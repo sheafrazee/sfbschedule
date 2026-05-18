@@ -1,0 +1,73 @@
+{
+  "weekTitle": "Week of May 18–24",
+  "days": [
+    {
+      "day": "Mon 18",
+      "events": [
+        { "time": "7:00 AM", "title": "Dalton Knecht", "type": "group", "people": ["Donovan","Tyler","Evan","Mark","Kenny","Dame","Luca"], "note": "" },
+        { "time": "8:00 AM", "title": "Colby, Dariq, Ousmane, KJ", "type": "group", "people": ["Donovan","Tyler","Evan","Colby","Mark","Ali","Kenny","Mateo","Luca"], "note": "" },
+        { "time": "9:30 AM", "title": "Karim, Hannes, Kadin S", "type": "group", "people": ["Donovan","Tyler","Evan","Ali","Mark","JD","Luca"], "note": "" },
+        { "time": "11:00 AM", "title": "Dev A, Luigi, Nick D, Jurian", "type": "group", "people": ["Donovan","Tyler","Evan","Shep","Mark","JD","Mateo","Dame"], "note": "" },
+        { "time": "12:30 PM", "title": "Kayden, Dre, Braydon, Zyon", "type": "group", "people": ["Donovan","Tyler","Evan","Kailen","Shep","Kirby","Ali","JD"], "note": "" }
+      ]
+    },
+    {
+      "day": "Tue 19",
+      "events": [
+        { "time": "8:00 AM", "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dre, Kayden, KJ, Dev A", "type": "group", "people": ["Donovan","Tyler","Evan","Kailen","Mateo","Charlie","Dame"], "note": "" },
+        { "time": "10:00 AM", "title": "Karim, Ousmane, Milan", "type": "group", "people": ["Donovan","Tyler","Evan","Mateo","Jacob S","Dame","Luca"], "note": "" },
+        { "time": "11:30 AM", "title": "Luigi, Carey B, Kadin S", "type": "group", "people": ["Donovan","Tyler","Evan","Jacob S","Kirby","Ali"], "note": "" },
+        { "time": "1:00 PM", "title": "ABA/Delta 11up – MAP", "type": "map", "people": ["Dame"], "note": "" },
+        { "time": "4:00 PM", "title": "Audrina 1 – Excel", "type": "excel", "people": ["Ethan"], "note": "" },
+        { "time": "5:00 PM", "title": "Group – Excel", "type": "excel", "people": ["Kirby","Ethan"], "note": "" }
+      ]
+    },
+    {
+      "day": "Wed 20",
+      "events": [
+        { "time": "8:00 AM", "title": "Interns Practice", "type": "other", "people": [], "note": "" },
+        { "time": "8:45 AM", "title": "Colby, Dariq, Ousmane, Kadin S", "type": "group", "people": ["Donovan","Tyler","Evan","JD","Mark","Kenny","Mateo","Luca","Sam"], "note": "" },
+        { "time": "10:00 AM", "title": "Karim, Hannes – Nets", "type": "group", "people": ["Donovan","Tyler","Evan","Colby","Mark","Mateo","Luca","Sam"], "note": "" },
+        { "time": "11:30 AM", "title": "Dev A, Luigi, Nick D, Milan", "type": "group", "people": ["Donovan","Tyler","Evan","JD","Mark","Dylan W","Luca","Mateo","Ali"], "note": "" },
+        { "time": "12:45 PM", "title": "Jurian, Dre, Carey B, Jaden N", "type": "group", "people": ["Donovan","Tyler","Evan","JD","Mark","Dylan W","Luca","Kirby"], "note": "" }
+      ]
+    },
+    {
+      "day": "Thu 21",
+      "events": [
+        { "time": "8:00 AM", "title": "Colby, Dariq, Ousmane", "type": "group", "people": ["Donovan","Tyler","Evan","Colin","Ali","Matt M","Luca"], "note": "" },
+        { "time": "9:30 AM", "title": "Karim, Hannes, Kadin S", "type": "group", "people": ["Donovan","Tyler","Evan","Dylan W","Shep","Matt M","Luca"], "note": "" },
+        { "time": "11:00 AM", "title": "Devin, Luigi, Nick D", "type": "group", "people": ["Donovan","Tyler","Evan","Dylan W","Colin","Matt M","Dame"], "note": "" },
+        { "time": "12:30 PM", "title": "Jurian, Dre, Carey, Jaden", "type": "group", "people": ["Donovan","Tyler","Evan","Dylan W","Shep","Kailen","Kirby","Colin","Ali"], "note": "" },
+        { "time": "1:00 PM", "title": "ABA/Delta 12up – MAP", "type": "map", "people": ["Dame"], "note": "" },
+        { "time": "5:00 PM", "title": "Group – Excel", "type": "excel", "people": ["Ethan","Kirby"], "note": "" }
+      ]
+    },
+    {
+      "day": "Fri 22",
+      "events": [
+        { "time": "8:00 AM", "title": "5x5: Colby, Dariq, Jurian, Dre, Kayden, Jaden, Nick D, Dev A", "type": "group", "people": ["Donovan","Tyler","Evan","Danny","Charlie","Kailen","Shep","Mateo"], "note": "" },
+        { "time": "10:00 AM", "title": "Karim, Hannes, Kadin S", "type": "group", "people": ["Donovan","Tyler","Evan","Colby","Mark","Matt M","Luca"], "note": "" },
+        { "time": "11:30 AM", "title": "Ousmane, Luigi", "type": "group", "people": ["Donovan","Tyler","Evan","Kirby","Mark","Matt M"], "note": "" },
+        { "time": "3:00 PM", "title": "GW – Excel", "type": "excel", "people": ["Dame","Kirby"], "note": "" },
+        { "time": "4:00 PM", "title": "Audrina 2 – Excel", "type": "excel", "people": ["Dame"], "note": "" },
+        { "time": "5:00 PM", "title": "Miles – Excel", "type": "excel", "people": [], "note": "" }
+      ]
+    },
+    {
+      "day": "Sat 23",
+      "events": [
+        { "time": "8:00 AM", "title": "Colby, Dariq, Ousmane, Nick D", "type": "group", "people": ["Donovan","Tyler","Evan","Luca","Kirby","Dylan O","JD"], "note": "" },
+        { "time": "9:15 AM", "title": "Karim, Hannes, Dev A", "type": "group", "people": ["Donovan","Tyler","Evan","Luca","Kirby","Dylan O","JD"], "note": "" },
+        { "time": "10:30 AM", "title": "Dre, Carey B, Jaden, Jurian", "type": "group", "people": ["Donovan","Tyler","Evan","Luca","Kirby","Dylan O","JD","Dame","Ian"], "note": "" }
+      ]
+    },
+    {
+      "day": "Sun 24",
+      "events": [
+        { "time": "8:00 AM", "title": "Pickup – Excel", "type": "excel", "people": ["Kirby"], "note": "" },
+        { "time": "11:30 AM", "title": "Little Kids Pickup – Excel", "type": "excel", "people": ["Kirby"], "note": "" }
+      ]
+    }
+  ]
+}
