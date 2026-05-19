@@ -175,15 +175,6 @@
             "Ethan"
           ],
           "note": ""
-        },
-        {
-          "time": "7:00  PM",
-          "title": "Dre Bullock",
-          "type": "group",
-          "people": [
-            "Kirby"
-          ],
-          "note": ""
         }
       ]
     },
@@ -191,15 +182,23 @@
       "day": "Wed 20",
       "events": [
         {
-          "time": "8:00 AM",
-          "title": "Interns Practice",
+          "time": "7:45 AM",
+          "title": "Alex Wilkins",
           "type": "other",
-          "people": [],
+          "people": [
+            "Kenny",
+            "Sam",
+            "Made",
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "JD"
+          ],
           "note": ""
         },
         {
           "time": "8:45 AM",
-          "title": "Colby, Dariq, Ousmane, Milan ",
+          "title": "Colby, Dariq, Ousmane, Kadin S",
           "type": "excel",
           "people": [
             "Donovan",
@@ -232,7 +231,7 @@
         },
         {
           "time": "11:30 AM",
-          "title": "Dev A, Luigi, Nick D, Kadin",
+          "title": "Dev A, Luigi, Nick D, Milan",
           "type": "excel",
           "people": [
             "Donovan",
@@ -249,7 +248,7 @@
         },
         {
           "time": "12:45 PM",
-          "title": "Jurian, Dre, Carey B, Jaden N, Kayden",
+          "title": "Jurian, Dre, Carey B, Jaden N",
           "type": "excel",
           "people": [
             "Donovan",
@@ -270,7 +269,7 @@
       "events": [
         {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Ousmane",
+          "title": "Colby, Dariq, Ousmane, Alex W",
           "type": "excel",
           "people": [
             "Donovan",
@@ -279,7 +278,9 @@
             "Colin",
             "Ali",
             "Matt M",
-            "Luca"
+            "Luca",
+            "Mateo",
+            "Colby"
           ],
           "note": ""
         },
@@ -356,7 +357,7 @@
       "events": [
         {
           "time": "8:00 AM",
-          "title": "5x5: Colby, Dariq, Jurian, Dre, Kayden, Jaden, Nick D, Dev A",
+          "title": "5x5: Colby, Dariq, Jurian, Dre, Kayden, Jaden, Nick D, Dev A, Alex W",
           "type": "excel",
           "people": [
             "Donovan",
@@ -428,28 +429,28 @@
           "title": "Colby, Dariq, Ousmane, Nick D",
           "type": "excel",
           "people": [
-            "Donovan",
             "Tyler",
             "Evan",
             "Luca",
             "Kirby",
             "Dylan O",
-            "JD"
+            "JD",
+            "Dame"
           ],
           "note": ""
         },
         {
           "time": "9:15 AM",
-          "title": "Karim, Hannes, Dev A",
+          "title": "Karim, Hannes, Dev A, Alex W",
           "type": "excel",
           "people": [
-            "Donovan",
             "Tyler",
             "Evan",
             "Luca",
             "Kirby",
             "Dylan O",
-            "JD"
+            "JD",
+            "Dame"
           ],
           "note": ""
         },
@@ -458,7 +459,6 @@
           "title": "Dre, Carey B, Jaden, Jurian",
           "type": "excel",
           "people": [
-            "Donovan",
             "Tyler",
             "Evan",
             "Luca",
@@ -466,7 +466,7 @@
             "Dylan O",
             "JD",
             "Dame",
-            "Ian"
+            "Matt M"
           ],
           "note": ""
         }
