@@ -7,7 +7,7 @@
         {
           "time": "7:00 AM",
           "title": "Dalton Knecht",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -22,7 +22,7 @@
         {
           "time": "8:00 AM",
           "title": "Colby, Dariq, Ousmane, KJ",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -39,7 +39,7 @@
         {
           "time": "9:30 AM",
           "title": "Karim, Hannes, Kadin S",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -54,7 +54,7 @@
         {
           "time": "11:00 AM",
           "title": "Dev A, Luigi, Nick D, Jurian",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -70,7 +70,7 @@
         {
           "time": "12:30 PM",
           "title": "Kayden, Dre, Braydon, Zyon",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -91,7 +91,7 @@
         {
           "time": "7:00 AM",
           "title": "Dalton Knecht",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Evan",
             "Donovan",
@@ -105,7 +105,7 @@
         {
           "time": "8:00 AM",
           "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dre, Kayden, KJ, Dev A",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -121,7 +121,7 @@
         {
           "time": "10:00 AM",
           "title": "Karim, Ousmane, Milan",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -136,7 +136,7 @@
         {
           "time": "11:30 AM",
           "title": "Luigi, Carey B, Kadin S",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -151,7 +151,7 @@
         {
           "time": "1:00 PM",
           "title": "ABA/Delta 11up – MAP",
-          "type": "map",
+          "type": "other",
           "people": [
             "Dame"
           ],
@@ -160,7 +160,7 @@
         {
           "time": "4:00 PM",
           "title": "Audrina 1 – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Ethan"
           ],
@@ -169,7 +169,7 @@
         {
           "time": "5:00 PM",
           "title": "Group – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Kirby",
             "Ethan"
@@ -191,7 +191,7 @@
         {
           "time": "8:45 AM",
           "title": "Colby, Dariq, Ousmane, Kadin S",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -208,7 +208,7 @@
         {
           "time": "10:00 AM",
           "title": "Karim, Hannes – Nets",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -224,7 +224,7 @@
         {
           "time": "11:30 AM",
           "title": "Dev A, Luigi, Nick D, Milan",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -241,7 +241,7 @@
         {
           "time": "12:45 PM",
           "title": "Jurian, Dre, Carey B, Jaden N",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -262,7 +262,7 @@
         {
           "time": "8:00 AM",
           "title": "Colby, Dariq, Ousmane",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -277,7 +277,7 @@
         {
           "time": "9:30 AM",
           "title": "Karim, Hannes, Kadin S",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -292,7 +292,7 @@
         {
           "time": "11:00 AM",
           "title": "Devin, Luigi, Nick D",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -307,7 +307,7 @@
         {
           "time": "12:30 PM",
           "title": "Jurian, Dre, Carey, Jaden",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -324,7 +324,7 @@
         {
           "time": "1:00 PM",
           "title": "ABA/Delta 12up – MAP",
-          "type": "map",
+          "type": "other",
           "people": [
             "Dame"
           ],
@@ -333,7 +333,7 @@
         {
           "time": "5:00 PM",
           "title": "Group – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Ethan",
             "Kirby"
@@ -348,7 +348,7 @@
         {
           "time": "8:00 AM",
           "title": "5x5: Colby, Dariq, Jurian, Dre, Kayden, Jaden, Nick D, Dev A",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -364,7 +364,7 @@
         {
           "time": "10:00 AM",
           "title": "Karim, Hannes, Kadin S",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -379,7 +379,7 @@
         {
           "time": "11:30 AM",
           "title": "Ousmane, Luigi",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -393,7 +393,7 @@
         {
           "time": "3:00 PM",
           "title": "GW – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Dame",
             "Kirby"
@@ -403,17 +403,10 @@
         {
           "time": "4:00 PM",
           "title": "Audrina 2 – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Dame"
           ],
-          "note": ""
-        },
-        {
-          "time": "5:00 PM",
-          "title": "Miles – Excel",
-          "type": "excel",
-          "people": [],
           "note": ""
         }
       ]
@@ -424,7 +417,7 @@
         {
           "time": "8:00 AM",
           "title": "Colby, Dariq, Ousmane, Nick D",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -439,7 +432,7 @@
         {
           "time": "9:15 AM",
           "title": "Karim, Hannes, Dev A",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -454,7 +447,7 @@
         {
           "time": "10:30 AM",
           "title": "Dre, Carey B, Jaden, Jurian",
-          "type": "group",
+          "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
@@ -476,7 +469,7 @@
         {
           "time": "8:00 AM",
           "title": "Pickup – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Kirby"
           ],
@@ -485,7 +478,7 @@
         {
           "time": "11:30 AM",
           "title": "Little Kids Pickup – Excel",
-          "type": "excel",
+          "type": "other",
           "people": [
             "Kirby"
           ],
