@@ -14,7 +14,7 @@
             "Evan",
             "Mark",
             "Kenny",
-            "Teddy",
+            "Dame",
             "Luca"
           ],
           "note": ""
@@ -91,13 +91,14 @@
         {
           "time": "7:00 AM",
           "title": "Dalton Knecht",
-          "type": "excel",
+          "type": "group",
           "people": [
             "Evan",
             "Donovan",
             "Tyler",
             "Mateo",
-            "Teddy"
+            "Teddy",
+            "Luca"
           ],
           "note": ""
         },
@@ -112,7 +113,8 @@
             "Kailen",
             "Mateo",
             "Charlie",
-            "Dame"
+            "Ador",
+            "Malcolm"
           ],
           "note": ""
         },
@@ -127,7 +129,7 @@
             "Mateo",
             "Jacob S",
             "Dame",
-            "Luca"
+            "Kirby"
           ],
           "note": ""
         },
@@ -141,7 +143,8 @@
             "Evan",
             "Jacob S",
             "Kirby",
-            "Ali"
+            "Ali",
+            "Colby"
           ],
           "note": ""
         },
