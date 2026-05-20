@@ -182,17 +182,11 @@
       "day": "Wed 20",
       "events": [
         {
-          "time": "7:45 AM",
-          "title": "Alex Wilkins",
+          "time": "6:30 AM",
+          "title": "Hailey Johnson",
           "type": "other",
           "people": [
-            "Kenny",
-            "Sam",
-            "Made",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "JD"
+            "Kirby"
           ],
           "note": ""
         },
@@ -248,7 +242,7 @@
         },
         {
           "time": "12:45 PM",
-          "title": "Jurian, Dre, Carey B, Jaden N",
+          "title": "Jurian, Dre, Kayden, Alex W",
           "type": "excel",
           "people": [
             "Donovan",
@@ -258,7 +252,8 @@
             "Mark",
             "Dylan W",
             "Luca",
-            "Kirby"
+            "Kirby",
+            "Ali"
           ],
           "note": ""
         }
@@ -267,6 +262,15 @@
     {
       "day": "Thu 21",
       "events": [
+        {
+          "time": "6:00 AM",
+          "title": "Hailey Johnson",
+          "type": "group",
+          "people": [
+            "Kirby"
+          ],
+          "note": ""
+        },
         {
           "time": "8:00 AM",
           "title": "Colby, Dariq, Ousmane, Alex W",
