@@ -182,20 +182,20 @@
       "day": "Wed 20",
       "events": [
         {
-          "time": "8:00 AM",
-          "title": "Intern Practice",
-          "type": "other",
-          "people": [
-            "Any interns welcome to attend"
-          ],
-          "note": ""
-        },
-        {
           "time": "6:30 AM",
           "title": "Hailey Johnson",
           "type": "other",
           "people": [
             "Kirby"
+          ],
+          "note": ""
+        },
+        {
+          "time": "8:00 AM",
+          "title": "Intern Practice",
+          "type": "other",
+          "people": [
+            "Any interns welcome to attend"
           ],
           "note": ""
         },
