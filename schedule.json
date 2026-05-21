@@ -275,13 +275,14 @@
           "title": "Hailey Johnson",
           "type": "other",
           "people": [
-            "Kirby"
+            "Kirby",
+            "Ali"
           ],
           "note": ""
         },
         {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Ousmane, Alex W",
+          "title": "Colby, Dariq, Ousmane",
           "type": "excel",
           "people": [
             "Donovan",
@@ -291,8 +292,7 @@
             "Ali",
             "Matt M",
             "Luca",
-            "Mateo",
-            "Colby"
+            "Mateo"
           ],
           "note": ""
         },
@@ -313,7 +313,7 @@
         },
         {
           "time": "11:00 AM",
-          "title": "Kayden M, Luigi, Nick D",
+          "title": "Alex W, Luigi, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
