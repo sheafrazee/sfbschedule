@@ -368,6 +368,13 @@
       "day": "Fri 22",
       "events": [
         {
+          "time": "6:00 AM",
+          "title": "Hailey Johnson",
+          "type": "other",
+          "people": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM",
           "title": "Karim, Hannes, Ousmane",
           "type": "excel",
