@@ -375,22 +375,7 @@
           "note": ""
         },
         {
-          "time": "8:00 AM",
-          "title": "Karim, Hannes, Ousmane",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Colby",
-            "Mark",
-            "Matt M",
-            "Luca"
-          ],
-          "note": ""
-        },
-        {
-          "time": "930:00 AM",
+          "time": "9:30 AM",
           "title": "5x5: Colby, Dariq, Jurian, Jaden, Nick D, Dev A, Alex W",
           "type": "excel",
           "people": [
@@ -402,6 +387,20 @@
             "Kailen",
             "Chris Mitchell",
             "Mateo"
+          ],
+          "note": ""
+        },
+        {
+          "time": "11:30 AM",
+          "title": "Karim, Hannes, Ousmane",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Colby",
+            "Mark",
+            "Matt M"
           ],
           "note": ""
         },
