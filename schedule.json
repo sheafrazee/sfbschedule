@@ -490,17 +490,16 @@
           "time": "8:00 AM",
           "title": "Pickup – Excel",
           "type": "other",
-          "people": [
-            "Kirby"
-          ],
+          "people": [],
           "note": ""
         },
         {
-          "time": "11:30 AM",
-          "title": "Little Kids Pickup – Excel",
+          "time": "10:30 AM",
+          "title": "Group – Excel",
           "type": "other",
           "people": [
-            "Kirby"
+            "Dame",
+            "Ian"
           ],
           "note": ""
         }
@@ -515,23 +514,8 @@
         "day": "Mon 18",
         "events": [
           {
-            "time": "7:00 AM",
-            "title": "Dalton Knecht",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Mark",
-              "Kenny",
-              "Dame",
-              "Luca"
-            ],
-            "note": ""
-          },
-          {
             "time": "8:00 AM",
-            "title": "Colby, Dariq, Ousmane, KJ",
+            "title": "Colby, Dariq, Nick D, Jurian D",
             "type": "excel",
             "people": [
               "Donovan",
@@ -548,7 +532,7 @@
           },
           {
             "time": "9:30 AM",
-            "title": "Karim, Hannes, Kadin S",
+            "title": "Karim, Hannes, Dev A",
             "type": "excel",
             "people": [
               "Donovan",
@@ -563,7 +547,7 @@
           },
           {
             "time": "11:00 AM",
-            "title": "Dev A, Luigi, Nick D, Jurian",
+            "title": "Hudson G, Trent S, Jaden N, Nick J",
             "type": "excel",
             "people": [
               "Donovan",
@@ -578,18 +562,24 @@
             "note": ""
           },
           {
-            "time": "12:30 PM",
-            "title": "Kayden, Dre, Braydon, Zyon",
-            "type": "excel",
+            "time": "2:45 PM",
+            "title": "Maxwell Scott",
+            "type": "other",
             "people": [
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Kailen",
-              "Shep",
+              "Titus",
               "Kirby",
-              "Ali",
-              "JD"
+              "Dame"
+            ],
+            "note": ""
+          },
+          {
+            "time": "4:00 PM",
+            "title": "Rudy",
+            "type": "group",
+            "people": [
+              "Titus",
+              "Kirby",
+              "Dame"
             ],
             "note": ""
           }
@@ -599,38 +589,29 @@
         "day": "Tue 19",
         "events": [
           {
-            "time": "7:00 AM",
-            "title": "Dalton Knecht",
-            "type": "excel",
-            "people": [
-              "Evan",
-              "Donovan",
-              "Tyler",
-              "Mateo",
-              "Teddy",
-              "Luca"
-            ],
-            "note": ""
-          },
-          {
             "time": "8:00 AM",
             "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dre, Kayden, KJ, Dev A",
             "type": "excel",
             "people": [
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Kailen",
-              "Mateo",
-              "Charlie",
-              "Ador",
-              "Malcolm"
+              "Colby",
+              "Dariq",
+              "Nick D",
+              "Jurian",
+              "Dev A",
+              "Jaden N",
+              "Hudson G",
+              "Trent S",
+              "Elmarko J",
+              "Jackson M",
+              "Jarin D",
+              "Brett D",
+              "Nick J"
             ],
             "note": ""
           },
           {
             "time": "10:00 AM",
-            "title": "Karim, Ousmane, Milan",
+            "title": "Karim + Anyone not playing 3v3",
             "type": "excel",
             "people": [
               "Donovan",
@@ -645,7 +626,7 @@
           },
           {
             "time": "11:30 AM",
-            "title": "Luigi, Carey B, Kadin S",
+            "title": "Anyone not playing 3x3",
             "type": "excel",
             "people": [
               "Donovan",
@@ -943,20 +924,17 @@
             "title": "GW",
             "type": "other",
             "people": [
-              "Kirby",
               "Dame"
             ],
             "note": ""
           },
           {
             "time": "8:00 AM",
-            "title": "Colby, Dariq, Ousmane, Nick D",
+            "title": "Colby, Nick D",
             "type": "excel",
             "people": [
               "Tyler",
               "Evan",
-              "Luca",
-              "Kirby",
               "Dylan O",
               "JD",
               "Dame",
@@ -972,11 +950,8 @@
             "people": [
               "Tyler",
               "Evan",
-              "Luca",
-              "Kirby",
               "Dylan O",
               "JD",
-              "Dame",
               "Mateo",
               "Mark"
             ],
@@ -984,13 +959,12 @@
           },
           {
             "time": "10:30 AM",
-            "title": "Dre, Jaden N, Jurian",
+            "title": "Dre, Jaden N",
             "type": "excel",
             "people": [
               "Tyler",
               "Evan",
-              "Luca",
-              "Kirby",
+              "Mark",
               "Dylan O",
               "JD",
               "Matt M",
