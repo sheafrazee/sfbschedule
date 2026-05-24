@@ -176,6 +176,17 @@
       "day": "Wed 27",
       "events": [
         {
+          "time": "6:30 AM ",
+          "title": "GW",
+          "type": "other",
+          "people": [],
+          "players": [
+            "Titus",
+            "Kirby"
+          ],
+          "note": ""
+        },
+        {
           "time": "8:00 AM",
           "title": "Colby, Dariq, Jarin S",
           "type": "excel",
