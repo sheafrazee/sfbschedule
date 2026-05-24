@@ -13,7 +13,7 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "JD",
+            "Shep",
             "Ali",
             "Kenny",
             "Mateo",
@@ -49,7 +49,7 @@
             "Evan",
             "Dame",
             "Dylan W",
-            "JD",
+            "Shep",
             "Ali"
           ],
           "note": "",
@@ -179,11 +179,11 @@
           "time": "6:30 AM ",
           "title": "GW",
           "type": "other",
-          "people": [],
-          "players": [
+          "people": [
             "Titus",
             "Kirby"
           ],
+          "players": [],
           "note": ""
         },
         {
