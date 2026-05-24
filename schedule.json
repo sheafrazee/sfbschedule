@@ -506,7 +506,15 @@
       ]
     }
   ],
-  "archive": [],
+  "archive": [
+    {
+      "key": "2026-05-18",
+      "range": "May 18 – May 24, 2026",
+      "title": "Week of May 18–24",
+      "path": "archive/2026-05-18.png",
+      "ts": 1779593517950
+    }
+  ],
   "nextWeek": {
     "weekTitle": "",
     "days": [
