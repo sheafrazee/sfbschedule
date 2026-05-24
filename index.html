@@ -232,8 +232,6 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .icon-btn.danger { color: var(--clay); border-color: #B8694A55; }
 .add-event-btn { padding: 8px; border: 1.5px dashed var(--light-stone); border-radius: 6px; background: transparent; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); }
 .add-event-btn:hover { border-color: var(--ink); color: var(--ink); }
-.add-event-top { border-style: dashed; opacity: .6; font-size: 11px; padding: 6px 8px; }
-.add-event-top:hover { opacity: 1; }
 .add-day-btn { grid-column: 1 / -1; padding: 20px; border: 2px dashed var(--light-stone); border-radius: 12px; background: transparent; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; color: var(--dark-stone); }
 .add-day-btn:hover { border-color: var(--ink); color: var(--ink); }
 
@@ -335,8 +333,8 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
   <div id="displayView">
     <div class="filter-bar">
       <div class="fb-row fb-top">
-        <input id="playerFilter" placeholder="🔍 Search players…">
         <input id="internFilter" placeholder="🔍 Search interns…">
+        <input id="playerFilter" placeholder="🔍 Search players…">
       </div>
       <div class="fb-row fb-bottom">
         <button class="type-btn active" data-type="all">All Types</button>
@@ -480,21 +478,28 @@ const STYLES = {
   other: { bg: "#D6D1CC", textPrimary: "#111111", textSecondary: "#5C5652", hlBg: "#F4F1EC", hlText: "#B8694A", playerHlBg: "#2e7d3225", playerHlText: "#2e7d32" },
 };
 
+function _migrateEvent(ev) {
+  if (ev.type !== "excel") ev.type = "other";
+  // Interns now live solely in ev.people. Fold any legacy ev.players names in, then retire it.
+  const people = Array.isArray(ev.people) ? ev.people : [];
+  const legacy = Array.isArray(ev.players) ? ev.players : [];
+  const merged = [];
+  [...people, ...legacy].forEach(n => {
+    const name = (n || "").trim();
+    if (name && !merged.includes(name)) merged.push(name);
+  });
+  ev.people = merged;
+  ev.players = []; // retired
+}
 function normalizeData(d) {
   if (!d || !Array.isArray(d.days)) return d;
-  d.days.forEach(day => {
-    (day.events || []).forEach(ev => {
-      if (ev.type !== "excel") ev.type = "other";
-      if (!Array.isArray(ev.players)) ev.players = [];
-    });
-  });
+  d.days.forEach(day => (day.events || []).forEach(_migrateEvent));
   if (d.nextWeek && Array.isArray(d.nextWeek.days)) {
-    d.nextWeek.days.forEach(day => {
-      (day.events || []).forEach(ev => {
-        if (ev.type !== "excel") ev.type = "other";
-        if (!Array.isArray(ev.players)) ev.players = [];
-      });
-    });
+    d.nextWeek.days.forEach(day => (day.events || []).forEach(_migrateEvent));
+  }
+  if (Array.isArray(d.archive)) {
+    d.archive.forEach(wk => (wk && Array.isArray(wk.days) ? wk.days : [])
+      .forEach(day => (day.events || []).forEach(_migrateEvent)));
   }
   return d;
 }
@@ -788,22 +793,18 @@ function buildCaptureNode(filtered, opts = {}) {
     } else {
       events.forEach(e => {
         const s = STYLES[e.type] || STYLES.other;
-        const players = e.people  || [];   // players in e.people
-        const interns = e.players || [];   // interns in e.players
-        const playerHtml = players.length ? `<div style="font-size:12px;line-height:1.5;color:${s.textSecondary};">${players.map(p => {
-          if (pt.length && personMatchesTerms(p, pt)) return `<span style="background:${s.playerHlBg};color:${s.playerHlText};border-radius:2px;padding:0 3px;font-weight:600;">${escapeHtml(p)}</span>`;
-          return escapeHtml(p);
-        }).join(", ")}</div>` : "";
+        const interns = internsOf(e);   // interns live in e.people
         const internHtml = interns.length ? `<div style="font-size:12px;line-height:1.5;color:${s.textSecondary};">${interns.map(p => {
           if (it.length && personMatchesTerms(p, it)) return `<span style="background:${s.hlBg};color:${s.hlText};border-radius:2px;padding:0 3px;font-weight:600;">${escapeHtml(p)}</span>`;
           return escapeHtml(p);
         }).join(", ")}</div>` : "";
+        const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);
         const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
-        const countBadge = [players.length ? `${players.length} player${players.length!==1?"s":""}` : "", interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : ""].filter(Boolean).join(" · ");
+        const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
         html += `<div style="padding:10px 14px;margin:6px 8px;border-radius:6px;background:${s.bg};">
           <div style="font-size:11px;font-weight:500;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.7;font-weight:600;white-space:nowrap;">${countBadge}</span>` : ""}</div>
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${escapeHtml(e.title)}</div>
-          ${internHtml}${playerHtml}${noteHtml}
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
+          ${internHtml}${noteHtml}
         </div>`;
       });
     }
@@ -817,7 +818,7 @@ function buildCaptureNode(filtered, opts = {}) {
     (data.days || []).forEach(day => {
       (day.events || []).forEach(ev => {
         if (typeFilter !== "all" && ev.type !== typeFilter) return;
-        (ev.players || []).forEach(p => {   // interns are in e.players
+        (ev.people || []).forEach(p => {   // interns are in e.people
           const name = (p || "").trim();
           if (name) counts[name] = (counts[name] || 0) + 1;
         });
@@ -862,22 +863,18 @@ function buildDayCaptureNode(day) {
   } else {
     events.forEach(e => {
       const s = STYLES[e.type] || STYLES.other;
-      const players = e.people  || [];   // players in e.people
-      const interns = e.players || [];   // interns in e.players
-      const playerHtml = players.length ? `<div style="font-size:12px;line-height:1.5;color:${s.textSecondary};">${players.map(p => {
-        if (pt.length && personMatchesTerms(p, pt)) return `<span style="background:${s.playerHlBg};color:${s.playerHlText};border-radius:2px;padding:0 3px;font-weight:600;">${escapeHtml(p)}</span>`;
-        return escapeHtml(p);
-      }).join(", ")}</div>` : "";
+      const interns = internsOf(e);   // interns live in e.people
       const internHtml = interns.length ? `<div style="font-size:12px;line-height:1.5;color:${s.textSecondary};">${interns.map(p => {
         if (it.length && personMatchesTerms(p, it)) return `<span style="background:${s.hlBg};color:${s.hlText};border-radius:2px;padding:0 3px;font-weight:600;">${escapeHtml(p)}</span>`;
         return escapeHtml(p);
       }).join(", ")}</div>` : "";
+      const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);
       const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
-      const countBadge = [players.length ? `${players.length} player${players.length!==1?"s":""}` : "", interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : ""].filter(Boolean).join(" · ");
+      const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
       html += `<div style="padding:10px 14px;margin:6px 8px;border-radius:6px;background:${s.bg};">
         <div style="font-size:11px;font-weight:500;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.7;font-weight:600;white-space:nowrap;">${countBadge}</span>` : ""}</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${escapeHtml(e.title)}</div>
-        ${internHtml}${playerHtml}${noteHtml}
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
+        ${internHtml}${noteHtml}
       </div>`;
     });
   }
@@ -963,9 +960,8 @@ function buildDayICS(day) {
   const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SFB Schedule//EN", "CALSCALE:GREGORIAN"];
   (day.events || []).forEach((e, i) => {
     const t = parseEventTimes(e.time);
-    const players = (e.people  || []).join(", ");
-    const interns = (e.players || []).join(", ");
-    const desc = [players ? "Players: " + players : "", interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
+    const interns = internsOf(e).join(", ");
+    const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
     lines.push("DTSTAMP:" + stamp);
@@ -1115,9 +1111,8 @@ function buildWeekICS() {
     const date = dateForDay(day.day);
     (day.events || []).filter(e => !internTerms().length && !playerTerms().length || eventMatches(e)).forEach((e, i) => {
       const t = parseEventTimes(e.time);
-      const players = (e.people  || []).join(", ");
-      const interns = (e.players || []).join(", ");
-      const desc = [players ? "Players: " + players : "", interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
+      const interns = internsOf(e).join(", ");
+      const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
       lines.push("BEGIN:VEVENT");
       lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
       lines.push("DTSTAMP:" + stamp);
@@ -1250,10 +1245,31 @@ function personMatchesTerms(name, terms) {
   const n = String(name).toLowerCase();
   return terms.some(t => n.includes(t));
 }
+// Interns live in the people name row; players live in the session title.
+function internsOf(e) { return [...(e.people || []), ...(e.players || [])]; }
+function titleMatchesTerms(title, terms) {
+  const t = String(title || "").toLowerCase();
+  return terms.some(term => t.includes(term));
+}
+function _escRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+// Highlight matched player terms inside the (player-bearing) title string.
+function highlightTitle(title, terms, bg, color) {
+  if (!terms.length) return escapeHtml(title);
+  const re = new RegExp("(" + terms.map(_escRegex).join("|") + ")", "ig");
+  let out = "", last = 0, m;
+  while ((m = re.exec(title)) !== null) {
+    out += escapeHtml(title.slice(last, m.index));
+    out += `<span class="hl-player" style="background:${bg};color:${color}">${escapeHtml(m[0])}</span>`;
+    last = m.index + m[0].length;
+    if (m.index === re.lastIndex) re.lastIndex++; // guard against zero-length
+  }
+  out += escapeHtml(title.slice(last));
+  return out;
+}
 function eventMatches(e) {
   const it = internTerms(), pt = playerTerms();
-  const im = !it.length || (e.players || []).some(p => personMatchesTerms(p, it));  // interns in e.players
-  const pm = !pt.length || (e.people  || []).some(p => personMatchesTerms(p, pt));  // players in e.people
+  const im = !it.length || internsOf(e).some(p => personMatchesTerms(p, it));  // interns: people name row
+  const pm = !pt.length || titleMatchesTerms(e.title, pt);                     // players: session title
   const tm = typeFilter === "all" || e.type === typeFilter;
   return im && pm && tm;
 }
@@ -1273,22 +1289,18 @@ function renderDisplay() {
     } else {
       events.forEach(e => {
         const s = STYLES[e.type] || STYLES.other;
-        const players = e.people   || [];   // players live in e.people
-        const interns = e.players  || [];   // interns live in e.players
-        const playerHtml = players.length ? `<div class="event-people" style="color:${s.textSecondary}">${players.map(p => {
-          if (pt.length && personMatchesTerms(p, pt)) return `<span class="hl-player" style="background:${s.playerHlBg};color:${s.playerHlText}">${escapeHtml(p)}</span>`;
-          return escapeHtml(p);
-        }).join(", ")}</div>` : "";
+        const interns = internsOf(e);          // interns live in the people name row
         const internHtml = interns.length ? `<div class="event-people" style="color:${s.textSecondary}">${interns.map(p => {
           if (it.length && personMatchesTerms(p, it)) return `<span class="hl" style="background:${s.hlBg};color:${s.hlText}">${escapeHtml(p)}</span>`;
           return escapeHtml(p);
         }).join(", ")}</div>` : "";
+        const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);  // players live in the title
         const noteHtml = e.note ? `<div class="event-note" style="color:${s.textSecondary};opacity:0.8">${escapeHtml(e.note)}</div>` : "";
-        const countBadge = [players.length ? `${players.length} player${players.length!==1?"s":""}` : "", interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : ""].filter(Boolean).join(" · ");
+        const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
         col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left:none;">
           <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.6;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}</div>
-          <div class="event-title" style="color:${s.textPrimary}">${escapeHtml(e.title)}</div>
-          ${playerHtml}${internHtml}${noteHtml}
+          <div class="event-title" style="color:${s.textPrimary}">${titleHtml}</div>
+          ${internHtml}${noteHtml}
         </div>`;
       });
     }
@@ -1329,28 +1341,21 @@ function renderEdit() {
     `;
     grid.appendChild(dEl);
     const body = dEl.querySelector(`#dayBody${di}`);
-
-    // ── Top "add" button ──
-    const addTop = document.createElement("button");
-    addTop.className = "add-event-btn add-event-top";
-    addTop.textContent = "+ Add Event";
-    addTop.onclick = () => {
-      ed().days[di].events.unshift({ time: "8:00 AM", title: "New Event", type: "group", people: [], players: [], note: "" });
-      saveDraft(); renderEdit();
+    const mkAddBtn = (label, atTop) => {
+      const b = document.createElement("button");
+      b.className = "add-event-btn";
+      b.textContent = label;
+      b.onclick = () => {
+        const nev = { time: "8:00 AM", title: "New Event", type: "other", people: [], players: [], note: "" };
+        if (atTop) ed().days[di].events.unshift(nev);
+        else ed().days[di].events.push(nev);
+        saveDraft(); renderEdit();
+      };
+      return b;
     };
-    body.appendChild(addTop);
-
+    body.appendChild(mkAddBtn("+ Add Event at Top", true));
     (day.events || []).forEach((ev, ei) => body.appendChild(buildEventEditor(di, ei, ev)));
-
-    // ── Bottom "add" button ──
-    const addBtn = document.createElement("button");
-    addBtn.className = "add-event-btn";
-    addBtn.textContent = "+ Add Event";
-    addBtn.onclick = () => {
-      ed().days[di].events.push({ time: "8:00 AM", title: "New Event", type: "group", people: [], players: [], note: "" });
-      saveDraft(); renderEdit();
-    };
-    body.appendChild(addBtn);
+    body.appendChild(mkAddBtn("+ Add Event", false));
   });
   const addDay = document.createElement("button");
   addDay.className = "add-day-btn";
@@ -1376,7 +1381,7 @@ function learnInterns() {
   const r = loadRoster();
   let changed = false;
   const scan = wk => (wk && wk.days || []).forEach(day =>
-    (day.events || []).forEach(ev => (ev.players || []).forEach(p => {
+    (day.events || []).forEach(ev => (ev.people || []).forEach(p => {
       const name = (p || "").trim();
       if (!name) return;
       r[name] = Date.now();
@@ -1399,11 +1404,11 @@ function renderInternTally() {
   box.classList.toggle("hidden", currentMode !== "edit");
   if (currentMode !== "edit") return;
 
-  // Active week: name -> session count (interns are in e.players)
+  // Active week: name -> session count (interns live in e.people)
   const counts = {};
   (ed().days || []).forEach(day => {
     (day.events || []).forEach(ev => {
-      (ev.players || []).forEach(p => {
+      (ev.people || []).forEach(p => {
         const name = (p || "").trim();
         if (!name) return;
         counts[name] = (counts[name] || 0) + 1;
@@ -1447,14 +1452,14 @@ function buildEventEditor(di, ei, ev) {
   el.innerHTML = `
     <div class="edit-event-row">
       <input class="ev-time" type="text" value="${escapeAttr(ev.time)}" data-d="${di}" data-e="${ei}" data-field="time" placeholder="Time">
-      <input class="ev-title" type="text" value="${escapeAttr(ev.title)}" data-d="${di}" data-e="${ei}" data-field="title" placeholder="Title / Players">
+      <input class="ev-title" type="text" value="${escapeAttr(ev.title)}" data-d="${di}" data-e="${ei}" data-field="title" placeholder="Title (players / client)">
       <select class="ev-type" data-d="${di}" data-e="${ei}" data-field="type">
         ${[["excel","Excel Client"],["other","Other"]].map(([v,label]) => `<option value="${v}" ${ev.type===v?"selected":""}>${label}</option>`).join("")}
       </select>
     </div>
     <div>
       <div class="edit-event-label">Interns (comma-separated)</div>
-      <textarea data-d="${di}" data-e="${ei}" data-field="players" rows="2">${escapeHtml((ev.players||[]).join(", "))}</textarea>
+      <textarea data-d="${di}" data-e="${ei}" data-field="people" rows="2">${escapeHtml((ev.people||[]).join(", "))}</textarea>
     </div>
     <div>
       <div class="edit-event-label">Note (optional)</div>
@@ -1476,7 +1481,7 @@ function attachEditListeners() {
       if (field === "people" || field === "players") v = v.split(",").map(s => s.trim()).filter(Boolean);
       ed().days[di].events[ei][field] = v;
       saveDraft();
-      if (field === "players") renderInternTally();
+      if (field === "people") renderInternTally();
     });
   });
   document.querySelectorAll("[data-day][data-field='day']").forEach(input => {
