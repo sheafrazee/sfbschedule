@@ -66,7 +66,7 @@
         {
           "time": "4:00 PM",
           "title": "Rudy",
-          "type": "group",
+          "type": "other",
           "people": [
             "Titus",
             "Kirby",
@@ -237,7 +237,7 @@
         {
           "time": "5:30 PM",
           "title": "Rudy",
-          "type": "group",
+          "type": "other",
           "people": [
             "Titus",
             "Kirby",
@@ -370,7 +370,7 @@
             "Evan",
             "Mark",
             "Matt M",
-            "Mateo"
+            "Shep"
           ],
           "note": ""
         },
@@ -445,7 +445,7 @@
             "Mateo",
             "Luca",
             "Mark",
-            "Shep"
+            "David"
           ],
           "note": ""
         },
@@ -462,7 +462,7 @@
             "Mateo",
             "Luca",
             "Mark",
-            "Shep"
+            "David"
           ],
           "note": ""
         },
@@ -484,7 +484,7 @@
         {
           "time": "11:45 AM",
           "title": "Brett D, Nick J",
-          "type": "group",
+          "type": "other",
           "people": [
             "Tyler",
             "Evan",
@@ -510,7 +510,7 @@
         {
           "time": "1030 AM",
           "title": "Group ",
-          "type": "group",
+          "type": "other",
           "people": [
             "Kirby",
             "Ian"
