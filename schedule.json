@@ -375,12 +375,23 @@
           "note": ""
         },
         {
+          "time": "2:00 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby",
+            "Dame"
+          ],
+          "note": ""
+        },
+        {
           "time": "3:00 PM",
           "title": "GW – Excel",
           "type": "other",
           "people": [
             "Titus",
-            "David",
+            "Dame",
             "Kirby"
           ],
           "note": ""
@@ -392,6 +403,17 @@
           "people": [
             "Titus",
             "David"
+          ],
+          "note": ""
+        },
+        {
+          "time": "5pm",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Titus",
+            "David",
+            "Kirby"
           ],
           "note": ""
         }
