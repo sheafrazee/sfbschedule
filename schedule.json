@@ -5,30 +5,15 @@
       "day": "Mon 18",
       "events": [
         {
-          "time": "7:00 AM",
-          "title": "Dalton Knecht",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Mark",
-            "Kenny",
-            "Dame",
-            "Luca"
-          ],
-          "note": ""
-        },
-        {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Ousmane, KJ",
+          "title": "Colby, Dariq, Nick D, Jurian D",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Colby",
-            "Mark",
+            "JD",
             "Ali",
             "Kenny",
             "Mateo",
@@ -38,48 +23,54 @@
         },
         {
           "time": "9:30 AM",
-          "title": "Karim, Hannes, Kadin S",
+          "title": "Karim, Hannes, Dev A",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Ali",
-            "Mark",
-            "JD",
+            "Matt M",
+            "Mateo",
             "Luca"
           ],
           "note": ""
         },
         {
           "time": "11:00 AM",
-          "title": "Dev A, Luigi, Nick D, Jurian",
+          "title": "Hudson G, Trent S, Jaden N, Nick J",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Shep",
-            "Mark",
+            "Dame",
+            "Dylan W",
             "JD",
-            "Mateo",
+            "Ali"
+          ],
+          "note": ""
+        },
+        {
+          "time": "2:45 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby",
             "Dame"
           ],
           "note": ""
         },
         {
-          "time": "12:30 PM",
-          "title": "Kayden, Dre, Braydon, Zyon",
-          "type": "excel",
+          "time": "4:00 PM",
+          "title": "Rudy",
+          "type": "group",
           "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Kailen",
-            "Shep",
+            "Titus",
             "Kirby",
-            "Ali",
-            "JD"
+            "Dame"
           ],
           "note": ""
         }
@@ -89,62 +80,50 @@
       "day": "Tue 19",
       "events": [
         {
-          "time": "7:00 AM",
-          "title": "Dalton Knecht",
-          "type": "excel",
-          "people": [
-            "Evan",
-            "Donovan",
-            "Tyler",
-            "Mateo",
-            "Teddy",
-            "Luca"
-          ],
-          "note": ""
-        },
-        {
           "time": "8:00 AM",
-          "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dre, Kayden, KJ, Dev A",
+          "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dev A, Jaden N, Hudson G, Trent S, Elmarko J, Jackson M, Jarin D, Brett D, Nick J",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Kailen",
-            "Mateo",
-            "Charlie",
-            "Ador",
-            "Malcolm"
+            "JD",
+            "Mateo"
           ],
           "note": ""
         },
         {
           "time": "10:00 AM",
-          "title": "Karim, Ousmane, Milan",
+          "title": "Karim + Anyone not playing 3v3",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
             "Mateo",
+            "JD",
             "Jacob S",
             "Dame",
-            "Kirby"
+            "Colin"
           ],
           "note": ""
         },
         {
           "time": "11:30 AM",
-          "title": "Luigi, Carey B, Kadin S",
+          "title": "Anyone not playing 3x3",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
+            "Mateo",
+            "JD",
             "Jacob S",
-            "Kirby",
-            "Ali",
-            "Colby"
+            "Dame",
+            "Colin"
           ],
           "note": ""
         },
@@ -153,6 +132,7 @@
           "title": "ABA/Delta 11up – MAP",
           "type": "other",
           "people": [
+            "Titus",
             "Dame"
           ],
           "note": ""
@@ -162,6 +142,7 @@
           "title": "Audrina 1 – Excel",
           "type": "other",
           "people": [
+            "Titus",
             "Ethan"
           ],
           "note": ""
@@ -171,8 +152,10 @@
           "title": "Group – Excel",
           "type": "other",
           "people": [
+            "Titus",
             "Kirby",
-            "Ethan"
+            "Ethan",
+            "David"
           ],
           "note": ""
         }
@@ -182,44 +165,29 @@
       "day": "Wed 20",
       "events": [
         {
-          "time": "6:30 AM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [
-            "Kirby"
-          ],
-          "note": ""
-        },
-        {
           "time": "8:00 AM",
-          "title": "Intern Practice",
-          "type": "other",
-          "people": [
-            "Any interns welcome to attend"
-          ],
-          "note": ""
-        },
-        {
-          "time": "8:45 AM",
-          "title": "Colby, Dariq, Ousmane, Kadin S",
+          "title": "Colby, Dariq, Jarin S",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "JD",
+            "Ali",
             "Mark",
             "Mateo",
             "Luca",
-            "Sam"
+            "Sam",
+            "Shep"
           ],
           "note": ""
         },
         {
-          "time": "10:00 AM",
-          "title": "Karim, Hannes – Nets",
+          "time": "9:15 AM",
+          "title": "Karim, Dev A, Nick D, Jackson M",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
@@ -227,41 +195,53 @@
             "Mark",
             "Mateo",
             "Luca",
-            "Sam"
+            "Sam",
+            "Shep"
           ],
           "note": ""
         },
         {
-          "time": "11:30 AM",
-          "title": "Dev A, Luigi, Nick D, Milan",
+          "time": "10:30 AM",
+          "title": "Trent Sisley, Elmarko J, Hudson G, Nick J",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
             "JD",
-            "Mark",
+            "Matt M",
             "Dylan W",
             "Luca",
-            "Mateo",
             "Ali"
           ],
           "note": ""
         },
         {
-          "time": "12:45 PM",
-          "title": "Jurian, Dre, Kayden, Alex W",
+          "time": "11:45 AM",
+          "title": "Jaden N, Brett D, Jurian D",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
             "JD",
-            "Mark",
+            "Matt M",
             "Dylan W",
             "Luca",
+            "Ali"
+          ],
+          "note": ""
+        },
+        {
+          "time": "5:30 PM",
+          "title": "Rudy",
+          "type": "group",
+          "people": [
+            "Titus",
             "Kirby",
-            "Ali"
+            "Dame"
           ],
           "note": ""
         }
@@ -271,26 +251,15 @@
       "day": "Thu 21",
       "events": [
         {
-          "time": "6:00 AM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Ali"
-          ],
-          "note": ""
-        },
-        {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Ousmane",
+          "title": "Colby, Dariq, Jarin S",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
             "Colin",
-            "Ali",
-            "Matt M",
             "Luca",
             "Mateo"
           ],
@@ -298,48 +267,54 @@
         },
         {
           "time": "9:30 AM",
-          "title": "Karim, Hannes, Dev",
+          "title": "Karim, Dev A, Nick D, Jackson M",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Dylan W",
+            "Colin",
+            "Luca",
+            "Mateo",
             "Shep",
-            "Matt M",
-            "Luca"
+            "Dylan W"
           ],
           "note": ""
         },
         {
           "time": "11:00 AM",
-          "title": "Alex W, Luigi, Nick D",
+          "title": "Trent S, Elmarko J, Hudson G, Nick J",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
+            "JD",
+            "Luca",
+            "Ali",
+            "Shep",
             "Dylan W",
-            "Colin",
-            "Matt M",
             "Dame"
           ],
           "note": ""
         },
         {
           "time": "12:30 PM",
-          "title": "Jurian, Dre, Carey, Jaden",
+          "title": "Jaden N, Brett D, Jurian D",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Dylan W",
+            "JD",
+            "Luca",
+            "Ali",
             "Shep",
-            "Kailen",
-            "Kirby",
-            "Colin",
-            "Ali"
+            "Dylan W",
+            "Kirby"
           ],
           "note": ""
         },
@@ -357,7 +332,8 @@
           "title": "Group – Excel",
           "type": "other",
           "people": [
-            "Ethan",
+            "Titus",
+            "David",
             "Kirby"
           ],
           "note": ""
@@ -368,22 +344,15 @@
       "day": "Fri 22",
       "events": [
         {
-          "time": "6:00 AM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [],
-          "note": ""
-        },
-        {
-          "time": "9:30 AM",
+          "time": "8:00 AM",
           "title": "5x5: Colby, Dariq, Jurian, Jaden, Nick D, Dev A, Alex W",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
             "Danny",
-            "Charlie",
             "Kailen",
             "Chris Mitchell",
             "Mateo"
@@ -391,16 +360,17 @@
           "note": ""
         },
         {
-          "time": "11:30 AM",
-          "title": "Karim, Hannes, Ousmane",
+          "time": "10:00 AM",
+          "title": "Anyone not playing 5x5",
           "type": "excel",
           "people": [
+            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Colby",
             "Mark",
-            "Matt M"
+            "Matt M",
+            "Mateo"
           ],
           "note": ""
         },
@@ -409,7 +379,8 @@
           "title": "GW – Excel",
           "type": "other",
           "people": [
-            "Dame",
+            "Titus",
+            "David",
             "Kirby"
           ],
           "note": ""
@@ -419,7 +390,8 @@
           "title": "Audrina 2 – Excel",
           "type": "other",
           "people": [
-            "Dame"
+            "Titus",
+            "David"
           ],
           "note": ""
         }
@@ -433,51 +405,71 @@
           "title": "GW",
           "type": "other",
           "people": [
-            "Dame"
+            "Dame",
+            "David"
           ],
           "note": ""
         },
         {
           "time": "8:00 AM",
-          "title": "Colby, Nick D",
+          "title": "Colby, Dariq, Jarin S, Jurian D",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
-            "Dylan O",
+            "Donovan",
             "JD",
             "Dame",
             "Mateo",
-            "Mark"
+            "Luca",
+            "Mark",
+            "Shep"
           ],
           "note": ""
         },
         {
           "time": "9:15 AM",
-          "title": "Karim, Hannes, Dev A",
+          "title": "Dev A, Nick D, Jackson M, Hudson G",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
-            "Dylan O",
+            "Donovan",
             "JD",
+            "Dame",
             "Mateo",
-            "Mark"
+            "Luca",
+            "Mark",
+            "Shep"
           ],
           "note": ""
         },
         {
           "time": "10:30 AM",
-          "title": "Dre, Jaden N",
+          "title": "Trent Sisley, Elmarko J, Jaden N",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
-            "Mark",
-            "Dylan O",
+            "Donovan",
             "JD",
-            "Matt M",
-            "Mateo"
+            "Kirby",
+            "Mateo",
+            "Luca"
+          ],
+          "note": ""
+        },
+        {
+          "time": "11:45 AM",
+          "title": "Brett D, Nick J",
+          "type": "group",
+          "people": [
+            "Tyler",
+            "Evan",
+            "Donovan",
+            "JD",
+            "Kirby",
+            "Luca"
           ],
           "note": ""
         }
@@ -494,11 +486,21 @@
           "note": ""
         },
         {
-          "time": "10:30 AM",
-          "title": "Group – Excel",
+          "time": "1030 AM",
+          "title": "Group ",
+          "type": "group",
+          "people": [
+            "Kirby",
+            "Ian"
+          ],
+          "note": ""
+        },
+        {
+          "time": "12pm",
+          "title": "Little Kids Pickup – Excel",
           "type": "other",
           "people": [
-            "Dame",
+            "Kirby",
             "Ian"
           ],
           "note": ""
@@ -515,515 +517,5 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": {
-    "weekTitle": "",
-    "days": [
-      {
-        "day": "Mon 18",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "Colby, Dariq, Nick D, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Ali",
-              "Kenny",
-              "Mateo",
-              "Luca"
-            ],
-            "note": ""
-          },
-          {
-            "time": "9:30 AM",
-            "title": "Karim, Hannes, Dev A",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Matt M",
-              "Mateo",
-              "Luca"
-            ],
-            "note": ""
-          },
-          {
-            "time": "11:00 AM",
-            "title": "Hudson G, Trent S, Jaden N, Nick J",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Dame",
-              "Dylan W",
-              "JD",
-              "Ali"
-            ],
-            "note": ""
-          },
-          {
-            "time": "2:45 PM",
-            "title": "Maxwell Scott",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Kirby",
-              "Dame"
-            ],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM",
-            "title": "Rudy",
-            "type": "group",
-            "people": [
-              "Titus",
-              "Kirby",
-              "Dame"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Tue 19",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "Skills + 3x3: Colby, Dariq, Nick D, Jurian, Dev A, Jaden N, Hudson G, Trent S, Elmarko J, Jackson M, Jarin D, Brett D, Nick J",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Mateo"
-            ],
-            "note": ""
-          },
-          {
-            "time": "10:00 AM",
-            "title": "Karim + Anyone not playing 3v3",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Mateo",
-              "JD",
-              "Jacob S",
-              "Dame",
-              "Colin"
-            ],
-            "note": ""
-          },
-          {
-            "time": "11:30 AM",
-            "title": "Anyone not playing 3x3",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Mateo",
-              "JD",
-              "Jacob S",
-              "Dame",
-              "Colin"
-            ],
-            "note": ""
-          },
-          {
-            "time": "1:00 PM",
-            "title": "ABA/Delta 11up – MAP",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Dame"
-            ],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM",
-            "title": "Audrina 1 – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Ethan"
-            ],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM",
-            "title": "Group – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Kirby",
-              "Ethan",
-              "David"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Wed 20",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "Colby, Dariq, Jarin S",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Ali",
-              "Mark",
-              "Mateo",
-              "Luca",
-              "Sam",
-              "Shep"
-            ],
-            "note": ""
-          },
-          {
-            "time": "9:15 AM",
-            "title": "Karim, Dev A, Nick D, Jackson M",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colby",
-              "Mark",
-              "Mateo",
-              "Luca",
-              "Sam",
-              "Shep"
-            ],
-            "note": ""
-          },
-          {
-            "time": "10:30 AM",
-            "title": "Trent Sisley, Elmarko J, Hudson G, Nick J",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Matt M",
-              "Dylan W",
-              "Luca",
-              "Ali"
-            ],
-            "note": ""
-          },
-          {
-            "time": "11:45 AM",
-            "title": "Jaden N, Brett D, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Matt M",
-              "Dylan W",
-              "Luca",
-              "Ali"
-            ],
-            "note": ""
-          },
-          {
-            "time": "5:30 PM",
-            "title": "Rudy",
-            "type": "group",
-            "people": [
-              "Titus",
-              "Kirby",
-              "Dame"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Thu 21",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "Colby, Dariq, Jarin S",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Luca",
-              "Mateo"
-            ],
-            "note": ""
-          },
-          {
-            "time": "9:30 AM",
-            "title": "Karim, Dev A, Nick D, Jackson M",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Luca",
-              "Mateo",
-              "Shep",
-              "Dylan W"
-            ],
-            "note": ""
-          },
-          {
-            "time": "11:00 AM",
-            "title": "Trent S, Elmarko J, Hudson G, Nick J",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Luca",
-              "Ali",
-              "Shep",
-              "Dylan W",
-              "Dame"
-            ],
-            "note": ""
-          },
-          {
-            "time": "12:30 PM",
-            "title": "Jaden N, Brett D, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "JD",
-              "Luca",
-              "Ali",
-              "Shep",
-              "Dylan W",
-              "Kirby"
-            ],
-            "note": ""
-          },
-          {
-            "time": "1:00 PM",
-            "title": "ABA/Delta 12up – MAP",
-            "type": "other",
-            "people": [
-              "Dame"
-            ],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM",
-            "title": "Group – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "David",
-              "Kirby"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Fri 22",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "5x5: Colby, Dariq, Jurian, Jaden, Nick D, Dev A, Alex W",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Danny",
-              "Kailen",
-              "Chris Mitchell",
-              "Mateo"
-            ],
-            "note": ""
-          },
-          {
-            "time": "10:00 AM",
-            "title": "Anyone not playing 5x5",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Mark",
-              "Matt M",
-              "Mateo"
-            ],
-            "note": ""
-          },
-          {
-            "time": "3:00 PM",
-            "title": "GW – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "David",
-              "Kirby"
-            ],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM",
-            "title": "Audrina 2 – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "David"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Sat 23",
-        "events": [
-          {
-            "time": "6:30 AM",
-            "title": "GW",
-            "type": "other",
-            "people": [
-              "Dame",
-              "David"
-            ],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM",
-            "title": "Colby, Dariq, Jarin S, Jurian D",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "JD",
-              "Dame",
-              "Mateo",
-              "Luca",
-              "Mark",
-              "Shep"
-            ],
-            "note": ""
-          },
-          {
-            "time": "9:15 AM",
-            "title": "Dev A, Nick D, Jackson M, Hudson G",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "JD",
-              "Dame",
-              "Mateo",
-              "Luca",
-              "Mark",
-              "Shep"
-            ],
-            "note": ""
-          },
-          {
-            "time": "10:30 AM",
-            "title": "Trent Sisley, Elmarko J, Jaden N",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "JD",
-              "Kirby",
-              "Mateo",
-              "Luca"
-            ],
-            "note": ""
-          },
-          {
-            "time": "11:45 AM",
-            "title": "Brett D, Nick J",
-            "type": "group",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "JD",
-              "Kirby",
-              "Luca"
-            ],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Sun 24",
-        "events": [
-          {
-            "time": "8:00 AM",
-            "title": "Pickup – Excel",
-            "type": "other",
-            "people": [],
-            "note": ""
-          },
-          {
-            "time": "1030 AM",
-            "title": "Group ",
-            "type": "group",
-            "people": [
-              "Kirby",
-              "Ian"
-            ],
-            "note": ""
-          },
-          {
-            "time": "12pm",
-            "title": "Little Kids Pickup – Excel",
-            "type": "other",
-            "people": [
-              "Kirby",
-              "Ian"
-            ],
-            "note": ""
-          }
-        ]
-      }
-    ]
-  }
+  "nextWeek": null
 }
