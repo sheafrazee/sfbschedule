@@ -226,6 +226,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .edit-event .ev-type { width: 120px; }
 .edit-event textarea { width: 100%; resize: vertical; min-height: 36px; }
 .edit-event-label { font-size: 10.5px; font-weight: 600; color: var(--stone); text-transform: uppercase; letter-spacing: .04em; font-family: 'Plus Jakarta Sans', sans-serif; }
+.intern-count-badge { display: inline-block; min-width: 16px; text-align: center; background: var(--clay); color: #fff; border-radius: 9px; font-size: 10px; font-weight: 700; padding: 1px 6px; margin-left: 4px; letter-spacing: 0; }
 .edit-event-actions { display: flex; justify-content: flex-end; gap: 4px; }
 .icon-btn { width: 26px; height: 26px; border-radius: 5px; border: 1px solid var(--light-stone); background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; padding: 0; }
 .icon-btn:hover { background: var(--warm-white); }
@@ -1458,7 +1459,7 @@ function buildEventEditor(di, ei, ev) {
       </select>
     </div>
     <div>
-      <div class="edit-event-label">Interns (comma-separated)</div>
+      <div class="edit-event-label">Interns (comma-separated) <span class="intern-count-badge" data-count-d="${di}" data-count-e="${ei}">${(ev.people||[]).length}</span></div>
       <textarea data-d="${di}" data-e="${ei}" data-field="people" rows="2">${escapeHtml((ev.people||[]).join(", "))}</textarea>
     </div>
     <div>
@@ -1482,6 +1483,15 @@ function attachEditListeners() {
       ed().days[di].events[ei][field] = v;
       saveDraft();
       if (field === "people") renderInternTally();
+    });
+  });
+  // Live per-session intern count while typing in the interns box
+  document.querySelectorAll("textarea[data-field='people']").forEach(ta => {
+    ta.addEventListener("input", () => {
+      const di = ta.dataset.d, ei = ta.dataset.e;
+      const n = ta.value.split(",").map(s => s.trim()).filter(Boolean).length;
+      const badge = document.querySelector(`.intern-count-badge[data-count-d="${di}"][data-count-e="${ei}"]`);
+      if (badge) badge.textContent = n;
     });
   });
   document.querySelectorAll("[data-day][data-field='day']").forEach(input => {
