@@ -921,9 +921,33 @@ function dateForDay(dayName) {
   return base;
 }
 function _parseClock(s) {
-  const m = /(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?/i.exec(s || "");
-  if (!m) return null;
-  return { h: +m[1], min: m[2] ? +m[2] : 0, mer: m[3] ? m[3].replace(/\./g,"").toLowerCase() : null };
+  if (s == null) return null;
+  let str = String(s).trim().toLowerCase();
+  if (!str) return null;
+  // Meridiem near the end: a / am / p / pm with optional dots & spaces (handles "5p", "5 p.m.")
+  let mer = null;
+  const mm = str.match(/([ap])\s*\.?\s*m?\s*\.?\s*$/);
+  if (mm && /\d/.test(str.slice(0, mm.index))) {
+    mer = mm[1] === "p" ? "pm" : "am";
+    str = str.slice(0, mm.index);
+  }
+  // Keep only digits and a colon for the numeric part
+  str = str.replace(/[^\d:]/g, "");
+  if (!str) return null;
+  let h, min = 0;
+  if (str.includes(":")) {
+    const p = str.split(":");
+    h = parseInt(p[0], 10);
+    min = p[1] ? parseInt(p[1].slice(0, 2), 10) : 0;
+  } else if (str.length <= 2) {        // "5", "12"
+    h = parseInt(str, 10); min = 0;
+  } else if (str.length === 3) {       // "530" -> 5:30, "915" -> 9:15
+    h = parseInt(str.slice(0, 1), 10); min = parseInt(str.slice(1), 10);
+  } else {                              // "1730" -> 17:30, "0930" -> 9:30
+    h = parseInt(str.slice(0, 2), 10); min = parseInt(str.slice(2, 4), 10);
+  }
+  if (isNaN(h) || isNaN(min) || h > 23 || min > 59) return null;
+  return { h, min, mer };
 }
 function _to24(c, inheritMer) {
   let h = c.h; const mer = c.mer || inheritMer;
@@ -933,7 +957,7 @@ function _to24(c, inheritMer) {
 }
 // Returns {start:{h,min}, end:{h,min}} or null if no time found.
 function parseEventTimes(timeStr) {
-  const parts = String(timeStr || "").split(/\s*(?:–|—|-|to)\s*/i).filter(Boolean);
+  const parts = String(timeStr || "").split(/\s*(?:–|—|-|to|until|thru)\s*/i).filter(Boolean);
   const a = _parseClock(parts[0]);
   if (!a) return null;
   const b = parts[1] ? _parseClock(parts[1]) : null;
@@ -1368,7 +1392,17 @@ function renderEdit() {
       return b;
     };
     body.appendChild(mkAddBtn("+ Add Event at Top", true));
-    (day.events || []).forEach((ev, ei) => body.appendChild(buildEventEditor(di, ei, ev)));
+    (day.events || []).forEach((ev, ei) => {
+      try {
+        body.appendChild(buildEventEditor(di, ei, ev));
+      } catch (err) {
+        console.error("buildEventEditor failed", { di, ei, ev, err });
+        const fb = document.createElement("div");
+        fb.className = "edit-event";
+        fb.innerHTML = `<div style="font-size:12px;color:#B8694A;">⚠ Couldn't render this session. <button class="icon-btn danger" data-remove-event data-d="${di}" data-e="${ei}" title="Remove">✕</button></div>`;
+        body.appendChild(fb);
+      }
+    });
     body.appendChild(mkAddBtn("+ Add Event", false));
   });
   const addDay = document.createElement("button");
@@ -1379,9 +1413,9 @@ function renderEdit() {
     saveDraft(); renderEdit();
   };
   grid.appendChild(addDay);
-  attachEditListeners();
-  renderInternTally();
-  renderCalendarPreview();
+  try { attachEditListeners(); } catch (e) { console.error("attachEditListeners failed", e); }
+  try { renderInternTally(); } catch (e) { console.error("renderInternTally failed", e); }
+  try { renderCalendarPreview(); } catch (e) { console.error("renderCalendarPreview failed", e); }
   updateStatus();
 }
 
