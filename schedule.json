@@ -36,7 +36,7 @@
             "Mateo",
             "Luca",
             "Dylan W",
-            "Maxwell S"
+            "Maxwell"
           ],
           "note": "",
           "players": []
@@ -60,7 +60,7 @@
           "players": []
         },
         {
-          "time": "230PM",
+          "time": "2:30 PM",
           "title": "Maxwell Scott",
           "type": "other",
           "people": [
@@ -72,7 +72,7 @@
           "players": []
         },
         {
-          "time": "330 PM",
+          "time": "3:30 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -82,6 +82,18 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "430p",
+          "title": "Sean Dao",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -116,7 +128,7 @@
             "Mateo",
             "JD",
             "Jacob S",
-            "Jung",
+            "Dame",
             "Colin"
           ],
           "note": "",
@@ -201,7 +213,7 @@
             "Mark",
             "Mateo",
             "Luca",
-            "Jung",
+            "Sam",
             "Shep"
           ],
           "note": "",
@@ -216,11 +228,11 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Jung",
+            "Colby",
             "Mark",
             "Mateo",
             "Luca",
-            "Colby",
+            "Sam",
             "Shep"
           ],
           "note": "",
@@ -239,14 +251,14 @@
             "Matt M",
             "Dylan W",
             "Luca",
-            "Jung"
+            "Ali"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "11:45 AM",
-          "title": "Jaden N, Brett D, Jurian D, Kadin S",
+          "title": "Jaden N, Brett D, Jurian D, Kaiden S",
           "type": "excel",
           "people": [
             "Titus",
@@ -258,25 +270,13 @@
             "Kailen",
             "Dylan W",
             "Luca",
-            "Jung"
+            "Ali"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "430 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Dame",
-            "Ian"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "5:30 PM",
+          "time": "5:15 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -286,6 +286,18 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "4:30 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Dame",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -294,7 +306,7 @@
       "events": [
         {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Jarin S, Kadin S",
+          "title": "Colby, Dariq, Jarin S, Kaiden S",
           "type": "excel",
           "people": [
             "Titus",
@@ -305,7 +317,7 @@
             "Kirby",
             "Mateo",
             "JD",
-            "Jung"
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -320,7 +332,7 @@
             "Tyler",
             "Evan",
             "Colin",
-            "Jung",
+            "Kirby",
             "Mateo",
             "Dame",
             "Dylan W"
@@ -339,7 +351,7 @@
             "Evan",
             "JD",
             "Luca",
-            "Jung",
+            "Ali",
             "Dylan W",
             "Dame"
           ],
@@ -461,7 +473,7 @@
           "players": []
         },
         {
-          "time": "530 pm",
+          "time": "5:30 pm",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -542,16 +554,15 @@
         },
         {
           "time": "11:45 AM",
-          "title": "Brett D, Nick J, Kadin S",
-          "type": "excel",
+          "title": "Brett D, Nick J",
+          "type": "other",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
             "JD",
             "Kirby",
-            "Luca",
-            "Mateo"
+            "Luca"
           ],
           "note": "",
           "players": []
