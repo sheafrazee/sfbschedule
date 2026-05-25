@@ -72,7 +72,7 @@
           "players": []
         },
         {
-          "time": "330PM",
+          "time": "330 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -178,36 +178,6 @@
       "day": "Wed 27",
       "events": [
         {
-          "time": "6:30 AM ",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Titus",
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "8:00 AM",
-          "title": "Colby, Dariq, Jarin S",
-          "type": "excel",
-          "people": [
-            "Titus",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Ali",
-            "Mark",
-            "Mateo",
-            "Luca",
-            "Jung",
-            "Shep"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
           "time": "9:15 AM",
           "title": "Karim, Dev A, Nick D, Jackson M",
           "type": "excel",
@@ -245,6 +215,36 @@
           "players": []
         },
         {
+          "time": "6:30 AM ",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:00 AM",
+          "title": "Colby, Dariq, Jarin S",
+          "type": "excel",
+          "people": [
+            "Titus",
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Ali",
+            "Mark",
+            "Mateo",
+            "Luca",
+            "Jung",
+            "Shep"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
           "time": "11:45 AM",
           "title": "Jaden N, Brett D, Jurian D, Kadin S",
           "type": "excel",
@@ -274,6 +274,18 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "430 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Dame",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -449,7 +461,7 @@
           "players": []
         },
         {
-          "time": "530pm",
+          "time": "530 pm",
           "title": "Rudy",
           "type": "other",
           "people": [
