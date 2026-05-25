@@ -408,9 +408,9 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
     <div class="week-preview" id="weekPreview">
       <div class="week-preview-head">
         <h3>📅 Week Overview</h3>
-        <button class="week-preview-toggle" id="weekPreviewToggle">Hide</button>
+        <button class="week-preview-toggle" id="weekPreviewToggle">Show</button>
       </div>
-      <div id="weekPreviewBody">
+      <div id="weekPreviewBody" class="hidden">
         <div class="preview-weeks" id="previewWeeks"></div>
       </div>
     </div>
@@ -1792,47 +1792,72 @@ function wireCalDrag(container) {
 }
 function onCalDragStart(e) {
   const el = e.currentTarget;
-  e.preventDefault();
   const hourPx = +el.dataset.hourpx;
   const startMin0 = +el.dataset.startmin;
   const dur = +el.dataset.dur;
   const isRange = el.dataset.range === "1";
   const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
-  const body = el.parentElement;            // .cal-day-body
+  const body = el.parentElement;
   const bodyH = body.clientHeight;
   const elH = el.offsetHeight;
   const origTop = (startMin0 / 60 - CAL_START_H) * hourPx;
   const startY = e.clientY;
+  const startX = e.clientX;
   const timeEl = el.querySelector(".cal-ev-time");
-  if (timeEl) timeEl.style.display = "block";
-  el.classList.add("cal-ev-dragging");
-  try { el.setPointerCapture(e.pointerId); } catch (_) {}
   let finalStartMin = startMin0;
+  let dragging = false;
+
+  // Long-press hold: only start drag after 400ms without significant movement
+  const HOLD_MS = 400;
+  const MOVE_THRESHOLD = 6; // px — cancel hold if finger wanders
+
+  let holdTimer = setTimeout(() => {
+    holdTimer = null;
+    dragging = true;
+    e.preventDefault();
+    if (timeEl) timeEl.style.display = "block";
+    el.classList.add("cal-ev-dragging");
+    try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  }, HOLD_MS);
+
+  function cancelHold() {
+    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+  }
 
   function move(ev) {
+    if (!dragging) {
+      // Cancel hold if moved too far
+      if (Math.abs(ev.clientY - startY) > MOVE_THRESHOLD || Math.abs(ev.clientX - startX) > MOVE_THRESHOLD) {
+        cancelHold();
+      }
+      return;
+    }
     const dy = ev.clientY - startY;
     let top = Math.max(0, Math.min(origTop + dy, bodyH - elH));
-    let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;   // snap 15 min
+    let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;
     mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
     finalStartMin = mins;
     el.style.top = ((mins / 60 - CAL_START_H) * hourPx) + "px";
     if (timeEl) timeEl.textContent = _fmtTimeRange(mins, dur, isRange);
   }
+
   function up() {
+    cancelHold();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
     el.removeEventListener("pointermove", move);
     el.removeEventListener("pointerup", up);
     el.removeEventListener("pointercancel", up);
     el.classList.remove("cal-ev-dragging");
-    if (finalStartMin !== startMin0) {
+    if (dragging && finalStartMin !== startMin0) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
       if (days && days[di] && days[di].events[ei]) {
         days[di].events[ei].time = _fmtTimeRange(finalStartMin, dur, isRange);
         saveDraft();
-        renderEdit();   // refresh editor cards, calendar, and tally
+        renderEdit();
       }
     }
   }
+
   el.addEventListener("pointermove", move);
   el.addEventListener("pointerup", up);
   el.addEventListener("pointercancel", up);
@@ -1916,50 +1941,64 @@ function quickAddEvent() {
   const feedback = document.getElementById("quickAddFeedback");
   const raw = input.value.trim();
   if (!raw) return;
+  if (!data) { feedback.textContent = "Schedule not loaded yet."; feedback.className = "quick-add-feedback err"; return; }
 
   const lines = raw.split(/[\n;]+/).map(s => s.trim()).filter(Boolean);
   const added = [], failed = [];
 
   lines.forEach(str => {
-    const r = parseQuickAdd(str);
-    if (r.err) { failed.push(`"${str}" — ${r.err}`); return; }
+    try {
+      const r = parseQuickAdd(str);
+      if (r.err) { failed.push(`"${str}" — ${r.err}`); return; }
 
-    const days = ed().days || [];
-    let dayIdx = -1;
-    if (r.dayKey !== null) {
-      dayIdx = days.findIndex(d => {
-        const lower = (d.day || '').toLowerCase();
-        return lower.startsWith(r.SHORT_DAY[r.dayKey]) || lower.includes(r.FULL_DAY[r.dayKey]);
-      });
-      if (dayIdx === -1) { failed.push(`"${str}" — no day matching "${r.SHORT_DAY[r.dayKey]}"`); return; }
-    } else {
-      dayIdx = 0;
-    }
-
-    const newEv = { time: r.timeStr, title: r.title, type: r.type, people: r.people, players: [], note: '' };
-    const events = ed().days[dayIdx].events;
-    const newT = parseEventTimes(r.timeStr);
-    let insertIdx = events.length;
-    if (newT) {
-      const newMin = newT.start.h * 60 + newT.start.min;
-      for (let i = 0; i < events.length; i++) {
-        const t = parseEventTimes(events[i].time);
-        if (t && (t.start.h * 60 + t.start.min) > newMin) { insertIdx = i; break; }
+      const days = ed().days || [];
+      let dayIdx = -1;
+      if (r.dayKey !== null) {
+        dayIdx = days.findIndex(d => {
+          const lower = (d.day || '').toLowerCase();
+          return lower.startsWith(r.SHORT_DAY[r.dayKey]) || lower.includes(r.FULL_DAY[r.dayKey]);
+        });
+        if (dayIdx === -1) { failed.push(`"${str}" — no day matching "${r.SHORT_DAY[r.dayKey]}"`); return; }
+      } else {
+        if (!days.length) { failed.push(`"${str}" — no days in schedule yet`); return; }
+        dayIdx = 0;
       }
+
+      const newEv = { time: r.timeStr, title: r.title, type: r.type, people: r.people, players: [], note: '' };
+      const events = ed().days[dayIdx].events;
+      const newT = parseEventTimes(r.timeStr);
+      let insertIdx = events.length;
+      if (newT) {
+        const newMin = newT.start.h * 60 + newT.start.min;
+        for (let i = 0; i < events.length; i++) {
+          const t = parseEventTimes(events[i].time);
+          if (t && (t.start.h * 60 + t.start.min) > newMin) { insertIdx = i; break; }
+        }
+      }
+      events.splice(insertIdx, 0, newEv);
+      added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
+    } catch (ex) {
+      failed.push(`"${str}" — unexpected error: ${ex.message}`);
     }
-    events.splice(insertIdx, 0, newEv);
-    added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
   });
 
-  if (added.length || failed.length) saveDraft(), renderEdit();
+  if (added.length > 0) {
+    saveDraft();
+    renderEdit();
+  }
 
-  if (failed.length) {
-    feedback.textContent = `✗ ${failed[0]}`;
+  if (failed.length > 0) {
+    const msg = added.length > 0
+      ? `✓ ${added.length} added — ✗ ${failed[0]}`
+      : `✗ ${failed[0]}`;
+    feedback.textContent = msg;
     feedback.className = "quick-add-feedback err";
+    if (added.length > 0) input.value = '';
   } else {
     feedback.textContent = `✓ Added ${added.length} session${added.length !== 1 ? 's' : ''}: ${added.join(', ')}`;
     feedback.className = "quick-add-feedback ok";
     input.value = '';
+    input.style.height = 'auto';
     setTimeout(() => { feedback.textContent = ''; feedback.className = 'quick-add-feedback'; }, 4000);
   }
 }
@@ -1984,7 +2023,7 @@ document.querySelectorAll(".type-btn").forEach(btn => btn.addEventListener("clic
 }));
 
 // Week preview toggle in edit mode
-let weekPreviewVisible = true;
+let weekPreviewVisible = false;
 document.getElementById("weekPreviewToggle").addEventListener("click", () => {
   weekPreviewVisible = !weekPreviewVisible;
   document.getElementById("weekPreviewBody").classList.toggle("hidden", !weekPreviewVisible);
