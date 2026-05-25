@@ -116,7 +116,7 @@
             "Mateo",
             "JD",
             "Jacob S",
-            "Dame",
+            "Jung",
             "Colin"
           ],
           "note": "",
@@ -201,7 +201,7 @@
             "Mark",
             "Mateo",
             "Luca",
-            "Sam",
+            "Jung",
             "Shep"
           ],
           "note": "",
@@ -216,11 +216,11 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Colby",
+            "Jung",
             "Mark",
             "Mateo",
             "Luca",
-            "Sam",
+            "Colby",
             "Shep"
           ],
           "note": "",
@@ -239,14 +239,14 @@
             "Matt M",
             "Dylan W",
             "Luca",
-            "Ali"
+            "Jung"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "11:45 AM",
-          "title": "Jaden N, Brett D, Jurian D, Kaiden S",
+          "title": "Jaden N, Brett D, Jurian D, Kadin S",
           "type": "excel",
           "people": [
             "Titus",
@@ -258,7 +258,7 @@
             "Kailen",
             "Dylan W",
             "Luca",
-            "Ali"
+            "Jung"
           ],
           "note": "",
           "players": []
@@ -282,7 +282,7 @@
       "events": [
         {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Jarin S, Kaiden S",
+          "title": "Colby, Dariq, Jarin S, Kadin S",
           "type": "excel",
           "people": [
             "Titus",
@@ -293,7 +293,7 @@
             "Kirby",
             "Mateo",
             "JD",
-            "Dame"
+            "Jung"
           ],
           "note": "",
           "players": []
@@ -308,7 +308,7 @@
             "Tyler",
             "Evan",
             "Colin",
-            "Kirby",
+            "Jung",
             "Mateo",
             "Dame",
             "Dylan W"
@@ -327,7 +327,7 @@
             "Evan",
             "JD",
             "Luca",
-            "Ali",
+            "Jung",
             "Dylan W",
             "Dame"
           ],
