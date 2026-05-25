@@ -1604,8 +1604,8 @@ function attachEditListeners() {
       onEnd: function(evt) {
         const fromDi = +evt.from.id.replace("dayBody", "");
         const toDi = +evt.to.id.replace("dayBody", "");
-        const fromIdx = evt.oldIndex;
-        const toIdx = evt.newIndex;
+        const fromIdx = evt.oldIndex - 1;
+        const toIdx = evt.newIndex - 1;
         if (fromDi === toDi && fromIdx === toIdx) return;
         const [moved] = ed().days[fromDi].events.splice(fromIdx, 1);
         ed().days[toDi].events.splice(toIdx, 0, moved);
