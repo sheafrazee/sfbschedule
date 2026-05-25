@@ -140,7 +140,6 @@
           "title": "ABA/Delta 11up – MAP",
           "type": "other",
           "people": [
-            "Titus",
             "Dame"
           ],
           "note": "",
@@ -151,7 +150,6 @@
           "title": "Audrina 1 – Excel",
           "type": "other",
           "people": [
-            "Titus",
             "Ethan"
           ],
           "note": "",
@@ -162,7 +160,6 @@
           "title": "Group – Excel",
           "type": "other",
           "people": [
-            "Titus",
             "Kirby",
             "Ethan",
             "David"
@@ -265,9 +262,9 @@
           "title": "Rudy",
           "type": "other",
           "people": [
-            "Titus",
             "Kirby",
-            "Dame"
+            "Dame",
+            "Ian"
           ],
           "note": "",
           "players": []
@@ -362,9 +359,9 @@
           "title": "Group – Excel",
           "type": "other",
           "people": [
-            "Titus",
             "David",
-            "Kirby"
+            "Kirby",
+            "Ian"
           ],
           "note": "",
           "players": []
