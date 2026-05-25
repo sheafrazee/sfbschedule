@@ -17,7 +17,8 @@
             "Ali",
             "Kenny",
             "Mateo",
-            "Luca"
+            "Luca",
+            "Kailen"
           ],
           "note": "",
           "players": []
@@ -97,7 +98,8 @@
             "Tyler",
             "Evan",
             "JD",
-            "Mateo"
+            "Mateo",
+            "Kailen"
           ],
           "note": "",
           "players": []
@@ -244,7 +246,7 @@
         },
         {
           "time": "11:45 AM",
-          "title": "Jaden N, Brett D, Jurian D",
+          "title": "Jaden N, Brett D, Jurian D, Kaiden S",
           "type": "excel",
           "people": [
             "Titus",
@@ -253,6 +255,7 @@
             "Evan",
             "JD",
             "Matt M",
+            "Kailen",
             "Dylan W",
             "Luca",
             "Ali"
@@ -279,7 +282,7 @@
       "events": [
         {
           "time": "8:00 AM",
-          "title": "Colby, Dariq, Jarin S",
+          "title": "Colby, Dariq, Jarin S, Kaiden S",
           "type": "excel",
           "people": [
             "Titus",
@@ -288,7 +291,9 @@
             "Evan",
             "Colin",
             "Kirby",
-            "Mateo"
+            "Mateo",
+            "JD",
+            "Dame"
           ],
           "note": "",
           "players": []
