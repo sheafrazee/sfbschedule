@@ -24,7 +24,7 @@
         },
         {
           "time": "9:30 AM",
-          "title": "Karim, Hannes, Dev A",
+          "title": "Karim, Hannes, Dev A, Kadin S",
           "type": "excel",
           "people": [
             "Titus",
@@ -33,7 +33,9 @@
             "Evan",
             "Shep",
             "Mateo",
-            "Luca"
+            "Luca",
+            "Dylan W",
+            "Jacob S"
           ],
           "note": "",
           "players": []
