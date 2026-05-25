@@ -300,6 +300,9 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-hour-line { border-bottom: 1px solid #F0EDE8; box-sizing: border-box; }
 .cal-half-line { border-bottom: 1px dashed #F0EDE8; box-sizing: border-box; height: 26px; }
 .cal-ev { position: absolute; left: 2px; right: 2px; border-radius: 3px; padding: 2px 4px; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: default; z-index: 2; }
+.cal-ev-drag { cursor: grab; touch-action: none; transition: box-shadow .12s; }
+.cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
+.cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
 .cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
@@ -1631,7 +1634,7 @@ function _calTop(h, min) {
   return Math.round(Math.max(0, (h + min / 60 - CAL_START_H) * CAL_HOUR_PX));
 }
 
-function renderCalendar(days, container, compact) {
+function renderCalendar(days, container, compact, editable, slot) {
   if (!days || !days.length) { container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--stone);font-size:13px;">No days yet.</div>`; return; }
   const totalHours = CAL_END_H - CAL_START_H;
   const totalPx = totalHours * CAL_HOUR_PX;
@@ -1649,12 +1652,12 @@ function renderCalendar(days, container, compact) {
 
   // Days
   let daysHtml = `<div class="cal-days">`;
-  days.forEach(day => {
+  days.forEach((day, di) => {
     const noTime = [];
     const timed = [];
-    (day.events || []).forEach(ev => {
+    (day.events || []).forEach((ev, ei) => {
       const t = parseEventTimes(ev.time);
-      if (t) timed.push({ ev, t });
+      if (t) timed.push({ ev, t, ei });
       else noTime.push(ev);
     });
 
@@ -1666,15 +1669,21 @@ function renderCalendar(days, container, compact) {
     }
 
     let evHtml = '';
-    timed.forEach(({ ev, t }) => {
+    timed.forEach(({ ev, t, ei }) => {
       const s = STYLES[ev.type] || STYLES.other;
       const hPxLocal = compact ? hourPx : CAL_HOUR_PX;
       const top = Math.round(Math.max(0, (t.start.h + t.start.min / 60 - CAL_START_H) * hPxLocal));
       const endFrac = (t.end.h + t.end.min / 60 - CAL_START_H) * hPxLocal;
       const height = Math.max(14, Math.round(endFrac) - top - 1);
-      evHtml += `<div class="cal-ev" style="top:${top}px;height:${height}px;background:${s.bg};color:${s.textPrimary};" title="${escapeAttr(ev.time + ' – ' + ev.title)}">
+      const startMin = t.start.h * 60 + t.start.min;
+      const durMin = Math.max(15, (t.end.h * 60 + t.end.min) - startMin);
+      const isRange = String(ev.time).split(/\s*(?:–|—|-|to)\s*/i).filter(Boolean).length > 1;
+      const editAttrs = editable
+        ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hPxLocal}"`
+        : '';
+      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.bg};color:${s.textPrimary};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
         <div class="cal-ev-title">${escapeHtml(ev.title)}</div>
-        ${height > 24 ? `<div class="cal-ev-time">${escapeHtml(ev.time)}</div>` : ''}
+        <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
       </div>`;
     });
 
@@ -1698,6 +1707,71 @@ function renderCalendar(days, container, compact) {
   daysHtml += `</div>`;
 
   container.innerHTML = `<div class="cal-grid">${timeHtml}${daysHtml}</div>`;
+  if (editable) wireCalDrag(container);
+}
+
+// 12-hour clock formatting for drag-edited times
+function _fmt12(totalMin) {
+  let h = Math.floor(totalMin / 60) % 24, m = ((totalMin % 60) + 60) % 60;
+  const mer = h < 12 ? "AM" : "PM";
+  let hh = h % 12; if (hh === 0) hh = 12;
+  return `${hh}:${String(m).padStart(2, "0")} ${mer}`;
+}
+function _fmtTimeRange(startMin, durMin, isRange) {
+  return isRange ? `${_fmt12(startMin)} \u2013 ${_fmt12(startMin + durMin)}` : _fmt12(startMin);
+}
+// Make calendar bubbles draggable to retime sessions (snaps to 15 min).
+function wireCalDrag(container) {
+  container.querySelectorAll(".cal-ev-drag").forEach(el => {
+    el.addEventListener("pointerdown", onCalDragStart);
+  });
+}
+function onCalDragStart(e) {
+  const el = e.currentTarget;
+  e.preventDefault();
+  const hourPx = +el.dataset.hourpx;
+  const startMin0 = +el.dataset.startmin;
+  const dur = +el.dataset.dur;
+  const isRange = el.dataset.range === "1";
+  const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
+  const body = el.parentElement;            // .cal-day-body
+  const bodyH = body.clientHeight;
+  const elH = el.offsetHeight;
+  const origTop = (startMin0 / 60 - CAL_START_H) * hourPx;
+  const startY = e.clientY;
+  const timeEl = el.querySelector(".cal-ev-time");
+  if (timeEl) timeEl.style.display = "block";
+  el.classList.add("cal-ev-dragging");
+  try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  let finalStartMin = startMin0;
+
+  function move(ev) {
+    const dy = ev.clientY - startY;
+    let top = Math.max(0, Math.min(origTop + dy, bodyH - elH));
+    let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;   // snap 15 min
+    mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
+    finalStartMin = mins;
+    el.style.top = ((mins / 60 - CAL_START_H) * hourPx) + "px";
+    if (timeEl) timeEl.textContent = _fmtTimeRange(mins, dur, isRange);
+  }
+  function up() {
+    try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+    el.removeEventListener("pointermove", move);
+    el.removeEventListener("pointerup", up);
+    el.removeEventListener("pointercancel", up);
+    el.classList.remove("cal-ev-dragging");
+    if (finalStartMin !== startMin0) {
+      const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
+      if (days && days[di] && days[di].events[ei]) {
+        days[di].events[ei].time = _fmtTimeRange(finalStartMin, dur, isRange);
+        saveDraft();
+        renderEdit();   // refresh editor cards, calendar, and tally
+      }
+    }
+  }
+  el.addEventListener("pointermove", move);
+  el.addEventListener("pointerup", up);
+  el.addEventListener("pointercancel", up);
 }
 
 // Render both-week preview in edit mode
@@ -1713,8 +1787,8 @@ function renderCalendarPreview() {
   if (hasNxt) html += `<div><div class="preview-week-label">Next — ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
   if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days in either week yet.</div>`;
   body.innerHTML = html;
-  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), true);
-  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), true);
+  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), true, true, 'current');
+  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), true, true, 'next');
 }
 
 // ============ WIRE UP ============
