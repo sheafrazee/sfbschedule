@@ -303,11 +303,21 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-ev-drag { cursor: grab; touch-action: none; transition: box-shadow .12s; }
 .cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
 .cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
+.cal-ev-selected { outline: 2px solid var(--ink) !important; outline-offset: 1px; z-index: 3; }
+.cal-ev-resize { position: absolute; bottom: 0; left: 0; right: 0; height: 7px; cursor: ns-resize; touch-action: none; border-radius: 0 0 3px 3px; }
+.cal-ev-resize:hover { background: rgba(0,0,0,0.2); }
 .cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
 .cal-day-body[data-di] { cursor: crosshair; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
+.cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 230px; }
+.cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
+.cal-pop-label:first-child { margin-top: 0; }
+.cal-popover input { width: 100%; border: 1.5px solid var(--light-stone); border-radius: 5px; padding: 6px 8px; font-size: 13px; font-family: 'Source Sans 3', sans-serif; outline: none; box-sizing: border-box; }
+.cal-popover input:focus { border-color: var(--stone); }
+.cal-pop-type-btn { flex: 1; padding: 5px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; cursor: pointer; background: #fff; color: var(--dark-stone); transition: all .12s; }
+.cal-pop-type-btn.active { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
 .cal-notime-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; border-radius: 3px; padding: 2px 4px; margin: 1px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Two-week preview layout */
 .week-preview { margin-bottom: 16px; }
@@ -546,6 +556,7 @@ let playerFilter = "";
 let typeFilter = "all";
 let currentMode = "display";
 let editSlot = "current";   // "current" or "next" — which week the edit UI targets
+let calSelection = null;    // { slot, di, ei } — selected calendar event
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
 // shown in display mode.
@@ -1750,6 +1761,7 @@ function renderCalendar(days, container, compact, editable, slot) {
       evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.bg};color:${s.textPrimary};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
         <div class="cal-ev-title">${escapeHtml(ev.title)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
+        ${editable ? '<div class="cal-ev-resize"></div>' : ''}
       </div>`;
     });
 
@@ -1791,6 +1803,10 @@ function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll(".cal-ev-drag").forEach(el => {
     el.addEventListener("pointerdown", onCalDragStart);
   });
+  // Resize handles
+  container.querySelectorAll(".cal-ev-resize").forEach(handle => {
+    handle.addEventListener("pointerdown", ev => onCalResizeStart(ev, slot, hPx));
+  });
   // Empty-space drag to create a new session
   container.querySelectorAll(".cal-day-body[data-di]").forEach(body => {
     body.addEventListener("pointerdown", ev => {
@@ -1799,6 +1815,12 @@ function wireCalDrag(container, slot, hPx) {
       onCalCreateStart(ev, slot, hPx);
     });
   });
+  // Re-apply selection highlight after re-render
+  if (calSelection && calSelection.slot === slot) {
+    const sel = container.querySelector(`.cal-ev-drag[data-di="${calSelection.di}"][data-ei="${calSelection.ei}"]`);
+    if (sel) sel.classList.add('cal-ev-selected');
+    else calSelection = null;
+  }
 }
 function onCalDragStart(e) {
   const el = e.currentTarget;
@@ -1865,6 +1887,8 @@ function onCalDragStart(e) {
         saveDraft();
         renderEdit();
       }
+    } else if (!dragging) {
+      selectCalEvent(slot, di, ei);
     }
   }
 
@@ -1873,8 +1897,71 @@ function onCalDragStart(e) {
   el.addEventListener("pointercancel", up);
 }
 
+function selectCalEvent(slot, di, ei) {
+  // Clear previous selection
+  document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
+  if (calSelection && calSelection.slot === slot && calSelection.di === di && calSelection.ei === ei) {
+    calSelection = null; // click same event again → deselect
+    hideCalPopover();
+    return;
+  }
+  calSelection = { slot, di, ei };
+  const sel = document.querySelector(`.cal-ev-drag[data-slot="${slot}"][data-di="${di}"][data-ei="${ei}"]`);
+  if (sel) {
+    sel.classList.add('cal-ev-selected');
+    showCalPopover(slot, di, ei, sel);
+  }
+}
+
+function onCalResizeStart(e, slot, hPx) {
+  e.stopPropagation(); // prevent the move-drag from triggering on the parent
+  const handle = e.currentTarget;
+  const el = handle.parentElement;
+  const startMin = +el.dataset.startmin;
+  const di = +el.dataset.di, ei = +el.dataset.ei;
+  const body = el.parentElement;
+  const rect = body.getBoundingClientRect();
+  const timeEl = el.querySelector('.cal-ev-time');
+  let endMins = startMin + +el.dataset.dur;
+
+  function yToEndMins(y) {
+    let m = Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
+    return Math.max(startMin + 15, Math.min(m, CAL_END_H * 60));
+  }
+
+  e.preventDefault();
+  try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+
+  function move(ev) {
+    endMins = yToEndMins(ev.clientY - rect.top);
+    el.style.height = Math.max(14, (endMins - startMin) / 60 * hPx) + 'px';
+    if (timeEl) { timeEl.style.display = 'block'; timeEl.textContent = _fmtTimeRange(startMin, endMins - startMin, true); }
+  }
+
+  function up() {
+    handle.removeEventListener('pointermove', move);
+    handle.removeEventListener('pointerup', up);
+    handle.removeEventListener('pointercancel', up);
+    try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+    const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+    if (days && days[di] && days[di].events[ei]) {
+      days[di].events[ei].time = _fmtTimeRange(startMin, endMins - startMin, true);
+      saveDraft();
+      renderEdit();
+    }
+  }
+
+  handle.addEventListener('pointermove', move);
+  handle.addEventListener('pointerup', up);
+  handle.addEventListener('pointercancel', up);
+}
+
 // Drag on empty calendar space to create a new session
 function onCalCreateStart(e, slot, hPx) {
+  // Clicking empty space clears selection
+  document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
+  calSelection = null;
+
   const body = e.currentTarget;
   const di = +body.dataset.di;
   const rect = body.getBoundingClientRect();
@@ -1947,8 +2034,102 @@ function onCalCreateStart(e, slot, hPx) {
   body.addEventListener('pointercancel', up);
 }
 
-// Render both-week preview in edit mode
+// ============ INLINE CALENDAR POPOVER ============
+function showCalPopover(slot, di, ei, evEl) {
+  hideCalPopover();
+  const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+  if (!days || !days[di] || !days[di].events[ei]) return;
+  const ev = days[di].events[ei];
+
+  const pop = document.createElement('div');
+  pop.className = 'cal-popover';
+  pop.id = 'calPopover';
+  pop.innerHTML = `
+    <span class="cal-pop-label">Players / Session Title</span>
+    <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
+    <span class="cal-pop-label">Interns <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:.65;">(comma-separated)</span></span>
+    <input id="calPopPeople" type="text" value="${escapeAttr((ev.people || []).join(', '))}" placeholder="Dame, Mateo, JD" autocomplete="off" spellcheck="false">
+    <span class="cal-pop-label">Type</span>
+    <div style="display:flex;gap:6px;">
+      <button class="cal-pop-type-btn${ev.type === 'excel' ? ' active' : ''}" data-type="excel">Excel Client</button>
+      <button class="cal-pop-type-btn${ev.type !== 'excel' ? ' active' : ''}" data-type="other">Other</button>
+    </div>
+  `;
+  document.body.appendChild(pop);
+
+  // Position: right of event, flip left if needed, clamp to viewport
+  const rect = evEl.getBoundingClientRect();
+  const popW = 230;
+  let left = rect.right + 10;
+  let top = rect.top;
+  if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
+  pop.style.left = Math.max(8, left) + 'px';
+  pop.style.top = Math.max(8, Math.min(top, window.innerHeight - 160)) + 'px';
+
+  const titleInput = pop.querySelector('#calPopTitle');
+  const peopleInput = pop.querySelector('#calPopPeople');
+  titleInput.focus();
+  titleInput.select();
+
+  function getEv() {
+    const d = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+    return d && d[di] && d[di].events[ei];
+  }
+
+  titleInput.addEventListener('input', () => {
+    const ev2 = getEv(); if (!ev2) return;
+    ev2.title = titleInput.value;
+    saveDraft();
+    // Live-update the tiny calendar label without full re-render
+    const lbl = evEl.querySelector('.cal-ev-title');
+    if (lbl) lbl.textContent = titleInput.value;
+    evEl.title = (ev2.time || '') + ' – ' + titleInput.value;
+  });
+
+  peopleInput.addEventListener('input', () => {
+    const ev2 = getEv(); if (!ev2) return;
+    ev2.people = peopleInput.value.split(',').map(s => s.trim()).filter(Boolean);
+    saveDraft();
+  });
+
+  pop.querySelectorAll('.cal-pop-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ev2 = getEv(); if (!ev2) return;
+      ev2.type = btn.dataset.type;
+      saveDraft();
+      pop.querySelectorAll('.cal-pop-type-btn').forEach(b => b.classList.toggle('active', b === btn));
+      // Live-update event color in calendar
+      const s = STYLES[btn.dataset.type] || STYLES.other;
+      evEl.style.background = s.bg;
+      evEl.style.color = s.textPrimary;
+    });
+  });
+
+  // Tab advances field; Enter / Escape close
+  titleInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); peopleInput.focus(); peopleInput.select(); }
+    if (e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+  });
+  peopleInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+  });
+
+  setTimeout(() => document.addEventListener('pointerdown', _calPopOutside, true), 0);
+}
+
+function _calPopOutside(e) {
+  const pop = document.getElementById('calPopover');
+  if (!pop) { document.removeEventListener('pointerdown', _calPopOutside, true); return; }
+  if (!pop.contains(e.target)) hideCalPopover();
+}
+
+function hideCalPopover() {
+  document.removeEventListener('pointerdown', _calPopOutside, true);
+  const pop = document.getElementById('calPopover');
+  if (pop) pop.remove();
+}
 function renderCalendarPreview() {
+  hideCalPopover(); // clean up before rebuilding DOM
   const body = document.getElementById('previewWeeks');
   if (!body) return;
   const cur = data;
@@ -2105,6 +2286,24 @@ document.querySelectorAll(".type-btn").forEach(btn => btn.addEventListener("clic
   document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
   this.classList.add("active"); typeFilter = this.dataset.type; renderDisplay();
 }));
+
+// Delete key removes selected calendar event
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { hideCalPopover(); return; }
+  if (e.key !== 'Delete' && e.key !== 'Backspace') return;
+  const tag = document.activeElement && document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+  if (!calSelection) return;
+  const { slot, di, ei } = calSelection;
+  const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+  if (days && days[di] && days[di].events[ei]) {
+    if (!confirm(`Delete "${days[di].events[ei].title}"?`)) return;
+    days[di].events.splice(ei, 1);
+    calSelection = null;
+    saveDraft();
+    renderEdit();
+  }
+});
 
 // Week preview toggle in edit mode
 let weekPreviewVisible = false;
