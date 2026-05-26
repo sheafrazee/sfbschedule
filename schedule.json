@@ -394,6 +394,20 @@
           "players": []
         },
         {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Crew Fotheringham, Danny Kennard",
+          "type": "other",
+          "people": [
+            "Titus",
+            "JD",
+            "Dame",
+            "Matt M",
+            "David"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "2:30 PM",
           "title": "Maxwell Scott",
           "type": "other",
@@ -508,6 +522,20 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Crew Fotheringham, Danny Kennard",
+          "type": "other",
+          "people": [
+            "Titus",
+            "JD",
+            "Dame",
+            "Mark",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -543,6 +571,18 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "1:30 PM – 3:00 PM",
+          "title": "Crew Fotheringham, Danny Kennard",
+          "type": "other",
+          "people": [
+            "Dame",
+            "Kirby",
+            "David"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     }
