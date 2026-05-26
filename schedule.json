@@ -101,6 +101,17 @@
       "day": "Tue 26",
       "events": [
         {
+          "time": "7:00 AM",
+          "title": "Dev A",
+          "type": "excel",
+          "people": [
+            "Titus",
+            "Tyler"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM",
           "title": "Skills + 3x3: Colby, Nick D, Jurian,  A, Jaden N, Hudson G, Trent S, Brett D, Nick J",
           "type": "excel",
