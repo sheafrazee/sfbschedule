@@ -1866,7 +1866,7 @@ function onCalDragStart(e) {
 // Render both-week preview in edit mode
 function renderCalendarPreview() {
   const body = document.getElementById('previewWeeks');
-  if (!body || document.getElementById('weekPreviewBody').classList.contains('hidden')) return;
+  if (!body) return;
   const cur = data;
   const nxt = data.nextWeek;
   const hasCur = (cur.days || []).length;
