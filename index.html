@@ -306,6 +306,8 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
+.cal-day-body[data-di] { cursor: crosshair; }
+.cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
 .cal-notime-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; border-radius: 3px; padding: 2px 4px; margin: 1px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Two-week preview layout */
 .week-preview { margin-bottom: 16px; }
@@ -1762,7 +1764,7 @@ function renderCalendar(days, container, compact, editable, slot) {
     daysHtml += `<div class="cal-day">
       <div class="cal-day-head">${escapeHtml(day.day)}</div>
       ${noTimeHtml}
-      <div class="cal-day-body" style="height:${compact ? Math.round(totalHours * hourPx) : totalPx}px;position:relative;overflow:hidden;">
+      <div class="cal-day-body" style="height:${compact ? Math.round(totalHours * hourPx) : totalPx}px;position:relative;overflow:hidden;"${editable ? ` data-di="${di}"` : ''}>
         ${hourLines}
         ${evHtml}
       </div>
@@ -1771,7 +1773,7 @@ function renderCalendar(days, container, compact, editable, slot) {
   daysHtml += `</div>`;
 
   container.innerHTML = `<div class="cal-grid">${timeHtml}${daysHtml}</div>`;
-  if (editable) wireCalDrag(container);
+  if (editable) wireCalDrag(container, slot, hourPx);
 }
 
 // 12-hour clock formatting for drag-edited times
@@ -1785,9 +1787,17 @@ function _fmtTimeRange(startMin, durMin, isRange) {
   return isRange ? `${_fmt12(startMin)} \u2013 ${_fmt12(startMin + durMin)}` : _fmt12(startMin);
 }
 // Make calendar bubbles draggable to retime sessions (snaps to 15 min).
-function wireCalDrag(container) {
+function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll(".cal-ev-drag").forEach(el => {
     el.addEventListener("pointerdown", onCalDragStart);
+  });
+  // Empty-space drag to create a new session
+  container.querySelectorAll(".cal-day-body[data-di]").forEach(body => {
+    body.addEventListener("pointerdown", ev => {
+      if (ev.button !== 0) return;
+      if (ev.target.closest('.cal-ev-drag')) return; // let existing-event drag handle it
+      onCalCreateStart(ev, slot, hPx);
+    });
   });
 }
 function onCalDragStart(e) {
@@ -1861,6 +1871,80 @@ function onCalDragStart(e) {
   el.addEventListener("pointermove", move);
   el.addEventListener("pointerup", up);
   el.addEventListener("pointercancel", up);
+}
+
+// Drag on empty calendar space to create a new session
+function onCalCreateStart(e, slot, hPx) {
+  const body = e.currentTarget;
+  const di = +body.dataset.di;
+  const rect = body.getBoundingClientRect();
+
+  function yToSnappedMins(y) {
+    let m = Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
+    return Math.max(CAL_START_H * 60, Math.min(m, CAL_END_H * 60));
+  }
+
+  const anchorMins = yToSnappedMins(e.clientY - rect.top);
+  let startMins = anchorMins, endMins = anchorMins + 60;
+
+  const ghost = document.createElement('div');
+  ghost.className = 'cal-ev-ghost';
+  body.appendChild(ghost);
+
+  function updateGhost() {
+    ghost.style.top = ((startMins / 60 - CAL_START_H) * hPx) + 'px';
+    ghost.style.height = Math.max(14, (endMins - startMins) / 60 * hPx) + 'px';
+    ghost.textContent = _fmt12(startMins) + ' – ' + _fmt12(endMins);
+  }
+  updateGhost();
+
+  e.preventDefault();
+  try { body.setPointerCapture(e.pointerId); } catch (_) {}
+
+  function move(ev) {
+    const curMins = yToSnappedMins(ev.clientY - rect.top);
+    if (curMins > anchorMins) {
+      startMins = anchorMins;
+      endMins = Math.max(anchorMins + 15, curMins);
+    } else {
+      startMins = Math.max(CAL_START_H * 60, curMins);
+      endMins = anchorMins + 60;
+    }
+    endMins = Math.min(endMins, CAL_END_H * 60);
+    updateGhost();
+  }
+
+  function up() {
+    body.removeEventListener('pointermove', move);
+    body.removeEventListener('pointerup', up);
+    body.removeEventListener('pointercancel', up);
+    try { body.releasePointerCapture(e.pointerId); } catch (_) {}
+    if (ghost.parentNode) ghost.parentNode.removeChild(ghost);
+
+    const dur = endMins - startMins;
+    // Short tap/click → default 1-hour block; meaningful drag → use dragged range
+    const timeStr = dur >= 30
+      ? _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins)
+      : _fmt12(startMins) + ' \u2013 ' + _fmt12(startMins + 60);
+
+    const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+    if (!days || !days[di]) return;
+
+    const newEv = { time: timeStr, title: 'New Event', type: 'other', people: [], players: [], note: '' };
+    const events = days[di].events;
+    let insertIdx = events.length;
+    for (let i = 0; i < events.length; i++) {
+      const t = parseEventTimes(events[i].time);
+      if (t && (t.start.h * 60 + t.start.min) > startMins) { insertIdx = i; break; }
+    }
+    events.splice(insertIdx, 0, newEv);
+    saveDraft();
+    renderEdit();
+  }
+
+  body.addEventListener('pointermove', move);
+  body.addEventListener('pointerup', up);
+  body.addEventListener('pointercancel', up);
 }
 
 // Render both-week preview in edit mode
