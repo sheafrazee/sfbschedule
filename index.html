@@ -1690,8 +1690,8 @@ function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g, c => ({"
 function escapeAttr(s){ return escapeHtml(s); }
 
 // ============ CALENDAR VIEW ============
-const CAL_START_H = 7;   // 7 AM
-const CAL_END_H   = 20;  // 8 PM
+const CAL_START_H = 5;   // 5 AM
+const CAL_END_H   = 21;  // 9 PM
 const CAL_HOUR_PX = 52;  // px per hour
 
 function _calTop(h, min) {
@@ -2028,6 +2028,7 @@ document.getElementById("weekPreviewToggle").addEventListener("click", () => {
   weekPreviewVisible = !weekPreviewVisible;
   document.getElementById("weekPreviewBody").classList.toggle("hidden", !weekPreviewVisible);
   document.getElementById("weekPreviewToggle").textContent = weekPreviewVisible ? "Hide" : "Show";
+  if (weekPreviewVisible) renderCalendarPreview();
 });
 document.getElementById("weekTitleInput").addEventListener("change", function(){ ed().weekTitle = this.value; saveDraft(); if (editSlot === "current") document.getElementById("weekTitleDisplay").textContent = this.value; });
 document.getElementById("publishBtn").addEventListener("click", publish);
