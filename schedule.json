@@ -60,20 +60,8 @@
           "players": []
         },
         {
-          "time": "2:30 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Titus",
-            "Kirby",
-            "Dame"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
           "time": "3:30 PM",
-          "title": "Rudy",
+          "title": "Group ",
           "type": "other",
           "people": [
             "Titus",
@@ -82,18 +70,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "430p",
-          "title": "Sean Dao",
-          "type": "other",
-          "people": [
-            "Titus",
-            "Kirby",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -346,6 +322,17 @@
           "players": []
         },
         {
+          "time": "4:00 PM",
+          "title": "Hailey Johnson",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "5:00 PM",
           "title": "Group – Excel",
           "type": "other",
@@ -362,6 +349,17 @@
     {
       "day": "Fri 29",
       "events": [
+        {
+          "time": "6:30 AM",
+          "title": "Hailey Johnson",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM",
           "title": "5x5: Colby, Nick D, Jaden N, Hudson G, Trent S, Brett D, Nick J, Jurian D, Dev A",
