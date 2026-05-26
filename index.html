@@ -1961,35 +1961,47 @@ function onCalCreateStart(e, slot, hPx) {
   // Clicking empty space clears selection
   document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
   calSelection = null;
+  hideCalPopover();
 
   const body = e.currentTarget;
   const di = +body.dataset.di;
   const rect = body.getBoundingClientRect();
+  const startY = e.clientY - rect.top;
+  const DRAG_PX = 10; // min pixels before drag is "real"
 
   function yToSnappedMins(y) {
     let m = Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
     return Math.max(CAL_START_H * 60, Math.min(m, CAL_END_H * 60));
   }
 
-  const anchorMins = yToSnappedMins(e.clientY - rect.top);
+  const anchorMins = yToSnappedMins(startY);
   let startMins = anchorMins, endMins = anchorMins + 60;
+  let hasDragged = false;
+  let ghost = null;
 
-  const ghost = document.createElement('div');
-  ghost.className = 'cal-ev-ghost';
-  body.appendChild(ghost);
+  function ensureGhost() {
+    if (ghost) return;
+    ghost = document.createElement('div');
+    ghost.className = 'cal-ev-ghost';
+    body.appendChild(ghost);
+  }
 
   function updateGhost() {
+    if (!ghost) return;
     ghost.style.top = ((startMins / 60 - CAL_START_H) * hPx) + 'px';
     ghost.style.height = Math.max(14, (endMins - startMins) / 60 * hPx) + 'px';
     ghost.textContent = _fmt12(startMins) + ' – ' + _fmt12(endMins);
   }
-  updateGhost();
 
   e.preventDefault();
   try { body.setPointerCapture(e.pointerId); } catch (_) {}
 
   function move(ev) {
-    const curMins = yToSnappedMins(ev.clientY - rect.top);
+    const y = ev.clientY - rect.top;
+    if (!hasDragged && Math.abs(y - startY) < DRAG_PX) return;
+    hasDragged = true;
+    ensureGhost();
+    const curMins = yToSnappedMins(y);
     if (curMins > anchorMins) {
       startMins = anchorMins;
       endMins = Math.max(anchorMins + 15, curMins);
@@ -2006,18 +2018,14 @@ function onCalCreateStart(e, slot, hPx) {
     body.removeEventListener('pointerup', up);
     body.removeEventListener('pointercancel', up);
     try { body.releasePointerCapture(e.pointerId); } catch (_) {}
-    if (ghost.parentNode) ghost.parentNode.removeChild(ghost);
+    if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
 
-    const dur = endMins - startMins;
-    // Short tap/click → default 1-hour block; meaningful drag → use dragged range
-    const timeStr = dur >= 30
-      ? _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins)
-      : _fmt12(startMins) + ' \u2013 ' + _fmt12(startMins + 60);
+    if (!hasDragged) return; // single click — just deselect, don't create
 
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (!days || !days[di]) return;
 
-    const newEv = { time: timeStr, title: 'New Event', type: 'other', people: [], players: [], note: '' };
+    const newEv = { time: _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins), title: 'New Event', type: 'other', people: [], players: [], note: '' };
     const events = days[di].events;
     let insertIdx = events.length;
     for (let i = 0; i < events.length; i++) {
@@ -2040,14 +2048,20 @@ function showCalPopover(slot, di, ei, evEl) {
   const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
   if (!days || !days[di] || !days[di].events[ei]) return;
   const ev = days[di].events[ei];
+  const initPlayerCount = countTitlePlayers(ev.title || '');
+  const initInternCount = (ev.people || []).length;
 
   const pop = document.createElement('div');
   pop.className = 'cal-popover';
   pop.id = 'calPopover';
   pop.innerHTML = `
-    <span class="cal-pop-label">Players / Session Title</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--dark-stone);">Edit Session</span>
+      <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
+    </div>
+    <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
-    <span class="cal-pop-label">Interns <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:.65;">(comma-separated)</span></span>
+    <span class="cal-pop-label">Interns <span class="intern-count-badge" id="calPopInternBadge">${initInternCount}</span></span>
     <input id="calPopPeople" type="text" value="${escapeAttr((ev.people || []).join(', '))}" placeholder="Dame, Mateo, JD" autocomplete="off" spellcheck="false">
     <span class="cal-pop-label">Type</span>
     <div style="display:flex;gap:6px;">
@@ -2064,10 +2078,12 @@ function showCalPopover(slot, di, ei, evEl) {
   let top = rect.top;
   if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
   pop.style.left = Math.max(8, left) + 'px';
-  pop.style.top = Math.max(8, Math.min(top, window.innerHeight - 160)) + 'px';
+  pop.style.top = Math.max(8, Math.min(top, window.innerHeight - 200)) + 'px';
 
   const titleInput = pop.querySelector('#calPopTitle');
   const peopleInput = pop.querySelector('#calPopPeople');
+  const playerBadge = pop.querySelector('#calPopPlayerBadge');
+  const internBadge = pop.querySelector('#calPopInternBadge');
   titleInput.focus();
   titleInput.select();
 
@@ -2076,10 +2092,23 @@ function showCalPopover(slot, di, ei, evEl) {
     return d && d[di] && d[di].events[ei];
   }
 
+  // Trash button
+  pop.querySelector('#calPopDelete').addEventListener('click', () => {
+    const d = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+    if (d && d[di] && d[di].events[ei]) {
+      d[di].events.splice(ei, 1);
+      calSelection = null;
+      hideCalPopover();
+      saveDraft();
+      renderEdit();
+    }
+  });
+
   titleInput.addEventListener('input', () => {
     const ev2 = getEv(); if (!ev2) return;
     ev2.title = titleInput.value;
     saveDraft();
+    if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     // Live-update the tiny calendar label without full re-render
     const lbl = evEl.querySelector('.cal-ev-title');
     if (lbl) lbl.textContent = titleInput.value;
@@ -2090,6 +2119,7 @@ function showCalPopover(slot, di, ei, evEl) {
     const ev2 = getEv(); if (!ev2) return;
     ev2.people = peopleInput.value.split(',').map(s => s.trim()).filter(Boolean);
     saveDraft();
+    if (internBadge) internBadge.textContent = ev2.people.length;
   });
 
   pop.querySelectorAll('.cal-pop-type-btn').forEach(btn => {
@@ -2297,9 +2327,9 @@ document.addEventListener('keydown', e => {
   const { slot, di, ei } = calSelection;
   const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
   if (days && days[di] && days[di].events[ei]) {
-    if (!confirm(`Delete "${days[di].events[ei].title}"?`)) return;
     days[di].events.splice(ei, 1);
     calSelection = null;
+    hideCalPopover();
     saveDraft();
     renderEdit();
   }
