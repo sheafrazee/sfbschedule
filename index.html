@@ -309,7 +309,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
-.cal-day-body[data-di] { cursor: crosshair; }
+.cal-day-body[data-di] { cursor: crosshair; touch-action: none; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
 .cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 230px; }
 .cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
@@ -1956,18 +1956,24 @@ function onCalResizeStart(e, slot, hPx) {
   handle.addEventListener('pointercancel', up);
 }
 
-// Drag on empty calendar space to create a new session
+// Drag on empty calendar space to create a new session.
+// Mouse: click+drag (10px threshold). Touch: long press (400ms) then drag.
 function onCalCreateStart(e, slot, hPx) {
   // Clicking empty space clears selection
   document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
   calSelection = null;
   hideCalPopover();
 
+  const isTouch = e.pointerType === 'touch';
   const body = e.currentTarget;
   const di = +body.dataset.di;
   const rect = body.getBoundingClientRect();
   const startY = e.clientY - rect.top;
-  const DRAG_PX = 10; // min pixels before drag is "real"
+  const startX = e.clientX - rect.left;
+
+  const MOUSE_PX   = 10;   // mouse: pixels before drag is real
+  const HOLD_MS    = 420;  // touch: hold duration to arm
+  const CANCEL_PX  = 10;   // touch: movement during hold that cancels it
 
   function yToSnappedMins(y) {
     let m = Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
@@ -1976,7 +1982,9 @@ function onCalCreateStart(e, slot, hPx) {
 
   const anchorMins = yToSnappedMins(startY);
   let startMins = anchorMins, endMins = anchorMins + 60;
-  let hasDragged = false;
+  let armed = false;       // true once drag threshold / long press met
+  let needsCapture = false; // claim pointer capture on next pointermove (touch)
+  let holdTimer = null;
   let ghost = null;
 
   function ensureGhost() {
@@ -1988,39 +1996,78 @@ function onCalCreateStart(e, slot, hPx) {
 
   function updateGhost() {
     if (!ghost) return;
-    ghost.style.top = ((startMins / 60 - CAL_START_H) * hPx) + 'px';
+    ghost.style.top  = ((startMins / 60 - CAL_START_H) * hPx) + 'px';
     ghost.style.height = Math.max(14, (endMins - startMins) / 60 * hPx) + 'px';
     ghost.textContent = _fmt12(startMins) + ' – ' + _fmt12(endMins);
   }
 
-  e.preventDefault();
-  try { body.setPointerCapture(e.pointerId); } catch (_) {}
+  function cleanup() {
+    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+    body.removeEventListener('pointermove', move);
+    body.removeEventListener('pointerup',   up);
+    body.removeEventListener('pointercancel', up);
+    try { body.releasePointerCapture(e.pointerId); } catch (_) {}
+    if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
+    ghost = null;
+  }
+
+  if (isTouch) {
+    // Touch path: wait for long press before arming; don't prevent default yet
+    holdTimer = setTimeout(() => {
+      holdTimer = null;
+      armed = true;
+      needsCapture = true;   // claim capture in next pointermove
+      if (navigator.vibrate) navigator.vibrate(32);  // haptic
+      ensureGhost();
+      updateGhost();
+    }, HOLD_MS);
+  } else {
+    // Mouse path: capture immediately, arm on movement threshold
+    e.preventDefault();
+    try { body.setPointerCapture(e.pointerId); } catch (_) {}
+  }
 
   function move(ev) {
-    const y = ev.clientY - rect.top;
-    if (!hasDragged && Math.abs(y - startY) < DRAG_PX) return;
-    hasDragged = true;
-    ensureGhost();
+    const y  = ev.clientY - rect.top;
+    const dx = ev.clientX - rect.left - startX;
+    const dy = y - startY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (!armed) {
+      if (isTouch) {
+        if (dist > CANCEL_PX) cleanup(); // moved too much — it's a scroll intent
+        return;
+      }
+      if (dist < MOUSE_PX) return;
+      // Mouse crossed threshold: arm now
+      armed = true;
+      ensureGhost();
+    }
+
+    // Claim pointer capture on first move after touch long press
+    if (needsCapture) {
+      needsCapture = false;
+      try { body.setPointerCapture(ev.pointerId); } catch (_) {}
+    }
+
+    ev.preventDefault();
+
     const curMins = yToSnappedMins(y);
     if (curMins > anchorMins) {
       startMins = anchorMins;
-      endMins = Math.max(anchorMins + 15, curMins);
+      endMins   = Math.max(anchorMins + 15, curMins);
     } else {
       startMins = Math.max(CAL_START_H * 60, curMins);
-      endMins = anchorMins + 60;
+      endMins   = anchorMins + 60;
     }
     endMins = Math.min(endMins, CAL_END_H * 60);
     updateGhost();
   }
 
   function up() {
-    body.removeEventListener('pointermove', move);
-    body.removeEventListener('pointerup', up);
-    body.removeEventListener('pointercancel', up);
-    try { body.releasePointerCapture(e.pointerId); } catch (_) {}
-    if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
-
-    if (!hasDragged) return; // single click — just deselect, don't create
+    const wasArmed = armed;
+    cleanup();
+    if (!wasArmed) return;
 
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (!days || !days[di]) return;
