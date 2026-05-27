@@ -508,7 +508,7 @@
         },
         {
           "time": "9:15 AM",
-          "title": "Jackson M, Hudson G, Trent Sisley, Nick J",
+          "title": "Jackson M, Trent Sisley, Nick J",
           "type": "excel",
           "people": [
             "Tyler",
@@ -516,7 +516,7 @@
             "Donovan",
             "JD",
             "Dame",
-            "Mateo",
+            "Shep",
             "Luca",
             "Mark",
             "David"
@@ -525,7 +525,7 @@
           "players": []
         },
         {
-          "time": "10:30 AM",
+          "time": "10:30 AM – 11:30 AM",
           "title": "Brett D, Jaden N, Kadin S, Jurian D",
           "type": "excel",
           "people": [
@@ -537,7 +537,7 @@
             "Mark",
             "Luca",
             "Dame",
-            "Mateo"
+            "Shep"
           ],
           "note": "",
           "players": []
