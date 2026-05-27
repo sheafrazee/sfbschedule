@@ -161,7 +161,7 @@
         },
         {
           "time": "8:00 AM",
-          "title": "Colby, Nick D, Jurian",
+          "title": "Colby, Nick D, Jurian, Jaden N",
           "type": "excel",
           "people": [
             "Titus",
@@ -171,7 +171,8 @@
             "Ali",
             "Mark",
             "Luca",
-            "Jung"
+            "Jung",
+            "Shep"
           ],
           "note": "",
           "players": []
@@ -195,7 +196,7 @@
         },
         {
           "time": "10:30 AM",
-          "title": "Trent Sisley, Hudson G, Nick J",
+          "title": "Trent Sisley, Hudson G, Nick J, Brett D",
           "type": "excel",
           "people": [
             "Titus",
@@ -212,21 +213,15 @@
           "players": []
         },
         {
-          "time": "11:45 AM",
-          "title": "Jaden N,  Brett D, Kadin S",
-          "type": "excel",
+          "time": "12:00 PM – 1:00 PM",
+          "title": "Hailey Johnson",
+          "type": "other",
           "people": [
             "Titus",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Jung",
-            "Kailen",
-            "Luca",
-            "Ali"
+            "Dame"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         },
         {
           "time": "4:30 PM",
@@ -241,7 +236,7 @@
           "note": ""
         },
         {
-          "time": "5:30 PM",
+          "time": "5:30 PM – 7:30 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -257,6 +252,14 @@
     {
       "day": "Thu 28",
       "events": [
+        {
+          "time": "5:45 AM – 7:45 AM",
+          "title": "New Event",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM",
           "title": "Colby, Nick D, Jurian D, Karim",
@@ -322,7 +325,7 @@
           "players": []
         },
         {
-          "time": "4:00 PM",
+          "time": "4:00 PM – 5:00 PM",
           "title": "Hailey Johnson",
           "type": "other",
           "people": [
@@ -333,7 +336,7 @@
           "note": ""
         },
         {
-          "time": "5:00 PM",
+          "time": "5:00 PM – 6:00 PM",
           "title": "Group – Excel",
           "type": "other",
           "people": [
@@ -343,6 +346,14 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "7:45 PM – 8:30 PM",
+          "title": "New Event",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -453,6 +464,14 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:30 PM – 7:00 PM",
+          "title": "New Event",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
         }
       ]
     },
