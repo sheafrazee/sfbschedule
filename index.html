@@ -1856,12 +1856,14 @@ function onCalDragStart(e) {
     if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
   }
 
+  let maxMoved = 0; // track peak movement to distinguish tap from scroll
+
   function move(ev) {
+    const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
+    if (dist > maxMoved) maxMoved = dist;
     if (!dragging) {
-      // Cancel hold if moved too far
-      if (Math.abs(ev.clientY - startY) > MOVE_THRESHOLD || Math.abs(ev.clientX - startX) > MOVE_THRESHOLD) {
-        cancelHold();
-      }
+      // Cancel hold if finger wandered
+      if (dist > MOVE_THRESHOLD) cancelHold();
       return;
     }
     const dy = ev.clientY - startY;
@@ -1873,13 +1875,20 @@ function onCalDragStart(e) {
     if (timeEl) timeEl.textContent = _fmtTimeRange(mins, dur, isRange);
   }
 
-  function up() {
+  function cleanup() {
     cancelHold();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
     el.removeEventListener("pointermove", move);
     el.removeEventListener("pointerup", up);
-    el.removeEventListener("pointercancel", up);
+    el.removeEventListener("pointercancel", cancel);
     el.classList.remove("cal-ev-dragging");
+  }
+
+  // pointercancel = scroll/system took over — just clean up, never select
+  function cancel() { cleanup(); }
+
+  function up() {
+    cleanup();
     if (dragging && finalStartMin !== startMin0) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
       if (days && days[di] && days[di].events[ei]) {
@@ -1888,13 +1897,16 @@ function onCalDragStart(e) {
         renderEdit();
       }
     } else if (!dragging) {
+      // Touch: only select if the finger barely moved (real tap, not a scroll)
+      const TAP_PX = 10;
+      if (e.pointerType === 'touch' && maxMoved > TAP_PX) return;
       selectCalEvent(slot, di, ei);
     }
   }
 
   el.addEventListener("pointermove", move);
   el.addEventListener("pointerup", up);
-  el.addEventListener("pointercancel", up);
+  el.addEventListener("pointercancel", cancel);
 }
 
 function selectCalEvent(slot, di, ei) {
