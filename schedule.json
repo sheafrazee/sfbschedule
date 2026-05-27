@@ -149,6 +149,17 @@
       "day": "Wed 27",
       "events": [
         {
+          "time": "6:30 AM ",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM",
           "title": "Colby, Nick D, Jurian, Jaden N",
           "type": "excel",
@@ -161,13 +172,13 @@
             "Mark",
             "Luca",
             "Jung",
-            "Dame"
+            "Shep"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "9:15 AM – 10:15 AM",
+          "time": "9:15 AM",
           "title": "Karim, Dariq, Jackson M",
           "type": "excel",
           "people": [
@@ -192,8 +203,7 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Dylan W",
-            "JD",
+            "ShepJD",
             "Matt M",
             "Luca",
             "Ali",
@@ -234,8 +244,8 @@
             "Dame",
             "Ian"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -307,7 +317,7 @@
           "players": []
         },
         {
-          "time": "4:00 PM – 5:00 PM",
+          "time": "4:00 PM – 4:15 PM",
           "title": "Hailey Johnson",
           "type": "other",
           "people": [
@@ -474,7 +484,7 @@
         },
         {
           "time": "9:15 AM",
-          "title": "Jackson M, Trent Sisley, Nick J",
+          "title": "Jackson M, Hudson G, Trent Sisley, Nick J",
           "type": "excel",
           "people": [
             "Tyler",
@@ -491,7 +501,7 @@
           "players": []
         },
         {
-          "time": "10:30 AM – 11:30 AM",
+          "time": "10:30 AM",
           "title": "Brett D, Jaden N, Kadin S, Jurian D",
           "type": "excel",
           "people": [
