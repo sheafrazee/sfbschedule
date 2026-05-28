@@ -402,6 +402,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
           <button class="btn publish" id="publishBtn">↑ Publish</button>
           <button class="btn" id="settingsBtn">⚙ Settings</button>
           <input type="file" id="importFile" accept=".json" style="display:none">
+          <button class="btn" id="revertLiveBtn" title="Fetch the latest published schedule and discard any local edits">↺ Revert to Live</button>
           <button class="btn danger" id="discardBtn">Discard</button>
         </div>
       </div>
@@ -2475,6 +2476,43 @@ document.getElementById("settingsBtn").addEventListener("click", openSettings);
 document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
 document.getElementById("importJsonBtn").addEventListener("click", () => document.getElementById("importFile").click());
 document.getElementById("importFile").addEventListener("change", e => { if (e.target.files[0]) importJson(e.target.files[0]); });
+document.getElementById("revertLiveBtn").addEventListener("click", async () => {
+  if (!confirm("Fetch the latest published schedule and discard all local edits?")) return;
+  const btn = document.getElementById("revertLiveBtn");
+  const orig = btn.textContent;
+  btn.textContent = "Fetching…";
+  btn.disabled = true;
+  try {
+    const cfg = loadCfg();
+    const path = cfg.path || "schedule.json";
+    const res = await fetch(`./${path}?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const fresh = await res.json();
+    normalizeData(fresh);
+    publishedData = fresh;
+    localStorage.setItem(LS_PUBLISHED, JSON.stringify(publishedData));
+    data = JSON.parse(JSON.stringify(publishedData));
+    clearDraft();
+    renderEdit();
+    updateStatus();
+  } catch (err) {
+    // Offline or fetch failed — fall back to cached published if available
+    if (publishedData) {
+      if (confirm(`Could not reach server (${err.message}). Revert to last cached published version instead?`)) {
+        data = JSON.parse(JSON.stringify(publishedData));
+        clearDraft();
+        renderEdit();
+        updateStatus();
+      }
+    } else {
+      alert(`Could not fetch published schedule: ${err.message}`);
+    }
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+});
+
 document.getElementById("discardBtn").addEventListener("click", () => {
   if (!isDirty()) { alert("No drafts to discard."); return; }
   if (confirm("Discard unpublished changes and revert to published version?")) {
