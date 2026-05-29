@@ -348,7 +348,7 @@
       "day": "Fri 29",
       "events": [
         {
-          "time": "6:30 AM",
+          "time": "6:30 AM – 7:30 AM",
           "title": "Hailey Johnson",
           "type": "other",
           "people": [
@@ -367,7 +367,7 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Mark",
+            "Dame",
             "Luca",
             "Ali"
           ],
@@ -376,21 +376,20 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "5x5:  Danny, Nick, Trent, Brett, Jurian, Crew,  Jaden, Gabe, Chris M, Dev,  John, Cam",
+          "title": "5x5: Nick D, Jaden N, Gabe, Trent S, Brett D, Jurian D, Dev A, Cam Anderson, Jon I, Danny, Chris Mitchell, Crew F",
           "type": "excel",
           "people": [
             "Titus",
             "Donovan",
             "Tyler",
-            "Evan",
-            "Luca"
+            "Evan"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "11:00 AM – 12:30 PM",
-          "title": "Jackson M, Hannes S",
+          "title": "Jackson M, Hannes",
           "type": "excel",
           "people": [
             "Titus",
@@ -406,7 +405,7 @@
         },
         {
           "time": "12:30 PM – 2:00 PM",
-          "title": "Crew Fotheringham, Danny Kennard, Maxwell Scott",
+          "title": "Crew Fotheringham, Danny Kennard, Maxwell, Oliver",
           "type": "other",
           "people": [
             "Titus",
@@ -414,10 +413,9 @@
             "Dylan W",
             "Matt M",
             "David",
+            "Mark",
             "Dame",
             "Kirby",
-            "JD",
-            "Ali",
             "Luca"
           ],
           "players": [],
