@@ -359,25 +359,38 @@
           "note": ""
         },
         {
-          "time": "8:00 AM",
-          "title": "5x5: Colby, Nick D, Jaden N, Hudson G, Trent S, Brett D, Nick J, Jurian D, Dev A",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Kadin, Dariq, Colby ",
           "type": "excel",
           "people": [
             "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Danny",
-            "Kailen",
-            "Chris Mitchell",
+            "Mark",
+            "Luca",
+            "Ali"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "9:30 AM – 11:00 AM",
+          "title": "5x5:  Danny, Nick, Trent, Brett, Jurian, Crew,  Jaden, Gabe, Chris M, Dev,  John, Cam",
+          "type": "excel",
+          "people": [
+            "Titus",
+            "Donovan",
+            "Tyler",
+            "Evan",
             "Luca"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "10:00 AM",
-          "title": "Jackson M, Kadin S",
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Jackson M, Hannes S",
           "type": "excel",
           "people": [
             "Titus",
@@ -392,30 +405,23 @@
           "players": []
         },
         {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Crew Fotheringham, Danny Kennard",
+          "time": "12:30 PM – 2:00 PM",
+          "title": "Crew Fotheringham, Danny Kennard, Maxwell Scott",
           "type": "other",
           "people": [
             "Titus",
             "JD",
             "Dylan W",
             "Matt M",
-            "David"
+            "David",
+            "Dame",
+            "Kirby",
+            "JD",
+            "Ali",
+            "Luca"
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "2:30 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Titus",
-            "Kirby",
-            "Dame"
-          ],
-          "note": "",
-          "players": []
         },
         {
           "time": "3:30 PM",
