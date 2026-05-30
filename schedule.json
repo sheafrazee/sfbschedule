@@ -213,6 +213,14 @@
           "note": ""
         },
         {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "New Event",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "3:30 PM – 4:30 PM",
           "title": "Tyrell Roberts",
           "type": "other",
@@ -292,7 +300,7 @@
           "players": []
         },
         {
-          "time": "11:00 AM – 12:00 PM",
+          "time": "11:00 AM – 12:15 PM",
           "title": "Brett D, Jaden N, Trent S, Nick J,",
           "type": "excel",
           "people": [
@@ -310,7 +318,7 @@
           "players": []
         },
         {
-          "time": "1:00 PM",
+          "time": "1:00 PM – 2:15 PM",
           "title": "ABA/Delta 12up – MAP",
           "type": "other",
           "people": [
@@ -488,7 +496,7 @@
             "Shep",
             "Luca",
             "Jung",
-            "David"
+            "dame David"
           ],
           "note": "",
           "players": []
@@ -501,9 +509,10 @@
             "Tyler",
             "Evan",
             "Donovan",
-            "JD",
             "Jung",
             "Luca",
+            "Dame",
+            "David",
             "Shep"
           ],
           "note": "",
@@ -514,7 +523,7 @@
           "title": "Crew Fotheringham",
           "type": "other",
           "people": [
-            "JD",
+            "Luca",
             "Dame",
             "Jung",
             "Kirby"
