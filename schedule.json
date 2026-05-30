@@ -462,28 +462,16 @@
       "day": "Sat 30",
       "events": [
         {
-          "time": "6:30 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Dame",
-            "David"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "8:00 AM",
-          "title": "Colby, Dev A, Nick D",
+          "time": "8:00 AM – 9:00 AM",
+          "title": "Trents S, Brett D, Nick D",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
-            "JD",
             "Jacob S",
             "Luca",
-            "Mark",
+            "Jung",
             "David"
           ],
           "note": "",
@@ -491,17 +479,15 @@
         },
         {
           "time": "9:15 AM",
-          "title": "Jackson M, Trent Sisley, Nick J",
+          "title": "Dev A, Hannes S, Jurian D",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
-            "JD",
-            "Dame",
             "Shep",
             "Luca",
-            "Mark",
+            "Jung",
             "David"
           ],
           "note": "",
@@ -509,17 +495,15 @@
         },
         {
           "time": "10:30 AM – 11:30 AM",
-          "title": "Brett D, Jaden N, Kadin S, Jurian D",
+          "title": "Kadin S, Gabe M, Jaden N",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
             "JD",
-            "Kirby",
-            "Mark",
+            "Jung",
             "Luca",
-            "Dame",
             "Shep"
           ],
           "note": "",
@@ -527,13 +511,12 @@
         },
         {
           "time": "12:00 PM – 1:30 PM",
-          "title": "Crew Fotheringham, Danny Kennard",
+          "title": "Crew Fotheringham",
           "type": "other",
           "people": [
-            "Titus",
             "JD",
             "Dame",
-            "Mark",
+            "Jung",
             "Kirby"
           ],
           "players": [],
@@ -544,6 +527,17 @@
     {
       "day": "Sun 24",
       "events": [
+        {
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Ilan",
+          "type": "other",
+          "people": [
+            "Dame",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM",
           "title": "Pickup – Excel",
@@ -576,12 +570,11 @@
         },
         {
           "time": "1:30 PM – 3:00 PM",
-          "title": "Crew Fotheringham, Danny Kennard",
+          "title": "Crew Fotheringham",
           "type": "other",
           "people": [
-            "Dame",
             "Kirby",
-            "David"
+            "Dame"
           ],
           "players": [],
           "note": ""
