@@ -2117,7 +2117,10 @@ function showCalPopover(slot, di, ei, evEl) {
   pop.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--dark-stone);">Edit Session</span>
-      <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
+      <div style="display:flex;gap:2px;">
+        <button id="calPopDuplicate" title="Duplicate session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:14px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--stone)'">⧉</button>
+        <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
+      </div>
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
@@ -2162,6 +2165,29 @@ function showCalPopover(slot, di, ei, evEl) {
       saveDraft();
       renderEdit();
     }
+  });
+
+  // Duplicate button — clones the session into the same day, shifted to start when the original ends
+  pop.querySelector('#calPopDuplicate').addEventListener('click', () => {
+    const d = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
+    if (!d || !d[di] || !d[di].events[ei]) return;
+    const src = d[di].events[ei];
+    const copy = JSON.parse(JSON.stringify(src));
+    // Offset time so the duplicate stacks right after the original
+    const t = parseEventTimes(src.time);
+    if (t) {
+      const startMin = t.start.h * 60 + t.start.min;
+      const endMin = t.end.h * 60 + t.end.min;
+      const durMin = Math.max(15, endMin - startMin);
+      const isRange = String(src.time).split(/\s*(?:–|—|-|to)\s*/i).filter(Boolean).length > 1;
+      const newStart = Math.min(endMin, (CAL_END_H * 60) - durMin);
+      copy.time = _fmtTimeRange(newStart, durMin, isRange);
+    }
+    d[di].events.splice(ei + 1, 0, copy);
+    calSelection = { slot, di, ei: ei + 1 };
+    hideCalPopover();
+    saveDraft();
+    renderEdit();
   });
 
   titleInput.addEventListener('input', () => {
