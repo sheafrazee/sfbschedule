@@ -541,7 +541,6 @@
           "title": "Ilan",
           "type": "other",
           "people": [
-            "Dame",
             "Ian"
           ],
           "players": [],
@@ -576,17 +575,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "1:30 PM – 3:00 PM",
-          "title": "Crew Fotheringham",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     }
