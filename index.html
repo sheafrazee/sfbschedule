@@ -310,6 +310,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
 .cal-day-body[data-di] { cursor: crosshair; touch-action: none; }
+.cal-day-body.cal-day-drop { background: rgba(184,105,74,0.10); box-shadow: 0 0 0 2px var(--clay) inset; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
 .cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 230px; }
 .cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
@@ -1830,14 +1831,19 @@ function onCalDragStart(e) {
   const dur = +el.dataset.dur;
   const isRange = el.dataset.range === "1";
   const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
-  const body = el.parentElement;
-  const bodyH = body.clientHeight;
   const elH = el.offsetHeight;
-  const origTop = (startMin0 / 60 - CAL_START_H) * hourPx;
   const startY = e.clientY;
   const startX = e.clientX;
+  const grabOffsetY = e.clientY - el.getBoundingClientRect().top; // keep grab point under cursor
   const timeEl = el.querySelector(".cal-ev-time");
+
+  // All day columns in THIS week's grid, indexed by day-index — enables cross-day drag.
+  const grid = el.closest(".cal-days");
+  const bodyByDi = {};
+  if (grid) grid.querySelectorAll(".cal-day-body[data-di]").forEach(b => { bodyByDi[+b.dataset.di] = b; });
+
   let finalStartMin = startMin0;
+  let finalDi = di;
   let dragging = false;
 
   // Long-press hold: only start drag after 400ms without significant movement
@@ -1857,6 +1863,10 @@ function onCalDragStart(e) {
     if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
   }
 
+  function clearDropHi() {
+    Object.values(bodyByDi).forEach(b => b.classList.remove("cal-day-drop"));
+  }
+
   let maxMoved = 0; // track peak movement to distinguish tap from scroll
 
   function move(ev) {
@@ -1867,8 +1877,24 @@ function onCalDragStart(e) {
       if (dist > MOVE_THRESHOLD) cancelHold();
       return;
     }
-    const dy = ev.clientY - startY;
-    let top = Math.max(0, Math.min(origTop + dy, bodyH - elH));
+
+    // Horizontal: find which day column the cursor is over and move the bubble there.
+    let targetDi = finalDi;
+    for (const k in bodyByDi) {
+      const r = bodyByDi[k].getBoundingClientRect();
+      if (ev.clientX >= r.left && ev.clientX <= r.right) { targetDi = +k; break; }
+    }
+    if (targetDi !== finalDi && bodyByDi[targetDi]) {
+      finalDi = targetDi;
+      bodyByDi[targetDi].appendChild(el); // re-parent into the new day column
+    }
+    clearDropHi();
+    if (finalDi !== di && bodyByDi[finalDi]) bodyByDi[finalDi].classList.add("cal-day-drop");
+
+    // Vertical: snap to 15-min grid within the current column.
+    const curBody = bodyByDi[finalDi] || el.parentElement;
+    const bRect = curBody.getBoundingClientRect();
+    let top = Math.max(0, Math.min(ev.clientY - bRect.top - grabOffsetY, curBody.clientHeight - elH));
     let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;
     mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
     finalStartMin = mins;
@@ -1878,6 +1904,7 @@ function onCalDragStart(e) {
 
   function cleanup() {
     cancelHold();
+    clearDropHi();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
     el.removeEventListener("pointermove", move);
     el.removeEventListener("pointerup", up);
@@ -1890,12 +1917,17 @@ function onCalDragStart(e) {
 
   function up() {
     cleanup();
-    if (dragging && finalStartMin !== startMin0) {
+    if (dragging && (finalStartMin !== startMin0 || finalDi !== di)) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
-      if (days && days[di] && days[di].events[ei]) {
-        days[di].events[ei].time = _fmtTimeRange(finalStartMin, dur, isRange);
+      if (days && days[di] && days[di].events[ei] && days[finalDi]) {
+        const moved = days[di].events.splice(ei, 1)[0]; // pull out of source day
+        moved.time = _fmtTimeRange(finalStartMin, dur, isRange);
+        days[finalDi].events.push(moved);            // drop into target day
+        calSelection = { slot, di: finalDi, ei: days[finalDi].events.length - 1 };
         saveDraft();
         renderEdit();
+      } else {
+        renderEdit(); // safety re-render to restore DOM if indices were stale
       }
     } else if (!dragging) {
       // Touch: only select if the finger barely moved (real tap, not a scroll)
