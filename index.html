@@ -1825,6 +1825,7 @@ function wireCalDrag(container, slot, hPx) {
   }
 }
 function onCalDragStart(e) {
+  if (e.button != null && e.button !== 0) return;
   const el = e.currentTarget;
   const hourPx = +el.dataset.hourpx;
   const startMin0 = +el.dataset.startmin;
@@ -1845,38 +1846,28 @@ function onCalDragStart(e) {
   let finalStartMin = startMin0;
   let finalDi = di;
   let dragging = false;
+  const DRAG_START_PX = 4; // begin dragging as soon as the pointer moves this far — no hold delay
 
-  // Long-press hold: only start drag after 400ms without significant movement
-  const HOLD_MS = 400;
-  const MOVE_THRESHOLD = 6; // px — cancel hold if finger wanders
+  // Capture immediately so moves keep firing even if the cursor outruns the bubble.
+  try { el.setPointerCapture(e.pointerId); } catch (_) {}
 
-  let holdTimer = setTimeout(() => {
-    holdTimer = null;
+  function beginDrag() {
     dragging = true;
-    e.preventDefault();
     if (timeEl) timeEl.style.display = "block";
     el.classList.add("cal-ev-dragging");
-    try { el.setPointerCapture(e.pointerId); } catch (_) {}
-  }, HOLD_MS);
-
-  function cancelHold() {
-    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
   }
 
   function clearDropHi() {
     Object.values(bodyByDi).forEach(b => b.classList.remove("cal-day-drop"));
   }
 
-  let maxMoved = 0; // track peak movement to distinguish tap from scroll
-
   function move(ev) {
-    const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
-    if (dist > maxMoved) maxMoved = dist;
     if (!dragging) {
-      // Cancel hold if finger wandered
-      if (dist > MOVE_THRESHOLD) cancelHold();
-      return;
+      const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
+      if (dist < DRAG_START_PX) return;
+      beginDrag();
     }
+    ev.preventDefault();
 
     // Horizontal: find which day column the cursor is over and move the bubble there.
     let targetDi = finalDi;
@@ -1887,6 +1878,7 @@ function onCalDragStart(e) {
     if (targetDi !== finalDi && bodyByDi[targetDi]) {
       finalDi = targetDi;
       bodyByDi[targetDi].appendChild(el); // re-parent into the new day column
+      try { el.setPointerCapture(ev.pointerId); } catch (_) {} // re-parenting drops capture — reclaim it
     }
     clearDropHi();
     if (finalDi !== di && bodyByDi[finalDi]) bodyByDi[finalDi].classList.add("cal-day-drop");
@@ -1903,16 +1895,15 @@ function onCalDragStart(e) {
   }
 
   function cleanup() {
-    cancelHold();
     clearDropHi();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
-    el.removeEventListener("pointermove", move);
-    el.removeEventListener("pointerup", up);
-    el.removeEventListener("pointercancel", cancel);
+    window.removeEventListener("pointermove", move);
+    window.removeEventListener("pointerup", up);
+    window.removeEventListener("pointercancel", cancel);
     el.classList.remove("cal-ev-dragging");
   }
 
-  // pointercancel = scroll/system took over — just clean up, never select
+  // pointercancel = system took over — just clean up, never select
   function cancel() { cleanup(); }
 
   function up() {
@@ -1930,16 +1921,13 @@ function onCalDragStart(e) {
         renderEdit(); // safety re-render to restore DOM if indices were stale
       }
     } else if (!dragging) {
-      // Touch: only select if the finger barely moved (real tap, not a scroll)
-      const TAP_PX = 10;
-      if (e.pointerType === 'touch' && maxMoved > TAP_PX) return;
-      selectCalEvent(slot, di, ei);
+      selectCalEvent(slot, di, ei); // no movement → treat as a tap/click
     }
   }
 
-  el.addEventListener("pointermove", move);
-  el.addEventListener("pointerup", up);
-  el.addEventListener("pointercancel", cancel);
+  window.addEventListener("pointermove", move);
+  window.addEventListener("pointerup", up);
+  window.addEventListener("pointercancel", cancel);
 }
 
 function selectCalEvent(slot, di, ei) {
