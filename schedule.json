@@ -1,49 +1,46 @@
 {
-  "weekTitle": "Week of May 25–31",
+  "weekTitle": "Week of Jun 1 – 7",
   "days": [
     {
-      "day": "Mon 25",
+      "day": "Mon 6/1",
       "events": [
         {
-          "time": "8:00 AM",
-          "title": "Colby, Dariq, Nick D, Jurian D",
+          "time": "9:00 AM – 10:30 AM",
+          "title": "Jurian D, Nick D, Cam A, Kadin S",
           "type": "excel",
           "people": [
-            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
+            "Colin",
+            "Mark",
             "Shep",
-            "Ali",
-            "Kenny",
             "Mateo",
             "Luca",
-            "Kailen"
+            "JD"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "9:30 AM",
-          "title": "Karim, Hannes, Dev A, Kadin S",
+          "time": "10:30 AM – 12:00 PM",
+          "title": "Trey M, Hannes S, Karim L",
           "type": "excel",
           "people": [
-            "Titus",
             "Donovan",
             "Tyler",
             "Evan",
-            "Shep",
-            "Mateo",
+            "Colin",
+            "Mark",
             "Luca",
-            "Dylan W",
-            "Maxwell"
+            "Colby"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:00 AM",
-          "title": "Hudson G, Trent S, Jaden N, Nick J",
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Jaden N, Carey B, King G",
           "type": "excel",
           "people": [
             "Titus",
@@ -60,35 +57,66 @@
           "players": []
         },
         {
-          "time": "3:30 PM",
-          "title": "Group ",
+          "time": "2:00 PM",
+          "title": "Crew Fotheringham",
           "type": "other",
           "people": [
-            "Titus",
-            "Kirby",
+            "Ali",
             "Dame"
           ],
           "note": "",
           "players": []
-        }
-      ]
-    },
-    {
-      "day": "Tue 26",
-      "events": [
+        },
         {
-          "time": "7:00 AM",
-          "title": "Dev A",
-          "type": "excel",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
           "people": [
-            "Titus",
-            "Tyler"
+            "Ali",
+            "Dame"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "8:00 AM",
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "David",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [
+            "David"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "7:30 AM – 8:45 AM",
+          "title": "Hailey Johnson",
+          "type": "other",
+          "people": [
+            "Kenny",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Tue 6/2",
+      "events": [
+        {
+          "time": "8:00 AM – 9:30 AM",
           "title": "Skills + 3x3: Colby, Nick D, Jurian,  A, Jaden N, Hudson G, Trent S, Brett D, Nick J",
           "type": "excel",
           "people": [
@@ -106,20 +134,12 @@
           "players": []
         },
         {
-          "time": "10:00 AM",
-          "title": "Karim, Dariq, Jackson M",
+          "time": "11:30 AM – 1:00 PM",
+          "title": "Karim L, Kadin S",
           "type": "excel",
-          "people": [
-            "Titus",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Jacob S",
-            "Jung",
-            "Ali"
-          ],
-          "note": "",
-          "players": []
+          "people": [],
+          "players": [],
+          "note": ""
         },
         {
           "time": "4:00 PM",
@@ -136,38 +156,15 @@
           "title": "Group – Excel",
           "type": "other",
           "people": [
-            "Kirby",
             "Ethan",
             "Dame"
           ],
           "note": "",
           "players": []
-        }
-      ]
-    },
-    {
-      "day": "Wed 27",
-      "events": [
-        {
-          "time": "8:00 AM",
-          "title": "Colby, Nick D, Jurian, Jaden N",
-          "type": "excel",
-          "people": [
-            "Titus",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Kenny",
-            "Mark",
-            "Luca",
-            "Jung"
-          ],
-          "note": "",
-          "players": []
         },
         {
-          "time": "9:15 AM – 10:15 AM",
-          "title": "Karim, Dariq, Jackson M",
+          "time": "9:30 AM – 11:30 AM",
+          "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D",
           "type": "excel",
           "people": [
             "Titus",
@@ -181,10 +178,82 @@
           ],
           "note": "",
           "players": []
+        }
+      ]
+    },
+    {
+      "day": "Wed 6/3",
+      "events": [
+        {
+          "time": "2:00 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Dame",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
         },
         {
-          "time": "10:30 AM",
-          "title": "Trent Sisley, Hudson G, Nick J, Brett D",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "GW – Excel",
+          "type": "other",
+          "people": [
+            "Titus",
+            "Dame",
+            "Kirby"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Tristan D, Karim L, Trey M",
+          "type": "excel",
+          "people": [
+            "Titus",
+            "Tyler"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Nick D, King G, Dev A, Kadin S",
+          "type": "excel",
+          "people": [
+            "Titus",
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Jacob S",
+            "Jung",
+            "Ali"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Michai W, Jaden N, Carey B, Jurian D",
           "type": "excel",
           "people": [
             "Titus",
@@ -200,71 +269,15 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "12:00 PM – 1:00 PM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [
-            "Titus",
-            "Dylan W"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:30 PM – 4:30 PM",
-          "title": "Tyrell Roberts",
-          "type": "other",
-          "people": [
-            "Dame",
-            "Kirby",
-            "Ian",
-            "JD"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:30 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Dame",
-            "Ian"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "5:30 PM – 6:30 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Dame",
-            "Ian"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "2:30 PM – 3:30 PM",
-          "title": "New Event",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": ""
         }
       ]
     },
     {
-      "day": "Thu 28",
+      "day": "Thu 6/4",
       "events": [
         {
-          "time": "8:00 AM",
-          "title": "Colby, Nick D, Jurian D, Jackson",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Tristan D, Karim L, Trey M",
           "type": "excel",
           "people": [
             "Titus",
@@ -282,8 +295,8 @@
           "players": []
         },
         {
-          "time": "9:30 AM – 10:30 AM",
-          "title": "Dariq, Kadin, Gabe",
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Nick D, King G, Dev A Kadin S",
           "type": "excel",
           "people": [
             "Titus",
@@ -301,7 +314,7 @@
         },
         {
           "time": "11:00 AM – 12:15 PM",
-          "title": "Brett D, Jaden N, Trent S, Nick J,",
+          "title": "Michai W, Jaden N, Carey B, Jurian D",
           "type": "excel",
           "people": [
             "Titus",
@@ -318,27 +331,6 @@
           "players": []
         },
         {
-          "time": "1:00 PM – 2:15 PM",
-          "title": "ABA/Delta 12up – MAP",
-          "type": "other",
-          "people": [
-            "Dame"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Ian"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:00 PM",
           "title": "Group – Excel",
           "type": "other",
@@ -353,7 +345,7 @@
       ]
     },
     {
-      "day": "Fri 29",
+      "day": "Fri 6/5",
       "events": [
         {
           "time": "6:30 AM – 7:30 AM",
@@ -368,7 +360,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Kadin, Dariq, Colby ",
+          "title": "Tristan De Silva, Kadin S",
           "type": "excel",
           "people": [
             "Titus",
@@ -384,7 +376,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "5x5: Nick D, Jaden N, Gabe, Trent S, Brett D, Jurian D, Dev A, Cam Anderson, Jon I, Danny, Chris Mitchell, Crew F",
+          "title": "5v5: Jaden N, Carey B, King G, Trey M, Nick D, Jurian D, Mark S, Dev A?",
           "type": "excel",
           "people": [
             "Titus",
@@ -396,41 +388,7 @@
           "players": []
         },
         {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Jackson M, Hannes",
-          "type": "excel",
-          "people": [
-            "Titus",
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Mark",
-            "Matt M",
-            "Luca"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "12:30 PM – 2:00 PM",
-          "title": "Crew Fotheringham, Danny Kennard, Maxwell, Oliver",
-          "type": "other",
-          "people": [
-            "Titus",
-            "JD",
-            "Dylan W",
-            "Matt M",
-            "David",
-            "Mark",
-            "Dame",
-            "Kirby",
-            "Luca"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:30 PM",
+          "time": "3:00 PM – 4:00 PM",
           "title": "GW – Excel",
           "type": "other",
           "people": [
@@ -442,7 +400,7 @@
           "players": []
         },
         {
-          "time": "4:30 PM",
+          "time": "4:00 PM",
           "title": "Audrina 2 – Excel",
           "type": "other",
           "people": [
@@ -453,7 +411,7 @@
           "players": []
         },
         {
-          "time": "5:30 pm",
+          "time": "2:00 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -463,15 +421,23 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
         }
       ]
     },
     {
-      "day": "Sat 30",
+      "day": "Sat 6/6",
       "events": [
         {
           "time": "8:00 AM – 9:00 AM",
-          "title": "Trents S, Brett D, Nick D",
+          "title": "Tristan D, Hannes S, Dev A",
           "type": "excel",
           "people": [
             "Tyler",
@@ -486,8 +452,8 @@
           "players": []
         },
         {
-          "time": "9:15 AM",
-          "title": "Dev A, Hannes S, Jurian D",
+          "time": "9:15 AM – 10:15 AM",
+          "title": "Nick D, Trey M, Kadin S",
           "type": "excel",
           "people": [
             "Tyler",
@@ -503,7 +469,7 @@
         },
         {
           "time": "10:30 AM – 11:30 AM",
-          "title": "Kadin S, Gabe M, Jaden N",
+          "title": "Jaden N, Jurian D",
           "type": "excel",
           "people": [
             "Tyler",
@@ -517,24 +483,11 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Crew Fotheringham",
-          "type": "other",
-          "people": [
-            "Luca",
-            "Dame",
-            "Jung",
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
     {
-      "day": "Sun 24",
+      "day": "Sun 6/7",
       "events": [
         {
           "time": "7:00 AM – 8:00 AM",
@@ -596,539 +549,5 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": {
-    "weekTitle": "Week of Jun 1 – 7",
-    "days": [
-      {
-        "day": "Mon 6/1",
-        "events": [
-          {
-            "time": "9:00 AM – 10:30 AM",
-            "title": "Jurian D, Nick D, Cam A, Kadin S",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Mark",
-              "Shep",
-              "Mateo",
-              "Luca",
-              "JD"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "10:30 AM – 12:00 PM",
-            "title": "Trey M, Hannes S, Karim L",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Mark",
-              "Luca",
-              "Colby"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "12:00 PM – 1:30 PM",
-            "title": "Jaden N, Carey B, King G",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Dame",
-              "Dylan W",
-              "Mateo",
-              "Ali",
-              "Jacob S"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "2:00 PM",
-            "title": "Crew Fotheringham",
-            "type": "other",
-            "people": [
-              "Ali",
-              "Dame"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "3:00 PM – 4:00 PM",
-            "title": "Maxwell Scott",
-            "type": "other",
-            "people": [
-              "Ali",
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Rudy",
-            "type": "other",
-            "people": [
-              "David",
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Parker S",
-            "type": "other",
-            "people": [
-              "David"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "7:30 AM – 8:45 AM",
-            "title": "Hailey Johnson",
-            "type": "other",
-            "people": [
-              "Kenny",
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Tue 6/2",
-        "events": [
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "Skills + 3x3: Colby, Nick D, Jurian,  A, Jaden N, Hudson G, Trent S, Brett D, Nick J",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Luca",
-              "Danny",
-              "Ador",
-              "Kailen",
-              "Jung"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "11:30 AM – 1:00 PM",
-            "title": "Karim L, Kadin S",
-            "type": "excel",
-            "people": [],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM",
-            "title": "Audrina 1 – Excel",
-            "type": "other",
-            "people": [
-              "Ethan"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "5:00 PM",
-            "title": "Group – Excel",
-            "type": "other",
-            "people": [
-              "Ethan",
-              "Dame"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "9:30 AM – 11:30 AM",
-            "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colby",
-              "Mark",
-              "Luca",
-              "Jung"
-            ],
-            "note": "",
-            "players": []
-          }
-        ]
-      },
-      {
-        "day": "Wed 6/3",
-        "events": [
-          {
-            "time": "2:00 PM",
-            "title": "Maxwell Scott",
-            "type": "other",
-            "people": [
-              "Kirby",
-              "Dame",
-              "Ian"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "3:00 PM – 4:00 PM",
-            "title": "Rudy",
-            "type": "other",
-            "people": [],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "GW – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Dame",
-              "Kirby"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Parker S",
-            "type": "other",
-            "people": [],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "Tristan D, Karim L, Trey M",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Tyler"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "9:30 AM – 11:00 AM",
-            "title": "Nick D, King G, Dev A, Kadin S",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Jacob S",
-              "Jung",
-              "Ali"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "11:00 AM – 12:30 PM",
-            "title": "Michai W, Jaden N, Carey B, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Dylan W",
-              "JD",
-              "Matt M",
-              "Luca",
-              "Ali",
-              "Jung"
-            ],
-            "note": "",
-            "players": []
-          }
-        ]
-      },
-      {
-        "day": "Thu 6/4",
-        "events": [
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "Tristan D, Karim L, Trey M",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Ali",
-              "Dylan W",
-              "Colby",
-              "Jung",
-              "Malachi"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "9:30 AM – 11:00 AM",
-            "title": "Nick D, King G, Dev A Kadin S",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Colin",
-              "Jung",
-              "Dylan W",
-              "Noel",
-              "Malachi"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "11:00 AM – 12:15 PM",
-            "title": "Michai W, Jaden N, Carey B, Jurian D",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Ali",
-              "Dylan W",
-              "Noel",
-              "Dame",
-              "Kirby"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group – Excel",
-            "type": "other",
-            "people": [
-              "Dame",
-              "Kirby",
-              "Ian"
-            ],
-            "note": "",
-            "players": []
-          }
-        ]
-      },
-      {
-        "day": "Fri 6/5",
-        "events": [
-          {
-            "time": "6:30 AM – 7:30 AM",
-            "title": "Hailey Johnson",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Kirby"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "Tristan De Silva, Kadin S",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan",
-              "Dame",
-              "Luca",
-              "Ali"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "9:30 AM – 11:00 AM",
-            "title": "5v5: Jaden N, Carey B, King G, Trey M, Nick D, Jurian D, Mark S, Dev A?",
-            "type": "excel",
-            "people": [
-              "Titus",
-              "Donovan",
-              "Tyler",
-              "Evan"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "3:00 PM – 4:00 PM",
-            "title": "GW – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "Dame",
-              "Kirby"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "4:00 PM",
-            "title": "Audrina 2 – Excel",
-            "type": "other",
-            "people": [
-              "Titus",
-              "David"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "2:00 PM",
-            "title": "Rudy",
-            "type": "other",
-            "people": [
-              "Titus",
-              "David",
-              "Kirby"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Parker S",
-            "type": "other",
-            "people": [],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Sat 6/6",
-        "events": [
-          {
-            "time": "8:00 AM – 9:00 AM",
-            "title": "Tristan D, Hannes S, Dev A",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "Jacob S",
-              "Luca",
-              "Jung",
-              "David"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "9:15 AM – 10:15 AM",
-            "title": "Nick D, Trey M, Kadin S",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "Kirby",
-              "Luca",
-              "Jung",
-              "dame David"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "10:30 AM – 11:30 AM",
-            "title": "Jaden N, Jurian D",
-            "type": "excel",
-            "people": [
-              "Tyler",
-              "Evan",
-              "Donovan",
-              "Jung",
-              "Luca",
-              "Dame",
-              "David",
-              "Kirby"
-            ],
-            "note": "",
-            "players": []
-          }
-        ]
-      },
-      {
-        "day": "Sun 6/7",
-        "events": [
-          {
-            "time": "7:00 AM – 8:00 AM",
-            "title": "Ilan",
-            "type": "other",
-            "people": [
-              "Ian"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM",
-            "title": "Pickup – Excel",
-            "type": "other",
-            "people": [],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "1030 AM",
-            "title": "Group ",
-            "type": "other",
-            "people": [
-              "Kirby",
-              "Ian"
-            ],
-            "note": "",
-            "players": []
-          },
-          {
-            "time": "12pm",
-            "title": "Little Kids Pickup – Excel",
-            "type": "other",
-            "people": [
-              "Kirby",
-              "Ian"
-            ],
-            "note": "",
-            "players": []
-          }
-        ]
-      }
-    ]
-  }
+  "nextWeek": null
 }
