@@ -73,7 +73,7 @@
         },
         {
           "time": "2:00 PM",
-          "title": "Maxwell, Danny",
+          "title": "Crew Fotheringham",
           "type": "other",
           "people": [
             "Jacob S",
@@ -82,6 +82,18 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Ali",
+            "Colby",
+            "Anthony"
+          ],
+          "players": [],
+          "note": ""
         },
         {
           "time": "4:00 PM – 5:00 PM",
@@ -120,6 +132,25 @@
           "note": ""
         },
         {
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Karim L, Kadin S, Luigi, Dalton ",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Teddy",
+            "Malachi H",
+            "Chris W",
+            "Dylan W",
+            "Jacob S",
+            "Blake",
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "9:30 AM – 11:30 AM",
           "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D, Dev A, Nick D",
           "type": "excel",
@@ -136,25 +167,8 @@
           "players": []
         },
         {
-          "time": "11:30 AM – 1:00 PM",
-          "title": "Karim L, Kadin S, Luigi",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Malachi H",
-            "Chris W",
-            "Dylan W",
-            "Jacob S",
-            "Blake"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "1:30 PM – 2:30 PM",
-          "title": "Danny K",
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Maxwell S",
           "type": "other",
           "people": [
             "Dylan W",
@@ -260,7 +274,7 @@
           "players": []
         },
         {
-          "time": "2:00 PM",
+          "time": "1:00 PM",
           "title": "Maxwell Scott",
           "type": "other",
           "people": [
@@ -271,7 +285,15 @@
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "2:30 PM – 4:00 PM",
+          "title": "Intern Pickup",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:30 PM – 5:30 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
@@ -283,7 +305,7 @@
           "note": ""
         },
         {
-          "time": "4:00 PM – 5:00 PM",
+          "time": "5:30 PM – 6:30 PM",
           "title": "GW – Excel",
           "type": "other",
           "people": [
@@ -292,16 +314,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Parker S",
-          "type": "other",
-          "people": [
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -376,20 +388,8 @@
           "note": ""
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Danny K",
-          "type": "other",
-          "people": [
-            "Dylan W",
-            "Jung",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Maxwell S",
+          "title": "Maxwell S, Danny K, Hao",
           "type": "other",
           "people": [
             "David",
@@ -401,7 +401,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Jung, David, Kirby",
+          "title": "Kenzie Forbes",
           "type": "other",
           "people": [],
           "players": [],
