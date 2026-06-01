@@ -1402,6 +1402,18 @@ function renderDisplay() {
 }
 
 // ============ EDIT MODE ============
+// Sort one day's events by start time (earliest first). Untimed events keep their
+// relative order and fall to the bottom. Stable, so same-time events stay put.
+function sortDayEventsChrono(day) {
+  if (!day || !Array.isArray(day.events)) return;
+  day.events.sort((a, b) => {
+    const ta = parseEventTimes(a.time), tb = parseEventTimes(b.time);
+    const ma = ta ? ta.start.h * 60 + ta.start.min : Infinity;
+    const mb = tb ? tb.start.h * 60 + tb.start.min : Infinity;
+    return ma - mb;
+  });
+}
+
 function renderEdit() {
   // Banner + toggle reflect the active slot
   const banner = document.getElementById("slotBanner");
@@ -1440,6 +1452,7 @@ function renderEdit() {
         const nev = { time: "8:00 AM", title: "New Event", type: "other", people: [], players: [], note: "" };
         if (atTop) ed().days[di].events.unshift(nev);
         else ed().days[di].events.push(nev);
+        sortDayEventsChrono(ed().days[di]);
         saveDraft(); renderEdit();
       };
       return b;
@@ -1592,6 +1605,7 @@ function attachEditListeners() {
       ed().days[di].events[ei][field] = v;
       saveDraft();
       if (field === "people") renderInternTally();
+      if (field === "time") { sortDayEventsChrono(ed().days[di]); renderEdit(); }
     });
   });
   // Live per-session intern count while typing in the interns box
@@ -1619,6 +1633,7 @@ function attachEditListeners() {
       const di = +btn.dataset.d, ei = +btn.dataset.e;
       const copy = JSON.parse(JSON.stringify(ed().days[di].events[ei]));
       ed().days[di].events.splice(ei + 1, 0, copy);
+      sortDayEventsChrono(ed().days[di]);
       saveDraft(); renderEdit();
     });
   });
@@ -1930,7 +1945,8 @@ function onCalDragStart(e) {
         const moved = days[di].events.splice(ei, 1)[0]; // pull out of source day
         moved.time = _fmtTimeRange(finalStartMin, dur, isRange);
         days[finalDi].events.push(moved);            // drop into target day
-        calSelection = { slot, di: finalDi, ei: days[finalDi].events.length - 1 };
+        sortDayEventsChrono(days[finalDi]);
+        calSelection = { slot, di: finalDi, ei: days[finalDi].events.indexOf(moved) };
         saveDraft();
         renderEdit();
       } else {
@@ -2129,6 +2145,7 @@ function onCalCreateStart(e, slot, hPx) {
       if (t && (t.start.h * 60 + t.start.min) > startMins) { insertIdx = i; break; }
     }
     events.splice(insertIdx, 0, newEv);
+    sortDayEventsChrono(days[di]);
     saveDraft();
     renderEdit();
   }
@@ -2220,7 +2237,8 @@ function showCalPopover(slot, di, ei, evEl) {
       copy.time = _fmtTimeRange(newStart, durMin, isRange);
     }
     d[di].events.splice(ei + 1, 0, copy);
-    calSelection = { slot, di, ei: ei + 1 };
+    sortDayEventsChrono(d[di]);
+    calSelection = { slot, di, ei: d[di].events.indexOf(copy) };
     hideCalPopover();
     saveDraft();
     renderEdit();
@@ -2393,6 +2411,7 @@ function quickAddEvent() {
         }
       }
       events.splice(insertIdx, 0, newEv);
+      sortDayEventsChrono(ed().days[dayIdx]);
       added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
     } catch (ex) {
       failed.push(`"${str}" — unexpected error: ${ex.message}`);
