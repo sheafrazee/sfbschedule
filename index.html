@@ -1437,6 +1437,7 @@ function renderEdit() {
     dEl.innerHTML = `
       <div class="edit-day-header">
         <input type="text" value="${escapeAttr(day.day)}" data-day="${di}" data-field="day">
+        <button class="icon-btn" data-sort-day="${di}" title="Sort sessions by time">↕⏱</button>
         <button class="icon-btn" data-dup-day="${di}" title="Duplicate day">⧉</button>
         <button class="icon-btn danger" data-remove-day="${di}" title="Remove day">✕</button>
       </div>
@@ -1648,6 +1649,13 @@ function attachEditListeners() {
     btn.addEventListener("click", () => {
       const di = +btn.dataset.removeDay;
       if (confirm(`Remove "${ed().days[di].day}" and all its events?`)) { ed().days.splice(di, 1); saveDraft(); renderEdit(); }
+    });
+  });
+  document.querySelectorAll("[data-sort-day]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const di = +btn.dataset.sortDay;
+      sortDayEventsChrono(ed().days[di]);
+      saveDraft(); renderEdit();
     });
   });
   document.querySelectorAll("[data-dup-day]").forEach(btn => {
