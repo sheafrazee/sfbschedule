@@ -284,12 +284,14 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .intern-row .nm { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .intern-row .ct { flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--warm-white); color: var(--dark-stone); display: inline-flex; align-items: center; justify-content: center; }
 .intern-tally-empty { padding: 16px 14px; color: var(--stone); font-size: 12.5px; text-align: center; }
-.intern-stats { padding: 8px 14px; background: var(--warm-white); border-bottom: 1px solid var(--light-stone); }
-.intern-stat { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12.5px; padding: 2px 0; }
-.intern-stat .lbl { color: var(--dark-stone); }
-.intern-stat .val { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--ink); min-width: 22px; text-align: right; }
-.intern-stat.total { margin-top: 4px; padding-top: 6px; border-top: 1px dashed var(--light-stone); }
-.intern-stat.total .lbl, .intern-stat.total .val { font-weight: 800; }
+.intern-cts { display: flex; gap: 5px; flex-shrink: 0; }
+.intern-row .ct { min-width: 26px; }
+.intern-row .ct.excel { background: #B8694A; color: #F4F1EC; }
+.intern-row .ct.other { background: #D6D1CC; color: #111111; }
+.intern-row .ct.all { background: var(--ink); color: var(--warm-white); }
+.intern-cols { display: flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--warm-white); border-bottom: 1px solid var(--light-stone); }
+.intern-cols .sp { flex: 1; }
+.intern-cols .h { width: 26px; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10px; color: var(--stone); }
 .intern-divider { padding: 7px 14px; background: var(--warm-white); border-top: 1px solid var(--light-stone); border-bottom: 1px solid var(--light-stone); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--stone); }
 .intern-row.past .nm { color: var(--dark-stone); }
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
@@ -1503,29 +1505,23 @@ function renderInternTally() {
   box.classList.toggle("hidden", currentMode !== "edit");
   if (currentMode !== "edit") return;
 
-  // Active week: name -> session count (interns live in e.people)
+  // Active week: name -> {excel, other} session counts (interns live in e.people)
   const counts = {};
   (ed().days || []).forEach(day => {
     (day.events || []).forEach(ev => {
+      const key = ev.type === "excel" ? "excel" : "other";
       (ev.people || []).forEach(p => {
         const name = (p || "").trim();
         if (!name) return;
-        counts[name] = (counts[name] || 0) + 1;
+        if (!counts[name]) counts[name] = { excel: 0, other: 0 };
+        counts[name][key]++;
       });
     });
   });
 
   const roster = learnInterns();
-  const rows = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-
-  // Session counts by type across the week being edited
-  let excelN = 0, otherN = 0;
-  (ed().days || []).forEach(day => {
-    (day.events || []).forEach(ev => {
-      if (ev.type === "excel") excelN++; else otherN++;
-    });
-  });
-  const totalN = excelN + otherN;
+  const rows = Object.entries(counts)
+    .sort((a, b) => (b[1].excel + b[1].other) - (a[1].excel + a[1].other) || a[0].localeCompare(b[0]));
 
   // Past interns = in roster but not on the week being edited (most-recent first)
   const past = Object.keys(roster)
@@ -1535,17 +1531,16 @@ function renderInternTally() {
   document.getElementById("internTallyCount").textContent =
     rows.length ? rows.length + (rows.length === 1 ? " intern" : " interns") : "";
 
-  const statsHtml = `<div class="intern-stats">
-    <div class="intern-stat"><span class="lbl">Excel Client sessions</span><span class="val">${excelN}</span></div>
-    <div class="intern-stat"><span class="lbl">Other sessions</span><span class="val">${otherN}</span></div>
-    <div class="intern-stat total"><span class="lbl">Overall sessions</span><span class="val">${totalN}</span></div>
-  </div>`;
+  const colsHtml = rows.length
+    ? `<div class="intern-cols"><span class="sp"></span><span class="h" title="Excel Client sessions">EXC</span><span class="h" title="Other sessions">OTH</span><span class="h" title="Overall sessions">ALL</span></div>`
+    : "";
 
   const body = document.getElementById("internTallyBody");
-  let html = statsHtml + (rows.length
-    ? rows.map(([name, n]) =>
-        `<div class="intern-row"><span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span><span class="ct">${n}</span></div>`
-      ).join("")
+  let html = colsHtml + (rows.length
+    ? rows.map(([name, c]) => {
+        const all = c.excel + c.other;
+        return `<div class="intern-row"><span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span><span class="intern-cts"><span class="ct excel" title="Excel Client sessions">${c.excel}</span><span class="ct other" title="Other sessions">${c.other}</span><span class="ct all" title="Overall sessions">${all}</span></span></div>`;
+      }).join("")
     : `<div class="intern-tally-empty">No interns scheduled yet this week.</div>`);
 
   if (past.length) {
