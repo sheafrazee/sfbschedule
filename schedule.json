@@ -5,6 +5,17 @@
       "day": "Mon 6/1",
       "events": [
         {
+          "time": "7:30 AM – 8:45 AM",
+          "title": "Hailey Johnson",
+          "type": "other",
+          "people": [
+            "Kenny",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "9:00 AM – 10:30 AM",
           "title": "Jurian D, Luigi, Cam A, Kadin S",
           "type": "excel",
@@ -103,17 +114,6 @@
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "7:30 AM – 8:45 AM",
-          "title": "Hailey Johnson",
-          "type": "other",
-          "people": [
-            "Kenny",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -130,6 +130,22 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "9:30 AM – 11:30 AM",
+          "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D, Dev A, Nick D",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Danny",
+            "Ador",
+            "Jon",
+            "Luca"
+          ],
+          "note": "",
+          "players": []
         },
         {
           "time": "11:30 AM – 1:00 PM",
@@ -158,6 +174,17 @@
           "note": ""
         },
         {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "GW ",
+          "type": "other",
+          "people": [
+            "Dame",
+            "David"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 1 – Excel",
           "type": "other",
@@ -178,84 +205,12 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "9:30 AM – 11:30 AM",
-          "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D, Dev A, Nick D",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Danny",
-            "Ador",
-            "Jon",
-            "Luca"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "GW ",
-          "type": "other",
-          "people": [
-            "Dame",
-            "David"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
     {
       "day": "Wed 6/3",
       "events": [
-        {
-          "time": "2:00 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Ali",
-            "JD"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Ali",
-            "JD"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "GW – Excel",
-          "type": "other",
-          "people": [
-            "Dame",
-            "Kirby"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Parker S",
-          "type": "other",
-          "people": [
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
-        },
         {
           "time": "8:00 AM – 9:30 AM",
           "title": "Tristan D, Karim L, Trey M, Nick D",
@@ -310,6 +265,51 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "2:00 PM",
+          "title": "Maxwell Scott",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Ali",
+            "JD"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Ali",
+            "JD"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "GW – Excel",
+          "type": "other",
+          "people": [
+            "Dame",
+            "Kirby"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -381,18 +381,6 @@
           "note": ""
         },
         {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group – Excel",
-          "type": "other",
-          "people": [
-            "David",
-            "Jung",
-            "Kirby"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
           "time": "2:00 PM – 3:00 PM",
           "title": "Danny K",
           "type": "other",
@@ -415,6 +403,18 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group – Excel",
+          "type": "other",
+          "people": [
+            "David",
+            "Jung",
+            "Kirby"
+          ],
+          "note": "",
+          "players": []
         }
       ]
     },
@@ -465,6 +465,17 @@
           "note": ""
         },
         {
+          "time": "2:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "David",
+            "Kirby"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
           "time": "3:00 PM – 4:00 PM",
           "title": "GW – Excel",
           "type": "other",
@@ -482,17 +493,6 @@
           "people": [
             "Dame",
             "David"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "2:00 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
-            "David",
-            "Kirby"
           ],
           "note": "",
           "players": []
