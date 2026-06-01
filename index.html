@@ -406,6 +406,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
       <!-- Row 2: actions -->
       <div class="ab-row ab-bottom">
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
+        <button class="btn" id="sortAllBtn" title="Sort every day's sessions chronologically by time">↕⏱ Sort all by time</button>
         <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
@@ -2494,6 +2495,10 @@ document.getElementById("weekPreviewToggle").addEventListener("click", () => {
 });
 document.getElementById("weekTitleInput").addEventListener("change", function(){ ed().weekTitle = this.value; saveDraft(); if (editSlot === "current") document.getElementById("weekTitleDisplay").textContent = this.value; });
 document.getElementById("publishBtn").addEventListener("click", publish);
+document.getElementById("sortAllBtn").addEventListener("click", () => {
+  (ed().days || []).forEach(sortDayEventsChrono);
+  saveDraft(); renderEdit();
+});
 
 // ---- Next-week workspace controls ----
 function switchSlot(slot) {
