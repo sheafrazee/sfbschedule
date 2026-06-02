@@ -130,7 +130,6 @@
             "Teddy",
             "Malachi H",
             "Chris W",
-            "Dylan W",
             "Jacob S",
             "Blake",
             "Nick M"
@@ -140,15 +139,13 @@
         },
         {
           "time": "9:30 AM – 11:30 AM",
-          "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, N, Jurian D, Dev A, Nick D",
+          "title": "3v3: Michai W, Jaden N, Carey B, King G, Trey M, Jurian D, Dev A, Nick D, Cam A",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Danny",
             "Ador",
-            "Jon",
             "Luca"
           ],
           "note": "",
@@ -162,17 +159,6 @@
             "Dylan W",
             "Luca",
             "Shep"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "GW ",
-          "type": "other",
-          "people": [
-            "Shep",
-            "David"
           ],
           "players": [],
           "note": ""
@@ -204,6 +190,17 @@
     {
       "day": "Wed 6/3",
       "events": [
+        {
+          "time": "6:15 AM – 7:45 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM – 9:30 AM",
           "title": "Tristan D, Karim L, Trey M, Nick D",
@@ -262,17 +259,6 @@
           "players": []
         },
         {
-          "time": "1:00 PM",
-          "title": "Maxwell Scott",
-          "type": "other",
-          "people": [
-            "Shep",
-            "Ali"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "2:30 PM – 4:00 PM",
           "title": "Intern Pickup",
           "type": "other",
@@ -293,7 +279,7 @@
         },
         {
           "time": "5:30 PM – 6:30 PM",
-          "title": "GW – Excel",
+          "title": "Sean Dao ",
           "type": "other",
           "people": [
             "Kirby",
@@ -460,17 +446,6 @@
           "players": []
         },
         {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "GW – Excel",
-          "type": "other",
-          "people": [
-            "Dame",
-            "David"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
           "time": "4:00 PM",
           "title": "Audrina 2 – Excel",
           "type": "other",
@@ -496,6 +471,17 @@
     {
       "day": "Sat 6/6",
       "events": [
+        {
+          "time": "6:15 AM – 7:45 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Kirby",
+            "Malachi S"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM – 9:00 AM",
           "title": "Tristan D, Hannes S, Dev A",
