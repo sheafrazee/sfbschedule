@@ -121,7 +121,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Karim L, Kadin S, Luigi, Dalton ",
+          "title": "Karim L, Kadin S, Luigi ",
           "type": "excel",
           "people": [
             "Donovan",
@@ -152,12 +152,29 @@
           "players": []
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Maxwell S",
+          "time": "11:30 AM – 1:00 PM",
+          "title": "Dalton Knecht",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Luca",
+            "Nick M",
+            "Blake"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "2:30 PM – 4:00 PM",
+          "title": "Michai White",
           "type": "other",
           "people": [
-            "Dylan W",
-            "Luca",
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "David",
             "Shep"
           ],
           "players": [],
@@ -175,7 +192,7 @@
           "players": []
         },
         {
-          "time": "5:00 PM",
+          "time": "5:00 PM – 6:00 PM",
           "title": "Group – Excel",
           "type": "other",
           "people": [
