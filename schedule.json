@@ -143,8 +143,7 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Ador",
-            "Luca"
+            "Ador"
           ],
           "note": "",
           "players": []
@@ -181,11 +180,12 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 1 – Excel",
+          "title": "Maxwell Scott – Excel",
           "type": "other",
           "people": [
             "Ethan",
-            "David"
+            "David",
+            "Anthony"
           ],
           "note": "",
           "players": []
@@ -196,7 +196,8 @@
           "type": "other",
           "people": [
             "Ethan",
-            "David"
+            "David",
+            "Anthony"
           ],
           "note": "",
           "players": []
@@ -211,7 +212,7 @@
           "title": "GW",
           "type": "other",
           "people": [
-            "Kirby",
+            "Ali",
             "Jung"
           ],
           "players": [],
@@ -219,7 +220,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Tristan D, Karim L, Trey M, Nick D",
+          "title": "Tristan D, Karim L, Trey M, Dalton K",
           "type": "excel",
           "people": [
             "Donovan",
@@ -231,25 +232,27 @@
             "Jung",
             "Luca",
             "Mateo",
-            "Mark"
+            "Mark",
+            "Teddy",
+            "Nick M"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Luigi, King G, Dev A, Kadin S",
+          "title": "Luigi, King G, Nick, Michai W",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Teddy",
             "Matt M",
             "Jung",
             "Mateo",
             "Mark",
-            "Dylan W",
+            "Nick",
+            "M",
             "Luca"
           ],
           "note": "",
@@ -257,17 +260,17 @@
         },
         {
           "time": "11:00 AM – 12:30 PM",
-          "title": "Michai W, Jaden N, Carey B, Jurian D",
+          "title": "Cam A, Jaden N, Carey B, Jurian D",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
+            "Nick M",
             "Jacob S",
             "Jung",
-            "JD",
+            "Mark",
             "Luca",
-            "Ali",
             "Mateo",
             "Matt M"
           ],
@@ -288,7 +291,7 @@
           "type": "other",
           "people": [
             "Shep",
-            "Kirby"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -298,7 +301,7 @@
           "title": "Sean Dao ",
           "type": "other",
           "people": [
-            "Kirby",
+            "Anthony",
             "Shep"
           ],
           "note": "",
@@ -347,7 +350,7 @@
           "players": []
         },
         {
-          "time": "11:00 AM – 12:15 PM",
+          "time": "11:00 AM – 12:30 PM",
           "title": "Michai W, Jaden N, Carey B, Jurian D",
           "type": "excel",
           "people": [
