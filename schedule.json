@@ -314,36 +314,35 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Tristan D, Karim L, Trey M, Dev A",
+          "title": "Dalton K, Michai W, King ",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Malachi H",
+            "Chris W",
             "Kenny",
             "Mateo",
-            "Jung",
-            "JD",
             "Dame",
-            "Teddy"
+            "Nick M",
+            "Teddy",
+            "Jaden"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, King G, Luigi, Kadin S",
+          "title": "Nick D, Trey M, Kadin S",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Malachi H",
             "Mateo",
+            "Jaden",
             "Jung",
-            "JD",
-            "Teddy",
+            "Nick M",
             "Chris W"
           ],
           "note": "",
@@ -351,18 +350,19 @@
         },
         {
           "time": "11:00 AM – 12:30 PM",
-          "title": "Michai W, Jaden N, Carey B, Jurian D",
+          "title": "Jaden, Carey, Jurian, Luigi",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Blake",
+            "Chris W",
+            "Nick M",
             "Dylan W",
             "Jung",
-            "JD",
             "Ali",
-            "Kirby"
+            "Dame",
+            "Jaden"
           ],
           "note": "",
           "players": []
@@ -372,7 +372,7 @@
           "title": "Ben E",
           "type": "other",
           "people": [
-            "David",
+            "Anthony",
             "Jung",
             "Dylan W"
           ],
@@ -397,8 +397,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Jung",
-            "Kirby"
+            "Jung"
           ],
           "note": "",
           "players": []
