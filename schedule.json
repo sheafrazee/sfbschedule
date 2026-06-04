@@ -387,17 +387,6 @@
           "note": ""
         },
         {
-          "time": "4:15 PM – 4:30 PM",
-          "title": "Trey McKinney ",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Tyler"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:00 PM",
           "title": "Group – Excel",
           "type": "other",
@@ -415,7 +404,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Tristan De Silva, Kadin S, Luigi",
+          "title": "Dalton K, Hannes S, Yon ",
           "type": "excel",
           "people": [
             "Donovan",
@@ -433,21 +422,35 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "5v5: Jaden N, Carey B, King G, Trey M, Nick D, Jurian D, Mark S, Dev A?",
+          "title": "5v5: Jaden N, Carey B, King G, Trey M, Nick D, Jurian D, Dariq W",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Jon",
             "Danny",
-            "Kailen"
+            "Chris M"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "1:00 PM – 2:00 PM",
+          "time": "11:30 AM – 12:30 PM",
+          "title": "Luigi - LAC",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Nick M",
+            "Mark",
+            "Danny"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
@@ -457,17 +460,6 @@
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "2:00 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
-            "David",
-            "Kirby"
-          ],
-          "note": "",
-          "players": []
         },
         {
           "time": "4:00 PM",
