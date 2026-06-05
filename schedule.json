@@ -429,7 +429,9 @@
             "Tyler",
             "Evan",
             "Danny",
-            "Chris M"
+            "Chris M",
+            "Maxwell",
+            "Mateo"
           ],
           "note": "",
           "players": []
@@ -444,14 +446,13 @@
             "Evan",
             "Nick M",
             "Mark",
-            "Ador",
-            "Jaden"
+            "Mateo"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "2:00 PM – 3:00 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
@@ -463,25 +464,24 @@
           "note": ""
         },
         {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "4:00 PM",
           "title": "Audrina 2 – Excel",
           "type": "other",
           "people": [
-            "Dame",
-            "David"
+            "Dame"
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Parker S",
-          "type": "other",
-          "people": [
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
