@@ -396,16 +396,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "6:00 PM – 7:00 PM",
-          "title": "Trey Mckinney",
-          "type": "other",
-          "people": [
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -467,7 +457,7 @@
           "type": "other",
           "people": [
             "Dylan W",
-            "Anthony",
+            "David",
             "Dame"
           ],
           "players": [],
@@ -510,8 +500,8 @@
           "note": ""
         },
         {
-          "time": "8:00 AM – 9:00 AM",
-          "title": "Tristan D, Hannes S, Dev A",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Tristan D, Mark, Dalton, Trey ",
           "type": "excel",
           "people": [
             "Tyler",
@@ -520,52 +510,49 @@
             "Luca",
             "JD",
             "Mark",
-            "Malachi S"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:15 AM – 10:15 AM",
-          "title": "Nick D, Trey M, Kadin S",
-          "type": "excel",
-          "people": [
-            "Tyler",
-            "Evan",
-            "Donovan",
-            "Luca",
-            "JD",
-            "Mark",
-            "Malachi S"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "10:30 AM – 11:30 AM",
-          "title": "Jaden N, Jurian D, Luigi",
-          "type": "excel",
-          "people": [
-            "Tyler",
-            "Evan",
-            "Donovan",
-            "Jung",
-            "Luca",
             "Dame",
-            "David",
-            "Kirby"
+            "Nick M",
+            "Mateo"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "12:00 PM – 1:00 PM",
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Hannes, Juom, Luigi, Jurian",
+          "type": "excel",
+          "people": [
+            "Tyler",
+            "Evan",
+            "Donovan",
+            "Luca",
+            "JD",
+            "Mark",
+            "Dame",
+            "Nick M",
+            "Mateo"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "11:00 AM – 12:00 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
-            "Malachi S",
-            "David",
-            "Luca"
+            "Anthony",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "12:00 PM – 1:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
           ],
           "players": [],
           "note": ""
