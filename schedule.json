@@ -396,6 +396,16 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:00 PM – 7:00 PM",
+          "title": "Trey Mckinney",
+          "type": "other",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -457,7 +467,7 @@
           "type": "other",
           "people": [
             "Dylan W",
-            "David",
+            "Anthony",
             "Dame"
           ],
           "players": [],
