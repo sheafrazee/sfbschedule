@@ -500,15 +500,14 @@
           "note": ""
         },
         {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Tristan D, Mark, Dalton, Trey ",
+          "time": "8:00 AM – 9:15 AM",
+          "title": "Tristan D, Dariq, Dalton K ",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
             "Luca",
-            "JD",
             "Mark",
             "Dame",
             "Nick M",
@@ -518,15 +517,14 @@
           "players": []
         },
         {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Hannes, Juom, Luigi, Jurian",
+          "time": "9:15 AM – 10:30 AM",
+          "title": "Jurian, Trey, Mark",
           "type": "excel",
           "people": [
             "Tyler",
             "Evan",
             "Donovan",
             "Luca",
-            "JD",
             "Mark",
             "Dame",
             "Nick M",
@@ -536,23 +534,42 @@
           "players": []
         },
         {
-          "time": "11:00 AM – 12:00 PM",
-          "title": "Ben E",
-          "type": "other",
+          "time": "10:30 AM – 11:45 AM",
+          "title": "Hannes, Luigi, Juom",
+          "type": "excel",
           "people": [
-            "Anthony",
-            "Dame"
+            "Tyler",
+            "Evan",
+            "Donovan",
+            "Luca",
+            "JD",
+            "Mark",
+            "Dame",
+            "Nick M"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "12:00 PM – 1:00 PM",
+          "title": "Ben E",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame",
+            "JD"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "1:00 PM – 2:00 PM",
           "title": "Rudy",
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Dame",
+            "JD"
           ],
           "players": [],
           "note": ""
