@@ -396,6 +396,16 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:00 PM – 7:00 PM",
+          "title": "Trey Mckinney",
+          "type": "other",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -585,18 +595,7 @@
           "players": []
         },
         {
-          "time": "1030 AM",
-          "title": "Group ",
-          "type": "other",
-          "people": [
-            "Kirby",
-            "Ian"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "12pm",
+          "time": "10:00 AM",
           "title": "Little Kids Pickup – Excel",
           "type": "other",
           "people": [
