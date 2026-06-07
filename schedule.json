@@ -608,6 +608,14 @@
   ],
   "archive": [
     {
+      "key": "2026-06-01",
+      "range": "Jun 1 – Jun 7, 2026",
+      "title": "Week of Jun 1 – 7",
+      "path": "archive/2026-06-01.png",
+      "pathExcel": "archive/2026-06-01-excel.png",
+      "ts": 1780840275888
+    },
+    {
       "key": "2026-05-25",
       "range": "May 25 – May 31, 2026",
       "title": "Week of May 25–31",
