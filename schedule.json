@@ -23,14 +23,6 @@
           "players": []
         },
         {
-          "time": "8:00 AM",
-          "title": "New Event",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "9:00 AM",
           "title": "Dalton K, Colby J, Mark S",
           "type": "excel",
@@ -304,7 +296,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Shep"
           ],
           "players": [],
           "note": ""
@@ -315,7 +307,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Shep"
           ],
           "players": [],
           "note": ""
@@ -326,7 +318,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Shep"
           ],
           "note": "",
           "players": []
@@ -464,8 +456,8 @@
         },
         {
           "time": "11:00 AM ",
-          "title": "Ben E, Rudy",
-          "type": "excel",
+          "title": " Rudy",
+          "type": "other",
           "people": [
             "Anthony",
             "Dame",
