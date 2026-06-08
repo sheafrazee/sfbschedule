@@ -279,19 +279,20 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .intern-tally-head span.c { font-size: 11px; opacity: .7; }
 .intern-tally-body { max-height: 320px; overflow-y: auto; }
 .intern-tally.collapsed .intern-tally-body { display: none; }
-.intern-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 14px; border-bottom: 1px solid var(--warm-white); font-size: 13px; }
+.intern-row { display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-bottom: 1px solid var(--warm-white); font-size: 13px; }
 .intern-row:last-child { border-bottom: none; }
-.intern-row .nm { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.intern-row .ct { flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--warm-white); color: var(--dark-stone); display: inline-flex; align-items: center; justify-content: center; }
-.intern-tally-empty { padding: 16px 14px; color: var(--stone); font-size: 12.5px; text-align: center; }
-.intern-cts { display: flex; gap: 5px; flex-shrink: 0; }
-.intern-row .ct { min-width: 26px; }
-.intern-row .ct.excel { background: #B8694A; color: #F4F1EC; }
-.intern-row .ct.other { background: #D6D1CC; color: #111111; }
+.intern-row .nm { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.intern-row .ct { flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; min-width: 28px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--warm-white); color: var(--dark-stone); display: inline-flex; align-items: center; justify-content: center; }
+.intern-row .ct.cur { background: var(--clay); color: #fff; }
+.intern-row .ct.nxt { background: var(--stone); color: #fff; }
 .intern-row .ct.all { background: var(--ink); color: var(--warm-white); }
-.intern-cols { display: flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--warm-white); border-bottom: 1px solid var(--light-stone); }
-.intern-cols .sp { flex: 1; }
-.intern-cols .h { width: 26px; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10px; color: var(--stone); }
+.intern-col-heads { display: flex; justify-content: flex-end; gap: 8px; padding: 4px 14px 2px; }
+.intern-col-heads span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: .04em; color: var(--stone); min-width: 28px; text-align: center; }
+.intern-coverage { display: inline-flex; align-items: center; gap: 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 4px; }
+.intern-coverage.cov-ok  { background: #d4f0da; color: #1a6b2f; }
+.intern-coverage.cov-low { background: #fde8cc; color: #8a4000; }
+.intern-coverage.cov-bad { background: #fddcdc; color: #9b1c1c; }
+.intern-tally-empty { padding: 16px 14px; color: var(--stone); font-size: 12.5px; text-align: center; }
 .intern-divider { padding: 7px 14px; background: var(--warm-white); border-top: 1px solid var(--light-stone); border-bottom: 1px solid var(--light-stone); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--stone); }
 .intern-row.past .nm { color: var(--dark-stone); }
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
@@ -308,7 +309,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-hour-line { border-bottom: 1px solid #F0EDE8; box-sizing: border-box; }
 .cal-half-line { border-bottom: 1px dashed #F0EDE8; box-sizing: border-box; height: 26px; }
 .cal-ev { position: absolute; left: 2px; right: 2px; border-radius: 3px; padding: 2px 4px; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: default; z-index: 2; }
-.cal-ev-drag { cursor: grab; touch-action: none; transition: box-shadow .12s; }
+.cal-ev-drag { cursor: grab; touch-action: pan-x; transition: box-shadow .12s; }
 .cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
 .cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
 .cal-ev-selected { outline: 2px solid var(--ink) !important; outline-offset: 1px; z-index: 3; }
@@ -317,8 +318,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
-.cal-day-body[data-di] { cursor: crosshair; touch-action: none; }
-.cal-day-body.cal-day-drop { background: rgba(184,105,74,0.10); box-shadow: 0 0 0 2px var(--clay) inset; }
+.cal-day-body[data-di] { cursor: crosshair; touch-action: pan-x; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
 .cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 230px; }
 .cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
@@ -406,7 +406,6 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
       <!-- Row 2: actions -->
       <div class="ab-row ab-bottom">
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
-        <button class="btn" id="sortAllBtn" title="Sort every day's sessions chronologically by time">↕⏱ Sort all by time</button>
         <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
@@ -1403,18 +1402,6 @@ function renderDisplay() {
 }
 
 // ============ EDIT MODE ============
-// Sort one day's events by start time (earliest first). Untimed events keep their
-// relative order and fall to the bottom. Stable, so same-time events stay put.
-function sortDayEventsChrono(day) {
-  if (!day || !Array.isArray(day.events)) return;
-  day.events.sort((a, b) => {
-    const ta = parseEventTimes(a.time), tb = parseEventTimes(b.time);
-    const ma = ta ? ta.start.h * 60 + ta.start.min : Infinity;
-    const mb = tb ? tb.start.h * 60 + tb.start.min : Infinity;
-    return ma - mb;
-  });
-}
-
 function renderEdit() {
   // Banner + toggle reflect the active slot
   const banner = document.getElementById("slotBanner");
@@ -1438,7 +1425,6 @@ function renderEdit() {
     dEl.innerHTML = `
       <div class="edit-day-header">
         <input type="text" value="${escapeAttr(day.day)}" data-day="${di}" data-field="day">
-        <button class="icon-btn" data-sort-day="${di}" title="Sort sessions by time">↕⏱</button>
         <button class="icon-btn" data-dup-day="${di}" title="Duplicate day">⧉</button>
         <button class="icon-btn danger" data-remove-day="${di}" title="Remove day">✕</button>
       </div>
@@ -1454,7 +1440,6 @@ function renderEdit() {
         const nev = { time: "8:00 AM", title: "New Event", type: "other", people: [], players: [], note: "" };
         if (atTop) ed().days[di].events.unshift(nev);
         else ed().days[di].events.push(nev);
-        sortDayEventsChrono(ed().days[di]);
         saveDraft(); renderEdit();
       };
       return b;
@@ -1520,46 +1505,56 @@ function renderInternTally() {
   box.classList.toggle("hidden", currentMode !== "edit");
   if (currentMode !== "edit") return;
 
-  // Active week: name -> {excel, other} session counts (interns live in e.people)
-  const counts = {};
-  (ed().days || []).forEach(day => {
-    (day.events || []).forEach(ev => {
-      const key = ev.type === "excel" ? "excel" : "other";
-      (ev.people || []).forEach(p => {
-        const name = (p || "").trim();
-        if (!name) return;
-        if (!counts[name]) counts[name] = { excel: 0, other: 0 };
-        counts[name][key]++;
+  // Count sessions per intern across current and next weeks
+  function countWeek(days) {
+    const c = {};
+    (days || []).forEach(day => {
+      (day.events || []).forEach(ev => {
+        (ev.people || []).forEach(p => {
+          const name = (p || "").trim();
+          if (name) c[name] = (c[name] || 0) + 1;
+        });
       });
     });
-  });
+    return c;
+  }
 
+  const cur = countWeek(data.days);
+  const nxt = countWeek(data.nextWeek && data.nextWeek.days);
+  const allNames = new Set([...Object.keys(cur), ...Object.keys(nxt)]);
   const roster = learnInterns();
-  const rows = Object.entries(counts)
-    .sort((a, b) => (b[1].excel + b[1].other) - (a[1].excel + a[1].other) || a[0].localeCompare(b[0]));
 
-  // Past interns = in roster but not on the week being edited (most-recent first)
+  // Rows: interns with at least one session this or next week
+  const rows = [...allNames]
+    .map(name => ({ name, cur: cur[name] || 0, nxt: nxt[name] || 0, all: (cur[name] || 0) + (nxt[name] || 0) }))
+    .sort((a, b) => b.all - a.all || a.name.localeCompare(b.name));
+
+  // Past: in roster but not scheduled either week
   const past = Object.keys(roster)
-    .filter(name => !(name in counts))
+    .filter(name => !allNames.has(name))
     .sort((a, b) => (roster[b] - roster[a]) || a.localeCompare(b));
 
-  document.getElementById("internTallyCount").textContent =
-    rows.length ? rows.length + (rows.length === 1 ? " intern" : " interns") : "";
-
-  const colsHtml = rows.length
-    ? `<div class="intern-cols"><span class="sp"></span><span class="h" title="Excel Client sessions">EXC</span><span class="h" title="Other sessions">OTH</span><span class="h" title="Overall sessions">ALL</span></div>`
-    : "";
+  document.getElementById("internTallyCount").textContent = "";
 
   const body = document.getElementById("internTallyBody");
-  let html = colsHtml + (rows.length
-    ? rows.map(([name, c]) => {
-        const all = c.excel + c.other;
-        return `<div class="intern-row"><span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span><span class="intern-cts"><span class="ct excel" title="Excel Client sessions">${c.excel}</span><span class="ct other" title="Other sessions">${c.other}</span><span class="ct all" title="Overall sessions">${all}</span></span></div>`;
-      }).join("")
-    : `<div class="intern-tally-empty">No interns scheduled yet this week.</div>`);
+  let html = "";
+
+  if (rows.length) {
+    html += `<div class="intern-col-heads"><span>Cur</span><span>Nxt</span><span>All</span></div>`;
+    html += rows.map(({ name, cur: c, nxt: n, all: a }) =>
+      `<div class="intern-row">
+        <span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span>
+        <span class="ct cur">${c}</span>
+        <span class="ct nxt">${n}</span>
+        <span class="ct all">${a}</span>
+      </div>`
+    ).join("");
+  } else {
+    html = `<div class="intern-tally-empty">No interns scheduled yet.</div>`;
+  }
 
   if (past.length) {
-    html += `<div class="intern-divider">Not on this week (${past.length})</div>`;
+    html += `<div class="intern-divider">Not scheduled (${past.length})</div>`;
     html += past.map(name =>
       `<div class="intern-row past"><span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span><button class="intern-forget" data-forget="${escapeAttr(name)}" title="Remove from history">✕</button></div>`
     ).join("");
@@ -1570,9 +1565,23 @@ function renderInternTally() {
     btn.addEventListener("click", () => forgetIntern(btn.dataset.forget)));
 }
 
+function internCoverageHtml(playerCount, internCount, isExcel) {
+  if (!isExcel) return '';
+  const ideal = 2 * playerCount + 1;
+  if (ideal <= 0) return '';
+  const diff = internCount - ideal;
+  const cls = diff >= 0 ? 'cov-ok' : diff === -1 ? 'cov-low' : 'cov-bad';
+  const label = diff >= 0 ? `✓ ${internCount}/${ideal}` : `${diff} intern${diff < -1 ? 's' : ''} · ${internCount}/${ideal}`;
+  return `<span class="intern-coverage ${cls}" data-cov-d="{D}" data-cov-e="{E}">${label}</span>`;
+}
+
 function buildEventEditor(di, ei, ev) {
   const el = document.createElement("div");
   el.className = "edit-event";
+  const playerCount = countTitlePlayers(ev.title);
+  const internCount = (ev.people || []).length;
+  const covHtml = internCoverageHtml(playerCount, internCount, ev.type === 'excel')
+    .replace('{D}', di).replace('{E}', ei);
   el.innerHTML = `
     <div class="edit-event-row">
       <input class="ev-time" type="text" value="${escapeAttr(ev.time)}" data-d="${di}" data-e="${ei}" data-field="time" placeholder="Time">
@@ -1581,9 +1590,9 @@ function buildEventEditor(di, ei, ev) {
         ${[["excel","Excel Client"],["other","Other"]].map(([v,label]) => `<option value="${v}" ${ev.type===v?"selected":""}>${label}</option>`).join("")}
       </select>
     </div>
-    <div class="edit-event-label" style="margin:-2px 0 2px;">Players in title <span class="player-count-badge" data-pcount-d="${di}" data-pcount-e="${ei}">${countTitlePlayers(ev.title)}</span></div>
+    <div class="edit-event-label" style="margin:-2px 0 2px;">Players in title <span class="player-count-badge" data-pcount-d="${di}" data-pcount-e="${ei}">${playerCount}</span></div>
     <div>
-      <div class="edit-event-label">Interns (comma-separated) <span class="intern-count-badge" data-count-d="${di}" data-count-e="${ei}">${(ev.people||[]).length}</span></div>
+      <div class="edit-event-label">Interns (comma-separated) <span class="intern-count-badge" data-count-d="${di}" data-count-e="${ei}">${internCount}</span>${covHtml}</div>
       <textarea data-d="${di}" data-e="${ei}" data-field="people" rows="2">${escapeHtml((ev.people||[]).join(", "))}</textarea>
     </div>
     <div>
@@ -1598,6 +1607,28 @@ function buildEventEditor(di, ei, ev) {
   return el;
 }
 
+function _updateCovBadge(di, ei, playerCount, internCount, isExcel) {
+  const cov = document.querySelector(`.intern-coverage[data-cov-d="${di}"][data-cov-e="${ei}"]`);
+  if (!isExcel) { if (cov) cov.remove(); return; }
+  const ideal = 2 * playerCount + 1;
+  const diff = internCount - ideal;
+  const cls = diff >= 0 ? 'cov-ok' : diff === -1 ? 'cov-low' : 'cov-bad';
+  const label = diff >= 0 ? `✓ ${internCount}/${ideal}` : `${diff} intern${diff < -1 ? 's' : ''} · ${internCount}/${ideal}`;
+  if (cov) {
+    cov.className = `intern-coverage ${cls}`;
+    cov.textContent = label;
+  } else {
+    const badge = document.querySelector(`.intern-count-badge[data-count-d="${di}"][data-count-e="${ei}"]`);
+    if (badge) {
+      const span = document.createElement('span');
+      span.className = `intern-coverage ${cls}`;
+      span.dataset.covD = di; span.dataset.covE = ei;
+      span.textContent = label;
+      badge.insertAdjacentElement('afterend', span);
+    }
+  }
+}
+
 function attachEditListeners() {
   document.querySelectorAll("[data-d][data-e][data-field]").forEach(input => {
     input.addEventListener("change", () => {
@@ -1607,24 +1638,34 @@ function attachEditListeners() {
       ed().days[di].events[ei][field] = v;
       saveDraft();
       if (field === "people") renderInternTally();
-      if (field === "time") { sortDayEventsChrono(ed().days[di]); renderEdit(); }
     });
   });
   // Live per-session intern count while typing in the interns box
   document.querySelectorAll("textarea[data-field='people']").forEach(ta => {
     ta.addEventListener("input", () => {
       const di = ta.dataset.d, ei = ta.dataset.e;
-      const n = ta.value.split(",").map(s => s.trim()).filter(Boolean).length;
+      const internCount = ta.value.split(",").map(s => s.trim()).filter(Boolean).length;
       const badge = document.querySelector(`.intern-count-badge[data-count-d="${di}"][data-count-e="${ei}"]`);
-      if (badge) badge.textContent = n;
+      if (badge) badge.textContent = internCount;
+      // Update coverage
+      const pBadge = document.querySelector(`.player-count-badge[data-pcount-d="${di}"][data-pcount-e="${ei}"]`);
+      const playerCount = pBadge ? +pBadge.textContent : 0;
+      const evType = document.querySelector(`select[data-d="${di}"][data-e="${ei}"][data-field="type"]`);
+      _updateCovBadge(di, ei, playerCount, internCount, evType && evType.value === 'excel');
     });
   });
   // Live per-session player count while typing in the title
   document.querySelectorAll("input[data-field='title']").forEach(inp => {
     inp.addEventListener("input", () => {
       const di = inp.dataset.d, ei = inp.dataset.e;
+      const playerCount = countTitlePlayers(inp.value);
       const badge = document.querySelector(`.player-count-badge[data-pcount-d="${di}"][data-pcount-e="${ei}"]`);
-      if (badge) badge.textContent = countTitlePlayers(inp.value);
+      if (badge) badge.textContent = playerCount;
+      // Update coverage
+      const cBadge = document.querySelector(`.intern-count-badge[data-count-d="${di}"][data-count-e="${ei}"]`);
+      const internCount = cBadge ? +cBadge.textContent : 0;
+      const evType = document.querySelector(`select[data-d="${di}"][data-e="${ei}"][data-field="type"]`);
+      _updateCovBadge(di, ei, playerCount, internCount, evType && evType.value === 'excel');
     });
   });
   document.querySelectorAll("[data-day][data-field='day']").forEach(input => {
@@ -1635,7 +1676,6 @@ function attachEditListeners() {
       const di = +btn.dataset.d, ei = +btn.dataset.e;
       const copy = JSON.parse(JSON.stringify(ed().days[di].events[ei]));
       ed().days[di].events.splice(ei + 1, 0, copy);
-      sortDayEventsChrono(ed().days[di]);
       saveDraft(); renderEdit();
     });
   });
@@ -1650,13 +1690,6 @@ function attachEditListeners() {
     btn.addEventListener("click", () => {
       const di = +btn.dataset.removeDay;
       if (confirm(`Remove "${ed().days[di].day}" and all its events?`)) { ed().days.splice(di, 1); saveDraft(); renderEdit(); }
-    });
-  });
-  document.querySelectorAll("[data-sort-day]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const di = +btn.dataset.sortDay;
-      sortDayEventsChrono(ed().days[di]);
-      saveDraft(); renderEdit();
     });
   });
   document.querySelectorAll("[data-dup-day]").forEach(btn => {
@@ -1865,68 +1898,58 @@ function wireCalDrag(container, slot, hPx) {
   }
 }
 function onCalDragStart(e) {
-  if (e.button != null && e.button !== 0) return;
   const el = e.currentTarget;
   const hourPx = +el.dataset.hourpx;
   const startMin0 = +el.dataset.startmin;
   const dur = +el.dataset.dur;
   const isRange = el.dataset.range === "1";
   const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
+  const body = el.parentElement;
+  const bodyH = body.clientHeight;
   const elH = el.offsetHeight;
+  const origTop = (startMin0 / 60 - CAL_START_H) * hourPx;
   const startY = e.clientY;
   const startX = e.clientX;
-  const grabOffsetY = e.clientY - el.getBoundingClientRect().top; // keep grab point under cursor
   const timeEl = el.querySelector(".cal-ev-time");
-
-  // All day columns in THIS week's grid, indexed by day-index — enables cross-day drag.
-  const grid = el.closest(".cal-days");
-  const bodyByDi = {};
-  if (grid) grid.querySelectorAll(".cal-day-body[data-di]").forEach(b => { bodyByDi[+b.dataset.di] = b; });
-
   let finalStartMin = startMin0;
-  let finalDi = di;
   let dragging = false;
-  const DRAG_START_PX = 4; // begin dragging as soon as the pointer moves this far — no hold delay
+  let needsCapture = false; // setPointerCapture must be called inside a pointer event
 
-  // Capture immediately so moves keep firing even if the cursor outruns the bubble.
-  try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  // Long-press hold: only start drag after 400ms without significant movement
+  const HOLD_MS = 400;
+  const MOVE_THRESHOLD = e.pointerType === 'touch' ? 12 : 6;
 
-  function beginDrag() {
+  let holdTimer = setTimeout(() => {
+    holdTimer = null;
     dragging = true;
     if (timeEl) timeEl.style.display = "block";
     el.classList.add("cal-ev-dragging");
+    needsCapture = true; // claim in next pointermove (spec requires pointer event context)
+    if (navigator.vibrate) navigator.vibrate(25);
+  }, HOLD_MS);
+
+  function cancelHold() {
+    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
   }
 
-  function clearDropHi() {
-    Object.values(bodyByDi).forEach(b => b.classList.remove("cal-day-drop"));
-  }
+  let maxMoved = 0; // track peak movement to distinguish tap from scroll
 
   function move(ev) {
+    const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
+    if (dist > maxMoved) maxMoved = dist;
     if (!dragging) {
-      const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
-      if (dist < DRAG_START_PX) return;
-      beginDrag();
+      // Cancel hold if finger wandered
+      if (dist > MOVE_THRESHOLD) cancelHold();
+      return;
+    }
+    // Claim pointer capture here (inside a pointer event handler — required by spec)
+    if (needsCapture) {
+      needsCapture = false;
+      try { el.setPointerCapture(ev.pointerId); } catch (_) {}
     }
     ev.preventDefault();
-
-    // Horizontal: find which day column the cursor is over and move the bubble there.
-    let targetDi = finalDi;
-    for (const k in bodyByDi) {
-      const r = bodyByDi[k].getBoundingClientRect();
-      if (ev.clientX >= r.left && ev.clientX <= r.right) { targetDi = +k; break; }
-    }
-    if (targetDi !== finalDi && bodyByDi[targetDi]) {
-      finalDi = targetDi;
-      bodyByDi[targetDi].appendChild(el); // re-parent into the new day column
-      try { el.setPointerCapture(ev.pointerId); } catch (_) {} // re-parenting drops capture — reclaim it
-    }
-    clearDropHi();
-    if (finalDi !== di && bodyByDi[finalDi]) bodyByDi[finalDi].classList.add("cal-day-drop");
-
-    // Vertical: snap to 15-min grid within the current column.
-    const curBody = bodyByDi[finalDi] || el.parentElement;
-    const bRect = curBody.getBoundingClientRect();
-    let top = Math.max(0, Math.min(ev.clientY - bRect.top - grabOffsetY, curBody.clientHeight - elH));
+    const dy = ev.clientY - startY;
+    let top = Math.max(0, Math.min(origTop + dy, bodyH - elH));
     let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;
     mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
     finalStartMin = mins;
@@ -1935,40 +1958,37 @@ function onCalDragStart(e) {
   }
 
   function cleanup() {
-    clearDropHi();
+    cancelHold();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
-    window.removeEventListener("pointermove", move);
-    window.removeEventListener("pointerup", up);
-    window.removeEventListener("pointercancel", cancel);
+    el.removeEventListener("pointermove", move);
+    el.removeEventListener("pointerup", up);
+    el.removeEventListener("pointercancel", cancel);
     el.classList.remove("cal-ev-dragging");
   }
 
-  // pointercancel = system took over — just clean up, never select
+  // pointercancel = scroll/system took over — just clean up, never select
   function cancel() { cleanup(); }
 
   function up() {
     cleanup();
-    if (dragging && (finalStartMin !== startMin0 || finalDi !== di)) {
+    if (dragging && finalStartMin !== startMin0) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
-      if (days && days[di] && days[di].events[ei] && days[finalDi]) {
-        const moved = days[di].events.splice(ei, 1)[0]; // pull out of source day
-        moved.time = _fmtTimeRange(finalStartMin, dur, isRange);
-        days[finalDi].events.push(moved);            // drop into target day
-        sortDayEventsChrono(days[finalDi]);
-        calSelection = { slot, di: finalDi, ei: days[finalDi].events.indexOf(moved) };
+      if (days && days[di] && days[di].events[ei]) {
+        days[di].events[ei].time = _fmtTimeRange(finalStartMin, dur, isRange);
         saveDraft();
         renderEdit();
-      } else {
-        renderEdit(); // safety re-render to restore DOM if indices were stale
       }
     } else if (!dragging) {
-      selectCalEvent(slot, di, ei); // no movement → treat as a tap/click
+      // Touch: only select if the finger barely moved (real tap, not a scroll)
+      const TAP_PX = 10;
+      if (e.pointerType === 'touch' && maxMoved > TAP_PX) return;
+      selectCalEvent(slot, di, ei);
     }
   }
 
-  window.addEventListener("pointermove", move);
-  window.addEventListener("pointerup", up);
-  window.addEventListener("pointercancel", cancel);
+  el.addEventListener("pointermove", move);
+  el.addEventListener("pointerup", up);
+  el.addEventListener("pointercancel", cancel);
 }
 
 function selectCalEvent(slot, di, ei) {
@@ -2154,7 +2174,6 @@ function onCalCreateStart(e, slot, hPx) {
       if (t && (t.start.h * 60 + t.start.min) > startMins) { insertIdx = i; break; }
     }
     events.splice(insertIdx, 0, newEv);
-    sortDayEventsChrono(days[di]);
     saveDraft();
     renderEdit();
   }
@@ -2179,10 +2198,7 @@ function showCalPopover(slot, di, ei, evEl) {
   pop.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--dark-stone);">Edit Session</span>
-      <div style="display:flex;gap:2px;">
-        <button id="calPopDuplicate" title="Duplicate session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:14px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--stone)'">⧉</button>
-        <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
-      </div>
+      <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
@@ -2227,30 +2243,6 @@ function showCalPopover(slot, di, ei, evEl) {
       saveDraft();
       renderEdit();
     }
-  });
-
-  // Duplicate button — clones the session into the same day, shifted to start when the original ends
-  pop.querySelector('#calPopDuplicate').addEventListener('click', () => {
-    const d = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
-    if (!d || !d[di] || !d[di].events[ei]) return;
-    const src = d[di].events[ei];
-    const copy = JSON.parse(JSON.stringify(src));
-    // Offset time so the duplicate stacks right after the original
-    const t = parseEventTimes(src.time);
-    if (t) {
-      const startMin = t.start.h * 60 + t.start.min;
-      const endMin = t.end.h * 60 + t.end.min;
-      const durMin = Math.max(15, endMin - startMin);
-      const isRange = String(src.time).split(/\s*(?:–|—|-|to)\s*/i).filter(Boolean).length > 1;
-      const newStart = Math.min(endMin, (CAL_END_H * 60) - durMin);
-      copy.time = _fmtTimeRange(newStart, durMin, isRange);
-    }
-    d[di].events.splice(ei + 1, 0, copy);
-    sortDayEventsChrono(d[di]);
-    calSelection = { slot, di, ei: d[di].events.indexOf(copy) };
-    hideCalPopover();
-    saveDraft();
-    renderEdit();
   });
 
   titleInput.addEventListener('input', () => {
@@ -2420,7 +2412,6 @@ function quickAddEvent() {
         }
       }
       events.splice(insertIdx, 0, newEv);
-      sortDayEventsChrono(ed().days[dayIdx]);
       added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
     } catch (ex) {
       failed.push(`"${str}" — unexpected error: ${ex.message}`);
@@ -2495,10 +2486,6 @@ document.getElementById("weekPreviewToggle").addEventListener("click", () => {
 });
 document.getElementById("weekTitleInput").addEventListener("change", function(){ ed().weekTitle = this.value; saveDraft(); if (editSlot === "current") document.getElementById("weekTitleDisplay").textContent = this.value; });
 document.getElementById("publishBtn").addEventListener("click", publish);
-document.getElementById("sortAllBtn").addEventListener("click", () => {
-  (ed().days || []).forEach(sortDayEventsChrono);
-  saveDraft(); renderEdit();
-});
 
 // ---- Next-week workspace controls ----
 function switchSlot(slot) {
