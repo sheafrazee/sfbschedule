@@ -90,7 +90,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
   .modal-actions { flex-wrap: wrap; gap: 6px; }
   .archive-item { flex-wrap: wrap; }
   .ai-btns { width: 100%; justify-content: flex-start; margin-top: 4px; }
-  .ai-view-btn { flex: 1; text-align: center; }
+  .ai-view-btn, .ai-share-btn { flex: 1; text-align: center; }
 }
 
 /* Phone (≤ 600px) */
@@ -165,7 +165,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
   /* Archive list */
   .archive-item { flex-wrap: wrap; padding: 10px 12px; }
   .ai-btns { width: 100%; margin-top: 6px; gap: 6px; }
-  .ai-view-btn { flex: 1; text-align: center; }
+  .ai-view-btn, .ai-share-btn { flex: 1; text-align: center; }
 
   /* Share menu — bigger tap targets */
   .share-menu { min-width: 170px; }
@@ -263,6 +263,9 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .ai-view-btn:hover { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
 .ai-view-btn.excel { border-color: var(--clay); color: var(--clay); }
 .ai-view-btn.excel:hover { background: var(--clay); color: #fff; border-color: var(--clay); }
+.ai-share-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.ai-share-btn:hover { background: var(--dark-stone); color: var(--warm-white); border-color: var(--dark-stone); }
+.ai-share-btn:disabled { opacity: .5; cursor: default; }
 .archive-empty { color: var(--stone); text-align: center; padding: 30px 16px; font-size: 13.5px; line-height: 1.5; }
 .archive-status { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: var(--dark-stone); min-height: 16px; flex: 1; }
 .img-modal { max-width: 92vw; padding: 14px; }
@@ -1305,6 +1308,7 @@ function renderArchiveList(filter) {
     <div class="ai-btns">
       <button class="ai-view-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">All Types →</button>
       ${a.pathExcel ? `<button class="ai-view-btn excel" data-path="${escapeAttr(a.pathExcel)}" data-range="${escapeAttr(a.range)}" data-label="Excel Client">Excel →</button>` : ""}
+      <button class="ai-share-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">↗ Share</button>
     </div>
   </div>`).join("") || `<div class="archive-empty">No match.</div>`;
   list.querySelectorAll(".ai-view-btn").forEach(b => b.addEventListener("click", () => {
@@ -1312,6 +1316,45 @@ function renderArchiveList(filter) {
     document.getElementById("imgView").src = rawUrl(b.dataset.path) + "?t=" + Date.now();
     document.getElementById("imgModal").classList.remove("hidden");
   }));
+  list.querySelectorAll(".ai-share-btn").forEach(b => b.addEventListener("click", () =>
+    shareArchivedWeek(b.dataset.path, b.dataset.range, b.dataset.label, b)));
+}
+
+// Pull an already-archived week PNG from GitHub and hand it to the native share
+// sheet (Messages, Mail, AirDrop…). Falls back to download on desktop.
+async function shareArchivedWeek(path, range, label, btn) {
+  const prev = btn ? btn.textContent : "";
+  if (btn) { btn.textContent = "⏳"; btn.disabled = true; }
+  try {
+    const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const blob = await res.blob();
+    const safe = (range || "week").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "week";
+    const tag = label === "Excel Client" ? "-excel" : "";
+    const fname = `schedule-${safe}${tag}.png`;
+    const file = new File([blob], fname, { type: blob.type || "image/png" });
+    const shareText = range + (label ? "  ·  " + label : "");
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], title: shareText, text: shareText });
+        return;
+      } catch (err) {
+        if (err && err.name === "AbortError") return;   // user dismissed the sheet
+        // otherwise fall through to download
+      }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = fname; a.click();
+    URL.revokeObjectURL(url);
+    alert("Saved “" + fname + "”. On a phone, Share opens the share sheet; on desktop it downloads so you can attach it.");
+  } catch (e) {
+    console.error(e);
+    alert("Share failed: " + e.message);
+  } finally {
+    if (btn) { btn.textContent = prev; btn.disabled = false; }
+  }
 }
 
 function openArchive() {
