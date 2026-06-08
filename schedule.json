@@ -5,7 +5,7 @@
       "day": "Mon 6/8",
       "events": [
         {
-          "time": "7:30 AM",
+          "time": "7:30 AM – 9:00 AM",
           "title": "Hannes S, Bobbi K, Ibbe K, Nick D",
           "type": "excel",
           "people": [
@@ -23,7 +23,7 @@
           "players": []
         },
         {
-          "time": "9:00 AM",
+          "time": "9:00 AM – 10:30 AM",
           "title": "Dalton K, Colby J, Mark S",
           "type": "excel",
           "people": [
@@ -40,7 +40,7 @@
           "players": []
         },
         {
-          "time": "10:30 AM",
+          "time": "10:30 AM – 12:00 PM",
           "title": "Juom MB, Jurian D, Jonas B",
           "type": "excel",
           "people": [
@@ -393,7 +393,7 @@
           "note": ""
         },
         {
-          "time": "5:00 PM",
+          "time": "4:00 PM",
           "title": "Sean Dao",
           "type": "other",
           "people": [
