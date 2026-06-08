@@ -292,6 +292,10 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .intern-coverage.cov-ok  { background: #d4f0da; color: #1a6b2f; }
 .intern-coverage.cov-low { background: #fde8cc; color: #8a4000; }
 .intern-coverage.cov-bad { background: #fddcdc; color: #9b1c1c; }
+.day-drag-handle { cursor: grab; color: var(--stone); font-size: 15px; padding: 0 3px; touch-action: none; user-select: none; flex-shrink: 0; line-height: 1; }
+.day-drag-handle:active { cursor: grabbing; }
+.edit-day.day-dragging { opacity: 0.35; pointer-events: none; }
+.edit-day.drop-before { box-shadow: -3px 0 0 0 var(--clay); }
 .intern-tally-empty { padding: 16px 14px; color: var(--stone); font-size: 12.5px; text-align: center; }
 .intern-divider { padding: 7px 14px; background: var(--warm-white); border-top: 1px solid var(--light-stone); border-bottom: 1px solid var(--light-stone); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--stone); }
 .intern-row.past .nm { color: var(--dark-stone); }
@@ -1424,6 +1428,7 @@ function renderEdit() {
     dEl.className = "edit-day";
     dEl.innerHTML = `
       <div class="edit-day-header">
+        <span class="day-drag-handle" title="Drag to reorder day">⠿</span>
         <input type="text" value="${escapeAttr(day.day)}" data-day="${di}" data-field="day">
         <button class="icon-btn" data-dup-day="${di}" title="Duplicate day">⧉</button>
         <button class="icon-btn danger" data-remove-day="${di}" title="Remove day">✕</button>
@@ -1466,6 +1471,7 @@ function renderEdit() {
     saveDraft(); renderEdit();
   };
   grid.appendChild(addDay);
+  wireDayDrag(grid);
   try { attachEditListeners(); } catch (e) { console.error("attachEditListeners failed", e); }
   try { renderInternTally(); } catch (e) { console.error("renderInternTally failed", e); }
   try { renderCalendarPreview(); } catch (e) { console.error("renderCalendarPreview failed", e); }
@@ -1605,6 +1611,80 @@ function buildEventEditor(di, ei, ev) {
     </div>
   `;
   return el;
+}
+
+function wireDayDrag(grid) {
+  grid.querySelectorAll('.day-drag-handle').forEach(handle => {
+    handle.addEventListener('pointerdown', e => {
+      if (e.button !== 0 && e.pointerType !== 'touch') return;
+      onDayDragStart(e);
+    });
+  });
+}
+
+function onDayDragStart(e) {
+  const handle = e.currentTarget;
+  const dayEl = handle.closest('.edit-day');
+  const grid = dayEl.parentElement;
+
+  e.preventDefault();
+  try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+
+  dayEl.classList.add('day-dragging');
+
+  function allDayEls() { return Array.from(grid.querySelectorAll('.edit-day')); }
+  const fromIdx = allDayEls().indexOf(dayEl);
+
+  let insertBeforeEl = null; // element before which we'll insert; null = end
+
+  function getInsertEl(clientX) {
+    // Find the first non-dragged day whose horizontal midpoint is right of the pointer
+    for (const el of allDayEls()) {
+      if (el === dayEl) continue;
+      const r = el.getBoundingClientRect();
+      if (clientX < r.left + r.width / 2) return el;
+    }
+    return null; // insert at end
+  }
+
+  function clearIndicators() {
+    allDayEls().forEach(el => el.classList.remove('drop-before'));
+  }
+
+  function move(ev) {
+    const target = getInsertEl(ev.clientX);
+    clearIndicators();
+    if (target) target.classList.add('drop-before');
+    insertBeforeEl = target;
+  }
+
+  function up() {
+    cleanup();
+    const els = allDayEls();
+    const insertDomIdx = insertBeforeEl ? els.indexOf(insertBeforeEl) : els.length;
+    // Convert to data index: after removing fromIdx, targets after it shift left
+    const toIdx = insertDomIdx > fromIdx ? insertDomIdx - 1 : insertDomIdx;
+    if (toIdx !== fromIdx) {
+      const days = ed().days;
+      const [removed] = days.splice(fromIdx, 1);
+      days.splice(toIdx, 0, removed);
+      saveDraft();
+      renderEdit();
+    }
+  }
+
+  function cleanup() {
+    handle.removeEventListener('pointermove', move);
+    handle.removeEventListener('pointerup', up);
+    handle.removeEventListener('pointercancel', cleanup);
+    try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+    dayEl.classList.remove('day-dragging');
+    clearIndicators();
+  }
+
+  handle.addEventListener('pointermove', move);
+  handle.addEventListener('pointerup', up);
+  handle.addEventListener('pointercancel', cleanup);
 }
 
 function _updateCovBadge(di, ei, playerCount, internCount, isExcel) {
