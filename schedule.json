@@ -6,7 +6,7 @@
       "events": [
         {
           "time": "7:30 AM – 9:00 AM",
-          "title": "Hannes S, Bobbi K, Ibbe K, Nick D",
+          "title": "Bobbi K, Ibbe K, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -24,7 +24,7 @@
         },
         {
           "time": "9:00 AM – 10:30 AM",
-          "title": "Dalton K, Colby J, Mark S",
+          "title": "Dalton K, Colby J, Mark S, Hannes",
           "type": "excel",
           "people": [
             "Donovan",
@@ -34,7 +34,8 @@
             "Mateo",
             "Luca",
             "JD",
-            "Nick M"
+            "Nick M",
+            "Aaron F"
           ],
           "note": "",
           "players": []
@@ -117,7 +118,9 @@
             "Nick M",
             "Malachi H",
             "Teddy",
-            "Kirby"
+            "Chris W",
+            "Kirby",
+            "Ali"
           ],
           "players": [],
           "note": ""
@@ -130,20 +133,18 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Colin",
-            "Kirby",
-            "Mateo"
+            "Nick M"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "3:00 PM",
+          "time": "2:30 PM",
           "title": "Maxwell S",
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "David"
           ],
           "players": [],
           "note": ""
@@ -154,7 +155,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "David"
           ],
           "players": [],
           "note": ""
@@ -165,7 +166,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Dame",
+            "Kirby"
           ],
           "note": "",
           "players": []
@@ -204,7 +206,8 @@
             "Luca",
             "Mark",
             "Noah P",
-            "Matai E"
+            "Matai E",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -221,7 +224,8 @@
             "Luca",
             "Mark",
             "Noah P",
-            "Matai E"
+            "Matai E",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -265,8 +269,10 @@
             "Matai E",
             "Colin",
             "Malachi H",
+            "Chris W",
             "JD",
-            "Jaden"
+            "Jaden",
+            "Luca"
           ],
           "note": "",
           "players": []
@@ -285,7 +291,9 @@
             "Colin",
             "Malachi H",
             "JD",
-            "Jaden"
+            "Chris W",
+            "Jaden",
+            "Luca"
           ],
           "note": "",
           "players": []
@@ -318,7 +326,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Shep"
+            "Shep",
+            "David"
           ],
           "note": "",
           "players": []
@@ -333,8 +342,9 @@
           "title": "GW",
           "type": "other",
           "people": [
-            "Anthony",
-            "Ali"
+            "Luca",
+            "Ali",
+            "David"
           ],
           "players": [],
           "note": ""
@@ -382,7 +392,7 @@
           "note": ""
         },
         {
-          "time": "3:00 PM",
+          "time": "3:00 PM – 4:00 PM",
           "title": "Rudy ",
           "type": "other",
           "people": [
@@ -413,8 +423,9 @@
           "title": "GW",
           "type": "other",
           "people": [
-            "Anthony",
-            "Ali"
+            "Luca",
+            "Ali",
+            "David"
           ],
           "players": [],
           "note": ""
