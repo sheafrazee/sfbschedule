@@ -12,12 +12,12 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Mark",
             "Teddy",
             "Mateo",
             "Luca",
             "JD",
-            "Nick M"
+            "Nick M",
+            "Guiressi"
           ],
           "note": "",
           "players": []
@@ -30,12 +30,12 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Mark",
             "Mateo",
             "Luca",
             "JD",
             "Nick M",
-            "Aaron F"
+            "Aaron F",
+            "Guiressi"
           ],
           "note": "",
           "players": []
@@ -48,11 +48,10 @@
             "Donovan",
             "Tyler",
             "Evan",
-            "Mark",
             "Mateo",
             "Nick M",
             "JD",
-            "Dame"
+            "Anthony"
           ],
           "note": "",
           "players": []
@@ -63,7 +62,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -73,8 +72,7 @@
           "title": "Rudy",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -84,8 +82,7 @@
           "title": "Parker S",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -95,8 +92,7 @@
           "title": "Sean Dao",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -187,9 +183,9 @@
             "Evan",
             "Nick M",
             "Luca",
-            "Mark",
             "Noah P",
-            "Matai E"
+            "Matai E",
+            "Malachi H"
           ],
           "players": [],
           "note": ""
@@ -204,7 +200,7 @@
             "Evan",
             "Nick M",
             "Luca",
-            "Mark",
+            "Malachi H",
             "Noah P",
             "Matai E",
             "Ali"
@@ -222,7 +218,6 @@
             "Evan",
             "Nick M",
             "Luca",
-            "Mark",
             "Noah P",
             "Matai E",
             "Ali"
