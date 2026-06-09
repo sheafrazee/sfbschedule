@@ -47,9 +47,9 @@
             "Tyler",
             "Evan",
             "Mateo",
+            "Guiressi",
             "Nick M",
-            "JD",
-            "Anthony"
+            "JD"
           ],
           "note": "",
           "players": []
@@ -101,8 +101,21 @@
       "day": "Tue 6/09",
       "events": [
         {
+          "time": "11:00 AM",
+          "title": "Dalton K Shooting",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dalton K, Bobbi K, Hannes S",
+          "title": "Dalton K, Bobbi K, Ibbe K, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -110,24 +123,28 @@
             "Evan",
             "Colin",
             "Nick M",
-            "Malachi H",
             "Teddy",
             "Chris W",
             "Kirby",
-            "Ali"
+            "Luca"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "9:30 AM – 11:30 AM",
-          "title": "3v3: Colby J, Hannes S, Dev A, Nick D, Ibbe K, Juom MB, Jurian D, Jonas B",
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Kadin S, Juom MB, Jonas B, Cam A",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Nick M"
+            "Colin",
+            "Nick M",
+            "Ali",
+            "Chris W",
+            "Kirby",
+            "Luca"
           ],
           "note": "",
           "players": []
