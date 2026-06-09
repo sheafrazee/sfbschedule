@@ -410,6 +410,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
       <!-- Row 2: actions -->
       <div class="ab-row ab-bottom">
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
+        <button class="btn" id="sortTimeBtn" title="Sort each day's sessions by start time">↕ Sort by time</button>
         <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
@@ -1027,6 +1028,22 @@ function parseEventTimes(timeStr) {
     if (!b) end = { h: (start.h + 1) % 24, min: start.min };
   }
   return { start, end };
+}
+// Sortable minute-of-day key for an event; events with no parseable time sort last.
+function _eventSortKey(ev) {
+  const t = parseEventTimes(ev && ev.time);
+  return t ? t.start.h * 60 + t.start.min : Infinity;
+}
+// Sort each day's events in the active slot by start time (stable).
+function sortEventsByTime() {
+  (ed().days || []).forEach(day => {
+    (day.events || []).sort((a, b) => {
+      const ka = _eventSortKey(a), kb = _eventSortKey(b);
+      return ka === kb ? 0 : ka - kb;
+    });
+  });
+  saveDraft();
+  renderEdit();
 }
 function _fmtLocal(date, h, min) {
   const d = new Date(date); d.setHours(h, min, 0, 0);
@@ -2651,6 +2668,8 @@ function switchSlot(slot) {
 }
 document.getElementById("slotCurrentBtn").addEventListener("click", () => switchSlot("current"));
 document.getElementById("slotNextBtn").addEventListener("click", () => switchSlot("next"));
+
+document.getElementById("sortTimeBtn").addEventListener("click", sortEventsByTime);
 
 document.getElementById("seedNextBtn").addEventListener("click", () => {
   const hasNext = data.nextWeek && (data.nextWeek.days || []).length;
