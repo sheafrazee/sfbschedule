@@ -120,7 +120,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Kadin S, Juom MB, Jonas B, Cam A",
+          "title": "Dev A, Juom MB, Jonas B, Cam A",
           "type": "excel",
           "people": [
             "Donovan",
@@ -138,13 +138,15 @@
         },
         {
           "time": "11:00 AM",
-          "title": "Dalton K Shooting",
+          "title": "Dalton K, Kadin S Shooting",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
             "Evan",
-            "Nick M"
+            "Nick M",
+            "Mark",
+            "Chris W"
           ],
           "players": [],
           "note": ""
