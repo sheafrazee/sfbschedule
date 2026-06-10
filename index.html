@@ -354,21 +354,6 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .preview-week-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--dark-stone); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
 @media (max-width: 780px) { .preview-weeks { grid-template-columns: 1fr; } }
 
-/* ---- Quick Add bar ---- */
-.quick-add-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; padding: 10px 12px; background: #fff; border: 1.5px solid var(--light-stone); border-radius: 10px; transition: border-color .15s; }
-.quick-add-bar:focus-within { border-color: var(--ink); }
-.quick-add-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--dark-stone); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; flex-shrink: 0; }
-.quick-add-input { flex: 1; border: none; outline: none; font-family: 'Source Sans 3', sans-serif; font-size: 13.5px; background: transparent; color: var(--ink); min-width: 0; }
-.quick-add-input::placeholder { color: var(--light-stone); }
-.quick-add-feedback { font-size: 11.5px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; white-space: nowrap; padding: 3px 8px; border-radius: 5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.quick-add-feedback.ok { color: var(--green); background: #2e7d3218; }
-.quick-add-feedback.err { color: var(--clay); background: #B8694A18; }
-@media (max-width: 600px) {
-  .quick-add-bar { flex-wrap: wrap; }
-  .quick-add-input { min-width: 0; flex: 1 1 140px; }
-  .quick-add-feedback { width: 100%; order: 3; }
-}
-
 /* ---- Search fields (display mode) ---- */
 .search-field { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px; padding: 8px 10px 8px 12px; background: #fff; border: 1.5px solid var(--light-stone); border-radius: 8px; transition: border-color .2s; cursor: text; }
 .search-field:focus-within { border-color: var(--stone); }
@@ -457,15 +442,6 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
           <button class="btn danger" id="discardBtn">Discard</button>
         </div>
       </div>
-    </div>
-    <!-- Quick Add -->
-    <div class="quick-add-bar" id="quickAddBar">
-      <span class="quick-add-label">Quick Add</span>
-      <textarea class="quick-add-input" id="quickAddInput" rows="1"
-        placeholder="Thurs 3p Dariq/KJ/Colby [Kirby, Dame, JD, Mateo]&#10;Mon 10a KJ/Colby [Dame, Mateo]; Tue 2p Dariq [Kirby]"
-        autocomplete="off" spellcheck="false" style="resize:none;line-height:1.5;overflow:hidden;"></textarea>
-      <span class="quick-add-feedback" id="quickAddFeedback"></span>
-      <button class="btn primary" id="quickAddBtn" style="padding:5px 12px;font-size:12px;flex-shrink:0;">Add</button>
     </div>
     <div id="slotBanner" style="display:none;margin-bottom:14px;padding:10px 14px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;background:#B8694A;color:#fff;"></div>
     <!-- Week Overview Calendar Preview -->
@@ -2629,129 +2605,6 @@ function renderCalendarPreview() {
   if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), true, true, 'next');
 }
 
-// ============ QUICK ADD ============
-function parseQuickAdd(str) {
-  str = str.trim();
-  if (!str) return { err: "Nothing to parse." };
-
-  // Extract interns/tags from [...] first
-  let people = [];
-  let typeFromBracket = null;
-  let outer = str.replace(/\[([^\]]*)\]/g, (_, inner) => {
-    const items = inner.split(',').map(s => s.trim()).filter(Boolean);
-    const excelIdx = items.findIndex(i => i.toLowerCase() === 'excel');
-    if (excelIdx !== -1) { typeFromBracket = 'excel'; items.splice(excelIdx, 1); }
-    people.push(...items);
-    return '';
-  }).trim();
-
-  const type = typeFromBracket || (/\bexcel\b/i.test(outer) ? 'excel' : 'other');
-  outer = outer.replace(/\bexcel\b/gi, '').trim();
-
-  // Day (optional — first token if it's a weekday name)
-  const DAY_MAP = {
-    sun: 0, sunday: 0,
-    mon: 1, monday: 1,
-    tue: 2, tues: 2, tuesday: 2,
-    wed: 3, wednesday: 3,
-    thu: 4, thur: 4, thurs: 4, thursday: 4,
-    fri: 5, friday: 5,
-    sat: 6, saturday: 6,
-  };
-  const SHORT_DAY = ["sun","mon","tue","wed","thu","fri","sat"];
-  const FULL_DAY  = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
-
-  let dayKey = null;
-  const dayMatch = outer.match(/^([a-z]+)\s+/i);
-  if (dayMatch && dayMatch[1].toLowerCase() in DAY_MAP) {
-    dayKey = DAY_MAP[dayMatch[1].toLowerCase()];
-    outer = outer.slice(dayMatch[0].length).trim();
-  }
-
-  // Time (required)
-  const tMatch = outer.match(/^(\d{1,2})(?::(\d{2}))?([ap]m?)\s*/i);
-  if (!tMatch) return { err: "Can't find a time. Try: 3p, 10:30a, 2pm" };
-  let h = parseInt(tMatch[1]);
-  const m = tMatch[2] ? parseInt(tMatch[2]) : 0;
-  const mer = tMatch[3][0].toLowerCase();
-  if (mer === 'p' && h !== 12) h += 12;
-  if (mer === 'a' && h === 12) h = 0;
-  const timeStr = `${h % 12 || 12}:${String(m).padStart(2,'0')} ${mer === 'p' ? 'PM' : 'AM'}`;
-  outer = outer.slice(tMatch[0].length).trim();
-
-  // Remaining = player names / title
-  const title = outer.replace(/\//g, ', ').replace(/\s*,\s*/g, ', ').trim() || 'New Event';
-
-  return { dayKey, timeStr, title, people, type, SHORT_DAY, FULL_DAY };
-}
-
-function quickAddEvent() {
-  const input    = document.getElementById("quickAddInput");
-  const feedback = document.getElementById("quickAddFeedback");
-  const raw = input.value.trim();
-  if (!raw) return;
-  if (!data) { feedback.textContent = "Schedule not loaded yet."; feedback.className = "quick-add-feedback err"; return; }
-
-  const lines = raw.split(/[\n;]+/).map(s => s.trim()).filter(Boolean);
-  const added = [], failed = [];
-
-  lines.forEach(str => {
-    try {
-      const r = parseQuickAdd(str);
-      if (r.err) { failed.push(`"${str}" — ${r.err}`); return; }
-
-      const days = ed().days || [];
-      let dayIdx = -1;
-      if (r.dayKey !== null) {
-        dayIdx = days.findIndex(d => {
-          const lower = (d.day || '').toLowerCase();
-          return lower.startsWith(r.SHORT_DAY[r.dayKey]) || lower.includes(r.FULL_DAY[r.dayKey]);
-        });
-        if (dayIdx === -1) { failed.push(`"${str}" — no day matching "${r.SHORT_DAY[r.dayKey]}"`); return; }
-      } else {
-        if (!days.length) { failed.push(`"${str}" — no days in schedule yet`); return; }
-        dayIdx = 0;
-      }
-
-      const newEv = { time: r.timeStr, title: r.title, type: r.type, people: r.people, players: [], note: '' };
-      const events = ed().days[dayIdx].events;
-      const newT = parseEventTimes(r.timeStr);
-      let insertIdx = events.length;
-      if (newT) {
-        const newMin = newT.start.h * 60 + newT.start.min;
-        for (let i = 0; i < events.length; i++) {
-          const t = parseEventTimes(events[i].time);
-          if (t && (t.start.h * 60 + t.start.min) > newMin) { insertIdx = i; break; }
-        }
-      }
-      events.splice(insertIdx, 0, newEv);
-      added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
-    } catch (ex) {
-      failed.push(`"${str}" — unexpected error: ${ex.message}`);
-    }
-  });
-
-  if (added.length > 0) {
-    saveDraft();
-    renderEdit();
-  }
-
-  if (failed.length > 0) {
-    const msg = added.length > 0
-      ? `✓ ${added.length} added — ✗ ${failed[0]}`
-      : `✗ ${failed[0]}`;
-    feedback.textContent = msg;
-    feedback.className = "quick-add-feedback err";
-    if (added.length > 0) input.value = '';
-  } else {
-    feedback.textContent = `✓ Added ${added.length} session${added.length !== 1 ? 's' : ''}: ${added.join(', ')}`;
-    feedback.className = "quick-add-feedback ok";
-    input.value = '';
-    input.style.height = 'auto';
-    setTimeout(() => { feedback.textContent = ''; feedback.className = 'quick-add-feedback'; }, 4000);
-  }
-}
-
 // ============ WIRE UP ============
 // Reveal mode toggle only if URL has ?edit=1
 const urlParams = new URLSearchParams(window.location.search);
@@ -2871,18 +2724,6 @@ async function promoteNext() {
   }
 }
 document.getElementById("promoteBtn").addEventListener("click", promoteNext);
-document.getElementById("quickAddBtn").addEventListener("click", quickAddEvent);
-document.getElementById("quickAddInput").addEventListener("keydown", e => {
-  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); quickAddEvent(); }
-  else if (e.key === "Enter" && e.shiftKey) {
-    // auto-grow
-    setTimeout(() => {
-      const ta = e.target;
-      ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
-    }, 0);
-  }
-});
 document.getElementById("settingsBtn").addEventListener("click", openSettings);
 document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
 document.getElementById("importJsonBtn").addEventListener("click", () => document.getElementById("importFile").click());
