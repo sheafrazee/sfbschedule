@@ -23,16 +23,22 @@
 body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); color: var(--ink); }
 .wrap { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
 
-/* ---- Header ---- */
-.sfb-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
-.sfb-badge { width: 48px; height: 48px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 9px; }
+/* ---- Masthead (ink band — mirrors the weekly PDF header) ---- */
+.masthead { background: var(--ink); color: var(--warm-white); margin-bottom: 20px; }
+.mast-inner { max-width: 1200px; margin: 0 auto; padding: 16px; display: flex; align-items: center; gap: 16px; }
+.sfb-badge { width: 52px; height: 52px; border-radius: 50%; background: var(--ink); border: 1.5px solid var(--stone); display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 10px; }
 .sfb-badge svg { width: 100%; height: 100%; }
-.sfb-header h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 1px; letter-spacing: -.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sfb-header p { font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--stone); }
+.mast-eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--stone); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.masthead h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 21px; font-weight: 800; color: var(--warm-white); letter-spacing: -.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .header-meta { flex: 1; min-width: 0; }
 .mode-toggle { display: flex; gap: 5px; flex-shrink: 0; }
 .mode-btn { padding: 7px 14px; border: 1.5px solid var(--ink); border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; background: #fff; color: var(--ink); transition: all .15s; white-space: nowrap; }
 .mode-btn.active { background: var(--ink); color: var(--warm-white); }
+.masthead .mode-btn { background: transparent; color: var(--warm-white); border-color: var(--dark-stone); }
+.masthead .mode-btn:hover { border-color: var(--stone); }
+.masthead .mode-btn.active { background: var(--warm-white); color: var(--ink); border-color: var(--warm-white); }
+button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.masthead button:focus-visible { outline-color: var(--warm-white); }
 
 /* ---- Action bar (edit mode) — two rows ---- */
 .action-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 10px 12px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; }
@@ -97,17 +103,18 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 @media (max-width: 600px) {
   .wrap { padding: 12px 12px 72px; } /* bottom pad clears intern tally */
 
-  /* Header */
-  .sfb-header { gap: 10px; margin-bottom: 14px; padding-bottom: 14px; }
-  .sfb-badge { width: 36px; height: 36px; padding: 7px; }
-  .sfb-header h1 { font-size: 16px; }
-  .sfb-header p { display: none; }
+  /* Masthead */
+  .masthead { margin-bottom: 14px; }
+  .mast-inner { gap: 10px; padding: 12px; }
+  .sfb-badge { width: 38px; height: 38px; padding: 7px; }
+  .masthead h1 { font-size: 16px; }
+  .mast-eyebrow { font-size: 9px; letter-spacing: .18em; }
   .mode-btn { padding: 6px 10px; font-size: 11px; }
 
   /* Filter bar */
   .filter-bar { margin-bottom: 12px; }
   .fb-top { flex-wrap: wrap; gap: 6px; }
-  .filter-bar input { min-width: 0; flex: 1 1 calc(50% - 4px); }
+  .filter-bar .search-field { min-width: 0; flex: 1 1 calc(50% - 4px); }
   .fb-bottom { flex-wrap: wrap; gap: 6px; }
   .fb-actions { margin-left: 0; width: 100%; }
   .fb-actions .btn { flex: 1; text-align: center; justify-content: center; }
@@ -180,16 +187,20 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 
 /* Very small phone (≤ 380px) */
 @media (max-width: 380px) {
-  .sfb-header h1 { font-size: 14px; }
+  .masthead h1 { font-size: 14px; }
   .mode-btn { padding: 5px 8px; font-size: 10px; }
-  .filter-bar input { flex: 1 1 100%; } /* stack search inputs */
+  .filter-bar .search-field { flex: 1 1 100%; } /* stack search inputs */
   .type-btn { padding: 5px 9px; font-size: 11px; }
   .btn { padding: 7px 10px; font-size: 11px; }
 }
 .day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
-.day-col { background: #fff; border-radius: 12px; border: 1px solid var(--light-stone); overflow: hidden; }
-.day-header { padding: 12px 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .3px; border-bottom: 1px solid var(--light-stone); display: flex; justify-content: space-between; align-items: center; color: var(--ink); }
-.day-header .count { font-weight: 400; font-size: 12px; color: var(--stone); }
+.day-col { background: #fff; border-radius: 12px; border: 1px solid var(--light-stone); transition: opacity .15s; }
+.day-col.is-today { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.day-col.is-empty-filtered { opacity: .45; }
+.day-header { padding: 11px 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; border-bottom: 1px solid var(--light-stone); display: flex; justify-content: space-between; align-items: center; color: var(--ink); background: #fff; border-radius: 12px 12px 0 0; position: sticky; top: -1px; z-index: 5; }
+.day-col.is-today .day-header { box-shadow: 0 1px 0 0 var(--ink); border-bottom-color: var(--ink); }
+.today-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; background: var(--clay); color: #fff; border-radius: 3px; padding: 2px 7px; line-height: 1.4; }
+.day-header .count { font-weight: 400; font-size: 12px; color: var(--stone); text-transform: none; letter-spacing: 0; }
 .day-header .dh-right { display: flex; align-items: center; gap: 6px; }
 .day-share-btn { border: none; background: transparent; color: var(--stone); border-radius: 5px; padding: 3px 5px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; cursor: pointer; line-height: 1; opacity: .45; transition: opacity .15s, color .15s, background .15s; }
 .day-share-btn:hover { opacity: 1; color: var(--ink); background: var(--warm-white); }
@@ -197,9 +208,10 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 .share-menu { position: absolute; z-index: 1000; background: #fff; border: 1px solid var(--light-stone); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.14); padding: 4px; min-width: 180px; }
 .share-menu-item { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 8px 11px; border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 13px; color: var(--ink); cursor: pointer; }
 .share-menu-item:hover { background: var(--warm-white); }
-.event-card { padding: 10px 14px; border-left: 3px solid transparent; margin: 6px 8px; border-radius: 6px; transition: background .15s; }
+.event-card { padding: 10px 12px 10px 13px; border-left: 3px solid transparent; margin: 8px; border-radius: 0 8px 8px 0; transition: background .15s; }
 .event-card:hover { filter: brightness(.97); }
-.event-time { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 500; color: var(--stone); margin-bottom: 2px; letter-spacing: .02em; }
+.event-time { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 600; color: var(--stone); margin-bottom: 2px; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.event-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; line-height: 1.4; flex-shrink: 0; }
 .event-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
 .event-people { font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--dark-stone); line-height: 1.5; }
 .event-people .hl { background: #B8694A33; border-radius: 2px; padding: 0 2px; font-weight: 600; color: var(--clay); }
@@ -356,30 +368,54 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
   .quick-add-input { min-width: 0; flex: 1 1 140px; }
   .quick-add-feedback { width: 100%; order: 3; }
 }
+
+/* ---- Search fields (display mode) ---- */
+.search-field { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px; padding: 8px 10px 8px 12px; background: #fff; border: 1.5px solid var(--light-stone); border-radius: 8px; transition: border-color .2s; cursor: text; }
+.search-field:focus-within { border-color: var(--stone); }
+.search-field .sf-icon { width: 14px; height: 14px; flex-shrink: 0; stroke: var(--stone); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.filter-bar .search-field input { flex: 1; min-width: 0; border: none; padding: 0; background: transparent; font-size: 14px; font-family: 'Source Sans 3', sans-serif; outline: none; }
+.sf-clear { flex-shrink: 0; width: 20px; height: 20px; border: none; border-radius: 50%; background: var(--light-stone); color: var(--dark-stone); font-size: 11px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+.sf-clear:hover { background: var(--stone); color: #fff; }
+.match-summary { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); padding: 0 2px; }
+.match-summary b { color: var(--ink); font-weight: 800; }
+
+/* ---- Toast ---- */
+.toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(8px); background: var(--ink); color: var(--warm-white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; padding: 10px 18px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.25); z-index: 500; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
+</head>
 <body>
-<div class="wrap">
-  <div class="sfb-header">
+<header class="masthead">
+  <div class="mast-inner">
     <div class="sfb-badge">
       <svg viewBox="50 10 275 275" xmlns="http://www.w3.org/2000/svg">
         <path fill="#F4F1EC" d="M 317.734375 145.902344 C 317.734375 143.558594 317.734375 138.863281 317.734375 136.519531 L 127.660156 136.519531 C 132.355469 108.359375 155.820312 87.238281 183.980469 84.894531 C 186.328125 84.894531 188.671875 82.546875 188.671875 80.199219 L 188.671875 68.464844 C 188.671875 66.121094 186.328125 66.121094 186.328125 63.773438 C 183.980469 63.773438 183.980469 63.773438 181.632812 63.773438 C 141.742188 66.121094 108.886719 96.625 104.195312 136.519531 L 80.730469 136.519531 C 85.421875 82.546875 130.007812 42.652344 181.632812 40.308594 C 186.328125 40.308594 188.671875 37.960938 188.671875 35.613281 L 188.671875 21.535156 C 188.671875 21.535156 186.328125 19.1875 186.328125 19.1875 C 183.980469 16.839844 183.980469 16.839844 181.632812 16.839844 C 113.582031 19.1875 57.261719 77.851562 57.261719 145.902344 C 57.261719 150.597656 57.261719 155.289062 57.261719 157.636719 L 249.683594 157.636719 C 242.644531 185.796875 221.523438 206.914062 191.019531 209.261719 C 188.671875 209.261719 188.671875 211.609375 188.671875 213.957031 L 188.671875 225.6875 C 188.671875 228.035156 188.671875 228.035156 188.671875 230.382812 C 191.019531 230.382812 191.019531 230.382812 193.367188 230.382812 C 233.257812 228.035156 266.109375 197.53125 270.804688 157.636719 L 294.269531 157.636719 C 289.578125 211.609375 244.992188 251.5 193.367188 253.847656 C 188.671875 253.847656 188.671875 256.195312 188.671875 258.542969 L 188.671875 272.621094 C 188.671875 274.96875 188.671875 274.96875 188.671875 274.96875 C 191.019531 277.3125 191.019531 277.3125 193.367188 277.3125 C 261.417969 274.96875 317.734375 216.300781 317.734375 145.902344 Z" fill-rule="evenodd"/>
       </svg>
     </div>
     <div class="header-meta">
+      <p class="mast-eyebrow">Shea Frazee Basketball · Training Schedule</p>
       <h1 id="weekTitleDisplay">Loading…</h1>
-      <p>Training Schedule</p>
     </div>
     <div class="mode-toggle hidden" id="modeToggle">
       <button class="mode-btn active" data-mode="display">View</button>
       <button class="mode-btn" id="editModeBtn" data-mode="edit">Edit</button>
     </div>
   </div>
-
+</header>
+<div class="wrap">
   <div id="displayView">
     <div class="filter-bar">
       <div class="fb-row fb-top">
-        <input id="internFilter" placeholder="🔍 Search interns…">
-        <input id="playerFilter" placeholder="🔍 Search players…">
+        <label class="search-field">
+          <svg class="sf-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+          <input id="internFilter" placeholder="Search interns…">
+          <button class="sf-clear hidden" type="button" data-clear="internFilter" aria-label="Clear intern search">✕</button>
+        </label>
+        <label class="search-field">
+          <svg class="sf-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+          <input id="playerFilter" placeholder="Search players…">
+          <button class="sf-clear hidden" type="button" data-clear="playerFilter" aria-label="Clear player search">✕</button>
+        </label>
       </div>
       <div class="fb-row fb-bottom">
         <button class="type-btn active" data-type="all">All Types</button>
@@ -387,9 +423,10 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
         <button class="type-btn" data-type="other">Other</button>
         <div class="fb-actions">
           <button class="btn" id="shareWeekBtn">↗ Share</button>
-          <button class="btn" id="archiveBtn">🗄 Archive</button>
+          <button class="btn" id="archiveBtn">Archive</button>
         </div>
       </div>
+      <div class="fb-row"><div class="match-summary hidden" id="matchSummary"></div></div>
     </div>
     <div class="day-grid" id="grid"></div>
   </div>
@@ -414,7 +451,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
         <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
-          <button class="btn" id="settingsBtn">⚙ Settings</button>
+          <button class="btn" id="settingsBtn">Settings</button>
           <input type="file" id="importFile" accept=".json" style="display:none">
           <button class="btn" id="revertLiveBtn" title="Fetch the latest published schedule and discard any local edits">↺ Revert to Live</button>
           <button class="btn danger" id="discardBtn">Discard</button>
@@ -423,7 +460,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
     </div>
     <!-- Quick Add -->
     <div class="quick-add-bar" id="quickAddBar">
-      <span class="quick-add-label">⚡ Quick Add</span>
+      <span class="quick-add-label">Quick Add</span>
       <textarea class="quick-add-input" id="quickAddInput" rows="1"
         placeholder="Thurs 3p Dariq/KJ/Colby [Kirby, Dame, JD, Mateo]&#10;Mon 10a KJ/Colby [Dame, Mateo]; Tue 2p Dariq [Kirby]"
         autocomplete="off" spellcheck="false" style="resize:none;line-height:1.5;overflow:hidden;"></textarea>
@@ -434,7 +471,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
     <!-- Week Overview Calendar Preview -->
     <div class="week-preview" id="weekPreview">
       <div class="week-preview-head">
-        <h3>📅 Week Overview</h3>
+        <h3>Week Overview</h3>
         <button class="week-preview-toggle" id="weekPreviewToggle">Show</button>
       </div>
       <div id="weekPreviewBody" class="hidden">
@@ -493,11 +530,11 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
   <div class="modal">
     <h2>Schedule Archive</h2>
     <p>Finalized weeks (Mon–Sun), captured Sunday night. Search a date or scroll to view a past schedule.</p>
-    <input class="archive-search" id="archiveSearch" placeholder="🔎  Search dates… e.g. May 18">
+    <input class="archive-search" id="archiveSearch" placeholder="Search dates… e.g. May 18">
     <div class="archive-list" id="archiveList"></div>
     <div class="modal-actions">
       <span class="archive-status" id="archiveStatus"></span>
-      <button class="btn hidden" id="archiveNowBtn">📸 Archive current week now</button>
+      <button class="btn hidden" id="archiveNowBtn">Archive current week now</button>
       <button class="btn primary" id="archiveClose">Close</button>
     </div>
   </div>
@@ -534,9 +571,27 @@ const LS_PUBLISHED = "sfb_schedule_published_v2";
 const LS_ROSTER = "sfb_intern_roster_v1";   // every intern name ever seen → last-seen ts
 
 const STYLES = {
-  excel: { bg: "#B8694A", textPrimary: "#F4F1EC", textSecondary: "#F4F1ECD9", hlBg: "#F4F1EC", hlText: "#B8694A", playerHlBg: "#ffffff44", playerHlText: "#F4F1EC" },
-  other: { bg: "#D6D1CC", textPrimary: "#111111", textSecondary: "#5C5652", hlBg: "#F4F1EC", hlText: "#B8694A", playerHlBg: "#2e7d3225", playerHlText: "#2e7d32" },
+  // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
+  excel: {
+    bg: "#B8694A14", rail: "#B8694A", tag: "Excel", tagBg: "#B8694A", tagText: "#F4F1EC",
+    textPrimary: "#111111", textSecondary: "#5C5652",
+    hlBg: "#B8694A", hlText: "#F4F1EC",            // intern search match
+    playerHlBg: "#111111", playerHlText: "#F4F1EC", // player search match
+    calBg: "#B8694A", calText: "#F4F1EC",           // calendar blocks stay solid for scannability
+  },
+  other: {
+    bg: "#F4F1EC", rail: "#D6D1CC", tag: "", tagBg: "#9B9590", tagText: "#F4F1EC",
+    textPrimary: "#111111", textSecondary: "#5C5652",
+    hlBg: "#B8694A", hlText: "#F4F1EC",
+    playerHlBg: "#111111", playerHlText: "#F4F1EC",
+    calBg: "#D6D1CC", calText: "#111111",
+  },
 };
+
+// SFB signal monogram as an inline SVG string (used in share-image captures)
+function sfbMonoSvg(fill, size) {
+  return `<svg viewBox="50 10 275 275" xmlns="http://www.w3.org/2000/svg" style="width:${size}px;height:${size}px;display:block;"><path fill="${fill}" d="M 317.734375 145.902344 C 317.734375 143.558594 317.734375 138.863281 317.734375 136.519531 L 127.660156 136.519531 C 132.355469 108.359375 155.820312 87.238281 183.980469 84.894531 C 186.328125 84.894531 188.671875 82.546875 188.671875 80.199219 L 188.671875 68.464844 C 188.671875 66.121094 186.328125 66.121094 186.328125 63.773438 C 183.980469 63.773438 183.980469 63.773438 181.632812 63.773438 C 141.742188 66.121094 108.886719 96.625 104.195312 136.519531 L 80.730469 136.519531 C 85.421875 82.546875 130.007812 42.652344 181.632812 40.308594 C 186.328125 40.308594 188.671875 37.960938 188.671875 35.613281 L 188.671875 21.535156 C 188.671875 21.535156 186.328125 19.1875 186.328125 19.1875 C 183.980469 16.839844 183.980469 16.839844 181.632812 16.839844 C 113.582031 19.1875 57.261719 77.851562 57.261719 145.902344 C 57.261719 150.597656 57.261719 155.289062 57.261719 157.636719 L 249.683594 157.636719 C 242.644531 185.796875 221.523438 206.914062 191.019531 209.261719 C 188.671875 209.261719 188.671875 211.609375 188.671875 213.957031 L 188.671875 225.6875 C 188.671875 228.035156 188.671875 228.035156 188.671875 230.382812 C 191.019531 230.382812 191.019531 230.382812 193.367188 230.382812 C 233.257812 228.035156 266.109375 197.53125 270.804688 157.636719 L 294.269531 157.636719 C 289.578125 211.609375 244.992188 251.5 193.367188 253.847656 C 188.671875 253.847656 188.671875 256.195312 188.671875 258.542969 L 188.671875 272.621094 C 188.671875 274.96875 188.671875 274.96875 188.671875 274.96875 C 191.019531 277.3125 191.019531 277.3125 193.367188 277.3125 C 261.417969 274.96875 317.734375 216.300781 317.734375 145.902344 Z" fill-rule="evenodd"/></svg>`;
+}
 
 function _migrateEvent(ev) {
   if (ev.type !== "excel") ev.type = "other";
@@ -841,14 +896,20 @@ function buildCaptureNode(filtered, opts = {}) {
     if (typeFilter !== "all") bits.push("Type: " + (typeFilter === "excel" ? "Excel Client" : "Other"));
   }
   const subtitle = bits.length ? bits.join("  ·  ") : "Training Schedule";
-  let html = `<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em;margin-bottom:4px;">${escapeHtml(data.weekTitle || "Training Schedule")}</div>
-    <div style="font-size:13px;color:#9B9590;margin-bottom:16px;">${escapeHtml(subtitle)}</div>
+  let html = `<div style="background:#111111;border-radius:12px;padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:14px;">
+      <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #9B9590;display:flex;align-items:center;justify-content:center;padding:9px;flex-shrink:0;">${sfbMonoSvg("#F4F1EC", 28)}</div>
+      <div style="min-width:0;flex:1;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9B9590;margin-bottom:3px;">Shea Frazee Basketball</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em;color:#F4F1EC;">${escapeHtml(data.weekTitle || "Training Schedule")}</div>
+      </div>
+      <div style="font-size:12px;color:#9B9590;text-align:right;flex-shrink:0;">${escapeHtml(subtitle)}</div>
+    </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;">`;
   (data.days || []).forEach(day => {
     const events = (day.events || []).filter(e => !filtered || eventMatches(e));
     if (filtered && (it.length || pt.length) && !events.length) return;
     html += `<div style="background:#fff;border-radius:12px;border:1px solid #D6D1CC;overflow:hidden;">
-      <div style="padding:12px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;letter-spacing:.3px;border-bottom:1px solid #D6D1CC;display:flex;justify-content:space-between;align-items:center;">${escapeHtml(day.day)}<span style="font-weight:400;font-size:12px;color:#9B9590;">${events.length} event${events.length !== 1 ? "s" : ""}</span></div>`;
+      <div style="padding:11px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #D6D1CC;display:flex;justify-content:space-between;align-items:center;">${escapeHtml(day.day)}<span style="font-weight:400;font-size:12px;color:#9B9590;letter-spacing:0;text-transform:none;">${events.length} event${events.length !== 1 ? "s" : ""}</span></div>`;
     if (!events.length) {
       html += `<div style="padding:20px 16px;color:#D6D1CC;font-size:13px;text-align:center;">${filtered ? "No matching events" : "No events"}</div>`;
     } else {
@@ -862,8 +923,9 @@ function buildCaptureNode(filtered, opts = {}) {
         const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);
         const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
         const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
-        html += `<div style="padding:10px 14px;margin:6px 8px;border-radius:6px;background:${s.bg};">
-          <div style="font-size:11px;font-weight:500;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.7;font-weight:600;white-space:nowrap;">${countBadge}</span>` : ""}</div>
+        const tagHtml = s.tag ? `<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
+        html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:3px solid ${s.rail};">
+          <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
           ${internHtml}${noteHtml}
         </div>`;
@@ -915,10 +977,15 @@ function buildDayCaptureNode(day) {
   const cap = document.createElement("div");
   cap.style.cssText = "position:absolute;left:-10000px;top:0;width:440px;background:#F4F1EC;padding:20px;font-family:'Source Sans 3',sans-serif;color:#111;";
   const events = (day.events || []).filter(e => eventMatches(e));
-  let html = `<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em;margin-bottom:2px;">${escapeHtml(data.weekTitle || "Training Schedule")}</div>
-    <div style="font-size:12px;color:#9B9590;margin-bottom:14px;">SFB Training Schedule</div>
+  let html = `<div style="background:#111111;border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;">
+      <div style="width:38px;height:38px;border-radius:50%;border:1.5px solid #9B9590;display:flex;align-items:center;justify-content:center;padding:7px;flex-shrink:0;">${sfbMonoSvg("#F4F1EC", 24)}</div>
+      <div style="min-width:0;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#9B9590;margin-bottom:2px;">Shea Frazee Basketball</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.02em;color:#F4F1EC;">${escapeHtml(data.weekTitle || "Training Schedule")}</div>
+      </div>
+    </div>
     <div style="background:#fff;border-radius:12px;border:1px solid #D6D1CC;overflow:hidden;">
-      <div style="padding:12px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;letter-spacing:.3px;border-bottom:1px solid #D6D1CC;display:flex;justify-content:space-between;align-items:center;">${escapeHtml(day.day)}<span style="font-weight:400;font-size:12px;color:#9B9590;">${events.length} event${events.length !== 1 ? "s" : ""}</span></div>`;
+      <div style="padding:11px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #D6D1CC;display:flex;justify-content:space-between;align-items:center;">${escapeHtml(day.day)}<span style="font-weight:400;font-size:12px;color:#9B9590;letter-spacing:0;text-transform:none;">${events.length} event${events.length !== 1 ? "s" : ""}</span></div>`;
   if (!events.length) {
     html += `<div style="padding:20px 16px;color:#D6D1CC;font-size:13px;text-align:center;">No events</div>`;
   } else {
@@ -932,8 +999,9 @@ function buildDayCaptureNode(day) {
       const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);
       const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
       const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
-      html += `<div style="padding:10px 14px;margin:6px 8px;border-radius:6px;background:${s.bg};">
-        <div style="font-size:11px;font-weight:500;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.7;font-weight:600;white-space:nowrap;">${countBadge}</span>` : ""}</div>
+      const tagHtml = s.tag ? `<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
+      html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:3px solid ${s.rail};">
+        <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
         ${internHtml}${noteHtml}
       </div>`;
@@ -944,8 +1012,53 @@ function buildDayCaptureNode(day) {
   return cap;
 }
 
-// ---- Share menu (image / calendar) ----
+// ---- Share menu (image / calendar / text) ----
 let _shareMenuEl = null;
+
+// ---- Copy as text (most reliable share path on iOS) ----
+function _eventTextLine(e) {
+  const interns = internsOf(e);
+  let l = `• ${e.time ? e.time + " — " : ""}${e.title || "Untitled"}${e.type === "excel" ? "  [Excel]" : ""}`;
+  if (interns.length) l += `\n   Interns: ${interns.join(", ")}`;
+  if (e.note) l += `\n   Note: ${e.note}`;
+  return l;
+}
+function buildDayText(day) {
+  const events = (day.events || []).filter(e => eventMatches(e));
+  return `${day.day}\n` + (events.length ? events.map(_eventTextLine).join("\n") : "• No sessions");
+}
+function buildWeekText() {
+  const filtering = anyFilterActive();
+  const blocks = (data.days || [])
+    .filter(d => !filtering || (d.events || []).some(e => eventMatches(e)))
+    .map(d => buildDayText(d));
+  return `${data.weekTitle || "Training Schedule"} — Shea Frazee Basketball\n\n` + blocks.join("\n\n");
+}
+function showToast(msg) {
+  let t = document.querySelector(".toast");
+  if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); }
+  t.textContent = msg;
+  requestAnimationFrame(() => t.classList.add("show"));
+  clearTimeout(t._hide);
+  t._hide = setTimeout(() => t.classList.remove("show"), 1800);
+}
+async function copyText(text, label) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;left:-9999px;top:0;";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    showToast(label || "Copied to clipboard");
+  } catch (e) { alert("Copy failed: " + e.message); }
+}
+
 function closeShareMenu() {
   if (_shareMenuEl) { _shareMenuEl.remove(); _shareMenuEl = null; document.removeEventListener("click", closeShareMenu); }
 }
@@ -953,12 +1066,13 @@ function openShareMenu(day, btn) {
   closeShareMenu();
   const menu = document.createElement("div");
   menu.className = "share-menu";
-  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="ics">↓ Add to calendar (.ics)</button>`;
+  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="txt">⧉ Copy as text</button><button class="share-menu-item" data-act="ics">↓ Add to calendar (.ics)</button>`;
   document.body.appendChild(menu);
   const r = btn.getBoundingClientRect();
   menu.style.top = (r.bottom + window.scrollY + 4) + "px";
   menu.style.left = Math.max(8, r.right + window.scrollX - menu.offsetWidth) + "px";
   menu.querySelector('[data-act="img"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); shareDay(day, btn); });
+  menu.querySelector('[data-act="txt"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); copyText(buildDayText(day), `${day.day} copied`); });
   menu.querySelector('[data-act="ics"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportDayICS(day); });
   _shareMenuEl = menu;
   setTimeout(() => document.addEventListener("click", closeShareMenu), 0);
@@ -1152,12 +1266,13 @@ function openWeekShareMenu(btn) {
   closeShareMenu();
   const menu = document.createElement("div");
   menu.className = "share-menu";
-  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="ics">📅 Add to calendar (.ics)</button>`;
+  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="txt">⧉ Copy as text</button><button class="share-menu-item" data-act="ics">↓ Add to calendar (.ics)</button>`;
   document.body.appendChild(menu);
   const r = btn.getBoundingClientRect();
   menu.style.top = (r.bottom + window.scrollY + 4) + "px";
   menu.style.left = Math.max(8, r.right + window.scrollX - menu.offsetWidth) + "px";
   menu.querySelector('[data-act="img"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); shareWeek(btn); });
+  menu.querySelector('[data-act="txt"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); copyText(buildWeekText(), "Week copied"); });
   menu.querySelector('[data-act="ics"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportWeekICS(); });
   _shareMenuEl = menu;
   setTimeout(() => document.addEventListener("click", closeShareMenu), 0);
@@ -1287,11 +1402,11 @@ async function archiveCurrentWeek(auto) {
   data.archive = data.archive || [];
   if (auto && data.archive.some(a => a.key === w.key)) return;   // already archived this week
   try {
-    setArchiveStatus("📸 Capturing all types…");
+    setArchiveStatus("Capturing all types…");
     const b64All = await captureWeekPNGForType("all");
     const pathAll = `archive/${w.key}.png`;
 
-    setArchiveStatus("📸 Capturing Excel Client only…");
+    setArchiveStatus("Capturing Excel Client only…");
     const b64Excel = await captureWeekPNGForType("excel");
     const pathExcel = `archive/${w.key}-excel.png`;
 
@@ -1454,16 +1569,36 @@ function eventMatches(e) {
   return im && pm && tm;
 }
 
+// ---- "Today" detection: weekday must match; if the label carries a day-of-month
+// (e.g. "Mon 13" or "Mon 5/18"), that must match too so stale weeks never get tagged.
+function isTodayLabel(dayName) {
+  const now = new Date();
+  const lower = (dayName || "").toLowerCase();
+  let wd = null;
+  for (const k in _WEEKDAYS) { if (lower.includes(k) || lower.includes(k.slice(0, 3))) { wd = _WEEKDAYS[k]; break; } }
+  if (wd === null || wd !== now.getDay()) return false;
+  const nums = String(dayName).match(/\d{1,2}/g);
+  if (nums && nums.length) return nums.some(x => parseInt(x, 10) === now.getDate());
+  return true;
+}
+function anyFilterActive() { return internTerms().length > 0 || playerTerms().length > 0 || typeFilter !== "all"; }
+let _todayScrolled = false;
+
 function renderDisplay() {
   document.getElementById("weekTitleDisplay").textContent = data.weekTitle || "";
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
   const it = internTerms(), pt = playerTerms();
+  const filtering = anyFilterActive();
+  let shown = 0, total = 0;
   (data.days || []).forEach((day, di) => {
     const events = (day.events || []).filter(e => eventMatches(e));
+    shown += events.length;
+    total += (day.events || []).length;
+    const today = isTodayLabel(day.day);
     const col = document.createElement("div");
-    col.className = "day-col";
-    col.innerHTML = `<div class="day-header">${escapeHtml(day.day)}<span class="dh-right"><span class="count">${events.length} event${events.length !== 1 ? "s" : ""}</span><button class="day-share-btn" title="Share a picture of this day" aria-label="Share this day">↗</button></span></div>`;
+    col.className = "day-col" + (today ? " is-today" : "") + (filtering && events.length === 0 ? " is-empty-filtered" : "");
+    col.innerHTML = `<div class="day-header"><span style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="overflow:hidden;text-overflow:ellipsis;">${escapeHtml(day.day)}</span>${today ? `<span class="today-tag">Today</span>` : ""}</span><span class="dh-right"><span class="count">${events.length} event${events.length !== 1 ? "s" : ""}</span><button class="day-share-btn" title="Share this day" aria-label="Share this day">↗</button></span></div>`;
     if (events.length === 0) {
       col.innerHTML += `<div class="empty-msg">No matching events</div>`;
     } else {
@@ -1477,8 +1612,9 @@ function renderDisplay() {
         const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);  // players live in the title
         const noteHtml = e.note ? `<div class="event-note" style="color:${s.textSecondary};opacity:0.8">${escapeHtml(e.note)}</div>` : "";
         const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
-        col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left:none;">
-          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span>${countBadge ? `<span style="opacity:.6;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}</div>
+        const tagHtml = s.tag ? `<span class="event-tag" style="background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
+        col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left-color:${s.rail};">
+          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;">${countBadge}</span>` : ""}${tagHtml}</span></div>
           <div class="event-title" style="color:${s.textPrimary}">${titleHtml}</div>
           ${internHtml}${noteHtml}
         </div>`;
@@ -1488,6 +1624,18 @@ function renderDisplay() {
     const shareBtn = col.querySelector(".day-share-btn");
     if (shareBtn) shareBtn.addEventListener("click", (ev) => { ev.stopPropagation(); openShareMenu(day, shareBtn); });
   });
+  // Match summary line (only while a search/type filter is active)
+  const ms = document.getElementById("matchSummary");
+  if (ms) {
+    if (filtering) { ms.classList.remove("hidden"); ms.innerHTML = `<b>${shown}</b> of ${total} session${total !== 1 ? "s" : ""} match`; }
+    else { ms.classList.add("hidden"); ms.innerHTML = ""; }
+  }
+  // On phones, bring today's column into view once per visit
+  if (!_todayScrolled) {
+    _todayScrolled = true;
+    const t = grid.querySelector(".day-col.is-today");
+    if (t && window.innerWidth <= 600) setTimeout(() => t.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+  }
 }
 
 // ============ EDIT MODE ============
@@ -1998,7 +2146,7 @@ function renderCalendar(days, container, compact, editable, slot) {
       const editAttrs = editable
         ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hPxLocal}"`
         : '';
-      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.bg};color:${s.textPrimary};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
+      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
         <div class="cal-ev-title">${escapeHtml(ev.title)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
         ${editable ? '<div class="cal-ev-resize"></div>' : ''}
@@ -2009,7 +2157,7 @@ function renderCalendar(days, container, compact, editable, slot) {
     if (noTime.length) {
       noTimeHtml = `<div class="cal-notime-strip">` + noTime.map(ev => {
         const s = STYLES[ev.type] || STYLES.other;
-        return `<div class="cal-notime-pill" style="background:${s.bg};color:${s.textPrimary};" title="${escapeAttr(ev.title)}">${escapeHtml(ev.title)}</div>`;
+        return `<div class="cal-notime-pill" style="background:${s.calBg};color:${s.calText};" title="${escapeAttr(ev.title)}">${escapeHtml(ev.title)}</div>`;
       }).join('') + `</div>`;
     }
 
@@ -2436,8 +2584,8 @@ function showCalPopover(slot, di, ei, evEl) {
       pop.querySelectorAll('.cal-pop-type-btn').forEach(b => b.classList.toggle('active', b === btn));
       // Live-update event color in calendar
       const s = STYLES[btn.dataset.type] || STYLES.other;
-      evEl.style.background = s.bg;
-      evEl.style.color = s.textPrimary;
+      evEl.style.background = s.calBg;
+      evEl.style.color = s.calText;
     });
   });
 
@@ -2616,8 +2764,23 @@ document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", 
   if (b.dataset.mode === "edit" && !editUnlocked) return;
   setMode(b.dataset.mode);
 }));
-document.getElementById("internFilter").addEventListener("input", function(){ internFilter = this.value; renderDisplay(); });
-document.getElementById("playerFilter").addEventListener("input", function(){ playerFilter = this.value; renderDisplay(); });
+function _syncClearBtn(id) {
+  const i = document.getElementById(id);
+  const b = document.querySelector(`[data-clear="${id}"]`);
+  if (b && i) b.classList.toggle("hidden", !i.value);
+}
+document.getElementById("internFilter").addEventListener("input", function(){ internFilter = this.value; _syncClearBtn("internFilter"); renderDisplay(); });
+document.getElementById("playerFilter").addEventListener("input", function(){ playerFilter = this.value; _syncClearBtn("playerFilter"); renderDisplay(); });
+document.querySelectorAll(".sf-clear").forEach(b => b.addEventListener("click", (e) => {
+  e.preventDefault();
+  const id = b.dataset.clear;
+  const input = document.getElementById(id);
+  input.value = "";
+  if (id === "internFilter") internFilter = ""; else playerFilter = "";
+  _syncClearBtn(id);
+  renderDisplay();
+  input.focus();
+}));
 document.querySelectorAll(".type-btn").forEach(btn => btn.addEventListener("click", function(){
   document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
   this.classList.add("active"); typeFilter = this.dataset.type; renderDisplay();
