@@ -191,8 +191,8 @@
       "day": "Wed 6/10",
       "events": [
         {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Colby J, Bobbi K, Ibbe K",
+          "time": "7:00 AM – 8:30 AM",
+          "title": "Juom MB, Jonas B, Nick D, Ibbe B",
           "type": "excel",
           "people": [
             "Donovan",
@@ -202,14 +202,16 @@
             "Luca",
             "Noah P",
             "Matai E",
-            "Malachi H"
+            "Malachi H",
+            "Jung",
+            "JD"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Hannes S, Dev A, Nick D",
+          "time": "8:30 AM – 10:00 AM",
+          "title": "Dalton K, Bobbi K, Dev A",
           "type": "excel",
           "people": [
             "Donovan",
@@ -217,27 +219,11 @@
             "Evan",
             "Nick M",
             "Luca",
+            "Noah P",
+            "Matai E",
             "Malachi H",
-            "Noah P",
-            "Matai E",
-            "Ali"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Juom MB, Jurian D, Jonas B",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Evan",
-            "Nick M",
-            "Luca",
-            "Noah P",
-            "Matai E",
-            "Ali"
+            "Jung",
+            "JD"
           ],
           "note": "",
           "players": []
@@ -258,7 +244,7 @@
             "Anthony",
             "Noah P",
             "Matai H",
-            "Kirby"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -283,7 +269,7 @@
             "Malachi H",
             "Chris W",
             "JD",
-            "Jaden",
+            "Shep",
             "Luca"
           ],
           "note": "",
@@ -304,7 +290,7 @@
             "Malachi H",
             "JD",
             "Chris W",
-            "Jaden",
+            "Shep",
             "Luca"
           ],
           "note": "",
