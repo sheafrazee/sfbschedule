@@ -211,6 +211,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .event-card { padding: 10px 12px 10px 13px; border-left: 4px solid transparent; margin: 8px; border-radius: 0 8px 8px 0; transition: background .15s; }
 .event-card:hover { filter: brightness(.97); }
 .event-time { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 600; color: var(--stone); margin-bottom: 2px; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.event-kicker { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 9px;
+  letter-spacing: .14em; text-transform: uppercase; line-height: 1; }
 .event-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; line-height: 1.4; flex-shrink: 0; }
 .event-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
 .event-people { font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--dark-stone); line-height: 1.5; }
@@ -705,14 +707,14 @@ const LS_ROSTER = "sfb_intern_roster_v1";   // every intern name ever seen → l
 const STYLES = {
   // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
   excel: {
-    bg: "#B8694A1F", rail: "#B8694A", tag: "Excel", tagBg: "#B8694A", tagText: "#F4F1EC",
+    bg: "#B8694A1F", rail: "#B8694A", tag: "Excel", tagBg: "#B8694A", tagText: "#F4F1EC", kicker: "#8A4530",
     textPrimary: "#111111", textSecondary: "#5C5652",
     hlBg: "#B8694A", hlText: "#F4F1EC",            // intern search match
     playerHlBg: "#111111", playerHlText: "#F4F1EC", // player search match
     calBg: "#B8694A", calText: "#F4F1EC",           // calendar blocks stay solid for scannability
   },
   other: {
-    bg: "#D6D1CC55", rail: "#9B9590", tag: "", tagBg: "#9B9590", tagText: "#F4F1EC",
+    bg: "#D6D1CC55", rail: "#9B9590", tag: "", tagBg: "#9B9590", tagText: "#F4F1EC", kicker: "#5C5652",
     textPrimary: "#111111", textSecondary: "#5C5652",
     hlBg: "#B8694A", hlText: "#F4F1EC",
     playerHlBg: "#111111", playerHlText: "#F4F1EC",
@@ -1744,9 +1746,9 @@ function renderDisplay() {
         const titleHtml = highlightTitle(e.title || "", pt, s.playerHlBg, s.playerHlText);  // players live in the title
         const noteHtml = e.note ? `<div class="event-note" style="color:${s.textSecondary};opacity:0.8">${escapeHtml(e.note)}</div>` : "";
         const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
-        const tagHtml = s.tag ? `<span class="event-tag" style="background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
+        const tagHtml = s.tag ? `<span class="event-kicker" style="color:${s.kicker};">${s.tag}</span>` : "";
         col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left-color:${s.rail};">
-          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}${tagHtml}</span></div>
+          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">${tagHtml}${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}</span></div>
           <div class="event-title" style="color:${s.textPrimary}">${titleHtml}</div>
           ${internHtml}${noteHtml}
         </div>`;
