@@ -238,7 +238,7 @@
         },
         {
           "time": "4:30 PM – 5:30 PM",
-          "title": "Ben E, Maxwell, Rudy, Sean",
+          "title": "Maxwell, Rudy, Sean",
           "type": "other",
           "people": [
             "Anthony",
@@ -256,7 +256,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Colby J, Bobbi K, Ibbe K, Dariq W",
+          "title": "Colby J, Bobbi K, Dev A, Dariq W",
           "type": "excel",
           "people": [
             "Donovan",
@@ -277,7 +277,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Dev A, Nick D, Juom MB, Jonas B",
+          "title": "Ibbe K, Nick D, Juom MB, Jonas B",
           "type": "excel",
           "people": [
             "Donovan",
@@ -297,19 +297,22 @@
           "players": []
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Ben E",
-          "type": "other",
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Jared M",
+          "type": "excel",
           "people": [
-            "Anthony",
-            "Shep"
+            "Donovan",
+            "Tyler",
+            "Evan",
+            "Nick M",
+            "JD"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Parker S",
+          "title": "Audrina ",
           "type": "other",
           "people": [
             "Anthony",
