@@ -208,7 +208,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .share-menu { position: absolute; z-index: 1000; background: #fff; border: 1px solid var(--light-stone); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.14); padding: 4px; min-width: 180px; }
 .share-menu-item { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 8px 11px; border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 13px; color: var(--ink); cursor: pointer; }
 .share-menu-item:hover { background: var(--warm-white); }
-.event-card { padding: 10px 12px 10px 13px; border-left: 3px solid transparent; margin: 8px; border-radius: 0 8px 8px 0; transition: background .15s; }
+.event-card { padding: 10px 12px 10px 13px; border-left: 4px solid transparent; margin: 8px; border-radius: 0 8px 8px 0; transition: background .15s; }
 .event-card:hover { filter: brightness(.97); }
 .event-time { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 600; color: var(--stone); margin-bottom: 2px; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .event-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; line-height: 1.4; flex-shrink: 0; }
@@ -313,6 +313,26 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .intern-row.past .nm { color: var(--dark-stone); }
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
 .intern-forget:hover { opacity: 1; color: var(--clay); background: var(--warm-white); }
+
+/* ---- Mode dock: View/Edit pinned bottom-center, reachable mid-scroll ---- */
+.mode-dock { position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: max(16px, env(safe-area-inset-bottom)); z-index: 95;
+  background: rgba(17,17,17,.92);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-radius: 12px; padding: 4px; gap: 3px;
+  box-shadow: 0 8px 28px rgba(17,17,17,.30); }
+.mode-dock .mode-btn { border: none; border-radius: 8px; padding: 8px 20px;
+  background: transparent; color: var(--warm-white); font-size: 12.5px; }
+.mode-dock .mode-btn:hover { background: rgba(244,241,236,.12); }
+.mode-dock .mode-btn.active { background: var(--warm-white); color: var(--ink); }
+.mode-dock .mode-btn.active:hover { background: var(--warm-white); }
+.mode-dock .mode-btn:focus-visible { outline-color: var(--warm-white); }
+/* phone + edit mode: ride above the intern-tally bottom bar */
+@media (max-width: 600px) {
+  body.mode-edit .mode-dock { bottom: calc(56px + env(safe-area-inset-bottom)); }
+  body.mode-edit .wrap { padding-bottom: 120px; }
+}
+
 /* ---- Calendar View ---- */
 .cal-wrap { overflow-x: auto; background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; padding: 0 0 8px; }
 .cal-grid { display: flex; min-width: 560px; }
@@ -393,8 +413,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
   border-radius: 2px; margin-right: 7px; vertical-align: 1px; }
 .type-btn[data-type="all"]::before { background: linear-gradient(135deg, var(--clay) 50%, var(--light-stone) 50%); }
 .type-btn[data-type="excel"]::before { background: var(--clay); }
-.type-btn[data-type="other"]::before { background: var(--light-stone); box-shadow: inset 0 0 0 1px rgba(17,17,17,.18); }
-.type-btn.active[data-type="other"]::before { box-shadow: inset 0 0 0 1px rgba(244,241,236,.5); }
+.type-btn[data-type="other"]::before { background: var(--stone); }
 
 /* (v2) Cards / Timeline switch */
 .view-toggle { display: flex; gap: 5px; }
@@ -406,8 +425,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 /* (v2) Day-jump rail — rides inside the sticky filter bar */
 .day-nav { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0; width: 100%; scrollbar-width: none; }
 .day-nav::-webkit-scrollbar { display: none; }
-.day-col { scroll-margin-top: 140px; }
-@media (max-width: 600px) { .day-col { scroll-margin-top: 190px; } }
+.day-col { scroll-margin-top: calc(var(--fb-h, 140px) + 10px); }
+.day-header { top: var(--fb-h, -1px); }   /* pin just under the sticky filter bar */
 .dn-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px;
   letter-spacing: .06em; text-transform: uppercase; padding: 7px 13px; border: 1.5px solid var(--light-stone);
   border-radius: 100px; background: #fff; color: var(--dark-stone); cursor: pointer; white-space: nowrap;
@@ -417,7 +436,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 
 /* (v2) Agenda rows: flush rows, hairline separators, tabular time rail (keeps v4 tint/rail/tag) */
 .event-card { display: grid; grid-template-columns: 82px 1fr; column-gap: 12px; align-items: start;
-  margin: 0; border-radius: 0; padding: 12px 14px 12px 13px;
+  margin: 0; border-radius: 0; padding: 12px 14px;
   border-bottom: 1px solid rgba(17,17,17,.10); }
 .day-col .event-card:last-child { border-bottom: none; border-radius: 0 0 11px 11px; }
 .event-time { grid-row: 1 / span 3; flex-direction: column !important; align-items: flex-start !important;
@@ -487,7 +506,7 @@ button.stat { cursor: pointer; font: inherit; }
 /* (v1) Print stylesheet — clean handout */
 @media print {
   body { background: #fff; }
-  .filter-bar, .day-nav, .mode-toggle, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
+  .filter-bar, .day-nav, .mode-toggle, .mode-dock, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
   .masthead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .day-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
   .day-col { break-inside: avoid; }
@@ -508,10 +527,6 @@ button.stat { cursor: pointer; font: inherit; }
     <div class="header-meta">
       <p class="mast-eyebrow">Shea Frazee Basketball · Training Schedule</p>
       <h1 id="weekTitleDisplay">Loading…</h1>
-    </div>
-    <div class="mode-toggle hidden" id="modeToggle">
-      <button class="mode-btn active" data-mode="display">View</button>
-      <button class="mode-btn" id="editModeBtn" data-mode="edit">Edit</button>
     </div>
   </div>
 </header>
@@ -667,6 +682,11 @@ button.stat { cursor: pointer; font: inherit; }
   </div>
 </div>
 
+<div class="mode-dock mode-toggle hidden" id="modeToggle">
+  <button class="mode-btn active" data-mode="display">View</button>
+  <button class="mode-btn" id="editModeBtn" data-mode="edit">Edit</button>
+</div>
+
 <div class="intern-tally hidden collapsed" id="internTally">
   <div class="intern-tally-head" id="internTallyHead">
     <span class="t">Intern sessions</span>
@@ -685,14 +705,14 @@ const LS_ROSTER = "sfb_intern_roster_v1";   // every intern name ever seen → l
 const STYLES = {
   // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
   excel: {
-    bg: "#B8694A14", rail: "#B8694A", tag: "Excel", tagBg: "#B8694A", tagText: "#F4F1EC",
+    bg: "#B8694A1F", rail: "#B8694A", tag: "Excel", tagBg: "#B8694A", tagText: "#F4F1EC",
     textPrimary: "#111111", textSecondary: "#5C5652",
     hlBg: "#B8694A", hlText: "#F4F1EC",            // intern search match
     playerHlBg: "#111111", playerHlText: "#F4F1EC", // player search match
     calBg: "#B8694A", calText: "#F4F1EC",           // calendar blocks stay solid for scannability
   },
   other: {
-    bg: "#F4F1EC", rail: "#D6D1CC", tag: "", tagBg: "#9B9590", tagText: "#F4F1EC",
+    bg: "#D6D1CC55", rail: "#9B9590", tag: "", tagBg: "#9B9590", tagText: "#F4F1EC",
     textPrimary: "#111111", textSecondary: "#5C5652",
     hlBg: "#B8694A", hlText: "#F4F1EC",
     playerHlBg: "#111111", playerHlText: "#F4F1EC",
@@ -1036,7 +1056,7 @@ function buildCaptureNode(filtered, opts = {}) {
         const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
         const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
         const tagHtml = s.tag ? `<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
-        html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:3px solid ${s.rail};">
+        html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:4px solid ${s.rail};">
           <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
           ${internHtml}${noteHtml}
@@ -1112,7 +1132,7 @@ function buildDayCaptureNode(day) {
       const noteHtml = e.note ? `<div style="font-size:11px;font-style:italic;margin-top:3px;color:${s.textSecondary};opacity:.8;">${escapeHtml(e.note)}</div>` : "";
       const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
       const tagHtml = s.tag ? `<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
-      html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:3px solid ${s.rail};">
+      html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:4px solid ${s.rail};">
         <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
         ${internHtml}${noteHtml}
@@ -1334,7 +1354,7 @@ async function exportDayICS(day) {
 async function shareDay(day, btn) {
   if (!window.html2canvas) { alert("Image library still loading — try again in a moment."); return; }
   const prev = btn ? btn.textContent : "";
-  if (btn) { btn.textContent = "⏳"; btn.disabled = true; }
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
   const cap = buildDayCaptureNode(day);
   document.body.appendChild(cap);
   try {
@@ -1397,7 +1417,7 @@ async function shareWeek(btn) {
   if (!anyMatch) { alert("No events match the current filter — nothing to share."); return; }
 
   const prev = btn ? btn.textContent : "";
-  if (btn) { btn.textContent = "⏳"; btn.disabled = true; }
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
   const cap = buildCaptureNode(true);   // respect active search/type filter
   document.body.appendChild(cap);
   try {
@@ -1570,7 +1590,7 @@ function renderArchiveList(filter) {
 // sheet (Messages, Mail, AirDrop…). Falls back to download on desktop.
 async function shareArchivedWeek(path, range, label, btn) {
   const prev = btn ? btn.textContent : "";
-  if (btn) { btn.textContent = "⏳"; btn.disabled = true; }
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
   try {
     const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -1606,7 +1626,7 @@ async function shareArchivedWeek(path, range, label, btn) {
 // Download the archived week PNG straight to the device (no share sheet).
 async function downloadArchivedWeek(path, range, label, btn) {
   const prev = btn ? btn.textContent : "";
-  if (btn) { btn.textContent = "⏳"; btn.disabled = true; }
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
   try {
     const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -1726,7 +1746,7 @@ function renderDisplay() {
         const countBadge = interns.length ? `${interns.length} intern${interns.length!==1?"s":""}` : "";
         const tagHtml = s.tag ? `<span class="event-tag" style="background:${s.tagBg};color:${s.tagText};">${s.tag}</span>` : "";
         col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left-color:${s.rail};">
-          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;">${countBadge}</span>` : ""}${tagHtml}</span></div>
+          <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}${tagHtml}</span></div>
           <div class="event-title" style="color:${s.textPrimary}">${titleHtml}</div>
           ${internHtml}${noteHtml}
         </div>`;
@@ -1759,11 +1779,11 @@ function renderEdit() {
   if (editSlot === "next") {
     banner.style.display = "block";
     banner.style.background = "var(--clay)";
-    banner.textContent = "✎ Editing NEXT WEEK — not visible to viewers until you Promote it.";
+    banner.textContent = "Editing NEXT WEEK — not visible to viewers until you Promote it.";
   } else {
     banner.style.display = "block";
     banner.style.background = "var(--dark-stone)";
-    banner.textContent = "✎ Editing the CURRENT (live) week — viewers see these changes once published.";
+    banner.textContent = "Editing the CURRENT (live) week — viewers see these changes once published.";
   }
   document.getElementById("weekTitleInput").value = ed().weekTitle || "";
   const grid = document.getElementById("editGrid");
@@ -2169,6 +2189,7 @@ function closeSettings() { document.getElementById("settingsModal").classList.ad
 function setMode(mode) {
   if (mode !== "display" && mode !== "edit") return;  // slot buttons share .mode-btn but carry no data-mode
   currentMode = mode;
+  document.body.classList.toggle("mode-edit", mode === "edit");
   document.querySelectorAll(".mode-btn").forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
   document.getElementById("displayView").classList.toggle("hidden", mode !== "display");
   document.getElementById("editView").classList.toggle("hidden", mode !== "edit");
@@ -2624,7 +2645,7 @@ function showCalPopover(slot, di, ei, evEl) {
   pop.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--dark-stone);">Edit Session</span>
-      <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">🗑</button>
+      <button id="calPopDelete" title="Delete session" style="border:none;background:transparent;cursor:pointer;color:var(--stone);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;" onmouseover="this.style.color='var(--clay)'" onmouseout="this.style.color='var(--stone)'">✕</button>
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
@@ -3207,6 +3228,16 @@ window.addEventListener("resize", () => {
     if (currentMode === "edit" && compact !== renderCalendarPreview._compact) renderCalendarPreview();
   }, 200);
 });
+
+// Keep --fb-h in sync with the sticky filter bar so day headers pin just beneath it
+(function () {
+  const fb = document.querySelector(".filter-bar");
+  if (!fb) return;
+  const setFbH = () => document.documentElement.style.setProperty("--fb-h", Math.max(0, fb.offsetHeight - 1) + "px");
+  setFbH();
+  if (window.ResizeObserver) new ResizeObserver(setFbH).observe(fb);
+  else window.addEventListener("resize", setFbH);
+})();
 
 init();
 </script>
