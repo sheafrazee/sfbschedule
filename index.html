@@ -351,6 +351,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .week-preview-toggle { background: transparent; border: 1.5px solid var(--light-stone); border-radius: 6px; padding: 4px 11px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); cursor: pointer; }
 .week-preview-toggle:hover { background: var(--warm-white); }
 .preview-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (min-width: 1025px) { .preview-weeks { grid-template-columns: 1fr; gap: 16px; } }
 .preview-week-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--dark-stone); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
 @media (max-width: 780px) { .preview-weeks { grid-template-columns: 1fr; } }
 
@@ -414,8 +415,11 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .dn-pill:hover { border-color: var(--ink); color: var(--ink); }
 .dn-pill.today { border-color: var(--clay); color: var(--clay); }
 
-/* (v2) Agenda rows: tabular time rail on the v4 tinted cards */
-.event-card { display: grid; grid-template-columns: 82px 1fr; column-gap: 12px; align-items: start; }
+/* (v2) Agenda rows: flush rows, hairline separators, tabular time rail (keeps v4 tint/rail/tag) */
+.event-card { display: grid; grid-template-columns: 82px 1fr; column-gap: 12px; align-items: start;
+  margin: 0; border-radius: 0; padding: 12px 14px 12px 13px;
+  border-bottom: 1px solid rgba(17,17,17,.10); }
+.day-col .event-card:last-child { border-bottom: none; border-radius: 0 0 11px 11px; }
 .event-time { grid-row: 1 / span 3; flex-direction: column !important; align-items: flex-start !important;
   justify-content: flex-start !important; gap: 4px !important; margin-bottom: 0; }
 .event-title { grid-column: 2; margin-bottom: 3px; }
@@ -473,23 +477,7 @@ button.stat { cursor: pointer; font: inherit; }
 .edit-event input, .edit-event select, .edit-event textarea { font-size: 13px; }
 .edit-event .ev-time { font-variant-numeric: tabular-nums; }
 
-/* Quick Add (restored) */
-.quick-add-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; padding: 10px 12px;
-  background: #fff; border: 1.5px solid var(--light-stone); border-radius: 10px; transition: border-color .15s; }
-.quick-add-bar:focus-within { border-color: var(--ink); }
-.quick-add-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700;
-  color: var(--dark-stone); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; flex-shrink: 0; }
-.quick-add-input { flex: 1; border: none; outline: none; font-family: 'Source Sans 3', sans-serif;
-  font-size: 13.5px; background: transparent; color: var(--ink); min-width: 0; }
-.quick-add-input::placeholder { color: var(--light-stone); }
-.quick-add-feedback { font-size: 11.5px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
-  white-space: nowrap; padding: 3px 8px; border-radius: 5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.quick-add-feedback.ok { color: var(--green); background: #2e7d3218; }
-.quick-add-feedback.err { color: var(--clay); background: #B8694A18; }
 @media (max-width: 600px) {
-  .quick-add-bar { flex-wrap: wrap; }
-  .quick-add-input { min-width: 0; flex: 1 1 140px; }
-  .quick-add-feedback { width: 100%; order: 3; }
   .filter-bar { top: 0; }
   .stats-strip { grid-template-columns: repeat(2, 1fr); }
   .view-toggle { width: 100%; } .vt-btn { flex: 1; }
@@ -591,15 +579,6 @@ button.stat { cursor: pointer; font: inherit; }
       </div>
     </div>
     <div class="stats-strip hidden" id="statsStrip"></div>
-    <!-- Quick Add -->
-    <div class="quick-add-bar" id="quickAddBar">
-      <span class="quick-add-label">Quick Add</span>
-      <textarea class="quick-add-input" id="quickAddInput" rows="1"
-        placeholder="Thurs 3p Dariq/KJ/Colby [Kirby, Dame, JD, Mateo]&#10;Mon 10a KJ/Colby [Dame, Mateo]; Tue 2p Dariq [Kirby]"
-        autocomplete="off" spellcheck="false" style="resize:none;line-height:1.5;overflow:hidden;"></textarea>
-      <span class="quick-add-feedback" id="quickAddFeedback"></span>
-      <button class="btn primary" id="quickAddBtn" style="padding:5px 12px;font-size:12px;flex-shrink:0;">Add</button>
-    </div>
     <div id="slotBanner" style="display:none;margin-bottom:14px;padding:10px 14px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;background:#B8694A;color:#fff;"></div>
     <!-- Week Overview Calendar Preview -->
     <div class="week-preview" id="weekPreview">
@@ -2748,6 +2727,9 @@ function hideCalPopover() {
 }
 function renderCalendarPreview() {
   hideCalPopover(); // clean up before rebuilding DOM
+  // Desktop gets the same scale as the viewer Timeline; narrower screens keep the compact preview
+  const compactPrev = window.innerWidth <= 1024;
+  renderCalendarPreview._compact = compactPrev;
   const body = document.getElementById('previewWeeks');
   if (!body) return;
   const cur = data;
@@ -2759,131 +2741,8 @@ function renderCalendarPreview() {
   if (hasNxt) html += `<div><div class="preview-week-label">Next — ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
   if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days in either week yet.</div>`;
   body.innerHTML = html;
-  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), true, true, 'current');
-  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), true, true, 'next');
-}
-
-// ============ QUICK ADD ============
-function parseQuickAdd(str) {
-  str = str.trim();
-  if (!str) return { err: "Nothing to parse." };
-
-  // Extract interns/tags from [...] first
-  let people = [];
-  let typeFromBracket = null;
-  let outer = str.replace(/\[([^\]]*)\]/g, (_, inner) => {
-    const items = inner.split(',').map(s => s.trim()).filter(Boolean);
-    const excelIdx = items.findIndex(i => i.toLowerCase() === 'excel');
-    if (excelIdx !== -1) { typeFromBracket = 'excel'; items.splice(excelIdx, 1); }
-    people.push(...items);
-    return '';
-  }).trim();
-
-  const type = typeFromBracket || (/\bexcel\b/i.test(outer) ? 'excel' : 'other');
-  outer = outer.replace(/\bexcel\b/gi, '').trim();
-
-  // Day (optional — first token if it's a weekday name)
-  const DAY_MAP = {
-    sun: 0, sunday: 0,
-    mon: 1, monday: 1,
-    tue: 2, tues: 2, tuesday: 2,
-    wed: 3, wednesday: 3,
-    thu: 4, thur: 4, thurs: 4, thursday: 4,
-    fri: 5, friday: 5,
-    sat: 6, saturday: 6,
-  };
-  const SHORT_DAY = ["sun","mon","tue","wed","thu","fri","sat"];
-  const FULL_DAY  = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
-
-  let dayKey = null;
-  const dayMatch = outer.match(/^([a-z]+)\s+/i);
-  if (dayMatch && dayMatch[1].toLowerCase() in DAY_MAP) {
-    dayKey = DAY_MAP[dayMatch[1].toLowerCase()];
-    outer = outer.slice(dayMatch[0].length).trim();
-  }
-
-  // Time (required)
-  const tMatch = outer.match(/^(\d{1,2})(?::(\d{2}))?([ap]m?)\s*/i);
-  if (!tMatch) return { err: "Can't find a time. Try: 3p, 10:30a, 2pm" };
-  let h = parseInt(tMatch[1]);
-  const m = tMatch[2] ? parseInt(tMatch[2]) : 0;
-  const mer = tMatch[3][0].toLowerCase();
-  if (mer === 'p' && h !== 12) h += 12;
-  if (mer === 'a' && h === 12) h = 0;
-  const timeStr = `${h % 12 || 12}:${String(m).padStart(2,'0')} ${mer === 'p' ? 'PM' : 'AM'}`;
-  outer = outer.slice(tMatch[0].length).trim();
-
-  // Remaining = player names / title
-  const title = outer.replace(/\//g, ', ').replace(/\s*,\s*/g, ', ').trim() || 'New Event';
-
-  return { dayKey, timeStr, title, people, type, SHORT_DAY, FULL_DAY };
-}
-
-function quickAddEvent() {
-  const input    = document.getElementById("quickAddInput");
-  const feedback = document.getElementById("quickAddFeedback");
-  const raw = input.value.trim();
-  if (!raw) return;
-  if (!data) { feedback.textContent = "Schedule not loaded yet."; feedback.className = "quick-add-feedback err"; return; }
-
-  const lines = raw.split(/[\n;]+/).map(s => s.trim()).filter(Boolean);
-  const added = [], failed = [];
-
-  lines.forEach(str => {
-    try {
-      const r = parseQuickAdd(str);
-      if (r.err) { failed.push(`"${str}" — ${r.err}`); return; }
-
-      const days = ed().days || [];
-      let dayIdx = -1;
-      if (r.dayKey !== null) {
-        dayIdx = days.findIndex(d => {
-          const lower = (d.day || '').toLowerCase();
-          return lower.startsWith(r.SHORT_DAY[r.dayKey]) || lower.includes(r.FULL_DAY[r.dayKey]);
-        });
-        if (dayIdx === -1) { failed.push(`"${str}" — no day matching "${r.SHORT_DAY[r.dayKey]}"`); return; }
-      } else {
-        if (!days.length) { failed.push(`"${str}" — no days in schedule yet`); return; }
-        dayIdx = 0;
-      }
-
-      const newEv = { time: r.timeStr, title: r.title, type: r.type, people: r.people, players: [], note: '' };
-      const events = ed().days[dayIdx].events;
-      const newT = parseEventTimes(r.timeStr);
-      let insertIdx = events.length;
-      if (newT) {
-        const newMin = newT.start.h * 60 + newT.start.min;
-        for (let i = 0; i < events.length; i++) {
-          const t = parseEventTimes(events[i].time);
-          if (t && (t.start.h * 60 + t.start.min) > newMin) { insertIdx = i; break; }
-        }
-      }
-      events.splice(insertIdx, 0, newEv);
-      added.push(`${ed().days[dayIdx].day} ${r.timeStr}`);
-    } catch (ex) {
-      failed.push(`"${str}" — unexpected error: ${ex.message}`);
-    }
-  });
-
-  if (added.length > 0) {
-    saveDraft();
-    renderEdit();
-  }
-
-  if (failed.length > 0) {
-    const msg = added.length > 0
-      ? `✓ ${added.length} added — ✗ ${failed[0]}`
-      : `✗ ${failed[0]}`;
-    feedback.textContent = msg;
-    feedback.className = "quick-add-feedback err";
-    if (added.length > 0) input.value = '';
-  } else {
-    feedback.textContent = `✓ Added ${added.length} session${added.length !== 1 ? 's' : ''}: ${added.join(', ')}`;
-    feedback.className = "quick-add-feedback ok";
-    input.value = '';
-    input.style.height = 'auto';
-    setTimeout(() => { feedback.textContent = ''; feedback.className = 'quick-add-feedback'; }, 4000);
-  }
+  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current');
+  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), compactPrev, true, 'next');
 }
 
 // ============ WIRE UP ============
@@ -3005,13 +2864,6 @@ async function promoteNext() {
   }
 }
 document.getElementById("promoteBtn").addEventListener("click", promoteNext);
-document.getElementById("quickAddBtn").addEventListener("click", quickAddEvent);
-document.getElementById("quickAddInput").addEventListener("keydown", e => {
-  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); quickAddEvent(); }
-  else if (e.key === "Enter" && e.shiftKey) {
-    setTimeout(() => { const ta = e.target; ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; }, 0);
-  }
-});
 document.getElementById("settingsBtn").addEventListener("click", openSettings);
 document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
 document.getElementById("importJsonBtn").addEventListener("click", () => document.getElementById("importFile").click());
@@ -3344,11 +3196,17 @@ document.addEventListener("keydown", e => {
   if (mod && e.key.toLowerCase() === "z" && currentMode === "edit") {
     e.preventDefault(); e.shiftKey ? doRedo() : doUndo(); return;
   }
-  if (e.key === "/" && currentMode === "edit") {
-    e.preventDefault(); const qa = document.getElementById("quickAddInput"); if (qa) qa.focus();
-  }
 });
 _syncUndoBtns();
+
+// Re-render the edit-tab calendar when a resize crosses the compact/full-size breakpoint
+window.addEventListener("resize", () => {
+  clearTimeout(window.__pcResizeT);
+  window.__pcResizeT = setTimeout(() => {
+    const compact = window.innerWidth <= 1024;
+    if (currentMode === "edit" && compact !== renderCalendarPreview._compact) renderCalendarPreview();
+  }, 200);
+});
 
 init();
 </script>
