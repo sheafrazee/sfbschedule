@@ -354,16 +354,17 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Bobbi K",
+          "title": "Jared M, Bobbi K, Jaylin Sellers",
           "type": "excel",
           "people": [
             "Donovan",
             "Tyler",
-            "Evan",
             "Nick M",
             "Noah P",
             "Matai E",
-            "Kirby"
+            "Kirby",
+            "JD",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -375,10 +376,10 @@
           "people": [
             "Donovan",
             "Tyler",
-            "Evan",
             "Nick M",
             "Noah P",
-            "Matai E"
+            "Matai E",
+            "Jung"
           ],
           "note": "",
           "players": []
