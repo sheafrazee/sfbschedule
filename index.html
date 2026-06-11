@@ -358,81 +358,61 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--warm-white); 
 }
 </style>
 
-<style id="skin-broadcast">
-/* ============ V2 — BROADCAST BOARD (agenda rows + viewer timeline) ============ */
-body{overflow-x:hidden;}
+<style id="skin-console">
+/* ============ V3 — COACH CONSOLE (editor-first, dense, app-shell) ============ */
+body{background:#EFECE6; overflow-x:hidden;}
 .wrap{padding-top:0;}
 .sfb-header{
-  background:linear-gradient(135deg,#111111,#5C5652); color:var(--warm-white); border-bottom:none;
-  margin:0 calc(50% - 50vw) 18px; padding:22px max(16px, calc(50vw - 600px + 16px)) 20px; gap:16px;
+  background:var(--ink); color:var(--warm-white); border-bottom:none;
+  margin:0 calc(50% - 50vw) 18px; padding:12px max(16px, calc(50vw - 600px + 16px));
+  gap:12px;
 }
-.sfb-badge{box-shadow:0 0 0 1.5px rgba(244,241,236,.3);}
-.header-meta{display:flex; flex-direction:column; gap:3px;}
-.sfb-header .eyebrow{font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:10px;
-  letter-spacing:.22em; text-transform:uppercase; color:#B9B3AD; display:block;}
-.sfb-header h1{color:var(--warm-white); font-size:26px; letter-spacing:-.02em;}
-.mode-btn{background:transparent; color:var(--warm-white); border-color:rgba(244,241,236,.45);}
-.mode-btn.active{background:var(--warm-white); color:var(--ink); border-color:var(--warm-white);}
-#editView .mode-btn{background:#fff; color:var(--ink); border-color:var(--ink);}
-#editView .mode-btn.active{background:var(--ink); color:var(--warm-white);}
+.sfb-badge{width:38px; height:38px; padding:7px; box-shadow:0 0 0 1.5px rgba(244,241,236,.25);}
+.header-meta{display:flex; flex-direction:column; gap:1px;}
+.sfb-header .eyebrow{font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:9px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--stone); display:block;}
+.sfb-header h1{color:var(--warm-white); font-size:17px; letter-spacing:-.01em;}
+/* segmented control */
+.sfb-header .mode-toggle{background:rgba(244,241,236,.14); border-radius:10px; padding:3px; gap:3px;}
+.sfb-header .mode-btn{border:none; border-radius:7px; background:transparent; color:var(--warm-white); padding:6px 14px;}
+.sfb-header .mode-btn.active{background:var(--warm-white); color:var(--ink);}
 
-/* Cards / Timeline switch (display mode) */
-.view-toggle{display:flex; gap:5px;}
-.vt-btn{padding:7px 14px; border:1.5px solid var(--ink); border-radius:8px;
-  font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12px; cursor:pointer;
-  background:#fff; color:var(--ink); transition:all .15s; white-space:nowrap;}
-.vt-btn.active{background:var(--ink); color:var(--warm-white);}
+.btn{border-radius:7px;}
+.action-bar{border-radius:12px; border-color:#E0DBD4; box-shadow:0 1px 2px rgba(17,17,17,.04);}
+.saved-at{font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:11px; color:var(--stone); white-space:nowrap;}
 
-/* Type pills get legend swatches */
-.type-btn{border-radius:100px;}
-.type-btn[data-type]::before{content:""; display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:7px; vertical-align:1px;}
-.type-btn[data-type="all"]::before{background:linear-gradient(135deg,var(--clay) 50%,var(--light-stone) 50%);}
-.type-btn[data-type="excel"]::before{background:var(--clay);}
-.type-btn[data-type="other"]::before{background:var(--light-stone); box-shadow:inset 0 0 0 1px rgba(17,17,17,.18);}
-.type-btn.active[data-type="other"]::before{box-shadow:inset 0 0 0 1px rgba(244,241,236,.5);}
+/* Stats strip */
+.stats-strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; margin-bottom:14px;}
+.stat{position:relative; background:#fff; border:1px solid #E0DBD4; border-radius:10px; padding:10px 12px; text-align:left;}
+.stat .k{font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:20px; line-height:1.1;
+  font-variant-numeric:tabular-nums; color:var(--ink); display:block;}
+.stat .l{font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:10px; letter-spacing:.07em;
+  text-transform:uppercase; color:var(--stone); display:block; margin-top:2px;}
+button.stat{cursor:pointer; font:inherit;}
+.stat.alert .k{color:#8a4000;}
+.stat.alert{border-color:#E3B57E; background:#FDF6EC;}
+.stat.ok .k{color:#1a6b2f;}
+.cov-panel{position:absolute; top:calc(100% + 6px); left:0; right:0; min-width:240px; z-index:80; background:#fff;
+  border:1.5px solid var(--ink); border-radius:10px; box-shadow:0 10px 28px rgba(17,17,17,.16); padding:6px; text-align:left;}
+.cov-item{display:block; width:100%; border:none; background:transparent; text-align:left; padding:8px 10px;
+  border-radius:7px; cursor:pointer; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:var(--ink);}
+.cov-item b{font-family:'Plus Jakarta Sans',sans-serif; font-size:12px;}
+.cov-item:hover{background:var(--warm-white);}
+.cov-item .gap{color:#8a4000; font-weight:700;}
 
-/* Sticky day-jump rail */
-.day-nav{position:sticky; top:0; z-index:60; display:flex; gap:6px; overflow-x:auto; padding:10px 0;
-  margin-bottom:4px; background:rgba(244,241,236,.94);
-  background:color-mix(in srgb, var(--warm-white) 90%, transparent);
-  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1px solid var(--light-stone);
-  scrollbar-width:none;}
-.day-nav::-webkit-scrollbar{display:none;}
-.dn-pill{font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:.06em;
-  text-transform:uppercase; padding:7px 13px; border:1.5px solid var(--light-stone); border-radius:100px;
-  background:#fff; color:var(--dark-stone); cursor:pointer; white-space:nowrap; transition:all .15s; flex-shrink:0;}
-.dn-pill:hover{border-color:var(--ink); color:var(--ink);}
-.dn-pill.today{border-color:var(--clay); color:var(--clay);}
-.dn-pill.today::after{content:"·"; margin-left:5px; font-size:16px; line-height:0; vertical-align:-2px;}
+/* Denser edit cards */
+.edit-grid{gap:12px;}
+.edit-day{border-radius:12px; border-color:#E0DBD4;}
+.edit-event{border-radius:9px; border-color:#E6E1DA; padding:9px;}
+.edit-event input,.edit-event select,.edit-event textarea{font-size:13px; border-radius:6px;}
+.edit-event .ev-time{font-variant-numeric:tabular-nums;}
+.intern-row .ct{font-variant-numeric:tabular-nums;}
+.edit-event.flash-card{animation:sfbFlash 1.5s ease;}
+@keyframes sfbFlash{0%{box-shadow:0 0 0 3px var(--clay);}100%{box-shadow:0 0 0 0 rgba(184,105,74,0);}}
 
-/* Match-count line + clear */
-.results-line{display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--stone);
-  font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; margin:8px 2px 12px; min-height:18px;}
-.results-line .clear-filters{border:none; background:none; color:var(--clay); font:inherit; font-weight:700;
-  cursor:pointer; padding:0; text-decoration:underline; text-underline-offset:3px;}
-
-/* Day columns → board panels with agenda rows */
-.day-grid{gap:14px;}
-.day-col{border-radius:14px; border-color:#E3DED7; overflow:hidden;}
-.day-header{background:#fff; border-bottom:2px solid var(--ink); font-size:13px; text-transform:uppercase;
-  letter-spacing:.1em; padding:12px 14px;}
-.day-col.is-today .day-header{background:var(--ink); color:var(--warm-white); border-bottom-color:var(--ink);}
-.day-col.is-today .day-share-btn{color:var(--warm-white);}
-.event-card{display:grid; grid-template-columns:84px 1fr; column-gap:12px; align-items:start;
-  margin:0; border-radius:0; padding:12px 14px; border-bottom:1px solid rgba(17,17,17,.12);}
-.day-col .event-card:last-child{border-bottom:none;}
-.event-time{grid-row:1 / span 3; flex-direction:column !important; align-items:flex-start !important;
-  justify-content:flex-start !important; gap:3px !important; font-size:12.5px; font-weight:600;
-  font-variant-numeric:tabular-nums; letter-spacing:0; margin-bottom:0;}
-.event-title{grid-column:2; font-size:14.5px; margin-bottom:3px;}
-.event-people{grid-column:2; font-size:12.5px;}
-.event-note{grid-column:2;}
-.empty-msg{padding:24px 16px;}
-.day-grid.hide-empty .day-col.is-empty{display:none;}
-
-/* Viewer timeline (read-only calendar) */
-#viewTimeline{margin-top:6px;}
-#viewTimeline .cal-day-head.cal-today{background:var(--ink); color:var(--warm-white);}
+#undoBtn:disabled,#redoBtn:disabled{opacity:.4; cursor:default;}
+kbd.sfb-kbd{font-family:'Plus Jakarta Sans',sans-serif; font-size:10px; border:1px solid var(--light-stone);
+  border-bottom-width:2px; border-radius:4px; padding:1px 5px; color:var(--dark-stone); background:#fff;}
 
 .sfb-toast{position:fixed; left:50%; bottom:22px; transform:translate(-50%,12px); background:var(--ink);
   color:var(--warm-white); font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px;
@@ -440,10 +420,8 @@ body{overflow-x:hidden;}
 .sfb-toast.show{opacity:1; transform:translate(-50%,0);}
 :focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
 @media (max-width:600px){
-  .sfb-header h1{font-size:18px;}
-  .sfb-header .eyebrow{display:block; font-size:8.5px;}
-  .event-card{grid-template-columns:72px 1fr; padding:11px 12px;}
-  .view-toggle{width:100%;} .vt-btn{flex:1;}
+  .sfb-header h1{font-size:15px;}
+  .stats-strip{grid-template-columns:repeat(2,1fr);}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
 </style>
@@ -476,18 +454,13 @@ body{overflow-x:hidden;}
         <button class="type-btn active" data-type="all">All Types</button>
         <button class="type-btn" data-type="excel">Excel Client</button>
         <button class="type-btn" data-type="other">Other</button>
-        <button class="type-btn" id="hideEmptyBtn">Hide empty days</button>
         <div class="fb-actions">
-          <div class="view-toggle" id="viewToggle"><button class="vt-btn active" data-view="cards">Cards</button><button class="vt-btn" data-view="timeline">Timeline</button></div>
           <button class="btn" id="shareWeekBtn">↗ Share</button>
           <button class="btn" id="archiveBtn">🗄 Archive</button>
         </div>
       </div>
     </div>
-    <div class="day-nav" id="dayNav"></div>
-    <div class="results-line" id="resultsLine"></div>
     <div class="day-grid" id="grid"></div>
-    <div class="cal-wrap hidden" id="viewTimeline"></div>
   </div>
 
   <div id="editView" class="hidden">
@@ -501,10 +474,14 @@ body{overflow-x:hidden;}
         <div class="ab-title-group">
           <input class="week-title" id="weekTitleInput" placeholder="Week of May 18–24">
           <span class="status-pill" id="statusPill"></span>
+          <span class="saved-at" id="savedAt"></span>
         </div>
       </div>
       <!-- Row 2: actions -->
       <div class="ab-row ab-bottom">
+        <button class="btn" id="undoBtn" title="Undo (Ctrl+Z)" disabled>↶ Undo</button>
+        <button class="btn" id="redoBtn" title="Redo (Ctrl+Shift+Z)" disabled>↷ Redo</button>
+        <div class="ab-divider"></div>
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
         <button class="btn" id="sortTimeBtn" title="Sort each day's sessions by start time">↕ Sort by time</button>
         <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
@@ -517,6 +494,7 @@ body{overflow-x:hidden;}
         </div>
       </div>
     </div>
+    <div class="stats-strip hidden" id="statsStrip"></div>
     <!-- Quick Add -->
     <div class="quick-add-bar" id="quickAddBar">
       <span class="quick-add-label">⚡ Quick Add</span>
@@ -2911,7 +2889,7 @@ document.getElementById("internTallyHead").addEventListener("click", () => {
 init();
 </script>
 
-<script id="patch-broadcast">
+<script id="patch-console">
 
 // FIX: global ".mode-btn" listener also fires on slot buttons (no data-mode),
 // which called setMode(undefined) and hid both views. Guard the mode value.
@@ -2924,90 +2902,134 @@ function sfbToast(msg){
   clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('show'), 2600);
 }
 
-let displayView2 = 'cards';      // 'cards' | 'timeline'
-let hideEmptyDays = false;
-
-function _sameDay2(a,b){return a&&b&&a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-function _todayIdx(){ const now=new Date(); let t=-1; (data.days||[]).forEach((d,i)=>{const dt=dateForDay(d.day); if(dt&&_sameDay2(dt,now)) t=i;}); return t; }
-function _filteredDays(){ return (data.days||[]).map(d=>({day:d.day, events:(d.events||[]).filter(e=>eventMatches(e))})); }
-
-function renderDayNav(){
-  const nav=document.getElementById('dayNav'); if(!nav) return;
-  const tIdx=_todayIdx();
-  nav.innerHTML='';
-  (data.days||[]).forEach((d,i)=>{
-    const b=document.createElement('button');
-    b.className='dn-pill'+(i===tIdx?' today':'');
-    b.textContent=(d.day||'Day').split(/\s+/)[0].slice(0,3);
-    b.title=d.day||'';
-    b.addEventListener('click',()=>{
-      const col=document.getElementById('grid').children[i];
-      if(col && displayView2==='cards') col.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-    nav.appendChild(b);
-  });
-  nav.classList.toggle('hidden', displayView2!=='cards' || !(data.days||[]).length);
+// ---------- Undo / Redo (snapshot stack around saveDraft) ----------
+let _undoStack=[], _redoStack=[], _lastSnap=null, _pendingSnap=null, _snapTimer=null, _silent=false;
+function _syncUndoBtns(){
+  const u=document.getElementById('undoBtn'), r=document.getElementById('redoBtn');
+  if(u) u.disabled = !_undoStack.length && !_pendingSnap;
+  if(r) r.disabled = !_redoStack.length;
 }
-
-function renderResultsLine(){
-  const el=document.getElementById('resultsLine'); if(!el) return;
-  let total=0, matched=0;
-  (data.days||[]).forEach(d=>(d.events||[]).forEach(e=>{ total++; if(eventMatches(e)) matched++; }));
-  const active = internFilter.trim()||playerFilter.trim()||typeFilter!=='all';
-  el.innerHTML = total
-    ? `Showing ${matched} of ${total} session${total!==1?'s':''}` +
-      (active?` &nbsp;<button class="clear-filters" id="clearFilters">Clear filters</button>`:'')
-    : '';
-  const cb=document.getElementById('clearFilters');
-  if(cb) cb.addEventListener('click',()=>{
-    const ii=document.getElementById('internFilter'), pi=document.getElementById('playerFilter');
-    ii.value=''; pi.value=''; internFilter=''; playerFilter='';
-    const allBtn=document.querySelector('.type-btn[data-type="all"]'); if(allBtn) allBtn.click(); else renderDisplay();
-  });
+function _markSaved(){
+  const el=document.getElementById('savedAt'); if(!el) return;
+  const d=new Date();
+  el.textContent='Saved · '+d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
 }
-
-function renderViewTimeline(){
-  const wrap=document.getElementById('viewTimeline'); if(!wrap) return;
-  renderCalendar(_filteredDays(), wrap, false, false, 'viewer');
-  const tIdx=_todayIdx();
-  if(tIdx>-1){ const heads=wrap.querySelectorAll('.cal-day-head'); if(heads[tIdx]) heads[tIdx].classList.add('cal-today'); }
-}
-
-function applyDisplayView(){
-  const grid=document.getElementById('grid'), tl=document.getElementById('viewTimeline');
-  document.querySelectorAll('.vt-btn').forEach(b=>b.classList.toggle('active', b.dataset.view===displayView2));
-  if(displayView2==='timeline'){ grid.classList.add('hidden'); tl.classList.remove('hidden'); renderViewTimeline(); }
-  else { tl.classList.add('hidden'); grid.classList.remove('hidden'); }
-  renderDayNav();
-}
-
 (function(){
-  const _rd=renderDisplay;
-  renderDisplay=function(){
-    _rd();
-    try{
-      const grid=document.getElementById('grid');
-      const tIdx=_todayIdx();
-      Array.from(grid.children).forEach((col,i)=>{
-        col.classList.toggle('is-today', i===tIdx);
-        const day=(data.days||[])[i]||{};
-        const any=(day.events||[]).some(e=>eventMatches(e));
-        col.classList.toggle('is-empty', !any);
-      });
-      grid.classList.toggle('hide-empty', hideEmptyDays);
-      renderResultsLine();
-      applyDisplayView();
-    }catch(e){console.warn(e);}
+  const _sd=saveDraft;
+  saveDraft=function(){
+    const cur=JSON.stringify(data);
+    if(_lastSnap===null){ _lastSnap=cur; }
+    else if(!_silent && cur!==_lastSnap){
+      if(_pendingSnap===null){
+        _pendingSnap=_lastSnap;
+        clearTimeout(_snapTimer);
+        _snapTimer=setTimeout(()=>{
+          _undoStack.push(_pendingSnap); if(_undoStack.length>60) _undoStack.shift();
+          _redoStack.length=0; _pendingSnap=null; _syncUndoBtns();
+        },400);
+      }
+      _lastSnap=cur;
+    }
+    _sd(); _markSaved(); _syncUndoBtns();
   };
 })();
+function _restore(json){
+  _silent=true;
+  data=JSON.parse(json); data.archive=data.archive||[];
+  _lastSnap=json;
+  saveDraft();
+  _silent=false;
+  if(currentMode==='edit') renderEdit(); else renderDisplay();
+  document.getElementById('weekTitleDisplay').textContent=data.weekTitle||'';
+}
+function doUndo(){
+  if(_pendingSnap!==null){ clearTimeout(_snapTimer); _undoStack.push(_pendingSnap); _pendingSnap=null; }
+  if(!_undoStack.length){ sfbToast('Nothing to undo'); return; }
+  _redoStack.push(JSON.stringify(data));
+  _restore(_undoStack.pop());
+  sfbToast('Undone'); _syncUndoBtns();
+}
+function doRedo(){
+  if(!_redoStack.length){ sfbToast('Nothing to redo'); return; }
+  if(_pendingSnap!==null){ clearTimeout(_snapTimer); _undoStack.push(_pendingSnap); _pendingSnap=null; }
+  _undoStack.push(JSON.stringify(data));
+  _restore(_redoStack.pop());
+  sfbToast('Redone'); _syncUndoBtns();
+}
+document.getElementById('undoBtn').addEventListener('click', doUndo);
+document.getElementById('redoBtn').addEventListener('click', doRedo);
 
-document.querySelectorAll('.vt-btn').forEach(b=>b.addEventListener('click',()=>{ displayView2=b.dataset.view; applyDisplayView(); }));
-document.getElementById('hideEmptyBtn').addEventListener('click',function(){
-  hideEmptyDays=!hideEmptyDays;
-  this.classList.toggle('active', hideEmptyDays);
-  this.textContent = hideEmptyDays ? '✓ Hiding empty days' : 'Hide empty days';
-  renderDisplay();
+// ---------- Stats strip + coverage alerts ----------
+function _covAlerts(){
+  const out=[];
+  (ed().days||[]).forEach((day,di)=>(day.events||[]).forEach((ev,ei)=>{
+    if(ev.type!=='excel') return;
+    const p=countTitlePlayers(ev.title), need=2*p+1, have=(ev.people||[]).length;
+    if(need>0 && have<need) out.push({di,ei,day:day.day,title:ev.title,have,need});
+  }));
+  return out;
+}
+function renderStats(){
+  const strip=document.getElementById('statsStrip'); if(!strip) return;
+  if(currentMode!=='edit'){ strip.classList.add('hidden'); return; }
+  strip.classList.remove('hidden');
+  let sessions=0, excel=0; const interns=new Set();
+  (ed().days||[]).forEach(d=>(d.events||[]).forEach(ev=>{
+    sessions++; if(ev.type==='excel') excel++;
+    (ev.people||[]).forEach(p=>{const n=(p||'').trim(); if(n) interns.add(n);});
+  }));
+  const alerts=_covAlerts();
+  strip.innerHTML=`
+    <div class="stat"><span class="k">${sessions}</span><span class="l">Sessions</span></div>
+    <div class="stat"><span class="k">${excel}</span><span class="l">Excel Client</span></div>
+    <div class="stat"><span class="k">${interns.size}</span><span class="l">Interns scheduled</span></div>
+    <button class="stat ${alerts.length?'alert':'ok'}" id="covStat" type="button">
+      <span class="k">${alerts.length}</span><span class="l">Coverage alerts</span>
+    </button>`;
+  const covBtn=document.getElementById('covStat');
+  covBtn.addEventListener('click',()=>{
+    const open=covBtn.querySelector('.cov-panel');
+    if(open){ open.remove(); return; }
+    if(!alerts.length){ sfbToast('All Excel sessions fully covered'); return; }
+    const panel=document.createElement('div'); panel.className='cov-panel';
+    panel.innerHTML=alerts.map(a=>`<button class="cov-item" data-d="${a.di}" data-e="${a.ei}">
+      <b>${escapeHtml(a.day||'')}</b> — ${escapeHtml(a.title||'')}
+      <span class="gap"> ${a.have}/${a.need} interns</span></button>`).join('');
+    covBtn.appendChild(panel);
+    panel.querySelectorAll('.cov-item').forEach(it=>it.addEventListener('click',ev=>{
+      ev.stopPropagation(); panel.remove();
+      const sel=document.querySelector(`textarea[data-d="${it.dataset.d}"][data-e="${it.dataset.e}"][data-field="people"]`);
+      const card=sel && sel.closest('.edit-event');
+      if(card){ card.scrollIntoView({behavior:'smooth', block:'center'});
+        card.classList.remove('flash-card'); void card.offsetWidth; card.classList.add('flash-card'); }
+    }));
+    setTimeout(()=>document.addEventListener('click', function close(e){
+      if(!covBtn.contains(e.target)){ panel.remove(); document.removeEventListener('click', close); }
+    }),0);
+  });
+}
+(function(){ const _re=renderEdit; renderEdit=function(){ _re(); try{renderStats();}catch(e){console.warn(e);} }; })();
+(function(){ const _sm2=setMode; setMode=function(m){ _sm2(m); try{renderStats();}catch(e){} }; })();
+
+// ---------- Keyboard shortcuts ----------
+document.addEventListener('keydown', e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  const typing = tag==='input'||tag==='textarea'||tag==='select'||e.target.isContentEditable;
+  const mod=e.metaKey||e.ctrlKey;
+  if(mod && e.key==='Enter' && currentMode==='edit'){
+    const pb=document.getElementById('publishBtn');
+    if(pb && !pb.disabled){ e.preventDefault(); pb.click(); }
+    return;
+  }
+  if(typing) return;  // don't hijack native text-field undo
+  if(mod && e.key.toLowerCase()==='z' && currentMode==='edit'){
+    e.preventDefault(); e.shiftKey ? doRedo() : doUndo(); return;
+  }
+  if(e.key==='/' && currentMode==='edit'){
+    e.preventDefault(); const qa=document.getElementById('quickAddInput'); if(qa) qa.focus();
+  }
 });
+_syncUndoBtns();
 </script>
 
 </body>
