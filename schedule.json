@@ -341,13 +341,12 @@
       "day": "Fri 6/12",
       "events": [
         {
-          "time": "6:15-7:45 AM",
-          "title": "GW",
-          "type": "other",
+          "time": "6:45 AM – 8:00 AM",
+          "title": "Jared M",
+          "type": "excel",
           "people": [
-            "Luca",
-            "Ali",
-            "David"
+            "Shea",
+            "Luca"
           ],
           "players": [],
           "note": ""
@@ -362,16 +361,16 @@
             "Nick M",
             "Noah P",
             "Matai E",
+            "Luca",
             "Kirby",
-            "JD",
-            "Jung"
+            "JD"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "5v5: Dev A, Nick D, Juom MB, Colby J, Dariq W, Ibbe K",
+          "title": "5v5: Dev A, Nick D, Juom MB, Colby J, Marc S, Ibbe K",
           "type": "excel",
           "people": [
             "Donovan",
@@ -379,7 +378,7 @@
             "Nick M",
             "Noah P",
             "Matai E",
-            "Jung"
+            "Luca"
           ],
           "note": "",
           "players": []
@@ -422,18 +421,6 @@
     {
       "day": "Sat 6/13",
       "events": [
-        {
-          "time": "6:15 AM – 7:45 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Luca",
-            "Ali",
-            "David"
-          ],
-          "players": [],
-          "note": ""
-        },
         {
           "time": "8:00 AM – 9:15 AM",
           "title": "Colby J, Bobbi K, Ibbe K, Dariq W",
