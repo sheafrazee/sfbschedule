@@ -287,21 +287,21 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .hidden { display: none !important; }
 
 /* Intern tally bubble (edit mode) */
-.intern-tally { position: fixed; bottom: 20px; right: 20px; z-index: 90; width: 260px; max-width: calc(100vw - 32px); background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.16); font-family: 'Source Sans 3', sans-serif; overflow: hidden; }
-.intern-tally-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; background: var(--ink); color: var(--warm-white); cursor: pointer; user-select: none; }
+.intern-tally { position: fixed; bottom: 20px; right: 20px; z-index: 90; width: 260px; max-width: calc(100vw - 32px); max-height: calc(100dvh - 40px); display: flex; flex-direction: column; background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.16); font-family: 'Source Sans 3', sans-serif; overflow: hidden; }
+.intern-tally-head { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; background: var(--ink); color: var(--warm-white); cursor: pointer; user-select: none; }
 .intern-tally-head span.t { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; }
 .intern-tally-head span.c { font-size: 11px; opacity: .7; }
-.intern-tally-body { max-height: 320px; overflow-y: auto; }
+.intern-tally-body { flex: 0 1 auto; min-height: 0; max-height: 320px; overflow-y: auto; }
 .intern-tally.collapsed .intern-tally-body { display: none; }
 .intern-row { display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-bottom: 1px solid var(--warm-white); font-size: 13px; }
 .intern-row:last-child { border-bottom: none; }
 .intern-row .nm { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-.intern-row .ct { flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; min-width: 28px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--warm-white); color: var(--dark-stone); display: inline-flex; align-items: center; justify-content: center; }
+.intern-row .ct { flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; min-width: 34px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--warm-white); color: var(--dark-stone); display: inline-flex; align-items: center; justify-content: center; }
 .intern-row .ct.cur { background: var(--clay); color: #fff; }
 .intern-row .ct.nxt { background: var(--stone); color: #fff; }
 .intern-row .ct.all { background: var(--ink); color: var(--warm-white); }
 .intern-col-heads { display: flex; justify-content: flex-end; gap: 8px; padding: 4px 14px 2px; }
-.intern-col-heads span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: .04em; color: var(--stone); min-width: 28px; text-align: center; }
+.intern-col-heads span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: .04em; color: var(--stone); min-width: 34px; text-align: center; }
 .intern-coverage { display: inline-flex; align-items: center; gap: 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 4px; }
 .intern-coverage.cov-ok  { background: #d4f0da; color: #1a6b2f; }
 .intern-coverage.cov-low { background: #fde8cc; color: #8a4000; }
@@ -317,7 +317,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .intern-forget:hover { opacity: 1; color: var(--clay); background: var(--warm-white); }
 
 /* ---- Mode dock: View/Edit pinned bottom-center, reachable mid-scroll ---- */
-.mode-dock { position: fixed; left: 50%; transform: translateX(-50%);
+.mode-dock { position: fixed; left: 20px;
   bottom: max(16px, env(safe-area-inset-bottom)); z-index: 95;
   background: rgba(17,17,17,.92);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
@@ -331,7 +331,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .mode-dock .mode-btn:focus-visible { outline-color: var(--warm-white); }
 /* phone + edit mode: ride above the intern-tally bottom bar */
 @media (max-width: 600px) {
-  body.mode-edit .mode-dock { bottom: calc(56px + env(safe-area-inset-bottom)); }
+  body.mode-edit .mode-dock { left: 50%; transform: translateX(-50%); bottom: calc(56px + env(safe-area-inset-bottom)); }
   body.mode-edit .wrap { padding-bottom: 120px; }
 }
 
@@ -351,9 +351,17 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
 .cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
 .cal-ev-selected { outline: 2px solid var(--ink) !important; outline-offset: 1px; z-index: 3; }
-.cal-ev-resize { position: absolute; bottom: 0; left: 0; right: 0; height: 7px; cursor: ns-resize; touch-action: none; border-radius: 0 0 3px 3px; }
-.cal-ev-resize:hover { background: rgba(0,0,0,0.2); }
-.cal-ev-title { font-size: 9.5px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Resize handles: generous hit zones at top & bottom edges (scale with block, capped) */
+.cal-ev-resize { position: absolute; left: 0; right: 0; height: 32%; min-height: 9px; max-height: 16px; cursor: ns-resize; touch-action: none; z-index: 4; }
+.cal-ev-resize-t { top: 0; }
+.cal-ev-resize-b { bottom: 0; }
+.cal-ev-resize::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); width: 22px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.9); box-shadow: 0 0 0 1px rgba(0,0,0,.18); opacity: 0; transition: opacity .12s; }
+.cal-ev-resize-t::after { top: 2px; }
+.cal-ev-resize-b::after { bottom: 2px; }
+.cal-ev:hover .cal-ev-resize::after, .cal-ev-selected .cal-ev-resize::after { opacity: 1; }
+.cal-ev-resizing { z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); }
+.cal-ev-title { font-size: 9.5px; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; word-break: break-word; }
+.cal-ev-title .more { opacity: .7; font-weight: 800; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
 .cal-day-body[data-di] { cursor: crosshair; touch-action: pan-x; }
@@ -375,6 +383,22 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .preview-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (min-width: 1025px) { .preview-weeks { grid-template-columns: 1fr; gap: 16px; } }
 .preview-week-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--dark-stone); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+
+/* ---- Week-context accent: makes which week you're editing unmistakable ---- */
+body { --week-accent: var(--ink); }
+body.editing-next { --week-accent: var(--clay); }
+/* NEXT-week edit station gets a clay treatment (current week stays unchanged) */
+body.editing-next .edit-day-header { background: var(--clay); }
+body.editing-next .edit-day { border-color: rgba(184,105,74,.5); }
+body.editing-next .edit-grid { background: rgba(184,105,74,.06); border: 1.5px dashed rgba(184,105,74,.4); border-radius: 14px; padding: 12px; }
+body.editing-next #slotNextBtn.active { background: var(--clay); border-color: var(--clay); color: #fff; }
+body.editing-next .action-bar { box-shadow: inset 5px 0 0 var(--clay); }
+.intern-tally.tally-next .intern-tally-head { background: var(--clay); }
+/* Preview calendars: spotlight the week being edited, dim the other */
+.prev-week { transition: opacity .15s; }
+.prev-week.prev-active .preview-week-label { color: var(--week-accent); }
+.prev-week.prev-active .cal-wrap { box-shadow: 0 0 0 2px var(--week-accent); border-color: var(--week-accent); }
+.prev-week.prev-idle { opacity: .5; }
 @media (max-width: 780px) { .preview-weeks { grid-template-columns: 1fr; } }
 
 /* ---- Search fields (display mode) ---- */
@@ -691,7 +715,7 @@ button.stat { cursor: pointer; font: inherit; }
 
 <div class="intern-tally hidden collapsed" id="internTally">
   <div class="intern-tally-head" id="internTallyHead">
-    <span class="t">Intern sessions</span>
+    <span class="t" id="internTallyTitle">Intern sessions</span>
     <span class="c" id="internTallyCount"></span>
   </div>
   <div class="intern-tally-body" id="internTallyBody"></div>
@@ -1676,6 +1700,18 @@ function countTitlePlayers(title) {
   t = t.replace(/\([^)]*\)/g, "");          // drop parenthetical notes
   return t.split(",").map(s => s.trim()).filter(Boolean).length;
 }
+// For calendar blocks: show up to `max` player names parsed from the title.
+// Falls back to the raw title for non-name labels (e.g. "Open Gym").
+function calTitleNames(title, max) {
+  const raw = String(title || "").trim();
+  if (!raw) return "";
+  let head = raw.split(/\s[\u2013\u2014-]\s/)[0].replace(/\([^)]*\)/g, "");
+  const names = head.split(",").map(s => s.trim()).filter(Boolean);
+  if (names.length <= 1) return escapeHtml(raw);   // single label, not a name list
+  const shown = names.slice(0, max).join(", ");
+  const extra = names.length > max ? ` <span class="more">+${names.length - max}</span>` : "";
+  return escapeHtml(shown) + extra;
+}
 function titleMatchesTerms(title, terms) {
   const t = String(title || "").toLowerCase();
   return terms.some(term => t.includes(term));
@@ -1775,6 +1811,7 @@ function renderDisplay() {
 // ============ EDIT MODE ============
 function renderEdit() {
   // Banner + toggle reflect the active slot
+  document.body.classList.toggle("editing-next", editSlot === "next");
   const banner = document.getElementById("slotBanner");
   document.getElementById("slotCurrentBtn").classList.toggle("active", editSlot === "current");
   document.getElementById("slotNextBtn").classList.toggle("active", editSlot === "next");
@@ -1878,48 +1915,58 @@ function renderInternTally() {
   box.classList.toggle("hidden", currentMode !== "edit");
   if (currentMode !== "edit") return;
 
-  // Count sessions per intern across current and next weeks
+  // Count sessions per intern, split by session type, in the active edit week only
   function countWeek(days) {
     const c = {};
     (days || []).forEach(day => {
       (day.events || []).forEach(ev => {
+        const isExcel = ev.type === "excel";
         (ev.people || []).forEach(p => {
           const name = (p || "").trim();
-          if (name) c[name] = (c[name] || 0) + 1;
+          if (!name) return;
+          if (!c[name]) c[name] = { excel: 0, other: 0 };
+          if (isExcel) c[name].excel++; else c[name].other++;
         });
       });
     });
     return c;
   }
 
-  const cur = countWeek(data.days);
-  const nxt = countWeek(data.nextWeek && data.nextWeek.days);
-  const allNames = new Set([...Object.keys(cur), ...Object.keys(nxt)]);
+  const wk = countWeek(ed().days);
+  const allNames = new Set(Object.keys(wk));
   const roster = learnInterns();
 
-  // Rows: interns with at least one session this or next week
+  // Rows: interns with at least one session in THIS week, by type (excel / other / overall)
   const rows = [...allNames]
-    .map(name => ({ name, cur: cur[name] || 0, nxt: nxt[name] || 0, all: (cur[name] || 0) + (nxt[name] || 0) }))
+    .map(name => {
+      const c = wk[name] || { excel: 0, other: 0 };
+      return { name, excel: c.excel, other: c.other, all: c.excel + c.other };
+    })
     .sort((a, b) => b.all - a.all || a.name.localeCompare(b.name));
 
-  // Past: in roster but not scheduled either week
+  // Past: in roster but not scheduled in this week
   const past = Object.keys(roster)
     .filter(name => !allNames.has(name))
     .sort((a, b) => (roster[b] - roster[a]) || a.localeCompare(b));
 
-  document.getElementById("internTallyCount").textContent = "";
+  // Header reflects (and is colour-coded to) the week being edited
+  box.classList.toggle("tally-next", editSlot === "next");
+  document.getElementById("internTallyTitle").textContent =
+    editSlot === "next" ? "Next week interns" : "Current week interns";
+  document.getElementById("internTallyCount").textContent =
+    `${rows.length} active`;
 
   const body = document.getElementById("internTallyBody");
   let html = "";
 
   if (rows.length) {
-    html += `<div class="intern-col-heads"><span>Cur</span><span>Nxt</span><span>All</span></div>`;
-    html += rows.map(({ name, cur: c, nxt: n, all: a }) =>
+    html += `<div class="intern-col-heads"><span>Excel</span><span>Other</span><span>All</span></div>`;
+    html += rows.map(({ name, excel, other, all: a }) =>
       `<div class="intern-row">
         <span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span>
-        <span class="ct cur">${c}</span>
-        <span class="ct nxt">${n}</span>
-        <span class="ct all">${a}</span>
+        <span class="ct cur" title="Excel sessions">${excel}</span>
+        <span class="ct nxt" title="Other sessions">${other}</span>
+        <span class="ct all" title="Overall sessions">${a}</span>
       </div>`
     ).join("");
   } else {
@@ -2197,7 +2244,7 @@ function setMode(mode) {
   document.getElementById("editView").classList.toggle("hidden", mode !== "edit");
   if (mode === "display") renderDisplay();
   else renderEdit();
-  if (mode !== "edit") document.getElementById("internTally").classList.add("hidden");
+  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); }
 }
 
 // ============ JSON IO ============
@@ -2283,9 +2330,9 @@ function renderCalendar(days, container, compact, editable, slot) {
         ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hPxLocal}"`
         : '';
       evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
-        <div class="cal-ev-title">${escapeHtml(ev.title)}</div>
+        <div class="cal-ev-title">${calTitleNames(ev.title, 6)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
-        ${editable ? '<div class="cal-ev-resize"></div>' : ''}
+        ${editable ? '<div class="cal-ev-resize cal-ev-resize-t" data-edge="top"></div><div class="cal-ev-resize cal-ev-resize-b" data-edge="bottom"></div>' : ''}
       </div>`;
     });
 
@@ -2327,9 +2374,9 @@ function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll(".cal-ev-drag").forEach(el => {
     el.addEventListener("pointerdown", onCalDragStart);
   });
-  // Resize handles
+  // Resize handles (top and bottom edges)
   container.querySelectorAll(".cal-ev-resize").forEach(handle => {
-    handle.addEventListener("pointerdown", ev => onCalResizeStart(ev, slot, hPx));
+    handle.addEventListener("pointerdown", ev => onCalResizeStart(ev, slot, hPx, handle.dataset.edge));
   });
   // Empty-space drag to create a new session
   container.querySelectorAll(".cal-day-body[data-di]").forEach(body => {
@@ -2348,6 +2395,7 @@ function wireCalDrag(container, slot, hPx) {
 }
 function onCalDragStart(e) {
   const el = e.currentTarget;
+  if (e.button != null && e.button !== 0) return;
   const hourPx = +el.dataset.hourpx;
   const startMin0 = +el.dataset.startmin;
   const dur = +el.dataset.dur;
@@ -2360,36 +2408,41 @@ function onCalDragStart(e) {
   const startY = e.clientY;
   const startX = e.clientX;
   const timeEl = el.querySelector(".cal-ev-time");
+  const isTouch = e.pointerType === 'touch';
   let finalStartMin = startMin0;
   let dragging = false;
   let needsCapture = false; // setPointerCapture must be called inside a pointer event
+  let maxMoved = 0;         // track peak movement to distinguish tap from scroll
 
-  // Long-press hold: only start drag after 400ms without significant movement
-  const HOLD_MS = 400;
-  const MOVE_THRESHOLD = e.pointerType === 'touch' ? 12 : 6;
+  // Mouse: arm immediately past a tiny threshold (macOS-Calendar feel).
+  // Touch: require a short hold first so a swipe still scrolls the calendar.
+  const MOVE_THRESHOLD = isTouch ? 12 : 4;
+  const HOLD_MS = 380;
+  let holdTimer = null;
 
-  let holdTimer = setTimeout(() => {
-    holdTimer = null;
+  function arm() {
     dragging = true;
     if (timeEl) timeEl.style.display = "block";
     el.classList.add("cal-ev-dragging");
     needsCapture = true; // claim in next pointermove (spec requires pointer event context)
-    if (navigator.vibrate) navigator.vibrate(25);
-  }, HOLD_MS);
-
-  function cancelHold() {
-    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+    if (isTouch && navigator.vibrate) navigator.vibrate(22);
   }
+  function cancelHold() { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } }
 
-  let maxMoved = 0; // track peak movement to distinguish tap from scroll
+  if (isTouch) {
+    holdTimer = setTimeout(() => { holdTimer = null; arm(); }, HOLD_MS);
+  } else {
+    // Mouse: capture immediately so we receive every move; arm on threshold below.
+    try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  }
 
   function move(ev) {
     const dist = Math.sqrt((ev.clientX - startX) ** 2 + (ev.clientY - startY) ** 2);
     if (dist > maxMoved) maxMoved = dist;
     if (!dragging) {
-      // Cancel hold if finger wandered
-      if (dist > MOVE_THRESHOLD) cancelHold();
-      return;
+      if (isTouch) { if (dist > MOVE_THRESHOLD) cancelHold(); return; }
+      if (dist < MOVE_THRESHOLD) return; // mouse: not a drag yet
+      arm();
     }
     // Claim pointer capture here (inside a pointer event handler — required by spec)
     if (needsCapture) {
@@ -2430,7 +2483,7 @@ function onCalDragStart(e) {
     } else if (!dragging) {
       // Touch: only select if the finger barely moved (real tap, not a scroll)
       const TAP_PX = 10;
-      if (e.pointerType === 'touch' && maxMoved > TAP_PX) return;
+      if (isTouch && maxMoved > TAP_PX) return;
       selectCalEvent(slot, di, ei);
     }
   }
@@ -2456,27 +2509,39 @@ function selectCalEvent(slot, di, ei) {
   }
 }
 
-function onCalResizeStart(e, slot, hPx) {
+function onCalResizeStart(e, slot, hPx, edge) {
   e.stopPropagation(); // prevent the move-drag from triggering on the parent
+  if (e.button != null && e.button !== 0) return;
   const handle = e.currentTarget;
   const el = handle.parentElement;
-  const startMin = +el.dataset.startmin;
+  const startMin0 = +el.dataset.startmin;
+  const dur0 = +el.dataset.dur;
   const di = +el.dataset.di, ei = +el.dataset.ei;
   const body = el.parentElement;
   const rect = body.getBoundingClientRect();
   const timeEl = el.querySelector('.cal-ev-time');
-  let endMins = startMin + +el.dataset.dur;
+  const fixedEnd = startMin0 + dur0;   // anchor when dragging the TOP edge
+  const fixedStart = startMin0;        // anchor when dragging the BOTTOM edge
+  let startMin = startMin0, endMins = fixedEnd;
 
-  function yToEndMins(y) {
-    let m = Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
-    return Math.max(startMin + 15, Math.min(m, CAL_END_H * 60));
+  function yToMins(y) {
+    return Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
   }
 
   e.preventDefault();
+  el.classList.add('cal-ev-resizing');
   try { handle.setPointerCapture(e.pointerId); } catch (_) {}
 
   function move(ev) {
-    endMins = yToEndMins(ev.clientY - rect.top);
+    const m = yToMins(ev.clientY - rect.top);
+    if (edge === 'top') {
+      startMin = Math.max(CAL_START_H * 60, Math.min(m, fixedEnd - 15));
+      endMins = fixedEnd;
+    } else {
+      startMin = fixedStart;
+      endMins = Math.max(fixedStart + 15, Math.min(m, CAL_END_H * 60));
+    }
+    el.style.top = ((startMin / 60 - CAL_START_H) * hPx) + 'px';
     el.style.height = Math.max(14, (endMins - startMin) / 60 * hPx) + 'px';
     if (timeEl) { timeEl.style.display = 'block'; timeEl.textContent = _fmtTimeRange(startMin, endMins - startMin, true); }
   }
@@ -2486,6 +2551,8 @@ function onCalResizeStart(e, slot, hPx) {
     handle.removeEventListener('pointerup', up);
     handle.removeEventListener('pointercancel', up);
     try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+    el.classList.remove('cal-ev-resizing');
+    if (startMin === startMin0 && endMins === fixedEnd) return; // pure click, no change
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (days && days[di] && days[di].events[ei]) {
       days[di].events[ei].time = _fmtTimeRange(startMin, endMins - startMin, true);
@@ -2760,8 +2827,9 @@ function renderCalendarPreview() {
   const hasCur = (cur.days || []).length;
   const hasNxt = nxt && (nxt.days || []).length;
   let html = '';
-  if (hasCur) html += `<div><div class="preview-week-label">Current — ${escapeHtml(cur.weekTitle || 'Current Week')}</div><div id="previewCalCur" class="cal-wrap"></div></div>`;
-  if (hasNxt) html += `<div><div class="preview-week-label">Next — ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
+  const curActive = editSlot === 'current', nxtActive = editSlot === 'next';
+  if (hasCur) html += `<div class="prev-week ${curActive ? 'prev-active' : 'prev-idle'}" data-slot="current"><div class="preview-week-label">${curActive ? '✎ Editing · ' : ''}Current — ${escapeHtml(cur.weekTitle || 'Current Week')}</div><div id="previewCalCur" class="cal-wrap"></div></div>`;
+  if (hasNxt) html += `<div class="prev-week ${nxtActive ? 'prev-active' : 'prev-idle'}" data-slot="next"><div class="preview-week-label">${nxtActive ? '✎ Editing · ' : ''}Next — ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
   if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days in either week yet.</div>`;
   body.innerHTML = html;
   if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current');
