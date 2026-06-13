@@ -347,7 +347,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-hour-line { border-bottom: 1px solid #F0EDE8; box-sizing: border-box; }
 .cal-half-line { border-bottom: 1px dashed #F0EDE8; box-sizing: border-box; height: 26px; }
 .cal-ev { position: absolute; left: 2px; right: 2px; border-radius: 3px; padding: 2px 4px; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: default; z-index: 2; }
-.cal-ev-drag { cursor: grab; touch-action: pan-x; transition: box-shadow .12s; }
+.cal-ev-drag { cursor: grab; touch-action: pan-x; transition: box-shadow .12s; user-select: none; -webkit-user-select: none; }
 .cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
 .cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
 .cal-ev-selected { outline: 2px solid var(--ink) !important; outline-offset: 1px; z-index: 3; }
@@ -805,6 +805,7 @@ let editSlot = "current";   // "current" or "next" — which week the edit UI ta
 let calSel = [];            // [{slot,di,ei}] selected calendar tiles (multi-select)
 let calAnchor = null;       // {slot,di,ei} anchor for shift-range selection
 let calHover = null;        // {slot,di} last-hovered day column (paste target)
+let _lastCalTap = null;     // {slot,di,ei,t} last tile tap — used to detect double-click
 let calClip = null;         // { items:[{di,ev}], minDi } copy/paste buffer
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
@@ -2506,7 +2507,16 @@ function onCalDragStart(e) {
       const TAP_PX = 10;
       if (isTouch && maxMoved > TAP_PX) return;
       const mods = ev ? { meta: ev.metaKey || ev.ctrlKey, shift: ev.shiftKey } : {};
-      selectCalEvent(slot, di, ei, mods);
+      // iCal-style: one click selects (so ⌘C copies the tile), two opens the
+      // editor. Touch has no ⌘ key and long-press is reserved for dragging, so
+      // a single tap still opens the editor on touch.
+      const now = Date.now();
+      const sameTile = _lastCalTap && _lastCalTap.slot === slot
+        && _lastCalTap.di === di && _lastCalTap.ei === ei;
+      const isDouble = sameTile && (now - _lastCalTap.t) < 350;
+      _lastCalTap = { slot, di, ei, t: now };
+      const openEditor = !mods.meta && !mods.shift && (isTouch || isDouble);
+      selectCalEvent(slot, di, ei, mods, openEditor);
     }
   }
 
@@ -2548,7 +2558,7 @@ function updateCalSelBar() {
 //  • plain click  → single-select (click again to deselect)
 //  • ⌘/Ctrl click → toggle this tile in/out of the selection
 //  • Shift click  → range-select within the same day; additive across days
-function selectCalEvent(slot, di, ei, mods) {
+function selectCalEvent(slot, di, ei, mods, openEditor) {
   mods = mods || {};
   const meta = mods.meta, shift = mods.shift;
 
@@ -2567,14 +2577,21 @@ function selectCalEvent(slot, di, ei, mods) {
     else calSel.push({ slot, di, ei });
     calAnchor = { slot, di, ei };
   } else {
-    if (calSel.length === 1 && calIsSelected(slot, di, ei)) { clearCalSel(); return; }
-    calSel = [{ slot, di, ei }];
-    calAnchor = { slot, di, ei };
+    // Plain click on the already-selected single tile: when we're opening the
+    // editor (double-click / touch tap) keep it selected and fall through to
+    // open; otherwise toggle the selection off (click-away convenience).
+    if (calSel.length === 1 && calIsSelected(slot, di, ei)) {
+      if (!openEditor) { clearCalSel(); return; }
+    } else {
+      calSel = [{ slot, di, ei }];
+      calAnchor = { slot, di, ei };
+    }
   }
 
   _applyCalSelHighlight();
-  // Inline popover only for a plain single-tile click (never during multi-select)
-  if (!meta && !shift && calSel.length === 1) {
+  // Inline popover only when explicitly requested (double-click on desktop,
+  // single tap on touch) and only for a lone selected tile.
+  if (openEditor && !meta && !shift && calSel.length === 1) {
     const s = calSel[0];
     const el = document.querySelector(`.cal-ev-drag[data-slot="${s.slot}"][data-di="${s.di}"][data-ei="${s.ei}"]`);
     if (el) showCalPopover(s.slot, s.di, s.ei, el);
