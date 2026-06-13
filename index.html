@@ -270,8 +270,11 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .archive-list { display: flex; flex-direction: column; gap: 8px; max-height: 46vh; overflow-y: auto; }
 .archive-item { display: flex; align-items: center; justify-content: space-between; width: 100%; background: var(--warm-white); border: 1.5px solid var(--light-stone); border-radius: 8px; padding: 10px 14px; font-family: 'Source Sans 3', sans-serif; transition: border-color .15s; text-align: left; gap: 10px; }
 .archive-item:hover { border-color: var(--stone); }
-.archive-item .ai-range { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14.5px; color: var(--ink); flex: 1; }
+.archive-item .ai-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.archive-item .ai-range { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14.5px; color: var(--ink); }
 .archive-item .ai-range small { font-family: 'Source Sans 3', sans-serif; font-weight: 400; font-size: 12px; color: var(--stone); margin-left: 6px; }
+.archive-item .ai-players { font-family: 'Source Sans 3', sans-serif; font-size: 11.5px; line-height: 1.45; color: var(--stone); }
+.archive-item .ai-players b { font-weight: 700; color: var(--clay); }
 .ai-btns { display: flex; gap: 6px; flex-shrink: 0; }
 .ai-view-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; white-space: nowrap; transition: all .15s; }
 .ai-view-btn:hover { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
@@ -346,10 +349,14 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-day-body { position: relative; }
 .cal-hour-line { border-bottom: 1px solid #F0EDE8; box-sizing: border-box; }
 .cal-half-line { border-bottom: 1px dashed #F0EDE8; box-sizing: border-box; height: 26px; }
-.cal-ev { position: absolute; left: 2px; right: 2px; border-radius: 3px; padding: 2px 4px; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: default; z-index: 2; }
-.cal-ev-drag { cursor: grab; touch-action: pan-x; transition: box-shadow .12s; user-select: none; -webkit-user-select: none; }
+.cal-ev { position: absolute; left: 2px; right: 2px; box-sizing: border-box; border-radius: 3px; padding: 2px 4px; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: default; z-index: 2; }
+.cal-ev-drag { cursor: grab; touch-action: none; transition: box-shadow .12s; user-select: none; -webkit-user-select: none; }
 .cal-ev-drag:hover { box-shadow: 0 0 0 1.5px rgba(0,0,0,.25) inset; }
 .cal-ev-dragging { cursor: grabbing; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); opacity: .96; }
+/* Floating clone that follows the pointer when dragging a tile (can cross day columns) */
+.cal-ev-fly { position: fixed; z-index: 9999; pointer-events: none; box-shadow: 0 10px 26px rgba(0,0,0,.34); opacity: .96; }
+/* Day column highlighted as the drop target during a cross-day drag */
+.cal-day-body.cal-day-drop { background: rgba(184,105,74,.10); box-shadow: inset 0 0 0 2px var(--clay); }
 .cal-ev-selected { outline: 2px solid var(--ink) !important; outline-offset: 1px; z-index: 3; }
 /* Resize handles: generous hit zones at top & bottom edges (scale with block, capped) */
 .cal-ev-resize { position: absolute; left: 0; right: 0; height: 32%; min-height: 9px; max-height: 16px; cursor: ns-resize; touch-action: none; z-index: 4; }
@@ -380,6 +387,12 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .week-preview-head h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; color: var(--ink); flex: 1; }
 .week-preview-toggle { background: transparent; border: 1.5px solid var(--light-stone); border-radius: 6px; padding: 4px 11px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); cursor: pointer; }
 .week-preview-toggle:hover { background: var(--warm-white); }
+.cal-type-seg { display: inline-flex; border: 1.5px solid var(--light-stone); border-radius: 7px; overflow: hidden; flex-shrink: 0; }
+.cal-type-seg .seg-btn { background: transparent; border: none; padding: 4px 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--dark-stone); cursor: pointer; transition: background .12s, color .12s; }
+.cal-type-seg .seg-btn + .seg-btn { border-left: 1.5px solid var(--light-stone); }
+.cal-type-seg .seg-btn:not(.active):hover { background: var(--warm-white); }
+.cal-type-seg .seg-btn.active { background: var(--ink); color: var(--warm-white); }
+.cal-type-seg .seg-btn[data-type="excel"].active { background: var(--clay); }
 .preview-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (min-width: 1025px) { .preview-weeks { grid-template-columns: 1fr; gap: 16px; } }
 .preview-week-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--dark-stone); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
@@ -637,6 +650,10 @@ button.stat { cursor: pointer; font: inherit; }
     <div class="week-preview" id="weekPreview">
       <div class="week-preview-head">
         <h3>Week Overview</h3>
+        <div class="cal-type-seg" id="previewTypeSeg" role="group" aria-label="Calendar type filter">
+          <button type="button" class="seg-btn active" data-type="all">All</button>
+          <button type="button" class="seg-btn" data-type="excel">Excel</button>
+        </div>
         <button class="week-preview-toggle" id="weekPreviewToggle">Hide</button>
       </div>
       <div id="weekPreviewBody">
@@ -695,7 +712,7 @@ button.stat { cursor: pointer; font: inherit; }
   <div class="modal">
     <h2>Schedule Archive</h2>
     <p>Finalized weeks (Mon–Sun), captured Sunday night. Search a date or scroll to view a past schedule.</p>
-    <input class="archive-search" id="archiveSearch" placeholder="Search dates… e.g. May 18">
+    <input class="archive-search" id="archiveSearch" placeholder="Search players or dates… e.g. Dariq, May 18">
     <div class="archive-list" id="archiveList"></div>
     <div class="modal-actions">
       <span class="archive-status" id="archiveStatus"></span>
@@ -800,6 +817,7 @@ let data = null;           // current working copy (may have unpublished drafts)
 let internFilter = "";
 let playerFilter = "";
 let typeFilter = "all";
+let previewTypeFilter = "all";   // edit-calendar screenshot toggle: "all" or "excel" (independent of the viewer's typeFilter)
 let currentMode = "display";
 let editSlot = "current";   // "current" or "next" — which week the edit UI targets
 let calSel = [];            // [{slot,di,ei}] selected calendar tiles (multi-select)
@@ -1110,6 +1128,48 @@ function buildCaptureNode(filtered, opts = {}) {
     html += `</div>`;
   });
   html += `</div>`;
+
+  // ---- Player session tally footer (archive captures only) ----
+  // Split by session shape: Individuals = one name in the title (1-on-1),
+  // Groups = multiple names in the title.
+  if (opts.showPlayerTally) {
+    const indiv = {}, group = {};
+    let indivSessions = 0, groupSessions = 0;
+    (data.days || []).forEach(day => {
+      (day.events || []).forEach(ev => {
+        if (typeFilter !== "all" && ev.type !== typeFilter) return;
+        const names = titlePlayerNames(ev.title);   // players live in e.title
+        if (names.length === 1) {
+          indivSessions++;
+          indiv[names[0]] = (indiv[names[0]] || 0) + 1;
+        } else if (names.length > 1) {
+          groupSessions++;
+          names.forEach(p => { const name = (p || "").trim(); if (name) group[name] = (group[name] || 0) + 1; });
+        }
+      });
+    });
+    const sortRows = obj => Object.entries(obj).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    const indivRows = sortRows(indiv), groupRows = sortRows(group);
+    if (indivRows.length || groupRows.length) {
+      const typeLabel = typeFilter === "excel" ? "Excel Client" : typeFilter === "other" ? "Other" : "All Types";
+      const chip = ([name, n]) => `
+              <div style="background:#fff;border:1.5px solid #D6D1CC;border-radius:8px;padding:6px 12px;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:7px;">
+                <span style="font-weight:700;font-size:13px;color:#111111;">${escapeHtml(name)}</span>
+                <span style="background:#2E7D32;color:#F4F1EC;border-radius:10px;font-size:11px;font-weight:700;padding:2px 8px;line-height:1.4;">${n}</span>
+              </div>`;
+      const subSection = (label, rows, sessions) => rows.length ? `
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#8A837D;margin:0 0 7px;">${label} <span style="color:#B3ACA6;">· ${sessions} session${sessions !== 1 ? "s" : ""}</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;">${rows.map(chip).join("")}</div>` : "";
+      html += `
+        <div style="margin-top:22px;padding-top:16px;border-top:2px solid #D6D1CC;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#5C5652;margin-bottom:12px;">
+            Player Session Totals · ${escapeHtml(typeLabel)}
+          </div>
+          ${subSection("Individuals", indivRows, indivSessions)}
+          ${subSection("Groups", groupRows, groupSessions)}
+        </div>`;
+    }
+  }
 
   // ---- Intern session tally footer (archive captures only) ----
   if (opts.showInternTally) {
@@ -1556,7 +1616,7 @@ async function captureWeekPNGForType(type) {
   // Temporarily override globals so buildCaptureNode renders with correct type and no name filters
   const savedType = typeFilter, savedIntern = internFilter, savedPlayer = playerFilter;
   typeFilter = type; internFilter = ""; playerFilter = "";
-  const cap = buildCaptureNode(true, { showInternTally: true });
+  const cap = buildCaptureNode(true, { showInternTally: true, showPlayerTally: true });
   typeFilter = savedType; internFilter = savedIntern; playerFilter = savedPlayer;
   document.body.appendChild(cap);
   await new Promise(r => setTimeout(r, 150));
@@ -1566,6 +1626,16 @@ async function captureWeekPNGForType(type) {
   } finally {
     document.body.removeChild(cap);
   }
+}
+
+// Unique player/client names parsed from every session title across a set of
+// days — captured at archive time so archived weeks are searchable by who trained.
+function weekRosterPlayers(days) {
+  const players = new Set();
+  (days || []).forEach(day => (day.events || []).forEach(ev => {
+    titlePlayerNames(ev.title).forEach(n => { const t = (n || "").trim(); if (t) players.add(t); });
+  }));
+  return [...players].sort((a, b) => a.localeCompare(b));
 }
 
 async function archiveCurrentWeek(auto) {
@@ -1591,7 +1661,7 @@ async function archiveCurrentWeek(auto) {
     await ghPutFile(pathExcel, b64Excel, "Archive week " + w.range + " (Excel Client)");
 
     data.archive = data.archive.filter(a => a.key !== w.key);
-    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, ts: Date.now() });
+    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, players: weekRosterPlayers(data.days), ts: Date.now() });
     data.archive.sort((a, b) => b.key.localeCompare(a.key));
     await publish();   // commit updated schedule.json (now includes the archive index)
     setArchiveStatus("✓ Archived " + w.range);
@@ -1607,13 +1677,35 @@ function renderArchiveList(filter) {
   const list = document.getElementById("archiveList");
   const arr = (data.archive || []).slice().sort((a, b) => b.key.localeCompare(a.key));
   const f = (filter || "").trim().toLowerCase();
-  const show = arr.filter(a => !f || a.range.toLowerCase().includes(f) || (a.title || "").toLowerCase().includes(f) || a.key.includes(f));
+  const show = arr.filter(a => !f
+    || a.range.toLowerCase().includes(f)
+    || (a.title || "").toLowerCase().includes(f)
+    || a.key.includes(f)
+    || (a.players || []).some(n => n.toLowerCase().includes(f)));   // players captured at archive time
   if (!arr.length) {
     list.innerHTML = `<div class="archive-empty">No archived weeks yet. The current week is captured automatically on Sunday night, or use the button below.</div>`;
     return;
   }
+  // Compact preview of the players captured that week — surfaces matches first and bolds them.
+  const rosterPreview = (names, q) => {
+    if (!names || !names.length) return "";
+    let ordered = names;
+    if (q) {
+      const hit = names.filter(n => n.toLowerCase().includes(q));
+      ordered = hit.concat(names.filter(n => !n.toLowerCase().includes(q)));
+    }
+    const MAX = 10;
+    const shown = ordered.slice(0, MAX).map(n =>
+      (q && n.toLowerCase().includes(q)) ? `<b>${escapeHtml(n)}</b>` : escapeHtml(n)
+    ).join(", ");
+    const more = ordered.length > MAX ? ` +${ordered.length - MAX} more` : "";
+    return `<span class="ai-players">${shown}${more}</span>`;
+  };
   list.innerHTML = show.map(a => `<div class="archive-item">
-    <span class="ai-range">${escapeHtml(a.range)}${a.title ? ` <small>${escapeHtml(a.title)}</small>` : ""}</span>
+    <div class="ai-main">
+      <span class="ai-range">${escapeHtml(a.range)}${a.title ? ` <small>${escapeHtml(a.title)}</small>` : ""}</span>
+      ${rosterPreview(a.players, f)}
+    </div>
     <div class="ai-btns">
       <button class="ai-view-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">All Types →</button>
       ${a.pathExcel ? `<button class="ai-view-btn excel" data-path="${escapeAttr(a.pathExcel)}" data-range="${escapeAttr(a.range)}" data-label="Excel Client">Excel →</button>` : ""}
@@ -1711,12 +1803,17 @@ function personMatchesTerms(name, terms) {
 function internsOf(e) { return [...(e.people || []), ...(e.players || [])]; }
 // Count player/client names in a title — the comma-separated names before the
 // " – Excel" style suffix and ignoring any trailing "(...)" note.
-function countTitlePlayers(title) {
+// Parse the player/client names out of a session title
+// (e.g. "Dariq, KJ \u2013 skills (gym 2)" -> ["Dariq", "KJ"]).
+function titlePlayerNames(title) {
   let t = String(title || "").trim();
-  if (!t) return 0;
+  if (!t) return [];
   t = t.split(/\s[\u2013\u2014-]\s/)[0];   // drop everything after an en/em dash or hyphen
   t = t.replace(/\([^)]*\)/g, "");          // drop parenthetical notes
-  return t.split(",").map(s => s.trim()).filter(Boolean).length;
+  return t.split(",").map(s => s.trim()).filter(Boolean);
+}
+function countTitlePlayers(title) {
+  return titlePlayerNames(title).length;
 }
 // For calendar blocks: show up to `max` player names parsed from the title.
 // Falls back to the raw title for non-name labels (e.g. "Open Gym").
@@ -2300,7 +2397,33 @@ function _calTop(h, min) {
   return Math.round(Math.max(0, (h + min / 60 - CAL_START_H) * CAL_HOUR_PX));
 }
 
-function renderCalendar(days, container, compact, editable, slot) {
+// Pack overlapping events into side-by-side columns (iCal-style). Mutates each
+// item, adding { col, cols }: its column index and the column count of its
+// overlap cluster. Items must carry numeric .sMin / .eMin (minutes of day).
+function assignCalColumns(items) {
+  if (!items.length) return;
+  items.sort((a, b) => a.sMin - b.sMin || a.eMin - b.eMin);
+  let cluster = [], clusterEnd = -Infinity;
+  const flush = () => {
+    const colEnds = [];   // colEnds[c] = end minute of the last event placed in column c
+    cluster.forEach(it => {
+      let c = 0;
+      while (c < colEnds.length && it.sMin < colEnds[c]) c++;   // first column it doesn't overlap
+      it.col = c;
+      colEnds[c] = it.eMin;
+    });
+    cluster.forEach(it => { it.cols = colEnds.length; });
+    cluster = []; clusterEnd = -Infinity;
+  };
+  items.forEach(it => {
+    if (cluster.length && it.sMin >= clusterEnd) flush();   // gap → close the cluster
+    cluster.push(it);
+    clusterEnd = Math.max(clusterEnd, it.eMin);
+  });
+  flush();
+}
+
+function renderCalendar(days, container, compact, editable, slot, typeOnly) {
   if (!days || !days.length) { container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--stone);font-size:13px;">No days yet.</div>`; return; }
   const totalHours = CAL_END_H - CAL_START_H;
   const totalPx = totalHours * CAL_HOUR_PX;
@@ -2322,6 +2445,7 @@ function renderCalendar(days, container, compact, editable, slot) {
     const noTime = [];
     const timed = [];
     (day.events || []).forEach((ev, ei) => {
+      if (typeOnly && ev.type !== typeOnly) return;   // type filter (preview screenshots); ei stays the real array index
       const t = parseEventTimes(ev.time);
       if (t) timed.push({ ev, t, ei });
       else noTime.push(ev);
@@ -2335,7 +2459,15 @@ function renderCalendar(days, container, compact, editable, slot) {
     }
 
     let evHtml = '';
-    timed.forEach(({ ev, t, ei }) => {
+    // Lay overlapping events out into side-by-side columns (iCal-style).
+    const laid = timed.map(o => {
+      const sMin = o.t.start.h * 60 + o.t.start.min;
+      let eMin = o.t.end.h * 60 + o.t.end.min;
+      if (eMin <= sMin) eMin = sMin + 15;   // guard zero/negative spans
+      return { ev: o.ev, t: o.t, ei: o.ei, sMin, eMin, col: 0, cols: 1 };
+    });
+    assignCalColumns(laid);
+    laid.forEach(({ ev, t, ei, col, cols }) => {
       const s = STYLES[ev.type] || STYLES.other;
       const hPxLocal = compact ? hourPx : CAL_HOUR_PX;
       const top = Math.round(Math.max(0, (t.start.h + t.start.min / 60 - CAL_START_H) * hPxLocal));
@@ -2344,10 +2476,16 @@ function renderCalendar(days, container, compact, editable, slot) {
       const startMin = t.start.h * 60 + t.start.min;
       const durMin = Math.max(15, (t.end.h * 60 + t.end.min) - startMin);
       const isRange = String(ev.time).split(/\s*(?:–|—|-|to)\s*/i).filter(Boolean).length > 1;
+      // Split the column into side-by-side tracks when events overlap in time.
+      let horiz = '';
+      if (cols > 1) {
+        const wPct = 100 / cols, leftPct = col * wPct;
+        horiz = `left:calc(${leftPct}% + 1px);width:calc(${wPct}% - 2px);right:auto;`;
+      }
       const editAttrs = editable
         ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hPxLocal}"`
         : '';
-      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
+      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
         <div class="cal-ev-title">${calTitleNames(ev.title, 6)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
         ${editable ? '<div class="cal-ev-resize cal-ev-resize-t" data-edge="top"></div><div class="cal-ev-resize cal-ev-resize-b" data-edge="bottom"></div>' : ''}
@@ -2424,30 +2562,55 @@ function onCalDragStart(e) {
   const isRange = el.dataset.range === "1";
   const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
   const body = el.parentElement;
-  const bodyH = body.clientHeight;
-  const elH = el.offsetHeight;
-  const origTop = (startMin0 / 60 - CAL_START_H) * hourPx;
+  const daysEl = el.closest('.cal-days');   // confine day-hopping to this week's columns
   const startY = e.clientY;
   const startX = e.clientX;
-  const timeEl = el.querySelector(".cal-ev-time");
   const isTouch = e.pointerType === 'touch';
   let finalStartMin = startMin0;
+  let finalDi = di;
   let dragging = false;
   let needsCapture = false; // setPointerCapture must be called inside a pointer event
   let maxMoved = 0;         // track peak movement to distinguish tap from scroll
 
+  // Floating-clone state — lets the tile travel across day columns (which clip overflow).
+  let ghost = null, grabDX = 0, grabDY = 0, ghostH = 0, dropBody = null;
+
   // Mouse: arm immediately past a tiny threshold (macOS-Calendar feel).
-  // Touch: require a short hold first so a swipe still scrolls the calendar.
+  // Touch: require a short hold first so a quick swipe isn't read as a drag.
   const MOVE_THRESHOLD = isTouch ? 12 : 4;
   const HOLD_MS = 380;
   let holdTimer = null;
 
+  function setDropTarget(b) {
+    if (b === dropBody) return;
+    if (dropBody) dropBody.classList.remove('cal-day-drop');
+    dropBody = b;
+    if (dropBody) dropBody.classList.add('cal-day-drop');
+  }
+
   function arm() {
     dragging = true;
-    if (timeEl) timeEl.style.display = "block";
     el.classList.add("cal-ev-dragging");
     needsCapture = true; // claim in next pointermove (spec requires pointer event context)
     if (isTouch && navigator.vibrate) navigator.vibrate(22);
+    // Lift a floating clone that follows the pointer and isn't clipped by columns.
+    const r = el.getBoundingClientRect();
+    grabDX = startX - r.left;
+    grabDY = startY - r.top;
+    ghostH = r.height;
+    ghost = el.cloneNode(true);
+    ghost.querySelectorAll('.cal-ev-resize').forEach(n => n.remove());
+    ghost.classList.add('cal-ev-fly');
+    ghost.classList.remove('cal-ev-dragging');
+    ghost.style.left = r.left + 'px';
+    ghost.style.top = r.top + 'px';
+    ghost.style.width = r.width + 'px';
+    ghost.style.height = r.height + 'px';
+    ghost.style.margin = '0';
+    const gt = ghost.querySelector('.cal-ev-time');
+    if (gt) gt.style.display = 'block';
+    document.body.appendChild(ghost);
+    el.style.opacity = '0.32';   // dimmed placeholder marks where it started
   }
   function cancelHold() { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } }
 
@@ -2472,13 +2635,35 @@ function onCalDragStart(e) {
       try { el.setPointerCapture(ev.pointerId); } catch (_) {}
     }
     ev.preventDefault();
-    const dy = ev.clientY - startY;
-    let top = Math.max(0, Math.min(origTop + dy, bodyH - elH));
-    let mins = Math.round(((top / hourPx) + CAL_START_H) * 60 / 15) * 15;
+
+    // Float the clone with the pointer (both axes).
+    if (ghost) {
+      ghost.style.left = (ev.clientX - grabDX) + 'px';
+      ghost.style.top = (ev.clientY - grabDY) + 'px';
+    }
+
+    // Which day column is under the pointer? (same week only; the clone ignores hit-testing)
+    let overBody = null;
+    const elAt = document.elementFromPoint(ev.clientX, ev.clientY);
+    if (elAt) {
+      const b = elAt.closest('.cal-day-body[data-di]');
+      if (b && daysEl && daysEl.contains(b)) overBody = b;
+    }
+    setDropTarget(overBody);
+    finalDi = overBody ? +overBody.dataset.di : di;
+
+    // Snap a start time from the pointer position within the target (or original) column.
+    const refBody = overBody || body;
+    const rb = refBody.getBoundingClientRect();
+    let topInBody = (ev.clientY - grabDY) - rb.top;
+    topInBody = Math.max(0, Math.min(topInBody, rb.height - ghostH));
+    let mins = Math.round(((topInBody / hourPx) + CAL_START_H) * 60 / 15) * 15;
     mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
     finalStartMin = mins;
-    el.style.top = ((mins / 60 - CAL_START_H) * hourPx) + "px";
-    if (timeEl) timeEl.textContent = _fmtTimeRange(mins, dur, isRange);
+    if (ghost) {
+      const gt = ghost.querySelector('.cal-ev-time');
+      if (gt) gt.textContent = _fmtTimeRange(mins, dur, isRange);
+    }
   }
 
   function cleanup() {
@@ -2488,21 +2673,37 @@ function onCalDragStart(e) {
     el.removeEventListener("pointerup", up);
     el.removeEventListener("pointercancel", cancel);
     el.classList.remove("cal-ev-dragging");
+    el.style.opacity = '';
+    setDropTarget(null);
+    if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
+    ghost = null;
   }
 
   // pointercancel = scroll/system took over — just clean up, never select
   function cancel() { cleanup(); }
 
   function up(ev) {
+    const wasDragging = dragging;
+    const tgtDi = finalDi;
+    const newMin = finalStartMin;
     cleanup();
-    if (dragging && finalStartMin !== startMin0) {
+    if (wasDragging) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
-      if (days && days[di] && days[di].events[ei]) {
-        days[di].events[ei].time = _fmtTimeRange(finalStartMin, dur, isRange);
+      const moved = (tgtDi !== di) || (newMin !== startMin0);
+      if (moved && days && days[di] && days[di].events && days[di].events[ei]) {
+        const evObj = days[di].events[ei];
+        evObj.time = _fmtTimeRange(newMin, dur, isRange);
+        if (tgtDi !== di && days[tgtDi]) {
+          days[di].events.splice(ei, 1);                                 // pull from the source day
+          (days[tgtDi].events = days[tgtDi].events || []).push(evObj);   // drop into the target day
+          clearCalSel();                                                 // indices shifted — clear stale selection
+        }
         saveDraft();
         renderEdit();
+      } else {
+        renderEdit();   // nothing changed; redraw to clear the dimmed placeholder
       }
-    } else if (!dragging) {
+    } else {
       // Touch: only select if the finger barely moved (real tap, not a scroll)
       const TAP_PX = 10;
       if (isTouch && maxMoved > TAP_PX) return;
@@ -3004,8 +3205,9 @@ function renderCalendarPreview() {
   if (hasNxt) html += `<div class="prev-week ${nxtActive ? 'prev-active' : 'prev-idle'}" data-slot="next"><div class="preview-week-label">${nxtActive ? '✎ Editing · ' : ''}Next — ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
   if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days in either week yet.</div>`;
   body.innerHTML = html;
-  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current');
-  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), compactPrev, true, 'next');
+  const typeOnly = previewTypeFilter === "excel" ? "excel" : null;
+  if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current', typeOnly);
+  if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), compactPrev, true, 'next', typeOnly);
 }
 
 // ============ WIRE UP ============
@@ -3083,6 +3285,13 @@ document.getElementById("weekPreviewToggle").addEventListener("click", () => {
   document.getElementById("weekPreviewBody").classList.toggle("hidden", !weekPreviewVisible);
   document.getElementById("weekPreviewToggle").textContent = weekPreviewVisible ? "Hide" : "Show";
   if (weekPreviewVisible) renderCalendarPreview();
+});
+document.getElementById("previewTypeSeg").addEventListener("click", e => {
+  const btn = e.target.closest(".seg-btn");
+  if (!btn || btn.dataset.type === previewTypeFilter) return;
+  previewTypeFilter = btn.dataset.type;
+  document.querySelectorAll("#previewTypeSeg .seg-btn").forEach(b => b.classList.toggle("active", b.dataset.type === previewTypeFilter));
+  renderCalendarPreview();
 });
 document.getElementById("weekTitleInput").addEventListener("change", function(){ ed().weekTitle = this.value; saveDraft(); if (editSlot === "current") document.getElementById("weekTitleDisplay").textContent = this.value; });
 document.getElementById("publishBtn").addEventListener("click", publish);
