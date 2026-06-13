@@ -637,9 +637,9 @@ button.stat { cursor: pointer; font: inherit; }
     <div class="week-preview" id="weekPreview">
       <div class="week-preview-head">
         <h3>Week Overview</h3>
-        <button class="week-preview-toggle" id="weekPreviewToggle">Show</button>
+        <button class="week-preview-toggle" id="weekPreviewToggle">Hide</button>
       </div>
-      <div id="weekPreviewBody" class="hidden">
+      <div id="weekPreviewBody">
         <div class="preview-weeks" id="previewWeeks"></div>
       </div>
     </div>
@@ -3077,7 +3077,7 @@ document.addEventListener('keydown', e => {
 window.addEventListener('blur', () => document.body.classList.remove('modifier-held'));
 
 // Week preview toggle in edit mode
-let weekPreviewVisible = false;
+let weekPreviewVisible = true;
 document.getElementById("weekPreviewToggle").addEventListener("click", () => {
   weekPreviewVisible = !weekPreviewVisible;
   document.getElementById("weekPreviewBody").classList.toggle("hidden", !weekPreviewVisible);
