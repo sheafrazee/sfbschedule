@@ -399,6 +399,18 @@ body.editing-next .action-bar { box-shadow: inset 5px 0 0 var(--clay); }
 .prev-week.prev-active .preview-week-label { color: var(--week-accent); }
 .prev-week.prev-active .cal-wrap { box-shadow: 0 0 0 2px var(--week-accent); border-color: var(--week-accent); }
 .prev-week.prev-idle { opacity: .5; }
+
+/* ---- Multi-select helper bar (keyboard batch ops) ---- */
+.cal-sel-bar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 96;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--ink); color: var(--warm-white);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px;
+  padding: 8px 14px; border-radius: 11px; box-shadow: 0 8px 28px rgba(17,17,17,.32); }
+.cal-sel-bar.hidden { display: none; }
+body.modifier-held .cal-popover { pointer-events: none; }
+.cal-sel-bar .cs-sep { width: 1px; height: 16px; background: rgba(244,241,236,.22); }
+.cal-sel-bar .k { background: rgba(244,241,236,.16); border-radius: 5px; padding: 2px 6px; font-size: 11px; margin-left: 4px; }
+@media (max-width: 600px) { .cal-sel-bar { bottom: calc(112px + env(safe-area-inset-bottom)); font-size: 11px; } }
 @media (max-width: 780px) { .preview-weeks { grid-template-columns: 1fr; } }
 
 /* ---- Search fields (display mode) ---- */
@@ -713,6 +725,8 @@ button.stat { cursor: pointer; font: inherit; }
   <button class="mode-btn" id="editModeBtn" data-mode="edit">Edit</button>
 </div>
 
+<div class="cal-sel-bar hidden" id="calSelBar"></div>
+
 <div class="intern-tally hidden collapsed" id="internTally">
   <div class="intern-tally-head" id="internTallyHead">
     <span class="t" id="internTallyTitle">Intern sessions</span>
@@ -788,7 +802,10 @@ let playerFilter = "";
 let typeFilter = "all";
 let currentMode = "display";
 let editSlot = "current";   // "current" or "next" — which week the edit UI targets
-let calSelection = null;    // { slot, di, ei } — selected calendar event
+let calSel = [];            // [{slot,di,ei}] selected calendar tiles (multi-select)
+let calAnchor = null;       // {slot,di,ei} anchor for shift-range selection
+let calHover = null;        // {slot,di} last-hovered day column (paste target)
+let calClip = null;         // { items:[{di,ev}], minDi } copy/paste buffer
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
 // shown in display mode.
@@ -2244,7 +2261,7 @@ function setMode(mode) {
   document.getElementById("editView").classList.toggle("hidden", mode !== "edit");
   if (mode === "display") renderDisplay();
   else renderEdit();
-  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); }
+  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); }
 }
 
 // ============ JSON IO ============
@@ -2378,20 +2395,24 @@ function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll(".cal-ev-resize").forEach(handle => {
     handle.addEventListener("pointerdown", ev => onCalResizeStart(ev, slot, hPx, handle.dataset.edge));
   });
-  // Empty-space drag to create a new session
+  // Empty-space drag to create a new session + hovered-day tracking for paste
   container.querySelectorAll(".cal-day-body[data-di]").forEach(body => {
+    const di = +body.dataset.di;
+    body.addEventListener("pointerenter", () => { calHover = { slot, di }; });
     body.addEventListener("pointerdown", ev => {
       if (ev.button !== 0) return;
       if (ev.target.closest('.cal-ev-drag')) return; // let existing-event drag handle it
       onCalCreateStart(ev, slot, hPx);
     });
   });
-  // Re-apply selection highlight after re-render
-  if (calSelection && calSelection.slot === slot) {
-    const sel = container.querySelector(`.cal-ev-drag[data-di="${calSelection.di}"][data-ei="${calSelection.ei}"]`);
-    if (sel) sel.classList.add('cal-ev-selected');
-    else calSelection = null;
-  }
+  // Re-apply multi-select highlight after re-render (prune tiles that no longer exist)
+  calSel = calSel.filter(s => {
+    if (s.slot !== slot) return true; // a different week's container handles its own
+    const el = container.querySelector(`.cal-ev-drag[data-di="${s.di}"][data-ei="${s.ei}"]`);
+    if (el) { el.classList.add('cal-ev-selected'); return true; }
+    return false;
+  });
+  updateCalSelBar();
 }
 function onCalDragStart(e) {
   const el = e.currentTarget;
@@ -2471,7 +2492,7 @@ function onCalDragStart(e) {
   // pointercancel = scroll/system took over — just clean up, never select
   function cancel() { cleanup(); }
 
-  function up() {
+  function up(ev) {
     cleanup();
     if (dragging && finalStartMin !== startMin0) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
@@ -2484,7 +2505,8 @@ function onCalDragStart(e) {
       // Touch: only select if the finger barely moved (real tap, not a scroll)
       const TAP_PX = 10;
       if (isTouch && maxMoved > TAP_PX) return;
-      selectCalEvent(slot, di, ei);
+      const mods = ev ? { meta: ev.metaKey || ev.ctrlKey, shift: ev.shiftKey } : {};
+      selectCalEvent(slot, di, ei, mods);
     }
   }
 
@@ -2493,20 +2515,156 @@ function onCalDragStart(e) {
   el.addEventListener("pointercancel", cancel);
 }
 
-function selectCalEvent(slot, di, ei) {
-  // Clear previous selection
+function calIsSelected(slot, di, ei) {
+  return calSel.some(s => s.slot === slot && s.di === di && s.ei === ei);
+}
+function _calDays(slot) { return slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days; }
+function _applyCalSelHighlight() {
   document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
-  if (calSelection && calSelection.slot === slot && calSelection.di === di && calSelection.ei === ei) {
-    calSelection = null; // click same event again → deselect
+  calSel.forEach(s => {
+    const el = document.querySelector(`.cal-ev-drag[data-slot="${s.slot}"][data-di="${s.di}"][data-ei="${s.ei}"]`);
+    if (el) el.classList.add('cal-ev-selected');
+  });
+  updateCalSelBar();
+}
+function clearCalSel() {
+  calSel = []; calAnchor = null;
+  document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
+  hideCalPopover();
+  updateCalSelBar();
+}
+function updateCalSelBar() {
+  const bar = document.getElementById('calSelBar');
+  if (!bar) return;
+  if (!calSel.length || currentMode !== 'edit') { bar.classList.add('hidden'); return; }
+  const n = calSel.length;
+  bar.innerHTML = `<span>${n} tile${n !== 1 ? 's' : ''} selected</span>`
+    + `<span class="cs-sep"></span>`
+    + `<span class="k">⌘C</span> Copy <span class="k">⌘V</span> Paste <span class="k">⌫</span> Delete`;
+  bar.classList.remove('hidden');
+}
+
+// Click selection with modifier keys:
+//  • plain click  → single-select (click again to deselect)
+//  • ⌘/Ctrl click → toggle this tile in/out of the selection
+//  • Shift click  → range-select within the same day; additive across days
+function selectCalEvent(slot, di, ei, mods) {
+  mods = mods || {};
+  const meta = mods.meta, shift = mods.shift;
+
+  // Selections live within one week at a time; switching weeks starts fresh
+  if ((meta || shift) && calSel.length && calSel[0].slot !== slot) { calSel = []; calAnchor = null; }
+
+  if (shift && calAnchor && calAnchor.slot === slot && calAnchor.di === di) {
+    const a = Math.min(calAnchor.ei, ei), b = Math.max(calAnchor.ei, ei);
+    calSel = calSel.filter(s => !(s.slot === slot && s.di === di));
+    for (let k = a; k <= b; k++) calSel.push({ slot, di, ei: k });
+  } else if (shift && calAnchor && calAnchor.slot === slot) {
+    if (!calIsSelected(slot, di, ei)) calSel.push({ slot, di, ei });
+    calAnchor = { slot, di, ei };
+  } else if (meta) {
+    if (calIsSelected(slot, di, ei)) calSel = calSel.filter(s => !(s.slot === slot && s.di === di && s.ei === ei));
+    else calSel.push({ slot, di, ei });
+    calAnchor = { slot, di, ei };
+  } else {
+    if (calSel.length === 1 && calIsSelected(slot, di, ei)) { clearCalSel(); return; }
+    calSel = [{ slot, di, ei }];
+    calAnchor = { slot, di, ei };
+  }
+
+  _applyCalSelHighlight();
+  // Inline popover only for a plain single-tile click (never during multi-select)
+  if (!meta && !shift && calSel.length === 1) {
+    const s = calSel[0];
+    const el = document.querySelector(`.cal-ev-drag[data-slot="${s.slot}"][data-di="${s.di}"][data-ei="${s.ei}"]`);
+    if (el) showCalPopover(s.slot, s.di, s.ei, el);
+  } else {
     hideCalPopover();
-    return;
   }
-  calSelection = { slot, di, ei };
-  const sel = document.querySelector(`.cal-ev-drag[data-slot="${slot}"][data-di="${di}"][data-ei="${ei}"]`);
-  if (sel) {
-    sel.classList.add('cal-ev-selected');
-    showCalPopover(slot, di, ei, sel);
-  }
+}
+
+function selectAllCal() {
+  const slot = editSlot;
+  const days = _calDays(slot);
+  if (!days) return false;
+  calSel = [];
+  days.forEach((day, di) => (day.events || []).forEach((ev, ei) => calSel.push({ slot, di, ei })));
+  if (!calSel.length) return false;
+  calAnchor = calSel[calSel.length - 1];
+  hideCalPopover();
+  _applyCalSelHighlight();
+  return true;
+}
+
+// ---- Batch operations driven by keyboard ----
+function deleteCalSelection() {
+  if (!calSel.length) return false;
+  const groups = {};
+  calSel.forEach(s => { const k = s.slot + ':' + s.di; (groups[k] = groups[k] || []).push(s.ei); });
+  Object.keys(groups).forEach(k => {
+    const slot = k.slice(0, k.indexOf(':')), di = +k.slice(k.indexOf(':') + 1);
+    const days = _calDays(slot);
+    if (!days || !days[di]) return;
+    groups[k].sort((a, b) => b - a).forEach(ei => days[di].events.splice(ei, 1));
+  });
+  const n = calSel.length;
+  clearCalSel();
+  saveDraft();
+  renderEdit();
+  showToast(`Deleted ${n} session${n !== 1 ? 's' : ''}`);
+  return true;
+}
+function copyCalSelection() {
+  if (!calSel.length) return false;
+  const slot = calSel[0].slot;
+  const days = _calDays(slot);
+  const items = [];
+  calSel.filter(s => s.slot === slot).forEach(s => {
+    if (days && days[s.di] && days[s.di].events[s.ei]) {
+      items.push({ di: s.di, ev: JSON.parse(JSON.stringify(days[s.di].events[s.ei])) });
+    }
+  });
+  if (!items.length) return false;
+  calClip = { items, minDi: Math.min(...items.map(i => i.di)) };
+  showToast(`Copied ${items.length} session${items.length !== 1 ? 's' : ''}`);
+  return true;
+}
+function pasteCalSelection() {
+  if (!calClip || !calClip.items.length) return false;
+  const slot = editSlot;                       // paste into the week being edited
+  const days = _calDays(slot);
+  if (!days || !days.length) { showToast('Add a day before pasting'); return false; }
+  // Target day: hovered column → current selection → original copy day
+  let tgt = (calHover && calHover.slot === slot) ? calHover.di
+          : (calSel.length && calSel[0].slot === slot) ? calSel[0].di
+          : calClip.minDi;
+  tgt = Math.max(0, Math.min(tgt, days.length - 1));
+
+  const MARK = '__paste_' + Date.now();
+  calClip.items.forEach(it => {
+    const dIdx = Math.max(0, Math.min(tgt + (it.di - calClip.minDi), days.length - 1));
+    const clone = JSON.parse(JSON.stringify(it.ev));
+    clone[MARK] = true;
+    const events = days[dIdx].events || (days[dIdx].events = []);
+    const t = parseEventTimes(clone.time);
+    const sm = t ? t.start.h * 60 + t.start.min : 1e9;
+    let idx = events.length;
+    for (let i = 0; i < events.length; i++) {
+      const et = parseEventTimes(events[i].time);
+      if (et && (et.start.h * 60 + et.start.min) > sm) { idx = i; break; }
+    }
+    events.splice(idx, 0, clone);
+  });
+  // Resolve final indices via the marker, then strip it so it never persists
+  const newSel = [];
+  days.forEach((day, di) => (day.events || []).forEach((ev, ei) => {
+    if (ev[MARK]) { delete ev[MARK]; newSel.push({ slot, di, ei }); }
+  }));
+  calSel = newSel; calAnchor = newSel[newSel.length - 1] || null;
+  saveDraft();
+  renderEdit();
+  showToast(`Pasted ${newSel.length} session${newSel.length !== 1 ? 's' : ''}`);
+  return true;
 }
 
 function onCalResizeStart(e, slot, hPx, edge) {
@@ -2570,9 +2728,7 @@ function onCalResizeStart(e, slot, hPx, edge) {
 // Mouse: click+drag (10px threshold). Touch: long press (400ms) then drag.
 function onCalCreateStart(e, slot, hPx) {
   // Clicking empty space clears selection
-  document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
-  calSelection = null;
-  hideCalPopover();
+  clearCalSel();
 
   const isTouch = e.pointerType === 'touch';
   const body = e.currentTarget;
@@ -2754,8 +2910,7 @@ function showCalPopover(slot, di, ei, evEl) {
     const d = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (d && d[di] && d[di].events[ei]) {
       d[di].events.splice(ei, 1);
-      calSelection = null;
-      hideCalPopover();
+      clearCalSel();
       saveDraft();
       renderEdit();
     }
@@ -2872,21 +3027,37 @@ document.querySelectorAll(".type-btn").forEach(btn => btn.addEventListener("clic
 
 // Delete key removes selected calendar event
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { hideCalPopover(); return; }
-  if (e.key !== 'Delete' && e.key !== 'Backspace') return;
-  const tag = document.activeElement && document.activeElement.tagName;
-  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-  if (!calSelection) return;
-  const { slot, di, ei } = calSelection;
-  const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
-  if (days && days[di] && days[di].events[ei]) {
-    days[di].events.splice(ei, 1);
-    calSelection = null;
-    hideCalPopover();
-    saveDraft();
-    renderEdit();
+  if (currentMode !== 'edit') return;
+  const ae = document.activeElement, tag = ae && ae.tagName;
+  const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (ae && ae.isContentEditable);
+  if (e.key === 'Escape') { if (!typing) clearCalSel(); return; }
+  if (typing) return;
+
+  const mod = e.metaKey || e.ctrlKey;
+  if (e.key === 'Delete' || e.key === 'Backspace') {
+    if (deleteCalSelection()) e.preventDefault();
+    return;
+  }
+  if (mod && !e.shiftKey && e.key.toLowerCase() === 'c') {
+    if (copyCalSelection()) e.preventDefault();
+    return;
+  }
+  if (mod && !e.shiftKey && e.key.toLowerCase() === 'v') {
+    if (pasteCalSelection()) e.preventDefault();
+    return;
+  }
+  if (mod && !e.shiftKey && e.key.toLowerCase() === 'a') {
+    if (selectAllCal()) e.preventDefault();
+    return;
   }
 });
+
+// While any modifier is held, the inline popover is click-through so a
+// cmd/shift-click can select a tile sitting beneath it.
+['keydown', 'keyup'].forEach(t => window.addEventListener(t, e => {
+  document.body.classList.toggle('modifier-held', e.metaKey || e.ctrlKey || e.shiftKey);
+}));
+window.addEventListener('blur', () => document.body.classList.remove('modifier-held'));
 
 // Week preview toggle in edit mode
 let weekPreviewVisible = false;
@@ -2903,6 +3074,7 @@ document.getElementById("publishBtn").addEventListener("click", publish);
 function switchSlot(slot) {
   if (slot === editSlot) return;
   editSlot = slot;
+  clearCalSel();
   // Auto-seed next week with calendar dates when it's empty
   if (slot === "next" && (!data.nextWeek || !(data.nextWeek.days || []).length)) {
     const nw = nextCalWeek();
