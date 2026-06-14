@@ -329,9 +329,12 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .view-edit-toggle .mode-btn:hover { background: rgba(17,17,17,.06); }
 .view-edit-toggle .mode-btn.active { background: var(--ink); color: var(--warm-white); }
 .view-edit-toggle .mode-btn.active:hover { background: var(--ink); }
-/* Edit tab: the View/Edit pill sits in flow at the top, then peels off on first
-   scroll to float in the top-left corner (sized to the pill so it never blocks taps). */
-.edit-sticky-toggle { position: sticky; top: 8px; z-index: 61; width: -webkit-fit-content; width: fit-content; margin-bottom: 10px; }
+/* Edit tab: the View/Edit pill sits in flow at the top, then once it scrolls under the
+   top edge it locks to the viewport's top-left corner with position:fixed — so no scrolling
+   on any axis (including the calendars' horizontal scroll) can move it. The wrapper keeps a
+   reserved height so the layout doesn't jump when the pill detaches. */
+.edit-sticky-toggle { position: relative; z-index: 61; width: -webkit-fit-content; width: fit-content; min-height: 36px; margin-bottom: 10px; }
+.edit-sticky-toggle.floating .view-edit-toggle { position: fixed; top: 8px; left: 12px; }
 .edit-sticky-toggle .view-edit-toggle { box-shadow: 0 4px 14px rgba(17,17,17,.16); }
 /* phone + edit mode: keep content clear of the intern-tally bottom bar */
 @media (max-width: 600px) {
@@ -2400,6 +2403,7 @@ function setMode(mode) {
   if (mode === "display") renderDisplay();
   else renderEdit();
   if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); }
+  _updateEditFloat();
 }
 
 // ============ JSON IO ============
@@ -3262,6 +3266,21 @@ document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", 
   if (b.dataset.mode === "edit" && !editUnlocked) return;
   setMode(b.dataset.mode);
 }));
+
+// Edit tab: once the View/Edit pill scrolls up under the top edge, lock it to the
+// viewport's top-left corner (position:fixed via the .floating class) so horizontal
+// scrolling of the calendars — or any scroll — can't drag it off-screen. Drop it back
+// into the toolbar when scrolled to the top. The wrapper reserves its height, so the
+// rect stays stable whether floating or not (no flicker, no layout jump).
+function _updateEditFloat() {
+  const ev = document.getElementById("editView");
+  const wrap = ev && ev.querySelector(".edit-sticky-toggle");
+  if (!wrap) return;
+  if (ev.classList.contains("hidden")) { wrap.classList.remove("floating"); return; }
+  wrap.classList.toggle("floating", wrap.getBoundingClientRect().top <= 8);
+}
+window.addEventListener("scroll", _updateEditFloat, { passive: true });
+window.addEventListener("resize", _updateEditFloat);
 function _syncClearBtn(id) {
   const i = document.getElementById(id);
   const b = document.querySelector(`[data-clear="${id}"]`);
