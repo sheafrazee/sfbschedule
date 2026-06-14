@@ -41,7 +41,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .masthead button:focus-visible { outline-color: var(--warm-white); }
 
 /* ---- Action bar (edit mode) — two rows ---- */
-.action-bar { position: sticky; top: 0; z-index: 60; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 10px 12px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; }
+.action-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 10px 12px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; }
 .ab-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .ab-top { gap: 8px; }
 .ab-bottom { gap: 6px; }
@@ -329,6 +329,11 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .view-edit-toggle .mode-btn:hover { background: rgba(17,17,17,.06); }
 .view-edit-toggle .mode-btn.active { background: var(--ink); color: var(--warm-white); }
 .view-edit-toggle .mode-btn.active:hover { background: var(--ink); }
+/* Edit tab: only the View/Edit toggle stays pinned; the action bar scrolls away beneath it */
+.edit-sticky-toggle { position: sticky; top: 0; z-index: 61; padding: 8px 0; margin-bottom: 8px;
+  background: rgba(244,241,236,.92);
+  background: color-mix(in srgb, var(--warm-white) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 /* phone + edit mode: keep content clear of the intern-tally bottom bar */
 @media (max-width: 600px) {
   body.mode-edit .wrap { padding-bottom: 72px; }
@@ -619,11 +624,13 @@ button.stat { cursor: pointer; font: inherit; }
   </div>
 
   <div id="editView" class="hidden">
-    <div class="action-bar">
+    <div class="edit-sticky-toggle">
       <div class="view-edit-toggle hidden" role="group" aria-label="View or edit mode">
         <button class="mode-btn active" data-mode="display">View</button>
         <button class="mode-btn" data-mode="edit">Edit</button>
       </div>
+    </div>
+    <div class="action-bar">
       <!-- Row 1: slot selector + week title + status -->
       <div class="ab-row ab-top">
         <div class="mode-toggle">
