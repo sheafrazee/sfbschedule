@@ -329,11 +329,10 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .view-edit-toggle .mode-btn:hover { background: rgba(17,17,17,.06); }
 .view-edit-toggle .mode-btn.active { background: var(--ink); color: var(--warm-white); }
 .view-edit-toggle .mode-btn.active:hover { background: var(--ink); }
-/* Edit tab: only the View/Edit toggle stays pinned; the action bar scrolls away beneath it */
-.edit-sticky-toggle { position: sticky; top: 0; z-index: 61; padding: 8px 0; margin-bottom: 8px;
-  background: rgba(244,241,236,.92);
-  background: color-mix(in srgb, var(--warm-white) 88%, transparent);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+/* Edit tab: the View/Edit pill sits in flow at the top, then peels off on first
+   scroll to float in the top-left corner (sized to the pill so it never blocks taps). */
+.edit-sticky-toggle { position: sticky; top: 8px; z-index: 61; width: -webkit-fit-content; width: fit-content; margin-bottom: 10px; }
+.edit-sticky-toggle .view-edit-toggle { box-shadow: 0 4px 14px rgba(17,17,17,.16); }
 /* phone + edit mode: keep content clear of the intern-tally bottom bar */
 @media (max-width: 600px) {
   body.mode-edit .wrap { padding-bottom: 72px; }
