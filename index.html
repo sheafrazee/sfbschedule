@@ -1411,11 +1411,11 @@ function _fmtStamp() {
 function _icsEsc(t) {
   return String(t || "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
 }
-function buildDayICS(day) {
+function buildDayICS(day, typeOnly) {
   const date = dateForDay(day.day);
   const stamp = _fmtStamp();
   const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SFB Schedule//EN", "CALSCALE:GREGORIAN"];
-  (day.events || []).forEach((e, i) => {
+  (day.events || []).filter(e => !typeOnly || e.type === typeOnly).forEach((e, i) => {
     const t = parseEventTimes(e.time);
     const interns = internsOf(e).join(", ");
     const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
@@ -1444,15 +1444,13 @@ async function exportDayICS(day) {
   const blob = new Blob([ics], { type: "text/calendar" });
   const safe = (day.day || "day").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "day";
   const fname = `schedule-${safe}.ics`;
-  const file = new File([blob], fname, { type: "text/calendar" });
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try { await navigator.share({ files: [file], title: day.day }); return; }
-    catch (err) { if (err && err.name === "AbortError") return; }
-  }
+  // Download the calendar file directly. On iOS/macOS this hands straight to
+  // Calendar ("Add All") — smoother than routing it through the share sheet.
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url; a.download = fname; a.click();
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
 async function shareDay(day, btn) {
@@ -1502,14 +1500,15 @@ function openWeekShareMenu(btn) {
   closeShareMenu();
   const menu = document.createElement("div");
   menu.className = "share-menu";
-  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="txt">⧉ Copy as text</button><button class="share-menu-item" data-act="ics">↓ Add to calendar (.ics)</button>`;
+  menu.innerHTML = `<button class="share-menu-item" data-act="img">↗ Share image</button><button class="share-menu-item" data-act="txt">⧉ Copy as text</button><button class="share-menu-item" data-act="ics-excel">↓ Excel calendar (.ics)</button><button class="share-menu-item" data-act="ics-other">↓ Other calendar (.ics)</button>`;
   document.body.appendChild(menu);
   const r = btn.getBoundingClientRect();
   menu.style.top = (r.bottom + window.scrollY + 4) + "px";
   menu.style.left = Math.max(8, r.right + window.scrollX - menu.offsetWidth) + "px";
   menu.querySelector('[data-act="img"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); shareWeek(btn); });
   menu.querySelector('[data-act="txt"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); copyText(buildWeekText(), "Week copied"); });
-  menu.querySelector('[data-act="ics"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportWeekICS(); });
+  menu.querySelector('[data-act="ics-excel"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportWeekICS("excel"); });
+  menu.querySelector('[data-act="ics-other"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportWeekICS("other"); });
   _shareMenuEl = menu;
   setTimeout(() => document.addEventListener("click", closeShareMenu), 0);
 }
@@ -1561,13 +1560,18 @@ async function shareWeek(btn) {
   }
 }
 
-// Build a .ics for the entire week (respects the active filter).
-function buildWeekICS() {
+// Build a .ics for the week. typeOnly "excel"/"other" restricts to that session
+// type (for the split calendar downloads); omitted respects the active filter.
+function buildWeekICS(typeOnly) {
   const stamp = _fmtStamp();
   const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SFB Schedule//EN", "CALSCALE:GREGORIAN"];
   (data.days || []).forEach(day => {
     const date = dateForDay(day.day);
-    (day.events || []).filter(e => !internTerms().length && !playerTerms().length || eventMatches(e)).forEach((e, i) => {
+    (day.events || []).filter(e => {
+      if (typeOnly === "excel") return e.type === "excel";
+      if (typeOnly === "other") return e.type !== "excel";
+      return !internTerms().length && !playerTerms().length || eventMatches(e);
+    }).forEach((e, i) => {
       const t = parseEventTimes(e.time);
       const interns = internsOf(e).join(", ");
       const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
@@ -1590,23 +1594,21 @@ function buildWeekICS() {
   lines.push("END:VCALENDAR");
   return lines.join("\r\n");
 }
-async function exportWeekICS() {
+async function exportWeekICS(typeOnly) {
+  const isExcel = typeOnly === "excel";
   const count = (data.days || []).reduce((n, d) =>
-    n + (d.events || []).filter(e => eventMatches(e)).length, 0);
-  if (!count) { alert("No events to add to the calendar."); return; }
-  const ics = buildWeekICS();
+    n + (d.events || []).filter(e => isExcel ? e.type === "excel" : e.type !== "excel").length, 0);
+  if (!count) { alert(`No ${isExcel ? "Excel Client" : "Other"} sessions this week to add to the calendar.`); return; }
+  const ics = buildWeekICS(typeOnly);
   const blob = new Blob([ics], { type: "text/calendar" });
   const base = (data.weekTitle || "schedule").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "schedule";
-  const fname = `schedule-${base}.ics`;
-  const file = new File([blob], fname, { type: "text/calendar" });
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try { await navigator.share({ files: [file], title: data.weekTitle || "Training Schedule" }); return; }
-    catch (err) { if (err && err.name === "AbortError") return; }
-  }
+  const fname = `schedule-${base}-${isExcel ? "excel" : "other"}.ics`;
+  // Download the calendar file directly — opens straight into Calendar on iOS/macOS.
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url; a.download = fname; a.click();
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
 
