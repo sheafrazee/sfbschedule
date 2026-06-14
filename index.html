@@ -41,7 +41,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .masthead button:focus-visible { outline-color: var(--warm-white); }
 
 /* ---- Action bar (edit mode) — two rows ---- */
-.action-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 10px 12px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; }
+.action-bar { position: sticky; top: 0; z-index: 60; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 10px 12px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; }
 .ab-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .ab-top { gap: 8px; }
 .ab-bottom { gap: 6px; }
@@ -323,24 +323,14 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
 .intern-forget:hover { opacity: 1; color: var(--clay); background: var(--warm-white); }
 
-/* ---- Mode dock: View/Edit pinned bottom-center, reachable mid-scroll ---- */
-.mode-dock { position: fixed; left: 20px;
-  bottom: max(16px, env(safe-area-inset-bottom)); z-index: 95;
-  background: rgba(17,17,17,.92);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  border-radius: 12px; padding: 4px; gap: 3px;
-  box-shadow: 0 8px 28px rgba(17,17,17,.30); }
-.mode-dock .mode-btn { border: none; border-radius: 8px; padding: 8px 20px;
-  background: transparent; color: var(--warm-white); font-size: 12.5px; }
-.mode-dock .mode-btn:hover { background: rgba(244,241,236,.12); }
-.mode-dock .mode-btn.active { background: var(--warm-white); color: var(--ink); }
-.mode-dock .mode-btn.active:hover { background: var(--warm-white); }
-.mode-dock .mode-btn:focus-visible { outline-color: var(--warm-white); }
-/* phone + edit mode: ride above the intern-tally bottom bar */
+/* ---- View/Edit toggle: lives at the top of the sticky toolbar in both tabs ---- */
+.view-edit-toggle { display: inline-flex; align-self: flex-start; gap: 4px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; padding: 3px; }
+.view-edit-toggle .mode-btn { border: none; background: transparent; padding: 6px 18px; border-radius: 7px; font-size: 12.5px; color: var(--dark-stone); }
+.view-edit-toggle .mode-btn:hover { background: rgba(17,17,17,.06); }
+.view-edit-toggle .mode-btn.active { background: var(--ink); color: var(--warm-white); }
+.view-edit-toggle .mode-btn.active:hover { background: var(--ink); }
+/* phone + edit mode: keep content clear of the intern-tally bottom bar */
 @media (max-width: 600px) {
-  /* Edit mode on phone: View/Edit dock rides top-right (below the iPhone status bar), clear of the compact intern bar pinned at the bottom */
-  body.mode-edit .mode-dock { left: auto; right: 10px; bottom: auto; top: calc(env(safe-area-inset-top) + 8px); transform: none; padding: 3px; }
-  body.mode-edit .mode-dock .mode-btn { padding: 6px 14px; font-size: 12px; }
   body.mode-edit .wrap { padding-bottom: 72px; }
 }
 
@@ -490,6 +480,11 @@ body.modifier-held .cal-popover { pointer-events: none; }
   transition: all .15s; flex-shrink: 0; }
 .dn-pill:hover { border-color: var(--ink); color: var(--ink); }
 .dn-pill.today { border-color: var(--clay); color: var(--clay); }
+/* phone: fit every day button across the width instead of scrolling sideways */
+@media (max-width: 600px) {
+  .day-nav { overflow-x: visible; gap: 4px; }
+  .dn-pill { flex: 1 1 0; min-width: 0; padding: 7px 2px; letter-spacing: .03em; }
+}
 
 /* (v2) Agenda rows: flush rows, hairline separators, tabular time rail (keeps v4 tint/rail/tag) */
 .event-card { display: grid; grid-template-columns: 82px 1fr; column-gap: 12px; align-items: start;
@@ -563,7 +558,7 @@ button.stat { cursor: pointer; font: inherit; }
 /* (v1) Print stylesheet — clean handout */
 @media print {
   body { background: #fff; }
-  .filter-bar, .day-nav, .mode-toggle, .mode-dock, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
+  .filter-bar, .day-nav, .mode-toggle, .view-edit-toggle, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
   .masthead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .day-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
   .day-col { break-inside: avoid; }
@@ -590,6 +585,10 @@ button.stat { cursor: pointer; font: inherit; }
 <div class="wrap">
   <div id="displayView">
     <div class="filter-bar">
+      <div class="view-edit-toggle hidden" role="group" aria-label="View or edit mode">
+        <button class="mode-btn active" data-mode="display">View</button>
+        <button class="mode-btn" data-mode="edit">Edit</button>
+      </div>
       <div class="fb-row fb-top">
         <label class="search-field">
           <svg class="sf-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
@@ -621,6 +620,10 @@ button.stat { cursor: pointer; font: inherit; }
 
   <div id="editView" class="hidden">
     <div class="action-bar">
+      <div class="view-edit-toggle hidden" role="group" aria-label="View or edit mode">
+        <button class="mode-btn active" data-mode="display">View</button>
+        <button class="mode-btn" data-mode="edit">Edit</button>
+      </div>
       <!-- Row 1: slot selector + week title + status -->
       <div class="ab-row ab-top">
         <div class="mode-toggle">
@@ -743,10 +746,6 @@ button.stat { cursor: pointer; font: inherit; }
   </div>
 </div>
 
-<div class="mode-dock mode-toggle hidden" id="modeToggle">
-  <button class="mode-btn active" data-mode="display">View</button>
-  <button class="mode-btn" id="editModeBtn" data-mode="edit">Edit</button>
-</div>
 
 <div class="cal-sel-bar hidden" id="calSelBar"></div>
 
@@ -3222,7 +3221,7 @@ function renderCalendarPreview() {
 // Reveal mode toggle only if URL has ?edit=1
 const urlParams = new URLSearchParams(window.location.search);
 const editUnlocked = urlParams.get("edit") === "1";
-if (editUnlocked) document.getElementById("modeToggle").classList.remove("hidden");
+if (editUnlocked) document.querySelectorAll(".view-edit-toggle").forEach(t => t.classList.remove("hidden"));
 if (editUnlocked) document.getElementById("archiveNowBtn").classList.remove("hidden");
 
 document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", () => {
