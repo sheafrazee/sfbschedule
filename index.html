@@ -148,14 +148,18 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
   .ab-right .btn { flex: 1 1 auto; text-align: center; }
   .btn.publish { order: -1; width: 100%; text-align: center; }
 
-  /* Intern tally — full-width bottom bar on phone */
+  /* Intern tally — compact full-width bottom bar on phone */
   .intern-tally {
     position: fixed; bottom: 0; left: 0; right: 0;
     width: 100%; max-width: 100%;
     border-radius: 12px 12px 0 0;
     box-shadow: 0 -4px 20px rgba(0,0,0,.15);
   }
-  .intern-tally-body { max-height: 200px; }
+  .intern-tally-head { padding: 6px 13px; }
+  .intern-tally-head span.t { font-size: 12px; }
+  .intern-tally-body { max-height: 132px; }
+  .intern-row { padding: 5px 13px; font-size: 12px; }
+  .intern-row .ct { min-width: 30px; height: 18px; }
 
   /* Modals — bottom sheet */
   .modal-bg { padding: 0; align-items: flex-end; }
@@ -334,10 +338,10 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .mode-dock .mode-btn:focus-visible { outline-color: var(--warm-white); }
 /* phone + edit mode: ride above the intern-tally bottom bar */
 @media (max-width: 600px) {
-  body.mode-edit .mode-dock { left: 50%; transform: translateX(-50%); bottom: calc(56px + env(safe-area-inset-bottom)); }
-  /* when the intern tally is expanded, lift the dock clear of it so it doesn't sit on the rows */
-  body.mode-edit.tally-open .mode-dock { bottom: calc(var(--tally-h, 0px) + 14px); }
-  body.mode-edit .wrap { padding-bottom: 120px; }
+  /* Edit mode on phone: View/Edit dock rides top-right (below the iPhone status bar), clear of the compact intern bar pinned at the bottom */
+  body.mode-edit .mode-dock { left: auto; right: 10px; bottom: auto; top: calc(env(safe-area-inset-top) + 8px); transform: none; padding: 3px; }
+  body.mode-edit .mode-dock .mode-btn { padding: 6px 14px; font-size: 12px; }
+  body.mode-edit .wrap { padding-bottom: 72px; }
 }
 
 /* ---- Calendar View ---- */
@@ -2032,7 +2036,7 @@ function renderInternTally() {
   const box = document.getElementById("internTally");
   if (!box) return;
   box.classList.toggle("hidden", currentMode !== "edit");
-  if (currentMode !== "edit") { syncTallyDock(); return; }
+  if (currentMode !== "edit") return;
 
   // Count sessions per intern, split by session type, in the active edit week only
   function countWeek(days) {
@@ -2102,18 +2106,6 @@ function renderInternTally() {
 
   body.querySelectorAll("[data-forget]").forEach(btn =>
     btn.addEventListener("click", () => forgetIntern(btn.dataset.forget)));
-
-  syncTallyDock();   // keep the floating View/Edit dock clear of the tally (phones)
-}
-
-// Publish the intern tally's live height + an "open" flag so the View/Edit dock
-// can lift above it on phones (where both sit at the bottom) instead of overlapping.
-function syncTallyDock() {
-  const box = document.getElementById("internTally");
-  if (!box) return;
-  const open = currentMode === "edit" && !box.classList.contains("hidden") && !box.classList.contains("collapsed");
-  document.body.classList.toggle("tally-open", open);
-  document.documentElement.style.setProperty("--tally-h", open ? box.offsetHeight + "px" : "0px");
 }
 
 function internCoverageHtml(playerCount, internCount, isExcel) {
@@ -3459,7 +3451,6 @@ document.getElementById("imgDownload").addEventListener("click", (e) => {
 
 document.getElementById("internTallyHead").addEventListener("click", () => {
   document.getElementById("internTally").classList.toggle("collapsed");
-  syncTallyDock();   // re-measure so the View/Edit dock sits just above the tally (phones)
 });
 
 
