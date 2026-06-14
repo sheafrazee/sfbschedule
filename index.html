@@ -335,6 +335,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 /* phone + edit mode: ride above the intern-tally bottom bar */
 @media (max-width: 600px) {
   body.mode-edit .mode-dock { left: 50%; transform: translateX(-50%); bottom: calc(56px + env(safe-area-inset-bottom)); }
+  /* when the intern tally is expanded, lift the dock clear of it so it doesn't sit on the rows */
+  body.mode-edit.tally-open .mode-dock { bottom: calc(var(--tally-h, 0px) + 14px); }
   body.mode-edit .wrap { padding-bottom: 120px; }
 }
 
@@ -2030,7 +2032,7 @@ function renderInternTally() {
   const box = document.getElementById("internTally");
   if (!box) return;
   box.classList.toggle("hidden", currentMode !== "edit");
-  if (currentMode !== "edit") return;
+  if (currentMode !== "edit") { syncTallyDock(); return; }
 
   // Count sessions per intern, split by session type, in the active edit week only
   function countWeek(days) {
@@ -2100,6 +2102,18 @@ function renderInternTally() {
 
   body.querySelectorAll("[data-forget]").forEach(btn =>
     btn.addEventListener("click", () => forgetIntern(btn.dataset.forget)));
+
+  syncTallyDock();   // keep the floating View/Edit dock clear of the tally (phones)
+}
+
+// Publish the intern tally's live height + an "open" flag so the View/Edit dock
+// can lift above it on phones (where both sit at the bottom) instead of overlapping.
+function syncTallyDock() {
+  const box = document.getElementById("internTally");
+  if (!box) return;
+  const open = currentMode === "edit" && !box.classList.contains("hidden") && !box.classList.contains("collapsed");
+  document.body.classList.toggle("tally-open", open);
+  document.documentElement.style.setProperty("--tally-h", open ? box.offsetHeight + "px" : "0px");
 }
 
 function internCoverageHtml(playerCount, internCount, isExcel) {
@@ -3445,6 +3459,7 @@ document.getElementById("imgDownload").addEventListener("click", (e) => {
 
 document.getElementById("internTallyHead").addEventListener("click", () => {
   document.getElementById("internTally").classList.toggle("collapsed");
+  syncTallyDock();   // re-measure so the View/Edit dock sits just above the tally (phones)
 });
 
 
