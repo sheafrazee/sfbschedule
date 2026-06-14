@@ -1424,9 +1424,13 @@ function sortEventsByTime() {
   renderEdit();
 }
 function _fmtLocal(date, h, min) {
+  // Write the wall-clock time (in this device's time zone — the gym's local time)
+  // as an absolute UTC instant ending in "Z". Floating times with no zone make
+  // Apple Calendar guess a zone on import (which shifted everything to Eastern);
+  // UTC is unambiguous, so each calendar app converts it back to the right local time.
   const d = new Date(date); d.setHours(h, min, 0, 0);
   const p = n => String(n).padStart(2, "0");
-  return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}T${p(d.getHours())}${p(d.getMinutes())}00`;
+  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}T${p(d.getUTCHours())}${p(d.getUTCMinutes())}00Z`;
 }
 function _fmtDate(date) {
   const p = n => String(n).padStart(2, "0");
