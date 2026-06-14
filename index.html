@@ -1322,8 +1322,31 @@ function openShareMenu(day, btn) {
 // ---- iCalendar (.ics) export for one day ----
 const _WEEKDAYS = { sunday:0, monday:1, tuesday:2, wednesday:3, thursday:4, friday:5, saturday:6 };
 // Map a day name (e.g. "Monday", "Mon 5/18") to an actual date in the current week.
+// The Monday of the week the schedule represents, parsed from its title
+// (e.g. "Week of June 15 – 21" → Mon June 15). Falls back to the real current
+// week when the title has no parseable date. .ics dates anchor to this so an
+// exported week lands on the dates shown, not on whatever today's week happens to be.
+function scheduleWeekMonday() {
+  const t = String(data.weekTitle || "").toLowerCase();
+  const m = t.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})/);
+  if (m) {
+    const mo = MON.findIndex(mm => mm.toLowerCase() === m[1]);
+    const day = parseInt(m[2], 10);
+    if (mo >= 0 && day >= 1 && day <= 31) {
+      const now = new Date();
+      let best = null, bestDiff = Infinity;
+      for (const yr of [now.getFullYear() - 1, now.getFullYear(), now.getFullYear() + 1]) {
+        const d = new Date(yr, mo, day);
+        const diff = Math.abs(d - now);
+        if (diff < bestDiff) { bestDiff = diff; best = d; }   // pick the year closest to today
+      }
+      if (best) return weekDates(best).mon;   // snap to that week's Monday
+    }
+  }
+  return weekDates(new Date()).mon;            // fallback: real current week
+}
 function dateForDay(dayName) {
-  const mon = weekDates(new Date()).mon;     // this week's Monday (local midnight)
+  const mon = scheduleWeekMonday();          // the schedule's Monday (not necessarily this real week's)
   const lower = (dayName || "").toLowerCase();
   let wd = null;
   for (const k in _WEEKDAYS) { if (lower.includes(k) || lower.includes(k.slice(0,3))) { wd = _WEEKDAYS[k]; break; } }
