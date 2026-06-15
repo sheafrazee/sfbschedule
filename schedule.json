@@ -5,6 +5,16 @@
       "day": "Mon 6/15",
       "events": [
         {
+          "time": "7:15 AM – 8:00 AM",
+          "title": "Jared M",
+          "type": "excel",
+          "people": [
+            "Luca"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Colby J, Bobi K, Ibbe K",
           "type": "excel",
@@ -37,16 +47,6 @@
             "Dame",
             "JD",
             "Ali"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "7:15 AM – 8:00 AM",
-          "title": "Jared M",
-          "type": "excel",
-          "people": [
-            "Luca"
           ],
           "note": "",
           "players": []
