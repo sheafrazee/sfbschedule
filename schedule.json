@@ -81,7 +81,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Hannes S, Dev A, Kadin S",
+          "title": "Jared M, Dev A, Kadin S",
           "type": "excel",
           "people": [
             "Donovan",
@@ -91,15 +91,14 @@
             "Matai E",
             "Luca",
             "Shep",
-            "Colin",
-            "Mateo"
+            "Ali"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:30 AM",
-          "title": "3v3: Colby J, Bobi K, Dariq W, Nick D, Ibbe K, Juom MB",
+          "title": "3v3: Colby J, Bobi K, Nick D, Juom MB",
           "type": "excel",
           "people": [
             "Donovan",
@@ -109,15 +108,14 @@
             "Matai E",
             "Luca",
             "Shep",
-            "Colin",
-            "Mateo"
+            "Colin"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "11:30 AM – 1:00 PM",
-          "title": "Jared M",
+          "title": "Hannes, +2",
           "type": "excel",
           "people": [
             "Donovan",
@@ -125,8 +123,9 @@
             "Nick M",
             "Noah P",
             "Matai E",
+            "Luca",
             "Shep",
-            "Ali"
+            "Colin"
           ],
           "note": "",
           "players": []
@@ -283,7 +282,7 @@
           "players": []
         },
         {
-          "time": "2:00 PM",
+          "time": "1:30 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
@@ -294,12 +293,22 @@
           "players": []
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "2:30 PM – 3:30 PM",
           "title": "Rudy, Sean",
           "type": "other",
           "people": [
             "Anthony",
             "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Audrina",
+          "type": "other",
+          "people": [
+            "Anthony"
           ],
           "players": [],
           "note": ""
