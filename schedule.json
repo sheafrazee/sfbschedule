@@ -90,7 +90,6 @@
             "Noah P",
             "Matai E",
             "Luca",
-            "Shep",
             "Ali"
           ],
           "note": "",
@@ -107,7 +106,6 @@
             "Noah P",
             "Matai E",
             "Luca",
-            "Shep",
             "Colin"
           ],
           "players": [],
@@ -123,20 +121,7 @@
             "Nick M",
             "Noah P",
             "Matai E",
-            "Luca",
-            "Shep",
-            "Colin"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "2:00 PM",
-          "title": "Ben E",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Shep"
+            "Luca"
           ],
           "note": "",
           "players": []
@@ -170,36 +155,47 @@
       "day": "Wed 6/17",
       "events": [
         {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Colby J, Juom MB, Dariq W",
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M",
           "type": "excel",
           "people": [
-            "Evan",
-            "Donovan",
-            "Tyler",
-            "Noah P",
-            "Matai E",
-            "Luca",
-            "Shep",
-            "Mateo"
+            "Ali"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         },
         {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, Hannes S, Jared M, Dev A",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Colby J, Hannes S, Karim 1, Karim 2",
           "type": "excel",
           "people": [
-            "Evan",
             "Donovan",
             "Tyler",
             "Noah P",
             "Matai E",
             "Luca",
             "Mateo",
-            "Dame",
-            "Shep"
+            "Ali",
+            "JD",
+            "Dame"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Nick D, Bobbi K, Dev A, Juom MB",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Noah P",
+            "Matai E",
+            "Luca",
+            "Mateo",
+            "Ali",
+            "JD",
+            "Dame"
           ],
           "note": "",
           "players": []
