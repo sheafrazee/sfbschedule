@@ -225,11 +225,21 @@
       "day": "Thu 6/18",
       "events": [
         {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Colby J, Juom MB, Dariq W, Kadin S",
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M",
           "type": "excel",
           "people": [
-            "Evan",
+            "Ali",
+            "Luca"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Cam A, Juom MB, Kadin S, Karim L",
+          "type": "excel",
+          "people": [
             "Donovan",
             "Tyler",
             "Noah P",
@@ -245,10 +255,9 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, Hannes S, Jared M, Dev A",
+          "title": "Nick D, Tristan D, Colby J, Mark S",
           "type": "excel",
           "people": [
-            "Evan",
             "Donovan",
             "Tyler",
             "Noah P",
@@ -258,17 +267,6 @@
             "Mateo",
             "Colin",
             "Dame"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "1:30 PM",
-          "title": "Ben E",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Kirby"
           ],
           "note": "",
           "players": []
