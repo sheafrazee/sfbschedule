@@ -237,7 +237,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Cam A, Juom MB, Kadin S, Karim L",
+          "title": "Cam A, Juom MB, Kadin S, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -255,7 +255,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, Tristan D, Colby J, Mark S",
+          "title": "Tristan D,  Mark S, Ousmane D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -270,6 +270,22 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Colby J, Dariq W",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Noah P",
+            "Matai E",
+            "Luca",
+            "Ali",
+            "Mateo"
+          ],
+          "players": [],
+          "note": ""
         },
         {
           "time": "2:30 PM – 3:30 PM",
