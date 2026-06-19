@@ -424,7 +424,7 @@
         },
         {
           "time": "8:00 AM – 9:15 AM",
-          "title": "Colby J, Juom MB, Dariq W, Kadin S",
+          "title": "Colby J, Juom MB, Dariq W",
           "type": "excel",
           "people": [
             "Evan",
@@ -432,7 +432,8 @@
             "Tyler",
             "Noah P",
             "Matai E",
-            "Luca Mateo",
+            "Luca",
+            "Mateo",
             "Kirby"
           ],
           "note": "",
@@ -440,7 +441,7 @@
         },
         {
           "time": "9:15 AM – 10:30 AM",
-          "title": "Nick D, Jared M, Dev A",
+          "title": "Ousmane D, Mark S, Deuce J",
           "type": "excel",
           "people": [
             "Evan",
@@ -448,7 +449,8 @@
             "Tyler",
             "Noah P",
             "Matai E",
-            "Luca Mateo",
+            "Luca",
+            "Mateo",
             "Kirby"
           ],
           "note": "",
@@ -470,26 +472,7 @@
     },
     {
       "day": "Sun 6/21",
-      "events": [
-        {
-          "time": "8:00 AM",
-          "title": "Pickup – Excel",
-          "type": "other",
-          "people": [],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "10:00 AM",
-          "title": "Little Kids Pickup – Excel",
-          "type": "other",
-          "people": [
-            "Kirby"
-          ],
-          "note": "",
-          "players": []
-        }
-      ]
+      "events": []
     }
   ],
   "archive": [
