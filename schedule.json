@@ -327,7 +327,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dev A, Kadin S",
+          "title": "Jared M, Dariq W, Colby J",
           "type": "excel",
           "people": [
             "Evan",
@@ -338,14 +338,15 @@
             "Luca",
             "Ali",
             "Mateo",
-            "Shep"
+            "Shep",
+            "Waleed"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "9:30 AM – 11:30 AM",
-          "title": "5v5: Colby J, Dariq W, Nick D, Juom MB",
+          "title": "5v5: Hannes Friend 1, Hannes Friend 2,  Dev A,  Juom MB,  Fred Jones II, Cam Anderson,  Mark Sears ",
           "type": "excel",
           "people": [
             "Evan",
@@ -354,19 +355,29 @@
             "Noah P",
             "Matai E",
             "Luca",
-            "Ali",
             "Mateo",
-            "Dame"
+            "Shep",
+            "Waleed",
+            "Chris Mitchell",
+            "Ronnie"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Ben E",
-          "type": "other",
+          "time": "11:30 AM – 1:00 PM",
+          "title": "Tristan D, Hannes S, Ousmane D, Kadin S",
+          "type": "excel",
           "people": [
-            "Guiressi",
+            "Evan",
+            "Donovan",
+            "Tyler",
+            "Noah P",
+            "Matai E",
+            "Luca",
+            "Matt M",
+            "Waleed",
+            "Mateo",
             "Shep"
           ],
           "players": [],
