@@ -314,18 +314,6 @@
       "day": "Fri 6/19",
       "events": [
         {
-          "time": "6:15 AM – 7:45 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Ali",
-            "Kirby",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Jared M, Dariq W, Colby J",
           "type": "excel",
@@ -472,6 +460,49 @@
   ],
   "archive": [
     {
+      "key": "2026-06-15",
+      "range": "Jun 15 – Jun 21, 2026",
+      "title": "Week of Jun 15 – 21",
+      "path": "archive/2026-06-15.png",
+      "pathExcel": "archive/2026-06-15-excel.png",
+      "players": [
+        "+2",
+        "3v3: Colby J",
+        "5v5: Hannes Friend 1",
+        "Audrina",
+        "Ben E",
+        "Bobbi K",
+        "Bobi K",
+        "Cam A",
+        "Cam Anderson",
+        "Colby J",
+        "Dariq W",
+        "Deuce J",
+        "Dev A",
+        "Fred Jones II",
+        "Group",
+        "GW",
+        "Hannes",
+        "Hannes Friend 2",
+        "Hannes S",
+        "Ibbe K",
+        "Intern Pickup",
+        "Jared M",
+        "Juom MB",
+        "Kadin S",
+        "Mark S",
+        "Mark Sears",
+        "Maxwell",
+        "Nick D",
+        "Ousmane D",
+        "Rudy",
+        "Sean",
+        "Sean Dao",
+        "Tristan D"
+      ],
+      "ts": 1781996530503
+    },
+    {
       "key": "2026-06-08",
       "range": "Jun 8 – Jun 14, 2026",
       "title": "Week of Jun 8 – 14",
@@ -540,5 +571,418 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": null
+  "nextWeek": {
+    "weekTitle": "Week of Jun 22 – 28",
+    "days": [
+      {
+        "day": "Mon 6/22",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Jared M, Colby J, Dariq W, Ousmane D",
+            "type": "excel",
+            "people": [
+              "Evan",
+              "Donovan",
+              "Tyler",
+              "Nick M",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Mateo",
+              "JD"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Dalton K, Mark S, Dev A, Juom MB",
+            "type": "excel",
+            "people": [
+              "Evan",
+              "Donovan",
+              "Tyler",
+              "Nick M",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Mateo",
+              "JD"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "2:00 PM – 3:00 PM",
+            "title": "Rudy",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "David"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Tue 6/23",
+        "events": [
+          {
+            "time": "8:00 AM – 9:00 AM",
+            "title": "Jared M",
+            "type": "excel",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "9:00 AM – 10:30 AM",
+            "title": "Ousmane D, Colby J, Dariq W, Dalton K",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Nick M",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Ali"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "10:30 AM – 12:30 PM",
+            "title": "Bball 5x: Mark S, Dev A, Juom MB, Tyrell R",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Nick M",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Colin"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Shep",
+              "David"
+            ],
+            "note": "",
+            "players": []
+          }
+        ]
+      },
+      {
+        "day": "Wed 6/24",
+        "events": [
+          {
+            "time": "8:00 AM – 9:00 AM",
+            "title": "Jared M",
+            "type": "excel",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "9:00 AM – 10:30 AM",
+            "title": "Ousmane D, Colby J, Dariq W, Dalton K",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Mateo",
+              "JD",
+              "Dame"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "10:30 AM – 12:00 PM",
+            "title": "Nick D, Dev A, Tyrell R, Juom MB",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Mateo",
+              "JD",
+              "Dame"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "2:30 PM – 4:00 PM",
+            "title": "Intern Pickup",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "4:30 PM – 5:30 PM",
+            "title": "Maxwell, Rudy",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Noah P",
+              "Matai E"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Thu 6/25",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Jared M, Ousmane D, Dariq W, Dalton K",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Ali",
+              "Mateo",
+              "Colin",
+              "Dame"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Nick D, Dev A, Tyrell R, Colby J",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Ali",
+              "Mateo",
+              "Colin",
+              "Dame"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:00 AM – 12:30 PM",
+            "title": "Charles P, Juom MB, King G",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Ali",
+              "Mateo"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Guiressi",
+              "Shep"
+            ],
+            "note": "",
+            "players": []
+          }
+        ]
+      },
+      {
+        "day": "Fri 6/26",
+        "events": [
+          {
+            "time": "6:15 AM – 7:45 AM",
+            "title": "GW",
+            "type": "other",
+            "people": [
+              "Ali",
+              "Kirby",
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Jared M, Dalton K, Ousmane, D",
+            "type": "excel",
+            "people": [
+              "Evan",
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Ali",
+              "Mateo",
+              "Shep",
+              "Waleed"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "5v5: Nick D, Dev A, Tyrell R, Charles P, Juom MB, King G, Colby J, Dariq W",
+            "type": "excel",
+            "people": [
+              "Evan",
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Luca",
+              "Mateo",
+              "Shep",
+              "Waleed",
+              "Chris Mitchell",
+              "Ronnie"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina ",
+            "type": "other",
+            "people": [
+              "Guiressi",
+              "Shep"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "3:00 PM – 4:00 PM",
+            "title": "Rudy, Sean",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Kirby"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Sat 6/27",
+        "events": [
+          {
+            "time": "6:15 AM – 7:45 AM",
+            "title": "GW",
+            "type": "other",
+            "people": [
+              "Kirby",
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Jared M, Ousmane D, Dariq W, Dalton K",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Mateo"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 10:45 AM",
+            "title": "Nick D, Dev A, Tyrell R, Colby J",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Mateo",
+              "Anthony"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "10:45 AM – 12:00 PM",
+            "title": "Charles P, Juom MB, King G",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Tyler",
+              "Noah P",
+              "Matai E",
+              "Mateo",
+              "Anthony"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "12:30 PM",
+            "title": " Rudy",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Noah P",
+              "Matai E"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Sun 6/28",
+        "events": []
+      }
+    ]
+  }
 }
