@@ -18,7 +18,8 @@
             "Luca",
             "Mateo",
             "Colin",
-            "Dame"
+            "Dame",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -37,16 +38,20 @@
             "Luca",
             "Mateo",
             "Colin",
-            "Dame"
+            "Dame",
+            "Ali"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:00 AM – 11:45 AM",
-          "title": "Kadin S",
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Kadin S, Oliver G",
           "type": "excel",
           "people": [
+            "Evan",
+            "Donovan",
+            "Tyler",
             "Nick M",
             "Noah P",
             "Matai E"
@@ -55,12 +60,14 @@
           "note": ""
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Rudy",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Rudy, Bruce",
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Noah P",
+            "Matai E",
+            "David"
           ],
           "players": [],
           "note": ""
@@ -99,7 +106,8 @@
             "Luca",
             "Jacob Sells",
             "Mateo",
-            "Dame"
+            "Dame",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -181,7 +189,8 @@
             "Luca",
             "JD",
             "Matt M",
-            "Mateo"
+            "Mateo",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -245,7 +254,8 @@
             "Luca",
             "Mateo",
             "Colin",
-            "Jacob Sells"
+            "Jacob Sells",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -264,7 +274,8 @@
             "Luca",
             "Mateo",
             "Colin",
-            "Jacob Sells"
+            "Jacob Sells",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -329,7 +340,8 @@
             "Luca",
             "Jacob Sells",
             "Mateo",
-            "JD"
+            "JD",
+            "Ali"
           ],
           "players": [],
           "note": ""
@@ -348,7 +360,8 @@
             "Luca",
             "Jacob Sells",
             "Mateo",
-            "JD"
+            "JD",
+            "Ali"
           ],
           "note": "",
           "players": []
