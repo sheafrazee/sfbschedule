@@ -132,6 +132,19 @@
           "note": ""
         },
         {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Benny G @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Noah P",
+            "Matai E",
+            "David"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "2:00 PM – 3:00 PM",
           "title": "Joseph Boddie",
           "type": "other",
@@ -164,19 +177,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Benny G @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Noah P",
-            "Matai E",
-            "David"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -405,8 +405,8 @@
           "players": []
         },
         {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Audrina ",
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Rudy",
           "type": "other",
           "people": [
             "Anthony",
@@ -416,8 +416,8 @@
           "note": ""
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Rudy",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Audrina ",
           "type": "other",
           "people": [
             "Anthony",
