@@ -132,12 +132,24 @@
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "2:00 PM – 3:00 PM",
           "title": "Joseph Boddie",
           "type": "other",
           "people": [
             "Anthony",
             "David"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Bruce Z",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "David",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -152,6 +164,19 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Benny G @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Noah P",
+            "Matai E",
+            "David"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -295,6 +320,19 @@
             "Mateo",
             "Ali",
             "Jacob Sells"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "1:15 PM – 2:45 PM",
+          "title": "Benny G @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Noah P",
+            "Matai E",
+            "Dame"
           ],
           "players": [],
           "note": ""
