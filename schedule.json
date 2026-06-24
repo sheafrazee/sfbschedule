@@ -169,7 +169,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Group",
+          "title": "Group: Russ",
           "type": "other",
           "people": [
             "Anthony",
@@ -177,6 +177,17 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -184,8 +195,19 @@
       "day": "Wed 6/24",
       "events": [
         {
-          "time": "8:00 AM – 9:00 AM",
-          "title": "Jared M, Kadin S",
+          "time": "6:30 AM – 7:30 AM",
+          "title": "Carter",
+          "type": "other",
+          "people": [
+            "Ali",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Jared M, Dev A, Dalton K",
           "type": "excel",
           "people": [
             "Evan",
@@ -195,14 +217,16 @@
             "Matai E",
             "Noah M",
             "Nick M",
-            "Luca"
+            "Luca",
+            "JD",
+            "Ali"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "9:00 AM – 10:30 AM",
-          "title": "Ousmane D, Colby J, Dariq W, Dalton K",
+          "time": "9:30 AM – 11:00 AM",
+          "title": "Ousmane D, Colby J, Dariq W, Juom",
           "type": "excel",
           "people": [
             "Evan",
@@ -213,7 +237,6 @@
             "Matai E",
             "Luca",
             "JD",
-            "Matt M",
             "Mateo",
             "Ali"
           ],
@@ -221,26 +244,7 @@
           "players": []
         },
         {
-          "time": "10:30 AM – 12:00 PM",
-          "title": "Nick D, Dev A, Tyrell R, Juom MB",
-          "type": "excel",
-          "people": [
-            "Evan",
-            "Donovan",
-            "Tyler",
-            "Nick M",
-            "Noah P",
-            "Matai E",
-            "Luca",
-            "Matt M",
-            "Mateo",
-            "JD"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "2:30 PM – 4:00 PM",
+          "time": "3:00 PM – 4:30 PM",
           "title": "Intern Pickup",
           "type": "other",
           "people": [],
