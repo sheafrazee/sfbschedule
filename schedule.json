@@ -207,7 +207,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dev A, Dalton K",
+          "title": "Jared M, Dev A, Dalton K, Mark S",
           "type": "excel",
           "people": [
             "Evan",
@@ -218,8 +218,7 @@
             "Noah M",
             "Nick M",
             "Luca",
-            "JD",
-            "Ali"
+            "JD"
           ],
           "players": [],
           "note": ""
