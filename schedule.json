@@ -219,8 +219,7 @@
             "Nick M",
             "Luca",
             "JD",
-            "Matt M",
-            "Ali"
+            "Matt M"
           ],
           "players": [],
           "note": ""
@@ -272,6 +271,22 @@
       "day": "Thu 6/25",
       "events": [
         {
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Nick D, Kadin S",
+          "type": "excel",
+          "people": [
+            "Evan",
+            "Donovan",
+            "Tyler",
+            "Nick M",
+            "Luca",
+            "Matai E",
+            "Noah P"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Jared M, Ousmane D, Dariq W, Dalton K",
           "type": "excel",
@@ -293,7 +308,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, Dev A, Tyrell R, Colby J",
+          "title": "Mark S, Dev A, Tyrell R, Colby J",
           "type": "excel",
           "people": [
             "Evan",
@@ -313,7 +328,7 @@
         },
         {
           "time": "11:00 AM – 12:30 PM",
-          "title": "Charles P, Juom MB, King G, Kadin S",
+          "title": "Charles P, Juom MB, King G, Tripp",
           "type": "excel",
           "people": [
             "Evan",
