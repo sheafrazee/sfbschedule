@@ -379,6 +379,26 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:00 PM – 7:00 PM",
+          "title": "King G, Charles",
+          "type": "excel",
+          "people": [
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "7:00 PM – 8:00 PM",
+          "title": "Dev Askew",
+          "type": "excel",
+          "people": [
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -387,7 +407,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dalton K, Ousmane, D, Kadin S",
+          "title": "Jared M, Dalton K, Ousmane D",
           "type": "excel",
           "people": [
             "Evan",
@@ -407,7 +427,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "5v5: Nick D, Dev A, Tyrell R, Charles P, Juom MB, King G, Colby J, Dariq W",
+          "title": "5v5: Dariq W, Dev A, Tyrell R, Charles P, Juom MB, King G, Dre, Tripp,  Colby J, Dariq W",
           "type": "excel",
           "people": [
             "Evan",
@@ -426,23 +446,65 @@
           "players": []
         },
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Rudy",
-          "type": "other",
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Micah, Moussa, Kadin",
+          "type": "excel",
           "people": [
-            "Anthony",
-            "Guiressi"
+            "Evan",
+            "Donovan",
+            "Tyler",
+            "Matt M",
+            "Noah P",
+            "Matai E",
+            "Luca",
+            "Jacob Sells",
+            "Mateo",
+            "JD"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "1:00 PM – 2:30 PM",
+          "title": "Stanley Johnson",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Noah P",
+            "Matai E"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:30 PM – 5:30 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:30 PM",
           "title": "Audrina ",
           "type": "other",
           "people": [
             "Anthony",
-            "Guiressi"
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:30 PM – 6:30 PM",
+          "title": "King",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
           ],
           "players": [],
           "note": ""
