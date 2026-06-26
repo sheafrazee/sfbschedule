@@ -407,7 +407,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dalton K, Ousmane D",
+          "title": "Dalton K, Ousmane D",
           "type": "excel",
           "people": [
             "Evan",
@@ -435,12 +435,7 @@
             "Tyler",
             "Nick M",
             "Noah P",
-            "Matai E",
-            "Luca",
-            "Jacob Sells",
-            "Mateo",
-            "JD",
-            "Ali"
+            "Matai E"
           ],
           "note": "",
           "players": []
@@ -477,17 +472,6 @@
           "note": ""
         },
         {
-          "time": "4:30 PM – 5:30 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "3:00 PM – 4:30 PM",
           "title": "Audrina ",
           "type": "other",
@@ -499,7 +483,7 @@
           "note": ""
         },
         {
-          "time": "5:30 PM – 6:30 PM",
+          "time": "4:30 PM – 5:30 PM",
           "title": "King",
           "type": "other",
           "people": [
