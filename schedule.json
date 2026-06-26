@@ -406,6 +406,16 @@
       "day": "Fri 6/26",
       "events": [
         {
+          "time": "6:15 AM – 7:45 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Dalton K, Ousmane D",
           "type": "excel",
