@@ -521,7 +521,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared, Dev, Ousmane",
+          "title": "Jared, Dev, Colby, Mark",
           "type": "excel",
           "people": [
             "Donovan",
@@ -531,7 +531,8 @@
             "Matai E",
             "Luca",
             "JD",
-            "Mateo"
+            "Mateo",
+            "Anthony"
           ],
           "note": "",
           "players": []
@@ -554,8 +555,8 @@
           "players": []
         },
         {
-          "time": "10:45 AM – 12:00 PM",
-          "title": "Charles P, Juom MB, King G",
+          "time": "10:45 AM – 12:15 PM",
+          "title": "Charles P, Juom MB, King G, Tyrell",
           "type": "excel",
           "people": [
             "Donovan",
@@ -565,34 +566,18 @@
             "Matai E",
             "Luca",
             "JD",
-            "Mateo"
+            "Mateo",
+            "Dame"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "12:00 PM – 1:15 PM",
-          "title": "Tyrell, Colby, Mark",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Tyler",
-            "Nick M",
-            "Noah P",
-            "Matai E",
-            "Luca",
-            "JD",
-            "Mateo"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "1:30 PM",
+          "time": "12:30 PM",
           "title": " Rudy",
           "type": "other",
           "people": [
-            "Anthony",
+            "Dame",
             "Ian"
           ],
           "players": [],
