@@ -502,6 +502,16 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "5:45 PM – 6:45 PM",
+          "title": "Dev A",
+          "type": "excel",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -538,7 +548,7 @@
         },
         {
           "time": "9:30 AM – 10:45 AM",
-          "title": "Moussa, Micah, Tripp, Dre B",
+          "title": "Moussa, Micah, Tripp",
           "type": "excel",
           "people": [
             "Donovan",
@@ -548,8 +558,7 @@
             "Matai E",
             "Luca",
             "JD",
-            "Mateo",
-            "Anthony"
+            "Mateo"
           ],
           "note": "",
           "players": []
@@ -567,7 +576,7 @@
             "Luca",
             "JD",
             "Mateo",
-            "Anthony"
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -577,7 +586,7 @@
           "title": " Rudy",
           "type": "other",
           "people": [
-            "Colby",
+            "Dame",
             "Ian"
           ],
           "players": [],
