@@ -5,6 +5,19 @@
       "day": "Mon 6/29",
       "events": [
         {
+          "time": "7:15 AM – 8:00 AM",
+          "title": "Nick D",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Tyler",
+            "Noah P",
+            "Matai E"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Dev A, Dariq W, Juom MB, Kelan M",
           "type": "excel",
@@ -67,7 +80,7 @@
         },
         {
           "time": "12:30 PM – 1:30 PM",
-          "title": "Kadin S, Nick D, William B",
+          "title": "Kadin S, William B",
           "type": "excel",
           "people": [
             "Donovan",
@@ -76,8 +89,7 @@
             "Noah P",
             "Matai E",
             "Mateo",
-            "Jacob Sells",
-            "JD"
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
