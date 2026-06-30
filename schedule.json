@@ -123,21 +123,15 @@
       "day": "Tue 6/30",
       "events": [
         {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Ousmane D, Kadin S, Nick D",
-          "type": "excel",
+          "time": "7:00 AM – 8:30 AM",
+          "title": "Benny G @ MAP",
+          "type": "other",
           "people": [
-            "Donovan",
-            "Tyler",
-            "Nick M",
-            "Mateo",
-            "Nico",
-            "Jaden G",
-            "Josh G",
-            "Kem"
+            "Anthony",
+            "Colby R"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         },
         {
           "time": "9:30 AM – 11:00 AM",
@@ -155,15 +149,21 @@
           "players": []
         },
         {
-          "time": "7:00 AM – 8:30 AM",
-          "title": "Benny G @ MAP",
-          "type": "other",
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Ousmane D, Kadin S, Nick D",
+          "type": "excel",
           "people": [
-            "Anthony",
-            "Colby R"
+            "Donovan",
+            "Tyler",
+            "Nick M",
+            "Mateo",
+            "Nico",
+            "Jaden G",
+            "Josh G",
+            "Kem"
           ],
-          "players": [],
-          "note": ""
+          "note": "",
+          "players": []
         },
         {
           "time": "2:00 PM – 3:00 PM",
