@@ -104,6 +104,18 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "5:15 PM – 6:15 PM",
+          "title": "King G, Charles P, William B",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Noah P",
+            "Matai E"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -111,7 +123,7 @@
       "day": "Tue 6/30",
       "events": [
         {
-          "time": "8:00 AM – 9:30 AM",
+          "time": "11:00 AM – 12:30 PM",
           "title": "Ousmane D, Kadin S, Nick D",
           "type": "excel",
           "people": [
@@ -129,7 +141,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Bball 5x: Mark S, Dev A, Dariq W, Juom MB, Tyrell R, Kelan M, Dre B, William B",
+          "title": "Bball 5x: Mark S, Dev A, Dariq W, Juom MB, Kelan M, Dre B, William B",
           "type": "excel",
           "people": [
             "Donovan",
@@ -143,7 +155,7 @@
           "players": []
         },
         {
-          "time": "11:45 AM – 1:15 PM",
+          "time": "7:00 AM – 8:30 AM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
@@ -159,6 +171,17 @@
           "people": [
             "Malachi",
             "Ethan"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Malachi"
           ],
           "players": [],
           "note": ""
