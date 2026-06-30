@@ -284,6 +284,9 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .ai-view-btn:hover { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
 .ai-view-btn.excel { border-color: var(--clay); color: var(--clay); }
 .ai-view-btn.excel:hover { background: var(--clay); color: #fff; border-color: var(--clay); }
+.ai-del-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 9px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--stone); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.ai-del-btn:hover { background: var(--clay); color: #fff; border-color: var(--clay); }
+.ai-del-btn:disabled { opacity: .5; cursor: not-allowed; }
 .archive-empty { color: var(--stone); text-align: center; padding: 30px 16px; font-size: 13.5px; line-height: 1.5; }
 .archive-status { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: var(--dark-stone); min-height: 16px; flex: 1; }
 .img-modal { max-width: 92vw; padding: 14px; }
@@ -1090,6 +1093,20 @@ async function ghPutFile(path, contentB64, message) {
   if (!p.ok) throw new Error("HTTP " + p.status + " " + (await p.text()).slice(0, 160));
 }
 
+// Delete a file (e.g. an archived PNG) from GitHub. Missing file (404) is treated as success.
+async function ghDeleteFile(path, message) {
+  const cfg = loadCfg();
+  const branch = cfg.branch || "main";
+  const base = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const headers = { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" };
+  const g = await fetch(base + "?ref=" + branch, { headers });
+  if (g.status === 404) return;                       // already gone
+  if (!g.ok) throw new Error("HTTP " + g.status + " " + (await g.text()).slice(0, 160));
+  const sha = (await g.json()).sha;
+  const d = await fetch(base, { method: "DELETE", headers, body: JSON.stringify({ message, sha, branch }) });
+  if (!d.ok) throw new Error("HTTP " + d.status + " " + (await d.text()).slice(0, 160));
+}
+
 // Build a clean, self-contained snapshot of the week off-screen.
 // filtered=false → full week (used by Archive). filtered=true → respect the active search/type filter (used by PDF).
 function buildCaptureNode(filtered, opts = {}) {
@@ -1752,6 +1769,7 @@ function renderArchiveList(filter) {
     <div class="ai-btns">
       <button class="ai-view-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">All Types →</button>
       ${a.pathExcel ? `<button class="ai-view-btn excel" data-path="${escapeAttr(a.pathExcel)}" data-range="${escapeAttr(a.range)}" data-label="Excel Client">Excel →</button>` : ""}
+      ${editUnlocked ? `<button class="ai-del-btn" data-key="${escapeAttr(a.key)}" data-range="${escapeAttr(a.range)}" title="Delete this archived snapshot">Delete</button>` : ""}
     </div>
   </div>`).join("") || `<div class="archive-empty">No match.</div>`;
   list.querySelectorAll(".ai-view-btn").forEach(b => b.addEventListener("click", () => {
@@ -1763,6 +1781,8 @@ function renderArchiveList(filter) {
     iv.dataset.label = b.dataset.label || "";
     document.getElementById("imgModal").classList.remove("hidden");
   }));
+  list.querySelectorAll(".ai-del-btn").forEach(b => b.addEventListener("click", () =>
+    deleteArchivedWeek(b.dataset.key, b.dataset.range, b)));
 }
 
 // Pull an already-archived week PNG from GitHub and hand it to the native share
@@ -1821,6 +1841,29 @@ async function downloadArchivedWeek(path, range, label, btn) {
     console.error(e);
     alert("Download failed: " + e.message);
   } finally {
+    if (btn) { btn.textContent = prev; btn.disabled = false; }
+  }
+}
+
+// Delete an archived week: removes both PNGs from GitHub, drops the index entry, and publishes.
+async function deleteArchivedWeek(key, range, btn) {
+  const entry = (data.archive || []).find(a => a.key === key);
+  if (!entry) return;
+  if (!confirm(`Delete the archived snapshot for ${range}?\n\nThis removes the saved image(s) from GitHub and the entry from the list. It does not affect the live schedule.`)) return;
+  const prev = btn ? btn.textContent : "";
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
+  setArchiveStatus("Deleting " + range + "…");
+  try {
+    if (entry.path)      await ghDeleteFile(entry.path,      "Delete archived week " + range + " (all types)");
+    if (entry.pathExcel) await ghDeleteFile(entry.pathExcel, "Delete archived week " + range + " (Excel Client)");
+    data.archive = (data.archive || []).filter(a => a.key !== key);
+    await publish();   // commit updated schedule.json without this entry
+    setArchiveStatus("✓ Deleted " + range);
+    renderArchiveList(document.getElementById("archiveSearch").value || "");
+  } catch (e) {
+    console.error(e);
+    setArchiveStatus("✗ Delete failed: " + e.message);
+    alert("Delete failed: " + e.message);
     if (btn) { btn.textContent = prev; btn.disabled = false; }
   }
 }
