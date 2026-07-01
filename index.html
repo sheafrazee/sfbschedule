@@ -946,8 +946,8 @@ async function refreshSha() {
   try {
     const path = cfg.path || "schedule.json";
     const branch = cfg.branch || "main";
-    const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${branch}`;
-    const res = await fetch(url, { headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json" } });
+    const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${branch}&_=${Date.now()}`;
+    const res = await fetch(url, { headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json" }, cache: "no-store" });
     if (res.ok) {
       const j = await res.json();
       publishedSha = j.sha;
@@ -1085,11 +1085,17 @@ async function ghPutFile(path, contentB64, message) {
   const base = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
   const headers = { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" };
   let sha = null;
-  const g = await fetch(base + "?ref=" + branch, { headers });
+  const g = await fetch(base + "?ref=" + branch + "&_=" + Date.now(), { headers, cache: "no-store" });
   if (g.ok) sha = (await g.json()).sha;
   const body = { message, content: contentB64, branch };
   if (sha) body.sha = sha;
-  const p = await fetch(base, { method: "PUT", headers, body: JSON.stringify(body) });
+  let p = await fetch(base, { method: "PUT", headers, body: JSON.stringify(body) });
+  // GitHub's read can lag its write; a stale SHA yields 409/422. Re-read once and retry.
+  if (p.status === 409 || p.status === 422) {
+    const g2 = await fetch(base + "?ref=" + branch + "&_=" + Date.now(), { headers, cache: "no-store" });
+    if (g2.ok) body.sha = (await g2.json()).sha; else delete body.sha;
+    p = await fetch(base, { method: "PUT", headers, body: JSON.stringify(body) });
+  }
   if (!p.ok) throw new Error("HTTP " + p.status + " " + (await p.text()).slice(0, 160));
 }
 
@@ -1099,7 +1105,7 @@ async function ghDeleteFile(path, message) {
   const branch = cfg.branch || "main";
   const base = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
   const headers = { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" };
-  const g = await fetch(base + "?ref=" + branch, { headers });
+  const g = await fetch(base + "?ref=" + branch + "&_=" + Date.now(), { headers, cache: "no-store" });
   if (g.status === 404) return;                       // already gone
   if (!g.ok) throw new Error("HTTP " + g.status + " " + (await g.text()).slice(0, 160));
   const sha = (await g.json()).sha;
