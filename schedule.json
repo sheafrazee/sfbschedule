@@ -212,7 +212,7 @@
         {
           "time": "6:15 PM – 7:15 PM",
           "title": "William Brunson",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Anthony",
             "Malachi S"
@@ -622,7 +622,7 @@
         "William B",
         "William Brunson"
       ],
-      "ts": 1782871555418
+      "ts": 1782871614397
     },
     {
       "key": "2026-06-22",
