@@ -170,7 +170,7 @@
           "title": "Sean Dao",
           "type": "other",
           "people": [
-            "Malachi",
+            "Malachi S",
             "Ethan"
           ],
           "players": [],
@@ -182,7 +182,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Malachi"
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -193,21 +193,32 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Malachi"
+            "Malachi S"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group",
+          "title": "Group: Russ",
           "type": "other",
           "people": [
             "Anthony",
-            "Malachi"
+            "Malachi S"
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "William Brunson",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Malachi S"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
