@@ -323,8 +323,7 @@
             "Mateo",
             "Jacob Sells",
             "Colin",
-            "Jaden G",
-            "Josh G",
+            "Frank M",
             "Nico",
             "Kem"
           ],
@@ -343,8 +342,7 @@
             "Mateo",
             "Jacob Sells",
             "Colin",
-            "Jaden G",
-            "Josh G",
+            "Frank M",
             "Nico",
             "Kem"
           ],
@@ -357,14 +355,25 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Guiressi"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "1:30 PM – 2:30 PM",
-          "title": "Sean Dao",
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Sean Dao, Maxwell Scott, Rudy",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Palemir ",
           "type": "other",
           "people": [
             "Anthony",
