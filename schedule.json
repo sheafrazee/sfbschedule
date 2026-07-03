@@ -388,6 +388,22 @@
       "day": "Fri 7/3",
       "events": [
         {
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Kadin S, Nick D",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Waleed",
+            "Frank M",
+            "Ali",
+            "Mateo",
+            "JD",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Ousmane D, William B, Dariq W",
           "type": "excel",
@@ -420,22 +436,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "7:00 AM – 8:00 AM",
-          "title": "Kadin S, Nick D",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Waleed",
-            "Frank M",
-            "Ali",
-            "Mateo",
-            "JD",
-            "Ian"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "12:00 PM – 1:30 PM",
