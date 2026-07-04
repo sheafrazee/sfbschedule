@@ -483,9 +483,9 @@
           "type": "excel",
           "people": [
             "Donovan",
+            "Nick M",
             "Mateo",
             "Ali",
-            "Ian",
             "JD",
             "Dame",
             "Jaden G",
@@ -496,7 +496,7 @@
         },
         {
           "time": "8:30 AM – 9:30 AM",
-          "title": "Dariq W, Nick D, Mark S, Jalen ",
+          "title": "Dariq W, Mark S, Ousmane, Juom",
           "type": "excel",
           "people": [
             "Donovan",
@@ -513,37 +513,11 @@
           "note": ""
         },
         {
-          "time": "9:30 AM – 10:30 AM",
-          "title": "Juom, Ousmane",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Mateo",
-            "Ali",
-            "JD",
-            "Dame"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "10:30 AM",
+          "time": "9:30 AM",
           "title": "Palmire ",
           "type": "excel",
           "people": [
             "Donovan",
-            "Dame",
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "11:30 AM – 12:30 PM",
-          "title": "Rudy",
-          "type": "other",
-          "people": [
             "Dame",
             "Kirby"
           ],
