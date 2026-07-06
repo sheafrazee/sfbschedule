@@ -58,7 +58,17 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Hailey ",
+          "type": "other",
+          "people": [
+            "Anthony",
             "Ian"
           ],
           "players": [],
