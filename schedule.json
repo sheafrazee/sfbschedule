@@ -18,7 +18,8 @@
             "RJ C",
             "Dame",
             "JS",
-            "Ali"
+            "Ali",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -36,19 +37,20 @@
             "Josh G",
             "RJ C",
             "Dame",
-            "Ali"
+            "Ali",
+            "Chozen"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "2:30 PM – 4:00 PM",
+          "time": "11:30 AM – 1:00 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Dame",
             "Guiressi",
-            "Anthony"
+            "Anthony",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -66,12 +68,23 @@
           "note": ""
         },
         {
-          "time": "4:30 PM – 5:30 PM",
+          "time": "2:30 PM – 4:00 PM",
+          "title": "Trayce J",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Anthony",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
           "title": "Allen",
           "type": "other",
           "people": [
             "Anthony",
-            "Dame",
             "Ian"
           ],
           "players": [],
@@ -92,7 +105,8 @@
             "Mateo",
             "Jaden G",
             "Josh G",
-            "Jacob S"
+            "Jacob S",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -109,7 +123,8 @@
             "Josh G",
             "Colin",
             "Nico",
-            "Ali"
+            "Ali",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -184,7 +199,8 @@
             "Dame",
             "Nico",
             "Ali",
-            "RJ C"
+            "RJ C",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -202,7 +218,8 @@
             "Dame",
             "Nico",
             "Ali",
-            "RJ C"
+            "RJ C",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -265,7 +282,8 @@
             "Jacob S",
             "Nico",
             "Ali",
-            "Waleed"
+            "Waleed",
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -283,7 +301,8 @@
             "Jacob S",
             "Nico",
             "Ali",
-            "Waleed"
+            "Waleed",
+            "Chozen"
           ],
           "note": "",
           "players": []
