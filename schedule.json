@@ -92,7 +92,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Bball 5x: Ousmane D, Jared M, Trayce J, Dariq W, Juom MB, Kelan M",
+          "title": "Bball 5x: Trayce J, Jared M, Cam A, Dariq W, Juom MB, Kelan M",
           "type": "excel",
           "people": [
             "Donovan",
@@ -100,18 +100,19 @@
             "Mateo",
             "Jaden G",
             "Josh G",
-            "Jacob S",
-            "Chozen"
+            "Chozen",
+            "RJ C"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Trayce J, Kadin S, Nick D",
+          "title": "Ousmane D, Trayce JD, Kadin S, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
+            "RJ C",
             "Nick M",
             "Mateo",
             "Jaden G",
@@ -119,7 +120,8 @@
             "Colin",
             "Nico",
             "Ali",
-            "Chozen"
+            "Chozen",
+            "Kem"
           ],
           "note": "",
           "players": []
@@ -182,11 +184,23 @@
       "day": "Wed 7/8",
       "events": [
         {
+          "time": "6:30 AM – 7:30 AM",
+          "title": "Hailey",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Jared M, Trayce J, Dariq W, Ousmane D",
           "type": "excel",
           "people": [
             "Donovan",
+            "RJ C",
             "Nick M",
             "Mateo",
             "Jaden G",
@@ -206,6 +220,7 @@
           "type": "excel",
           "people": [
             "Donovan",
+            "RJ C",
             "Nick M",
             "Mateo",
             "Jaden G",
@@ -218,17 +233,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "11:45 AM – 1:15 PM",
-          "title": "Kenzie F @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "2:30 PM – 4:00 PM",
@@ -270,7 +274,7 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
+            "RJ C",
             "Mateo",
             "Jaden G",
             "Josh G",
@@ -289,7 +293,7 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
+            "RJ C",
             "Mateo",
             "Jaden G",
             "Josh G",
@@ -344,6 +348,17 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "2:45 PM – 4:00 PM",
+          "title": "Kenzie F",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -356,6 +371,7 @@
           "type": "excel",
           "people": [
             "Donovan",
+            "RJ C",
             "Nick M",
             "Mateo",
             "Jaden G",
@@ -392,17 +408,6 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "11:00 AM – 12:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Donovan",
             "Dame"
           ],
           "players": [],
