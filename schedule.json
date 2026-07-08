@@ -41,6 +41,17 @@
           "players": []
         },
         {
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Palmire",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "11:30 AM – 1:00 PM",
           "title": "Benny G @ MAP",
           "type": "other",
@@ -48,17 +59,6 @@
             "Guiressi",
             "Anthony",
             "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "11:00 AM – 12:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M"
           ],
           "players": [],
           "note": ""
@@ -170,7 +170,7 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "title": "Group: Tarek, Russ, Jacob 2x, Justin Stone",
           "type": "other",
           "people": [
             "Malachi S"
@@ -208,7 +208,6 @@
             "Dame",
             "Nico",
             "Ali",
-            "RJ C",
             "Chozen"
           ],
           "note": "",
@@ -228,7 +227,6 @@
             "Dame",
             "Nico",
             "Ali",
-            "RJ C",
             "Chozen"
           ],
           "note": "",
@@ -329,6 +327,17 @@
           "note": ""
         },
         {
+          "time": "2:45 PM – 4:00 PM",
+          "title": "Kenzie F",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "5:00 PM – 6:15 PM",
           "title": "Group: ",
           "type": "other",
@@ -348,23 +357,23 @@
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "2:45 PM – 4:00 PM",
-          "title": "Kenzie F",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Guiressi"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
     {
       "day": "Fri 7/10",
       "events": [
+        {
+          "time": "6:15 AM – 7:45 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "8:00 AM – 9:30 AM",
           "title": "Dariq W, Ousmane D, Juom MB",
@@ -401,17 +410,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "6:15 AM – 7:45 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
