@@ -196,7 +196,7 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Trayce J, Dariq W, Ousmane D",
+          "title": "Trayce J, Dalton K, Ousmane D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -207,15 +207,15 @@
             "Josh G",
             "Dame",
             "Nico",
-            "Ali",
-            "Chozen"
+            "Chozen",
+            "Kirby"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Juom MB, Nick D, Kelan M, Marko S",
+          "title": "Jared M, Dariq W, Kelan M",
           "type": "excel",
           "people": [
             "Donovan",
@@ -226,8 +226,29 @@
             "Josh G",
             "Dame",
             "Nico",
+            "Chozen",
             "Ali",
-            "Chozen"
+            "Blake"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Nick D, Kadin S, Juom MB, Marko S",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "RJ C",
+            "Nick M",
+            "Mateo",
+            "Jaden G",
+            "Josh G",
+            "Dame",
+            "Nico",
+            "Chozen",
+            "Ali",
+            "Blake"
           ],
           "note": "",
           "players": []
@@ -245,7 +266,6 @@
           "title": "Group: ",
           "type": "other",
           "people": [
-            "Dame",
             "Guiressi"
           ],
           "players": [],
