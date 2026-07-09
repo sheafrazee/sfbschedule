@@ -207,8 +207,7 @@
             "Josh G",
             "Dame",
             "Nico",
-            "Chozen",
-            "Kirby"
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -242,13 +241,12 @@
             "RJ C",
             "Nick M",
             "Mateo",
-            "Jaden G",
+            "Guiressi",
             "Josh G",
             "Dame",
             "Nico",
             "Chozen",
-            "Ali",
-            "Blake"
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -263,11 +261,9 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "title": "Group: Cesar",
           "type": "other",
-          "people": [
-            "Guiressi"
-          ],
+          "people": [],
           "players": [],
           "note": ""
         },
@@ -288,25 +284,6 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Trayce J, Dariq W, Ousmane D",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "RJ C",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Jacob S",
-            "Nico",
-            "Ali",
-            "Waleed",
-            "Chozen"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:30 AM – 11:00 AM",
           "title": "Juom MB, Nick D, Kadin S, Marko S",
           "type": "excel",
           "people": [
@@ -319,7 +296,8 @@
             "Nico",
             "Ali",
             "Waleed",
-            "Chozen"
+            "Chozen",
+            "Jaden"
           ],
           "note": "",
           "players": []
@@ -330,29 +308,31 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Dame",
+            "Kirby"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "1:15 PM – 2:45 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "2:45 PM – 4:00 PM",
+          "time": "1:15 PM – 2:30 PM",
           "title": "Kenzie F",
           "type": "other",
           "people": [
             "Anthony",
-            "Guiressi"
+            "Dame",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Hailey Johnson ",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Kirby"
           ],
           "players": [],
           "note": ""
@@ -367,16 +347,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
