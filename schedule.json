@@ -332,18 +332,18 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Kirby"
+            "David"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "title": "Group: Breadon, Jacob Jares 2x, Russ",
           "type": "other",
           "people": [
             "Anthony",
-            "Kirby"
+            "David"
           ],
           "note": "",
           "players": []
@@ -354,49 +354,43 @@
       "day": "Fri 7/10",
       "events": [
         {
-          "time": "6:15 AM – 7:45 AM",
+          "time": "6:15 AM – 7:30 AM",
           "title": "GW",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Anthony"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dariq W, Ousmane D, Juom MB",
+          "title": "Juom MB, Marko S, Kadin S, Ethan L",
           "type": "excel",
           "people": [
             "Donovan",
             "RJ C",
-            "Nick M",
             "Mateo",
             "Jaden G",
             "Josh G",
             "Nico",
             "Ali",
             "Colin",
-            "Frank M"
+            "Jamal",
+            "Waleed",
+            "Braedon"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Nick D, Marko S, Kadin S",
+          "title": "Nick D",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Nico",
-            "Ali",
-            "Colin",
-            "Frank M"
+            "RJ C",
+            "Mateo"
           ],
           "note": "",
           "players": []
