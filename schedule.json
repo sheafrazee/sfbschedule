@@ -6,16 +6,16 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M J, Dariq W, Kelan M, Juom MB",
+          "title": "Jared M, Dariq W, Kelan M, Juom MB",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
             "Mateo",
-            "Ian",
             "Jaden G",
             "Josh G",
-            "RJ C",
+            "Anthony",
+            "Dame",
             "Ali",
             "Chozen"
           ],
@@ -24,7 +24,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": " Nick D, Kadin S, Will B, Cam A",
+          "title": "Nick D, Kadin S, Will B, Cam A",
           "type": "excel",
           "people": [
             "Donovan",
@@ -296,8 +296,7 @@
             "Nico",
             "Ali",
             "Waleed",
-            "Chozen",
-            "Jaden"
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -308,20 +307,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame",
-            "Kirby"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "1:15 PM – 2:30 PM",
-          "title": "Kenzie F",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame",
-            "Kirby"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -401,35 +387,19 @@
       "day": "Sat 7/11",
       "events": [
         {
-          "time": "8:00 AM – 9:15 AM",
-          "title": "Dariq W, Ousmane D",
+          "time": "9:00 AM – 10:30 AM",
+          "title": "Ethan L, Mark S, Nick D, Harrison I",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Mateo",
             "Nico",
-            "Colin",
             "Jaden G",
             "Josh G",
-            "JD"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:15 AM – 10:30 AM",
-          "title": "Nick D, Juom MB, Marko S",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Mateo",
-            "Nico",
-            "Colin",
-            "Jaden G",
-            "Josh G",
-            "JD"
+            "Braedon",
+            "Dame",
+            "Waleed",
+            "Cesar",
+            "David"
           ],
           "note": "",
           "players": []
@@ -657,5 +627,562 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": null
+  "nextWeek": {
+    "weekTitle": "Week of Jul 13 – 19",
+    "days": [
+      {
+        "day": "Mon 7/13",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Dalton K, Dariq W, Mark S, Trayce JD",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Dame",
+              "Colin",
+              "Jaden G",
+              "Josh G",
+              "Cesar",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Ousmane D, Harrison I, Kadin S, Clark R",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Dame",
+              "Colin",
+              "Jaden G",
+              "Josh G",
+              "Cesar",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:00 AM – 12:30 PM",
+            "title": "Ethan L, Nick D",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Jaden G",
+              "Josh G",
+              "Cesar",
+              "Ali",
+              "Chozen"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "Cole S @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Archie @ Excel",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "12:30 PM – 1:30 PM",
+            "title": "Palmire",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Chozen"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Tue 7/14",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Ousmane D, Harrison I, Kadin S, Clark R, Ethan L, Mario H",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Jaden G",
+              "Josh G",
+              "Chozen",
+              "RJ C"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Dalton K, Nick D + Anyone not playing",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "RJ C",
+              "Nick M",
+              "Mateo",
+              "Jaden G",
+              "Josh G",
+              "Colin",
+              "Nico",
+              "Ali",
+              "Chozen",
+              "Kem"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:30 AM – 1:00 PM",
+            "title": "Benny G @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Guiressi"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "Stanley J @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Guiressi"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "2:30 PM – 4:00 PM",
+            "title": "Cole S @ MAP",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Palmire",
+            "type": "excel",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:15 PM",
+            "title": "Group: ",
+            "type": "other",
+            "people": [
+              "Malachi S"
+            ],
+            "note": "",
+            "players": []
+          }
+        ]
+      },
+      {
+        "day": "Wed 7/15",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Dalton K, Dariq W, Mark S, Trayce JD",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "7:00 AM – 8:00 AM",
+            "title": "Nick D",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Ousmane D, Harrison I, Kadin S, Mario H",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:00 AM – 12:30 PM",
+            "title": "Clark R, Ethan L",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "1:30 PM – 3:00 PM",
+            "title": "Intern Pickup",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:15 PM",
+            "title": "Group: ",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Palmire",
+            "type": "excel",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Archie @ Excel",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Thu 7/16",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Dalton K, Dariq W, Mark S, Trayce JD",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Ousmane D, Harrison I, Kadin S, Mario H",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:00 AM – 12:30 PM",
+            "title": "Clark R, Ethan L",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "Benny G @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "2:30 PM – 4:00 PM",
+            "title": "Cole S @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:15 PM",
+            "title": "Group: ",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "David"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Palmire",
+            "type": "excel",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "7:00 AM – 8:00 AM",
+            "title": "Nick D",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          }
+        ]
+      },
+      {
+        "day": "Fri 7/17",
+        "events": [
+          {
+            "time": "6:15 AM – 7:30 AM",
+            "title": "GW",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Bball Comp: Ayo D, Dariq W, Mark S, Trayce JD, Ousmane D, Harrison I, Kadin S, Clark R, Ethan L, Mario H",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Jaden G",
+              "Josh G",
+              "Chozen",
+              "RJ C"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Dalton K, Nick D + Anyone not playing",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "RJ C",
+              "Nick M",
+              "Mateo",
+              "Jaden G",
+              "Josh G",
+              "Colin",
+              "Nico",
+              "Ali",
+              "Chozen",
+              "Kem"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:30 AM – 1:00 PM",
+            "title": "Benny G @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Guiressi"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "Stanley J @ MAP",
+            "type": "other",
+            "people": [
+              "Anthony",
+              "Guiressi"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "2:30 PM – 4:00 PM",
+            "title": "Cole S @ MAP",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "11:00 AM – 12:00 PM",
+            "title": "Palmire",
+            "type": "excel",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Archie @ Excel",
+            "type": "other",
+            "people": [
+              "Anthony"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Sat 7/18",
+        "events": [
+          {
+            "time": "8:00 AM – 9:30 AM",
+            "title": "Dalton K, Dariq W, Ayo D, Trayce JD",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "9:30 AM – 11:00 AM",
+            "title": "Ousmane D, Harrison I, Marko S, Mario H",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M",
+              "Mateo",
+              "Ian",
+              "Jaden G",
+              "Josh G",
+              "RJ C",
+              "Ali",
+              "Chozen"
+            ],
+            "note": "",
+            "players": []
+          },
+          {
+            "time": "11:00 AM – 12:30 PM",
+            "title": "Clark R, Ethan L, Nick D, Kadin S",
+            "type": "excel",
+            "people": [
+              "Donovan",
+              "Nick M"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Sun 7/19",
+        "events": []
+      }
+    ]
+  }
 }
