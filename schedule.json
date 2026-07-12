@@ -26,7 +26,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Ousmane D, Harrison I, Marko S, Clark R",
+          "title": "Harrison I, Marko S, Clark R",
           "type": "excel",
           "people": [
             "Donovan",
@@ -81,17 +81,6 @@
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "11:00 AM – 12:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -100,7 +89,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Ousmane D, Harrison I, Kadin S, Clark R, Ethan L, Mario H, Issac O",
+          "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Harrison I, Kadin S, Clark R, Ethan L, Mario H, Issac O",
           "type": "excel",
           "people": [
             "Donovan",
@@ -157,20 +146,11 @@
           "note": ""
         },
         {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:15 PM",
           "title": "Group: ",
           "type": "other",
           "people": [
+            "Anthony",
             "Guiressi"
           ],
           "note": "",
@@ -194,14 +174,15 @@
             "Cesar",
             "Ali",
             "Chozen",
-            "Braedon"
+            "Braedon",
+            "Matt M"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Ousmane D, Harrison I, Mario H, Marko S",
+          "title": "Harrison I, Mario H, Marko S",
           "type": "excel",
           "people": [
             "Donovan",
@@ -212,7 +193,8 @@
             "Cesar",
             "Ali",
             "Chozen",
-            "Braedon"
+            "Braedon",
+            "Matt M"
           ],
           "note": "",
           "players": []
@@ -257,17 +239,8 @@
           "title": "Group: ",
           "type": "other",
           "people": [
+            "Anthony",
             "Chozen"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -290,7 +263,7 @@
       "events": [
         {
           "time": "7:00 AM – 8:15 AM",
-          "title": "Ethan L, Nick D, Kadin S, Clark R",
+          "title": "Ethan L, Nick D, Clark R",
           "type": "excel",
           "people": [
             "Donovan",
@@ -322,14 +295,15 @@
             "Sean D",
             "Waleed",
             "Jacob S",
-            "Braedon"
+            "Braedon",
+            "Matt M"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Ousmane D, Harrison I, Marko S",
+          "title": "Harrison I, Marko S, Kadin S",
           "type": "excel",
           "people": [
             "Donovan",
@@ -341,7 +315,8 @@
             "Waleed",
             "Jacob S",
             "Sean D",
-            "Braedon"
+            "Braedon",
+            "Matt M"
           ],
           "note": "",
           "players": []
@@ -375,20 +350,11 @@
           "title": "Group: ",
           "type": "other",
           "people": [
+            "Anthony",
             "Guiressi"
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -409,14 +375,14 @@
         },
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Ousmane D, Harrison I, Kadin S, Clark R, Ethan L, Mario H, Issac O, Ayo D",
+          "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Harrison I, Kadin S, Clark R, Ethan L, Mario H, Issac O, Ayo D",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
             "Chozen",
             "Mateo",
-            "Ollie"
+            "Jamal"
           ],
           "note": "",
           "players": []
@@ -436,9 +402,9 @@
             "Braedon",
             "Jacob S",
             "Sean D",
-            "Ollie",
             "Jamal",
-            "Devin H"
+            "Devin H",
+            "Matt M"
           ],
           "note": "",
           "players": []
@@ -461,19 +427,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Guiressi",
-            "Ollie"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "11:00 AM – 12:00 PM",
-          "title": "Palmire",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M"
+            "Guiressi"
           ],
           "players": [],
           "note": ""
@@ -484,7 +438,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Guiressi"
+            "Guiressi",
+            "Ollie"
           ],
           "players": [],
           "note": ""
@@ -517,7 +472,7 @@
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Ousmane D, Harrison I, Marko S, Mario H",
+          "title": "Harrison I, Marko S, Mario H",
           "type": "excel",
           "people": [
             "Donovan",
