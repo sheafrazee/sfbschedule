@@ -5,6 +5,23 @@
       "day": "Mon 7/13",
       "events": [
         {
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Ethan L, Nick D, Kadin S",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Anthony",
+            "Dame",
+            "Jaden G",
+            "Josh G",
+            "Cesar",
+            "Jacob S",
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:15 AM – 9:30 AM",
           "title": "Dalton K, Dariq W, Issac O",
           "type": "excel",
@@ -42,23 +59,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "7:00 AM – 8:15 AM",
-          "title": "Ethan L, Nick D, Kadin S",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Anthony",
-            "Dame",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Jacob S",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "11:45 AM – 1:15 PM",
@@ -163,6 +163,22 @@
       "day": "Wed 7/15",
       "events": [
         {
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Ethan L, Nick D, Clark R",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Anthony",
+            "Mateo",
+            "Jaden G",
+            "Josh G",
+            "Cesar",
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:15 AM – 9:30 AM",
           "title": "Dalton K, Dariq W, Issac O, Trayce JD",
           "type": "excel",
@@ -201,22 +217,6 @@
           "players": []
         },
         {
-          "time": "7:00 AM – 8:15 AM",
-          "title": "Ethan L, Nick D, Clark R",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Anthony",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "11:30 AM – 1:00 PM",
           "title": "Stanley J @ MAP",
           "type": "other",
@@ -236,8 +236,8 @@
           "note": ""
         },
         {
-          "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Archie @ Excel",
           "type": "other",
           "people": [
             "Anthony",
@@ -247,8 +247,8 @@
           "note": ""
         },
         {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Archie @ Excel",
+          "time": "5:00 PM – 6:15 PM",
+          "title": "Group: ",
           "type": "other",
           "people": [
             "Anthony",
@@ -411,6 +411,17 @@
           "players": []
         },
         {
+          "time": "11:45 AM – 1:15 PM",
+          "title": "Stanley J @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "1:15 PM – 2:45 PM",
           "title": "Benny G @ MAP",
           "type": "other",
@@ -418,17 +429,6 @@
             "Anthony",
             "Guiressi",
             "Ollie"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "11:45 AM – 1:15 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Guiressi"
           ],
           "players": [],
           "note": ""
