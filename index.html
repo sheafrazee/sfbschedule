@@ -287,6 +287,9 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .ai-del-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 9px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--stone); cursor: pointer; white-space: nowrap; transition: all .15s; }
 .ai-del-btn:hover { background: var(--clay); color: #fff; border-color: var(--clay); }
 .ai-del-btn:disabled { opacity: .5; cursor: not-allowed; }
+.ai-cal-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 9px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.ai-cal-btn:hover:not(:disabled) { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
+.ai-cal-btn:disabled { opacity: .4; cursor: not-allowed; }
 .archive-empty { color: var(--stone); text-align: center; padding: 30px 16px; font-size: 13.5px; line-height: 1.5; }
 .archive-status { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: var(--dark-stone); min-height: 16px; flex: 1; }
 .img-modal { max-width: 92vw; padding: 14px; }
@@ -1386,6 +1389,35 @@ function dateForDay(dayName) {
   if (wd !== null) base.setDate(mon.getDate() + ((wd + 6) % 7));   // offset from Monday
   return base;
 }
+// Same idea, but anchored to a Monday passed in (used by archived weeks, whose
+// Monday comes from the archive key rather than the live week title). Prefers an
+// explicit M/D in the label (e.g. "Mon 5/18") when the day is dated.
+function dateForDayFrom(dayName, mon) {
+  const label = String(dayName || "");
+  const md = label.match(/(\d{1,2})\s*\/\s*(\d{1,2})/);
+  if (md) {
+    const m = parseInt(md[1], 10) - 1, d = parseInt(md[2], 10);
+    if (m >= 0 && m <= 11 && d >= 1 && d <= 31) {
+      let yr = mon.getFullYear();
+      const probe = new Date(yr, m, d);
+      const DAY = 864e5;
+      if (probe - mon > 200 * DAY) yr--;        // week straddles New Year
+      else if (mon - probe > 200 * DAY) yr++;
+      return new Date(yr, m, d);
+    }
+  }
+  const lower = label.toLowerCase();
+  let wd = null;
+  for (const k in _WEEKDAYS) { if (lower.includes(k) || lower.includes(k.slice(0,3))) { wd = _WEEKDAYS[k]; break; } }
+  const base = new Date(mon);
+  if (wd !== null) base.setDate(mon.getDate() + ((wd + 6) % 7));
+  return base;
+}
+// Monday of an archived week, from its key ("YYYY-MM-DD").
+function archiveMonday(entry) {
+  const m = String((entry && entry.key) || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? new Date(+m[1], +m[2] - 1, +m[3]) : weekDates(new Date()).mon;
+}
 function _parseClock(s) {
   if (s == null) return null;
   let str = String(s).trim().toLowerCase();
@@ -1624,18 +1656,21 @@ async function shareWeek(btn) {
   }
 }
 
-// Build a .ics for the week. typeOnly "excel"/"other" restricts to that session
-// type (for the split calendar downloads); omitted respects the active filter.
-function buildWeekICS(typeOnly) {
+// Event predicate for the split calendar downloads. "excel" = Excel Client only,
+// "other" = everything else; omitted falls back to the active search filter.
+function icsTypePred(typeOnly) {
+  if (typeOnly === "excel") return e => e.type === "excel";
+  if (typeOnly === "other") return e => e.type !== "excel";
+  return e => (!internTerms().length && !playerTerms().length) || eventMatches(e);
+}
+// Build a .ics from any days array. dateFn maps a day label to a real date, so the
+// same builder serves the live week (title-anchored) and archived weeks (key-anchored).
+function buildICSFromDays(days, dateFn, pred) {
   const stamp = _fmtStamp();
   const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SFB Schedule//EN", "CALSCALE:GREGORIAN"];
-  (data.days || []).forEach(day => {
-    const date = dateForDay(day.day);
-    (day.events || []).filter(e => {
-      if (typeOnly === "excel") return e.type === "excel";
-      if (typeOnly === "other") return e.type !== "excel";
-      return !internTerms().length && !playerTerms().length || eventMatches(e);
-    }).forEach((e, i) => {
+  (days || []).forEach(day => {
+    const date = dateFn(day.day);
+    (day.events || []).filter(pred).forEach((e, i) => {
       const t = parseEventTimes(e.time);
       const interns = internsOf(e).join(", ");
       const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
@@ -1658,21 +1693,62 @@ function buildWeekICS(typeOnly) {
   lines.push("END:VCALENDAR");
   return lines.join("\r\n");
 }
-async function exportWeekICS(typeOnly) {
-  const isExcel = typeOnly === "excel";
-  const count = (data.days || []).reduce((n, d) =>
-    n + (d.events || []).filter(e => isExcel ? e.type === "excel" : e.type !== "excel").length, 0);
-  if (!count) { alert(`No ${isExcel ? "Excel Client" : "Other"} sessions this week to add to the calendar.`); return; }
-  const ics = buildWeekICS(typeOnly);
+// Live week: anchored to the Monday parsed from the week title.
+function buildWeekICS(typeOnly) {
+  return buildICSFromDays(data.days, dateForDay, icsTypePred(typeOnly));
+}
+// Download the calendar file directly — opens straight into Calendar on iOS/macOS.
+function downloadICS(ics, fname) {
   const blob = new Blob([ics], { type: "text/calendar" });
-  const base = (data.weekTitle || "schedule").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "schedule";
-  const fname = `schedule-${base}-${isExcel ? "excel" : "other"}.ics`;
-  // Download the calendar file directly — opens straight into Calendar on iOS/macOS.
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url; a.download = fname;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function _icsSlug(s, fallback) {
+  return (s || fallback).replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || fallback;
+}
+async function exportWeekICS(typeOnly) {
+  const isExcel = typeOnly === "excel";
+  const count = (data.days || []).reduce((n, d) =>
+    n + (d.events || []).filter(e => isExcel ? e.type === "excel" : e.type !== "excel").length, 0);
+  if (!count) { alert(`No ${isExcel ? "Excel Client" : "Other"} sessions this week to add to the calendar.`); return; }
+  downloadICS(buildWeekICS(typeOnly), `schedule-${_icsSlug(data.weekTitle, "schedule")}-${isExcel ? "excel" : "other"}.ics`);
+}
+
+// ---- .ics for an archived week (dates anchored to that week's Monday) ----
+function exportArchiveICS(entry, typeOnly) {
+  const days = (entry && entry.days) || [];
+  if (!days.length) {
+    alert("This week was archived before calendar export existed, so only its image was saved. Weeks archived from now on can be downloaded as .ics.");
+    return;
+  }
+  const isExcel = typeOnly === "excel";
+  const pred = e => isExcel ? e.type === "excel" : e.type !== "excel";
+  const count = days.reduce((n, d) => n + (d.events || []).filter(pred).length, 0);
+  if (!count) { alert(`No ${isExcel ? "Excel Client" : "Other"} sessions in ${entry.range}.`); return; }
+  const mon = archiveMonday(entry);
+  const ics = buildICSFromDays(days, name => dateForDayFrom(name, mon), pred);
+  downloadICS(ics, `schedule-${_icsSlug(entry.range, "week")}-${isExcel ? "excel" : "other"}.ics`);
+}
+
+// Menu off an archived week's calendar button — same split as the header Share menu.
+function openArchiveICSMenu(entry, btn) {
+  closeShareMenu();
+  const menu = document.createElement("div");
+  menu.className = "share-menu";
+  menu.innerHTML = `<button class="share-menu-item" data-act="ics-excel">↓ Excel calendar (.ics)</button><button class="share-menu-item" data-act="ics-other">↓ Other calendar (.ics)</button>`;
+  document.body.appendChild(menu);
+  const r = btn.getBoundingClientRect();
+  const h = menu.offsetHeight;
+  const below = r.bottom + 4 + h <= window.innerHeight;   // flip above if it would run off-screen
+  menu.style.top = ((below ? r.bottom + 4 : Math.max(8, r.top - h - 4)) + window.scrollY) + "px";
+  menu.style.left = Math.max(8, r.right + window.scrollX - menu.offsetWidth) + "px";
+  menu.querySelector('[data-act="ics-excel"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportArchiveICS(entry, "excel"); });
+  menu.querySelector('[data-act="ics-other"]').addEventListener("click", (e) => { e.stopPropagation(); closeShareMenu(); exportArchiveICS(entry, "other"); });
+  _shareMenuEl = menu;
+  setTimeout(() => document.addEventListener("click", closeShareMenu), 0);
 }
 
 
@@ -1727,7 +1803,9 @@ async function archiveCurrentWeek(auto) {
     await ghPutFile(pathExcel, b64Excel, "Archive week " + w.range + " (Excel Client)");
 
     data.archive = data.archive.filter(a => a.key !== w.key);
-    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, players: weekRosterPlayers(data.days), ts: Date.now() });
+    // Snapshot the week's events alongside the PNGs so archived weeks can be
+    // re-exported as .ics later (the images alone aren't machine-readable).
+    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, players: weekRosterPlayers(data.days), days: JSON.parse(JSON.stringify(data.days || [])), ts: Date.now() });
     data.archive.sort((a, b) => b.key.localeCompare(a.key));
     await publish();   // commit updated schedule.json (now includes the archive index)
     setArchiveStatus("✓ Archived " + w.range);
@@ -1775,6 +1853,7 @@ function renderArchiveList(filter) {
     <div class="ai-btns">
       <button class="ai-view-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">All Types →</button>
       ${a.pathExcel ? `<button class="ai-view-btn excel" data-path="${escapeAttr(a.pathExcel)}" data-range="${escapeAttr(a.range)}" data-label="Excel Client">Excel →</button>` : ""}
+      <button class="ai-cal-btn" data-cal-key="${escapeAttr(a.key)}" ${(a.days && a.days.length) ? `title="Download this week as a calendar file (.ics)"` : `disabled title="Archived before calendar export existed — image only"`}>↓ .ics</button>
       ${editUnlocked ? `<button class="ai-del-btn" data-key="${escapeAttr(a.key)}" data-range="${escapeAttr(a.range)}" title="Delete this archived snapshot">Delete</button>` : ""}
     </div>
   </div>`).join("") || `<div class="archive-empty">No match.</div>`;
@@ -1786,6 +1865,11 @@ function renderArchiveList(filter) {
     iv.dataset.range = b.dataset.range;
     iv.dataset.label = b.dataset.label || "";
     document.getElementById("imgModal").classList.remove("hidden");
+  }));
+  list.querySelectorAll(".ai-cal-btn").forEach(b => b.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const entry = (data.archive || []).find(a => a.key === b.dataset.calKey);
+    if (entry) openArchiveICSMenu(entry, b);
   }));
   list.querySelectorAll(".ai-del-btn").forEach(b => b.addEventListener("click", () =>
     deleteArchivedWeek(b.dataset.key, b.dataset.range, b)));
