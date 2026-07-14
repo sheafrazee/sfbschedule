@@ -290,6 +290,18 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .ai-cal-btn { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 9px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; white-space: nowrap; transition: all .15s; }
 .ai-cal-btn:hover:not(:disabled) { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
 .ai-cal-btn:disabled { opacity: .4; cursor: not-allowed; }
+/* Promote pre-flight */
+.pc-card { border: 1.5px solid var(--light-stone); border-left-width: 5px; border-radius: 8px; background: var(--warm-white); padding: 12px 14px; margin-bottom: 10px; font-family: 'Source Sans 3', sans-serif; }
+.pc-card.ok { border-left-color: #2E7D4F; }
+.pc-card.warn { border-left-color: var(--clay); }
+.pc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+.pc-meta { font-size: 12.5px; line-height: 1.5; color: var(--dark-stone); }
+.pc-meta b { color: var(--ink); }
+.pc-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.pc-btns .ai-view-btn, .pc-btns .ai-cal-btn { padding: 5px 10px; }
+.promote-ack { display: flex; align-items: flex-start; gap: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); line-height: 1.45; margin: 4px 0 2px; cursor: pointer; }
+.promote-ack input { margin-top: 2px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--ink); }
+.promote-ack input:disabled + span { color: var(--stone); }
 .archive-empty { color: var(--stone); text-align: center; padding: 30px 16px; font-size: 13.5px; line-height: 1.5; }
 .archive-status { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: var(--dark-stone); min-height: 16px; flex: 1; }
 .img-modal { max-width: 92vw; padding: 14px; }
@@ -658,7 +670,7 @@ button.stat { cursor: pointer; font: inherit; }
         <div class="ab-divider"></div>
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
         <button class="btn" id="sortTimeBtn" title="Sort each day's sessions by start time">↕ Sort by time</button>
-        <button class="btn primary" id="promoteBtn" title="Archive the current week and make Next Week the live current week">→ Promote Next</button>
+        <button class="btn primary" id="promoteBtn" title="Archive the current week (required), then make Next Week the live current week">→ Promote Next</button>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
           <button class="btn" id="settingsBtn">Settings</button>
@@ -742,6 +754,22 @@ button.stat { cursor: pointer; font: inherit; }
       <span class="archive-status" id="archiveStatus"></span>
       <button class="btn hidden" id="archiveNowBtn">Archive current week now</button>
       <button class="btn primary" id="archiveClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Promote Pre-flight Modal -->
+<div class="modal-bg hidden" id="promoteModal">
+  <div class="modal">
+    <h2>Before you promote</h2>
+    <p>Promoting overwrites the current week. Check its archive first — this is the last chance to fix it.</p>
+    <div id="promoteCheck"></div>
+    <label class="promote-ack"><input type="checkbox" id="promoteAck"><span>I’ve reviewed the archive for this week — the snapshot and calendar data look right.</span></label>
+    <div class="modal-actions">
+      <span class="archive-status" id="promoteStatus"></span>
+      <button class="btn" id="promoteArchiveBtn">Archive now</button>
+      <button class="btn" id="promoteCancel">Cancel</button>
+      <button class="btn primary" id="promoteGo" disabled>Promote →</button>
     </div>
   </div>
 </div>
@@ -1780,15 +1808,16 @@ function weekRosterPlayers(days) {
   return [...players].sort((a, b) => a.localeCompare(b));
 }
 
+// Returns true only if the week is archived when this resolves (callers gate on it).
 async function archiveCurrentWeek(auto) {
   const cfg = loadCfg();
   if (!cfg.token || !cfg.owner || !cfg.repo) {
     if (!auto) { setArchiveStatus(""); alert("Connect GitHub in Settings to archive."); openSettings(); }
-    return;
+    return false;
   }
   const w = weekDates(new Date());
   data.archive = data.archive || [];
-  if (auto && data.archive.some(a => a.key === w.key)) return;   // already archived this week
+  if (auto && data.archive.some(a => a.key === w.key)) return true;   // already archived this week
   try {
     setArchiveStatus("Capturing all types…");
     const b64All = await captureWeekPNGForType("all");
@@ -1810,11 +1839,20 @@ async function archiveCurrentWeek(auto) {
     await publish();   // commit updated schedule.json (now includes the archive index)
     setArchiveStatus("✓ Archived " + w.range);
     if (!document.getElementById("archiveModal").classList.contains("hidden")) renderArchiveList("");
+    return true;
   } catch (e) {
     console.error(e);
     setArchiveStatus("✗ Archive failed: " + e.message);
     if (!auto) alert("Archive failed: " + e.message);
+    return false;
   }
+}
+
+// Is this real calendar week already archived *with* its event data (so the
+// snapshot is both viewable and re-exportable as .ics)? Promote gates on this.
+function currentWeekArchived() {
+  const key = weekDates(new Date()).key;
+  return (data.archive || []).some(a => a.key === key && Array.isArray(a.days) && a.days.length);
 }
 
 function renderArchiveList(filter) {
@@ -3519,16 +3557,99 @@ document.getElementById("seedNextBtn").addEventListener("click", () => {
   saveDraft(); renderEdit();
 });
 
-async function promoteNext() {
+// ---- Promote pre-flight: confirm the outgoing week is archived the way you want ----
+function setPromoteStatus(msg) {
+  const el = document.getElementById("promoteStatus");
+  if (el) el.textContent = msg || "";
+}
+function _fmtWhen(ts) {
+  if (!ts) return "";
+  const d = new Date(ts);
+  const mins = Math.round((Date.now() - ts) / 60000);
+  const ago = mins < 1 ? "just now" : mins < 60 ? mins + " min ago" : mins < 1440 ? Math.round(mins / 60) + " hr ago" : Math.round(mins / 1440) + " days ago";
+  return `${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} · ${ago}`;
+}
+// Renders the archive state of the outgoing week and unlocks Promote only when it's safe.
+function renderPromoteCheck() {
+  const w = weekDates(new Date());
+  const entry = (data.archive || []).find(a => a.key === w.key) || null;
+  const hasDays = !!(entry && Array.isArray(entry.days) && entry.days.length);
+  const box = document.getElementById("promoteCheck");
+  const ack = document.getElementById("promoteAck");
+  const go = document.getElementById("promoteGo");
+  const archBtn = document.getElementById("promoteArchiveBtn");
+
+  let title, meta, cls, btns = "";
+  if (hasDays) {
+    const all = entry.days.reduce((n, d) => n + (d.events || []).length, 0);
+    const ex = entry.days.reduce((n, d) => n + (d.events || []).filter(e => e.type === "excel").length, 0);
+    cls = "ok";
+    title = "✓ Archived — " + escapeHtml(w.range);
+    meta = `<b>${all}</b> session${all === 1 ? "" : "s"} saved (<b>${ex}</b> Excel · <b>${all - ex}</b> other)<br>Snapshot taken ${escapeHtml(_fmtWhen(entry.ts))}<br>Images + calendar data stored — this week stays exportable as .ics.`;
+    btns = `<div class="pc-btns">
+      <button class="ai-view-btn" data-pc-img="${escapeAttr(entry.path || "")}" data-pc-label="All Types">View image →</button>
+      ${entry.pathExcel ? `<button class="ai-view-btn excel" data-pc-img="${escapeAttr(entry.pathExcel)}" data-pc-label="Excel Client">View Excel →</button>` : ""}
+    </div>`;
+  } else if (entry) {
+    cls = "warn";
+    title = "! Image only — " + escapeHtml(w.range);
+    meta = `This week was archived before calendar export existed, so no event data was saved and it can’t be downloaded as .ics.<br>Re-archive to capture it properly.`;
+  } else {
+    cls = "warn";
+    title = "✗ Not archived — " + escapeHtml(w.range);
+    meta = `Nothing has been saved for the outgoing week. Archive it before it’s overwritten — once promoted, this week’s sessions are gone.`;
+  }
+  box.innerHTML = `<div class="pc-card ${cls}"><div class="pc-title">${title}</div><div class="pc-meta">${meta}</div>${btns}</div>` +
+    (data.nextWeek ? `<div class="pc-card"><div class="pc-title">Incoming: ${escapeHtml(data.nextWeek.weekTitle || "Next Week")}</div><div class="pc-meta"><b>${(data.nextWeek.days || []).reduce((n, d) => n + (d.events || []).length, 0)}</b> sessions will go live to viewers.</div></div>` : "");
+
+  box.querySelectorAll("[data-pc-img]").forEach(b => b.addEventListener("click", () => {
+    document.getElementById("imgTitle").textContent = w.range + "  ·  " + b.dataset.pcLabel;
+    const iv = document.getElementById("imgView");
+    iv.src = rawUrl(b.dataset.pcImg) + "?t=" + Date.now();
+    iv.dataset.path = b.dataset.pcImg;
+    iv.dataset.range = w.range;
+    iv.dataset.label = b.dataset.pcLabel;
+    document.getElementById("imgModal").classList.remove("hidden");
+  }));
+
+  archBtn.textContent = hasDays ? "Re-archive" : "Archive now";
+  ack.disabled = !hasDays;
+  if (!hasDays) ack.checked = false;
+  go.disabled = !(hasDays && ack.checked);
+}
+function openPromoteCheck() {
   if (!data.nextWeek || !(data.nextWeek.days || []).length) {
     alert("Next Week is empty. Build it first (or use “Seed from current”).");
     return;
   }
-  if (!confirm("Promote Next Week to Current?\n\nThis archives the current week, replaces it with Next Week, clears the Next Week slot, and publishes. This is what viewers will see.")) return;
+  document.getElementById("promoteAck").checked = false;
+  setPromoteStatus("");
+  renderPromoteCheck();
+  document.getElementById("promoteModal").classList.remove("hidden");
+}
+async function promoteArchiveFromCheck() {
+  const btn = document.getElementById("promoteArchiveBtn");
+  const prev = btn.textContent;
+  btn.disabled = true; btn.textContent = "…";
+  setPromoteStatus("Archiving…");
+  const ok = await archiveCurrentWeek(false);
+  btn.disabled = false; btn.textContent = prev;
+  setPromoteStatus(ok ? "✓ Archived" : "✗ Archive failed — nothing promoted");
+  renderPromoteCheck();
+}
+async function promoteNext() {
+  // Hard gate, re-checked at the moment of promoting: the outgoing week must be
+  // archived with its event data, or nothing is touched.
+  if (!currentWeekArchived()) {
+    alert("Promote cancelled — the current week isn’t archived, so nothing was changed.");
+    renderPromoteCheck();
+    return;
+  }
+  if (!document.getElementById("promoteAck").checked) return;
+  const btn = document.getElementById("promoteGo");
+  btn.disabled = true;
+  setPromoteStatus("Promoting…");
   try {
-    // Archive the outgoing current week first (best effort; needs GitHub configured)
-    const cfg = loadCfg();
-    if (cfg.token && cfg.owner && cfg.repo) { try { await archiveCurrentWeek(false); } catch (e) { console.warn("archive skipped:", e); } }
     // Swap next -> current
     data.weekTitle = data.nextWeek.weekTitle || data.weekTitle;
     data.days = data.nextWeek.days;
@@ -3538,13 +3659,24 @@ async function promoteNext() {
     saveDraft();
     renderEdit();
     await publish();
+    document.getElementById("promoteModal").classList.add("hidden");
     alert("Promoted. Next Week is now live.");
   } catch (e) {
     console.error(e);
+    setPromoteStatus("✗ Promote failed");
     alert("Promote failed: " + e.message);
+  } finally {
+    btn.disabled = false;
   }
 }
-document.getElementById("promoteBtn").addEventListener("click", promoteNext);
+document.getElementById("promoteBtn").addEventListener("click", openPromoteCheck);
+document.getElementById("promoteArchiveBtn").addEventListener("click", promoteArchiveFromCheck);
+document.getElementById("promoteAck").addEventListener("change", e => {
+  document.getElementById("promoteGo").disabled = !(e.target.checked && currentWeekArchived());
+});
+document.getElementById("promoteCancel").addEventListener("click", () =>
+  document.getElementById("promoteModal").classList.add("hidden"));
+document.getElementById("promoteGo").addEventListener("click", promoteNext);
 document.getElementById("settingsBtn").addEventListener("click", openSettings);
 document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
 document.getElementById("importJsonBtn").addEventListener("click", () => document.getElementById("importFile").click());
