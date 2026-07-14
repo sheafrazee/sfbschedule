@@ -193,60 +193,44 @@
       "events": [
         {
           "time": "8:15 AM – 9:30 AM",
-          "title": "Dalton K, Dariq W, Issac O, Trayce JD",
+          "title": "Mario H, Dariq W, Trayce JD, Marko",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
-            "Mateo",
+            "Anthony",
             "Jaden G",
             "Josh G",
             "Cesar",
             "Ali",
             "Chozen",
             "Braedon",
-            "Matt M"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Harrison I, Mario H, Marko S",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Ali",
-            "Chozen",
-            "Braedon",
-            "Matt M"
+            "Matt M",
+            "Dame"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "7:00 AM – 8:15 AM",
-          "title": "Ethan L, Nick D, Clark R",
+          "title": "Ethan L, Nick D, Klark R, Dalton K",
           "type": "excel",
           "people": [
             "Donovan",
             "Anthony",
-            "Mateo",
+            "Dame",
+            "Ali",
             "Jaden G",
             "Josh G",
             "Cesar",
-            "Braedon"
+            "Braedon",
+            "Chozen"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "11:30 AM – 1:00 PM",
+          "time": "11:00 AM – 12:30 PM",
           "title": "Stanley J, Cole S @ MAP",
           "type": "other",
           "people": [
