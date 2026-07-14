@@ -127,16 +127,14 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Chozen",
-            "Jaden G",
-            "Josh G"
+            "Chozen"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Dalton K, Nick D + Anyone not playing",
+          "title": "Dalton K, Nick D, Mario H",
           "type": "excel",
           "people": [
             "Donovan",
@@ -167,7 +165,7 @@
         },
         {
           "time": "1:15 PM – 2:45 PM",
-          "title": "Cole S @ MAP",
+          "title": "Stanlet J @ MAP",
           "type": "other",
           "people": [
             "Anthony",
@@ -249,11 +247,12 @@
         },
         {
           "time": "11:30 AM – 1:00 PM",
-          "title": "Stanley J @ MAP",
+          "title": "Stanley J, Cole S @ MAP",
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Guiressi",
+            "Braedon"
           ],
           "players": [],
           "note": ""
