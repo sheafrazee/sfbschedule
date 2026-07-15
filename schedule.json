@@ -177,7 +177,7 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "title": "Group: Russ, Braedon, Tarek, Jacob Jares 2x",
           "type": "other",
           "people": [
             "Anthony",
@@ -193,15 +193,14 @@
       "events": [
         {
           "time": "7:00 AM – 8:15 AM",
-          "title": "Ethan L, Nick D, Dalton K",
+          "title": "Ethan L, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
-            "Dame",
             "Ali",
             "Jaden G",
             "Josh G",
-            "Cesar",
+            "Dame",
             "Braedon",
             "Chozen"
           ],
@@ -235,11 +234,10 @@
             "Nick M",
             "Jaden G",
             "Josh G",
-            "Cesar",
             "Chozen",
             "Braedon",
             "Matt M",
-            "Dame"
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -249,7 +247,6 @@
           "title": "Stanley J, Cole S @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
             "Guiressi",
             "Braedon"
           ],
@@ -269,7 +266,8 @@
           "title": "Archie @ Excel",
           "type": "other",
           "people": [
-            "Anthony",
+            "Dame",
+            "Greg",
             "Chozen"
           ],
           "players": [],
@@ -280,7 +278,8 @@
           "title": "Group: ",
           "type": "other",
           "people": [
-            "Anthony",
+            "Dame",
+            "Greg",
             "Chozen"
           ],
           "players": [],
@@ -380,8 +379,8 @@
           "title": "Group: ",
           "type": "other",
           "people": [
-            "Anthony",
-            "Guiressi"
+            "Guiressi",
+            "David"
           ],
           "note": "",
           "players": []
@@ -396,7 +395,6 @@
           "title": "GW",
           "type": "other",
           "people": [
-            "Anthony",
             "Braedon"
           ],
           "players": [],
@@ -443,8 +441,8 @@
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Guiressi"
+            "Guiressi",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -454,9 +452,9 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
             "Guiressi",
-            "Ollie"
+            "Ollie",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -466,9 +464,9 @@
           "title": "Archie @ Excel",
           "type": "other",
           "people": [
-            "Anthony",
             "Guiressi",
-            "Ollie"
+            "Ollie",
+            "Braedon"
           ],
           "players": [],
           "note": ""
