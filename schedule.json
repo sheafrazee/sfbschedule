@@ -362,7 +362,7 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Guiressi",
+            "Waleed",
             "Braedon"
           ],
           "players": [],
@@ -373,7 +373,7 @@
           "title": "Cole S @ MAP",
           "type": "other",
           "people": [
-            "Guiressi",
+            "Waleed",
             "Braedon"
           ],
           "players": [],
@@ -381,10 +381,9 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
+          "title": "Group: Braedon, Ali",
           "type": "other",
           "people": [
-            "Guiressi",
             "David"
           ],
           "note": "",
@@ -396,44 +395,26 @@
       "day": "Fri 7/17",
       "events": [
         {
-          "time": "6:15 AM – 7:30 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Bball Comp: Dariq W, Mark S, Trayce JD, Harrison I, Kadin S, Clark R, Ethan L, Mario H, Issac O, Ayo D",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
-            "Chozen",
-            "Mateo",
-            "Jamal"
+            "Chozen"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "9:30 AM – 11:00 AM",
-          "title": "Dalton K, Nick D + Anyone not playing",
+          "title": "Dalton K",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Ali",
+            "Chozen",
             "Braedon",
-            "Jacob S",
-            "Sean D",
             "Jamal",
             "Devin H",
             "Matt M"
@@ -446,7 +427,7 @@
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
-            "Guiressi",
+            "Waleed",
             "Braedon"
           ],
           "players": [],
@@ -457,7 +438,7 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Guiressi",
+            "Waleed",
             "Ollie",
             "Braedon"
           ],
@@ -488,9 +469,6 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
             "Cesar",
             "Ali",
             "Chozen",
@@ -540,6 +518,17 @@
             "Waleed",
             "Ollie",
             "Jamal"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "6:15 AM – 7:30 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Braedon"
           ],
           "players": [],
           "note": ""
