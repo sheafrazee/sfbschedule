@@ -96,7 +96,7 @@
         {
           "time": "5:00 PM – 6:00 PM",
           "title": "Harrison Ingram ",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Anthony",
             "Donovan"
@@ -107,7 +107,7 @@
         {
           "time": "6:00 PM – 7:00 PM",
           "title": "Mario Hezjona ",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Donovan",
             "Anthony"
@@ -185,6 +185,16 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "Mario Hezjona ",
+          "type": "excel",
+          "people": [
+            "Donovan"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -380,6 +390,17 @@
           "note": ""
         },
         {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Harrison I",
+          "type": "excel",
+          "people": [
+            "Braedon",
+            "Donovan"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "5:00 PM – 6:15 PM",
           "title": "Group: Braedon, Ali",
           "type": "other",
@@ -388,6 +409,16 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "Mario Hezjona ",
+          "type": "excel",
+          "people": [
+            "Donovan"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -435,7 +466,7 @@
         {
           "time": "2:00 PM – 3:00 PM",
           "title": "Harrison I",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Donovan",
             "Ollie"
@@ -457,10 +488,20 @@
         {
           "time": "5:15 PM – 6:15 PM",
           "title": "Klark",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Donovan",
             "Ollie"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "Mario Hezjona ",
+          "type": "excel",
+          "people": [
+            "Donovan"
           ],
           "players": [],
           "note": ""
