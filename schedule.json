@@ -471,6 +471,17 @@
       "day": "Sat 7/18",
       "events": [
         {
+          "time": "6:15 AM – 7:30 AM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 9:30 AM",
           "title": "Marko S, Harrison I, Ethan L, Klark R",
           "type": "excel",
@@ -507,17 +518,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "6:15 AM – 7:30 AM",
-          "title": "GW",
-          "type": "other",
-          "people": [
-            "Ollie",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "11:00 AM – 12:00 PM",
