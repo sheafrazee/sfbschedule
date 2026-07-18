@@ -415,25 +415,13 @@
             "Chozen",
             "Braedon",
             "Jamal",
-            "Devin H",
-            "Matt M"
+            "Sean D"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:45 AM – 1:15 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Waleed",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "1:15 PM – 2:45 PM",
+          "time": "12:00 PM – 1:30 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
@@ -445,13 +433,34 @@
           "note": ""
         },
         {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Harrison I",
+          "type": "other",
+          "people": [
+            "Donovan",
+            "Ollie"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Archie @ Excel",
           "type": "other",
           "people": [
-            "Guiressi",
             "Ollie",
-            "Braedon"
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:15 PM – 6:15 PM",
+          "title": "Klark",
+          "type": "other",
+          "people": [
+            "Donovan",
+            "Ollie"
           ],
           "players": [],
           "note": ""
@@ -463,7 +472,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dalton K, Dariq W, Ayo D, Trayce JD",
+          "title": "Marko S, Harrison I, Ethan L, Klark R",
           "type": "excel",
           "people": [
             "Donovan",
