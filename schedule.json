@@ -478,6 +478,7 @@
             "Donovan",
             "Nick M",
             "Cesar",
+            "Dame",
             "Ali",
             "Chozen",
             "Braedon",
@@ -489,46 +490,23 @@
           "players": []
         },
         {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Harrison I, Marko S, Mario H",
+          "time": "9:30 AM – 10:45 AM",
+          "title": "Trayce JD, Dalton K, Mario H",
           "type": "excel",
           "people": [
             "Donovan",
             "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
             "Cesar",
-            "Ali",
+            "Ian",
             "Chozen",
             "Braedon",
             "Waleed",
             "Ollie",
-            "Jamal"
+            "Jamal",
+            "Dame"
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Clark R, Ethan L, Nick D, ",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Ali",
-            "Chozen",
-            "Braedon",
-            "Waleed",
-            "Ollie",
-            "Jamal"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "6:15 AM – 7:30 AM",
@@ -540,12 +518,40 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Ian"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
     {
       "day": "Sun 7/19",
-      "events": []
+      "events": [
+        {
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Intern Pickup",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "10:00 AM – 11:00 AM",
+          "title": "Little Kids Pickup",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        }
+      ]
     }
   ],
   "archive": [
