@@ -158,7 +158,7 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Dame",
+            "Braedon",
             "Ollie",
             "Guiressi"
           ],
@@ -170,21 +170,9 @@
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
-            "Dame",
+            "Braedon",
             "Ollie",
             "Guiressi"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Aggie @ Excel",
-          "type": "other",
-          "people": [
-            "Ollie",
-            "Guiressi",
-            "Dame"
           ],
           "players": [],
           "note": ""
@@ -195,11 +183,21 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Guiressi",
-            "Dame"
+            "Guiressi"
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina ",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -370,6 +368,17 @@
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Aggie @ Excel",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -382,6 +391,7 @@
           "type": "excel",
           "people": [
             "Donovan",
+            "Nick M",
             "Braedon",
             "Ollie",
             "Mateo",
@@ -422,6 +432,16 @@
             "Anthony",
             "Ollie",
             "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Alice @ Excel",
+          "type": "other",
+          "people": [
+            "Ollie"
           ],
           "players": [],
           "note": ""
