@@ -144,6 +144,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
   .action-bar input.week-title { max-width: 100%; min-width: 0; flex: 1; }
   .status-pill { font-size: 10px; padding: 3px 8px; }
   .ab-bottom { flex-wrap: wrap; gap: 6px; }
+  .ab-find { width: 100%; order: -2; }
+  .ab-find input { flex: 1; width: auto; min-width: 0; }
   .ab-right { margin-left: 0; flex-wrap: wrap; width: 100%; }
   .ab-right .btn { flex: 1 1 auto; text-align: center; }
   .btn.publish { order: -1; width: 100%; text-align: center; }
@@ -338,6 +340,24 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .intern-tally-empty { padding: 16px 14px; color: var(--stone); font-size: 12.5px; text-align: center; }
 .intern-divider { padding: 7px 14px; background: var(--warm-white); border-top: 1px solid var(--light-stone); border-bottom: 1px solid var(--light-stone); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--stone); }
 .intern-row.past .nm { color: var(--dark-stone); }
+/* ---- Editor find: highlight an intern's / player's sessions in place ---- */
+.ab-find { display: flex; align-items: center; gap: 5px; }
+.ab-find input { padding: 7px 10px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; width: 190px; min-width: 110px; background: #fff; color: var(--ink); }
+.ab-find input:focus { outline: none; border-color: var(--clay); }
+.ab-find.active input { border-color: var(--clay); background: #FFF6F1; font-weight: 600; }
+.ab-find .find-nav { padding: 6px 9px; font-size: 12px; line-height: 1; }
+.find-count { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--stone); white-space: nowrap; }
+.find-count.hit { color: var(--clay); }
+.edit-event.find-hit { border-color: var(--clay); background: #FFF6F1; box-shadow: 0 0 0 2px var(--clay) inset, 0 3px 10px rgba(184,105,74,.20); }
+.edit-event.find-miss { opacity: .35; }
+.cal-ev.find-hit { outline: 2px solid var(--ink); outline-offset: -1px; box-shadow: 0 3px 10px rgba(0,0,0,.32); z-index: 6; }
+.cal-ev.find-miss { opacity: .18; }
+.cal-ev-title .hl-find { background: rgba(255,255,255,.62); box-shadow: 0 0 0 1px rgba(0,0,0,.28); border-radius: 2px; }
+.intern-row.findable .nm { cursor: pointer; }
+.intern-row.findable:hover { background: var(--warm-white); }
+.intern-row.find-on { background: var(--clay); }
+.intern-row.find-on .nm { color: #fff; font-weight: 700; }
+.intern-row.find-on .ct { background: rgba(255,255,255,.9); color: var(--clay); }
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
 .intern-forget:hover { opacity: 1; color: var(--clay); background: var(--warm-white); }
 
@@ -388,7 +408,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-ev-resize-b::after { bottom: 2px; }
 .cal-ev:hover .cal-ev-resize::after, .cal-ev-selected .cal-ev-resize::after { opacity: 1; }
 .cal-ev-resizing { z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.28); }
-.cal-ev-title { font-size: 9.5px; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; word-break: break-word; }
+.cal-ev-title { font-size: 9.5px; line-height: 1.18; overflow: hidden; word-break: break-word; }
 .cal-ev-title .more { opacity: .7; font-weight: 800; }
 .cal-ev-time { font-size: 8.5px; font-weight: 400; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
@@ -671,6 +691,15 @@ button.stat { cursor: pointer; font: inherit; }
         <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
         <button class="btn" id="sortTimeBtn" title="Sort each day's sessions by start time">↕ Sort by time</button>
         <button class="btn primary" id="promoteBtn" title="Archive the current week (required), then make Next Week the live current week">→ Promote Next</button>
+        <div class="ab-divider"></div>
+        <div class="ab-find" id="abFind">
+          <input id="editFindInput" list="editFindNames" placeholder="Find intern or player…" autocomplete="off" spellcheck="false">
+          <datalist id="editFindNames"></datalist>
+          <button class="btn find-nav" id="editFindPrev" title="Previous match (Shift+Enter)">↑</button>
+          <button class="btn find-nav" id="editFindNext" title="Next match (Enter)">↓</button>
+          <button class="btn find-nav" id="editFindClear" title="Clear (Esc)">✕</button>
+          <span class="find-count" id="editFindCount"></span>
+        </div>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
           <button class="btn" id="settingsBtn">Settings</button>
@@ -873,6 +902,8 @@ let calAnchor = null;       // {slot,di,ei} anchor for shift-range selection
 let calHover = null;        // {slot,di} last-hovered day column (paste target)
 let _lastCalTap = null;     // {slot,di,ei,t} last tile tap — used to detect double-click
 let calClip = null;         // { items:[{di,ev}], minDi } copy/paste buffer
+let editFindTerm = "";      // editor person-search term (intern or player name)
+let _findIdx = -1;          // cursor for ↑/↓ jump-to-match
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
 // shown in display mode.
@@ -2031,15 +2062,17 @@ function countTitlePlayers(title) {
 }
 // For calendar blocks: show up to `max` player names parsed from the title.
 // Falls back to the raw title for non-name labels (e.g. "Open Gym").
-function calTitleNames(title, max) {
+function calNameList(title) {
   const raw = String(title || "").trim();
-  if (!raw) return "";
+  if (!raw) return [];
   let head = raw.split(/\s[\u2013\u2014-]\s/)[0].replace(/\([^)]*\)/g, "");
   const names = head.split(",").map(s => s.trim()).filter(Boolean);
-  if (names.length <= 1) return escapeHtml(raw);   // single label, not a name list
-  const shown = names.slice(0, max).join(", ");
-  const extra = names.length > max ? ` <span class="more">+${names.length - max}</span>` : "";
-  return escapeHtml(shown) + extra;
+  return names.length <= 1 ? [raw] : names;   // single label, not a name list
+}
+function calTitleNames(title, max) {
+  const names = calNameList(title);
+  if (!names.length) return "";
+  return _calNamesHtml(names, Math.min(names.length, max));
 }
 function titleMatchesTerms(title, terms) {
   const t = String(title || "").toLowerCase();
@@ -2208,6 +2241,7 @@ function renderEdit() {
   try { attachEditListeners(); } catch (e) { console.error("attachEditListeners failed", e); }
   try { renderInternTally(); } catch (e) { console.error("renderInternTally failed", e); }
   try { renderCalendarPreview(); } catch (e) { console.error("renderCalendarPreview failed", e); }
+  try { refreshFindNames(); applyEditFind(); } catch (e) { console.error("applyEditFind failed", e); }
   updateStatus();
 }
 
@@ -2235,6 +2269,102 @@ function learnInterns() {
 function forgetIntern(name) {
   const r = loadRoster();
   if (name in r) { delete r[name]; saveRoster(r); renderInternTally(); }
+}
+
+// ============ EDITOR PERSON SEARCH ============
+// Type a name (or click one in the session counter) to light up every session
+// that person is in — across the editor cards AND the Week Overview calendar,
+// without leaving the Edit tab. Matches interns (people) and players (title).
+function editFindTerms() { return _splitTerms(editFindTerm); }
+function findMatchesEvent(ev, terms) {
+  if (!ev || !terms.length) return false;
+  const names = [...(ev.people || []), ...(ev.players || []), ...titlePlayerNames(ev.title)];
+  return names.some(n => personMatchesTerms(n, terms));
+}
+function _slotDaysFor(slot) {
+  return slot === "next" ? ((data.nextWeek && data.nextWeek.days) || []) : (data.days || []);
+}
+function _evAt(days, di, ei) {
+  const d = days[di];
+  return d && d.events ? d.events[ei] : null;
+}
+// Every intern + player name across both weeks — feeds the search autocomplete.
+function allPersonNames() {
+  const s = new Set();
+  [data, data && data.nextWeek].forEach(wk =>
+    ((wk && wk.days) || []).forEach(day => (day.events || []).forEach(ev => {
+      [...(ev.people || []), ...(ev.players || []), ...titlePlayerNames(ev.title)]
+        .forEach(n => { const v = (n || "").trim(); if (v) s.add(v); });
+    })));
+  return [...s].sort((a, b) => a.localeCompare(b));
+}
+function refreshFindNames() {
+  const dl = document.getElementById("editFindNames");
+  if (!dl) return;
+  dl.innerHTML = allPersonNames().map(n => `<option value="${escapeAttr(n)}"></option>`).join("");
+}
+function setEditFind(term, jump) {
+  const next = (term || "").trim();
+  const changed = next.toLowerCase() !== editFindTerm.toLowerCase();
+  editFindTerm = next;
+  const inp = document.getElementById("editFindInput");
+  if (inp && inp.value !== editFindTerm) inp.value = editFindTerm;
+  if (changed) _findIdx = -1;
+  applyEditFind();
+  // Repaint in-block name highlights (fitCalTitle rebuilds each block's names)
+  if (changed) document.querySelectorAll("#previewWeeks .cal-wrap").forEach(c => { if (c.clientWidth) fitCalTitles(c); });
+  if (jump) jumpFind(1);
+}
+function clearEditFind() { setEditFind("", false); }
+// Paint hit/miss classes onto editor cards, calendar blocks and tally rows.
+function applyEditFind() {
+  const terms = editFindTerms();
+  const on = terms.length > 0;
+  const wrap = document.getElementById("abFind");
+  if (wrap) wrap.classList.toggle("active", on);
+
+  // 1. Editor session cards (active slot only — that's all that's rendered)
+  const days = ed().days || [];
+  let hits = 0;
+  document.querySelectorAll("#editGrid .edit-event[data-d]").forEach(card => {
+    const hit = on && findMatchesEvent(_evAt(days, +card.dataset.d, +card.dataset.e), terms);
+    card.classList.toggle("find-hit", hit);
+    card.classList.toggle("find-miss", on && !hit);
+    if (hit) hits++;
+  });
+
+  // 2. Week Overview blocks (shows current AND next week)
+  let otherHits = 0;
+  document.querySelectorAll("#previewWeeks .cal-ev[data-slot]").forEach(el => {
+    const hit = on && findMatchesEvent(_evAt(_slotDaysFor(el.dataset.slot), +el.dataset.di, +el.dataset.ei), terms);
+    el.classList.toggle("find-hit", hit);
+    el.classList.toggle("find-miss", on && !hit);
+    if (hit && el.dataset.slot !== editSlot) otherHits++;
+  });
+
+  // 3. Session-counter rows
+  document.querySelectorAll("#internTallyBody .intern-row[data-find]").forEach(r =>
+    r.classList.toggle("find-on", on && personMatchesTerms(r.dataset.find, terms)));
+
+  const cEl = document.getElementById("editFindCount");
+  if (cEl) {
+    const otherLabel = editSlot === "next" ? "current wk" : "next wk";
+    cEl.classList.toggle("hit", on && hits > 0);
+    cEl.textContent = !on ? ""
+      : (hits || otherHits)
+        ? `${hits} session${hits === 1 ? "" : "s"}${otherHits ? ` · ${otherHits} in ${otherLabel}` : ""}`
+        : "no matches";
+  }
+}
+// Step through matching editor cards, scrolling each into view.
+function jumpFind(dir) {
+  const hits = Array.from(document.querySelectorAll("#editGrid .edit-event.find-hit"));
+  if (!hits.length) return;
+  _findIdx = _findIdx < 0 ? (dir > 0 ? 0 : hits.length - 1)
+                          : (_findIdx + dir + hits.length) % hits.length;
+  const el = hits[_findIdx];
+  el.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+  el.classList.remove("flash-card"); void el.offsetWidth; el.classList.add("flash-card");
 }
 
 // Tally interns across the active edit slot. One event = one session.
@@ -2291,8 +2421,8 @@ function renderInternTally() {
   if (rows.length) {
     html += `<div class="intern-col-heads"><span>Excel</span><span>Other</span><span>All</span></div>`;
     html += rows.map(({ name, excel, other, all: a }) =>
-      `<div class="intern-row">
-        <span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span>
+      `<div class="intern-row findable" data-find="${escapeAttr(name)}" title="Click to highlight ${escapeAttr(name)}'s sessions">
+        <span class="nm">${escapeHtml(name)}</span>
         <span class="ct cur" title="Excel sessions">${excel}</span>
         <span class="ct nxt" title="Other sessions">${other}</span>
         <span class="ct all" title="Overall sessions">${a}</span>
@@ -2312,6 +2442,16 @@ function renderInternTally() {
 
   body.querySelectorAll("[data-forget]").forEach(btn =>
     btn.addEventListener("click", () => forgetIntern(btn.dataset.forget)));
+
+  // Click a name to highlight that intern's sessions; click again to clear.
+  body.querySelectorAll(".intern-row[data-find]").forEach(row =>
+    row.addEventListener("click", e => {
+      if (e.target.closest("button")) return;
+      const n = row.dataset.find;
+      setEditFind(editFindTerm.toLowerCase() === n.toLowerCase() ? "" : n, false);
+    }));
+
+  applyEditFind();
 }
 
 function internCoverageHtml(playerCount, internCount, isExcel) {
@@ -2327,6 +2467,8 @@ function internCoverageHtml(playerCount, internCount, isExcel) {
 function buildEventEditor(di, ei, ev) {
   const el = document.createElement("div");
   el.className = "edit-event";
+  el.dataset.d = di;
+  el.dataset.e = ei;
   const playerCount = countTitlePlayers(ev.title);
   const internCount = (ev.people || []).length;
   const covHtml = internCoverageHtml(playerCount, internCount, ev.type === 'excel')
@@ -2638,6 +2780,56 @@ function assignCalColumns(items) {
   flush();
 }
 
+// ============ CALENDAR NAME AUTO-FIT ============
+// Blocks show up to CAL_TITLE_MAX_NAMES names; the font shrinks until every
+// name fits inside the block. Only if the smallest size still overflows do we
+// trim trailing names and fall back to a "+N" badge.
+const CAL_TITLE_MAX_NAMES = 12;
+const CAL_TITLE_SIZES = (() => { const a = []; for (let s = 9.5; s >= 4.25; s -= 0.25) a.push(Math.round(s * 100) / 100); return a; })();
+
+function _calNamesHtml(names, n) {
+  const terms = currentMode === "edit" ? editFindTerms() : [];
+  const body = names.slice(0, n).map(nm => {
+    const esc = escapeHtml(nm);
+    return terms.length && personMatchesTerms(nm, terms) ? `<span class="hl-find">${esc}</span>` : esc;
+  }).join(", ");
+  const extra = names.length - n;
+  return body + (extra > 0 ? ` <span class="more">+${extra}</span>` : "");
+}
+function fitCalTitle(el) {
+  const t = el.querySelector(".cal-ev-title");
+  if (!t) return;
+  if (!el.clientWidth || !el.clientHeight) return;   // container hidden — keep defaults
+  const cs = getComputedStyle(el);
+  const timeEl = el.querySelector(".cal-ev-time");
+  const avail = el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - (timeEl ? timeEl.offsetHeight : 0);
+  if (!(avail > 0)) return;
+
+  const names = (t.dataset.names || "").split("\u0001").filter(Boolean);
+  const shown = Math.min(names.length, CAL_TITLE_MAX_NAMES);
+  if (shown) t.innerHTML = _calNamesHtml(names, shown);
+
+  const fits = i => { t.style.fontSize = CAL_TITLE_SIZES[i] + "px"; return t.scrollHeight <= avail; };
+  // Binary search the largest font size that still fits (sizes are descending).
+  let lo = 0, hi = CAL_TITLE_SIZES.length - 1, best = -1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (fits(mid)) { best = mid; hi = mid - 1; } else lo = mid + 1;
+  }
+  if (best >= 0) { t.style.fontSize = CAL_TITLE_SIZES[best] + "px"; return; }
+
+  // Even the smallest size overflows: drop trailing names until it fits.
+  t.style.fontSize = CAL_TITLE_SIZES[CAL_TITLE_SIZES.length - 1] + "px";
+  for (let n = shown - 1; n >= 1; n--) {
+    t.innerHTML = _calNamesHtml(names, n);
+    if (t.scrollHeight <= avail) return;
+  }
+}
+function fitCalTitles(container) {
+  container.querySelectorAll(".cal-ev").forEach(fitCalTitle);
+  return !!container.clientWidth;   // false = container hidden, nothing measurable yet
+}
+
 function renderCalendar(days, container, compact, editable, slot, typeOnly) {
   if (!days || !days.length) { container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--stone);font-size:13px;">No days yet.</div>`; return; }
   const totalHours = CAL_END_H - CAL_START_H;
@@ -2701,7 +2893,7 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly) {
         ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hPxLocal}"`
         : '';
       evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(ev.time + ' – ' + ev.title)}">
-        <div class="cal-ev-title">${calTitleNames(ev.title, 6)}</div>
+        <div class="cal-ev-title" data-names="${escapeAttr(calNameList(ev.title).join("\u0001"))}">${calTitleNames(ev.title, CAL_TITLE_MAX_NAMES)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
         ${editable ? '<div class="cal-ev-resize cal-ev-resize-t" data-edge="top"></div><div class="cal-ev-resize cal-ev-resize-b" data-edge="bottom"></div>' : ''}
       </div>`;
@@ -2727,6 +2919,10 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly) {
   daysHtml += `</div>`;
 
   container.innerHTML = `<div class="cal-grid">${timeHtml}${daysHtml}</div>`;
+  // If the calendar was built while hidden, measurements are 0 — retry next frame.
+  if (!fitCalTitles(container)) {
+    requestAnimationFrame(() => { if (container.isConnected && container.clientWidth) fitCalTitles(container); });
+  }
   if (editable) wireCalDrag(container, slot, hourPx);
 }
 
@@ -3135,6 +3331,7 @@ function onCalResizeStart(e, slot, hPx, edge) {
     el.style.top = ((startMin / 60 - CAL_START_H) * hPx) + 'px';
     el.style.height = Math.max(14, (endMins - startMin) / 60 * hPx) + 'px';
     if (timeEl) { timeEl.style.display = 'block'; timeEl.textContent = _fmtTimeRange(startMin, endMins - startMin, true); }
+    fitCalTitle(el);
   }
 
   function up() {
@@ -3423,6 +3620,7 @@ function renderCalendarPreview() {
   const typeOnly = previewTypeFilter === "excel" ? "excel" : null;
   if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current', typeOnly);
   if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), compactPrev, true, 'next', typeOnly);
+  applyEditFind();
 }
 
 // ============ WIRE UP ============
@@ -3507,6 +3705,29 @@ document.addEventListener('keydown', e => {
   document.body.classList.toggle('modifier-held', e.metaKey || e.ctrlKey || e.shiftKey);
 }));
 window.addEventListener('blur', () => document.body.classList.remove('modifier-held'));
+
+// ---- Editor person search (find an intern/player's sessions in place) ----
+(function wireEditFind() {
+  const inp = document.getElementById("editFindInput");
+  if (!inp) return;
+  let t = null;
+  inp.addEventListener("input", () => {
+    clearTimeout(t);
+    t = setTimeout(() => setEditFind(inp.value, false), 120);
+  });
+  inp.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault(); clearTimeout(t);
+      setEditFind(inp.value, false);
+      jumpFind(e.shiftKey ? -1 : 1);
+    } else if (e.key === "Escape") {
+      e.preventDefault(); clearEditFind(); inp.blur();
+    }
+  });
+  document.getElementById("editFindNext").addEventListener("click", () => jumpFind(1));
+  document.getElementById("editFindPrev").addEventListener("click", () => jumpFind(-1));
+  document.getElementById("editFindClear").addEventListener("click", () => { clearEditFind(); inp.focus(); });
+})();
 
 // Week preview toggle in edit mode
 let weekPreviewVisible = true;
@@ -4018,6 +4239,8 @@ window.addEventListener("resize", () => {
   window.__pcResizeT = setTimeout(() => {
     const compact = window.innerWidth <= 1024;
     if (currentMode === "edit" && compact !== renderCalendarPreview._compact) renderCalendarPreview();
+    // Column widths changed — re-fit names in whichever calendars are on screen
+    else document.querySelectorAll("#previewWeeks .cal-wrap, #viewTimeline").forEach(c => { if (c.clientWidth) fitCalTitles(c); });
   }, 200);
 });
 
