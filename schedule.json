@@ -16,8 +16,8 @@
           "note": ""
         },
         {
-          "time": "7:45 AM – 10:00 AM",
-          "title": "Wamrup/5v5: TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick WB",
+          "time": "8:00 AM – 10:00 AM",
+          "title": "5v5: TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick WB",
           "type": "excel",
           "people": [
             "Donovan",
@@ -25,7 +25,7 @@
             "JD",
             "Ollie",
             "Mateo",
-            "Ian"
+            "Chozen"
           ],
           "note": "",
           "players": []
@@ -92,7 +92,7 @@
           "type": "other",
           "people": [
             "David",
-            "Ollie"
+            "Ian"
           ],
           "players": [],
           "note": ""
@@ -182,9 +182,9 @@
           "title": "Aggie @ Excel",
           "type": "other",
           "people": [
-            "Anthony",
-            "Waleed",
-            "Ollie"
+            "Ollie",
+            "Guiressi",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -195,7 +195,8 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -206,19 +207,16 @@
       "day": "Wed 7/22",
       "events": [
         {
-          "time": "7:15 AM – 9:30 AM",
-          "title": "Warmup/5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W, Nick WB",
+          "time": "7:30 AM – 9:30 AM",
+          "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W, Nick WB",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Bradeon",
             "JD",
+            "Braedon",
             "Ollie",
             "Mateo",
-            "Matt M",
             "Chozen",
-            "Jacob Sells",
             "Jung"
           ],
           "note": "",
@@ -230,7 +228,6 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
             "Bradeon",
             "JD",
             "Ollie",
@@ -325,7 +322,8 @@
             "Chozen",
             "Jung",
             "Ali",
-            "Colin"
+            "Colin",
+            "Tarek"
           ],
           "note": "",
           "players": []
@@ -343,7 +341,9 @@
             "Mateo",
             "Chozen",
             "Jung",
-            "Ali"
+            "Ali",
+            "Tarek",
+            "Waleed"
           ],
           "note": "",
           "players": []
@@ -377,22 +377,17 @@
       "day": "Fri 7/24",
       "events": [
         {
-          "time": "7:15 AM – 9:30 AM",
-          "title": "Warmup/5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D, Dariq W, Nick WB",
+          "time": "7:30 AM – 9:30 AM",
+          "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D, Dariq W, Nick WB",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
-            "Tarek",
             "Chozen",
-            "Jacob Sells",
             "Waleed",
-            "Braedon",
-            "Frank M",
-            "Matt M"
+            "Frank M"
           ],
           "note": "",
           "players": []
@@ -454,8 +449,15 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Chozen"
+            "Bradeon",
+            "Ollie",
+            "Mateo",
+            "Chozen",
+            "Jacob Sells",
+            "Jamal",
+            "Waleed",
+            "Braedon",
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -466,15 +468,15 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Kirby",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Jacob S",
-            "Ali",
+            "Bradeon",
+            "Ollie",
+            "Mateo",
             "Chozen",
-            "Braedon"
+            "Jacob Sells",
+            "Jamal",
+            "Waleed",
+            "Braedon",
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -485,15 +487,15 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Kirby",
-            "Jaden G",
-            "Josh G",
-            "Cesar",
-            "Jacob S",
-            "Ali",
+            "Bradeon",
+            "Ollie",
+            "Mateo",
             "Chozen",
-            "Braedon"
+            "Jacob Sells",
+            "Jamal",
+            "Waleed",
+            "Braedon",
+            "Dame"
           ],
           "note": "",
           "players": []
@@ -502,7 +504,18 @@
           "time": "11:30 AM – 1:00 PM",
           "title": "Marko S, Nick D, Nick WB",
           "type": "excel",
-          "people": [],
+          "people": [
+            "Donovan",
+            "Bradeon",
+            "Ollie",
+            "Mateo",
+            "Chozen",
+            "Jacob Sells",
+            "Jamal",
+            "Waleed",
+            "Braedon",
+            "Dame"
+          ],
           "players": [],
           "note": ""
         }
