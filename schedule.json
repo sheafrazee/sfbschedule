@@ -165,7 +165,7 @@
         },
         {
           "time": "1:15 PM – 2:45 PM",
-          "title": "Stanlet J @ MAP",
+          "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
             "Anthony",
@@ -633,7 +633,6 @@
         "Marko S",
         "Nick D",
         "Rudy",
-        "Stanlet J @ MAP",
         "Stanley J",
         "Stanley J @ MAP",
         "Tarek",
@@ -804,7 +803,7 @@
             },
             {
               "time": "1:15 PM – 2:45 PM",
-              "title": "Stanlet J @ MAP",
+              "title": "Stanley J @ MAP",
               "type": "other",
               "people": [
                 "Anthony",
@@ -1234,7 +1233,7 @@
           ]
         }
       ],
-      "ts": 1784408362194
+      "ts": 1784501063719
     },
     {
       "key": "2026-07-06",
@@ -1500,74 +1499,70 @@
         "day": "Mon 7/20",
         "events": [
           {
-            "time": "7:00 AM – 8:00 AM",
-            "title": "Play Prep:  TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H",
-            "type": "excel",
+            "time": "7:30 AM – 8:30 AM",
+            "title": "Stanley Johnson @ MAP",
+            "type": "other",
             "people": [
-              "Donovan",
-              "Nick M",
-              "Bradeon",
-              "JD"
+              "Colby",
+              "David"
             ],
             "players": [],
             "note": ""
           },
           {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "5v5: TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H",
+            "time": "7:45 AM – 10:00 AM",
+            "title": "Wamrup/5v5: TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick WB",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Ali",
-              "Jacob S",
-              "Chozen",
-              "Braedon"
+              "JD",
+              "Ollie",
+              "Mateo",
+              "Ian"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "9:30 AM – 11:00 AM",
+            "time": "10:00 AM – 11:30 AM",
             "title": "Dalton K + Anyone not playing",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
+              "Tarek",
               "Chozen",
-              "Braedon"
+              "Jacob Sells",
+              "Colin",
+              "Jamal"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "11:45 AM – 1:15 PM",
-            "title": "Stanley J @ MAP",
+            "time": "12:15 PM – 1:45 PM",
+            "title": "Benny G @ MAP",
             "type": "other",
             "people": [
-              "Anthony",
-              "Dame"
+              "David",
+              "Ollie",
+              "Braedon"
             ],
             "players": [],
             "note": ""
           },
           {
-            "time": "3:00 PM – 4:00 PM",
-            "title": "Rudy ",
+            "time": "1:45 PM – 3:15 PM",
+            "title": "Stanely J @ MAP",
             "type": "other",
             "people": [
-              "Anthony",
+              "David",
+              "Ollie",
               "Braedon"
             ],
             "players": [],
@@ -1575,33 +1570,23 @@
           },
           {
             "time": "4:00 PM – 5:00 PM",
-            "title": "Archie @ Excel",
+            "title": "Ben E",
             "type": "other",
             "people": [
-              "Anthony",
-              "Guiressi"
+              "David",
+              "Ollie",
+              "Ian"
             ],
             "players": [],
             "note": ""
           },
           {
             "time": "5:00 PM – 6:00 PM",
-            "title": "Harrison Ingram ",
-            "type": "excel",
+            "title": "Audrina ",
+            "type": "other",
             "people": [
-              "Anthony",
-              "Donovan"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "6:00 PM – 7:00 PM",
-            "title": "Mario Hezjona ",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Anthony"
+              "David",
+              "Ollie"
             ],
             "players": [],
             "note": ""
@@ -1618,93 +1603,96 @@
             "people": [
               "Donovan",
               "Nick M",
-              "Chozen"
+              "Ollie",
+              "Jung",
+              "Chozen",
+              "Braedon",
+              "Ali",
+              "Mateo"
             ],
             "note": "",
             "players": []
           },
           {
             "time": "8:30 AM – 10:00 AM",
-            "title": "TJD, Harrison I, Mario H",
+            "title": "TJD, Harrison I, Mario H, Marko S",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Kirby",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
-              "Ali",
+              "Ollie",
+              "Jung",
               "Chozen",
-              "Braedon"
+              "Braedon",
+              "Ali",
+              "Mateo"
             ],
             "note": "",
             "players": []
           },
           {
             "time": "10:00 AM – 11:30 AM",
-            "title": "Johnny D, Jordan D, Marko S, Kark R",
+            "title": "Johnny D, Jordan D, Nick WB, Kark R",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Kirby",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
-              "Ali",
+              "Ollie",
+              "Jung",
               "Chozen",
-              "Braedon"
+              "Braedon",
+              "Ali",
+              "Mateo"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "11:45 AM – 1:15 PM",
+            "time": "12:15 PM – 1:45 PM",
             "title": "Benny G @ MAP",
             "type": "other",
             "people": [
-              "Anthony",
-              "Guiressi",
-              "Braedon"
+              "Dame",
+              "Ollie",
+              "Guiressi"
             ],
             "players": [],
             "note": ""
           },
           {
-            "time": "1:15 PM – 2:45 PM",
-            "title": "Stanlet J @ MAP",
+            "time": "1:45 PM – 3:15 PM",
+            "title": "Stanley J @ MAP",
+            "type": "other",
+            "people": [
+              "Dame",
+              "Ollie",
+              "Guiressi"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Aggie @ Excel",
             "type": "other",
             "people": [
               "Anthony",
-              "Guiressi",
-              "Braedon"
+              "Waleed",
+              "Ollie"
             ],
             "players": [],
             "note": ""
           },
           {
             "time": "5:00 PM – 6:15 PM",
-            "title": "Group: Russ, Braedon, Tarek, Jacob Jares 2x",
+            "title": "Group: ",
             "type": "other",
             "people": [
-              "Anthony",
+              "Ollie",
               "Guiressi"
             ],
             "note": "",
             "players": []
-          },
-          {
-            "time": "6:15 PM – 7:15 PM",
-            "title": "Mario Hezjona ",
-            "type": "excel",
-            "people": [
-              "Donovan"
-            ],
-            "players": [],
-            "note": ""
           }
         ]
       },
@@ -1712,33 +1700,20 @@
         "day": "Wed 7/22",
         "events": [
           {
-            "time": "7:00 AM – 8:00 AM",
-            "title": "Play Prep: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W",
+            "time": "7:15 AM – 9:30 AM",
+            "title": "Warmup/5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W, Nick WB",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Bradeon"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Ali",
-              "Jacob S",
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
+              "Matt M",
               "Chozen",
-              "Braedon"
+              "Jacob Sells",
+              "Jung"
             ],
             "note": "",
             "players": []
@@ -1750,25 +1725,26 @@
             "people": [
               "Donovan",
               "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
+              "Matt M",
               "Chozen",
-              "Braedon"
+              "Jacob Sells",
+              "Jung",
+              "Jamal"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "11:30 AM – 1:00 PM",
-            "title": "Stanley J, Cole S @ MAP",
+            "time": "11:45 AM – 1:15 PM",
+            "title": "Stanley J @ MAP",
             "type": "other",
             "people": [
-              "Colby",
-              "Braedon"
+              "Ollie",
+              "Anthony"
             ],
             "players": [],
             "note": ""
@@ -1783,45 +1759,24 @@
           },
           {
             "time": "4:00 PM – 5:00 PM",
-            "title": "Archie @ Excel",
+            "title": "Aggie @ Excel",
             "type": "other",
             "people": [
-              "Dame",
               "Greg",
-              "Chozen"
+              "Ollie",
+              "David"
             ],
             "players": [],
             "note": ""
           },
           {
             "time": "5:00 PM – 6:15 PM",
-            "title": "Group: Takichyo",
+            "title": "Group: Tarek",
             "type": "other",
             "people": [
-              "Dame",
-              "Greg"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "6:15 PM – 7:15 PM",
-            "title": "Klark",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "7:15 PM – 8:15 PM",
-            "title": "Mario H",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Dame"
+              "Greg",
+              "Ollie",
+              "David"
             ],
             "players": [],
             "note": ""
@@ -1838,101 +1793,77 @@
             "people": [
               "Donovan",
               "Nick M",
-              "Chozen"
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
+              "Chozen",
+              "Jung",
+              "Ali",
+              "Colin"
             ],
             "note": "",
             "players": []
           },
           {
             "time": "8:30 AM – 10:00 AM",
-            "title": "Harrison I, Mario H, Dariq W",
+            "title": "Harrison I, Mario H, Dariq W, Marko S",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Kirby",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
-              "Ali",
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
               "Chozen",
-              "Braedon"
+              "Jung",
+              "Ali",
+              "Colin"
             ],
             "note": "",
             "players": []
           },
           {
             "time": "10:00 AM – 11:30 AM",
-            "title": "Johnny D, Jordan D, Marko S, Kark R",
+            "title": "Johnny D, Jordan D, Nick WB, Kark R",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Kirby",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
-              "Ali",
+              "Bradeon",
+              "JD",
+              "Ollie",
+              "Mateo",
               "Chozen",
-              "Braedon"
+              "Jung",
+              "Ali"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "11:45 AM – 1:15 PM",
+            "time": "12:15 PM – 1:45 PM",
             "title": "Benny G @ MAP",
             "type": "other",
             "people": [
+              "Anthony",
               "Waleed",
-              "Braedon"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "1:15 PM – 2:45 PM",
-            "title": "Cole S @ MAP",
-            "type": "other",
-            "people": [
-              "Waleed",
-              "Braedon"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Harrison I",
-            "type": "excel",
-            "people": [
-              "Braedon",
-              "Donovan"
+              "Ollie"
             ],
             "players": [],
             "note": ""
           },
           {
             "time": "5:00 PM – 6:15 PM",
-            "title": "Group: Braedon, Ali",
+            "title": "Group:",
             "type": "other",
             "people": [
-              "David"
+              "Anthony",
+              "Ollie"
             ],
             "note": "",
             "players": []
-          },
-          {
-            "time": "6:15 PM – 7:15 PM",
-            "title": "Mario Hezjona ",
-            "type": "excel",
-            "people": [
-              "Donovan"
-            ],
-            "players": [],
-            "note": ""
           }
         ]
       },
@@ -1940,33 +1871,22 @@
         "day": "Fri 7/24",
         "events": [
           {
-            "time": "7:00 AM – 8:00 AM",
-            "title": "Play Prep: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D",
+            "time": "7:15 AM – 9:30 AM",
+            "title": "Warmup/5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D, Dariq W, Nick WB",
             "type": "excel",
             "people": [
               "Donovan",
               "Nick M",
-              "Bradeon"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D, Dariq W",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Ali",
-              "Jacob S",
+              "Bradeon",
+              "Ollie",
+              "Mateo",
+              "Tarek",
               "Chozen",
-              "Braedon"
+              "Jacob Sells",
+              "Waleed",
+              "Braedon",
+              "Frank M",
+              "Matt M"
             ],
             "note": "",
             "players": []
@@ -1978,57 +1898,41 @@
             "people": [
               "Donovan",
               "Nick M",
-              "Dame",
-              "Colin",
-              "Jaden G",
-              "Josh G",
-              "Cesar",
-              "Jacob S",
+              "Bradeon",
+              "Ollie",
+              "Mateo",
+              "Tarek",
               "Chozen",
-              "Braedon"
+              "Matt M",
+              "Jacob Sells",
+              "Jamal",
+              "Waleed",
+              "Braedon",
+              "Frank M"
             ],
             "note": "",
             "players": []
           },
           {
-            "time": "2:00 PM – 3:00 PM",
-            "title": "Harrison I",
-            "type": "excel",
+            "time": "11:45 AM – 1:15 PM",
+            "title": "Benny G @ MAP",
+            "type": "other",
             "people": [
-              "Donovan",
-              "Ollie"
+              "Anthony",
+              "Ollie",
+              "Braedon"
             ],
             "players": [],
             "note": ""
           },
           {
             "time": "4:00 PM – 5:00 PM",
-            "title": "Archie @ Excel",
+            "title": "Aggie @ Excel",
             "type": "other",
             "people": [
+              "Anthony",
               "Ollie",
-              "Ian"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:15 PM – 6:15 PM",
-            "title": "Klark",
-            "type": "excel",
-            "people": [
-              "Donovan",
-              "Ollie"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "6:15 PM – 7:15 PM",
-            "title": "Mario Hezjona ",
-            "type": "excel",
-            "people": [
-              "Donovan"
+              "Guressi"
             ],
             "players": [],
             "note": ""
@@ -2038,17 +1942,6 @@
       {
         "day": "Sat 7/25",
         "events": [
-          {
-            "time": "5:15 AM – 6:30 AM",
-            "title": "GW",
-            "type": "other",
-            "people": [
-              "Ollie",
-              "Braedon"
-            ],
-            "players": [],
-            "note": ""
-          },
           {
             "time": "7:00 AM – 8:30 AM",
             "title": "Jared M, Dalton K, TDS, Ayo D",
@@ -2101,20 +1994,9 @@
           },
           {
             "time": "11:30 AM – 1:00 PM",
-            "title": "Marko S, Nick D",
+            "title": "Marko S, Nick D, Nick WB",
             "type": "excel",
             "people": [],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "2:30 PM – 3:30 PM",
-            "title": "Rudy",
-            "type": "other",
-            "people": [
-              "Ollie",
-              "Ian"
-            ],
             "players": [],
             "note": ""
           }
