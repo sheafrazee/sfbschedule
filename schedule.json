@@ -37,7 +37,7 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Bradeon",
+            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -103,8 +103,23 @@
       "day": "Tue 7/21",
       "events": [
         {
-          "time": "7:00 AM – 8:30 AM",
-          "title": "Jared M, Dalton K, TDS, Ayo D",
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Ayo D",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Nick M",
+            "Ollie",
+            "Jung",
+            "Braedon",
+            "Mateo"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:15 AM – 9:30 AM",
+          "title": "Jared M, Dalton K, TDS",
           "type": "excel",
           "people": [
             "Donovan",
@@ -114,13 +129,14 @@
             "Chozen",
             "Braedon",
             "Ali",
-            "Mateo"
+            "Mateo",
+            "LH"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "8:30 AM – 10:00 AM",
+          "time": "9:30 AM – 11:00 AM",
           "title": "TJD, Harrison I, Mario H, Marko S",
           "type": "excel",
           "people": [
@@ -131,13 +147,14 @@
             "Chozen",
             "Braedon",
             "Ali",
-            "Mateo"
+            "Mateo",
+            "LH"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "10:00 AM – 11:30 AM",
+          "time": "11:00 AM – 12:30 PM",
           "title": "Johnny D, Jordan D, Nick WB, Kark R",
           "type": "excel",
           "people": [
@@ -148,31 +165,34 @@
             "Chozen",
             "Braedon",
             "Ali",
-            "Mateo"
+            "Mateo",
+            "LH"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "12:15 PM – 1:45 PM",
+          "time": "1:00 PM – 2:15 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Braedon",
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "LH"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "1:45 PM – 3:15 PM",
+          "time": "2:15 PM – 3:30 PM",
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
             "Braedon",
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -226,7 +246,7 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Bradeon",
+            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -294,7 +314,7 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Bradeon",
+            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -313,7 +333,7 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Bradeon",
+            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -333,7 +353,7 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Bradeon",
+            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -408,7 +428,7 @@
           "people": [
             "Donovan",
             "Nick M",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
             "Tarek",
@@ -417,7 +437,6 @@
             "Jacob Sells",
             "Jamal",
             "Waleed",
-            "Braedon",
             "Frank M"
           ],
           "note": "",
@@ -429,7 +448,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Braedon"
+            "Braedon",
+            "Waleed"
           ],
           "players": [],
           "note": ""
@@ -451,7 +471,7 @@
           "people": [
             "Anthony",
             "Ollie",
-            "Guressi"
+            "Guiressi"
           ],
           "players": [],
           "note": ""
@@ -467,14 +487,13 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
             "Chozen",
             "Jacob Sells",
             "Jamal",
-            "Waleed",
-            "Braedon"
+            "Waleed"
           ],
           "note": "",
           "players": []
@@ -485,14 +504,13 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
             "Chozen",
             "Jacob Sells",
             "Jamal",
-            "Waleed",
-            "Braedon"
+            "Waleed"
           ],
           "note": "",
           "players": []
@@ -503,14 +521,13 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
             "Chozen",
             "Jacob Sells",
             "Jamal",
-            "Waleed",
-            "Braedon"
+            "Waleed"
           ],
           "note": "",
           "players": []
@@ -521,14 +538,13 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Bradeon",
+            "Braedon",
             "Ollie",
             "Mateo",
             "Chozen",
             "Jacob Sells",
             "Jamal",
-            "Waleed",
-            "Braedon"
+            "Waleed"
           ],
           "players": [],
           "note": ""
