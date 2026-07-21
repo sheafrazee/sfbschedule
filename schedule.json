@@ -17,7 +17,7 @@
         },
         {
           "time": "8:00 AM – 10:00 AM",
-          "title": "5v5: TDS, Ayo D, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick WB",
+          "title": "5v5: TDS, Ethan L, TJD, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick WB",
           "type": "excel",
           "people": [
             "Donovan",
@@ -112,7 +112,8 @@
             "Ollie",
             "Jung",
             "Braedon",
-            "Mateo"
+            "Mateo",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -128,7 +129,6 @@
             "Jung",
             "Chozen",
             "Braedon",
-            "Ali",
             "Mateo",
             "LH"
           ],
@@ -136,8 +136,25 @@
           "players": []
         },
         {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "TJD, Harrison I, Mario H, Marko S",
+          "time": "9:30 AM – 10:30 AM",
+          "title": " Harrison I, Mario H, Marko S",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Nick M",
+            "Ollie",
+            "Jung",
+            "Chozen",
+            "Braedon",
+            "Mateo",
+            "LH"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "10:30 AM – 12:00 PM",
+          "title": "Dev A, Ethan L, Nick WB, Kark R",
           "type": "excel",
           "people": [
             "Donovan",
@@ -154,45 +171,29 @@
           "players": []
         },
         {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Johnny D, Jordan D, Nick WB, Kark R",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Ollie",
-            "Jung",
-            "Chozen",
-            "Braedon",
-            "Ali",
-            "Mateo",
-            "LH"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "1:00 PM – 2:15 PM",
+          "time": "12:30 PM – 2:00 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Braedon",
             "Ollie",
             "Guiressi",
-            "LH"
+            "LH",
+            "Jung"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "2:15 PM – 3:30 PM",
+          "time": "2:00 PM – 3:30 PM",
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
             "Braedon",
             "Ollie",
             "Guiressi",
-            "LH"
+            "LH",
+            "Jung"
           ],
           "players": [],
           "note": ""
