@@ -226,28 +226,11 @@
       "day": "Wed 7/22",
       "events": [
         {
-          "time": "7:30 AM – 9:30 AM",
-          "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Dariq W, Nick WB",
+          "time": "7:45 AM – 10:15 AM",
+          "title": "Warmup + 5v5: Jared M, TDS, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
           "type": "excel",
           "people": [
             "Donovan",
-            "JD",
-            "Braedon",
-            "Ollie",
-            "Mateo",
-            "Chozen",
-            "Jung"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Dalton K + Anyone not playing",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Braedon",
             "JD",
             "Ollie",
             "Mateo",
@@ -255,13 +238,13 @@
             "Chozen",
             "Jacob Sells",
             "Jung",
-            "Jamal"
+            "Dame"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:45 AM – 1:15 PM",
+          "time": "11:30 AM – 1:00 PM",
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
