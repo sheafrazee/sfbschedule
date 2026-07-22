@@ -175,7 +175,6 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Braedon",
             "Ollie",
             "Guiressi",
             "LH",
@@ -189,7 +188,6 @@
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
-            "Braedon",
             "Ollie",
             "Guiressi",
             "LH",
@@ -204,7 +202,8 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "Braedon"
           ],
           "note": "",
           "players": []
@@ -215,7 +214,8 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -242,17 +242,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "11:30 AM – 1:00 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Braedon",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
         },
         {
           "time": "2:00 PM – 3:30 PM",
@@ -362,6 +351,18 @@
           "note": ""
         },
         {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Ben E @ Excel",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Anthony",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "5:00 PM – 6:15 PM",
           "title": "Group:",
           "type": "other",
@@ -378,7 +379,8 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Guiressi"
+            "Guiressi",
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -389,50 +391,41 @@
       "day": "Fri 7/24",
       "events": [
         {
-          "time": "7:30 AM – 9:30 AM",
-          "title": "5v5: Jared M, TDS, Ayo D, Harrison I, Johnny D, Jordan D, Klark R, Marko S, Mario H, Nick D, Dariq W, Nick WB",
+          "time": "7:45 AM – 10:15 AM",
+          "title": "Warmup + 5v5: Jared M, TDS, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
-            "Braedon",
+            "JD",
             "Ollie",
             "Mateo",
-            "Chozen",
-            "Waleed",
-            "Frank M"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "9:30 AM – 11:00 AM",
-          "title": "Dalton K + Anyone not playing",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Nick M",
-            "Braedon",
-            "Ollie",
-            "Mateo",
-            "Tarek",
-            "Chozen",
             "Matt M",
+            "Chozen",
             "Jacob Sells",
-            "Jamal",
-            "Waleed",
-            "Frank M"
+            "Jung",
+            "Dame"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:45 AM – 1:15 PM",
+          "time": "11:00 AM – 12:30 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Anthony",
-            "Braedon",
+            "Waleed",
+            "Guiressi"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "12:30 PM – 2:00 PM",
+          "title": "Stanley J @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
             "Waleed"
           ],
           "players": [],
@@ -440,10 +433,12 @@
         },
         {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Alice @ Excel",
+          "title": "Ben E @ Excel",
           "type": "other",
           "people": [
-            "Ollie"
+            "Ollie",
+            "Anthony",
+            "Guiressi"
           ],
           "players": [],
           "note": ""
