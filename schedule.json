@@ -281,27 +281,25 @@
       "day": "Thu 7/23",
       "events": [
         {
-          "time": "7:00 AM – 8:30 AM",
-          "title": "Jared M, Dalton K, TDS, Ayo D",
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Ayo",
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
             "Braedon",
             "JD",
             "Ollie",
             "Mateo",
             "Chozen",
             "Jung",
-            "Ali",
             "Colin"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "8:30 AM – 10:00 AM",
-          "title": "Harrison I, Mario H, Dariq W, Marko S",
+          "time": "8:15 AM – 9:30 AM",
+          "title": "Harrison I, Dev A, Dariq W, Jared M",
           "type": "excel",
           "people": [
             "Donovan",
@@ -320,8 +318,8 @@
           "players": []
         },
         {
-          "time": "10:00 AM – 11:30 AM",
-          "title": "Johnny D, Jordan D, Nick WB, Kark R",
+          "time": "9:30 AM – 10:45 AM",
+          "title": "Mario H, Marko S, Klark R, Nick WB",
           "type": "excel",
           "people": [
             "Donovan",
@@ -340,12 +338,13 @@
           "players": []
         },
         {
-          "time": "12:15 PM – 1:45 PM",
+          "time": "11:30 AM – 1:00 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -368,7 +367,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Ollie"
+            "Ollie",
+            "Guiressi"
           ],
           "note": "",
           "players": []
@@ -392,7 +392,7 @@
       "events": [
         {
           "time": "7:45 AM – 10:15 AM",
-          "title": "Warmup + 5v5: Jared M, TDS, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
+          "title": "Warmup + 5v5: Jared M, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
           "type": "excel",
           "people": [
             "Donovan",
