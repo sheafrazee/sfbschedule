@@ -480,69 +480,85 @@
       "day": "Sat 7/25",
       "events": [
         {
-          "time": "7:00 AM – 8:30 AM",
-          "title": "Jared M, Dalton K, TDS, Ayo D",
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Ayo",
           "type": "excel",
           "people": [
             "Donovan",
             "Braedon",
             "Ollie",
-            "Mateo",
             "Chozen",
+            "Dame"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "8:15 AM – 9:30 AM",
+          "title": "Jared M, ",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Braedon",
+            "Ollie",
+            "Chozen",
+            "Dame",
             "Jacob Sells",
-            "Jamal",
+            "Jaden Goodall",
+            "Josh Goodall",
             "Waleed"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "8:30 AM – 10:00 AM",
-          "title": "Harrison I, Dariq W, Mario H",
+          "time": "10:00 AM – 11:15 AM",
+          "title": "Kark R",
           "type": "excel",
           "people": [
             "Donovan",
             "Braedon",
             "Ollie",
-            "Mateo",
             "Chozen",
+            "Dame",
             "Jacob Sells",
-            "Jamal",
+            "Jaden Goodall",
+            "Josh Goodall",
             "Waleed"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "10:00 AM – 11:30 AM",
-          "title": "Johnny D, Jordan D, Kark R",
+          "time": "12:00 PM – 1:00 PM",
+          "title": "Anthony Excel",
           "type": "excel",
           "people": [
             "Donovan",
-            "Braedon",
             "Ollie",
-            "Mateo",
-            "Chozen",
-            "Jacob Sells",
-            "Jamal",
-            "Waleed"
+            "Anthony"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         },
         {
-          "time": "11:30 AM – 1:00 PM",
-          "title": "Marko S, Nick D, Nick WB",
-          "type": "excel",
+          "time": "1:00 PM – 2:00 PM",
+          "title": "Ben E ",
+          "type": "other",
           "people": [
-            "Donovan",
-            "Braedon",
             "Ollie",
-            "Mateo",
-            "Chozen",
-            "Jacob Sells",
-            "Jamal",
-            "Waleed"
+            "Anthony"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "David Barr",
+          "type": "other",
+          "people": [
+            "Ollie",
+            "Anthony"
           ],
           "players": [],
           "note": ""
