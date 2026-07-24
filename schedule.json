@@ -197,18 +197,6 @@
           "note": ""
         },
         {
-          "time": "5:00 PM – 6:15 PM",
-          "title": "Group: ",
-          "type": "other",
-          "people": [
-            "Ollie",
-            "Guiressi",
-            "Braedon"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina ",
           "type": "other",
@@ -253,7 +241,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Aggie @ Excel",
+          "title": "Aggie +1 @ Excel",
           "type": "other",
           "people": [
             "Greg",
@@ -265,7 +253,7 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group: Tarek",
+          "title": "Group: Tarek, Cesar, ",
           "type": "other",
           "people": [
             "Greg",
@@ -350,6 +338,18 @@
           "note": ""
         },
         {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Ayo, Klark",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Ollie",
+            "Anthony"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "3:00 PM – 4:00 PM",
           "title": "Ben E @ Excel",
           "type": "other",
@@ -363,7 +363,7 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group:",
+          "title": "Group: Jacob Jares 2x, Braedon, Russ",
           "type": "other",
           "people": [
             "Anthony",
@@ -375,12 +375,23 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Aggie @ Excel",
+          "title": "Aggie +2 @ Excel",
           "type": "other",
           "people": [
             "Ollie",
             "Guiressi",
             "Anthony"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "Jared M, Mario H",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Ollie"
           ],
           "players": [],
           "note": ""
@@ -391,42 +402,51 @@
       "day": "Fri 7/24",
       "events": [
         {
-          "time": "7:45 AM – 10:15 AM",
-          "title": "Warmup + 5v5: Jared M, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
+          "time": "8:00 AM – 9:00 AM",
+          "title": "Cam A",
           "type": "excel",
           "people": [
             "Donovan",
-            "JD",
             "Ollie",
             "Mateo",
-            "Matt M",
-            "Chozen",
             "Jacob Sells",
-            "Jung",
-            "Dame"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Benny G @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
+            "Jaden G",
+            "Josh G",
             "Waleed",
-            "Guiressi"
+            "Frank M"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "12:30 PM – 2:00 PM",
-          "title": "Stanley J @ MAP",
+          "time": "9:00 AM – 11:30 AM",
+          "title": "Warmup + 5v5: Jared M, Ayo D, Harrison I, Klark R, Marko S, Mario H, Dalton K, Devin A",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Ollie",
+            "Mateo",
+            "Matt M",
+            "Braedon",
+            "Jacob Sells",
+            "LH",
+            "Dame",
+            "Jaden G",
+            "Josh G",
+            "Waleed",
+            "Frank M"
+          ],
+          "note": "",
+          "players": []
+        },
+        {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -437,8 +457,7 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Anthony",
-            "Guiressi"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -450,7 +469,7 @@
           "people": [
             "Anthony",
             "Ollie",
-            "Guiressi"
+            "Braedon"
           ],
           "players": [],
           "note": ""
