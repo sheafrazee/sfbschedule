@@ -452,12 +452,13 @@
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Ben E @ Excel",
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group: Russ, Rudy +1, ",
           "type": "other",
           "people": [
             "Ollie",
-            "Anthony"
+            "Anthony",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -470,6 +471,16 @@
             "Anthony",
             "Ollie",
             "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "AC Kids",
+          "type": "excel",
+          "people": [
+            "Donovan"
           ],
           "players": [],
           "note": ""
@@ -547,18 +558,20 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Anthony"
+            "Anthony",
+            "Jung"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "2:00 PM – 3:00 PM",
+          "time": "12:00 PM – 1:00 PM",
           "title": "David Barr",
           "type": "other",
           "people": [
             "Ollie",
-            "Anthony"
+            "Anthony",
+            "Jung"
           ],
           "players": [],
           "note": ""
