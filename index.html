@@ -361,6 +361,28 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .intern-forget { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 2px 4px; border-radius: 4px; opacity: .5; transition: opacity .15s, color .15s, background .15s; }
 .intern-forget:hover { opacity: 1; color: var(--clay); background: var(--warm-white); }
 
+/* ---- Assign mode: an intern is armed; click sessions to add / remove them ---- */
+body.assign-mode .cal-ev { cursor: copy; }
+body.assign-mode .cal-ev.find-miss { opacity: .55; }
+.cal-ev.assign-in { outline: 2.5px solid #1a6b2f !important; outline-offset: -1px; box-shadow: 0 0 0 2px rgba(26,107,47,.3), 0 3px 10px rgba(0,0,0,.3); opacity: 1 !important; z-index: 7; }
+.cal-ev.assign-out { outline: 1.5px dashed var(--stone); outline-offset: -1px; }
+.edit-event.assign-in { border-color: #1a6b2f; box-shadow: 0 0 0 2px #1a6b2f inset, 0 3px 10px rgba(26,107,47,.18); }
+.assign-flash { animation: assignPulse .45s ease-out; }
+@keyframes assignPulse { 0% { transform: scale(1); } 45% { transform: scale(1.06); } 100% { transform: scale(1); } }
+.assign-bar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 97;
+  display: flex; align-items: center; gap: 9px;
+  background: var(--clay); color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12.5px;
+  padding: 9px 14px; border-radius: 11px; box-shadow: 0 8px 28px rgba(184,105,74,.42); }
+.assign-bar.hidden { display: none; }
+.assign-bar .ab-name { background: rgba(255,255,255,.22); border-radius: 6px; padding: 2px 8px; }
+.assign-bar .ab-hint { font-weight: 500; opacity: .92; }
+.assign-bar .ab-done { border: none; background: #fff; color: var(--clay); font-family: inherit; font-weight: 700; font-size: 11.5px; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+@media (max-width: 600px) {
+  .assign-bar { bottom: calc(150px + env(safe-area-inset-bottom)); font-size: 11px; gap: 6px; padding: 7px 10px; max-width: calc(100vw - 20px); flex-wrap: wrap; justify-content: center; }
+  .assign-bar .ab-hint { display: none; }
+}
+
 /* ---- View/Edit toggle: lives at the top of the sticky toolbar in both tabs ---- */
 .view-edit-toggle { display: inline-flex; align-self: flex-start; gap: 4px; background: #fff; border: 1px solid var(--light-stone); border-radius: 10px; padding: 3px; }
 .view-edit-toggle .mode-btn { border: none; background: transparent; padding: 6px 18px; border-radius: 7px; font-size: 12.5px; color: var(--dark-stone); }
@@ -841,6 +863,7 @@ button.stat { cursor: pointer; font: inherit; }
 
 
 <div class="cal-sel-bar hidden" id="calSelBar"></div>
+<div class="assign-bar hidden" id="assignBar"></div>
 
 <div class="intern-tally hidden collapsed" id="internTally">
   <div class="intern-tally-head" id="internTallyHead">
@@ -924,6 +947,7 @@ let calHover = null;        // {slot,di} last-hovered day column (paste target)
 let _lastCalTap = null;     // {slot,di,ei,t} last tile tap — used to detect double-click
 let calClip = null;         // { items:[{di,ev}], minDi } copy/paste buffer
 let editFindTerm = "";      // editor person-search term (intern or player name)
+let assignName = "";        // armed intern — click a session to add/remove them
 let _findIdx = -1;          // cursor for ↑/↓ jump-to-match
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
@@ -2335,8 +2359,73 @@ function setEditFind(term, jump) {
   // Repaint in-block name highlights (fitCalTitle rebuilds each block's names)
   if (changed) document.querySelectorAll("#previewWeeks .cal-wrap").forEach(c => { if (c.clientWidth) fitCalTitles(c); });
   if (jump) jumpFind(1);
+  if (assignName && next.toLowerCase() !== assignName.toLowerCase()) setAssignName("");
 }
-function clearEditFind() { setEditFind("", false); }
+function clearEditFind() { setEditFind("", false); setAssignName(""); }
+
+// ============ ASSIGN MODE ============
+// Click an intern's name in the session counter to arm them: their sessions light
+// up, and clicking any block on the Week Overview adds or removes them from it.
+function eventHasIntern(ev, name) {
+  if (!ev || !name) return false;
+  const k = name.trim().toLowerCase();
+  return (ev.people || []).some(p => (p || "").trim().toLowerCase() === k);
+}
+function setAssignName(name) {
+  assignName = (name || "").trim();
+  document.body.classList.toggle("assign-mode", !!assignName);
+  updateAssignBar();
+  try { applyEditFind(); } catch (e) {}
+}
+function updateAssignBar() {
+  const bar = document.getElementById("assignBar");
+  if (!bar) return;
+  if (!assignName || currentMode !== "edit") { bar.classList.add("hidden"); return; }
+  let n = 0;
+  (ed().days || []).forEach(d => (d.events || []).forEach(ev => { if (eventHasIntern(ev, assignName)) n++; }));
+  bar.innerHTML = `<span>Assigning</span><span class="ab-name">${escapeHtml(assignName)}</span>`
+    + `<span>${n} session${n === 1 ? "" : "s"}</span>`
+    + `<span class="ab-hint">Click a block to add / remove · Esc to stop</span>`
+    + `<button class="ab-done" type="button">Done</button>`;
+  bar.querySelector(".ab-done").addEventListener("click", () => { setAssignName(""); setEditFind("", false); });
+  bar.classList.remove("hidden");
+}
+// Add or remove the armed intern on one session. Returns "added" | "removed" | null.
+function toggleInternOnEvent(slot, di, ei) {
+  if (!assignName) return null;
+  const days = _calDays(slot);
+  const ev = days && days[di] && days[di].events && days[di].events[ei];
+  if (!ev) return null;
+  ev.people = ev.people || [];
+  const k = assignName.toLowerCase();
+  const idx = ev.people.findIndex(p => (p || "").trim().toLowerCase() === k);
+  let action;
+  if (idx >= 0) { ev.people.splice(idx, 1); action = "removed"; }
+  else { ev.people.push(assignName); action = "added"; }
+  saveDraft();
+  try { learnInterns(); } catch (e) {}
+  hideCalPopover();
+  renderEdit();
+  // Pulse the block so the change is obvious
+  const el = document.querySelector(`.cal-ev-drag[data-slot="${slot}"][data-di="${di}"][data-ei="${ei}"]`);
+  if (el) { el.classList.remove("assign-flash"); void el.offsetWidth; el.classList.add("assign-flash"); }
+  showToast(`${action === "added" ? "Added" : "Removed"} ${assignName} ${action === "added" ? "to" : "from"} ${(ev.title || "session").slice(0, 28)}`);
+  return action;
+}
+// Paint in/out state onto blocks and editor cards while a name is armed.
+function applyAssignPaint() {
+  const on = !!assignName;
+  const days = ed().days || [];
+  document.querySelectorAll("#editGrid .edit-event[data-d]").forEach(card => {
+    card.classList.toggle("assign-in", on && eventHasIntern(_evAt(days, +card.dataset.d, +card.dataset.e), assignName));
+  });
+  document.querySelectorAll("#previewWeeks .cal-ev[data-slot]").forEach(el => {
+    const has = on && eventHasIntern(_evAt(_slotDaysFor(el.dataset.slot), +el.dataset.di, +el.dataset.ei), assignName);
+    el.classList.toggle("assign-in", has);
+    el.classList.toggle("assign-out", on && !has);
+  });
+  updateAssignBar();
+}
 // Paint hit/miss classes onto editor cards, calendar blocks and tally rows.
 function applyEditFind() {
   const terms = editFindTerms();
@@ -2376,6 +2465,7 @@ function applyEditFind() {
         ? `${hits} session${hits === 1 ? "" : "s"}${otherHits ? ` · ${otherHits} in ${otherLabel}` : ""}`
         : "no matches";
   }
+  try { applyAssignPaint(); } catch (e) {}
 }
 // Step through matching editor cards, scrolling each into view.
 function jumpFind(dir) {
@@ -2393,7 +2483,7 @@ function renderInternTally() {
   const box = document.getElementById("internTally");
   if (!box) return;
   box.classList.toggle("hidden", currentMode !== "edit");
-  if (currentMode !== "edit") return;
+  if (currentMode !== "edit") { if (assignName) setAssignName(""); return; }
 
   // Count sessions per intern, split by session type, in the active edit week only
   function countWeek(days) {
@@ -2456,7 +2546,7 @@ function renderInternTally() {
   if (past.length) {
     html += `<div class="intern-divider">Not scheduled (${past.length})</div>`;
     html += past.map(name =>
-      `<div class="intern-row past"><span class="nm" title="${escapeAttr(name)}">${escapeHtml(name)}</span><button class="intern-forget" data-forget="${escapeAttr(name)}" title="Remove from history">✕</button></div>`
+      `<div class="intern-row past findable" data-find="${escapeAttr(name)}" title="Click to assign ${escapeAttr(name)} to sessions"><span class="nm">${escapeHtml(name)}</span><button class="intern-forget" data-forget="${escapeAttr(name)}" title="Remove from history">✕</button></div>`
     ).join("");
   }
   body.innerHTML = html;
@@ -2464,12 +2554,15 @@ function renderInternTally() {
   body.querySelectorAll("[data-forget]").forEach(btn =>
     btn.addEventListener("click", () => forgetIntern(btn.dataset.forget)));
 
-  // Click a name to highlight that intern's sessions; click again to clear.
+  // Click a name to highlight that intern's sessions AND arm assign mode
+  // (click any calendar block to add/remove them); click the name again to stop.
   body.querySelectorAll(".intern-row[data-find]").forEach(row =>
     row.addEventListener("click", e => {
       if (e.target.closest("button")) return;
       const n = row.dataset.find;
-      setEditFind(editFindTerm.toLowerCase() === n.toLowerCase() ? "" : n, false);
+      const same = editFindTerm.toLowerCase() === n.toLowerCase();
+      setEditFind(same ? "" : n, false);
+      setAssignName(same ? "" : n);
     }));
 
   applyEditFind();
@@ -3140,6 +3233,13 @@ function onCalDragStart(e) {
       const TAP_PX = 10;
       if (isTouch && maxMoved > TAP_PX) return;
       const mods = ev ? { meta: ev.metaKey || ev.ctrlKey, shift: ev.shiftKey } : {};
+      // Assign mode: a plain click adds/removes the armed intern on this session.
+      // ⌘/Shift still fall through to normal multi-select.
+      if (assignName && !mods.meta && !mods.shift) {
+        _lastCalTap = null;
+        toggleInternOnEvent(slot, di, ei);
+        return;
+      }
       // iCal-style: one click selects (so ⌘C copies the tile), two opens the
       // editor. Touch has no ⌘ key and long-press is reserved for dragging, so
       // a single tap still opens the editor on touch.
@@ -3917,7 +4017,11 @@ document.addEventListener('keydown', e => {
   if (currentMode !== 'edit') return;
   const ae = document.activeElement, tag = ae && ae.tagName;
   const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (ae && ae.isContentEditable);
-  if (e.key === 'Escape') { if (!typing) clearCalSel(); return; }
+  if (e.key === 'Escape') {
+    if (!typing && assignName) { setAssignName(""); setEditFind("", false); return; }
+    if (!typing) clearCalSel();
+    return;
+  }
   if (typing) return;
 
   const mod = e.metaKey || e.ctrlKey;
