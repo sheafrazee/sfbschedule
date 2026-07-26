@@ -414,7 +414,22 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
 .cal-day-body[data-di] { cursor: crosshair; touch-action: pan-x; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
-.cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 230px; }
+.cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 320px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow-y: auto; }
+/* ---- Intern chip box: shows 12 names at a time (2 cols x 6 rows), scrolls past that ---- */
+.cal-chip-box { border: 1.5px solid var(--light-stone); border-radius: 6px; background: var(--warm-white); padding: 5px; }
+.cal-chip-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; max-height: 174px; overflow-y: auto; align-content: start; }
+.cal-chip-list::-webkit-scrollbar { width: 7px; }
+.cal-chip-list::-webkit-scrollbar-thumb { background: var(--light-stone); border-radius: 4px; }
+.cal-chip { display: flex; align-items: center; gap: 2px; min-width: 0; background: #fff; border: 1px solid var(--light-stone); border-radius: 5px; padding: 3px 3px 3px 6px; height: 25px; box-sizing: border-box; }
+.cal-chip .nm { flex: 1; min-width: 0; font-size: 12px; font-family: 'Source Sans 3', sans-serif; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: text; }
+.cal-chip .x { flex-shrink: 0; border: none; background: transparent; color: var(--stone); font-size: 11px; line-height: 1; cursor: pointer; padding: 2px 3px; border-radius: 3px; }
+.cal-chip .x:hover { color: #fff; background: var(--clay); }
+.cal-chip-empty { grid-column: 1 / -1; font-size: 11.5px; color: var(--stone); text-align: center; padding: 8px 4px; font-family: 'Source Sans 3', sans-serif; }
+.cal-chip-more { font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--stone); font-family: 'Plus Jakarta Sans', sans-serif; text-align: right; padding: 3px 2px 0; }
+.cal-popover .cal-chip-box input { border: none; background: transparent; padding: 5px 4px 2px; font-size: 12.5px; }
+.cal-popover .cal-chip-box input:focus { border: none; }
+.cal-chip-addrow { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--light-stone); margin-top: 5px; }
+@media (max-width: 600px) { .cal-chip-list { max-height: 150px; } .cal-chip { height: 23px; } }
 .cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
 .cal-pop-label:first-child { margin-top: 0; }
 .cal-popover input { width: 100%; border: 1.5px solid var(--light-stone); border-radius: 5px; padding: 6px 8px; font-size: 13px; font-family: 'Source Sans 3', sans-serif; outline: none; box-sizing: border-box; }
@@ -3505,7 +3520,14 @@ function showCalPopover(slot, di, ei, evEl) {
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
     <span class="cal-pop-label">Interns <span class="intern-count-badge" id="calPopInternBadge">${initInternCount}</span></span>
-    <input id="calPopPeople" type="text" value="${escapeAttr((ev.people || []).join(', '))}" placeholder="Dame, Mateo, JD" autocomplete="off" spellcheck="false">
+    <div class="cal-chip-box">
+      <div class="cal-chip-list" id="calPopInternList"></div>
+      <div class="cal-chip-more" id="calPopInternMore"></div>
+      <div class="cal-chip-addrow">
+        <input id="calPopPeople" type="text" list="calPopNames" placeholder="Add intern — Enter or comma" autocomplete="off" spellcheck="false">
+      </div>
+      <datalist id="calPopNames"></datalist>
+    </div>
     <span class="cal-pop-label">Type</span>
     <div style="display:flex;gap:6px;">
       <button class="cal-pop-type-btn${ev.type === 'excel' ? ' active' : ''}" data-type="excel">Excel Client</button>
@@ -3516,12 +3538,12 @@ function showCalPopover(slot, di, ei, evEl) {
 
   // Position: right of event, flip left if needed, clamp to viewport
   const rect = evEl.getBoundingClientRect();
-  const popW = 230;
+  const popW = pop.offsetWidth || 320;
+  const popH = pop.offsetHeight || 320;
   let left = rect.right + 10;
-  let top = rect.top;
   if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
-  pop.style.left = Math.max(8, left) + 'px';
-  pop.style.top = Math.max(8, Math.min(top, window.innerHeight - 200)) + 'px';
+  pop.style.left = Math.max(8, Math.min(left, window.innerWidth - popW - 8)) + 'px';
+  pop.style.top = Math.max(8, Math.min(rect.top, window.innerHeight - popH - 8)) + 'px';
 
   const titleInput = pop.querySelector('#calPopTitle');
   const peopleInput = pop.querySelector('#calPopPeople');
@@ -3557,12 +3579,70 @@ function showCalPopover(slot, di, ei, evEl) {
     evEl.title = (ev2.time || '') + ' – ' + titleInput.value;
   });
 
-  peopleInput.addEventListener('input', () => {
+  // ---- Intern chip box (12 visible at a time, scrolls beyond) ----
+  const internList = pop.querySelector('#calPopInternList');
+  const internMore = pop.querySelector('#calPopInternMore');
+
+  function renderInternChips() {
+    const ev2 = getEv(); if (!ev2 || !internList) return;
+    const names = ev2.people || [];
+    internList.innerHTML = names.length
+      ? names.map((n, i) =>
+          `<span class="cal-chip"><span class="nm" data-edit="${i}" title="${escapeAttr(n)}">${escapeHtml(n)}</span>` +
+          `<button class="x" data-del="${i}" title="Remove ${escapeAttr(n)}">✕</button></span>`).join('')
+      : '<div class="cal-chip-empty">No interns yet — add one below.</div>';
+    if (internMore) internMore.textContent = names.length > 12 ? `12 of ${names.length} shown — scroll for more` : '';
+    if (internBadge) internBadge.textContent = names.length;
+  }
+
+  function addInterns(str) {
     const ev2 = getEv(); if (!ev2) return;
-    ev2.people = peopleInput.value.split(',').map(s => s.trim()).filter(Boolean);
+    const incoming = String(str || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (!incoming.length) return;
+    const cur = ev2.people ? ev2.people.slice() : [];
+    const seen = new Set(cur.map(s => s.toLowerCase()));
+    incoming.forEach(n => { if (!seen.has(n.toLowerCase())) { cur.push(n); seen.add(n.toLowerCase()); } });
+    ev2.people = cur;
     saveDraft();
-    if (internBadge) internBadge.textContent = ev2.people.length;
-  });
+    renderInternChips();
+    try { learnInterns(); } catch (err) {}
+    try { renderInternTally(); } catch (err) {}
+    if (internList) internList.scrollTop = internList.scrollHeight;
+  }
+
+  function removeIntern(i) {
+    const ev2 = getEv(); if (!ev2 || !ev2.people) return null;
+    const gone = ev2.people.splice(i, 1)[0];
+    saveDraft();
+    renderInternChips();
+    try { renderInternTally(); } catch (err) {}
+    return gone;
+  }
+
+  if (internList) {
+    internList.addEventListener('click', e => {
+      const del = e.target.closest('[data-del]');
+      if (del) { removeIntern(+del.dataset.del); peopleInput.focus(); return; }
+      const ed = e.target.closest('[data-edit]');
+      if (ed) {  // click a name to pull it back into the field for a quick fix
+        const gone = removeIntern(+ed.dataset.edit);
+        if (gone != null) { peopleInput.value = gone; peopleInput.focus(); peopleInput.select(); }
+      }
+    });
+  }
+
+  // Autocomplete from every intern name ever seen
+  try {
+    const dl = pop.querySelector('#calPopNames');
+    if (dl) {
+      const names = new Set(Object.keys(loadRoster() || {}));
+      (allPersonNames() || []).forEach(n => names.add(n));
+      dl.innerHTML = [...names].sort((a, b) => a.localeCompare(b))
+        .map(n => `<option value="${escapeAttr(n)}"></option>`).join('');
+    }
+  } catch (err) {}
+
+  renderInternChips();
 
   pop.querySelectorAll('.cal-pop-type-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3583,8 +3663,29 @@ function showCalPopover(slot, di, ei, evEl) {
     if (e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
   });
   peopleInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addInterns(peopleInput.value);
+      peopleInput.value = '';
+      return;
+    }
+    if (e.key === 'Backspace' && !peopleInput.value) {
+      const ev2 = getEv();
+      if (ev2 && ev2.people && ev2.people.length) { e.preventDefault(); removeIntern(ev2.people.length - 1); }
+      return;
+    }
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      if (peopleInput.value) { peopleInput.value = ''; return; }  // first Esc clears, second closes
+      hideCalPopover();
+    }
   });
+  // Datalist pick fires 'change' without a keystroke
+  peopleInput.addEventListener('change', () => {
+    if (peopleInput.value) { addInterns(peopleInput.value); peopleInput.value = ''; }
+  });
+  // Don't lose half-typed name when the popover closes
+  _calPopFlush = () => { if (peopleInput.value) { addInterns(peopleInput.value); peopleInput.value = ''; } };
 
   setTimeout(() => document.addEventListener('pointerdown', _calPopOutside, true), 0);
 }
@@ -3595,7 +3696,9 @@ function _calPopOutside(e) {
   if (!pop.contains(e.target)) hideCalPopover();
 }
 
+let _calPopFlush = null;
 function hideCalPopover() {
+  if (_calPopFlush) { try { _calPopFlush(); } catch (e) {} _calPopFlush = null; }
   document.removeEventListener('pointerdown', _calPopOutside, true);
   const pop = document.getElementById('calPopover');
   if (pop) pop.remove();
