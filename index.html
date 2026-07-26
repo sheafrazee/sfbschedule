@@ -948,6 +948,8 @@ let _lastCalTap = null;     // {slot,di,ei,t} last tile tap — used to detect d
 let calClip = null;         // { items:[{di,ev}], minDi } copy/paste buffer
 let editFindTerm = "";      // editor person-search term (intern or player name)
 let assignName = "";        // armed intern — click a session to add/remove them
+let _lastAssignToggle = null;  // last assign toggle, so a double-click can revert it
+let _calCtxAt = 0;             // when a calendar block was last right-clicked
 let _findIdx = -1;          // cursor for ↑/↓ jump-to-match
 // Returns the object the edit UI should read/write. Next Week lives inside the
 // same schedule.json under data.nextWeek, so it publishes alongside but is never
@@ -2385,13 +2387,13 @@ function updateAssignBar() {
   (ed().days || []).forEach(d => (d.events || []).forEach(ev => { if (eventHasIntern(ev, assignName)) n++; }));
   bar.innerHTML = `<span>Assigning</span><span class="ab-name">${escapeHtml(assignName)}</span>`
     + `<span>${n} session${n === 1 ? "" : "s"}</span>`
-    + `<span class="ab-hint">Click a block to add / remove · Esc to stop</span>`
+    + `<span class="ab-hint">Click add/remove · Right-click or double-click to edit · Drag retimes · Esc stops</span>`
     + `<button class="ab-done" type="button">Done</button>`;
   bar.querySelector(".ab-done").addEventListener("click", () => { setAssignName(""); setEditFind("", false); });
   bar.classList.remove("hidden");
 }
 // Add or remove the armed intern on one session. Returns "added" | "removed" | null.
-function toggleInternOnEvent(slot, di, ei) {
+function toggleInternOnEvent(slot, di, ei, silent) {
   if (!assignName) return null;
   const days = _calDays(slot);
   const ev = days && days[di] && days[di].events && days[di].events[ei];
@@ -2408,8 +2410,8 @@ function toggleInternOnEvent(slot, di, ei) {
   renderEdit();
   // Pulse the block so the change is obvious
   const el = document.querySelector(`.cal-ev-drag[data-slot="${slot}"][data-di="${di}"][data-ei="${ei}"]`);
-  if (el) { el.classList.remove("assign-flash"); void el.offsetWidth; el.classList.add("assign-flash"); }
-  showToast(`${action === "added" ? "Added" : "Removed"} ${assignName} ${action === "added" ? "to" : "from"} ${(ev.title || "session").slice(0, 28)}`);
+  if (el && !silent) { el.classList.remove("assign-flash"); void el.offsetWidth; el.classList.add("assign-flash"); }
+  if (!silent) showToast(`${action === "added" ? "Added" : "Removed"} ${assignName} ${action === "added" ? "to" : "from"} ${(ev.title || "session").slice(0, 28)}`);
   return action;
 }
 // Paint in/out state onto blocks and editor cards while a name is armed.
@@ -3054,6 +3056,15 @@ function _fmtTimeRange(startMin, durMin, isRange) {
 function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll(".cal-ev-drag").forEach(el => {
     el.addEventListener("pointerdown", onCalDragStart);
+    // Right-click (or two-finger tap / Ctrl-click on a Mac) always opens the
+    // editor popup — no modifier key required, works in assign mode too.
+    el.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      _calCtxAt = Date.now();
+      _lastCalTap = null; _lastAssignToggle = null;
+      selectCalEvent(el.dataset.slot, +el.dataset.di, +el.dataset.ei, {}, true);
+    });
   });
   // Resize handles (top and bottom edges)
   container.querySelectorAll(".cal-ev-resize").forEach(handle => {
@@ -3232,21 +3243,41 @@ function onCalDragStart(e) {
       // Touch: only select if the finger barely moved (real tap, not a scroll)
       const TAP_PX = 10;
       if (isTouch && maxMoved > TAP_PX) return;
-      const mods = ev ? { meta: ev.metaKey || ev.ctrlKey, shift: ev.shiftKey } : {};
-      // Assign mode: a plain click adds/removes the armed intern on this session.
-      // ⌘/Shift still fall through to normal multi-select.
+      // A right-click / Ctrl-click already opened the popup — don't also act on
+      // the click that came with it.
+      if (Date.now() - _calCtxAt < 500) return;
+      const mods = ev ? { meta: ev.metaKey || ev.ctrlKey, shift: ev.shiftKey, alt: ev.altKey } : {};
+      const now = Date.now();
+      const sameTile = _lastCalTap && _lastCalTap.slot === slot
+        && _lastCalTap.di === di && _lastCalTap.ei === ei;
+      const isDouble = sameTile && (now - _lastCalTap.t) < 350;
+
+      // ---- Assign mode ----
+      // Single click toggles the armed intern instantly (no debounce lag).
+      // Double-click still opens the editor: the second click UNDOES the toggle
+      // the first one just did, then opens the popover. ⌥ click goes straight
+      // to the popover; ⌘/⇧ click still multi-selects; drag still retimes.
       if (assignName && !mods.meta && !mods.shift) {
-        _lastCalTap = null;
+        if (mods.alt) {
+          _lastCalTap = null; _lastAssignToggle = null;
+          selectCalEvent(slot, di, ei, {}, true);
+          return;
+        }
+        if (isDouble && _lastAssignToggle && _lastAssignToggle.slot === slot
+            && _lastAssignToggle.di === di && _lastAssignToggle.ei === ei) {
+          toggleInternOnEvent(slot, di, ei, true);   // revert, silently
+          _lastCalTap = null; _lastAssignToggle = null;
+          selectCalEvent(slot, di, ei, {}, true);
+          return;
+        }
+        _lastCalTap = { slot, di, ei, t: now };
+        _lastAssignToggle = { slot, di, ei, t: now };
         toggleInternOnEvent(slot, di, ei);
         return;
       }
       // iCal-style: one click selects (so ⌘C copies the tile), two opens the
       // editor. Touch has no ⌘ key and long-press is reserved for dragging, so
       // a single tap still opens the editor on touch.
-      const now = Date.now();
-      const sameTile = _lastCalTap && _lastCalTap.slot === slot
-        && _lastCalTap.di === di && _lastCalTap.ei === ei;
-      const isDouble = sameTile && (now - _lastCalTap.t) < 350;
       _lastCalTap = { slot, di, ei, t: now };
       const openEditor = !mods.meta && !mods.shift && (isTouch || isDouble);
       selectCalEvent(slot, di, ei, mods, openEditor);
