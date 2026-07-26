@@ -414,7 +414,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-notime-strip { padding: 3px 4px; border-bottom: 1px solid var(--warm-white); }
 .cal-day-body[data-di] { cursor: crosshair; touch-action: pan-x; }
 .cal-ev-ghost { position: absolute; left: 2px; right: 2px; border-radius: 3px; background: rgba(17,17,17,0.10); border: 1.5px dashed var(--ink); z-index: 10; pointer-events: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; color: var(--ink); padding: 2px 4px; overflow: hidden; white-space: nowrap; }
-.cal-popover { position: fixed; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 320px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow-y: auto; }
+.cal-popover { position: absolute; z-index: 300; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.2); width: 320px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow-y: auto; }
 /* ---- Intern chip box: shows 12 names at a time (2 cols x 6 rows), scrolls past that ---- */
 .cal-chip-box { border: 1.5px solid var(--light-stone); border-radius: 6px; background: var(--warm-white); padding: 5px; }
 .cal-chip-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; max-height: 174px; overflow-y: auto; align-content: start; }
@@ -429,6 +429,12 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .cal-popover .cal-chip-box input { border: none; background: transparent; padding: 5px 4px 2px; font-size: 12.5px; }
 .cal-popover .cal-chip-box input:focus { border: none; }
 .cal-chip-addrow { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--light-stone); margin-top: 5px; }
+.cal-pop-label.row { display: flex; align-items: center; gap: 5px; }
+.cal-pop-tools { display: flex; gap: 4px; margin-left: auto; }
+.cal-pop-mini { border: 1px solid var(--light-stone); background: #fff; border-radius: 5px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--dark-stone); padding: 2px 6px; cursor: pointer; }
+.cal-pop-mini:hover { background: var(--warm-white); }
+.cal-pop-mini.active { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
+.cal-chip-text { width: 100%; box-sizing: border-box; height: 174px; border: none; background: transparent; resize: vertical; outline: none; padding: 4px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; line-height: 1.45; color: var(--ink); }
 @media (max-width: 600px) { .cal-chip-list { max-height: 150px; } .cal-chip { height: 23px; } }
 .cal-pop-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; display: block; margin-bottom: 4px; margin-top: 10px; }
 .cal-pop-label:first-child { margin-top: 0; }
@@ -3519,12 +3525,18 @@ function showCalPopover(slot, di, ei, evEl) {
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
-    <span class="cal-pop-label">Interns <span class="intern-count-badge" id="calPopInternBadge">${initInternCount}</span></span>
+    <span class="cal-pop-label row">Interns <span class="intern-count-badge" id="calPopInternBadge">${initInternCount}</span>
+      <span class="cal-pop-tools">
+        <button type="button" class="cal-pop-mini" id="calPopCopy" title="Copy the intern list">Copy</button>
+        <button type="button" class="cal-pop-mini" id="calPopTextMode" title="Edit as plain text — select all to copy, or paste a list in">Text</button>
+      </span>
+    </span>
     <div class="cal-chip-box">
       <div class="cal-chip-list" id="calPopInternList"></div>
+      <textarea id="calPopInternText" class="cal-chip-text hidden" spellcheck="false" autocomplete="off" placeholder="One name per line"></textarea>
       <div class="cal-chip-more" id="calPopInternMore"></div>
-      <div class="cal-chip-addrow">
-        <input id="calPopPeople" type="text" list="calPopNames" placeholder="Add intern — Enter or comma" autocomplete="off" spellcheck="false">
+      <div class="cal-chip-addrow" id="calPopAddRow">
+        <input id="calPopPeople" type="text" list="calPopNames" placeholder="Add or paste names — Enter to commit" autocomplete="off" spellcheck="false">
       </div>
       <datalist id="calPopNames"></datalist>
     </div>
@@ -3536,15 +3548,12 @@ function showCalPopover(slot, di, ei, evEl) {
   `;
   document.body.appendChild(pop);
 
-  // Position beside the event block, and keep it glued there while the page moves
+  // Position beside the event block, pinned to that spot on the page
   positionCalPop(pop, evEl);
+  revealCalPop(pop);
   _calPopAnchor = evEl;
   window.addEventListener('scroll', _calPopTrack, true);
   window.addEventListener('resize', _calPopTrack);
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('scroll', _calPopTrack);
-    window.visualViewport.addEventListener('resize', _calPopTrack);
-  }
 
   const titleInput = pop.querySelector('#calPopTitle');
   const peopleInput = pop.querySelector('#calPopPeople');
@@ -3596,9 +3605,13 @@ function showCalPopover(slot, di, ei, evEl) {
     if (internBadge) internBadge.textContent = names.length;
   }
 
+  function splitNames(str) {
+    return String(str || '').split(/[\n\r,;\t]+/).map(s => s.trim()).filter(Boolean);
+  }
+
   function addInterns(str) {
     const ev2 = getEv(); if (!ev2) return;
-    const incoming = String(str || '').split(',').map(s => s.trim()).filter(Boolean);
+    const incoming = splitNames(str);
     if (!incoming.length) return;
     const cur = ev2.people ? ev2.people.slice() : [];
     const seen = new Set(cur.map(s => s.toLowerCase()));
@@ -3644,6 +3657,77 @@ function showCalPopover(slot, di, ei, evEl) {
   } catch (err) {}
 
   renderInternChips();
+
+  // ---- Copy / paste ----
+  const copyBtn = pop.querySelector('#calPopCopy');
+  const textBtn = pop.querySelector('#calPopTextMode');
+  const internText = pop.querySelector('#calPopInternText');
+  const addRow = pop.querySelector('#calPopAddRow');
+  let textMode = false;
+
+  function internNames() { const ev2 = getEv(); return (ev2 && ev2.people) || []; }
+
+  copyBtn.addEventListener('click', async () => {
+    const txt = (textMode ? splitNames(internText.value) : internNames()).join(', ');
+    let ok = true;
+    try { await navigator.clipboard.writeText(txt); }
+    catch (err) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      } catch (e2) { ok = false; }
+    }
+    copyBtn.textContent = ok ? 'Copied' : 'Failed';
+    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1100);
+  });
+
+  // Plain-text mode: one name per line — select all to copy, or paste a whole list
+  function setTextMode(on) {
+    textMode = on;
+    textBtn.classList.toggle('active', on);
+    internList.classList.toggle('hidden', on);
+    addRow.classList.toggle('hidden', on);
+    internText.classList.toggle('hidden', !on);
+    if (on) {
+      internText.value = internNames().join('\n');
+      if (internMore) internMore.textContent = 'One name per line';
+      internText.focus();
+      internText.setSelectionRange(internText.value.length, internText.value.length);
+    } else {
+      renderInternChips();
+    }
+    positionCalPop(pop, evEl);
+    revealCalPop(pop);
+  }
+  textBtn.addEventListener('click', () => setTextMode(!textMode));
+
+  internText.addEventListener('input', () => {
+    const ev2 = getEv(); if (!ev2) return;
+    const seen = new Set();
+    ev2.people = splitNames(internText.value).filter(n => {
+      const k = n.toLowerCase();
+      if (seen.has(k)) return false;
+      seen.add(k); return true;
+    });
+    saveDraft();
+    if (internBadge) internBadge.textContent = ev2.people.length;
+    try { renderInternTally(); } catch (err) {}
+  });
+  internText.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { e.preventDefault(); setTextMode(false); }
+    e.stopPropagation();   // don't let editor hotkeys steal the keystroke
+  });
+
+  // Pasting a list into the add field commits the whole thing at once
+  peopleInput.addEventListener('paste', e => {
+    const cd = e.clipboardData || window.clipboardData;
+    const txt = cd && cd.getData('text');
+    if (!txt) return;
+    e.preventDefault();
+    addInterns(txt);
+    peopleInput.value = '';
+  });
 
   pop.querySelectorAll('.cal-pop-type-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3700,28 +3784,50 @@ function _calPopOutside(e) {
 let _calPopFlush = null;
 let _calPopAnchor = null;
 
-// Place the popover to the right of its event block (flips left, clamps to viewport).
+// Place the popover beside its event block, in PAGE coordinates, so it stays
+// pinned to that spot on the page and scrolls away with the calendar.
 function positionCalPop(pop, evEl) {
   const rect = evEl.getBoundingClientRect();
+  const sx = window.scrollX || window.pageXOffset || 0;
+  const sy = window.scrollY || window.pageYOffset || 0;
   const popW = pop.offsetWidth || 320;
   const popH = pop.offsetHeight || 320;
+
+  // Horizontal: right of the block, flip left if it won't fit on screen
   let left = rect.right + 10;
   if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
-  pop.style.left = Math.max(8, Math.min(left, window.innerWidth - popW - 8)) + 'px';
-  pop.style.top = Math.max(8, Math.min(rect.top, window.innerHeight - popH - 8)) + 'px';
+  left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+
+  // Vertical: top-aligned with the block, nudged up only enough to fit on screen
+  let top = Math.min(rect.top, window.innerHeight - popH - 8);
+  top = Math.max(8, top);
+
+  pop.style.left = (left + sx) + 'px';
+  pop.style.top  = (top + sy) + 'px';
 }
 
-// Follow the block while scrolling; bail out once the block is gone or off-screen.
-function _calPopTrack() {
+// If the popover still hangs off the bottom (or top) of the screen, scroll the
+// page just enough to bring the whole thing into view.
+function revealCalPop(pop) {
+  const r = pop.getBoundingClientRect();
+  let dy = 0;
+  if (r.bottom > window.innerHeight - 8) dy = r.bottom - (window.innerHeight - 8);
+  if (r.top - dy < 8) dy = r.top - 8;
+  if (dy) window.scrollBy({ top: dy, behavior: 'smooth' });
+}
+
+// The page scroll is handled by absolute positioning. This only tracks the
+// calendar's own horizontal scroll, and kills the popover if its block is gone.
+function _calPopTrack(e) {
   const pop = document.getElementById('calPopover');
   const el = _calPopAnchor;
-  if (!pop || !el) { hideCalPopover(); return; }
-  if (!el.isConnected) { hideCalPopover(); return; }
-  const r = el.getBoundingClientRect();
-  // Zero-size = hidden; fully outside the viewport = user has scrolled away
-  if ((r.width === 0 && r.height === 0) ||
-      r.bottom < 0 || r.top > window.innerHeight ||
-      r.right < 0 || r.left > window.innerWidth) { hideCalPopover(); return; }
+  if (!pop || !el || !el.isConnected) { hideCalPopover(); return; }
+  if (e && e.type === 'scroll') {
+    const t = e.target;
+    // Ignore page scroll and scrolling inside the popover itself
+    if (!t || t === document || t === document.documentElement || t === document.body) return;
+    if (t.nodeType === 1 && (pop.contains(t) || !t.closest('.cal-wrap'))) return;
+  }
   positionCalPop(pop, el);
 }
 
@@ -3729,10 +3835,6 @@ function hideCalPopover() {
   if (_calPopFlush) { try { _calPopFlush(); } catch (e) {} _calPopFlush = null; }
   window.removeEventListener('scroll', _calPopTrack, true);
   window.removeEventListener('resize', _calPopTrack);
-  if (window.visualViewport) {
-    window.visualViewport.removeEventListener('scroll', _calPopTrack);
-    window.visualViewport.removeEventListener('resize', _calPopTrack);
-  }
   _calPopAnchor = null;
   document.removeEventListener('pointerdown', _calPopOutside, true);
   const pop = document.getElementById('calPopover');
