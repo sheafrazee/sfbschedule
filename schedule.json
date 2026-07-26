@@ -25,12 +25,12 @@
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
             "Kirby",
-            "Hugh V"
+            "Hugh V",
+            "Jaden G",
+            "Josh G"
           ],
           "players": [],
           "note": ""
@@ -44,12 +44,13 @@
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
             "Donovan",
-            "Hugh V"
+            "Hugh V",
+            "Kirby",
+            "Jaden G",
+            "Josh G"
           ],
           "note": "",
           "players": []
@@ -64,11 +65,11 @@
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
-            "Hugh V"
+            "Hugh V",
+            "Jaden G",
+            "Josh G"
           ],
           "note": "",
           "players": []
@@ -79,8 +80,8 @@
           "type": "other",
           "people": [
             "Kirby",
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Guiressi"
           ],
           "players": [],
           "note": ""
@@ -91,8 +92,8 @@
           "type": "other",
           "people": [
             "Kirby",
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Guiressi"
           ],
           "players": [],
           "note": ""
@@ -113,8 +114,8 @@
           "title": "David Barr",
           "type": "other",
           "people": [
-            "Guiressi",
-            "Ian H"
+            "Ian H",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -154,13 +155,14 @@
             "Colin",
             "Jung",
             "Donovan",
-            "Nick M",
             "Ollie",
             "Chozen",
             "Braedon",
             "Mateo",
             "JD",
-            "Tarek"
+            "Tarek",
+            "Ali",
+            "Nico G"
           ],
           "note": "",
           "players": []
@@ -180,7 +182,9 @@
             "Braedon",
             "Mateo",
             "JD",
-            "Tarek"
+            "Tarek",
+            "Ali",
+            "Nico G"
           ],
           "note": "",
           "players": []
@@ -203,7 +207,7 @@
           "type": "other",
           "people": [
             "Ollie",
-            "Braedon"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -280,13 +284,13 @@
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
             "Jacob Sells",
             "Matt M",
-            "Tarek"
+            "Tarek",
+            "Jaden G",
+            "Josh G"
           ],
           "players": [],
           "note": ""
@@ -301,13 +305,13 @@
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
             "Jacob Sells",
             "Matt M",
-            "Tarek"
+            "Tarek",
+            "Jaden G",
+            "Josh G"
           ],
           "note": "",
           "players": []
@@ -319,17 +323,17 @@
           "people": [
             "Donovan",
             "Nick M",
-            "JD",
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Jung",
             "Ali",
             "Kirby",
             "Matt M",
-            "Tarek"
+            "Tarek",
+            "Jaden G",
+            "Josh G",
+            "Jacob Sells"
           ],
           "note": "",
           "players": []
@@ -388,16 +392,16 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Nick M",
             "Braedon",
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jung",
             "Ali",
             "Colin",
-            "Tarek",
-            "Frank M"
+            "Frank M",
+            "Waleed",
+            "Nico G",
+            "Jacob Sells"
           ],
           "note": "",
           "players": []
@@ -410,15 +414,15 @@
             "Donovan",
             "Nick M",
             "Braedon",
-            "JD",
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jung",
             "Ali",
-            "Tarek",
             "Waleed",
-            "Frank M"
+            "Frank M",
+            "Colin",
+            "Nico G",
+            "Jacob Sells"
           ],
           "note": "",
           "players": []
@@ -431,15 +435,14 @@
             "Donovan",
             "Nick M",
             "Braedon",
-            "JD",
             "Ollie",
             "Mateo",
             "Chozen",
-            "Jung",
             "Ali",
-            "Tarek",
             "Waleed",
-            "Frank M"
+            "Frank M",
+            "Nico G",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -450,7 +453,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -472,7 +476,6 @@
           "title": "Group:",
           "type": "other",
           "people": [
-            "Guiressi",
             "Anthony",
             "Dame"
           ],
@@ -502,34 +505,39 @@
           "people": [
             "Donovan",
             "Mateo",
-            "Jacob Sells",
             "Jaden G",
             "Josh G",
             "Waleed",
             "Frank M",
             "JD",
-            "Matt M"
+            "Matt M",
+            "Braedon",
+            "Dame",
+            "Chozen",
+            "Nick M",
+            "Ali"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "8:45 AM – 10:00 AM",
-          "title": "5v5: Jared M,  Dalton K,  Dariq W, Marko S,  Harrison I,  Nick D,  Nick WB,  Devin A,  Klark R,  Dalen T, Ethan L",
+          "title": "5v5: Jared M,  Dalton K,  Dariq W, Marko S, Harrison I,  Nick D,  Nick WB,  Devin A,  Klark R,  Dalen T, Ethan L",
           "type": "excel",
           "people": [
             "Donovan",
             "Mateo",
             "Matt M",
             "Braedon",
-            "Jacob Sells",
-            "LH",
             "Dame",
             "Jaden G",
             "Josh G",
             "Waleed",
             "Frank M",
-            "JD"
+            "JD",
+            "Chozen",
+            "Nick M",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -543,12 +551,15 @@
             "Mateo",
             "Matt M",
             "Braedon",
-            "LH",
             "Dame",
             "Jaden G",
             "Josh G",
             "Frank M",
-            "JD"
+            "JD",
+            "Waleed",
+            "Chozen",
+            "Nick M",
+            "Ali"
           ],
           "note": "",
           "players": []
@@ -559,7 +570,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -569,8 +581,9 @@
           "title": "Audrina ",
           "type": "other",
           "people": [
-            "Guiressi",
-            "Anthony"
+            "Anthony",
+            "Dame",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -586,15 +599,14 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Ollie",
             "Dame",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Ian H",
             "Chozen",
             "Nick M",
             "Ali",
-            "Mateo"
+            "Mateo",
+            "Jaden G",
+            "Josh G"
           ],
           "note": "",
           "players": []
@@ -605,15 +617,14 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Ollie",
             "Dame",
-            "Jaden Goodall",
-            "Josh Goodall",
             "Ian H",
             "Chozen",
             "Nick M",
             "Ali",
-            "Mateo"
+            "Mateo",
+            "Jaden G",
+            "Josh G"
           ],
           "note": "",
           "players": []
@@ -624,7 +635,9 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Dame",
+            "Braedon",
+            "Ian H"
           ],
           "players": [],
           "note": ""
