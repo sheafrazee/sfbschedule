@@ -3536,14 +3536,15 @@ function showCalPopover(slot, di, ei, evEl) {
   `;
   document.body.appendChild(pop);
 
-  // Position: right of event, flip left if needed, clamp to viewport
-  const rect = evEl.getBoundingClientRect();
-  const popW = pop.offsetWidth || 320;
-  const popH = pop.offsetHeight || 320;
-  let left = rect.right + 10;
-  if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
-  pop.style.left = Math.max(8, Math.min(left, window.innerWidth - popW - 8)) + 'px';
-  pop.style.top = Math.max(8, Math.min(rect.top, window.innerHeight - popH - 8)) + 'px';
+  // Position beside the event block, and keep it glued there while the page moves
+  positionCalPop(pop, evEl);
+  _calPopAnchor = evEl;
+  window.addEventListener('scroll', _calPopTrack, true);
+  window.addEventListener('resize', _calPopTrack);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('scroll', _calPopTrack);
+    window.visualViewport.addEventListener('resize', _calPopTrack);
+  }
 
   const titleInput = pop.querySelector('#calPopTitle');
   const peopleInput = pop.querySelector('#calPopPeople');
@@ -3697,8 +3698,42 @@ function _calPopOutside(e) {
 }
 
 let _calPopFlush = null;
+let _calPopAnchor = null;
+
+// Place the popover to the right of its event block (flips left, clamps to viewport).
+function positionCalPop(pop, evEl) {
+  const rect = evEl.getBoundingClientRect();
+  const popW = pop.offsetWidth || 320;
+  const popH = pop.offsetHeight || 320;
+  let left = rect.right + 10;
+  if (left + popW > window.innerWidth - 8) left = rect.left - popW - 10;
+  pop.style.left = Math.max(8, Math.min(left, window.innerWidth - popW - 8)) + 'px';
+  pop.style.top = Math.max(8, Math.min(rect.top, window.innerHeight - popH - 8)) + 'px';
+}
+
+// Follow the block while scrolling; bail out once the block is gone or off-screen.
+function _calPopTrack() {
+  const pop = document.getElementById('calPopover');
+  const el = _calPopAnchor;
+  if (!pop || !el) { hideCalPopover(); return; }
+  if (!el.isConnected) { hideCalPopover(); return; }
+  const r = el.getBoundingClientRect();
+  // Zero-size = hidden; fully outside the viewport = user has scrolled away
+  if ((r.width === 0 && r.height === 0) ||
+      r.bottom < 0 || r.top > window.innerHeight ||
+      r.right < 0 || r.left > window.innerWidth) { hideCalPopover(); return; }
+  positionCalPop(pop, el);
+}
+
 function hideCalPopover() {
   if (_calPopFlush) { try { _calPopFlush(); } catch (e) {} _calPopFlush = null; }
+  window.removeEventListener('scroll', _calPopTrack, true);
+  window.removeEventListener('resize', _calPopTrack);
+  if (window.visualViewport) {
+    window.visualViewport.removeEventListener('scroll', _calPopTrack);
+    window.visualViewport.removeEventListener('resize', _calPopTrack);
+  }
+  _calPopAnchor = null;
   document.removeEventListener('pointerdown', _calPopOutside, true);
   const pop = document.getElementById('calPopover');
   if (pop) pop.remove();
