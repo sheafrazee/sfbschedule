@@ -130,6 +130,17 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Dalen Terry ",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Ethan S"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -163,7 +174,8 @@
             "JD",
             "Tarek",
             "Ali",
-            "Nico G"
+            "Nico G",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -185,7 +197,8 @@
             "JD",
             "Tarek",
             "Ali",
-            "Nico G"
+            "Nico G",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -197,7 +210,9 @@
           "people": [
             "Anthony",
             "Colby",
-            "Kirby"
+            "Kirby",
+            "LH",
+            "JD"
           ],
           "players": [],
           "note": ""
@@ -254,7 +269,9 @@
           "people": [
             "Anthony",
             "Kirby",
-            "Colby"
+            "Colby",
+            "LH",
+            "JD"
           ],
           "players": [],
           "note": ""
@@ -291,7 +308,8 @@
             "Matt M",
             "Tarek",
             "Jaden G",
-            "Josh G"
+            "Josh G",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -312,7 +330,8 @@
             "Matt M",
             "Tarek",
             "Jaden G",
-            "Josh G"
+            "Josh G",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -334,7 +353,8 @@
             "Tarek",
             "Jaden G",
             "Josh G",
-            "Jacob Sells"
+            "Jacob Sells",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -402,7 +422,8 @@
             "Frank M",
             "Waleed",
             "Nico G",
-            "Jacob Sells"
+            "Jacob Sells",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -423,7 +444,8 @@
             "Frank M",
             "Colin",
             "Nico G",
-            "Jacob Sells"
+            "Jacob Sells",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -443,7 +465,8 @@
             "Waleed",
             "Frank M",
             "Nico G",
-            "Jacob Sells"
+            "Jacob Sells",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -455,7 +478,8 @@
           "people": [
             "Anthony",
             "Waleed",
-            "Dame"
+            "Dame",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -572,7 +596,8 @@
           "people": [
             "Anthony",
             "Waleed",
-            "Dame"
+            "Dame",
+            "JD"
           ],
           "players": [],
           "note": ""
@@ -607,7 +632,8 @@
             "Ali",
             "Mateo",
             "Jaden G",
-            "Josh G"
+            "Josh G",
+            "Waleed"
           ],
           "note": "",
           "players": []
@@ -625,7 +651,8 @@
             "Ali",
             "Mateo",
             "Jaden G",
-            "Josh G"
+            "Josh G",
+            "Waleed"
           ],
           "note": "",
           "players": []
