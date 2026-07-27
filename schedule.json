@@ -133,6 +133,18 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
+          "title": "Rudy",
+          "type": "other",
+          "people": [
+            "Ian H",
+            "Braedon",
+            "Anthony"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
           "title": "Dalen Terry ",
           "type": "excel",
           "people": [
