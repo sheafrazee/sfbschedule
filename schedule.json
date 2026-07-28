@@ -79,9 +79,8 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Kirby",
             "Jung",
-            "Guiressi"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -91,9 +90,8 @@
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
-            "Kirby",
             "Jung",
-            "Guiressi"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -104,7 +102,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Guiressi"
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -143,17 +141,6 @@
           ],
           "players": [],
           "note": ""
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Dalen Terry ",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Ethan S"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
@@ -183,9 +170,7 @@
             "Ollie",
             "Chozen",
             "Braedon",
-            "Mateo",
             "JD",
-            "Tarek",
             "Ali",
             "Nico G",
             "LH"
@@ -202,16 +187,14 @@
             "Colin",
             "Jung",
             "Donovan",
-            "Nick M",
             "Ollie",
             "Chozen",
             "Braedon",
-            "Mateo",
             "JD",
-            "Tarek",
             "Ali",
             "Nico G",
-            "LH"
+            "LH",
+            "Nick M"
           ],
           "note": "",
           "players": []
@@ -245,44 +228,11 @@
           "note": ""
         },
         {
-          "time": "3:15 PM – 4:00 PM",
-          "title": "Audrina ",
-          "type": "other",
-          "people": [
-            "Ollie",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "David Barr",
-          "type": "other",
-          "people": [
-            "Braedon",
-            "Guiressi",
-            "Ollie"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "AC Kids",
           "type": "excel",
           "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "5:00 PM – 6:15 PM",
-          "title": "Group:",
-          "type": "other",
-          "people": [
-            "Guiressi",
+            "Donovan",
             "Ollie",
             "Anthony"
           ],
