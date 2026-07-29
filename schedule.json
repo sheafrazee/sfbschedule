@@ -109,23 +109,14 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "David Barr",
-          "type": "other",
-          "people": [
-            "Ian H",
-            "Braedon",
-            "Ethan S"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
           "title": "AC Kids",
           "type": "excel",
           "people": [
             "Anthony",
-            "Donovan"
+            "Donovan",
+            "Ian H",
+            "Braedon",
+            "Ethan S"
           ],
           "players": [],
           "note": ""
@@ -214,27 +205,22 @@
           "note": ""
         },
         {
-          "time": "12:15 PM – 1:45 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Klark ",
+          "type": "excel",
           "people": [
-            "Anthony",
-            "Colby",
-            "Kirby",
-            "LH",
-            "JD"
+            "Donovan"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "AC Kids",
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Dalin Terry",
           "type": "excel",
           "people": [
             "Donovan",
-            "Ollie",
-            "Anthony"
+            "Ollie"
           ],
           "players": [],
           "note": ""
@@ -338,6 +324,16 @@
             "Ollie",
             "Anthony",
             "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Drew ",
+          "type": "excel",
+          "people": [
+            "Donovan"
           ],
           "players": [],
           "note": ""
