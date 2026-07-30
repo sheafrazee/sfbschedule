@@ -424,18 +424,31 @@
           "title": "Drew ",
           "type": "excel",
           "people": [
-            "Donovan"
+            "Donovan",
+            "Anthony"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "3:00 PM – 4:00 PM",
+          "title": "Dalton K",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Braedon",
+            "Anthony",
+            "Greg"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "2:00 PM – 3:00 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
             "Braedon",
-            "Anthony",
             "Greg"
           ],
           "players": [],
