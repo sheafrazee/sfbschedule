@@ -254,10 +254,6 @@
             "Jung",
             "Ali",
             "Jacob Sells",
-            "Matt M",
-            "Tarek",
-            "Jaden G",
-            "Josh G",
             "LH"
           ],
           "players": [],
@@ -276,10 +272,6 @@
             "Jung",
             "Ali",
             "Jacob Sells",
-            "Matt M",
-            "Tarek",
-            "Jaden G",
-            "Josh G",
             "LH"
           ],
           "note": "",
@@ -298,10 +290,6 @@
             "Jung",
             "Ali",
             "Kirby",
-            "Matt M",
-            "Tarek",
-            "Jaden G",
-            "Josh G",
             "Jacob Sells",
             "LH"
           ],
@@ -355,19 +343,8 @@
       "day": "Thu 7/30",
       "events": [
         {
-          "time": "6:00 AM – 7:00 AM",
-          "title": "Dalen Terry ",
-          "type": "excel",
-          "people": [
-            "Dame",
-            "Ollie"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "7:00 AM – 8:15 AM",
-          "title": "Jared M, Dalton K, Dev A",
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M, Dev A, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -387,7 +364,7 @@
           "players": []
         },
         {
-          "time": "8:15 AM – 9:30 AM",
+          "time": "8:00 AM – 9:00 AM",
           "title": " Harrison I, Dariq W, Marko S",
           "type": "excel",
           "people": [
@@ -409,8 +386,8 @@
           "players": []
         },
         {
-          "time": "9:30 AM – 10:45 AM",
-          "title": "Nick WB, Nick D, Klark R",
+          "time": "9:00 AM – 10:00 AM",
+          "title": "Nick WB, Klark R, Cam A",
           "type": "excel",
           "people": [
             "Donovan",
@@ -430,26 +407,47 @@
           "note": ""
         },
         {
-          "time": "11:30 AM – 1:00 PM",
+          "time": "10:45 AM – 12:15 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Anthony",
             "Waleed",
-            "Dame",
-            "LH"
+            "LH",
+            "Jacob Sells"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Drew ",
+          "type": "excel",
+          "people": [
+            "Donovan"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Ben E",
+          "type": "other",
+          "people": [
+            "Braedon",
+            "Anthony",
+            "Greg"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Ben E",
+          "title": "Audrina ",
           "type": "other",
           "people": [
-            "Braedon",
-            "Dame",
-            "Anthony"
+            "Anthony",
+            "Greg"
           ],
           "players": [],
           "note": ""
@@ -460,7 +458,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Dame"
+            "Greg"
           ],
           "players": [],
           "note": ""
