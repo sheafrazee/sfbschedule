@@ -413,8 +413,7 @@
           "people": [
             "Anthony",
             "Waleed",
-            "LH",
-            "Jacob Sells"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -436,18 +435,17 @@
           "type": "other",
           "people": [
             "Braedon",
-            "Greg"
+            "Greg",
+            "Dylan O"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "6:15 PM – 7:15 PM",
           "title": "Dalton K",
           "type": "excel",
           "people": [
-            "Donovan",
-            "Braedon",
             "Anthony",
             "Greg"
           ],
@@ -467,7 +465,7 @@
         },
         {
           "time": "5:00 PM – 6:15 PM",
-          "title": "Group:",
+          "title": "Group: Russ, Tarek, Jacob Jares 2x",
           "type": "other",
           "people": [
             "Anthony",
@@ -482,17 +480,6 @@
       "day": "Fri 7/31",
       "events": [
         {
-          "time": "6:00 AM – 7:00 AM",
-          "title": "Dalen Terry ",
-          "type": "excel",
-          "people": [
-            "Anthony",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "8:00 AM – 8:45 AM",
           "title": "Warmup + Skills: Jared M,  Dalton K,  Dariq W, Marko S,  Harrison I,  Nick D,  Nick WB,  Devin A,  Klark R,  Dalen T, Ethan L",
           "type": "excel",
@@ -506,8 +493,6 @@
             "JD",
             "Matt M",
             "Braedon",
-            "Dame",
-            "Chozen",
             "Nick M",
             "Ali"
           ],
@@ -521,15 +506,13 @@
           "people": [
             "Donovan",
             "Mateo",
-            "Matt M",
-            "Braedon",
-            "Dame",
             "Jaden G",
             "Josh G",
             "Waleed",
             "Frank M",
             "JD",
-            "Chozen",
+            "Matt M",
+            "Braedon",
             "Nick M",
             "Ali"
           ],
@@ -543,20 +526,29 @@
           "people": [
             "Donovan",
             "Mateo",
-            "Matt M",
-            "Braedon",
-            "Dame",
             "Jaden G",
             "Josh G",
+            "Waleed",
             "Frank M",
             "JD",
-            "Waleed",
-            "Chozen",
+            "Matt M",
+            "Braedon",
             "Nick M",
             "Ali"
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Drew ",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
         },
         {
           "time": "11:30 AM – 1:00 PM",
@@ -565,7 +557,6 @@
           "people": [
             "Anthony",
             "Waleed",
-            "Dame",
             "JD"
           ],
           "players": [],
@@ -579,6 +570,17 @@
             "Anthony",
             "Dame",
             "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:15 PM",
+          "title": "Group:",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Greg"
           ],
           "players": [],
           "note": ""
