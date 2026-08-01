@@ -442,17 +442,6 @@
           "note": ""
         },
         {
-          "time": "6:15 PM – 7:15 PM",
-          "title": "Dalton K",
-          "type": "excel",
-          "people": [
-            "Anthony",
-            "Greg"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina ",
           "type": "other",
@@ -467,6 +456,17 @@
           "time": "5:00 PM – 6:15 PM",
           "title": "Group: Russ, Tarek, Jacob Jares 2x",
           "type": "other",
+          "people": [
+            "Anthony",
+            "Greg"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "6:15 PM – 7:15 PM",
+          "title": "Dalton K",
+          "type": "excel",
           "people": [
             "Anthony",
             "Greg"
@@ -579,6 +579,18 @@
       "day": "Sat 8/1",
       "events": [
         {
+          "time": "7:45 AM – 8:45 AM",
+          "title": "Ben E ",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Dame",
+            "LH"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "9:00 AM – 10:30 AM",
           "title": "Dalton K, Yon N, Harrison I",
           "type": "excel",
@@ -596,18 +608,6 @@
           ],
           "note": "",
           "players": []
-        },
-        {
-          "time": "7:45 AM – 8:45 AM",
-          "title": "Ben E ",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Dame",
-            "LH"
-          ],
-          "players": [],
-          "note": ""
         }
       ]
     },
