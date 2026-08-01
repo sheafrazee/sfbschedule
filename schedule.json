@@ -551,18 +551,6 @@
           "note": ""
         },
         {
-          "time": "11:30 AM – 1:00 PM",
-          "title": "Benny G @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Waleed",
-            "JD"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina ",
           "type": "other",
@@ -591,52 +579,32 @@
       "day": "Sat 8/1",
       "events": [
         {
-          "time": "7:00 AM – 8:30 AM",
-          "title": "Jared M, Dalton K, Dev A, Dariq W",
+          "time": "9:00 AM – 10:30 AM",
+          "title": "Dalton K, Yon N, Harrison I",
           "type": "excel",
           "people": [
             "Donovan",
             "Dame",
             "Ian H",
-            "Chozen",
             "Nick M",
             "Ali",
             "Mateo",
             "Jaden G",
             "Josh G",
-            "Waleed"
+            "Waleed",
+            "LH"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "8:30 AM – 10:00 AM",
-          "title": " Harrison I, Marko S, Nick D, Klark R",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Dame",
-            "Ian H",
-            "Chozen",
-            "Nick M",
-            "Ali",
-            "Mateo",
-            "Jaden G",
-            "Josh G",
-            "Waleed"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "10:30 AM – 11:30 AM",
+          "time": "7:45 AM – 8:45 AM",
           "title": "Ben E ",
           "type": "other",
           "people": [
             "Anthony",
             "Dame",
-            "Braedon",
-            "Ian H"
+            "LH"
           ],
           "players": [],
           "note": ""
