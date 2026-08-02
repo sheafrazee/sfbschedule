@@ -2698,20 +2698,55 @@ function _locateEvent(slot, evObj) {
 function _calTileEl(slot, di, ei) {
   return document.querySelector(`#previewWeeks [data-slot="${slot}"][data-di="${di}"][data-ei="${ei}"]`);
 }
-// Save + sort + redraw, then re-open the editor on the same session wherever it landed.
+// Redraw without moving the page under the user: the window scroll, each
+// calendar's horizontal scroll and the phone day-pager all go back where they were.
+const _FRAME_IDS = ['previewCalCur', 'previewCalNxt', 'previewCalActive', 'calDayPager'];
+function _withFrame(fn) {
+  const sx = window.scrollX || window.pageXOffset || 0;
+  const sy = window.scrollY || window.pageYOffset || 0;
+  const keep = {};
+  _FRAME_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) keep[id] = el.scrollLeft;
+  });
+  renderDayPager._centred = false;
+  fn();
+  _FRAME_IDS.forEach(id => {
+    if (id === 'calDayPager' && renderDayPager._centred) return;   // it moved on purpose
+    const el = document.getElementById(id);
+    if (el && keep[id] != null) el.scrollLeft = keep[id];
+  });
+  if ((window.scrollX || 0) !== sx || (window.scrollY || 0) !== sy) window.scrollTo(sx, sy);
+}
+
+// Sort + save + redraw after a confirmed edit. The editor itself is NOT torn down:
+// it stays mounted and is re-pointed at the session's new position, so focus, the
+// on-screen keyboard and your place on the page all survive.
 function _commitAndReopen(slot, evObj, focusId) {
-  hideCalPopover();   // flush any half-typed intern while the old indices are still valid
+  const pop = document.getElementById('calPopover');
+  if (pop && pop._flush) { try { pop._flush(); } catch (e) {} }   // commit half-typed input first
   autoSortSlot(slot);
   saveDraft();
   const loc = _locateEvent(slot, evObj);
-  if (loc && _calPhone() && typeof calDayPage[slot] === 'number') calDayPage[slot] = loc.di;
-  renderEdit();
-  if (!loc) return;
-  calSel = [{ slot, di: loc.di, ei: loc.ei }];
-  calAnchor = calSel[0];
+  if (loc) {
+    if (_calPhone() && typeof calDayPage[slot] === 'number') calDayPage[slot] = loc.di;
+    calSel = [{ slot, di: loc.di, ei: loc.ei }];
+    calAnchor = calSel[0];
+  }
+  const reuse = !!(pop && pop.isConnected && pop._rebind && loc);
+  _calPopKeep = reuse;
+  try { renderEdit(); } finally { _calPopKeep = false; }
+  if (!loc) { hideCalPopover(); return; }
   _applyCalSelHighlight();
   const el = _calTileEl(slot, loc.di, loc.ei);
-  if (el) showCalPopover(slot, loc.di, loc.ei, el, focusId);
+  if (!el) { hideCalPopover(); return; }
+  if (reuse) {
+    pop._rebind(loc.di, loc.ei, el);
+    _calPopAnchor = el;
+    if (!_calPhone()) positionCalPop(pop, el);   // follow the tile, but never scroll the page
+  } else {
+    showCalPopover(slot, loc.di, loc.ei, el, focusId, true);
+  }
 }
 
 // ============ DAY MANAGEMENT (calendar day headers) ============
@@ -3736,22 +3771,33 @@ function onCalCreateStart(e, slot, hPx) {
 }
 
 // ============ SESSION EDITOR (popover on desktop, bottom sheet on phones) ============
-function showCalPopover(slot, di, ei, evEl, focusId) {
+// The editor is mounted on <body>, outside the calendar it edits, so an auto-sort
+// redraw can re-point it at the session's new position instead of tearing it down.
+function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   hideCalPopover();
   hideDayMenu();
-  const days = _calDays(slot);
-  if (!days || !days[di] || !days[di].events[ei]) return;
-  const ev = days[di].events[ei];
+  const days0 = _calDays(slot);
+  if (!days0 || !days0[di0] || !days0[di0].events[ei0]) return;
+  const ctx = { di: di0, ei: ei0, evEl: evEl0 };
+  const ev = days0[di0].events[ei0];
   const phone = _calPhone();
   const initPlayerCount = countTitlePlayers(ev.title || '');
   const initInternCount = (ev.people || []).length;
 
-  const t0 = parseEventTimes(ev.time);
-  const isRange0 = String(ev.time || '').split(/\s*(?:\u2013|\u2014|-|to)\s*/i).filter(Boolean).length > 1;
-  const startMin0 = t0 ? t0.start.h * 60 + t0.start.min : null;
-  const startVal = t0 ? _fmt12(startMin0) : '';
-  const endVal = (t0 && isRange0) ? _fmt12(t0.end.h * 60 + t0.end.min) : '';
-  const dur0 = (t0 && isRange0) ? (t0.end.h * 60 + t0.end.min) - startMin0 : 0;
+  // Time fields show a parsed clock when there is one, otherwise whatever raw
+  // string the session carries (so "TBD" is visible and overwritable).
+  function readTimes(evx) {
+    const t = parseEventTimes(evx.time);
+    const rng = String(evx.time || '').split(/\s*(?:\u2013|\u2014|-|to)\s*/i).filter(Boolean).length > 1;
+    const sMin = t ? t.start.h * 60 + t.start.min : null;
+    const eMin = (t && rng) ? t.end.h * 60 + t.end.min : null;
+    return {
+      start: sMin == null ? (evx.time || '') : _fmt12(sMin),
+      end: eMin == null ? '' : _fmt12(eMin),
+      dur: (sMin != null && eMin != null) ? eMin - sMin : 0
+    };
+  }
+  const t0 = readTimes(ev);
   const DURS = [[30, '30m'], [45, '45m'], [60, '1h'], [90, '1.5h'], [120, '2h']];
 
   const pop = document.createElement('div');
@@ -3769,11 +3815,11 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
     <span class="cal-pop-label">Day &amp; Time</span>
     <div class="cal-pop-grid three">
-      <select id="calPopDay" title="Move this session to another day">${days.map((d, i) => `<option value="${i}"${i === di ? ' selected' : ''}>${escapeHtml(d.day || ('Day ' + (i + 1)))}</option>`).join('')}</select>
-      <input id="calPopStart" type="text" value="${escapeAttr(startVal)}" placeholder="Start" autocomplete="off" spellcheck="false">
-      <input id="calPopEnd" type="text" value="${escapeAttr(endVal)}" placeholder="End" autocomplete="off" spellcheck="false">
+      <select id="calPopDay" title="Move this session to another day">${days0.map((d, i) => `<option value="${i}"${i === di0 ? ' selected' : ''}>${escapeHtml(d.day || ('Day ' + (i + 1)))}</option>`).join('')}</select>
+      <input id="calPopStart" type="text" value="${escapeAttr(t0.start)}" placeholder="Start" autocomplete="off" spellcheck="false">
+      <input id="calPopEnd" type="text" value="${escapeAttr(t0.end)}" placeholder="End" autocomplete="off" spellcheck="false">
     </div>
-    <div class="cal-pop-dur" id="calPopDur">${DURS.map(([m, l]) => `<button type="button" data-dur="${m}"${dur0 === m ? ' class="active"' : ''}>${l}</button>`).join('')}</div>
+    <div class="cal-pop-dur" id="calPopDur">${DURS.map(([m, l]) => `<button type="button" data-dur="${m}"${t0.dur === m ? ' class="active"' : ''}>${l}</button>`).join('')}</div>
     <span class="cal-pop-label row">Interns <span class="intern-count-badge" id="calPopInternBadge">${initInternCount}</span><span id="calPopCov"></span>
       <span class="cal-pop-tools">
         <button type="button" class="cal-pop-mini" id="calPopCopy" title="Copy the intern list">Copy</button>
@@ -3801,18 +3847,18 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
 
   if (phone) {
     document.body.classList.add('sheet-open');
-    if (evEl && evEl.scrollIntoView) { try { evEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (err) {} }
+    if (!quiet) _revealBehindSheet(ctx.evEl);
   } else {
-    // Position beside the event block, pinned to that spot on the page
-    positionCalPop(pop, evEl);
-    revealCalPop(pop);
-    _calPopAnchor = evEl;
+    positionCalPop(pop, ctx.evEl);
+    if (!quiet) revealCalPop(pop);
+    _calPopAnchor = ctx.evEl;
     window.addEventListener('scroll', _calPopTrack, true);
     window.addEventListener('resize', _calPopTrack);
   }
 
   const titleInput = pop.querySelector('#calPopTitle');
   const peopleInput = pop.querySelector('#calPopPeople');
+  const daySel = pop.querySelector('#calPopDay');
   const startEl = pop.querySelector('#calPopStart');
   const endEl = pop.querySelector('#calPopEnd');
   const noteEl = pop.querySelector('#calPopNote');
@@ -3820,35 +3866,76 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
   const internBadge = pop.querySelector('#calPopInternBadge');
   const covBox = pop.querySelector('#calPopCov');
 
-  // Once the sheet is detached, its handlers must never touch data again: the
-  // indices they captured may now point at a different session.
+  // Once detached, handlers must never touch data again: their indices are stale.
   function getEv() {
     if (!pop.isConnected) return null;
     const d = _calDays(slot);
-    return d && d[di] && d[di].events[ei];
+    return d && d[ctx.di] && d[ctx.di].events[ctx.ei];
   }
   function updateCov() {
     const ev2 = getEv(); if (!ev2 || !covBox) return;
     covBox.innerHTML = internCoverageHtml(countTitlePlayers(titleInput.value), (ev2.people || []).length, ev2.type === 'excel');
   }
 
+  // ---- Intern chip box (12 visible at a time, scrolls beyond) ----
+  const internList = pop.querySelector('#calPopInternList');
+  const internMore = pop.querySelector('#calPopInternMore');
+
+  function renderInternChips() {
+    const ev2 = getEv(); if (!ev2 || !internList) return;
+    const names = ev2.people || [];
+    internList.innerHTML = names.length
+      ? names.map((n, i) =>
+          `<span class="cal-chip"><span class="nm" data-edit="${i}" title="${escapeAttr(n)}">${escapeHtml(n)}</span>` +
+          `<button class="x" data-del="${i}" title="Remove ${escapeAttr(n)}">\u2715</button></span>`).join('')
+      : '<div class="cal-chip-empty">No interns yet \u2014 add one below.</div>';
+    if (internMore) internMore.textContent = names.length > 12 ? `12 of ${names.length} shown \u2014 scroll for more` : '';
+    if (internBadge) internBadge.textContent = names.length;
+    updateCov();
+  }
+
+  // Re-point the open editor at the same session after a sort moved it. Fields the
+  // user is currently in are left untouched so nothing is yanked mid-keystroke.
+  pop._rebind = function (nDi, nEi, nEl) {
+    ctx.di = nDi; ctx.ei = nEi; ctx.evEl = nEl;
+    const ev2 = getEv(); if (!ev2) return;
+    const d = _calDays(slot) || [];
+    const active = document.activeElement;
+    if (daySel && active !== daySel) {
+      daySel.innerHTML = d.map((dd, i) => `<option value="${i}"${i === nDi ? ' selected' : ''}>${escapeHtml(dd.day || ('Day ' + (i + 1)))}</option>`).join('');
+      daySel.value = String(nDi);
+    }
+    const t = readTimes(ev2);
+    if (active !== startEl) startEl.value = t.start;
+    if (active !== endEl) endEl.value = t.end;
+    pop.querySelectorAll('#calPopDur [data-dur]').forEach(b => b.classList.toggle('active', +b.dataset.dur === t.dur));
+    if (active !== titleInput && titleInput.value !== (ev2.title || '')) titleInput.value = ev2.title || '';
+    if (active !== noteEl && noteEl.value !== (ev2.note || '')) noteEl.value = ev2.note || '';
+    pop.querySelectorAll('.cal-pop-type-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.type === (ev2.type === 'excel' ? 'excel' : 'other')));
+    if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
+    renderInternChips();
+  };
+
   // Trash + duplicate
   pop.querySelector('#calPopDelete').addEventListener('click', () => {
-    hideCalPopover();                     // flush half-typed input before indices move
     const d = _calDays(slot);
-    if (d && d[di] && d[di].events[ei]) {
-      d[di].events.splice(ei, 1);
+    const tDi = ctx.di, tEi = ctx.ei;
+    hideCalPopover();                     // flush half-typed input before indices move
+    if (d && d[tDi] && d[tDi].events[tEi]) {
+      d[tDi].events.splice(tEi, 1);
       clearCalSel();
       saveDraft();
       renderEdit();
     }
   });
   pop.querySelector('#calPopDup').addEventListener('click', () => {
-    hideCalPopover();
     const d = _calDays(slot);
-    if (!d || !d[di] || !d[di].events[ei]) return;
-    const copy = JSON.parse(JSON.stringify(d[di].events[ei]));
-    d[di].events.splice(ei + 1, 0, copy);
+    const tDi = ctx.di, tEi = ctx.ei;
+    if (!d || !d[tDi] || !d[tDi].events[tEi]) return;
+    if (_calPopFlush) { try { _calPopFlush(); } catch (e) {} }
+    const copy = JSON.parse(JSON.stringify(d[tDi].events[tEi]));
+    d[tDi].events.splice(tEi + 1, 0, copy);
     calSel = [];
     _commitAndReopen(slot, copy);
   });
@@ -3860,10 +3947,10 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
     saveDraft();
     if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     updateCov();
-    // Live-update the tiny calendar label without full re-render
-    const lbl = evEl && evEl.querySelector && evEl.querySelector('.cal-ev-title');
+    // Live-update the tiny calendar label without a full re-render
+    const lbl = ctx.evEl && ctx.evEl.querySelector && ctx.evEl.querySelector('.cal-ev-title');
     if (lbl) lbl.textContent = titleInput.value;
-    if (evEl) evEl.title = (ev2.time || '') + ' \u2013 ' + titleInput.value;
+    if (ctx.evEl) ctx.evEl.title = (ev2.time || '') + ' \u2013 ' + titleInput.value;
   });
 
   // ---- Day + time ----
@@ -3904,17 +3991,19 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
     const ev2 = getEv(); if (!ev2) return;
     const sm = _parseTimeToMin(startEl.value.trim(), null);
     if (sm == null) { startEl.focus(); return; }
-    const m = +b.dataset.dur;
-    ev2.time = _fmtTimeRange(sm, m, true);
+    const next = _fmtTimeRange(sm, +b.dataset.dur, true);
+    if (next === ev2.time) return;
+    ev2.time = next;
     _commitAndReopen(slot, ev2);
   });
-  pop.querySelector('#calPopDay').addEventListener('change', e => {
+  daySel.addEventListener('change', e => {
     const to = +e.target.value;
-    if (to === di) return;
-    hideCalPopover();
+    const from = ctx.di, tEi = ctx.ei;
+    if (to === from) return;
+    if (_calPopFlush) { try { _calPopFlush(); } catch (err) {} }
     const d = _calDays(slot);
-    if (!d || !d[di] || !d[to]) return;
-    const moved = d[di].events.splice(ei, 1)[0];
+    if (!d || !d[from] || !d[to]) return;
+    const moved = d[from].events.splice(tEi, 1)[0];
     if (!moved) return;
     (d[to].events = d[to].events || []).push(moved);
     calSel = [];
@@ -3931,23 +4020,6 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
     if (e.key === 'Escape' || e.key === 'Enter') { e.preventDefault(); hideCalPopover(); }
     e.stopPropagation();
   });
-
-  // ---- Intern chip box (12 visible at a time, scrolls beyond) ----
-  const internList = pop.querySelector('#calPopInternList');
-  const internMore = pop.querySelector('#calPopInternMore');
-
-  function renderInternChips() {
-    const ev2 = getEv(); if (!ev2 || !internList) return;
-    const names = ev2.people || [];
-    internList.innerHTML = names.length
-      ? names.map((n, i) =>
-          `<span class="cal-chip"><span class="nm" data-edit="${i}" title="${escapeAttr(n)}">${escapeHtml(n)}</span>` +
-          `<button class="x" data-del="${i}" title="Remove ${escapeAttr(n)}">\u2715</button></span>`).join('')
-      : '<div class="cal-chip-empty">No interns yet \u2014 add one below.</div>';
-    if (internMore) internMore.textContent = names.length > 12 ? `12 of ${names.length} shown \u2014 scroll for more` : '';
-    if (internBadge) internBadge.textContent = names.length;
-    updateCov();
-  }
 
   function splitNames(str) {
     return String(str || '').split(/[\n\r,;\t]+/).map(s => s.trim()).filter(Boolean);
@@ -4041,7 +4113,7 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
     } else {
       renderInternChips();
     }
-    if (!phone) { positionCalPop(pop, evEl); revealCalPop(pop); }
+    if (!phone) positionCalPop(pop, ctx.evEl);
   }
   textBtn.addEventListener('click', () => setTextMode(!textMode));
 
@@ -4080,9 +4152,9 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
       saveDraft();
       pop.querySelectorAll('.cal-pop-type-btn').forEach(b => b.classList.toggle('active', b === btn));
       updateCov();
-      // Live-update event color in calendar
+      // Live-update event color in the calendar
       const st = STYLES[btn.dataset.type] || STYLES.other;
-      if (evEl) { evEl.style.background = st.calBg; evEl.style.color = st.calText; }
+      if (ctx.evEl) { ctx.evEl.style.background = st.calBg; ctx.evEl.style.color = st.calText; }
       try { renderInternTally(); } catch (err) {}
     });
   });
@@ -4114,8 +4186,9 @@ function showCalPopover(slot, di, ei, evEl, focusId) {
   peopleInput.addEventListener('change', () => {
     if (peopleInput.value) { addInterns(peopleInput.value); peopleInput.value = ''; }
   });
-  // Don't lose half-typed name when the popover closes
+  // Don't lose a half-typed name when the editor closes or the sort re-points it
   _calPopFlush = () => { if (peopleInput.value) { addInterns(peopleInput.value); peopleInput.value = ''; } };
+  pop._flush = _calPopFlush;
 
   updateCov();
   const focusEl = focusId ? pop.querySelector('#' + focusId) : null;
@@ -4133,6 +4206,7 @@ function _calPopOutside(e) {
 
 let _calPopFlush = null;
 let _calPopAnchor = null;
+let _calPopKeep = false;   // true while an auto-sort redraw is re-binding the open editor
 
 // Place the popover beside its event block, in PAGE coordinates, so it stays
 // pinned to that spot on the page and scrolls away with the calendar.
@@ -4158,6 +4232,19 @@ function positionCalPop(pop, evEl) {
 
 // If the popover still hangs off the bottom (or top) of the screen, scroll the
 // page just enough to bring the whole thing into view.
+// Phone: nudge the tile out from behind the bottom sheet, by the smallest amount
+// that works — and only if it's actually covered.
+function _revealBehindSheet(el) {
+  const pop = document.getElementById('calPopover');
+  if (!el || !pop) return;
+  const limit = pop.getBoundingClientRect().top;
+  const r = el.getBoundingClientRect();
+  const pad = 12;
+  let dy = 0;
+  if (r.bottom > limit - pad) dy = r.bottom - (limit - pad);
+  if (r.top - dy < pad) dy = r.top - pad;
+  if (dy) window.scrollBy(0, dy);
+}
 function revealCalPop(pop) {
   const r = pop.getBoundingClientRect();
   let dy = 0;
@@ -4171,7 +4258,9 @@ function revealCalPop(pop) {
 function _calPopTrack(e) {
   const pop = document.getElementById('calPopover');
   const el = _calPopAnchor;
-  if (!pop || !el || !el.isConnected) { hideCalPopover(); return; }
+  if (!pop) return;
+  // Mid-redraw the anchor is briefly detached; it gets re-pointed on the same tick.
+  if (!el || !el.isConnected) return;
   if (e && e.type === 'scroll') {
     const t = e.target;
     // Ignore page scroll and scrolling inside the popover itself
@@ -4192,7 +4281,8 @@ function hideCalPopover() {
   if (pop) pop.remove();
 }
 function renderCalendarPreview() {
-  hideCalPopover(); hideDayMenu();   // clean up before rebuilding DOM
+  if (!_calPopKeep) hideCalPopover();   // an open editor survives an auto-sort redraw
+  hideDayMenu();
   const phone = _calPhone();
   // Desktop gets the same scale as the viewer Timeline; narrower screens keep the compact preview
   const compactPrev = !phone && window.innerWidth <= 1024;
@@ -4264,7 +4354,12 @@ function renderDayPager(slot, days, page) {
   const addD = el.querySelector('[data-addday]');
   if (addD) addD.addEventListener('click', () => addDayToSlot(slot));
   const act = el.querySelector('.dp-btn.active');
-  if (act) el.scrollLeft = Math.max(0, act.offsetLeft - el.clientWidth / 2 + act.offsetWidth / 2);
+  const key = slot + ':' + page;
+  if (act && renderDayPager._key !== key) {
+    renderDayPager._key = key;
+    renderDayPager._centred = true;
+    el.scrollLeft = Math.max(0, act.offsetLeft - el.clientWidth / 2 + act.offsetWidth / 2);
+  }
 }
 
 // ============ WIRE UP ============
@@ -4892,6 +4987,8 @@ function renderStats() {
   });
 }
 (function () { const _re = renderEdit; renderEdit = function () { _re(); try { renderStats(); } catch (e) { console.warn(e); } }; })();
+// Redraws are never navigation: keep the page, the calendars and the pager put.
+(function () { const _re = renderEdit; renderEdit = function () { _withFrame(_re); }; })();
 (function () { const _sm = setMode; setMode = function (m) { _sm(m); try { renderStats(); } catch (e) {} }; })();
 
 // ---------- (v3) Keyboard shortcuts ----------
