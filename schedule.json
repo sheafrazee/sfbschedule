@@ -132,7 +132,7 @@
           "title": "Group @ Clava",
           "type": "other",
           "people": [
-            "Anthony"
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -157,7 +157,9 @@
             "Abdel S",
             "Jamal",
             "Anthony",
-            "Danny K"
+            "Danny K",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -177,7 +179,9 @@
             "Abdel S",
             "Jamal",
             "Anthony",
-            "Danny K"
+            "Danny K",
+            "LH",
+            "Jacob Sells"
           ],
           "note": "",
           "players": []
@@ -188,8 +192,16 @@
       "day": "Thu 8/6",
       "events": [
         {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Dariq W, Kelan M, Jared M, Nick D",
+          "time": "7:30 AM – 8:30 AM",
+          "title": "Dariq W, Kelan W, Jared M",
+          "type": "excel",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "8:30 AM – 10:00 AM",
+          "title": "Nick D, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
@@ -202,7 +214,9 @@
             "Dame",
             "Waleed",
             "Abdel S",
-            "Anthony"
+            "Anthony",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -214,7 +228,9 @@
           "people": [
             "Anthony",
             "Waleed",
-            "Jung"
+            "Jung",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -226,7 +242,24 @@
           "people": [
             "Anthony",
             "Waleed",
-            "Jung"
+            "Jung",
+            "LH",
+            "Jacob Sells"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "1:30 PM – 2:30 PM",
+          "title": "Sean D",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Braedon",
+            "Jung",
+            "Waleed",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -247,7 +280,8 @@
           "title": "Group @ Clava",
           "type": "other",
           "people": [
-            "Anthony"
+            "Anthony",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -259,7 +293,7 @@
       "events": [
         {
           "time": "8:00 AM – 8:45 AM",
-          "title": "Warmup + Skills: Jared M, Dariq W, Kelan M, Nick D",
+          "title": "Warmup + Skills: Jared M, Dariq W, Kelan M, Nick D, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
@@ -273,14 +307,17 @@
             "Abdel S",
             "Waleed",
             "Anthony",
-            "Danny K"
+            "Danny K",
+            "Tarek",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "8:45 AM – 10:00 AM",
-          "title": "Live Play: Jared M, Dariq W, Kelan M, Nick D",
+          "title": "Live Play: Jared M, Dariq W, Kelan M, Nick D, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
@@ -294,7 +331,10 @@
             "Abdel S",
             "Waleed",
             "Anthony",
-            "Danny K"
+            "Danny K",
+            "Tarek",
+            "LH",
+            "Jacob Sells"
           ],
           "note": "",
           "players": []
@@ -307,7 +347,9 @@
             "Jung",
             "Braedon",
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -320,20 +362,39 @@
             "Jung",
             "Braedon",
             "Anthony",
-            "Waleed"
+            "Waleed",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "2:30 PM – 3:30 PM",
+          "title": "Sean D",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Braedon",
+            "Jung",
+            "Waleed",
+            "LH",
+            "Jacob Sells"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "3:30 PM – 4:30 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
             "Anthony",
             "Braedon",
             "Jung",
-            "Waleed"
+            "Waleed",
+            "LH",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -369,7 +430,8 @@
             "Jamal",
             "Braedon",
             "Nick M",
-            "Abdel S"
+            "Abdel S",
+            "Tarek"
           ],
           "players": [],
           "note": ""
