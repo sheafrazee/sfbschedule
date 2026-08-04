@@ -51,7 +51,7 @@
           "people": [
             "Jung",
             "Anthony",
-            "Braedon"
+            "Mateo"
           ],
           "players": [],
           "note": ""
@@ -62,8 +62,7 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony",
-            "Braedon"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -100,7 +99,8 @@
           "people": [
             "Anthony",
             "Jung",
-            "Dame"
+            "Braedon",
+            "Mateo"
           ],
           "players": [],
           "note": ""
@@ -111,14 +111,15 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony"
+            "Anthony",
+            "Braedon"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ Clava",
+          "title": "Audrina @ OGP",
           "type": "other",
           "people": [
             "Anthony",
@@ -129,7 +130,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ Clava",
+          "title": "Group @ OGP",
           "type": "other",
           "people": [
             "Braedon"
@@ -244,7 +245,8 @@
             "Waleed",
             "Jung",
             "LH",
-            "Jacob Sells"
+            "Jacob Sells",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -258,7 +260,8 @@
             "Waleed",
             "Jung",
             "LH",
-            "Jacob Sells"
+            "Jacob Sells",
+            "Braedon"
           ],
           "players": [],
           "note": ""
@@ -271,16 +274,31 @@
             "Anthony",
             "Braedon",
             "Jung",
-            "Waleed",
             "LH",
+            "Waleed",
             "Jacob Sells"
           ],
           "players": [],
           "note": ""
         },
         {
+          "time": "2:30 PM – 3:30 PM",
+          "title": "GW",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Waleed",
+            "Jung",
+            "LH",
+            "Jacob Sells",
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ Clava",
+          "title": "Audrina @ OGP",
           "type": "other",
           "people": [
             "Anthony",
@@ -291,7 +309,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ Clava",
+          "title": "Group @ OGP",
           "type": "other",
           "people": [
             "Anthony",
