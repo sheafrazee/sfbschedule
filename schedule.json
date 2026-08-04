@@ -37,9 +37,9 @@
             "Josh G",
             "Jamal",
             "Braedon",
-            "Abdel S",
             "Anthony",
-            "Danny K"
+            "Danny K",
+            "Hugh V"
           ],
           "note": "",
           "players": []
@@ -74,7 +74,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dariq W, Kelan M, Jared M",
+          "title": "Dariq W, Kelan M",
           "type": "excel",
           "people": [
             "Donovan",
@@ -83,11 +83,7 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Jamal",
-            "Nick M",
-            "Braedon",
-            "Dame",
-            "Abdel S"
+            "Nick M"
           ],
           "players": [],
           "note": ""
@@ -193,30 +189,8 @@
       "day": "Thu 8/6",
       "events": [
         {
-          "time": "7:30 AM – 9:00 AM",
-          "title": "Nick D, Hudson G",
-          "type": "excel",
-          "people": [
-            "Donovan",
-            "Mateo",
-            "Jung",
-            "Ali",
-            "Jaden G",
-            "Josh G",
-            "Braedon",
-            "Dame",
-            "Waleed",
-            "Abdel S",
-            "Anthony",
-            "LH",
-            "Jacob Sells"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "9:00 AM – 10:00 AM",
-          "title": "Dariq W, Kelan W, Jared M",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Dariq W, Kelan W, Jared M, Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -325,7 +299,7 @@
       "events": [
         {
           "time": "8:00 AM – 8:45 AM",
-          "title": "Warmup + Skills: Jared M, Dariq W, Kelan M, Nick D, Hudson G",
+          "title": "Warmup + Skills:  Dariq W, Kelan M, Nick D, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
@@ -349,7 +323,7 @@
         },
         {
           "time": "8:45 AM – 10:00 AM",
-          "title": "Live Play: Jared M, Dariq W, Kelan M, Nick D, Hudson G",
+          "title": "Live Play: Dariq W, Kelan M, Nick D, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
@@ -449,8 +423,8 @@
           "note": ""
         },
         {
-          "time": "9:00 AM – 10:30 AM",
-          "title": "Dariq W, Kelan M, Jared M",
+          "time": "8:00 AM – 9:30 AM",
+          "title": "Dariq W, Kelan M, Jared M, Hudson G",
           "type": "excel",
           "people": [
             "Donovan",
