@@ -140,6 +140,18 @@
       "day": "Wed 8/5",
       "events": [
         {
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Jung",
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 8:45 AM",
           "title": "Warmup + Skills: Jared M, Dariq W, Kelan M",
           "type": "excel",
@@ -163,7 +175,7 @@
         },
         {
           "time": "8:45 AM – 10:00 AM",
-          "title": "Live Play: Jared M, Dariq W, Kelan M",
+          "title": "Live Play: Dariq W, Kelan M",
           "type": "excel",
           "people": [
             "Donovan",
@@ -173,15 +185,25 @@
             "Jaden G",
             "Josh G",
             "Braedon",
-            "Abdel S",
-            "Jamal",
             "Anthony",
-            "Danny K",
             "LH",
-            "Jacob Sells"
+            "Jacob Sells",
+            "Hugh V"
           ],
           "note": "",
           "players": []
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Aggie +2 @ OGP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Malachi S",
+            "Jon I"
+          ],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -410,18 +432,6 @@
     {
       "day": "Sat 8/8",
       "events": [
-        {
-          "time": "6:00 AM – 7:15 AM",
-          "title": "Ben E @ MAP",
-          "type": "other",
-          "people": [
-            "Dame",
-            "Anthony",
-            "Jung"
-          ],
-          "players": [],
-          "note": ""
-        },
         {
           "time": "8:00 AM – 9:30 AM",
           "title": "Dariq W, Kelan M, Jared M, Hudson G",
