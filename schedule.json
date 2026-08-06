@@ -212,7 +212,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dariq W, Kelan W, Jared M, Nick D",
+          "title": "Dariq W,  Nick D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -222,38 +222,17 @@
             "Jaden G",
             "Josh G",
             "Braedon",
-            "Dame",
-            "Waleed",
-            "Abdel S",
-            "Anthony",
-            "LH",
-            "Jacob Sells"
+            "Anthony"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Benny G @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Waleed",
-            "Jung",
-            "LH",
-            "Jacob Sells",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "12:30 PM – 1:30 PM",
+          "time": "12:15 PM – 1:15 PM",
           "title": "Ben E",
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed",
             "Jung",
             "LH",
             "Jacob Sells",
@@ -271,7 +250,6 @@
             "Braedon",
             "Jung",
             "LH",
-            "Waleed",
             "Jacob Sells"
           ],
           "players": [],
@@ -283,10 +261,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Waleed",
             "Jung",
             "LH",
-            "Jacob Sells",
             "Braedon"
           ],
           "players": [],
@@ -309,7 +285,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Braedon"
+            "Jung"
           ],
           "players": [],
           "note": ""
