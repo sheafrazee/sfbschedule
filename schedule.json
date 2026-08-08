@@ -443,6 +443,480 @@
   ],
   "archive": [
     {
+      "key": "2026-08-03",
+      "range": "Aug 3 – Aug 9, 2026",
+      "title": "Week of Aug 3 – 9",
+      "path": "archive/2026-08-03.png",
+      "pathExcel": "archive/2026-08-03-excel.png",
+      "players": [
+        "Aggie @ OGP",
+        "Aggie +2 @ OGP",
+        "Agot Makeer",
+        "Audrina @ OGP",
+        "Ben E @ MAP",
+        "Benny G @ MAP",
+        "Ceasar",
+        "Dariq W",
+        "Group @ OGP: Cesar",
+        "Group @ OGP: Thomas",
+        "Hudson G",
+        "Jared M",
+        "Jon I",
+        "Kelan M",
+        "Live Play: Dariq W",
+        "Live Play: Jared M",
+        "Nick D",
+        "Russ",
+        "Sean D @ MAP",
+        "Stanley J @ MAP",
+        "Tarek",
+        "Warmup + Skills:  Dariq W",
+        "Warmup + Skills: Jared M"
+      ],
+      "days": [
+        {
+          "day": "Mon 8/3",
+          "events": [
+            {
+              "time": "8:00 AM – 8:45 AM",
+              "title": "Warmup + Skills: Jared M, Dariq W, Kelan M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Jamal",
+                "Abdel S",
+                "Braedon",
+                "Anthony",
+                "Danny K"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:45 AM – 10:00 AM",
+              "title": "Live Play: Jared M, Dariq W, Kelan M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Jamal",
+                "Braedon",
+                "Anthony",
+                "Danny K",
+                "Hugh V"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "11:30 AM – 1:00 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Anthony",
+                "Mateo"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:30 PM – 3:00 PM",
+              "title": "Stanley J @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Anthony"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Tue 8/4",
+          "events": [
+            {
+              "time": "8:00 AM – 9:30 AM",
+              "title": "Dariq W, Kelan M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Nick M"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "11:00 AM – 12:30 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung",
+                "Braedon",
+                "Mateo"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:30 PM – 2:00 PM",
+              "title": "Stanley J @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Anthony",
+                "Braedon"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Cesar, Russ, Tarek",
+              "type": "other",
+              "people": [
+                "Braedon"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 8/5",
+          "events": [
+            {
+              "time": "7:00 AM – 8:00 AM",
+              "title": "Jared M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Jung",
+                "Braedon"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:00 AM – 8:45 AM",
+              "title": "Warmup + Skills: Jared M, Dariq W, Kelan M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Braedon",
+                "Abdel S",
+                "Jamal",
+                "Anthony",
+                "Danny K",
+                "LH",
+                "Jacob Sells"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:45 AM – 10:00 AM",
+              "title": "Live Play: Dariq W, Kelan M",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Braedon",
+                "Anthony",
+                "LH",
+                "Jacob Sells",
+                "Hugh V"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Aggie +2 @ OGP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Malachi S",
+                "Jon I"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 8/6",
+          "events": [
+            {
+              "time": "8:00 AM – 9:30 AM",
+              "title": "Dariq W,  Nick D",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Braedon",
+                "Anthony"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:15 PM – 1:15 PM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung",
+                "LH",
+                "Jacob Sells",
+                "Braedon"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:30 PM – 2:30 PM",
+              "title": "Sean D @ MAP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Braedon",
+                "Jung",
+                "LH",
+                "Jacob Sells"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Thomas, Russ, Jon I, Ceasar",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 8/7",
+          "events": [
+            {
+              "time": "7:00 AM – 8:00 AM",
+              "title": "Nick D",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Jaden G",
+                "Josh G",
+                "Tarek"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:00 AM – 8:45 AM",
+              "title": "Warmup + Skills:  Dariq W, Hudson G",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Jaden G",
+                "Josh G",
+                "Jamal",
+                "Anthony",
+                "Danny K",
+                "Tarek",
+                "Jacob Sells",
+                "Hugh V",
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:45 AM – 10:00 AM",
+              "title": "Live Play: Dariq W, Hudson G",
+              "type": "excel",
+              "people": [
+                "Donovan",
+                "Mateo",
+                "Jung",
+                "Jaden G",
+                "Josh G",
+                "Jamal",
+                "Anthony",
+                "Danny K",
+                "Tarek",
+                "Jacob Sells",
+                "Hugh V",
+                "Ali"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "11:00 AM – 12:30 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Waleed",
+                "LH",
+                "Jacob Sells"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:30 PM – 1:30 PM",
+              "title": "Sean D @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Waleed",
+                "LH",
+                "Dame",
+                "Jacob Sells"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:30 PM – 2:45 PM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Waleed",
+                "LH",
+                "Dame",
+                "Jacob Sells"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "2:00 PM – 3:00 PM",
+              "title": "Agot Makeer",
+              "type": "excel",
+              "people": [
+                "Braedon",
+                "Anthony"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Aggie @ OGP",
+              "type": "other",
+              "people": [
+                "Anthony",
+                "Jung",
+                "Dame"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 8/8",
+          "events": [
+            {
+              "time": "8:00 AM – 9:30 AM",
+              "title": "Hudson G",
+              "type": "excel",
+              "people": [
+                "Braedon",
+                "Tarek",
+                "Anthony",
+                "Malachi"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "9:30 AM – 10:45 AM",
+              "title": "Agot Makeer",
+              "type": "excel",
+              "people": [
+                "Braedon",
+                "Tarek",
+                "Anthony",
+                "Malachi"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sun 8/9",
+          "events": []
+        }
+      ],
+      "ts": 1786225209841
+    },
+    {
       "key": "2026-07-27",
       "range": "Jul 27 – Aug 2, 2026",
       "title": "Week of Jul 27 – Aug 2",
