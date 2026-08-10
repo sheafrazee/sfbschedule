@@ -15,11 +15,9 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Jamal",
-            "Abdel S",
             "Braedon",
             "Anthony",
-            "Danny K"
+            "Dart M"
           ],
           "players": [],
           "note": ""
@@ -35,34 +33,34 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Jamal",
             "Braedon",
             "Anthony",
-            "Danny K",
-            "Hugh V"
+            "Dart M"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "10:00 AM – 11:15 AM",
+          "time": "10:15 AM – 11:30 AM",
           "title": "Agot Makeer",
           "type": "excel",
           "people": [
-            "Braedon",
-            "Tarek",
-            "Colby",
-            "Anthony",
-            "Malachi",
             "Donovan",
             "Mateo",
             "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
-            "Jamal",
-            "Danny K",
-            "Hugh V"
+            "Braedon"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "12:30 PM – 1:30 PM",
+          "title": "Dalton K",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -73,8 +71,9 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony",
-            "Mateo"
+            "Mateo",
+            "LH",
+            "David"
           ],
           "players": [],
           "note": ""
@@ -85,7 +84,9 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony"
+            "Mateo",
+            "LH",
+            "David"
           ],
           "players": [],
           "note": ""
@@ -94,7 +95,10 @@
           "time": "4:00 PM – 5:00 PM",
           "title": "Joseph Boddie @ OGP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Jung",
+            "Anthony"
+          ],
           "players": [],
           "note": ""
         },
@@ -121,10 +125,7 @@
           "people": [
             "Donovan",
             "Mateo",
-            "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
             "Nick M"
           ],
           "players": [],
@@ -138,7 +139,7 @@
             "Anthony",
             "Jung",
             "Braedon",
-            "Mateo"
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -150,7 +151,8 @@
           "people": [
             "Jung",
             "Anthony",
-            "Braedon"
+            "Braedon",
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -162,7 +164,9 @@
           "people": [
             "Jung",
             "Anthony",
-            "Braedon"
+            "Braedon",
+            "LH",
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -172,8 +176,8 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -183,9 +187,8 @@
           "title": "Group @ OGP",
           "type": "other",
           "people": [
-            "Braedon",
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -207,12 +210,9 @@
             "Jaden G",
             "Josh G",
             "Braedon",
-            "Abdel S",
-            "Jamal",
             "Anthony",
             "Danny K",
-            "LH",
-            "Jacob Sells"
+            "LH"
           ],
           "players": [],
           "note": ""
@@ -230,9 +230,8 @@
             "Josh G",
             "Braedon",
             "Anthony",
-            "LH",
-            "Jacob Sells",
-            "Hugh V"
+            "Danny K",
+            "LH"
           ],
           "note": "",
           "players": []
@@ -244,8 +243,6 @@
           "people": [
             "Anthony",
             "Jung",
-            "LH",
-            "Jacob Sells",
             "Braedon"
           ],
           "players": [],
@@ -262,13 +259,13 @@
           "type": "excel",
           "people": [
             "Donovan",
-            "Mateo",
             "Jung",
             "Ali",
             "Jaden G",
             "Josh G",
             "Braedon",
-            "Anthony"
+            "Anthony",
+            "Jacob Sells"
           ],
           "players": [],
           "note": ""
@@ -280,35 +277,19 @@
           "people": [
             "Anthony",
             "Jung",
-            "Braedon",
-            "Mateo"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "12:00 PM – 1:00 PM",
-          "title": "Ben E @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Braedon",
-            "Jung",
-            "LH",
+            "Colby",
             "Jacob Sells"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "1:30 PM – 2:30 PM",
-          "title": "Sean D @ MAP",
+          "time": "12:00 PM – 1:15 PM",
+          "title": "Ben E @ MAP",
           "type": "other",
           "people": [
             "Anthony",
-            "Braedon",
             "Jung",
-            "LH",
             "Jacob Sells"
           ],
           "players": [],
@@ -354,10 +335,9 @@
             "Jamal",
             "Anthony",
             "Danny K",
-            "Tarek",
             "Jacob Sells",
-            "Hugh V",
-            "Ali"
+            "Ali",
+            "Nick M"
           ],
           "players": [],
           "note": ""
@@ -375,51 +355,45 @@
             "Jamal",
             "Anthony",
             "Danny K",
-            "Tarek",
             "Jacob Sells",
-            "Hugh V",
-            "Ali"
+            "Ali",
+            "Nick M"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "11:30 AM – 12:45 PM",
-          "title": "Ben E @ MAP",
+          "time": "11:30 AM – 1:00 PM",
+          "title": "GW @ MAP",
           "type": "other",
           "people": [
             "Jung",
             "Waleed",
-            "LH",
-            "Dame",
-            "Jacob Sells"
+            "Anthony"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "12:45 PM – 2:15 PM",
+          "time": "1:00 PM – 2:30 PM",
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Jung",
             "Waleed",
-            "LH",
-            "Jacob Sells"
+            "Anthony"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "2:15 PM – 3:15 PM",
+          "time": "2:30 PM – 4:00 PM",
           "title": "Stanley J @ MAP",
           "type": "other",
           "people": [
             "Jung",
             "Waleed",
-            "LH",
-            "Dame",
-            "Jacob Sells"
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -435,24 +409,12 @@
           "type": "excel",
           "people": [
             "Braedon",
-            "Tarek",
             "Colby",
             "Anthony",
-            "Malachi"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "9:30 AM – 10:45 AM",
-          "title": "Agot Makeer",
-          "type": "excel",
-          "people": [
-            "Braedon",
-            "Tarek",
-            "Colby",
-            "Anthony",
-            "Malachi"
+            "Malachi",
+            "Jung",
+            "Nick M",
+            "Mateo"
           ],
           "players": [],
           "note": ""
