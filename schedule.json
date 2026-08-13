@@ -136,21 +136,7 @@
           "people": [
             "Anthony",
             "Jung",
-            "Braedon",
-            "LH"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Anthony",
-            "Braedon",
-            "LH"
+            "Mateo"
           ],
           "players": [],
           "note": ""
@@ -162,7 +148,6 @@
           "people": [
             "Jung",
             "Anthony",
-            "Braedon",
             "LH",
             "Malachi S",
             "Colby R"
@@ -186,8 +171,8 @@
           "title": "Group @ OGP",
           "type": "other",
           "people": [
-            "Jung",
-            "Malachi S"
+            "Malachi S",
+            "Anthony"
           ],
           "players": [],
           "note": ""
@@ -198,8 +183,19 @@
       "day": "Wed 8/12",
       "events": [
         {
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M",
+          "type": "excel",
+          "people": [
+            "Donovan",
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "8:00 AM – 8:45 AM",
-          "title": "Warmup + Skills: Jared M, Dariq W, Dalton K",
+          "title": "Warmup + Skills: Jurian D, Kelan M, Dariq W, Dalton K",
           "type": "excel",
           "people": [
             "Donovan",
@@ -208,10 +204,8 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Braedon",
             "Anthony",
-            "Danny K",
-            "LH"
+            "Danny K"
           ],
           "players": [],
           "note": ""
@@ -242,7 +236,7 @@
           "people": [
             "Anthony",
             "Jung",
-            "Braedon"
+            "Mateo"
           ],
           "players": [],
           "note": ""
@@ -254,7 +248,19 @@
           "people": [
             "Anthony",
             "Jung",
-            "Braedon"
+            "Mateo"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "1:15 PM – 2:30 PM",
+          "title": "Stanley J @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Jung",
+            "Mateo"
           ],
           "players": [],
           "note": ""
@@ -266,15 +272,13 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dariq W, Dalton K",
+          "title": "Jurian D",
           "type": "excel",
           "people": [
             "Donovan",
             "Jung",
-            "Ali",
             "Jaden G",
             "Josh G",
-            "Braedon",
             "Anthony",
             "Jacob Sells"
           ],
@@ -283,25 +287,13 @@
         },
         {
           "time": "10:30 AM – 12:00 PM",
-          "title": "Benny G @ MAP",
+          "title": "Benny G, Ben E @ MAP",
           "type": "other",
           "people": [
             "Anthony",
             "Jung",
-            "Colby",
-            "Jacob Sells"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "12:00 PM – 1:15 PM",
-          "title": "Ben E @ MAP",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Jung",
-            "Jacob Sells"
+            "Mateo",
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -312,7 +304,7 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Jung"
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -323,7 +315,8 @@
           "type": "other",
           "people": [
             "Anthony",
-            "Jung"
+            "Greg",
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -422,12 +415,12 @@
           "type": "excel",
           "people": [
             "Braedon",
-            "Colby",
             "Anthony",
             "Malachi",
             "Jung",
             "Nick M",
-            "Mateo"
+            "Mateo",
+            "Colby R"
           ],
           "players": [],
           "note": ""
