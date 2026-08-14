@@ -287,7 +287,33 @@
         },
         {
           "time": "10:30 AM – 12:00 PM",
-          "title": "Benny G, Ben E @ MAP",
+          "title": "Benny G @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Jung",
+            "Mateo",
+            "Colby R"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Stanley J @ MAP",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Jung",
+            "Mateo",
+            "Colby R"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "1:30 PM – 2:30 PM",
+          "title": "Hailey J@ MAP",
           "type": "other",
           "people": [
             "Anthony",
@@ -327,29 +353,19 @@
       "day": "Fri 8/14",
       "events": [
         {
-          "time": "8:00 AM – 8:45 AM",
-          "title": "Warmup + Skills: Jared M, Dariq W, Dalton K",
+          "time": "7:00 AM – 8:00 AM",
+          "title": "Jared M",
           "type": "excel",
           "people": [
             "Donovan",
-            "Mateo",
-            "Jung",
-            "Jaden G",
-            "Josh G",
-            "Jamal",
-            "Anthony",
-            "Danny K",
-            "Jacob Sells",
-            "Ali",
-            "Nick M",
-            "Matt M"
+            "Ali"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "8:45 AM – 10:00 AM",
-          "title": "Live Play: Jared M, Dariq W, Dalton K",
+          "time": "8:00 AM – 9:45 AM",
+          "title": "Live Play: Jurian D",
           "type": "excel",
           "people": [
             "Donovan",
@@ -361,7 +377,6 @@
             "Anthony",
             "Danny K",
             "Jacob Sells",
-            "Ali",
             "Nick M",
             "Matt M"
           ],
@@ -370,11 +385,11 @@
         },
         {
           "time": "11:30 AM – 1:00 PM",
-          "title": "GW @ MAP",
+          "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Jung",
-            "Waleed",
+            "Mateo",
             "Anthony"
           ],
           "players": [],
@@ -382,23 +397,10 @@
         },
         {
           "time": "1:00 PM – 2:30 PM",
-          "title": "Benny G @ MAP",
+          "title": "GW @ MAP",
           "type": "other",
           "people": [
             "Jung",
-            "Waleed",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "2:30 PM – 4:00 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Waleed",
             "Anthony"
           ],
           "players": [],
