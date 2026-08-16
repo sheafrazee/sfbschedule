@@ -40,14 +40,13 @@
         },
         {
           "time": "10:15 AM – 11:30 AM",
-          "title": "Agot Makeer",
+          "title": "Dariq Whitehead",
           "type": "excel",
           "people": [
             "Donovan",
             "Mateo",
             "Jung",
-            "Ali",
-            "Braedon"
+            "Ali"
           ],
           "players": [],
           "note": ""
@@ -168,7 +167,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP",
+          "title": "Group @ OGP: Tarek, Russ, Cesar ",
           "type": "other",
           "people": [
             "Malachi S",
@@ -221,7 +220,6 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Braedon",
             "Anthony",
             "Danny K",
             "LH"
@@ -337,7 +335,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Zayden, Russ, Cesar, Justin",
           "type": "other",
           "people": [
             "Anthony",
@@ -410,24 +408,7 @@
     },
     {
       "day": "Sat 8/15",
-      "events": [
-        {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Jared M, Dariq W, Dalton K",
-          "type": "excel",
-          "people": [
-            "Braedon",
-            "Anthony",
-            "Malachi",
-            "Jung",
-            "Nick M",
-            "Mateo",
-            "Colby R"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
+      "events": []
     },
     {
       "day": "Sun 8/16",
