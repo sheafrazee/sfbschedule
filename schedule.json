@@ -230,7 +230,7 @@
         },
         {
           "time": "11:30 AM – 1:00 PM",
-          "title": "Benny G, Ben E @ MAP",
+          "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Anthony",
@@ -244,7 +244,7 @@
         },
         {
           "time": "1:00 PM – 2:30 PM",
-          "title": "Stanley J @ MAP",
+          "title": "Ben E @ MAP",
           "type": "other",
           "people": [
             "Anthony",
@@ -316,12 +316,14 @@
         },
         {
           "time": "12:30 PM – 2:00 PM",
-          "title": "Benny G @ MAP",
+          "title": "Benny G, Ben E @ MAP",
           "type": "other",
           "people": [
             "Jung",
             "Mateo",
-            "Anthony"
+            "Anthony",
+            "Colby R",
+            "Braedon"
           ],
           "players": [],
           "note": ""
