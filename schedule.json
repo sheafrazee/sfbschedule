@@ -14,9 +14,7 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Anthony",
             "Danny K",
-            "Hugh V",
             "Braedon"
           ],
           "note": "",
@@ -28,8 +26,7 @@
           "type": "other",
           "people": [
             "Mateo",
-            "David O",
-            "Anthony"
+            "David O"
           ],
           "players": [],
           "note": ""
@@ -40,8 +37,7 @@
           "type": "other",
           "people": [
             "Mateo",
-            "David O",
-            "Anthony"
+            "David O"
           ],
           "players": [],
           "note": ""
@@ -64,42 +60,36 @@
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
-          "title": "Dalton K, Efe D",
+          "title": "Efe D",
           "type": "excel",
           "people": [
-            "Mateo",
             "Ali",
             "Nick M",
-            "Anthony",
-            "Braedon",
-            "Tarek"
+            "Tarek",
+            "Chozen"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "10:30 AM – 12:00 PM",
-          "title": "Benny G, Ben E @ MAP",
+          "title": "Stanley J ",
           "type": "other",
           "people": [
-            "Anthony",
-            "Mateo",
             "Dame",
-            "Colby R",
-            "Braedon"
+            "Jung"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "12:00 PM – 1:30 PM",
-          "title": "Stanley J ",
+          "title": "Benny G, Ben E @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Mateo",
-            "Colby R",
-            "Braedon"
+            "Dame",
+            "Jung",
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -109,20 +99,8 @@
           "title": "Hailey J @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Colby R",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Dalton K",
-          "type": "excel",
-          "people": [
-            "Ali",
-            "Colby R"
+            "Dame",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -132,7 +110,7 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Anthony",
+            "Jung",
             "Dame"
           ],
           "players": [],
@@ -143,7 +121,8 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Anthony",
+            "Jung",
+            "David O",
             "Dame"
           ],
           "players": [],
@@ -160,12 +139,9 @@
           "type": "excel",
           "people": [
             "Mateo",
-            "Jung",
             "Ali",
             "Jaden G",
             "Josh G",
-            "Anthony",
-            "Danny K",
             "Hugh V",
             "Braedon"
           ],
@@ -177,9 +153,8 @@
           "title": "Ben E @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung",
-            "Mateo"
+            "Colby R",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -189,8 +164,8 @@
           "title": "Hailey J @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung"
+            "Colby R",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -206,7 +181,6 @@
           "type": "excel",
           "people": [
             "Jung",
-            "Anthony",
             "Mateo",
             "Ali",
             "Braedon"
@@ -220,7 +194,6 @@
           "type": "excel",
           "people": [
             "Jung",
-            "Anthony",
             "Mateo",
             "Ali",
             "Braedon"
@@ -233,11 +206,9 @@
           "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
             "Jung",
-            "Mateo",
             "Colby R",
-            "Braedon"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -247,10 +218,9 @@
           "title": "Ben E @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
             "Jung",
             "Colby R",
-            "Mateo"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -260,7 +230,6 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Anthony",
             "Jung"
           ],
           "players": [],
@@ -271,7 +240,6 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Anthony",
             "Jung"
           ],
           "players": [],
@@ -292,8 +260,6 @@
             "Jaden G",
             "Josh G",
             "Jamal",
-            "Anthony",
-            "Danny K",
             "Nick M",
             "Ali",
             "Hugh V",
@@ -309,8 +275,7 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony",
-            "Mateo"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -321,10 +286,8 @@
           "type": "other",
           "people": [
             "Jung",
-            "Mateo",
-            "Anthony",
             "Colby R",
-            "Braedon"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -334,8 +297,8 @@
           "title": "Hailey J@ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -345,7 +308,6 @@
           "title": "Sean Dao @ OGP",
           "type": "other",
           "people": [
-            "Anthony",
             "Jung"
           ],
           "players": [],
@@ -362,7 +324,6 @@
           "type": "excel",
           "people": [
             "Jung",
-            "Anthony",
             "Mateo",
             "Ali",
             "Braedon"
@@ -376,7 +337,6 @@
           "type": "excel",
           "people": [
             "Jung",
-            "Anthony",
             "Mateo",
             "Ali",
             "Braedon"
