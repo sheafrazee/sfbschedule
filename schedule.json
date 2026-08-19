@@ -71,19 +71,8 @@
           "note": ""
         },
         {
-          "time": "10:30 AM – 12:00 PM",
-          "title": "Stanley J ",
-          "type": "other",
-          "people": [
-            "Dame",
-            "Jung"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "12:00 PM – 1:30 PM",
-          "title": "Benny G, Ben E @ MAP",
+          "title": "Benny G @ MAP",
           "type": "other",
           "people": [
             "Dame",
@@ -134,7 +123,7 @@
       "events": [
         {
           "time": "8:00 AM – 10:00 AM",
-          "title": "Live Play: Dariq W, Efe D, Dalton K",
+          "title": "Live Play: Dariq W, Efe D",
           "type": "excel",
           "people": [
             "Mateo",
@@ -142,14 +131,16 @@
             "Jaden G",
             "Josh G",
             "Hugh V",
-            "Braedon"
+            "Braedon",
+            "Chozen",
+            "Mark L"
           ],
           "note": "",
           "players": []
         },
         {
           "time": "11:00 AM – 12:15 PM",
-          "title": "Ben E @ MAP",
+          "title": "Hailey J @ MAP",
           "type": "other",
           "people": [
             "Colby R",
@@ -160,7 +151,7 @@
         },
         {
           "time": "12:15 PM – 1:30 PM",
-          "title": "Hailey J @ MAP",
+          "title": "Ben E @ MAP",
           "type": "other",
           "people": [
             "Colby R",
@@ -176,7 +167,7 @@
       "events": [
         {
           "time": "8:00 AM – 9:15 AM",
-          "title": "A Sengun, Dalton K",
+          "title": "A Sengun",
           "type": "excel",
           "people": [
             "Jung",
