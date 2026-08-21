@@ -14,10 +14,8 @@
             "Ali",
             "Jaden G",
             "Josh G",
-            "Anthony",
             "Danny K",
-            "Hugh V",
-            "Braedon"
+            "Hugh V"
           ],
           "note": "",
           "players": []
@@ -29,30 +27,7 @@
           "people": [
             "Mateo",
             "David O",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "1:30 PM – 3:00 PM",
-          "title": "Stanley J @ MAP",
-          "type": "other",
-          "people": [
-            "Mateo",
-            "David O",
-            "Anthony"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Dalton K",
-          "type": "excel",
-          "people": [
-            "Jung",
-            "Ali"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -70,8 +45,8 @@
             "Mateo",
             "Ali",
             "Nick M",
-            "Anthony",
             "Dame",
+            "Jung",
             "Braedon"
           ],
           "players": [],
@@ -79,27 +54,12 @@
         },
         {
           "time": "10:30 AM – 12:00 PM",
-          "title": "Benny G, Ben E @ MAP",
+          "title": "Benny G @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Mateo",
             "Dame",
             "Colby R",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Stanley J ",
-          "type": "other",
-          "people": [
-            "Anthony",
-            "Mateo",
-            "Colby R",
-            "Braedon"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -109,20 +69,8 @@
           "title": "Hailey J @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Colby R",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Dalton K",
-          "type": "excel",
-          "people": [
-            "Ali",
-            "Colby R"
+            "Dame",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -132,8 +80,8 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Jung",
+            "David O"
           ],
           "players": [],
           "note": ""
@@ -143,8 +91,8 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Anthony",
-            "Dame"
+            "Jung",
+            "David O"
           ],
           "players": [],
           "note": ""
@@ -160,11 +108,9 @@
           "type": "excel",
           "people": [
             "Mateo",
-            "Jung",
             "Ali",
             "Jaden G",
             "Josh G",
-            "Anthony",
             "Danny K",
             "Hugh V",
             "Braedon"
@@ -174,23 +120,22 @@
         },
         {
           "time": "11:00 AM – 12:15 PM",
-          "title": "Ben E @ MAP",
+          "title": "Hailey J @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung",
-            "Mateo"
+            "Dame",
+            "Colby R"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "12:15 PM – 1:30 PM",
-          "title": "Hailey J @ MAP",
+          "title": "Ben E @ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung"
+            "Dame",
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -218,8 +163,7 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Jung",
-            "David O"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -229,8 +173,7 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Jung",
-            "David O"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -246,16 +189,15 @@
           "type": "excel",
           "people": [
             "Mateo",
-            "Jung",
             "Jaden G",
             "Josh G",
             "Jamal",
-            "Anthony",
-            "Danny K",
             "Nick M",
             "Ali",
             "Hugh V",
-            "Braedon"
+            "Braedon",
+            "Jung",
+            "Tarek"
           ],
           "note": "",
           "players": []
@@ -266,8 +208,7 @@
           "type": "other",
           "people": [
             "Jung",
-            "Anthony",
-            "Mateo"
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -278,8 +219,8 @@
           "type": "other",
           "people": [
             "Jung",
-            "Mateo",
-            "Anthony"
+            "Dame",
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -289,8 +230,19 @@
           "title": "Hailey J@ MAP",
           "type": "other",
           "people": [
-            "Anthony",
-            "Jung"
+            "Jung",
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Sean Dao @ OGP",
+          "type": "other",
+          "people": [
+            "Colby R",
+            "Dame"
           ],
           "players": [],
           "note": ""
@@ -302,25 +254,10 @@
       "events": [
         {
           "time": "8:00 AM – 9:15 AM",
-          "title": "A Sengun, Dalton K",
-          "type": "excel",
-          "people": [
-            "Jung",
-            "Anthony",
-            "Mateo",
-            "Ali",
-            "Braedon"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "9:15 AM – 10:30 AM",
           "title": "Dariq W, Efe D",
           "type": "excel",
           "people": [
             "Jung",
-            "Anthony",
             "Mateo",
             "Ali",
             "Braedon"
