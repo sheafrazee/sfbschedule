@@ -262,6 +262,293 @@
   ],
   "archive": [
     {
+      "key": "2026-08-17",
+      "range": "Aug 17 – Aug 23, 2026",
+      "title": "Week of Aug 17 – 23",
+      "path": "archive/2026-08-17.png",
+      "pathExcel": "archive/2026-08-17-excel.png",
+      "players": [
+        "Audrina @ OGP",
+        "Ben E @ MAP",
+        "Benny G @ MAP",
+        "Dalton K",
+        "Dariq W",
+        "Efe D",
+        "Group @ OGP:  Russ",
+        "Group @ OGP: Jude",
+        "GW @ MAP",
+        "Hailey J @ MAP",
+        "Hailey J@ MAP",
+        "Live Play: Dalton K",
+        "Live Play: Dariq W",
+        "Russ",
+        "Sean Dao @ OGP",
+        "Tarek",
+        "Zayden"
+      ],
+      "days": [
+        {
+          "day": "Mon 8/17",
+          "events": [
+            {
+              "time": "8:00 AM – 10:00 AM",
+              "title": "Live Play: Dalton K, Efe D",
+              "type": "excel",
+              "people": [
+                "Mateo",
+                "Jung",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Danny K",
+                "Hugh V"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "12:00 PM – 1:30 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Mateo",
+                "David O",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Tue 8/18",
+          "events": [
+            {
+              "time": "8:00 AM – 9:30 AM",
+              "title": "Dalton K, Efe D",
+              "type": "excel",
+              "people": [
+                "Mateo",
+                "Ali",
+                "Nick M",
+                "Dame",
+                "Jung",
+                "Braedon"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "10:30 AM – 12:00 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:30 PM – 2:45 PM",
+              "title": "Hailey J @ MAP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "David O"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Jude, Russ, Zayden, Tarek",
+              "type": "other",
+              "people": [
+                "Jung",
+                "David O"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 8/19",
+          "events": [
+            {
+              "time": "8:00 AM – 10:00 AM",
+              "title": "Live Play: Dariq W, Efe D, Dalton K",
+              "type": "excel",
+              "people": [
+                "Mateo",
+                "Ali",
+                "Jaden G",
+                "Josh G",
+                "Danny K",
+                "Hugh V",
+                "Braedon"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "11:00 AM – 12:15 PM",
+              "title": "Hailey J @ MAP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:15 PM – 1:30 PM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 8/20",
+          "events": [
+            {
+              "time": "8:00 AM – 9:15 AM",
+              "title": "Dariq W, Efe D",
+              "type": "excel",
+              "people": [
+                "Mateo",
+                "Ali",
+                "Braedon",
+                "Chozen"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:  Russ",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 8/21",
+          "events": [
+            {
+              "time": "8:00 AM – 10:00 AM",
+              "title": "Live Play: Dariq W, Efe D",
+              "type": "excel",
+              "people": [
+                "Mateo",
+                "Jaden G",
+                "Josh G",
+                "Jamal",
+                "Nick M",
+                "Ali",
+                "Hugh V",
+                "Jung",
+                "Tarek",
+                "Chozen",
+                "Jacob (Duke)",
+                "Dart M"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "11:00 AM – 12:30 PM",
+              "title": "GW @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:30 PM – 2:00 PM",
+              "title": "Benny G @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "2:00 PM – 3:00 PM",
+              "title": "Hailey J@ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Sean Dao @ OGP",
+              "type": "other",
+              "people": [
+                "Colby R",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 8/22",
+          "events": []
+        },
+        {
+          "day": "Sun 8/23",
+          "events": []
+        }
+      ],
+      "ts": 1787435313548
+    },
+    {
       "key": "2026-08-10",
       "range": "Aug 10 – Aug 16, 2026",
       "title": "Week of Aug 10 – 16",
