@@ -11,23 +11,31 @@
           "people": [
             "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
             "Nick M",
             "Braedon",
-            "Dart"
+            "Dart",
+            "Chozen"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "12:00 PM – 1:15 PM",
+          "time": "11:30 AM – 12:45 PM",
           "title": "Ben E @ MAP",
           "type": "other",
           "people": [
             "Jung",
-            "Colby R",
-            "Dame"
+            "Nick M"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "12:45 PM – 1:45 PM",
+          "title": "Rudy W",
+          "type": "other",
+          "people": [
+            "Nick M"
           ],
           "players": [],
           "note": ""
@@ -44,8 +52,6 @@
           "people": [
             "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
             "Nick M",
             "Dart",
             "Braedon"
@@ -58,8 +64,7 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Jung",
-            "Dame"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -69,8 +74,7 @@
           "title": "Group @ OGP:",
           "type": "other",
           "people": [
-            "Jung",
-            "Dame"
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -87,8 +91,6 @@
           "people": [
             "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
             "Nick M",
             "Dart",
             "Chozen"
@@ -157,8 +159,6 @@
           "people": [
             "Jung",
             "Ali",
-            "Jaden G",
-            "Josh G",
             "Dart",
             "Chozen"
           ],
