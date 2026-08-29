@@ -227,6 +227,258 @@
   ],
   "archive": [
     {
+      "key": "2026-08-24",
+      "range": "Aug 24 – Aug 30, 2026",
+      "title": "Week of Aug 24 – 30",
+      "path": "archive/2026-08-24.png",
+      "pathExcel": "archive/2026-08-24-excel.png",
+      "players": [
+        "Audrina @ OGP",
+        "Ben E @ MAP",
+        "Bogi M",
+        "Cesar",
+        "Dalton K",
+        "Dariq W",
+        "Eric @ MAP",
+        "Group @ OGP: Russ",
+        "Group @ OGP: Zayden 3/5",
+        "Jared M",
+        "Justin Stone",
+        "Live Play:  Dariq W",
+        "Live Play: Dariq W",
+        "Maxwell Scott @ CDM",
+        "Rudy W",
+        "Russ",
+        "Tarek"
+      ],
+      "days": [
+        {
+          "day": "Mon 8/24",
+          "events": [
+            {
+              "time": "8:00 AM – 10:00 AM",
+              "title": "Live Play: Dariq W",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Nick M",
+                "Braedon",
+                "Dart",
+                "Chozen"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "11:30 AM – 12:45 PM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Nick M"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "12:45 PM – 1:45 PM",
+              "title": "Rudy W",
+              "type": "other",
+              "people": [
+                "Nick M"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Tue 8/25",
+          "events": [
+            {
+              "time": "7:00 AM – 8:00 AM",
+              "title": "Jared M",
+              "type": "excel",
+              "people": [
+                "Ali",
+                "Nick M",
+                "Braedon",
+                "Chozen"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:00 AM – 9:15 AM",
+              "title": "Dariq W",
+              "type": "excel",
+              "people": [
+                "Ali",
+                "Nick M",
+                "Braedon",
+                "Chozen"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Zayden 3/5, Tarek, Russ",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 8/26",
+          "events": [
+            {
+              "time": "7:00 AM – 9:00 AM",
+              "title": "Live Play: Dariq W, Dalton K",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Nick M",
+                "Dart",
+                "Chozen",
+                "Kirby"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "10:30 AM – 11:45 AM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Colby R",
+                "Dame"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 8/27",
+          "events": [
+            {
+              "time": "6:30 AM – 8:00 AM",
+              "title": "Maxwell Scott @ CDM",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:00 PM – 2:00 PM",
+              "title": "Eric @ MAP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Russ, Tarek, Cesar, Justin Stone",
+              "type": "other",
+              "people": [
+                "Greg",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 8/28",
+          "events": [
+            {
+              "time": "9:30 AM – 11:30 AM",
+              "title": "Live Play:  Dariq W, Bogi M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Dart",
+                "Chozen",
+                "Tarek"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "Ben E @ MAP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 8/29",
+          "events": [
+            {
+              "time": "10:00 AM – 11:15 AM",
+              "title": "Bogi M ",
+              "type": "excel",
+              "people": [
+                "Matt M",
+                "Guiressi"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sun 8/30",
+          "events": []
+        }
+      ],
+      "ts": 1788040578338
+    },
+    {
       "key": "2026-08-17",
       "range": "Aug 17 – Aug 23, 2026",
       "title": "Week of Aug 17 – 23",
