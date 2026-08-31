@@ -195,6 +195,217 @@
   ],
   "archive": [
     {
+      "key": "2026-08-31",
+      "range": "Aug 31 – Sep 6, 2026",
+      "title": "Week of Aug 31 – Sep 6",
+      "path": "archive/2026-08-31.png",
+      "pathExcel": "archive/2026-08-31-excel.png",
+      "players": [
+        "Audrina @ OGP",
+        "Bogi M",
+        "Group @ OGP:",
+        "Jared M",
+        "Live Play: Bogi M",
+        "Maxwell Scott @ CDM",
+        "Sean Dao @ OGP",
+        "Steven M"
+      ],
+      "days": [
+        {
+          "day": "Mon 8/31",
+          "events": [
+            {
+              "time": "9:00 AM – 11:00 AM",
+              "title": "Live Play: Bogi M, Jared M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Chozen",
+                "Mark L",
+                "Bing"
+              ],
+              "note": "",
+              "players": []
+            }
+          ]
+        },
+        {
+          "day": "Tue 9/1",
+          "events": [
+            {
+              "time": "9:00 AM – 10:15 AM",
+              "title": "Bogi M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Greg"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Greg"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 9/2",
+          "events": [
+            {
+              "time": "9:00 AM – 11:00 AM",
+              "title": "Live Play: Bogi M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Dart",
+                "Chozen",
+                "Mark L",
+                "Bing"
+              ],
+              "note": "",
+              "players": []
+            }
+          ]
+        },
+        {
+          "day": "Thu 9/3",
+          "events": [
+            {
+              "time": "6:30 AM – 7:45 AM",
+              "title": "Maxwell Scott @ CDM",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "9:00 AM – 10:15 AM",
+              "title": "Bogi M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Greg",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:",
+              "type": "other",
+              "people": [
+                "Dame",
+                "Greg",
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 9/4",
+          "events": [
+            {
+              "time": "9:00 AM – 11:00 AM",
+              "title": "Live Play: Bogi M",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali",
+                "Dart",
+                "Chozen",
+                "Mark L",
+                "Bing",
+                "Matt M"
+              ],
+              "note": "",
+              "players": []
+            },
+            {
+              "time": "1:00 PM – 2:00 PM",
+              "title": "Steven M",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Dame"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "3:30 PM – 4:30 PM",
+              "title": "Sean Dao @ OGP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Steven M"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 9/5",
+          "events": [
+            {
+              "time": "9:00 AM – 10:15 AM",
+              "title": "Bogi M ",
+              "type": "excel",
+              "people": [
+                "Jung",
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sun 9/6",
+          "events": []
+        }
+      ],
+      "ts": 1788216142299
+    },
+    {
       "key": "2026-08-24",
       "range": "Aug 24 – Aug 30, 2026",
       "title": "Week of Aug 24 – 30",
