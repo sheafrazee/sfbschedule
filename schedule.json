@@ -35,17 +35,6 @@
           "note": ""
         },
         {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ OGP",
-          "type": "other",
-          "people": [
-            "Dame",
-            "Greg"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:00 PM",
           "title": "Group @ OGP:",
           "type": "other",
@@ -108,7 +97,6 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Dame",
             "Greg",
             "Jung"
           ],
@@ -120,7 +108,6 @@
           "title": "Group @ OGP:",
           "type": "other",
           "people": [
-            "Dame",
             "Greg",
             "Jung"
           ],
@@ -133,7 +120,7 @@
       "day": "Fri 9/4",
       "events": [
         {
-          "time": "9:00 AM – 11:00 AM",
+          "time": "10:00 AM – 12:00 PM",
           "title": "Live Play: Bogi M",
           "type": "excel",
           "people": [
@@ -149,7 +136,7 @@
           "players": []
         },
         {
-          "time": "1:00 PM – 2:00 PM",
+          "time": "1:30 PM – 2:30 PM",
           "title": "Steven M",
           "type": "other",
           "people": [
