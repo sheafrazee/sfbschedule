@@ -36,7 +36,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Tarek +2, Dan Choi 2x",
           "type": "other",
           "people": [
             "Dame",
@@ -108,7 +108,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Jacob Jares",
           "type": "other",
           "people": [
             "Greg",
@@ -125,7 +125,7 @@
       "events": [
         {
           "time": "10:00 AM – 12:00 PM",
-          "title": "Live Play: Bogi M",
+          "title": "Live Play: Bogi M, Ryan R",
           "type": "excel",
           "people": [
             "Jung",
@@ -134,14 +134,15 @@
             "Chozen",
             "Mark L",
             "Bing",
-            "Matt M"
+            "Matt M",
+            "Yusef"
           ],
           "note": "",
           "players": []
         },
         {
-          "time": "1:30 PM – 2:30 PM",
-          "title": "Steven M",
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Steven M @ OGP",
           "type": "other",
           "people": [
             "Jung",
