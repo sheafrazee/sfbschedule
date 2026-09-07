@@ -1226,9 +1226,16 @@ function weekDates(d) {
 // ---- Next-week date helpers ----
 const _DAY_SHORT = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
-// Returns { dates: Date[7] Mon–Sun, title: string } for the calendar week after today's week.
+// Returns { dates: Date[7] Mon–Sun, title: string } for the calendar week that
+// FOLLOWS the week the live schedule represents.
+// BUGFIX: was weekDates(new Date()) -- anchored to today's week. When turnover
+// runs late (you promote on Mon 9/7 the week that was meant to go live 8/31),
+// the live week and today's week are no longer the same, and anchoring to the
+// wall clock silently skipped a week: seeding produced 9/14-9/20 when 9/7-9/13
+// was the week that still needed building. Anchoring to the schedule's own
+// Monday keeps the sequence unbroken whether you're early, on time or late.
 function nextCalWeek() {
-  const w = weekDates(new Date());
+  const w = liveWeekDates(data);
   const nextMon = new Date(w.mon);
   nextMon.setDate(nextMon.getDate() + 7);
   const dates = [];
@@ -4513,8 +4520,10 @@ document.getElementById("addDayBtn").addEventListener("click", () => addDayToSlo
 
 document.getElementById("seedNextBtn").addEventListener("click", () => {
   const hasNext = data.nextWeek && (data.nextWeek.days || []).length;
-  if (hasNext && !confirm("Overwrite the existing Next Week with a fresh copy of the current week?")) return;
   const nw = nextCalWeek();
+  if (hasNext && !confirm(
+        `Overwrite “${data.nextWeek.weekTitle || "Next Week"}” with a fresh copy of the current week?\n\n` +
+        `It will be rebuilt as: ${nw.title}`)) return;
   const days = JSON.parse(JSON.stringify(data.days || []));
   relabelToNextWeek(days, nw);
   data.nextWeek = { weekTitle: nw.title, days };
