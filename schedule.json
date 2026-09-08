@@ -1,46 +1,32 @@
 {
-  "weekTitle": "Week of Aug 31 – Sep 6",
+  "weekTitle": "Week of Sep 7 – 13",
   "days": [
     {
-      "day": "Mon 8/31",
-      "events": [
-        {
-          "time": "9:00 AM – 11:00 AM",
-          "title": "Live Play: Bogi M, Jared M",
-          "type": "excel",
-          "people": [
-            "Jung",
-            "Ali",
-            "Chozen",
-            "Mark L",
-            "Bing"
-          ],
-          "note": "",
-          "players": []
-        }
-      ]
+      "day": "Mon 9/7",
+      "events": []
     },
     {
-      "day": "Tue 9/1",
+      "day": "Tue 9/8",
       "events": [
         {
-          "time": "9:00 AM – 10:15 AM",
-          "title": "Bogi M",
-          "type": "excel",
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina @ OGP",
+          "type": "other",
           "people": [
             "Jung",
-            "Ali"
+            "Dame"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Tarek +2, Dan Choi 2x",
+          "title": "Group @ OGP:",
           "type": "other",
           "people": [
             "Dame",
-            "Greg"
+            "Greg",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -48,29 +34,22 @@
       ]
     },
     {
-      "day": "Wed 9/2",
+      "day": "Wed 9/9",
       "events": [
         {
-          "time": "11:00 AM – 1:00 PM",
-          "title": "Live Play: Bogi M",
-          "type": "excel",
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA 1u @ MAP",
+          "type": "other",
           "people": [
-            "Jung",
-            "Ali",
-            "Dart",
-            "Chozen",
-            "Mark L",
-            "Bing",
-            "Anthony",
-            "Brandon H"
+            "Jung"
           ],
-          "note": "",
-          "players": []
+          "players": [],
+          "note": ""
         }
       ]
     },
     {
-      "day": "Thu 9/3",
+      "day": "Thu 9/10",
       "events": [
         {
           "time": "6:30 AM – 7:45 AM",
@@ -81,14 +60,29 @@
           ],
           "players": [],
           "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Fri 9/11",
+      "events": [
+        {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Steven M @ OGP",
+          "type": "other",
+          "people": [
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
         },
         {
-          "time": "10:00 AM – 11:15 AM",
-          "title": "Bogi M",
-          "type": "excel",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Sean Dao @ OGP",
+          "type": "other",
           "people": [
-            "Ali",
-            "Kirby"
+            "Steven M",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -99,19 +93,21 @@
           "type": "other",
           "people": [
             "Greg",
-            "Dylan O"
+            "Jung",
+            "Steven M"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Jacob Jares",
+          "title": "Group @ OGP:",
           "type": "other",
           "people": [
             "Greg",
-            "Dylan O",
-            "Kirby"
+            "Kirby",
+            "Jung",
+            "Steven M"
           ],
           "players": [],
           "note": ""
@@ -119,67 +115,11 @@
       ]
     },
     {
-      "day": "Fri 9/4",
-      "events": [
-        {
-          "time": "10:00 AM – 12:00 PM",
-          "title": "Live Play: Bogi M, Ryan R",
-          "type": "excel",
-          "people": [
-            "Jung",
-            "Ali",
-            "Dart",
-            "Chozen",
-            "Mark L",
-            "Bing",
-            "Matt M",
-            "Yusef"
-          ],
-          "note": "",
-          "players": []
-        },
-        {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Steven M @ OGP",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:30 PM – 4:30 PM",
-          "title": "Sean Dao @ OGP",
-          "type": "other",
-          "people": [
-            "Steven M",
-            "Jung"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
+      "day": "Sat 9/12",
+      "events": []
     },
     {
-      "day": "Sat 9/5",
-      "events": [
-        {
-          "time": "8:00 AM – 9:15 AM",
-          "title": "Bogi M ",
-          "type": "excel",
-          "people": [
-            "Jung",
-            "Ali"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Sun 9/6",
+      "day": "Sun 9/13",
       "events": []
     }
   ],
