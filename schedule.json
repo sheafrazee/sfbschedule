@@ -51,11 +51,12 @@
       "day": "Thu 9/10",
       "events": [
         {
-          "time": "6:30 AM – 7:45 AM",
-          "title": "Maxwell Scott @ CDM",
+          "time": "10:00 AM – 11:15 AM",
+          "title": "Dariq W",
           "type": "other",
           "people": [
-            "Kirby"
+            "Ali",
+            "Jung"
           ],
           "players": [],
           "note": ""
@@ -66,10 +67,11 @@
       "day": "Fri 9/11",
       "events": [
         {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Steven M @ OGP",
+          "time": "10:00 AM – 11:15 AM",
+          "title": "Dariq W",
           "type": "other",
           "people": [
+            "Ali",
             "Jung"
           ],
           "players": [],
@@ -77,10 +79,9 @@
         },
         {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Sean Dao @ OGP",
+          "title": "Steven M @ OGP",
           "type": "other",
           "people": [
-            "Steven M",
             "Jung"
           ],
           "players": [],
