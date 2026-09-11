@@ -67,33 +67,19 @@
       "events": [
         {
           "time": "10:00 AM – 11:15 AM",
-          "title": "Dariq W",
+          "title": "Dariq W @ OGP",
           "type": "other",
-          "people": [
-            "Ali",
-            "Jung"
-          ],
+          "people": [],
           "players": [],
           "note": ""
         },
         {
-          "time": "3:00 PM – 4:00 PM",
+          "time": "3:30 PM – 4:30 PM",
           "title": "Steven M @ OGP",
           "type": "other",
           "people": [
-            "Colby",
-            "Jung"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ OGP",
-          "type": "other",
-          "people": [
             "Jung",
-            "Steven M"
+            "Dylan O"
           ],
           "players": [],
           "note": ""
@@ -104,7 +90,8 @@
           "type": "other",
           "people": [
             "Jung",
-            "Steven M"
+            "Steven M",
+            "Dylan O"
           ],
           "players": [],
           "note": ""
