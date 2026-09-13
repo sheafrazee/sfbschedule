@@ -99,6 +99,120 @@
   ],
   "archive": [
     {
+      "key": "2026-09-07",
+      "range": "Sep 7 – Sep 13, 2026",
+      "title": "Week of Sep 7 – 13",
+      "path": "archive/2026-09-07.png",
+      "pathExcel": "archive/2026-09-07-excel.png",
+      "players": [
+        "ABA/DELTA 1u @ MAP",
+        "Audrina @ OGP",
+        "Cesar",
+        "Dariq W",
+        "Dariq W @ OGP",
+        "Group @ OGP: Russ",
+        "Zayden 3/5"
+      ],
+      "days": [
+        {
+          "day": "Mon 9/7",
+          "events": []
+        },
+        {
+          "day": "Tue 9/8",
+          "events": [
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina @ OGP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Guiressi"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Russ, Cesar",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Guiressi"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 9/9",
+          "events": [
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA 1u @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 9/10",
+          "events": [
+            {
+              "time": "10:00 AM – 11:15 AM",
+              "title": "Dariq W",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 9/11",
+          "events": [
+            {
+              "time": "10:00 AM – 11:15 AM",
+              "title": "Dariq W @ OGP",
+              "type": "excel",
+              "people": [
+                "Mark L"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Russ, Zayden 3/5",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 9/12",
+          "events": []
+        },
+        {
+          "day": "Sun 9/13",
+          "events": []
+        }
+      ],
+      "ts": 1789324650403
+    },
+    {
       "key": "2026-08-31",
       "range": "Aug 31 – Sep 6, 2026",
       "title": "Week of Aug 31 – Sep 6",
