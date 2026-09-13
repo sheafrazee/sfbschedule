@@ -4113,5 +4113,116 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": null
+  "nextWeek": {
+    "weekTitle": "Week of Sep 14 – 20",
+    "days": [
+      {
+        "day": "Mon 9/14",
+        "events": [
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "ABA/DELTA 2u @ MAP",
+            "type": "other",
+            "people": [
+              "Jung"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Tue 9/15",
+        "events": [
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina @ OGP",
+            "type": "other",
+            "people": [
+              "Jung",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group @ OGP:",
+            "type": "other",
+            "people": [
+              "Jung",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Wed 9/16",
+        "events": [
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "ABA/DELTA 3u @ MAP",
+            "type": "other",
+            "people": [
+              "Jung"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Thu 9/17",
+        "events": [
+          {
+            "time": "6:15 AM – 7:30 AM",
+            "title": "Maxwell, Ryan @ CDM",
+            "type": "other",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Fri 9/18",
+        "events": [
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina @ OGP",
+            "type": "other",
+            "people": [
+              "Jung",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": ""
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group @ OGP: ",
+            "type": "other",
+            "people": [
+              "Jung",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": ""
+          }
+        ]
+      },
+      {
+        "day": "Sat 9/19",
+        "events": []
+      },
+      {
+        "day": "Sun 9/20",
+        "events": []
+      }
+    ]
+  }
 }
