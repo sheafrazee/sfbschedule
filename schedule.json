@@ -21,7 +21,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Cesar",
           "type": "other",
           "people": [
             "Jung",
@@ -53,7 +53,7 @@
         {
           "time": "10:00 AM – 11:15 AM",
           "title": "Dariq W",
-          "type": "other",
+          "type": "excel",
           "people": [
             "Ali"
           ],
@@ -68,25 +68,16 @@
         {
           "time": "10:00 AM – 11:15 AM",
           "title": "Dariq W @ OGP",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:30 PM – 4:30 PM",
-          "title": "Steven M @ OGP",
-          "type": "other",
+          "type": "excel",
           "people": [
-            "Jung",
-            "Dylan O"
+            "Mark L"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Zayden 3/5",
           "type": "other",
           "people": [
             "Jung",
