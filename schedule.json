@@ -1,43 +1,12 @@
 {
-  "weekTitle": "Week of Sep 7 – 13",
+  "weekTitle": "Week of Sep 14 – 20",
   "days": [
     {
-      "day": "Mon 9/7",
-      "events": []
-    },
-    {
-      "day": "Tue 9/8",
-      "events": [
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ OGP",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Guiressi"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Cesar",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Guiressi"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Wed 9/9",
+      "day": "Mon 9/14",
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA 1u @ MAP",
+          "title": "ABA/DELTA 2u @ MAP",
           "type": "other",
           "people": [
             "Jung"
@@ -48,36 +17,22 @@
       ]
     },
     {
-      "day": "Thu 9/10",
+      "day": "Tue 9/15",
       "events": [
         {
-          "time": "10:00 AM – 11:15 AM",
-          "title": "Dariq W",
-          "type": "excel",
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina @ OGP",
+          "type": "other",
           "people": [
-            "Ali"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Fri 9/11",
-      "events": [
-        {
-          "time": "10:00 AM – 11:15 AM",
-          "title": "Dariq W @ OGP",
-          "type": "excel",
-          "people": [
-            "Mark L"
+            "Jung",
+            "Dylan O"
           ],
           "players": [],
           "note": ""
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Zayden 3/5",
+          "title": "Group @ OGP:",
           "type": "other",
           "people": [
             "Jung",
@@ -89,11 +44,68 @@
       ]
     },
     {
-      "day": "Sat 9/12",
+      "day": "Wed 9/16",
+      "events": [
+        {
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA 3u @ MAP",
+          "type": "other",
+          "people": [
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Thu 9/17",
+      "events": [
+        {
+          "time": "6:15 AM – 7:30 AM",
+          "title": "Maxwell, Ryan @ CDM",
+          "type": "other",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Fri 9/18",
+      "events": [
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina @ OGP",
+          "type": "other",
+          "people": [
+            "Jung",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP: ",
+          "type": "other",
+          "people": [
+            "Jung",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Sat 9/19",
       "events": []
     },
     {
-      "day": "Sun 9/13",
+      "day": "Sun 9/20",
       "events": []
     }
   ],
@@ -4113,116 +4125,5 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": {
-    "weekTitle": "Week of Sep 14 – 20",
-    "days": [
-      {
-        "day": "Mon 9/14",
-        "events": [
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA 2u @ MAP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Tue 9/15",
-        "events": [
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina @ OGP",
-            "type": "other",
-            "people": [
-              "Jung",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP:",
-            "type": "other",
-            "people": [
-              "Jung",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Wed 9/16",
-        "events": [
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA 3u @ MAP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Thu 9/17",
-        "events": [
-          {
-            "time": "6:15 AM – 7:30 AM",
-            "title": "Maxwell, Ryan @ CDM",
-            "type": "other",
-            "people": [
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Fri 9/18",
-        "events": [
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina @ OGP",
-            "type": "other",
-            "people": [
-              "Jung",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP: ",
-            "type": "other",
-            "people": [
-              "Jung",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Sat 9/19",
-        "events": []
-      },
-      {
-        "day": "Sun 9/20",
-        "events": []
-      }
-    ]
-  }
+  "nextWeek": null
 }
