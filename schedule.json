@@ -70,12 +70,7 @@
           ],
           "players": [],
           "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Fri 9/18",
-      "events": [
+        },
         {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina @ OGP",
@@ -94,6 +89,21 @@
           "people": [
             "Jung",
             "Dylan O"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Fri 9/18",
+      "events": [
+        {
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Dao @ OGP",
+          "type": "other",
+          "people": [
+            "Jung"
           ],
           "players": [],
           "note": ""
