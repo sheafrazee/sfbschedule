@@ -66,7 +66,8 @@
           "title": "Maxwell, Ryan @ CDM",
           "type": "other",
           "people": [
-            "Dame"
+            "Kirby",
+            "Guiressi"
           ],
           "players": [],
           "note": ""
@@ -76,8 +77,8 @@
           "title": "Audrina @ OGP",
           "type": "other",
           "people": [
-            "Jung",
-            "Dylan O"
+            "Dylan O",
+            "Kirby"
           ],
           "players": [],
           "note": ""
@@ -87,8 +88,8 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Jung",
-            "Dylan O"
+            "Dylan O",
+            "Kirby"
           ],
           "players": [],
           "note": ""
@@ -98,6 +99,16 @@
     {
       "day": "Fri 9/18",
       "events": [
+        {
+          "time": "2:30 PM – 3:30 PM",
+          "title": "Parker S",
+          "type": "other",
+          "people": [
+            "Colby"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "3:30 PM – 4:30 PM",
           "title": "Dao @ OGP",
