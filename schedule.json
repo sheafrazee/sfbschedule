@@ -1,39 +1,8 @@
 {
-  "weekTitle": "Week of Sep 14 – 20",
+  "weekTitle": "Week of Sep 21 – 27",
   "days": [
     {
-      "day": "Mon 9/14",
-      "events": [
-        {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA 2u @ MAP",
-          "type": "other",
-          "people": [
-            "Jung"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Tue 9/15",
-      "events": [
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Anthony",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "day": "Wed 9/16",
+      "day": "Mon 9/21",
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
@@ -48,7 +17,49 @@
       ]
     },
     {
-      "day": "Thu 9/17",
+      "day": "Tue 9/22",
+      "events": [
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina 2/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O",
+            "Kirby"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP:",
+          "type": "other",
+          "people": [
+            "Jung",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Wed 9/23",
+      "events": [
+        {
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA 4u @ MAP",
+          "type": "other",
+          "people": [
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "day": "Thu 9/24",
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
@@ -62,7 +73,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 1/5 @ OGP",
+          "title": "Audrina 3/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O",
@@ -73,7 +84,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Zayden",
+          "title": "Group @ OGP: ",
           "type": "other",
           "people": [
             "Dylan O",
@@ -85,11 +96,19 @@
       ]
     },
     {
-      "day": "Fri 9/18",
+      "day": "Fri 9/25",
       "events": [
         {
-          "time": "2:30 PM – 3:30 PM",
-          "title": "Parker S",
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Dao @ OGP",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "4:30 PM – 5:30 PM",
+          "title": "Parker S @ OGP",
           "type": "other",
           "people": [
             "Colby R"
@@ -100,11 +119,11 @@
       ]
     },
     {
-      "day": "Sat 9/19",
+      "day": "Sat 9/26",
       "events": []
     },
     {
-      "day": "Sun 9/20",
+      "day": "Sun 9/27",
       "events": []
     }
   ],
