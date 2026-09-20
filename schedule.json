@@ -20,19 +20,8 @@
       "day": "Tue 9/15",
       "events": [
         {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ OGP",
-          "type": "other",
-          "people": [
-            "Jung",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Anthony",
           "type": "other",
           "people": [
             "Jung",
@@ -66,7 +55,6 @@
           "title": "Maxwell, Ryan @ CDM",
           "type": "other",
           "people": [
-            "Kirby",
             "Guiressi"
           ],
           "players": [],
@@ -74,7 +62,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina @ OGP",
+          "title": "Audrina 1/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O",
@@ -85,7 +73,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP: Russ, Zayden",
           "type": "other",
           "people": [
             "Dylan O",
@@ -104,17 +92,7 @@
           "title": "Parker S",
           "type": "other",
           "people": [
-            "Colby"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "3:30 PM – 4:30 PM",
-          "title": "Dao @ OGP",
-          "type": "other",
-          "people": [
-            "Jung"
+            "Colby R"
           ],
           "players": [],
           "note": ""
