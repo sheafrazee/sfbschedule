@@ -1,8 +1,8 @@
 {
-  "weekTitle": "Week of Sep 21 – 27",
+  "weekTitle": "Week of Sep 28 – Oct 4",
   "days": [
     {
-      "day": "Mon 9/21",
+      "day": "Mon 9/28",
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
@@ -17,7 +17,7 @@
       ]
     },
     {
-      "day": "Tue 9/22",
+      "day": "Tue 9/29",
       "events": [
         {
           "time": "4:00 PM – 5:00 PM",
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "day": "Wed 9/23",
+      "day": "Wed 9/30",
       "events": [
         {
           "time": "6:00 AM – 7:30 AM",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "day": "Thu 9/24",
+      "day": "Thu 10/1",
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "day": "Fri 9/25",
+      "day": "Fri 10/2",
       "events": [
         {
           "time": "8:00 AM – 9:30 AM",
@@ -131,11 +131,11 @@
       ]
     },
     {
-      "day": "Sat 9/26",
+      "day": "Sat 10/3",
       "events": []
     },
     {
-      "day": "Sun 9/27",
+      "day": "Sun 10/4",
       "events": []
     }
   ],
@@ -4442,146 +4442,5 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": {
-    "weekTitle": "Week of Sep 28 – Oct 4",
-    "days": [
-      {
-        "day": "Mon 9/28",
-        "events": [
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA 3u @ MAP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Tue 9/29",
-        "events": [
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 2/5 @ OGP",
-            "type": "other",
-            "people": [
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP: Russ",
-            "type": "other",
-            "people": [
-              "Dylan O"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Wed 9/30",
-        "events": [
-          {
-            "time": "6:00 AM – 7:30 AM",
-            "title": "GW @ OGP",
-            "type": "other",
-            "people": [
-              "Jung",
-              "Ali"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA 4u @ MAP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Thu 10/1",
-        "events": [
-          {
-            "time": "6:15 AM – 7:30 AM",
-            "title": "Maxwell, Ryan @ CDM",
-            "type": "other",
-            "people": [
-              "Ali",
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 3/5 @ OGP",
-            "type": "other",
-            "people": [
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP: Russ, Zayden 5/5",
-            "type": "other",
-            "people": [
-              "Dame"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Fri 10/2",
-        "events": [
-          {
-            "time": "8:00 AM – 9:30 AM",
-            "title": "Malachi O @ Sunday Red",
-            "type": "excel",
-            "people": [
-              "Ali",
-              "Evan",
-              "Matt M"
-            ],
-            "players": [],
-            "note": ""
-          },
-          {
-            "time": "3:30 PM – 4:30 PM",
-            "title": "Dao @ OGP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": ""
-          }
-        ]
-      },
-      {
-        "day": "Sat 10/3",
-        "events": []
-      },
-      {
-        "day": "Sun 10/4",
-        "events": []
-      }
-    ]
-  }
+  "nextWeek": null
 }
