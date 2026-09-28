@@ -6,7 +6,7 @@
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA 3u @ MAP",
+          "title": "ABA/DELTA #5 @ MAP",
           "type": "other",
           "people": [
             "Jung"
@@ -21,7 +21,7 @@
       "events": [
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 2/5 @ OGP",
+          "title": "Audrina 4/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O"
@@ -31,7 +31,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ",
+          "title": "Group @ OGP",
           "type": "other",
           "people": [
             "Dylan O"
@@ -57,7 +57,7 @@
         },
         {
           "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA 4u @ MAP",
+          "title": "ABA/DELTA #6 @ MAP",
           "type": "other",
           "people": [
             "Jung"
@@ -83,7 +83,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 3/5 @ OGP",
+          "title": "Audrina 5/5 @ OGP",
           "type": "other",
           "people": [
             "Dame"
@@ -93,7 +93,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Zayden 5/5",
+          "title": "Group @ OGP",
           "type": "other",
           "people": [
             "Dame"
@@ -106,18 +106,6 @@
     {
       "day": "Fri 10/2",
       "events": [
-        {
-          "time": "8:00 AM – 9:30 AM",
-          "title": "Malachi O @ Sunday Red",
-          "type": "excel",
-          "people": [
-            "Ali",
-            "Evan",
-            "Matt M"
-          ],
-          "players": [],
-          "note": ""
-        },
         {
           "time": "3:30 PM – 4:30 PM",
           "title": "Dao @ OGP",
