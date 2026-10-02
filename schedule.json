@@ -31,7 +31,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP",
+          "title": "Group @ OGP: Russ, Aiden",
           "type": "other",
           "people": [
             "Jung"
@@ -82,7 +82,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
-          "title": "Maxwell, Ryan @ CDM",
+          "title": "Maxwell, 1/5 Jude 3/5 @ CDM",
           "type": "other",
           "people": [
             "Ali",
@@ -93,7 +93,7 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan @ OGP",
+          "title": "Jordan 2/5 @ OGP",
           "type": "other",
           "people": [
             "Jung"
@@ -102,18 +102,8 @@
           "note": ""
         },
         {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 5/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Dame"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP",
+          "title": "Group @ OGP: Russ, Cesar",
           "type": "other",
           "people": [
             "Dame"
