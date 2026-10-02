@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Home-screen icon: SFB monogram, warm white on ink. Embedded so index.html stays a single file. -->
+<meta name="apple-mobile-web-app-title" content="SFB Schedule">
+<meta name="application-name" content="SFB Schedule">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
 <title>SFB Training Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -270,8 +275,11 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .ab-link { background: none; border: none; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); text-decoration: underline; cursor: pointer; }
 .ab-link:hover { color: var(--ink); }
 .ab-sep { color: var(--light-stone); }
+.ab-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; width: 100%; }
 .archive-bulk .btn:disabled { opacity: .45; cursor: not-allowed; }
 .archive-bulk .btn:disabled:hover { background: #fff; }
+.btn.excel { border-color: var(--clay); color: var(--clay); }
+.btn.excel:hover:not(:disabled) { background: var(--clay); color: #fff; }
 /* Archive roll-up */
 .rollup-modal { max-width: 760px; }
 .ru-types { display: flex; gap: 6px; margin-bottom: 14px; }
@@ -909,8 +917,11 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
       <button class="ab-link" id="abAll">Select all shown</button>
       <span class="ab-sep">·</span>
       <button class="ab-link" id="abNone">Clear</button>
-      <button class="btn" id="abRollup" disabled>Σ Players &amp; interns</button>
-      <button class="btn" id="abZip" disabled>↓ Download (.zip)</button>
+      <div class="ab-actions">
+        <button class="btn" id="abRollup" disabled>Σ Players &amp; interns</button>
+        <button class="btn excel" id="abExcel" disabled title="Download only the Excel Client schedule images for the selected weeks">↓ Excel only (.zip)</button>
+        <button class="btn" id="abZip" disabled>↓ Download (.zip)</button>
+      </div>
     </div>
     <div class="modal-actions">
       <span class="archive-status" id="archiveStatus"></span>
@@ -2147,6 +2158,7 @@ function updateArchiveBulk() {
   bar.classList.toggle("off", n === 0);
   document.getElementById("abCount").textContent = n ? `${n} week${n !== 1 ? "s" : ""} selected` : "None selected";
   document.getElementById("abZip").disabled = !n;
+  document.getElementById("abExcel").disabled = !n;
   document.getElementById("abRollup").disabled = !n;
 }
 
@@ -2321,7 +2333,6 @@ function openBulkZipMenu(btn) {
   menu.className = "share-menu";
   menu.innerHTML = `<button class="share-menu-item" data-act="both">↓ Both images (${n} wk)</button>`
     + `<button class="share-menu-item" data-act="all">↓ All Types images only</button>`
-    + `<button class="share-menu-item" data-act="excel">↓ Excel images only</button>`
     + `<button class="share-menu-item" data-act="ics">↓ Images + calendars (.ics)</button>`;
   document.body.appendChild(menu);
   const r = btn.getBoundingClientRect();
@@ -2335,9 +2346,10 @@ function openBulkZipMenu(btn) {
   setTimeout(() => document.addEventListener("click", closeShareMenu), 0);
 }
 
+let _zipBusy = false;
 async function zipSelectedWeeks(mode, btn) {
   const sel = selectedArchiveEntries();
-  if (!sel.length) return;
+  if (!sel.length || _zipBusy) return;
   if (!window.JSZip) { alert("Zip library still loading — try again in a moment."); return; }
   const wantAll   = mode !== "excel";
   const wantExcel = mode !== "all";
@@ -2347,6 +2359,7 @@ async function zipSelectedWeeks(mode, btn) {
   const zip = new JSZip();
   const missing = [];
   let files = 0;
+  _zipBusy = true;
   try {
     for (let i = 0; i < sel.length; i++) {
       const e = sel[i];
@@ -2361,6 +2374,8 @@ async function zipSelectedWeeks(mode, btn) {
         const b = await fetchArchiveBlob(e.pathExcel);
         if (b) { zip.file(`${e.key}_${slug}_excel.png`, b); files++; }
         else missing.push(`${e.range} — Excel image`);
+      } else if (wantExcel) {
+        missing.push(`${e.range} — no Excel image archived for this week`);
       }
       if (wantIcs) {
         if (!hasSnapshot(e)) { missing.push(`${e.range} — calendars (archived before .ics existed)`); }
@@ -2377,15 +2392,18 @@ async function zipSelectedWeeks(mode, btn) {
     }
     if (!files) {
       setArchiveStatus("✗ Nothing to download");
-      alert("None of the selected weeks had files to download.");
+      alert(mode === "excel"
+        ? "None of the selected weeks have an Excel schedule image."
+        : "None of the selected weeks had files to download.");
       return;
     }
     setArchiveStatus(`Building .zip — ${files} file${files !== 1 ? "s" : ""}…`);
     const blob = await zip.generateAsync({ type: "blob" });
     const stamp = new Date().toISOString().slice(0, 10);
+    const base = mode === "excel" ? "sfb-excel" : "sfb-archive";
     const fname = sel.length === 1
-      ? `sfb-archive-${_icsSlug(sel[0].range, "week")}.zip`
-      : `sfb-archive-${sel.length}-weeks-${stamp}.zip`;
+      ? `${base}-${_icsSlug(sel[0].range, "week")}.zip`
+      : `${base}-${sel.length}-weeks-${stamp}.zip`;
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url; a.download = fname;
@@ -2398,6 +2416,7 @@ async function zipSelectedWeeks(mode, btn) {
     setArchiveStatus("✗ Download failed: " + err.message);
     alert("Download failed: " + err.message);
   } finally {
+    _zipBusy = false;
     if (btn) { btn.disabled = false; btn.textContent = prev; }
   }
 }
@@ -5047,6 +5066,7 @@ document.getElementById("abNone").addEventListener("click", () => {
   renderArchiveList(document.getElementById("archiveSearch").value || "");
 });
 document.getElementById("abZip").addEventListener("click", (e) => { e.stopPropagation(); openBulkZipMenu(e.currentTarget); });
+document.getElementById("abExcel").addEventListener("click", (e) => { closeShareMenu(); zipSelectedWeeks("excel", e.currentTarget); });
 document.getElementById("abRollup").addEventListener("click", openArchiveRollup);
 
 // Roll-up modal
