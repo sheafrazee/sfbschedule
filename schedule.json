@@ -128,6 +128,153 @@
   ],
   "archive": [
     {
+      "key": "2026-09-28",
+      "range": "Sep 28 – Oct 4, 2026",
+      "title": "Week of Sep 28 – Oct 4",
+      "path": "archive/2026-09-28.png",
+      "pathExcel": "archive/2026-09-28-excel.png",
+      "players": [
+        "1/5 Jude 3/5 @ CDM",
+        "ABA/DELTA #5 @ MAP",
+        "ABA/DELTA #6 @ MAP",
+        "Aiden",
+        "Audrina 4/5 @ OGP",
+        "Cesar",
+        "Group @ OGP: Russ",
+        "GW @ OGP",
+        "Jordan @ OGP",
+        "Jordan 2/5 @ OGP",
+        "Maxwell"
+      ],
+      "days": [
+        {
+          "day": "Mon 9/28",
+          "events": [
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #5 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Tue 9/29",
+          "events": [
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 4/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Russ, Aiden",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 9/30",
+          "events": [
+            {
+              "time": "6:00 AM – 7:30 AM",
+              "title": "GW @ OGP",
+              "type": "other",
+              "people": [
+                "Jung",
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "11:30 AM – 12:30 PM",
+              "title": "Jordan @ OGP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #6 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 10/1",
+          "events": [
+            {
+              "time": "6:15 AM – 7:30 AM",
+              "title": "Maxwell, 1/5 Jude 3/5 @ CDM",
+              "type": "other",
+              "people": [
+                "Ali",
+                "Dame"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "10:00 AM – 11:00 AM",
+              "title": "Jordan 2/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: Russ, Cesar",
+              "type": "other",
+              "people": [
+                "Dame"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 10/2",
+          "events": []
+        },
+        {
+          "day": "Sat 10/3",
+          "events": []
+        },
+        {
+          "day": "Sun 10/4",
+          "events": []
+        }
+      ],
+      "ts": 1790981605072
+    },
+    {
       "key": "2026-09-21",
       "range": "Sep 21 – Sep 27, 2026",
       "title": "Week of Sep 21 – 27",
