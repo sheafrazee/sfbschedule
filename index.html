@@ -744,6 +744,144 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
   .day-menu input { font-size: 16px; padding: 10px; }
   .day-menu .dm-btn { padding: 11px 4px; font-size: 12px; }
 }
+/* ================ (v4) Mobile editing: safer touch, clearer controls ================ */
+/* The day pager scrolls inside its column instead of stretching the page past the phone's edge */
+.preview-weeks > .prev-week { min-width: 0; }
+
+/* ---- Action bar: Seed / Promote only while editing Next Week; rare actions behind the ⋯ menu ---- */
+.ab-next { display: none; align-items: center; gap: 8px; }
+body.editing-next .ab-next { display: flex; }
+.btn.promote { background: #fff; color: var(--clay); border-color: var(--clay); }
+.btn.promote:hover { background: var(--clay); color: #fff; }
+.ab-more { position: relative; display: flex; }
+.btn.ab-more-btn { min-width: 38px; padding-left: 10px; padding-right: 10px; font-size: 16px; line-height: 1; }
+.ab-menu { position: absolute; right: 0; top: calc(100% + 6px); z-index: 95; min-width: 210px;
+  display: flex; flex-direction: column; padding: 5px; background: #fff; border: 1.5px solid var(--ink);
+  border-radius: 10px; box-shadow: 0 10px 28px rgba(17,17,17,.18); }
+.ab-menu button { text-align: left; border: none; background: transparent; border-radius: 7px; padding: 10px 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: var(--ink);
+  cursor: pointer; white-space: nowrap; }
+.ab-menu button:hover { background: var(--warm-white); }
+.ab-menu button.danger { color: var(--clay); }
+.ab-menu-sep { height: 1px; background: var(--light-stone); margin: 4px 8px; }
+
+/* ---- Session editor: one Done up top; Duplicate / Delete down at the bottom ---- */
+.cal-pop-head { gap: 8px; margin-bottom: 10px; }
+.cal-pop-head .cp-done { flex: 0 0 auto; min-height: 32px; padding: 6px 16px; border: 1.5px solid var(--ink);
+  border-radius: 8px; background: var(--ink); color: var(--warm-white); cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 12.5px; }
+.cal-pop-head .cp-done:hover { background: var(--dark-stone); border-color: var(--dark-stone); }
+.cal-pop-head .cp-cancel { flex: 0 0 auto; min-height: 32px; padding: 6px 4px; border: none; background: transparent;
+  color: var(--dark-stone); cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12.5px; }
+.cal-pop-head .cp-cancel:hover { color: var(--ink); }
+.cal-popover.is-new .cal-pop-head .cp-t { text-align: center; }
+.cal-pop-foot { display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--light-stone); }
+.cp-foot-btn { flex: 1 1 0; padding: 8px 10px; border: 1.5px solid var(--light-stone); border-radius: 8px;
+  background: #fff; color: var(--dark-stone); cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; }
+.cp-foot-btn:hover { border-color: var(--ink); color: var(--ink); }
+.cp-foot-btn.danger { color: var(--clay); border-color: #B8694A66; }
+.cp-foot-btn.danger:hover { background: var(--clay); border-color: var(--clay); color: #fff; }
+
+/* ---- Undo bar: a delete, discard or touch-move can be taken back for 6 seconds ---- */
+.undo-bar { position: fixed; left: 50%; bottom: 24px; z-index: 450; display: flex; align-items: center; gap: 12px;
+  max-width: min(440px, calc(100vw - 24px)); padding: 6px 6px 6px 16px; border-radius: 12px;
+  background: var(--ink); color: var(--warm-white); box-shadow: 0 10px 28px rgba(17,17,17,.3);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;
+  opacity: 0; transform: translate(-50%, 8px); transition: opacity .18s, transform .18s; }
+.undo-bar.show { opacity: 1; transform: translate(-50%, 0); }
+.undo-bar .ub-msg { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.undo-bar .ub-btn { flex: 0 0 auto; padding: 8px 14px; border: none; border-radius: 8px;
+  background: rgba(244,241,236,.12); color: #F2B79C; font: inherit; font-weight: 800; cursor: pointer; }
+.undo-bar .ub-btn:hover { background: rgba(244,241,236,.2); }
+
+/* ---- Tap-to-create marker (touch): nothing is added until the marker itself is tapped ---- */
+.cal-new-marker { position: absolute; left: 3px; right: 3px; z-index: 6; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 4px 10px;
+  border: 1.5px dashed var(--clay); border-radius: 6px; background: rgba(184,105,74,.13); color: var(--ink);
+  text-align: left; overflow: hidden; white-space: nowrap; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; animation: sfbFade .15s ease-out; }
+.cal-new-marker .nm-l { font-weight: 800; font-size: 13px; }
+.cal-new-marker .nm-t { font-weight: 600; font-size: 11px; color: var(--dark-stone); }
+
+.cal-fab, .sheet-scrim { display: none; }
+.cp-done:focus-visible, .cp-cancel:focus-visible, .cp-foot-btn:focus-visible, .ab-menu button:focus-visible,
+.ub-btn:focus-visible, .cal-fab:focus-visible, .cal-new-marker:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+@keyframes sfbFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sfbSheetUp { from { transform: translateY(36px); opacity: .5; } to { transform: none; opacity: 1; } }
+
+/* ---- Touch screens: resize grips only on the selected tile; no keyboard-shortcut bar ---- */
+@media (hover: none) and (pointer: coarse) {
+  .cal-ev-drag .cal-ev-resize { pointer-events: none; }
+  .cal-ev-drag.cal-ev-selected .cal-ev-resize { pointer-events: auto; }
+  .cal-sel-bar { display: none !important; }
+}
+
+/* ---- Phone action bar: week + status / title / tools / Publish + ⋯ ---- */
+@media (max-width: 600px) {
+  .action-bar .ab-title-group { display: contents; }
+  .action-bar .ab-top .status-pill { order: 1; margin-left: auto; }
+  .action-bar .ab-top input.week-title { order: 2; flex: 1 1 auto; min-width: 0; max-width: none; }
+  .action-bar .ab-top .saved-at { order: 3; }
+  .action-bar .ab-bottom > .ab-divider, .action-bar .ab-next .ab-divider { display: none; }
+  .action-bar .ab-ur { order: 0; min-width: 42px; padding-left: 0; padding-right: 0; font-size: 17px; }
+  .action-bar .ab-ur .ab-lbl { display: none; }
+  .action-bar .ab-find { order: 1; width: auto; flex: 1 1 0; min-width: 0; }
+  .action-bar .ab-next { order: 2; flex: 1 1 100%; }
+  .action-bar .ab-next .btn { flex: 1 1 0; text-align: center; }
+  .action-bar .ab-right { order: 3; flex-wrap: nowrap; }
+  .action-bar .ab-right .btn.publish { order: 0; width: auto; flex: 1 1 auto; }
+  .action-bar .ab-right .ab-more { flex: 0 0 auto; }
+  .action-bar .ab-right .btn.ab-more-btn { flex: 0 0 48px; }
+  .stats-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 10px; }
+  .stats-strip .stat { padding: 7px 8px 6px; border-radius: 8px; }
+  .stats-strip .stat .k { font-size: 17px; }
+  .stats-strip .stat .l { font-size: 8.5px; letter-spacing: .04em; line-height: 1.2; }
+  .stats-strip .cov-panel { left: auto; right: 0; width: min(300px, calc(100vw - 24px)); min-width: 0; }
+  #slotBanner { padding: 7px 11px !important; font-size: 12px !important; margin-bottom: 10px !important; }
+}
+
+/* ---- Phone editor: compact day strip, bottom sheet with backdrop, + button ---- */
+@media (max-width: 700px) {
+  #previewWeeks .preview-week-label, #weekPreviewToggle { display: none; }
+  .cal-daypager { gap: 4px; }
+  .cal-daypager .dp-btn { position: relative; flex: 1 1 0; min-width: 38px; display: flex; flex-direction: column;
+    align-items: center; gap: 1px; padding: 5px 2px 4px; }
+  .cal-daypager .dp-btn .wd { font-size: 9.5px; font-weight: 700; opacity: .7; }
+  .cal-daypager .dp-btn .dd { font-size: 15px; font-weight: 800; line-height: 1.1; }
+  .cal-daypager .dp-btn .dd.sm { font-size: 11px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .cal-daypager .dp-btn .n { font-size: 9px; }
+
+  .cal-popover.sheet { animation: sfbSheetUp .2s ease-out; }
+  .cal-popover.sheet.no-anim { animation: none; }
+  .cal-popover.sheet .sheet-grip { position: relative; width: 140px; height: 22px; margin: -6px auto 2px;
+    background: none; cursor: grab; }
+  .cal-popover.sheet .sheet-grip::before { content: ""; position: absolute; left: 50%; top: 8px; width: 44px; height: 5px;
+    margin-left: -22px; border-radius: 3px; background: var(--light-stone); }
+  .cal-pop-head .cp-done { min-height: 42px; padding: 9px 22px; border-radius: 10px; font-size: 14px; }
+  .cal-pop-head .cp-cancel { min-height: 42px; padding: 9px 6px; font-size: 14px; }
+  .cal-pop-foot { margin-top: 18px; padding-top: 14px; }
+  .cp-foot-btn { padding: 12px 10px; border-radius: 10px; font-size: 13.5px; }
+  .sheet-scrim { display: block; position: fixed; inset: 0; z-index: 290; background: rgba(17,17,17,.22);
+    touch-action: none; cursor: pointer; -webkit-tap-highlight-color: transparent; animation: sfbFade .18s ease-out; }
+
+  .undo-bar { left: 12px; right: 12px; max-width: none; transform: translateY(8px);
+    bottom: calc(76px + env(safe-area-inset-bottom)); }   /* clears the intern tally */
+  .undo-bar.show { transform: none; }
+  .undo-bar .ub-btn { padding: 11px 16px; }
+
+  body.mode-edit .cal-fab { display: flex; align-items: center; justify-content: center; position: fixed; z-index: 95;
+    right: 16px; bottom: calc(48px + env(safe-area-inset-bottom)); width: 56px; height: 56px; padding: 0 0 3px;
+    border: none; border-radius: 50%; background: var(--ink); color: var(--warm-white);
+    box-shadow: 0 6px 18px rgba(17,17,17,.3); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
+    font-size: 30px; line-height: 1; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  body.mode-edit.editing-next .cal-fab { background: var(--clay); color: #fff; }
+  body.mode-edit .cal-fab:active { transform: scale(.94); }
+  body.undo-open .cal-fab { bottom: calc(138px + env(safe-area-inset-bottom)); }
+  body.sheet-open .cal-fab, body.daymenu-open .cal-fab { display: none; }
+  body:has(#assignBar:not(.hidden)) .cal-fab,
+  body:has(#internTally:not(.collapsed):not(.hidden)) .cal-fab { display: none; }
+}
 </style>
 </head>
 <body>
@@ -804,7 +942,7 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
       </div>
     </div>
     <div class="action-bar">
-      <!-- Row 1: slot selector + week title + status -->
+      <!-- Row 1: which week, its title, publish status -->
       <div class="ab-row ab-top">
         <div class="mode-toggle">
           <button class="mode-btn active" id="slotCurrentBtn" data-slot="current">Current Week</button>
@@ -816,15 +954,16 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
           <span class="saved-at" id="savedAt"></span>
         </div>
       </div>
-      <!-- Row 2: actions -->
+      <!-- Row 2: editing tools. Seed + Promote only show while editing Next Week;
+           Add day, Settings and Discard edits live behind the ⋯ menu. -->
       <div class="ab-row ab-bottom">
-        <button class="btn" id="undoBtn" title="Undo (Ctrl+Z)" disabled>↶ Undo</button>
-        <button class="btn" id="redoBtn" title="Redo (Ctrl+Shift+Z)" disabled>↷ Redo</button>
-        <div class="ab-divider"></div>
-        <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
-        <button class="btn" id="addDayBtn" title="Add a day column to this week">+ Add Day</button>
-        <button class="btn" id="sortTimeBtn" title="Re-sort every day by start time (edits already auto-sort)">↕ Re-sort</button>
-        <button class="btn primary" id="promoteBtn" title="Archive the current week (required), then make Next Week the live current week">→ Promote Next</button>
+        <button class="btn ab-ur" id="undoBtn" title="Undo (Ctrl+Z)" aria-label="Undo" disabled>↶<span class="ab-lbl"> Undo</span></button>
+        <button class="btn ab-ur" id="redoBtn" title="Redo (Ctrl+Shift+Z)" aria-label="Redo" disabled>↷<span class="ab-lbl"> Redo</span></button>
+        <div class="ab-next" id="abNext">
+          <div class="ab-divider"></div>
+          <button class="btn" id="seedNextBtn" title="Copy the current week's days/events into Next Week as a starting point">⧉ Seed from current</button>
+          <button class="btn promote" id="promoteBtn" title="Archive the current week (required), then make Next Week the live current week">→ Promote Next</button>
+        </div>
         <div class="ab-divider"></div>
         <div class="ab-find" id="abFind">
           <input id="editFindInput" list="editFindNames" placeholder="Find intern or player…" autocomplete="off" spellcheck="false">
@@ -836,10 +975,16 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
         </div>
         <div class="ab-right">
           <button class="btn publish" id="publishBtn">↑ Publish</button>
-          <button class="btn" id="settingsBtn">Settings</button>
+          <div class="ab-more">
+            <button class="btn ab-more-btn" id="moreBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions" title="More actions">⋯</button>
+            <div class="ab-menu hidden" id="moreMenu" role="menu">
+              <button type="button" role="menuitem" id="addDayBtn" title="Add a day column to this week">+ Add day</button>
+              <button type="button" role="menuitem" id="settingsBtn">Settings</button>
+              <div class="ab-menu-sep" role="separator"></div>
+              <button type="button" role="menuitem" class="danger" id="revertLiveBtn" title="Reload the published schedule and drop any unpublished edits">↺ Discard edits</button>
+            </div>
+          </div>
           <input type="file" id="importFile" accept=".json" style="display:none">
-          <button class="btn" id="revertLiveBtn" title="Fetch the latest published schedule and discard any local edits">↺ Revert to Live</button>
-          <button class="btn danger" id="discardBtn">Discard</button>
         </div>
       </div>
     </div>
@@ -984,6 +1129,7 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
 
 <div class="cal-sel-bar hidden" id="calSelBar"></div>
 <div class="assign-bar hidden" id="assignBar"></div>
+<button type="button" class="cal-fab" id="calFab" aria-label="New session" title="New session">+</button>
 
 <div class="intern-tally hidden collapsed" id="internTally">
   <div class="intern-tally-head" id="internTallyHead">
@@ -1789,12 +1935,6 @@ function parseEventTimes(timeStr) {
 function _eventSortKey(ev) {
   const t = parseEventTimes(ev && ev.time);
   return t ? t.start.h * 60 + t.start.min : Infinity;
-}
-// Sort each day's events in the active slot by start time (stable).
-function sortEventsByTime() {
-  autoSortSlot(editSlot);
-  saveDraft();
-  renderEdit();
 }
 function _fmtLocal(date, h, min) {
   // Write the wall-clock time (in this device's time zone — the gym's local time)
@@ -2645,11 +2785,11 @@ function renderEdit() {
   if (editSlot === "next") {
     banner.style.display = "block";
     banner.style.background = "var(--clay)";
-    banner.textContent = "Editing NEXT WEEK — not visible to viewers until you Promote it.";
+    banner.textContent = "Next week: hidden from viewers until you Promote it.";
   } else {
     banner.style.display = "block";
     banner.style.background = "var(--dark-stone)";
-    banner.textContent = "Editing the CURRENT (live) week — viewers see these changes once published.";
+    banner.textContent = "Live week: viewers see your edits after you Publish.";
   }
   document.getElementById("weekTitleInput").value = ed().weekTitle || "";
   try { renderInternTally(); } catch (e) { console.error("renderInternTally failed", e); }
@@ -3058,6 +3198,282 @@ function _commitAndReopen(slot, evObj, focusId) {
   }
 }
 
+// ============ (v4) SAFER TOUCH EDITING ============
+// A session made by a tap, the + button or a drag starts as a draft: Add keeps it,
+// Cancel drops it, and closing it with no name, interns or note drops it too.
+var _newEv = null;
+var _draftSeq = 0;                       // bumps on every saveDraft; an undo offer dies once it moves
+var _undoBarEl = null, _undoBarSeq = -1;
+var _newMarker = null;
+var _calTouchDrag = false;               // a touch drag is armed: block page scrolling
+var _lastTouchDown = 0;
+
+function _isBlankNew(ev) {
+  if (!ev) return false;
+  const t = String(ev.title || '').trim().toLowerCase();
+  return (t === '' || t === 'new session' || t === 'new event')
+    && !(ev.people || []).length && !(ev.players || []).length && !String(ev.note || '').trim();
+}
+// Pull one event object out of whichever week/day holds it.
+function _removeEventObj(evObj) {
+  for (const slot of ['current', 'next']) {
+    const days = _calDays(slot) || [];
+    for (let di = 0; di < days.length; di++) {
+      const evs = days[di].events || [];
+      const ei = evs.indexOf(evObj);
+      if (ei >= 0) { evs.splice(ei, 1); return { slot, di }; }
+    }
+  }
+  return null;
+}
+// A draft that was added and then dropped shouldn't leave a do-nothing undo step behind.
+function _dropNoopUndo() {
+  const cur = JSON.stringify(data);
+  if (_pendingSnap === cur) { clearTimeout(_snapTimer); _pendingSnap = null; }
+  else if (_undoStack.length && _undoStack[_undoStack.length - 1] === cur) {
+    _undoStack.pop();
+    if (_pendingSnap !== null) { clearTimeout(_snapTimer); _pendingSnap = null; }
+  }
+  _syncUndoBtns();
+}
+function _discardStaleNew(render) {
+  const ev = _newEv;
+  _newEv = null;
+  if (!_isBlankNew(ev) || !_removeEventObj(ev)) return false;
+  clearCalSel();
+  saveDraft();
+  _dropNoopUndo();
+  if (render) renderEdit();
+  return true;
+}
+// A touch tap that opens something under the finger is followed by the browser's own
+// click at the same spot. Without this, that click lands on what just opened (the sheet's
+// backdrop or a button inside it, or the + marker) and acts on it.
+function _swallowNextClick(ms) {
+  const until = Date.now() + ms;
+  const h = e => {
+    document.removeEventListener('click', h, true);
+    if (Date.now() <= until) { e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
+  };
+  document.addEventListener('click', h, true);
+  setTimeout(() => document.removeEventListener('click', h, true), ms);
+}
+function _blurInside(root) {
+  const a = document.activeElement;
+  if (root && a && a !== document.body && root.contains(a) && typeof a.blur === 'function') a.blur();
+}
+// Every deliberate way out of the editor: Done, backdrop, swipe down, Esc, click away.
+function closeEditor() {
+  const pop = document.getElementById('calPopover');
+  if (pop) _blurInside(pop);             // a half-typed time commits instead of vanishing
+  hideCalPopover();
+  _discardStaleNew(true);
+}
+function cancelNewSession() {
+  const ev = _newEv;
+  _newEv = null;
+  hideCalPopover();                        // flushes a half-typed intern name first
+  if (!ev) return;
+  const blank = _isBlankNew(ev);
+  const where = _removeEventObj(ev);
+  if (!where) return;
+  clearCalSel();
+  saveDraft();
+  if (blank) _dropNoopUndo();
+  renderEdit();
+  if (!blank) _offerUndo('New session discarded', () => _restoreEvents([{ slot: where.slot, di: where.di, ev }]));
+}
+function _createSessionAt(slot, di, startMin, dur) {
+  _discardStaleNew(false);
+  const days = _calDays(slot);
+  if (!days || !days[di]) return;
+  const nev = { time: _fmt12(startMin) + ' \u2013 ' + _fmt12(startMin + dur), title: 'New Session', type: 'other', people: [], players: [], note: '' };
+  (days[di].events = days[di].events || []).push(nev);
+  autoSortSlot(slot);
+  saveDraft();
+  _newEv = nev;
+  const loc = _locateEvent(slot, nev);
+  if (_calPhone()) calDayPage[slot] = di;
+  renderEdit();
+  if (loc) selectCalEvent(slot, loc.di, loc.ei, {}, true);
+}
+
+// ---- Tap-to-create marker (touch): a tap shows it, tapping the marker creates ----
+function _clearNewMarker() {
+  document.removeEventListener('pointerdown', _newMarkerOutside, true);
+  if (_newMarker) { _newMarker.remove(); _newMarker = null; }
+}
+function _newMarkerOutside(e) {
+  if (_newMarker && _newMarker.isConnected && _newMarker.contains(e.target)) return;
+  _clearNewMarker();
+}
+function _showNewMarker(slot, body, di, hPx, y) {
+  _clearNewMarker();
+  let m = Math.floor(((Math.max(0, y) / hPx) + CAL_START_H) * 2) * 30;   // the half hour you tapped
+  m = Math.max(CAL_START_H * 60, Math.min(m, CAL_END_H * 60 - 60));
+  const mk = document.createElement('button');
+  mk.type = 'button';
+  mk.className = 'cal-new-marker';
+  mk.style.top = Math.round((m / 60 - CAL_START_H) * hPx) + 'px';
+  mk.style.height = Math.max(30, Math.round(hPx) - 2) + 'px';
+  mk.setAttribute('aria-label', 'Create a session at ' + _fmt12(m));
+  mk.innerHTML = `<span class="nm-l">+ New session</span><span class="nm-t">${_fmt12(m)} \u2013 ${_fmt12(m + 60)}</span>`;
+  mk.addEventListener('pointerdown', ev => ev.stopPropagation());   // not a fresh tap on the grid
+  mk.addEventListener('click', ev => {
+    ev.preventDefault(); ev.stopPropagation();
+    _clearNewMarker();
+    _createSessionAt(slot, di, m, 60);
+  });
+  body.appendChild(mk);
+  _newMarker = mk;
+  setTimeout(() => { if (_newMarker === mk) document.addEventListener('pointerdown', _newMarkerOutside, true); }, 0);
+}
+// Only a quick, still tap on empty grid shows the marker. Holds, scrolls and brushes do nothing.
+function _touchTapToMarker(e, body, slot, di, hPx, startX, startY, rect) {
+  const SLOP = 10, MAX_MS = 650, t0 = Date.now();
+  let far = false;
+  const move = ev => {
+    if (ev.pointerId !== e.pointerId) return;
+    if (Math.hypot(ev.clientX - rect.left - startX, ev.clientY - rect.top - startY) > SLOP) far = true;
+  };
+  const done = () => {
+    body.removeEventListener('pointermove', move);
+    body.removeEventListener('pointerup', up);
+    body.removeEventListener('pointercancel', done);
+  };
+  const up = ev => {
+    if (ev.pointerId !== e.pointerId) return;
+    done();
+    if (far || Date.now() - t0 > MAX_MS) return;
+    _swallowNextClick(500);
+    _showNewMarker(slot, body, di, hPx, startY);
+  };
+  body.addEventListener('pointermove', move);
+  body.addEventListener('pointerup', up);
+  body.addEventListener('pointercancel', done);
+}
+
+// ---- Phone bottom sheets: a backdrop that only closes, and swipe-down on the grip ----
+function _mountScrim(owner, onClose) {
+  if (!_calPhone()) return;
+  let sc = document.getElementById('sheetScrim');
+  if (!sc) {
+    sc = document.createElement('div');
+    sc.id = 'sheetScrim';
+    sc.className = 'sheet-scrim';
+    sc.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(sc);
+  }
+  sc.dataset.owner = owner;
+  sc.onclick = ev => { ev.preventDefault(); ev.stopPropagation(); onClose(); };
+}
+function _unmountScrim(owner) {
+  const sc = document.getElementById('sheetScrim');
+  if (sc && (!owner || sc.dataset.owner === owner)) sc.remove();
+}
+function _wireSheetSwipe(pop, onClose) {
+  let y0 = null, dy = 0, pid = null, zone = null;
+  const down = e => {
+    if (e.button != null && e.button !== 0) return;
+    if (e.target.closest('button, input, select, textarea')) return;
+    y0 = e.clientY; dy = 0; pid = e.pointerId; zone = e.currentTarget;
+    try { zone.setPointerCapture(pid); } catch (_) {}
+  };
+  const move = e => {
+    if (y0 === null || e.pointerId !== pid) return;
+    dy = Math.max(0, e.clientY - y0);
+    pop.style.transition = 'none';
+    pop.style.transform = dy ? `translateY(${dy}px)` : '';
+  };
+  const up = e => {
+    if (y0 === null || e.pointerId !== pid) return;
+    y0 = null;
+    try { zone.releasePointerCapture(pid); } catch (_) {}
+    if (dy > 70) { onClose(); return; }
+    pop.style.transition = 'transform .16s ease-out';
+    pop.style.transform = '';
+  };
+  [pop.querySelector('.sheet-grip'), pop.querySelector('.cal-pop-head')].forEach(z => {
+    if (!z) return;
+    z.style.touchAction = 'none';
+    z.addEventListener('pointerdown', down);
+    z.addEventListener('pointermove', move);
+    z.addEventListener('pointerup', up);
+    z.addEventListener('pointercancel', up);
+  });
+}
+
+// ---- Undo bar: deletes, discards and touch moves can be taken back for 6 s ----
+function hideUndoBar() {
+  if (!_undoBarEl) return;
+  clearTimeout(_undoBarEl._t);
+  _undoBarEl.remove();
+  _undoBarEl = null;
+  document.body.classList.remove('undo-open');
+}
+function _offerUndo(msg, restore) {
+  hideUndoBar();
+  const bar = document.createElement('div');
+  bar.className = 'undo-bar';
+  bar.setAttribute('role', 'status');
+  bar.innerHTML = '<span class="ub-msg"></span><button type="button" class="ub-btn">Undo</button>';
+  bar.querySelector('.ub-msg').textContent = msg;
+  const seq = _draftSeq;
+  bar.querySelector('.ub-btn').addEventListener('click', () => {
+    const live = seq === _draftSeq;      // nothing else has changed since
+    hideUndoBar();
+    if (live) restore();
+  });
+  document.body.appendChild(bar);
+  document.body.classList.add('undo-open');
+  _undoBarEl = bar; _undoBarSeq = seq;
+  requestAnimationFrame(() => bar.classList.add('show'));
+  bar._t = setTimeout(hideUndoBar, 6000);
+}
+function _evLabel(ev) {
+  const t = String((ev && ev.title) || '').trim();
+  return t ? '\u201c' + (t.length > 26 ? t.slice(0, 25) + '\u2026' : t) + '\u201d' : 'session';
+}
+function _restoreEvents(items) {
+  const slots = new Set();
+  items.forEach(it => {
+    const days = _calDays(it.slot);
+    if (!days || !days.length) return;
+    const d = days[Math.min(it.di, days.length - 1)];
+    (d.events = d.events || []).push(it.ev);
+    slots.add(it.slot);
+  });
+  if (!slots.size) return;
+  slots.forEach(sl => autoSortSlot(sl));
+  saveDraft();
+  const first = items[0], loc0 = _locateEvent(first.slot, first.ev);
+  if (loc0 && _calPhone() && first.slot === editSlot) calDayPage[first.slot] = loc0.di;
+  renderEdit();
+  items.forEach(it => {
+    const l = _locateEvent(it.slot, it.ev);
+    const el = l && _calTileEl(it.slot, l.di, l.ei);
+    if (el) { el.classList.remove('flash-card'); void el.offsetWidth; el.classList.add('flash-card'); }
+  });
+  showToast(items.length === 1 ? 'Restored' : `Restored ${items.length} sessions`);
+}
+function _offerMoveUndo(slot, evObj, fromDi, prevTime, toDi, newMin) {
+  const days = _calDays(slot) || [];
+  const where = (toDi !== fromDi && days[toDi]) ? _shortDay(days[toDi].day) + ' ' : '';
+  _offerUndo(`Moved to ${where}${_fmt12(newMin)}`, () => {
+    const d2 = _calDays(slot);
+    if (!d2 || !d2.length) return;
+    for (const dd of d2) { const k = (dd.events || []).indexOf(evObj); if (k >= 0) { dd.events.splice(k, 1); break; } }
+    const home = d2[Math.min(fromDi, d2.length - 1)];
+    (home.events = home.events || []).push(evObj);
+    evObj.time = prevTime;
+    autoSortSlot(slot);
+    saveDraft();
+    if (_calPhone()) calDayPage[slot] = Math.min(fromDi, d2.length - 1);
+    renderEdit();
+    showToast('Move undone');
+  });
+}
+
 // ============ DAY MANAGEMENT (calendar day headers) ============
 function addDayToSlot(slot) {
   const wk = slot === 'next' ? (data.nextWeek = data.nextWeek || { weekTitle: '', days: [] }) : data;
@@ -3070,37 +3486,33 @@ function addDayToSlot(slot) {
   if (btn) openDayMenu(slot, wk.days.length - 1, btn);
 }
 // Add a session to a day, dropped in after the last one that already has a time.
+// It opens as a draft: Add keeps it, Cancel (or closing it blank) drops it.
 function addSessionToDay(slot, di) {
+  _discardStaleNew(false);
   const days = _calDays(slot);
   if (!days || !days[di]) return;
-  const evs = days[di].events || (days[di].events = []);
   let startMin = 8 * 60;
-  evs.forEach(e => {
+  (days[di].events || []).forEach(e => {
     const t = parseEventTimes(e.time);
     if (t) startMin = Math.max(startMin, t.end.h * 60 + t.end.min);
   });
   startMin = Math.min(startMin, CAL_END_H * 60 - 60);
-  const nev = { time: _fmt12(startMin) + ' \u2013 ' + _fmt12(startMin + 60), title: 'New Session', type: 'other', people: [], players: [], note: '' };
-  evs.push(nev);
-  autoSortSlot(slot);
-  saveDraft();
-  const loc = _locateEvent(slot, nev);
-  if (_calPhone()) calDayPage[slot] = di;
-  renderEdit();
-  if (loc) selectCalEvent(slot, loc.di, loc.ei, {}, true);
+  _createSessionAt(slot, di, startMin, 60);
 }
 
 let _dayMenuAnchor = null;
 function hideDayMenu() {
   document.removeEventListener('pointerdown', _dayMenuOutside, true);
   _dayMenuAnchor = null;
+  document.body.classList.remove('daymenu-open');
+  _unmountScrim('day');
   const m = document.getElementById('dayMenu');
   if (m) m.remove();
 }
 function _dayMenuOutside(e) {
   const m = document.getElementById('dayMenu');
   if (!m) { document.removeEventListener('pointerdown', _dayMenuOutside, true); return; }
-  if (!m.contains(e.target)) hideDayMenu();
+  if (!m.contains(e.target) && !(e.target.closest && e.target.closest('#sheetScrim'))) hideDayMenu();
 }
 function openDayMenu(slot, di, anchorEl) {
   hideDayMenu();
@@ -3127,6 +3539,8 @@ function openDayMenu(slot, di, anchorEl) {
       <button class="dm-btn danger" id="dmDel">\u2715 Delete day</button>
     </div>`;
   document.body.appendChild(m);
+  document.body.classList.add('daymenu-open');
+  _mountScrim('day', () => { _blurInside(m); hideDayMenu(); });
 
   if (!_calPhone()) {
     const r = anchorEl.getBoundingClientRect();
@@ -3140,7 +3554,7 @@ function openDayMenu(slot, di, anchorEl) {
   _dayMenuAnchor = anchorEl;
 
   const name = m.querySelector('#dmName');
-  name.focus(); name.select();
+  if (!_calPhone()) { name.focus(); name.select(); }   // phone: no keyboard until you tap the name
   const commitName = () => {
     if (name.value === day.day) return;
     day.day = name.value;
@@ -3249,7 +3663,10 @@ function importJson(file) {
     try {
       const obj = JSON.parse(e.target.result);
       if (!obj.days || !Array.isArray(obj.days)) throw new Error("Invalid format — needs { weekTitle, days: [...] }");
-      data = obj; saveDraft(); setMode(currentMode); closeSettings();
+      data = obj;
+      _dayEventSort(data.days);                       // older or hand-edited files may be unsorted
+      if (data.nextWeek) _dayEventSort(data.nextWeek.days);
+      saveDraft(); setMode(currentMode); closeSettings();
     } catch (err) { alert("Import failed: " + err.message); }
   };
   reader.readAsText(file);
@@ -3482,6 +3899,7 @@ function wireCalDrag(container, slot, hPx) {
     el.addEventListener("contextmenu", e => {
       e.preventDefault();
       e.stopPropagation();
+      if (e.pointerType === 'touch' || Date.now() - _lastTouchDown < 1500) return;   // touch long-press = drag
       _calCtxAt = Date.now();
       _lastCalTap = null; _lastAssignToggle = null;
       selectCalEvent(el.dataset.slot, +el.dataset.di, +el.dataset.ei, {}, true);
@@ -3550,7 +3968,7 @@ function onCalDragStart(e) {
   // Mouse: arm immediately past a tiny threshold (macOS-Calendar feel).
   // Touch: require a short hold first so a quick swipe isn't read as a drag.
   const MOVE_THRESHOLD = isTouch ? 12 : 4;
-  const HOLD_MS = 380;
+  const HOLD_MS = 500;   // (v4) was 380: a resting thumb no longer picks a tile up
   let holdTimer = null;
 
   function setDropTarget(b) {
@@ -3562,6 +3980,7 @@ function onCalDragStart(e) {
 
   function arm() {
     dragging = true;
+    if (isTouch) _calTouchDrag = true;   // from here on the page must not scroll under the finger
     el.classList.add("cal-ev-dragging");
     needsCapture = true; // claim in next pointermove (spec requires pointer event context)
     if (isTouch && navigator.vibrate) navigator.vibrate(22);
@@ -3641,6 +4060,7 @@ function onCalDragStart(e) {
   function cleanup() {
     cancelHold();
     try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+    _calTouchDrag = false;
     el.removeEventListener("pointermove", move);
     el.removeEventListener("pointerup", up);
     el.removeEventListener("pointercancel", cancel);
@@ -3664,6 +4084,7 @@ function onCalDragStart(e) {
       const moved = (tgtDi !== di) || (newMin !== startMin0);
       if (moved && days && days[di] && days[di].events && days[di].events[ei]) {
         const evObj = days[di].events[ei];
+        const prevTime = evObj.time;
         evObj.time = _fmtTimeRange(newMin, dur, isRange);
         if (tgtDi !== di && days[tgtDi]) {
           days[di].events.splice(ei, 1);                                 // pull from the source day
@@ -3673,6 +4094,7 @@ function onCalDragStart(e) {
         autoSortSlot(slot);
         saveDraft();
         renderEdit();
+        if (isTouch) _offerMoveUndo(slot, evObj, di, prevTime, tgtDi, newMin);
       } else {
         renderEdit();   // nothing changed; redraw to clear the dimmed placeholder
       }
@@ -3704,6 +4126,7 @@ function onCalDragStart(e) {
             && _lastAssignToggle.di === di && _lastAssignToggle.ei === ei) {
           toggleInternOnEvent(slot, di, ei, true);   // revert, silently
           _lastCalTap = null; _lastAssignToggle = null;
+          if (isTouch) _swallowNextClick(600);
           selectCalEvent(slot, di, ei, {}, true);
           return;
         }
@@ -3717,6 +4140,7 @@ function onCalDragStart(e) {
       // a single tap still opens the editor on touch.
       _lastCalTap = { slot, di, ei, t: now };
       const openEditor = !mods.meta && !mods.shift && (isTouch || isDouble);
+      if (isTouch && openEditor) _swallowNextClick(600);   // the tap's own click must not hit the sheet
       selectCalEvent(slot, di, ei, mods, openEditor);
     }
   }
@@ -3817,19 +4241,24 @@ function selectAllCal() {
 // ---- Batch operations driven by keyboard ----
 function deleteCalSelection() {
   if (!calSel.length) return false;
-  const groups = {};
+  const groups = {}, removed = [];
   calSel.forEach(s => { const k = s.slot + ':' + s.di; (groups[k] = groups[k] || []).push(s.ei); });
   Object.keys(groups).forEach(k => {
     const slot = k.slice(0, k.indexOf(':')), di = +k.slice(k.indexOf(':') + 1);
     const days = _calDays(slot);
     if (!days || !days[di]) return;
-    groups[k].sort((a, b) => b - a).forEach(ei => days[di].events.splice(ei, 1));
+    groups[k].sort((a, b) => b - a).forEach(ei => {
+      const gone = days[di].events.splice(ei, 1)[0];
+      if (!gone) return;
+      removed.push({ slot, di, ev: gone });
+      if (gone === _newEv) _newEv = null;
+    });
   });
-  const n = calSel.length;
+  const n = removed.length;
   clearCalSel();
   saveDraft();
   renderEdit();
-  showToast(`Deleted ${n} session${n !== 1 ? 's' : ''}`);
+  if (n) _offerUndo(n === 1 ? 'Deleted ' + _evLabel(removed[0].ev) : `Deleted ${n} sessions`, () => _restoreEvents(removed));
   return true;
 }
 function copyCalSelection() {
@@ -3946,7 +4375,8 @@ function onCalResizeStart(e, slot, hPx, edge) {
 }
 
 // Drag on empty calendar space to create a new session.
-// Mouse: click+drag (10px threshold). Touch: long press (400ms) then drag.
+// Mouse: click+drag (10px threshold). Touch: a tap drops a "+ New session" marker and
+// tapping the marker creates it. Touch never creates anything on its own.
 function onCalCreateStart(e, slot, hPx) {
   // Clicking empty space clears selection
   clearCalSel();
@@ -3999,15 +4429,9 @@ function onCalCreateStart(e, slot, hPx) {
   }
 
   if (isTouch) {
-    // Touch path: wait for long press before arming; don't prevent default yet
-    holdTimer = setTimeout(() => {
-      holdTimer = null;
-      armed = true;
-      needsCapture = true;   // claim capture in next pointermove
-      if (navigator.vibrate) navigator.vibrate(32);  // haptic
-      ensureGhost();
-      updateGhost();
-    }, HOLD_MS);
+    // (v4) No long-press create: holds and the start of a scroll used to add sessions by accident.
+    _touchTapToMarker(e, body, slot, di, hPx, startX, startY, rect);
+    return;
   } else {
     // Mouse path: capture immediately, arm on movement threshold
     e.preventDefault();
@@ -4055,11 +4479,12 @@ function onCalCreateStart(e, slot, hPx) {
     const wasArmed = armed;
     cleanup();
     if (!wasArmed) return;
+    _discardStaleNew(false);
 
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (!days || !days[di]) return;
 
-    const newEv = { time: _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins), title: 'New Event', type: 'other', people: [], players: [], note: '' };
+    const newEv = { time: _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins), title: 'New Session', type: 'other', people: [], players: [], note: '' };
     const events = days[di].events;
     let insertIdx = events.length;
     for (let i = 0; i < events.length; i++) {
@@ -4069,6 +4494,7 @@ function onCalCreateStart(e, slot, hPx) {
     events.splice(insertIdx, 0, newEv);
     autoSortSlot(slot);
     saveDraft();
+    _newEv = newEv;                         // a draft until it gets a name, interns or a note
     const loc = _locateEvent(slot, newEv);
     renderEdit();
     if (loc) selectCalEvent(slot, loc.di, loc.ei, {}, true);
@@ -4090,6 +4516,8 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   const ctx = { di: di0, ei: ei0, evEl: evEl0 };
   const ev = days0[di0].events[ei0];
   const phone = _calPhone();
+  const isNew = !!_newEv && ev === _newEv;            // just created: Cancel / Add instead of Done
+  if (isNew && !focusId) focusId = 'calPopTitle';
   const initPlayerCount = countTitlePlayers(ev.title || '');
   const initInternCount = (ev.people || []).length;
 
@@ -4110,15 +4538,14 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   const DURS = [[30, '30m'], [45, '45m'], [60, '1h'], [90, '1.5h'], [120, '2h']];
 
   const pop = document.createElement('div');
-  pop.className = 'cal-popover' + (phone ? ' sheet' : '');
+  pop.className = 'cal-popover' + (phone ? ' sheet' : '') + (isNew ? ' is-new' : '') + (quiet ? ' no-anim' : '');
   pop.id = 'calPopover';
   pop.innerHTML = `
-    <div class="sheet-grip"></div>
+    <div class="sheet-grip" title="Swipe down to close"></div>
     <div class="cal-pop-head">
-      <span class="cp-t">Edit Session</span>
-      <button type="button" class="icon-btn" id="calPopDup" title="Duplicate this session">\u29c9</button>
-      <button type="button" class="icon-btn danger" id="calPopDelete" title="Delete this session">\u2715</button>
-      <button type="button" class="cal-pop-mini" id="calPopDone" title="Close the editor">Done</button>
+      ${isNew ? '<button type="button" class="cp-cancel" id="calPopCancel" title="Throw this new session away">Cancel</button>' : ''}
+      <span class="cp-t">${isNew ? 'New Session' : 'Edit Session'}</span>
+      <button type="button" class="cp-done" id="calPopDone" title="${isNew ? 'Keep this session' : 'Close the editor'}">${isNew ? 'Add' : 'Done'}</button>
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
@@ -4151,11 +4578,17 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     </div>
     <span class="cal-pop-label">Note</span>
     <input id="calPopNote" type="text" value="${escapeAttr(ev.note || '')}" placeholder="Optional note" autocomplete="off">
+    ${isNew ? '' : `<div class="cal-pop-foot">
+      <button type="button" class="cp-foot-btn" id="calPopDup" title="Make a copy of this session">\u29c9 Duplicate</button>
+      <button type="button" class="cp-foot-btn danger" id="calPopDelete" title="Delete this session (you can undo)">Delete session</button>
+    </div>`}
   `;
   document.body.appendChild(pop);
 
   if (phone) {
     document.body.classList.add('sheet-open');
+    _mountScrim('editor', () => closeEditor());       // backdrop: tapping out only closes
+    _wireSheetSwipe(pop, () => closeEditor());
     if (!quiet) _revealBehindSheet(ctx.evEl);
   } else {
     positionCalPop(pop, ctx.evEl);
@@ -4226,19 +4659,23 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     renderInternChips();
   };
 
-  // Trash + duplicate
-  pop.querySelector('#calPopDelete').addEventListener('click', () => {
+  // Delete + Duplicate sit at the bottom, away from Done. A delete can be undone.
+  const delBtn = pop.querySelector('#calPopDelete');
+  if (delBtn) delBtn.addEventListener('click', () => {
     const d = _calDays(slot);
     const tDi = ctx.di, tEi = ctx.ei;
     hideCalPopover();                     // flush half-typed input before indices move
     if (d && d[tDi] && d[tDi].events[tEi]) {
-      d[tDi].events.splice(tEi, 1);
+      const gone = d[tDi].events.splice(tEi, 1)[0];
+      if (gone === _newEv) _newEv = null;
       clearCalSel();
       saveDraft();
       renderEdit();
+      _offerUndo('Deleted ' + _evLabel(gone), () => _restoreEvents([{ slot, di: tDi, ev: gone }]));
     }
   });
-  pop.querySelector('#calPopDup').addEventListener('click', () => {
+  const dupBtn = pop.querySelector('#calPopDup');
+  if (dupBtn) dupBtn.addEventListener('click', () => {
     const d = _calDays(slot);
     const tDi = ctx.di, tEi = ctx.ei;
     if (!d || !d[tDi] || !d[tDi].events[tEi]) return;
@@ -4248,7 +4685,18 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     calSel = [];
     _commitAndReopen(slot, copy);
   });
-  pop.querySelector('#calPopDone').addEventListener('click', () => hideCalPopover());
+  // One clear way out: Done (existing) or Cancel / Add (new).
+  pop.querySelector('#calPopDone').addEventListener('click', () => {
+    if (isNew && _newEv === ev) {         // Add keeps it, even under the default name
+      _newEv = null;
+      _blurInside(pop);                   // commit a half-typed time first
+      hideCalPopover();
+      return;
+    }
+    closeEditor();
+  });
+  const cancelBtn = pop.querySelector('#calPopCancel');
+  if (cancelBtn) cancelBtn.addEventListener('click', () => cancelNewSession());
 
   titleInput.addEventListener('input', () => {
     const ev2 = getEv(); if (!ev2) return;
@@ -4287,12 +4735,12 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   endEl.addEventListener('change', () => commitTime('calPopEnd'));
   startEl.addEventListener('keydown', e => {
     if (e.key === 'Enter') { e.preventDefault(); endEl.focus(); endEl.select(); }
-    if (e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+    if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
     e.stopPropagation();
   });
   endEl.addEventListener('keydown', e => {
     if (e.key === 'Enter') { e.preventDefault(); commitTime(); }
-    if (e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+    if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
     e.stopPropagation();
   });
   pop.querySelector('#calPopDur').addEventListener('click', e => {
@@ -4326,7 +4774,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     saveDraft();
   });
   noteEl.addEventListener('keydown', e => {
-    if (e.key === 'Escape' || e.key === 'Enter') { e.preventDefault(); hideCalPopover(); }
+    if (e.key === 'Escape' || e.key === 'Enter') { e.preventDefault(); closeEditor(); }
     e.stopPropagation();
   });
 
@@ -4471,7 +4919,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   // Tab advances field; Enter / Escape close
   titleInput.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); peopleInput.focus(); peopleInput.select(); }
-    if (e.key === 'Escape') { e.preventDefault(); hideCalPopover(); }
+    if (e.key === 'Escape') { e.preventDefault(); closeEditor(); }
   });
   peopleInput.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ',') {
@@ -4488,7 +4936,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (e.key === 'Escape') {
       e.preventDefault();
       if (peopleInput.value) { peopleInput.value = ''; return; }  // first Esc clears, second closes
-      hideCalPopover();
+      closeEditor();
     }
   });
   // Datalist pick fires 'change' without a keystroke
@@ -4510,7 +4958,9 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
 function _calPopOutside(e) {
   const pop = document.getElementById('calPopover');
   if (!pop) { document.removeEventListener('pointerdown', _calPopOutside, true); return; }
-  if (!pop.contains(e.target)) hideCalPopover();
+  if (pop.contains(e.target)) return;
+  if (e.target && e.target.closest && e.target.closest('#sheetScrim')) return;   // the backdrop closes on its own tap
+  closeEditor();
 }
 
 let _calPopFlush = null;
@@ -4586,6 +5036,7 @@ function hideCalPopover() {
   _calPopAnchor = null;
   document.removeEventListener('pointerdown', _calPopOutside, true);
   document.body.classList.remove('sheet-open');
+  _unmountScrim('editor');
   const pop = document.getElementById('calPopover');
   if (pop) pop.remove();
 }
@@ -4631,27 +5082,39 @@ function renderCalendarPreview() {
   const curActive = editSlot === 'current', nxtActive = editSlot === 'next';
   if (hasCur) html += `<div class="prev-week ${curActive ? 'prev-active' : 'prev-idle'}" data-slot="current"><div class="preview-week-label">${curActive ? '\u270e Editing \u00b7 ' : ''}Current \u2014 ${escapeHtml(cur.weekTitle || 'Current Week')}</div><div id="previewCalCur" class="cal-wrap"></div></div>`;
   if (hasNxt) html += `<div class="prev-week ${nxtActive ? 'prev-active' : 'prev-idle'}" data-slot="next"><div class="preview-week-label">${nxtActive ? '\u270e Editing \u00b7 ' : ''}Next \u2014 ${escapeHtml(nxt.weekTitle || 'Next Week')}</div><div id="previewCalNxt" class="cal-wrap"></div></div>`;
-  if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days in either week yet \u2014 use <b>+ Add Day</b>.</div>`;
+  if (!hasCur && !hasNxt) html = `<div style="color:var(--stone);font-size:13px;padding:8px 0;">No days yet. <button type="button" class="btn" data-add-first-day>+ Add day</button></div>`;
   body.innerHTML = html;
+  const firstDay = body.querySelector('[data-add-first-day]');
+  if (firstDay) firstDay.addEventListener('click', () => addDayToSlot(editSlot));
   if (hasCur) renderCalendar(cur.days, document.getElementById('previewCalCur'), compactPrev, true, 'current', typeOnly);
   if (hasNxt) renderCalendar(nxt.days, document.getElementById('previewCalNxt'), compactPrev, true, 'next', typeOnly);
   applyEditFind();
 }
 
-// Phone day-switcher above the calendar: one chip per day, an "All" chip for the
-// whole week, and a big add button for whatever is on screen.
+// Phone day-switcher above the calendar: one compact chip per day (weekday over date,
+// session count under it) plus a whole-week chip. New sessions come from the + button
+// or a tap on the grid, so this strip only switches days.
+function _pagerParts(label) {
+  const m = String(label || '').trim().match(/^([A-Za-z]{3})[A-Za-z]*\.?,?\s+(?:\d{1,2}\/(\d{1,2})|[A-Za-z]+\.?\s+(\d{1,2})|(\d{1,2}))\b/);
+  if (!m) return null;
+  return { wd: m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase(), dd: m[2] || m[3] || m[4] };
+}
 function renderDayPager(slot, days, page) {
   const el = document.getElementById('calDayPager');
   if (!el) return;
   if (!days.length) {
     el.innerHTML = `<button class="dp-add" data-addday>+ Add Day</button>`;
   } else {
-    el.innerHTML = days.map((d, i) =>
-        `<button class="dp-btn${page === i ? ' active' : ''}" data-page="${i}">${escapeHtml(_shortDay(d.day))}<span class="n">${(d.events || []).length}</span></button>`
-      ).join('')
-      + `<button class="dp-btn${page === null ? ' active' : ''}" data-page="all">All<span class="n">week</span></button>`
-      + (page === null ? `<button class="dp-add" data-addday>+ Day</button>`
-                       : `<button class="dp-add" data-addsession>+ Session</button>`);
+    el.innerHTML = days.map((d, i) => {
+        const p = _pagerParts(d.day);
+        const n = (d.events || []).length;
+        const lbl = `${d.day || 'Day ' + (i + 1)}, ${n} session${n === 1 ? '' : 's'}`;
+        return `<button class="dp-btn${page === i ? ' active' : ''}" data-page="${i}" title="${escapeAttr(lbl)}" aria-label="${escapeAttr(lbl)}">`
+          + (p ? `<span class="wd">${escapeHtml(p.wd)}</span><span class="dd">${escapeHtml(p.dd)}</span>`
+               : `<span class="wd">&nbsp;</span><span class="dd sm">${escapeHtml(_shortDay(d.day))}</span>`)
+          + `<span class="n">${n}</span></button>`;
+      }).join('')
+      + `<button class="dp-btn${page === null ? ' active' : ''}" data-page="all" title="Whole week" aria-label="Whole week"><span class="wd">Week</span><span class="dd">All</span><span class="n">&nbsp;</span></button>`;
   }
   el.querySelectorAll('[data-page]').forEach(b => b.addEventListener('click', () => {
     calDayPage[slot] = b.dataset.page === 'all' ? null : +b.dataset.page;
@@ -4727,7 +5190,7 @@ document.addEventListener('keydown', e => {
   const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (ae && ae.isContentEditable);
   if (e.key === 'Escape') {
     if (!typing && assignName) { setAssignName(""); setEditFind("", false); return; }
-    if (!typing) clearCalSel();
+    if (!typing) { if (document.getElementById('calPopover')) closeEditor(); clearCalSel(); }
     return;
   }
   if (typing) return;
@@ -4817,11 +5280,11 @@ function switchSlot(slot) {
 document.getElementById("slotCurrentBtn").addEventListener("click", () => switchSlot("current"));
 document.getElementById("slotNextBtn").addEventListener("click", () => switchSlot("next"));
 
-document.getElementById("sortTimeBtn").addEventListener("click", sortEventsByTime);
 document.getElementById("addDayBtn").addEventListener("click", () => addDayToSlot(editSlot));
 
 document.getElementById("seedNextBtn").addEventListener("click", () => {
-  const hasNext = data.nextWeek && (data.nextWeek.days || []).length;
+  // Only ask before overwriting when Next Week already has sessions in it
+  const hasNext = data.nextWeek && (data.nextWeek.days || []).some(d => (d.events || []).length);
   const nw = nextCalWeek();
   if (hasNext && !confirm(
         `Overwrite “${data.nextWeek.weekTitle || "Next Week"}” with a fresh copy of the current week?\n\n` +
@@ -4983,7 +5446,8 @@ document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
 document.getElementById("importJsonBtn").addEventListener("click", () => document.getElementById("importFile").click());
 document.getElementById("importFile").addEventListener("change", e => { if (e.target.files[0]) importJson(e.target.files[0]); });
 document.getElementById("revertLiveBtn").addEventListener("click", async () => {
-  if (!confirm("Fetch the latest published schedule and discard all local edits?")) return;
+  if (!confirm("Discard all unpublished edits and reload the live schedule?")) return;
+  hideUndoBar();
   const btn = document.getElementById("revertLiveBtn");
   const orig = btn.textContent;
   btn.textContent = "Fetching…";
@@ -5019,13 +5483,6 @@ document.getElementById("revertLiveBtn").addEventListener("click", async () => {
   }
 });
 
-document.getElementById("discardBtn").addEventListener("click", () => {
-  if (!isDirty()) { alert("No drafts to discard."); return; }
-  if (confirm("Discard unpublished changes and revert to published version?")) {
-    data = publishedData ? JSON.parse(JSON.stringify(publishedData)) : JSON.parse(JSON.stringify(DEFAULT_DATA));
-    clearDraft(); setMode(currentMode);
-  }
-});
 document.getElementById("cfgCancel").addEventListener("click", closeSettings);
 document.getElementById("cfgClear").addEventListener("click", () => {
   if (confirm("Remove GitHub token from this browser?")) {
@@ -5266,6 +5723,54 @@ function doRedo() {
 }
 document.getElementById("undoBtn").addEventListener("click", doUndo);
 document.getElementById("redoBtn").addEventListener("click", doRedo);
+
+// ---------- (v4) Touch drag that actually holds on to the tile ----------
+// Registered once, non-passive, on the calendar's permanent container: the browser then
+// waits for this before scrolling, so an armed drag can stop the page from moving.
+document.getElementById('previewWeeks').addEventListener('touchmove', e => {
+  if (_calTouchDrag && e.cancelable) e.preventDefault();
+}, { passive: false });
+document.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') _lastTouchDown = Date.now(); }, true);
+
+// ---------- (v4) Undo-bar bookkeeping, ⋯ menu, + button ----------
+(function () {
+  const _sd = saveDraft;
+  saveDraft = function () {
+    _draftSeq++;
+    const r = _sd.apply(this, arguments);
+    if (_undoBarEl && _undoBarSeq !== _draftSeq) hideUndoBar();   // any later edit retires the offer
+    return r;
+  };
+})();
+(function () {
+  const btn = document.getElementById('moreBtn'), menu = document.getElementById('moreMenu');
+  if (!btn || !menu) return;
+  const outside = e => { if (!menu.contains(e.target) && !btn.contains(e.target)) close(); };
+  function close() {
+    menu.classList.add('hidden');
+    btn.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('pointerdown', outside, true);
+  }
+  btn.addEventListener('click', () => {
+    if (!menu.classList.contains('hidden')) { close(); return; }
+    menu.classList.remove('hidden');
+    btn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => document.addEventListener('pointerdown', outside, true), 0);
+  });
+  menu.addEventListener('click', e => { if (e.target.closest('button')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) close(); });
+})();
+document.getElementById('calFab').addEventListener('click', () => {
+  if (currentMode !== 'edit') return;
+  const days = _calDays(editSlot) || [];
+  if (!days.length) { addDayToSlot(editSlot); return; }
+  let di = calDayPage[editSlot];
+  if (typeof di !== 'number' || !days[di]) {
+    const t = days.findIndex(d => isTodayLabel(d.day));
+    di = t >= 0 ? t : 0;
+  }
+  addSessionToDay(editSlot, di);
+});
 
 // ---------- (v3) Stats strip + coverage alerts ----------
 function _covAlerts() {
