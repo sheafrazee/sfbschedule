@@ -1,8 +1,8 @@
 {
-  "weekTitle": "Week of Sep 28 – Oct 4",
+  "weekTitle": "Week of Oct 5 – 11",
   "days": [
     {
-      "day": "Mon 9/28",
+      "day": "Mon 10/5",
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
@@ -15,11 +15,11 @@
       ]
     },
     {
-      "day": "Tue 9/29",
+      "day": "Tue 10/6",
       "events": [
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 4/5 @ OGP",
+          "title": "Audrina 1/5 @ OGP",
           "type": "other",
           "people": [
             "Jung"
@@ -29,7 +29,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Aiden",
+          "title": "Group @ OGP:",
           "type": "other",
           "people": [
             "Jung"
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "day": "Wed 9/30",
+      "day": "Wed 10/7",
       "events": [
         {
           "time": "6:00 AM – 7:30 AM",
@@ -54,7 +54,7 @@
         },
         {
           "time": "11:30 AM – 12:30 PM",
-          "title": "Jordan @ OGP",
+          "title": "Jordan 3/5 @ OGP",
           "type": "other",
           "people": [
             "Jung"
@@ -75,7 +75,7 @@
       ]
     },
     {
-      "day": "Thu 10/1",
+      "day": "Thu 10/8",
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
@@ -89,15 +89,25 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 2/5 @ OGP",
+          "title": "Jordan 4/5 @ OGP",
           "type": "other",
           "people": [],
           "players": [],
           "note": ""
         },
         {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina 2/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Jung"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Cesar",
+          "title": "Group @ OGP: ",
           "type": "other",
           "people": [
             "Greg R"
@@ -108,15 +118,15 @@
       ]
     },
     {
-      "day": "Fri 10/2",
+      "day": "Fri 10/9",
       "events": []
     },
     {
-      "day": "Sat 10/3",
+      "day": "Sat 10/10",
       "events": []
     },
     {
-      "day": "Sun 10/4",
+      "day": "Sun 10/11",
       "events": []
     }
   ],
