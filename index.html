@@ -882,6 +882,171 @@ body.editing-next .ab-next { display: flex; }
   body:has(#assignBar:not(.hidden)) .cal-fab,
   body:has(#internTally:not(.collapsed):not(.hidden)) .cal-fab { display: none; }
 }
+/* ════════ Pay tab: Weekly Pay · Excel Monthly Interns Invoice · rates ════════ */
+.pay-top { margin-bottom: 12px; }
+.pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
+.pay-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.pay-card { background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; padding: 14px 16px 16px; min-width: 0; }
+.pay-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 12px; }
+.pay-head h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -.01em; color: var(--ink); margin-right: auto; }
+.pay-ctrls { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.pay-select { appearance: none; -webkit-appearance: none; padding: 7px 30px 7px 11px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; max-width: 100%;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235C5652' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center; }
+.pay-select:hover { border-color: var(--stone); }
+.pay-ctrls .btn:disabled { opacity: .45; cursor: not-allowed; }
+.pay-msg { font-size: 12.5px; line-height: 1.5; color: var(--dark-stone); margin: -4px 0 10px; }
+.pay-msg b { color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+.pay-msg:empty { display: none; }
+.pay-warn { font-size: 12.5px; line-height: 1.5; color: var(--dark-stone); background: var(--warm-white); border: 1.5px solid var(--light-stone); border-left: 4px solid var(--clay); border-radius: 6px; padding: 8px 12px; margin-bottom: 10px; }
+.pay-warn div + div { margin-top: 2px; }
+.pay-status { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-stone); min-height: 16px; margin-top: 8px; }
+.pay-status:empty { display: none; }
+.pay-empty { color: var(--stone); font-size: 13px; text-align: center; padding: 22px 12px; line-height: 1.5; }
+.pay-sheet-wrap { max-width: 760px; }
+
+/* Rates */
+.rates-card { position: sticky; top: 12px; }
+.rates-hint { font-size: 12px; line-height: 1.5; color: var(--stone); margin: -6px 0 12px; }
+.rate-row { display: grid; grid-template-columns: minmax(0, 1fr) 62px 78px 22px; gap: 5px; align-items: center; margin-bottom: 6px; }
+.rate-row input, .rate-row select { width: 100%; min-width: 0; padding: 6px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
+.rate-row input:focus, .rate-row select:focus { border-color: var(--stone); }
+.rate-row .rr-name { font-weight: 600; }
+.rate-row.dup .rr-name { border-color: var(--clay); background: #FFF6F1; }
+.rate-row .rr-money { position: relative; display: block; }
+.rate-row .rr-money span { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--stone); pointer-events: none; }
+.rate-row .rr-rate { padding-left: 17px; font-variant-numeric: tabular-nums; }
+.rate-row .rr-unit { appearance: none; -webkit-appearance: none; padding-right: 6px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 11.5px; }
+.rate-row.hr .rr-unit { border-color: #7B5EA7; color: #7B5EA7; }
+.rate-item { margin-bottom: 6px; }
+.rate-item .rate-row { margin-bottom: 0; }
+.rate-item .rate-sub { margin-top: 4px; }
+.rate-row.split .rr-unit { border-color: var(--ink); color: var(--ink); }
+.rr-by { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 11px; color: var(--stone); text-align: center; }
+.rr-type { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; text-align: right; padding-right: 6px; color: var(--dark-stone); }
+.rr-type.excel { color: #8A4530; }
+.rr-del { border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 5px 4px; border-radius: 4px; }
+.rr-del:hover { color: #fff; background: var(--clay); }
+.rate-add { width: 100%; margin-top: 4px; }
+.rate-sync { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--light-stone); }
+.rate-sync:empty { display: none; }
+.rs-msg { font-size: 12.5px; line-height: 1.5; color: var(--dark-stone); }
+.rs-msg.ok { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: var(--green); }
+.rs-msg.dirty { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; color: var(--amber); }
+.rs-msg.err { color: var(--clay); }
+.rs-form { display: flex; gap: 6px; width: 100%; }
+.rs-form input { flex: 1; min-width: 0; padding: 7px 10px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
+.rs-form input:focus { border-color: var(--stone); }
+.rate-sync .btn:disabled { opacity: .55; cursor: default; }
+.rate-sync .ab-link { text-align: left; }
+
+/* Invoice preview thumbnails (pages are real 11×8.5in layouts, scaled down) */
+.iv-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.iv-thumb { position: relative; overflow: hidden; aspect-ratio: 1056 / 816; border: 1px solid var(--light-stone); border-radius: 6px; background: #F4F1EC; cursor: zoom-in; }
+.iv-thumb.wide { grid-column: 1 / -1; cursor: zoom-out; }
+.iv-thumb:hover { border-color: var(--stone); }
+.iv-thumb > .iv-doc { position: absolute; top: 0; left: 0; width: 1056px; transform-origin: 0 0; pointer-events: none; }
+
+@media (max-width: 960px) {
+  .pay-grid { grid-template-columns: 1fr; }
+  .rates-card { position: static; }
+}
+@media (max-width: 600px) {
+  .pay-card { padding: 12px; }
+  .pay-ctrls { width: 100%; }
+  .pay-ctrls .pay-select { flex: 1 1 100%; }
+  .pay-ctrls .cal-type-seg { flex: 1 1 100%; }
+  .pay-ctrls .cal-type-seg .seg-btn { flex: 1; padding: 7px 10px; }
+  .pay-ctrls .btn { flex: 1 1 auto; text-align: center; }
+  .iv-thumbs { grid-template-columns: 1fr; }
+}
+
+/* ---- Weekly Pay sheet (on-screen preview is fluid; the PNG is captured at 760px) ---- */
+.wp-sheet { background: #F4F1EC; padding: 18px; border-radius: 10px; font-family: 'Source Sans 3', sans-serif; color: #111111; }
+.wp-sheet.wp-fixed { width: 760px; padding: 24px; border-radius: 0; }
+.wp-hdr { background: #111111; border-radius: 12px; padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 18px; }
+.wp-badge { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #9B9590; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.wp-titles { flex: 1; min-width: 150px; }
+.wp-eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #9B9590; margin-bottom: 3px; }
+.wp-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -.02em; color: #F4F1EC; line-height: 1.15; }
+.wp-sub { font-size: 12.5px; color: #9B9590; margin-top: 3px; }
+.wp-total { text-align: right; margin-left: auto; }
+.wp-total .v { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 27px; letter-spacing: -.01em; line-height: 1.1; color: #E08B63; }
+.wp-total .l { font-size: 11.5px; color: #9B9590; margin-top: 3px; }
+.wp-sec { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: #5C5652; margin: 0 0 9px; }
+.wp-sec span { color: #9B9590; font-weight: 700; }
+.wp-list { background: #fff; border: 1px solid #D6D1CC; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+.wp-row { padding: 11px 16px 12px 14px; border-left: 4px solid #B8694A; }
+.wp-row + .wp-row { border-top: 1px solid #ECE8E3; }
+.wp-row.hr { border-left-color: #7B5EA7; }
+.wp-row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.wp-row .nm { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15.5px; color: #111111; }
+.wp-row .amt { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; color: #111111; white-space: nowrap; }
+.wp-calc { font-size: 13px; color: #5C5652; margin-top: 1px; display: flex; justify-content: space-between; gap: 12px; }
+.wp-calc .pa { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: #5C5652; white-space: nowrap; }
+.wp-row.multi .wp-part { margin-top: 5px; }
+.wp-row.multi .wp-part + .wp-part { padding-top: 5px; border-top: 1px dashed #ECE8E3; }
+.wp-calc b { font-weight: 600; color: #B8694A; }
+.wp-part.hr .wp-calc b { color: #7B5EA7; }
+.wp-days { font-size: 12px; line-height: 1.45; color: #9B9590; margin-top: 3px; }
+.wp-empty { padding: 18px 16px; color: #9B9590; font-size: 13px; text-align: center; }
+.wp-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.wp-chip { background: #fff; border: 1.5px solid #D6D1CC; border-radius: 8px; padding: 6px 12px; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; gap: 7px; }
+.wp-chip .nm { font-weight: 700; font-size: 13px; color: #111111; }
+.wp-chip .ct { background: #111111; color: #F4F1EC; border-radius: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; line-height: 1.4; }
+
+/* ---- Excel Monthly Interns Invoice pages: 11×8.5in (1056×816px), one per PDF page ---- */
+.iv-doc { font-family: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #111111; text-align: left; }
+.iv-page { position: relative; width: 1056px; height: 816px; padding: 22px 26px; overflow: hidden; background: #F4F1EC; box-sizing: border-box; }
+.iv-hdr { display: flex; align-items: center; gap: 14px; background: #111111; border-radius: 10px; padding: 12px 18px; margin-bottom: 14px; }
+.iv-hdr.cover { padding: 15px 20px; margin-bottom: 18px; }
+.iv-badge { width: 34px; height: 34px; flex: 0 0 34px; }
+.iv-titles { flex: 1; min-width: 0; }
+.iv-sl { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: #9B9590; margin-bottom: 3px; }
+.iv-h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; color: #F4F1EC; letter-spacing: -.01em; line-height: 1.2; }
+.cover .iv-h1 { font-size: 24px; }
+.iv-roster { font-size: 9px; color: #9B9590; margin-top: 4px; line-height: 1.4; }
+.iv-metrics { text-align: right; flex: 0 0 auto; max-width: 48%; }
+.iv-tot { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 800; color: #E08B63; }
+.cover .iv-tot { font-size: 29px; line-height: 1.1; }
+.iv-sub { font-size: 9px; color: #9B9590; margin-top: 3px; }
+.iv-note { font-size: 8px; color: #8A837D; margin-top: 4px; font-style: italic; }
+.iv-grid { display: grid; gap: 8px; align-items: start; }
+.iv-col { background: #FFFFFF; border: .5px solid #D6D1CC; border-radius: 8px; padding: 8px; min-width: 0; }
+.iv-dhdr { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111111; padding-bottom: 5px; margin-bottom: 7px; }
+.iv-dhdr .d { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.iv-dhdr .c { font-size: 7.5px; color: #9B9590; }
+.iv-card { background: #F7EFEA; border-left: 2.5px solid #B8694A; border-radius: 3px; padding: 5px 6px; margin-bottom: 5px; }
+.iv-crow { display: flex; justify-content: space-between; align-items: baseline; gap: 4px; }
+.iv-time { font-size: 7.5px; color: #6E6862; font-weight: 600; }
+.iv-dur { font-size: 7px; color: #9B9590; font-weight: 600; letter-spacing: .04em; }
+.iv-cost { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 800; color: #B8694A; white-space: nowrap; }
+.iv-cost.zero { color: #C4BFB9; }
+.iv-ttl { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8.5px; font-weight: 700; line-height: 1.25; margin: 2px 0 3px; overflow-wrap: anywhere; }
+.iv-ppl { font-size: 7.5px; color: #6E6862; line-height: 1.4; }
+.iv-ppl b { font-weight: 700; color: #B8694A; }
+.iv-ppl u { text-decoration: none; font-weight: 700; color: #7B5EA7; }
+.iv-dtot { display: flex; justify-content: space-between; align-items: baseline; border-top: .5px solid #D6D1CC; padding-top: 5px; margin-top: 6px; }
+.iv-dtot .l { font-size: 7px; letter-spacing: .1em; text-transform: uppercase; color: #9B9590; }
+.iv-dtot .v { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 800; }
+.iv-empty { font-size: 8px; color: #C4BFB9; padding: 10px 0; text-align: center; }
+.iv-ctable { width: 100%; border-collapse: collapse; margin-top: 6px; }
+.iv-ctable th { text-align: left; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; color: #9B9590; padding: 0 12px 7px 0; border-bottom: 1.5px solid #111111; }
+.iv-ctable td { font-size: 13px; padding: 11px 12px 11px 0; border-bottom: .5px solid #D6D1CC; }
+.iv-ctable td.wk { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+.iv-ctable td.amt { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #B8694A; }
+.iv-ctable td.hrs { font-weight: 700; color: #7B5EA7; }
+.iv-ctable tr.grand td { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 800; border-bottom: none; border-top: 1.5px solid #111111; padding-top: 13px; }
+.iv-rates { margin-top: 24px; }
+.iv-rates .lbl { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: #9B9590; margin-bottom: 9px; }
+.iv-rl { display: inline-block; background: #fff; border: .5px solid #D6D1CC; border-radius: 20px; padding: 5px 13px; font-size: 10px; margin: 0 6px 6px 0; }
+.iv-rl b { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+.iv-rl i { font-style: normal; font-weight: 700; color: #B8694A; }
+.iv-rl .u { color: #9B9590; }
+.iv-rl .x { color: #5C5652; }
+.iv-rl.hr { border-color: #7B5EA7; }
+.iv-rl.hr i { color: #7B5EA7; }
+.iv-rl.off { opacity: .45; }
+.iv-foot { margin-top: 20px; font-size: 8.5px; color: #9B9590; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -904,6 +1069,7 @@ body.editing-next .ab-next { display: flex; }
       <div class="view-edit-toggle hidden" role="group" aria-label="View or edit mode">
         <button class="mode-btn active" data-mode="display">View</button>
         <button class="mode-btn" data-mode="edit">Edit</button>
+        <button class="mode-btn" data-mode="pay">Pay</button>
       </div>
       <div class="fb-row fb-top">
         <label class="search-field">
@@ -939,6 +1105,7 @@ body.editing-next .ab-next { display: flex; }
       <div class="view-edit-toggle hidden" role="group" aria-label="View or edit mode">
         <button class="mode-btn active" data-mode="display">View</button>
         <button class="mode-btn" data-mode="edit">Edit</button>
+        <button class="mode-btn" data-mode="pay">Pay</button>
       </div>
     </div>
     <div class="action-bar">
@@ -1005,6 +1172,57 @@ body.editing-next .ab-next { display: flex; }
       </div>
     </div>
   </div>
+
+  <div id="payView" class="hidden">
+    <div class="pay-top">
+      <div class="view-edit-toggle hidden" role="group" aria-label="View, edit or pay">
+        <button class="mode-btn active" data-mode="display">View</button>
+        <button class="mode-btn" data-mode="edit">Edit</button>
+        <button class="mode-btn" data-mode="pay">Pay</button>
+      </div>
+    </div>
+    <div class="pay-grid">
+      <div class="pay-main">
+        <section class="pay-card" aria-labelledby="payWeekH">
+          <div class="pay-head">
+            <h2 id="payWeekH">Weekly Pay</h2>
+            <div class="pay-ctrls">
+              <select class="pay-select" id="payWeekSel" aria-label="Week"></select>
+              <div class="cal-type-seg" id="payTypeSeg" role="group" aria-label="Sessions counted">
+                <button type="button" class="seg-btn" data-type="other">Other Only</button>
+                <button type="button" class="seg-btn" data-type="all">All Sessions</button>
+              </div>
+              <button class="btn" id="payShareBtn" type="button">↗ Share</button>
+              <button class="btn primary" id="payDownloadBtn" type="button">↓ Download PNG</button>
+            </div>
+          </div>
+          <div class="pay-msg" id="payWeekMsg"></div>
+          <div class="pay-sheet-wrap" id="payWeekPreview"></div>
+        </section>
+        <section class="pay-card" aria-labelledby="invH">
+          <div class="pay-head">
+            <h2 id="invH">Excel Monthly Interns Invoice</h2>
+            <div class="pay-ctrls">
+              <select class="pay-select" id="invMonthSel" aria-label="Month"></select>
+              <button class="btn primary" id="invDownloadBtn" type="button">↓ Download PDF</button>
+            </div>
+          </div>
+          <div class="pay-msg" id="invMsg"></div>
+          <div id="invWarn"></div>
+          <div class="iv-thumbs" id="invPreview"></div>
+          <div class="pay-status" id="invStatus"></div>
+        </section>
+      </div>
+      <section class="pay-card rates-card" aria-labelledby="ratesH">
+        <div class="pay-head"><h2 id="ratesH">Paid intern rates</h2></div>
+        <p class="rates-hint">Names must match the schedule (any capitalization). Choose “split” to pay Excel and Other sessions differently — e.g. hourly for Excel, per session for Other.</p>
+        <div id="rateList"></div>
+        <datalist id="rateNames"></datalist>
+        <button class="btn rate-add" id="rateAddBtn" type="button">+ Add paid intern</button>
+        <div class="rate-sync" id="rateSync" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
 </div>
 
 <!-- Settings Modal -->
@@ -1036,7 +1254,7 @@ body.editing-next .ab-next { display: flex; }
     </div>
     <div class="modal-field" style="border-top:1px solid var(--light-stone);padding-top:14px;">
       <label>Backup &amp; Restore</label>
-      <div class="hint" style="margin-bottom:8px;">Export saves the whole schedule (current week, next week, archive) as a .json file — including unpublished drafts. Import replaces everything from a file. Your normal backup is GitHub; use these only for offline copies or device transfers.</div>
+      <div class="hint" style="margin-bottom:8px;">Export saves the whole schedule (current week, next week, archive) plus the pay rates as a .json file — including unpublished drafts. Import replaces everything from a file. Your normal backup is GitHub; use these only for offline copies or device transfers.</div>
       <div style="display:flex;gap:8px;">
         <button class="btn" id="exportJsonBtn">↓ Export JSON</button>
         <button class="btn" id="importJsonBtn">↑ Import JSON</button>
@@ -3635,21 +3853,24 @@ function closeSettings() { document.getElementById("settingsModal").classList.ad
 
 // ============ MODE TOGGLE ============
 function setMode(mode) {
-  if (mode !== "display" && mode !== "edit") return;  // slot buttons share .mode-btn but carry no data-mode
+  if (mode !== "display" && mode !== "edit" && mode !== "pay") return;  // slot buttons share .mode-btn but carry no data-mode
   currentMode = mode;
   document.body.classList.toggle("mode-edit", mode === "edit");
+  document.body.classList.toggle("mode-pay", mode === "pay");
   document.querySelectorAll(".mode-btn").forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
   document.getElementById("displayView").classList.toggle("hidden", mode !== "display");
   document.getElementById("editView").classList.toggle("hidden", mode !== "edit");
+  document.getElementById("payView").classList.toggle("hidden", mode !== "pay");
   if (mode === "display") renderDisplay();
-  else renderEdit();
-  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); }
+  else if (mode === "edit") renderEdit();
+  else renderPay();
+  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); if (assignName) setAssignName(""); }
   _updateEditFloat();
 }
 
 // ============ JSON IO ============
 function exportJson() {
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+  const blob = new Blob([JSON.stringify({ ...data, payRates }, null, 2)], {type: "application/json"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -3663,6 +3884,8 @@ function importJson(file) {
     try {
       const obj = JSON.parse(e.target.result);
       if (!obj.days || !Array.isArray(obj.days)) throw new Error("Invalid format — needs { weekTitle, days: [...] }");
+      if (Array.isArray(obj.payRates)) { payRates = _cleanRates(obj.payRates); payLocal.dirty = true; savePayRates(); }
+      delete obj.payRates;   // rates stay on this device; schedule.json is public
       data = obj;
       _dayEventSort(data.days);                       // older or hand-edited files may be unsorted
       if (data.nextWeek) _dayEventSort(data.nextWeek.days);
@@ -5143,7 +5366,7 @@ if (editUnlocked) document.getElementById("archiveNowBtn").classList.remove("hid
 
 document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", () => {
   // Block edit mode unless unlocked
-  if (b.dataset.mode === "edit" && !editUnlocked) return;
+  if ((b.dataset.mode === "edit" || b.dataset.mode === "pay") && !editUnlocked) return;
   setMode(b.dataset.mode);
 }));
 
@@ -5869,6 +6092,901 @@ window.addEventListener("resize", () => {
   setFbH();
   if (window.ResizeObserver) new ResizeObserver(setFbH).observe(fb);
   else window.addEventListener("resize", setFbH);
+})();
+
+// ════════════════ PAY: rates · Weekly Pay (.png) · Excel Monthly Interns Invoice (.pdf) ════════════════
+// Everything is computed from the same week data the app already keeps: the live week plus every
+// archived snapshot (archive[].days).
+// RATES: edited in the Pay tab. Each device keeps a working copy (localStorage); "Save rates" writes an
+// AES-GCM–encrypted copy to pay-rates.json beside schedule.json, and other devices load it once the pay
+// passphrase is entered there. The repo is public, so the rates never go to GitHub unencrypted and never
+// into schedule.json. DEFAULT_PAY_RATES only seeds a device that has never saved or loaded a rate card —
+// change rates in the Pay tab, not here.
+const LS_PAY_RATES = "sfb_pay_rates_v1";
+const LS_PAY_PASS = "sfb_pay_pass_v1";
+const LS_PAY_TYPE = "sfb_pay_type_v1";
+const JSPDF_SRC = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+// Starting rate card: the September 2026 Intern Cost sheet + Dylan O and Greg R (Oct 2026).
+const DEFAULT_PAY_RATES = [
+  { name: "Jung", rate: 17, unit: "hr" },
+  { name: "Dame", rate: 17, unit: "session" },
+  { name: "Anthony", rate: 17, unit: "session" },
+  { name: "Guiressi", rate: 20, unit: "session" },
+  { name: "Colby", rate: 20, unit: "session" },
+  { name: "Dylan W", rate: 17, unit: "session" },
+  { name: "Kirby", rate: 17, unit: "session" },
+  { name: "David", rate: 15, unit: "session" },
+  { name: "Mark L", rate: 25, unit: "session" },
+  { name: "Ali", rate: 15, unit: "session" },
+  { name: "Dylan O", rate: 17, unit: "session" },
+  { name: "Greg R", rate: 17, unit: "session" },
+];
+// A rate is { name, rate, unit: "session" | "hr" } for both session types, or unit "split" with its own
+// { rate, unit } for Excel Client and for Other sessions (a 0 rate = not paid for that type).
+function _cleanRates(list) {
+  const sub = (o, r) => ({ rate: Number(o ? o.rate : r.rate) || 0, unit: (o ? o.unit : r.unit) === "hr" ? "hr" : "session" });
+  return (Array.isArray(list) ? list : []).filter(r => r && typeof r === "object").map(r => {
+    const unit = r.unit === "hr" || r.unit === "split" ? r.unit : "session";
+    const out = { name: String(r.name || ""), rate: Number(r.rate) || 0, unit };
+    if (unit === "split") { out.excel = sub(r.excel, r); out.other = sub(r.other, r); }
+    return out;
+  });
+}
+// payLocal = this device's copy: { rates, dirty (edited since the last save/load), syncedAt (updatedAt of the
+// GitHub copy it matches) }.
+function loadPayLocal() {
+  let raw = null;
+  try { raw = JSON.parse(localStorage.getItem(LS_PAY_RATES)); } catch (e) {}
+  if (Array.isArray(raw)) {   // first release kept a bare array — keep those edits, add any newer defaults
+    const rates = _cleanRates(raw), have = new Set(rates.map(r => _payKey(r.name)));
+    DEFAULT_PAY_RATES.forEach(d => { if (!have.has(_payKey(d.name))) rates.push({ ...d }); });
+    return { rates, dirty: true, syncedAt: null };
+  }
+  if (raw && Array.isArray(raw.rates)) return { rates: _cleanRates(raw.rates), dirty: !!raw.dirty, syncedAt: raw.syncedAt || null };
+  return { rates: DEFAULT_PAY_RATES.map(r => ({ ...r })), dirty: false, syncedAt: null };
+}
+function savePayRates() {
+  payLocal.rates = payRates;
+  try { localStorage.setItem(LS_PAY_RATES, JSON.stringify({ v: 2, rates: payRates, dirty: payLocal.dirty, syncedAt: payLocal.syncedAt })); } catch (e) {}
+}
+let payLocal = loadPayLocal();
+let payRates = payLocal.rates;
+let payType = (() => { try { return localStorage.getItem(LS_PAY_TYPE) === "all" ? "all" : "other"; } catch (e) { return "other"; } })();
+let payWeekKey = null;   // Monday key of the week shown in Weekly Pay
+let invMonth = null;     // "YYYY-MM" shown in the invoice
+
+// Names match on case, spacing and dots only — "Mark L." = "mark l", but "Dylan O" ≠ "Dylan W".
+function _payKey(n) { return String(n || "").toLowerCase().replace(/\./g, "").replace(/\s+/g, " ").trim(); }
+// name key → { name, split, excel: {rate, unit} | null, other: {rate, unit} | null }
+function payRateIndex() {
+  const m = new Map();
+  const one = (rate, unit) => (Number(rate) > 0 ? { rate: Number(rate), unit: unit === "hr" ? "hr" : "session" } : null);
+  payRates.forEach(r => {
+    const k = _payKey(r.name);
+    if (!k || m.has(k)) return;
+    const split = r.unit === "split";
+    const excel = split ? one(r.excel && r.excel.rate, r.excel && r.excel.unit) : one(r.rate, r.unit);
+    const other = split ? one(r.other && r.other.rate, r.other && r.other.unit) : one(r.rate, r.unit);
+    if (excel || other) m.set(k, { name: String(r.name).trim().replace(/\s+/g, " "), split, excel, other });
+  });
+  return m;
+}
+function _evKind(ev) { return ev && ev.type === "excel" ? "excel" : "other"; }
+
+// ---- small formatters ----
+function _addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function _md(d) { return `${MON[d.getMonth()]} ${d.getDate()}`; }
+function _rangeLabel(a, b) {
+  if (+a === +b) return _md(a);
+  return a.getMonth() === b.getMonth() ? `${_md(a)} – ${b.getDate()}` : `${_md(a)} – ${_md(b)}`;
+}
+function _dayTag(d) { return `${_DAY_SHORT[d.getDay()]} ${d.getMonth() + 1}/${d.getDate()}`; }
+function fmtMoney(v) {
+  const c = Math.round((Number(v) || 0) * 100 + 1e-6) / 100;
+  const whole = Math.abs(c - Math.round(c)) < 1e-9;
+  return "$" + c.toLocaleString("en-US", { minimumFractionDigits: whole ? 0 : 2, maximumFractionDigits: 2 });
+}
+function fmtHrs(mins) { return `${Math.round(mins / 60 * 100) / 100}h`; }
+// "9:00 AM – 10:15 AM" → "9:00 – 10:15 AM" (the invoice's compact form)
+function _shortTime(t) {
+  const s = String(t || "").trim();
+  const m = s.match(/^(.+?)\s*(AM|PM)\s*[–—-]\s*(.+?)\s*(AM|PM)$/i);
+  if (m && m[2].toUpperCase() === m[4].toUpperCase()) return `${m[1]} – ${m[3]} ${m[4].toUpperCase()}`;
+  return s.replace(/\s*[–—]\s*/, " – ");
+}
+// Scheduled length of a session in minutes (single start time = 60 min, like the calendar).
+function sessionMinutes(ev) {
+  const t = parseEventTimes(ev && ev.time);
+  if (!t) return 0;
+  let d = (t.end.h * 60 + t.end.min) - (t.start.h * 60 + t.start.min);
+  if (d === 0) return 60;
+  while (d < 0) d += 720;          // "11:30 – 1:00 PM": the start inherited PM; back it up 12h
+  return d;
+}
+// Player/client names for a week's roster line: "Live Play: Bogi M, Ryan R" → Bogi M, Ryan R
+function _rosterNames(title) {
+  return titlePlayerNames(title).map(n => n.split(":").pop().split(/\s@\s/)[0].trim()).filter(Boolean);
+}
+
+// ---- Week sources: archived snapshots + the live week (the live copy wins on the same Monday) ----
+function payWeekSources() {
+  const out = new Map();
+  (data && data.archive || []).forEach(e => {
+    if (!hasSnapshot(e)) return;
+    const prev = out.get(e.key);
+    if (prev && (prev.ts || 0) > (e.ts || 0)) return;
+    out.set(e.key, { key: e.key, mon: archiveMonday(e), days: e.days, ts: e.ts || 0, live: false });
+  });
+  if (data && (data.days || []).length) {
+    const w = liveWeekDates(data);
+    out.set(w.key, { key: w.key, mon: w.mon, days: data.days, live: true });
+  }
+  return [...out.values()].sort((a, b) => b.key.localeCompare(a.key));
+}
+
+// What one session pays: every rate-card intern on it, hourly × scheduled length or flat per session.
+function sessionPay(ev, rix) {
+  const mins = sessionMinutes(ev);
+  const seen = new Set(), lines = [];
+  let cost = 0;
+  (ev.people || []).forEach(p => {
+    const raw = String(p || "").trim(), k = _payKey(raw);
+    if (!k || seen.has(k)) return;
+    seen.add(k);
+    const entry = rix.get(k), kind = _evKind(ev), r = entry && entry[kind];
+    if (!r) { lines.push({ name: entry ? entry.name : raw, paid: false }); return; }
+    const amt = r.unit === "hr" ? r.rate * mins / 60 : r.rate;
+    cost += amt;
+    lines.push({ name: entry.name, paid: true, rate: r, amt, kind, split: entry.split });
+  });
+  return { mins, cost, lines };
+}
+
+// ============ WEEKLY PAY ============
+function buildWeeklyPay(src, type) {
+  const rix = payRateIndex();
+  const paid = new Map(), other = new Map();
+  let sessions = 0;
+  (src.days || []).forEach(day => {
+    const date = dateForDayFrom(day.day, src.mon);
+    (day.events || []).forEach(ev => {
+      if (type !== "all" && ev.type === "excel") return;
+      sessions++;
+      const sp = sessionPay(ev, rix);
+      sp.lines.forEach(l => {
+        const k = _payKey(l.name);
+        if (l.paid) {
+          const r = paid.get(k) || { name: l.name, split: l.split, n: 0, mins: 0, amt: 0, parts: new Map() };
+          r.n++; r.mins += sp.mins; r.amt += l.amt;
+          // One part per distinct rate: a split intern's Excel hours and Other sessions stay separate
+          const pk = `${l.rate.unit}|${l.rate.rate}`;
+          const part = r.parts.get(pk) || { rate: l.rate, n: 0, mins: 0, amt: 0, kinds: new Set(), days: new Map() };
+          part.n++; part.mins += sp.mins; part.amt += l.amt; part.kinds.add(l.kind);
+          const d = part.days.get(+date) || { date, n: 0, mins: 0 };
+          d.n++; d.mins += sp.mins; part.days.set(+date, d);
+          r.parts.set(pk, part);
+          paid.set(k, r);
+        } else {
+          const r = other.get(k) || { name: l.name, n: 0 };
+          r.n++; other.set(k, r);
+        }
+      });
+    });
+  });
+  const paidRows = [...paid.values()].sort((a, b) => b.amt - a.amt || a.name.localeCompare(b.name));
+  paidRows.forEach(r => {
+    r.partList = [...r.parts.values()].sort((a, b) => b.amt - a.amt);
+    r.partList.forEach(pt => { pt.dayList = [...pt.days.values()].sort((a, b) => a.date - b.date); });
+  });
+  const otherRows = [...other.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
+  const idle = [...rix.values()].filter(e => (type === "all" ? (e.excel || e.other) : e.other) && !paid.has(_payKey(e.name))).map(e => e.name);
+  return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle, sessions,
+           total: paidRows.reduce((s, r) => s + r.amt, 0) };
+}
+
+const _KIND_LABEL = { excel: "Excel", other: "Other" };
+function _payTypeLabel(t) { return t === "all" ? "All sessions" : "Other sessions only"; }
+function weeklyPayHtml(m, fixed) {
+  const typeLabel = _payTypeLabel(m.type);
+  const range = `${_rangeLabel(m.src.mon, m.sun)}, ${m.sun.getFullYear()}`;
+  const plural = (n, w) => `${n} ${w}${n !== 1 ? "s" : ""}`;
+  const rows = m.paidRows.map(r => {
+    const multi = r.partList.length > 1;
+    const parts = r.partList.map(pt => {
+      const hr = pt.rate.unit === "hr";
+      const kind = m.type === "all" && r.split && pt.kinds.size === 1 ? ` · ${_KIND_LABEL[[...pt.kinds][0]]}` : "";
+      const calc = hr
+        ? `<b>${fmtHrs(pt.mins)} × ${fmtMoney(pt.rate.rate)}/hr</b>${kind}${multi ? "" : ` · ${plural(pt.n, "session")}`}`
+        : `<b>${plural(pt.n, "session")} × ${fmtMoney(pt.rate.rate)}</b>${kind}${multi ? "" : ` · ${fmtHrs(pt.mins)}`}`;
+      const days = pt.dayList.map(d => _dayTag(d.date) + (hr ? " " + fmtHrs(d.mins) : d.n > 1 ? " ×" + d.n : "")).join(" · ");
+      return `<div class="wp-part${hr ? " hr" : ""}">
+        <div class="wp-calc"><span>${calc}</span>${multi ? `<span class="pa">${fmtMoney(pt.amt)}</span>` : ""}</div>
+        <div class="wp-days">${escapeHtml(days)}</div>
+      </div>`;
+    }).join("");
+    const allHr = r.partList.every(pt => pt.rate.unit === "hr");
+    return `<div class="wp-row${allHr ? " hr" : ""}${multi ? " multi" : ""}">
+      <div class="wp-row-top"><span class="nm">${escapeHtml(r.name)}</span><span class="amt">${fmtMoney(r.amt)}</span></div>
+      ${parts}
+    </div>`;
+  }).join("");
+  const chips = m.otherRows.map(r => `<div class="wp-chip"><span class="nm">${escapeHtml(r.name)}</span><span class="ct">${r.n}</span></div>`).join("");
+  return `<div class="wp-sheet${fixed ? " wp-fixed" : ""}">
+    <div class="wp-hdr">
+      <div class="wp-badge">${sfbMonoSvg("#F4F1EC", 26)}</div>
+      <div class="wp-titles">
+        <div class="wp-eyebrow">Shea Frazee Basketball</div>
+        <div class="wp-title">Weekly Pay</div>
+        <div class="wp-sub">Week of ${escapeHtml(range)} · ${typeLabel}</div>
+      </div>
+      <div class="wp-total"><div class="v">${fmtMoney(m.total)}</div><div class="l">Total · ${plural(m.paidRows.length, "paid intern")}</div></div>
+    </div>
+    <div class="wp-sec">Paid interns</div>
+    <div class="wp-list">${rows || `<div class="wp-empty">No paid interns on ${m.type === "all" ? "any" : "Other"} sessions this week.</div>`}</div>
+    ${chips ? `<div class="wp-sec">Unpaid interns <span>· session totals · ${typeLabel}</span></div><div class="wp-chips">${chips}</div>` : ""}
+  </div>`;
+}
+
+// ============ EXCEL MONTHLY INTERNS INVOICE ============
+function invoiceMonths() {
+  const set = new Set();
+  payWeekSources().forEach(s => (s.days || []).forEach(day => {
+    const d = dateForDayFrom(day.day, s.mon);
+    set.add(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  }));
+  return [...set].sort().reverse();
+}
+
+function buildInvoice(ym) {
+  const [Y, M] = ym.split("-").map(Number), m0 = M - 1;
+  const first = new Date(Y, m0, 1), last = new Date(Y, m0 + 1, 0);
+  const monthName = MONTH_FULL[m0];
+  const inMonth = d => d.getFullYear() === Y && d.getMonth() === m0;
+  const rix = payRateIndex();
+  const hourly = [...rix.values()].filter(e => e.excel && e.excel.unit === "hr").map(e => ({ name: e.name, rate: e.excel.rate, unit: "hr" }));
+  const srcs = new Map(payWeekSources().map(s => [s.key, s]));
+  const imageOnly = new Set((data.archive || []).filter(e => !hasSnapshot(e)).map(e => e.key));
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const weeks = [], gaps = [];
+  for (let mon = weekDates(first).mon; mon <= last; mon = _addDays(mon, 7)) {
+    const key = weekDates(mon).key, sun = _addDays(mon, 6);
+    const from = mon < first ? first : mon, to = sun > last ? last : sun;
+    const src = srcs.get(key);
+    if (!src) {
+      gaps.push({ from, to, why: imageOnly.has(key) ? "image" : from > today ? "future" : "missing" });
+      continue;
+    }
+    const days = [], outside = [];
+    (src.days || []).forEach(day => {
+      const date = dateForDayFrom(day.day, src.mon);
+      if (!inMonth(date)) { outside.push(date); return; }
+      const sessions = (day.events || []).filter(e => e.type === "excel")
+        .slice().sort((a, b) => _eventSortKey(a) - _eventSortKey(b))
+        .map(ev => ({ ev, ...sessionPay(ev, rix) }));
+      days.push({ date, sessions, total: sessions.reduce((s, x) => s + x.cost, 0) });
+    });
+    days.sort((a, b) => a.date - b.date);
+    outside.sort((a, b) => a - b);
+    const all = days.flatMap(d => d.sessions);
+    const hrs = {};
+    hourly.forEach(h => { hrs[_payKey(h.name)] = 0; });
+    all.forEach(s => s.lines.forEach(l => { if (l.paid && l.rate.unit === "hr") hrs[_payKey(l.name)] += s.mins; }));
+    const roster = [];
+    all.forEach(s => _rosterNames(s.ev.title).forEach(n => { if (!roster.includes(n)) roster.push(n); }));
+    weeks.push({ key, from, to, days, outside, roster, hrs, live: src.live,
+      total: all.reduce((s, x) => s + x.cost, 0), count: all.length, paid: all.filter(x => x.cost > 0).length });
+  }
+  // Merge back-to-back gaps of the same kind ("Oct 5 – 31 not scheduled yet", not four lines)
+  const merged = [];
+  gaps.forEach(g => {
+    const p = merged[merged.length - 1];
+    if (p && p.why === g.why && +_addDays(p.to, 1) === +g.from) p.to = g.to; else merged.push({ ...g });
+  });
+  const per = new Map();
+  weeks.forEach(w => w.days.forEach(d => d.sessions.forEach(s => s.lines.forEach(l => {
+    if (!l.paid) return;
+    const k = _payKey(l.name), r = per.get(k) || { n: 0, mins: 0, amt: 0 };
+    r.n++; r.mins += s.mins; r.amt += l.amt; per.set(k, r);
+  }))));
+  const hrsTot = {};
+  hourly.forEach(h => { const k = _payKey(h.name); hrsTot[k] = weeks.reduce((s, w) => s + (w.hrs[k] || 0), 0); });
+  return {
+    ym, Y, m0, monthName, first, last, weeks, gaps: merged, rix, hourly, per, hrsTot,
+    total: weeks.reduce((s, w) => s + w.total, 0),
+    count: weeks.reduce((s, w) => s + w.count, 0),
+    paid: weeks.reduce((s, w) => s + w.paid, 0),
+    front: weeks.length && weeks[0].outside.filter(d => d < first),
+    back: weeks.length && weeks[weeks.length - 1].outside.filter(d => d > last),
+  };
+}
+
+const _GAP_SHORT = { missing: "not saved", image: "image only", future: "not scheduled yet" };
+const _GAP_LONG = { missing: "no schedule was saved for that week", image: "that week was archived as an image only", future: "not scheduled yet" };
+
+function _invHdr(cls, sl, h1, roster, tot, sub, note) {
+  return `<div class="iv-hdr${cls ? " " + cls : ""}">
+    <div class="iv-badge">${sfbMonoSvg("#F4F1EC", 34)}</div>
+    <div class="iv-titles"><div class="iv-sl">${sl}</div><div class="iv-h1">${h1}</div><div class="iv-roster">${roster}</div></div>
+    <div class="iv-metrics"><div class="iv-tot">${tot}</div><div class="iv-sub">${sub}</div>${note ? `<div class="iv-note">${note}</div>` : ""}</div>
+  </div>`;
+}
+function _hrsBits(inv, hrs) {
+  return inv.hourly.filter(h => (hrs[_payKey(h.name)] || 0) > 0)
+    .map(h => ` · ${fmtHrs(hrs[_payKey(h.name)])} ${escapeHtml(h.name)}`).join("");
+}
+
+function invCoverHtml(inv) {
+  const mn = inv.monthName;
+  const covFrom = inv.weeks[0].from, covTo = inv.weeks[inv.weeks.length - 1].to;
+  const sub = [`Excel Client · ${_rangeLabel(covFrom, covTo)}`];
+  if (inv.front.length) sub.push(`${_rangeLabel(inv.front[0], inv.front[inv.front.length - 1])} excluded`);
+  if (inv.back.length) sub.push(`${_rangeLabel(inv.back[0], inv.back[inv.back.length - 1])} excluded`);
+  inv.gaps.forEach(g => sub.push(`${_rangeLabel(g.from, g.to)} ${_GAP_SHORT[g.why]}`));
+
+  const hcols = inv.hourly;
+  const head = `<tr><th>Week</th><th>Sessions</th><th>Paid</th>${hcols.map(h => `<th>${escapeHtml(h.name)} Hrs</th>`).join("")}<th>Total</th><th>$ / Paid</th></tr>`;
+  const rows = inv.weeks.map(w => `<tr><td class="wk">${_rangeLabel(w.from, w.to)}</td><td>${w.count}</td><td>${w.paid}</td>${
+    hcols.map(h => `<td class="hrs">${fmtHrs(w.hrs[_payKey(h.name)] || 0)}</td>`).join("")
+  }<td class="amt">${fmtMoney(w.total)}</td><td>${w.paid ? fmtMoney(w.total / w.paid) : "—"}</td></tr>`).join("");
+  const grand = `<tr class="grand"><td>${mn} Total</td><td>${inv.count}</td><td>${inv.paid}</td>${
+    hcols.map(h => `<td class="hrs">${fmtHrs(inv.hrsTot[_payKey(h.name)] || 0)}</td>`).join("")
+  }<td class="amt">${fmtMoney(inv.total)}</td><td>${inv.paid ? fmtMoney(inv.total / inv.paid) : "—"}</td></tr>`;
+
+  const rates = [...inv.rix.values()].filter(e => e.excel).map(e => ({ name: e.name, rate: e.excel.rate, unit: e.excel.unit }))
+    .sort((a, b) => (a.unit === "hr" ? 0 : 1) - (b.unit === "hr" ? 0 : 1));
+  const chips = rates.map(r => {
+    const u = inv.per.get(_payKey(r.name)), hr = r.unit === "hr";
+    const x = u ? `<span class="x"> · ${hr ? fmtHrs(u.mins) : u.n} = ${fmtMoney(u.amt)}</span>` : "";
+    return `<span class="iv-rl${hr ? " hr" : ""}${u ? "" : " off"}"><b>${escapeHtml(r.name)}</b> <i>${fmtMoney(r.rate)}</i><span class="u"> / ${hr ? "hr" : "session"}</span>${x}</span>`;
+  }).join("");
+
+  const foot = [];
+  const usedHr = inv.hourly.filter(h => inv.per.has(_payKey(h.name)));
+  const anyFlat = [...inv.per.keys()].some(k => inv.rix.get(k).excel && inv.rix.get(k).excel.unit !== "hr");
+  if (usedHr.length) {
+    foot.push(usedHr.map(h => { const u = inv.per.get(_payKey(h.name));
+      return `${escapeHtml(h.name)} is billed hourly — ${fmtHrs(u.mins)} of scheduled session time in ${mn} at ${fmtMoney(h.rate)}/hr = ${fmtMoney(u.amt)}.`; }).join(" ")
+      + (anyFlat ? " Every other intern is billed per session." : ""));
+  }
+  if (rates.some(r => !inv.per.has(_payKey(r.name)))) foot.push(`Faded rates had no Excel Client sessions in ${mn}.`);
+  if (inv.front.length || inv.back.length) {
+    const bits = [];
+    if (inv.front.length) bits.push(`${_rangeLabel(inv.front[0], inv.front[inv.front.length - 1])} clipped off the front`);
+    if (inv.back.length) bits.push(`${_rangeLabel(inv.back[0], inv.back[inv.back.length - 1])}${inv.front.length ? "" : " clipped"} off the back`);
+    foot.push(`Only ${mn} calendar days counted — ${bits.join(", ")}.`);
+  }
+  inv.gaps.forEach(g => foot.push(`${_rangeLabel(g.from, g.to)} not included — ${_GAP_LONG[g.why]}.`));
+
+  return `<div class="iv-page">
+    ${_invHdr("cover", "Shea Frazee Basketball · Intern Cost", `${mn} ${inv.Y} — Cost Summary`, escapeHtml(sub.join(" · ")),
+      fmtMoney(inv.total), `${mn} total · ${inv.count} session${inv.count !== 1 ? "s" : ""} · ${inv.paid} paid${_hrsBits(inv, inv.hrsTot)}`, "")}
+    <div class="iv-fit">
+      <table class="iv-ctable">${head}${rows}${grand}</table>
+      <div class="iv-rates">
+        <div class="lbl">Paid Intern Rates</div>
+        ${chips || `<span class="iv-rl off">No paid interns on the rate card</span>`}
+        ${foot.length ? `<div class="iv-foot">${foot.join("<br>")}</div>` : ""}
+      </div>
+    </div>
+  </div>`;
+}
+
+function invWeekHtml(inv, w) {
+  const mn = inv.monthName, n = w.days.length;
+  const width = n >= 7 ? "100%" : `${(Math.max(n, 1) / 7 * 100).toFixed(2)}%`;
+  const cols = w.days.map(d => {
+    const cards = d.sessions.map(s => {
+      const badge = s.cost > 0 ? `<span class="iv-cost">${fmtMoney(s.cost)}</span>` : `<span class="iv-cost zero">—</span>`;
+      const ppl = s.lines.map(l => !l.paid ? escapeHtml(l.name)
+        : l.rate.unit === "hr" ? `<u>${escapeHtml(l.name)} ${fmtMoney(l.rate.rate)}/hr</u>`
+        : `<b>${escapeHtml(l.name)} ${fmtMoney(l.rate.rate)}</b>`).join(", ");
+      return `<div class="iv-card"><div class="iv-crow"><span class="iv-time">${escapeHtml(_shortTime(s.ev.time))}</span>${badge}</div>`
+        + (s.mins ? `<div class="iv-dur">${fmtHrs(s.mins)}</div>` : "")
+        + `<div class="iv-ttl">${escapeHtml(s.ev.title || "Untitled")}</div>`
+        + (ppl ? `<div class="iv-ppl">${ppl}</div>` : "") + `</div>`;
+    }).join("") || `<div class="iv-empty">No sessions</div>`;
+    const k = d.sessions.length;
+    return `<div class="iv-col"><div class="iv-dhdr"><span class="d">${_DAY_SHORT[d.date.getDay()]} ${d.date.getDate()}</span><span class="c">${k} session${k !== 1 ? "s" : ""}</span></div>${cards}<div class="iv-dtot"><span class="l">Day Total</span><span class="v">${fmtMoney(d.total)}</span></div></div>`;
+  }).join("") || `<div class="iv-col"><div class="iv-empty">No ${mn} days in this week's schedule</div></div>`;
+  let note = "";
+  if (w.outside.length) {
+    const o = w.outside;
+    note = `${mn} only — ${o.length === 1 ? `${_DAY_SHORT[o[0].getDay()]} ${_md(o[0])}` : _rangeLabel(o[0], o[o.length - 1])} removed.`;
+  }
+  const sub = `${w.count} session${w.count !== 1 ? "s" : ""} total · ${w.paid ? fmtMoney(w.total / w.paid) : "—"} / paid session${_hrsBits(inv, w.hrs)}`;
+  return `<div class="iv-page">
+    ${_invHdr("", "Shea Frazee Basketball · Intern Cost", `Week of ${_rangeLabel(w.from, w.to)}`,
+      w.roster.length ? escapeHtml(w.roster.join(" · ")) : "No Excel Client sessions this week",
+      `Weekly Total: ${fmtMoney(w.total)}`, sub, escapeHtml(note))}
+    <div class="iv-grid iv-fit" style="grid-template-columns: repeat(${Math.max(n, 1)}, minmax(0, 1fr)); width: ${width};">${cols}</div>
+  </div>`;
+}
+
+function invoicePagesHtml(inv) {
+  return [invCoverHtml(inv), ...inv.weeks.map(w => invWeekHtml(inv, w))];
+}
+
+// A busy week can outgrow the 8.5in page. Shrink its body just enough to fit (the grid also widens,
+// so cards re-wrap shorter) — every page stays one letter-size sheet.
+function fitInvoicePage(page) {
+  const body = page && page.querySelector(".iv-fit");
+  if (!body) return;
+  if (!body.hasAttribute("data-w")) body.dataset.w = body.style.width || "";
+  body.style.transform = ""; body.style.width = body.dataset.w;
+  const avail = page.clientHeight - 22 - body.offsetTop;
+  if (avail <= 0 || body.offsetHeight <= avail) return;
+  const w0 = body.offsetWidth;
+  let lo = 0.4, hi = 1;
+  for (let i = 0; i < 8; i++) {
+    const s = (lo + hi) / 2;
+    body.style.width = `${w0 / s}px`;
+    if (body.offsetHeight * s <= avail) lo = s; else hi = s;
+  }
+  body.style.width = `${w0 / lo}px`;
+  body.style.transformOrigin = "0 0";
+  body.style.transform = `scale(${lo})`;
+}
+
+// ============ CAPTURE / DOWNLOAD ============
+function _loadScript(src) {
+  _loadScript.p = _loadScript.p || {};
+  if (_loadScript.p[src]) return _loadScript.p[src];
+  return (_loadScript.p[src] = new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = src; s.async = true;
+    s.onload = () => res();
+    s.onerror = () => { delete _loadScript.p[src]; s.remove(); rej(new Error("couldn't load the PDF library — check the connection and try again")); };
+    document.head.appendChild(s);
+  }));
+}
+async function _payFontsReady() {
+  try {
+    await Promise.all(["800 20px 'Plus Jakarta Sans'", "700 12px 'Plus Jakarta Sans'",
+      "400 12px 'Source Sans 3'", "600 12px 'Source Sans 3'"].map(f => document.fonts.load(f)));
+    await document.fonts.ready;
+  } catch (e) {}
+}
+function _saveBlob(blob, fname) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+function _paySrc() { return payWeekSources().find(s => s.key === payWeekKey) || null; }
+
+let _payBusy = false;
+async function exportWeeklyPay(mode, btn) {
+  const src = _paySrc();
+  if (!src || _payBusy) return;
+  if (!window.html2canvas) { alert("Image library still loading — try again in a moment."); return; }
+  const m = buildWeeklyPay(src, payType);
+  const prev = btn ? btn.textContent : "";
+  if (btn) { btn.disabled = true; btn.textContent = "…"; }
+  _payBusy = true;
+  const host = document.createElement("div");
+  host.style.cssText = "position:absolute;left:-10000px;top:0;";
+  host.innerHTML = weeklyPayHtml(m, true);
+  document.body.appendChild(host);
+  try {
+    await _payFontsReady();
+    await new Promise(r => setTimeout(r, 80));
+    const cv = await html2canvas(host.firstElementChild, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true, logging: false });
+    const blob = await new Promise(res => cv.toBlob(res, "image/png"));
+    if (!blob) throw new Error("Could not render image.");
+    const fname = `weekly-pay-${_icsSlug(_rangeLabel(src.mon, m.sun) + " " + m.sun.getFullYear(), "week")}-${m.type === "all" ? "all-sessions" : "other"}.png`;
+    if (mode === "share") {
+      const file = new File([blob], fname, { type: "image/png" });
+      const title = `Weekly Pay · ${_rangeLabel(src.mon, m.sun)}`;
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], title, text: title }); return; }
+        catch (err) { if (err && err.name === "AbortError") return; }
+      }
+    }
+    _saveBlob(blob, fname);
+  } catch (e) {
+    console.error(e);
+    alert("Weekly Pay failed: " + e.message);
+  } finally {
+    host.remove();
+    _payBusy = false;
+    if (btn) { btn.disabled = false; btn.textContent = prev; }
+  }
+}
+
+function setInvStatus(msg) { const el = document.getElementById("invStatus"); if (el) el.textContent = msg || ""; }
+async function downloadInvoice(btn) {
+  if (_payBusy || !invMonth) return;
+  if (!window.html2canvas) { alert("Image library still loading — try again in a moment."); return; }
+  const inv = buildInvoice(invMonth);
+  if (!inv.weeks.length) { alert(`No saved schedule covers ${inv.monthName} ${inv.Y}.`); return; }
+  const prev = btn ? btn.textContent : "";
+  if (btn) { btn.disabled = true; btn.textContent = "…"; }
+  _payBusy = true;
+  const host = document.createElement("div");
+  host.className = "iv-doc";
+  host.style.cssText = "position:absolute;left:-10000px;top:0;width:1056px;";
+  document.body.appendChild(host);
+  try {
+    setInvStatus("Loading PDF library…");
+    await _loadScript(JSPDF_SRC);
+    const JsPDF = window.jspdf && window.jspdf.jsPDF;
+    if (!JsPDF) throw new Error("PDF library didn't load.");
+    await _payFontsReady();
+    const pages = invoicePagesHtml(inv);
+    const pdf = new JsPDF({ orientation: "landscape", unit: "in", format: "letter", compress: true });
+    for (let i = 0; i < pages.length; i++) {
+      setInvStatus(`Rendering page ${i + 1} of ${pages.length}…`);
+      host.innerHTML = pages[i];
+      const page = host.firstElementChild;
+      fitInvoicePage(page);
+      await new Promise(r => setTimeout(r, 30));
+      const cv = await html2canvas(page, { backgroundColor: "#F4F1EC", scale: 2.5, useCORS: true, logging: false, width: 1056, height: 816 });
+      if (i) pdf.addPage("letter", "landscape");
+      pdf.addImage(cv.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, 11, 8.5, undefined, "FAST");
+    }
+    pdf.setProperties({ title: `${inv.monthName} ${inv.Y} — Intern Cost`, subject: "Excel Client intern invoice", author: "Shea Frazee Basketball" });
+    const fname = `${inv.monthName}_${inv.Y}_Intern_Cost.pdf`;
+    _saveBlob(pdf.output("blob"), fname);
+    setInvStatus(`✓ ${fname} · ${pages.length} page${pages.length !== 1 ? "s" : ""}`);
+  } catch (e) {
+    console.error(e);
+    setInvStatus("✗ " + e.message);
+    alert("Invoice failed: " + e.message);
+  } finally {
+    host.remove();
+    _payBusy = false;
+    if (btn) { btn.disabled = false; btn.textContent = prev; }
+  }
+}
+
+// ============ RATE SYNC (encrypted pay-rates.json in the repo) ============
+let paySync = { state: "idle", remote: null, err: "", locked: false, unlockErr: false, form: false, busy: false };
+function _payPass() { try { return localStorage.getItem(LS_PAY_PASS) || ""; } catch (e) { return ""; } }
+function _setPayPass(v) { try { localStorage.setItem(LS_PAY_PASS, v); } catch (e) {} }
+function _paySyncOn() { const c = loadCfg(); return !!(c.token && c.owner && c.repo) && !!(window.crypto && crypto.subtle); }
+function payRatesPath() {
+  const p = loadCfg().path || "schedule.json", i = p.lastIndexOf("/");
+  return (i >= 0 ? p.slice(0, i + 1) : "") + "pay-rates.json";
+}
+function _b64(bytes) { let s = ""; for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]); return btoa(s); }
+function _unb64(str) { return Uint8Array.from(atob(str), c => c.charCodeAt(0)); }
+async function _payCryptoKey(pass, salt, iter) {
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iter, hash: "SHA-256" }, base,
+    { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+}
+async function sealRates(rates, pass) {
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12)), iter = 200000;
+  const key = await _payCryptoKey(pass, salt, iter);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify({ rates }))));
+  return { app: "sfb-pay-rates", v: 1, updatedAt: new Date().toISOString(), kdf: "PBKDF2-SHA256", iter,
+           salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
+}
+async function openRates(env, pass) {   // throws if the passphrase is wrong
+  const key = await _payCryptoKey(pass, _unb64(env.salt), env.iter || 200000);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(env.iv) }, key, _unb64(env.ct));
+  return _cleanRates(JSON.parse(new TextDecoder().decode(pt)).rates);
+}
+async function ghGetJson(path) {   // authenticated read: no raw-CDN caching, null when the file doesn't exist
+  const cfg = loadCfg();
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch || "main"}&_=${Date.now()}`;
+  const res = await fetch(url, { headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json" }, cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error("GitHub " + res.status);
+  const j = await res.json();
+  return JSON.parse(new TextDecoder().decode(_unb64(String(j.content || "").replace(/\s/g, ""))));
+}
+function _adoptRates(rates, updatedAt) {
+  payRates = rates; payLocal.dirty = false; payLocal.syncedAt = updatedAt; savePayRates();
+  renderRates(); renderWeeklyPay(); renderInvoicePreview();
+}
+// Pull the GitHub copy. Unsaved edits on this device are never overwritten without asking.
+async function refreshRateSync() {
+  if (!_paySyncOn()) { paySync.state = "off"; renderRateSync(); return; }
+  paySync.state = "loading"; renderRateSync();
+  try {
+    const env = await ghGetJson(payRatesPath());
+    paySync.remote = env && env.ct ? env : null;
+    paySync.state = "ready"; paySync.err = "";
+    const pass = _payPass();
+    if (paySync.remote && pass && !payLocal.dirty && payLocal.syncedAt !== paySync.remote.updatedAt) {
+      try { _adoptRates(await openRates(paySync.remote, pass), paySync.remote.updatedAt); paySync.locked = false; }
+      catch (e) { paySync.locked = true; }      // the passphrase was changed on another device
+    }
+  } catch (e) { paySync.state = "error"; paySync.err = e.message; }
+  renderRateSync();
+}
+async function saveRatesToGitHub(newPass) {
+  const pass = newPass || _payPass();
+  if (!pass || paySync.busy) return;
+  paySync.busy = true; paySync.err = ""; renderRateSync();
+  try {
+    const env = await sealRates(_cleanRates(payRates).filter(r => r.name.trim()), pass);
+    await ghPutFile(payRatesPath(), btoa(unescape(encodeURIComponent(JSON.stringify(env, null, 1)))), "Update pay rates (encrypted)");
+    if (newPass) _setPayPass(newPass);
+    paySync.remote = env; paySync.locked = false; paySync.unlockErr = false; paySync.form = false;
+    payLocal.dirty = false; payLocal.syncedAt = env.updatedAt; savePayRates();
+    showToast("Rates saved to GitHub");
+  } catch (e) {
+    console.error(e);
+    paySync.err = "Save failed — " + e.message;
+  }
+  paySync.busy = false; renderRateSync();
+}
+async function unlockRates(pass) {
+  if (!pass || !paySync.remote || paySync.busy) return;
+  paySync.busy = true; renderRateSync();
+  try {
+    const rates = await openRates(paySync.remote, pass);
+    _setPayPass(pass); paySync.locked = false; paySync.unlockErr = false;
+    if (!payLocal.dirty) _adoptRates(rates, paySync.remote.updatedAt);
+  } catch (e) { paySync.unlockErr = true; }
+  paySync.busy = false; renderRateSync();
+}
+function _rsWhen(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  return `${MON[d.getMonth()]} ${d.getDate()}, ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+}
+function renderRateSync() {
+  const box = document.getElementById("rateSync");
+  if (!box) return;
+  const st = paySync, pass = _payPass(), dis = st.busy ? " disabled" : "";
+  const form = (hint, ph, ac, act, label, cls) => `<div class="rs-msg">${hint}</div>
+    <div class="rs-form"><input type="password" id="rsPass" placeholder="${ph}" autocomplete="${ac}" spellcheck="false"><button class="btn ${cls}" type="button" data-rs="${act}"${dis}>${st.busy ? "…" : label}</button></div>`;
+  let h = "";
+  if (!_paySyncOn()) {
+    h = `<div class="rs-msg">Saved on this device only. Add your GitHub token in Settings to sync rates to your other devices.</div>`;
+  } else if (st.state === "loading" || st.state === "idle") {
+    h = `<div class="rs-msg">Checking GitHub for saved rates…</div>`;
+  } else if (st.state === "error") {
+    h = `<div class="rs-msg err">Couldn't reach GitHub (${escapeHtml(st.err)}). Rates are still saved on this device.</div><button class="btn" type="button" data-rs="retry">Retry</button>`;
+  } else if (st.form === "set") {
+    h = form(st.remote ? "Choose a new pay passphrase. This device's rates replace the GitHub copy, and the old passphrase stops working."
+                       : "Choose a pay passphrase. Enter it once on each of your devices — it keeps the rates unreadable in your public repo.",
+             "Pay passphrase", "new-password", "create", "↑ Save rates", "publish")
+      + (st.err ? `<div class="rs-msg err">${escapeHtml(st.err)}</div>` : "")
+      + `<button class="ab-link" type="button" data-rs="cancel">Cancel</button>`;
+  } else if (st.remote && (st.locked || !pass)) {
+    h = form(st.locked ? "The pay passphrase was changed on another device. Enter the new one to load the latest rates."
+                       : "Rates were saved to GitHub from another device. Enter the pay passphrase to load them.",
+             "Pay passphrase", "current-password", "unlock", "Unlock", "primary")
+      + (st.unlockErr ? `<div class="rs-msg err">That passphrase doesn't match.</div>` : "")
+      + `<button class="ab-link" type="button" data-rs="reset">Forgot it? Replace the GitHub copy with this device's rates</button>`;
+  } else if (!st.remote && !pass) {
+    h = `<div class="rs-msg">Saved on this device only.</div><button class="btn" type="button" data-rs="setup">Sync across devices</button>`;
+  } else if (payLocal.dirty || !st.remote) {
+    h = `<div class="rs-msg dirty">${st.remote ? "● Unsaved rate changes" : "● Not saved to GitHub yet"}</div><button class="btn publish" type="button" data-rs="save"${dis}>${st.busy ? "Saving…" : "↑ Save rates"}</button>`;
+    if (st.remote && st.remote.updatedAt !== payLocal.syncedAt)
+      h += `<div class="rs-msg">Another device saved rates ${escapeHtml(_rsWhen(st.remote.updatedAt))}. <button class="ab-link" type="button" data-rs="load">Load those instead</button></div>`;
+  } else {
+    h = `<div class="rs-msg ok">✓ Synced to GitHub · ${escapeHtml(_rsWhen(st.remote.updatedAt))}</div>`;
+  }
+  if (st.err && st.form !== "set" && st.state === "ready") h += `<div class="rs-msg err">${escapeHtml(st.err)}</div>`;
+  box.innerHTML = h;
+}
+
+// ============ PAY TAB RENDER ============
+function renderPay() {
+  if (currentMode !== "pay") return;
+  renderRates();
+  renderWeeklyPay();
+  renderInvoicePreview();
+  refreshRateSync();
+}
+
+function renderWeeklyPay() {
+  const sel = document.getElementById("payWeekSel"), box = document.getElementById("payWeekPreview");
+  const msg = document.getElementById("payWeekMsg");
+  const srcs = payWeekSources();
+  if (!srcs.some(s => s.key === payWeekKey)) payWeekKey = (srcs.find(s => s.live) || srcs[0] || {}).key || null;
+  sel.innerHTML = srcs.map(s => {
+    const sun = _addDays(s.mon, 6);
+    return `<option value="${escapeAttr(s.key)}"${s.key === payWeekKey ? " selected" : ""}>${escapeHtml(_rangeLabel(s.mon, sun))}, ${sun.getFullYear()}${s.live ? " · live" : ""}</option>`;
+  }).join("");
+  document.querySelectorAll("#payTypeSeg .seg-btn").forEach(b => b.classList.toggle("active", b.dataset.type === payType));
+  const src = _paySrc();
+  ["payDownloadBtn", "payShareBtn"].forEach(id => { document.getElementById(id).disabled = !src; });
+  sel.disabled = !src;
+  if (!src) { msg.innerHTML = ""; box.innerHTML = `<div class="pay-empty">No weeks with saved sessions yet.</div>`; return; }
+  const m = buildWeeklyPay(src, payType);
+  msg.innerHTML = m.idle.length ? `On the rate card, no ${payType === "all" ? "" : "Other "}sessions this week: ${escapeHtml(m.idle.join(", "))}` : "";
+  box.innerHTML = weeklyPayHtml(m, false);
+}
+
+function renderInvoicePreview() {
+  const sel = document.getElementById("invMonthSel"), box = document.getElementById("invPreview");
+  const msg = document.getElementById("invMsg"), warn = document.getElementById("invWarn");
+  const months = invoiceMonths();
+  if (!months.includes(invMonth)) {
+    const t = new Date(), prevM = new Date(t.getFullYear(), t.getMonth() - 1, 1);
+    const want = `${prevM.getFullYear()}-${String(prevM.getMonth() + 1).padStart(2, "0")}`;
+    invMonth = months.includes(want) ? want : (months[0] || null);
+  }
+  sel.innerHTML = months.map(ym => `<option value="${ym}"${ym === invMonth ? " selected" : ""}>${MONTH_FULL[+ym.slice(5) - 1]} ${ym.slice(0, 4)}</option>`).join("");
+  sel.disabled = !months.length;
+  document.getElementById("invDownloadBtn").disabled = !invMonth;
+  if (!invMonth) { msg.innerHTML = ""; warn.innerHTML = ""; box.innerHTML = `<div class="pay-empty">No saved weeks to invoice yet.</div>`; return; }
+  const inv = buildInvoice(invMonth);
+  if (!inv.weeks.length) { msg.innerHTML = ""; warn.innerHTML = ""; box.innerHTML = `<div class="pay-empty">No saved schedule covers this month.</div>`; return; }
+  const pages = invoicePagesHtml(inv);
+  msg.innerHTML = `<b>${fmtMoney(inv.total)}</b> · ${inv.count} Excel session${inv.count !== 1 ? "s" : ""} · ${inv.paid} paid · ${pages.length} page${pages.length !== 1 ? "s" : ""}. Tap a page to enlarge.`;
+  const live = inv.weeks.find(w => w.live);
+  const notes = inv.gaps.map(g => `${_rangeLabel(g.from, g.to)} isn't included — ${_GAP_LONG[g.why]}.`);
+  if (live) notes.push(`${_rangeLabel(live.from, live.to)} comes from the live week (not archived yet).`);
+  warn.innerHTML = notes.length ? `<div class="pay-warn">${notes.map(n => `<div>${escapeHtml(n)}</div>`).join("")}</div>` : "";
+  box.innerHTML = pages.map((p, i) => `<div class="iv-thumb" role="button" tabindex="0" data-i="${i}" aria-label="Page ${i + 1} — tap to enlarge"><div class="iv-doc">${p}</div></div>`).join("");
+  box.querySelectorAll(".iv-page").forEach(fitInvoicePage);
+  scaleInvoiceThumbs();
+}
+function scaleInvoiceThumbs() {
+  document.querySelectorAll("#invPreview .iv-thumb").forEach(t => {
+    const doc = t.firstElementChild;
+    if (doc && t.clientWidth) doc.style.transform = `scale(${t.clientWidth / 1056})`;
+  });
+}
+
+// ---- Rate card editor ----
+function _knownInternNames() {
+  const s = new Map();
+  const add = n => { const v = String(n || "").trim(), k = _payKey(v); if (k && !s.has(k)) s.set(k, v); };
+  Object.keys(loadRoster()).forEach(add);
+  payWeekSources().forEach(src => (src.days || []).forEach(d => (d.events || []).forEach(ev => (ev.people || []).forEach(add))));
+  return [...s.values()].sort((a, b) => a.localeCompare(b));
+}
+function _markRateDupes() {
+  const c = {};
+  payRates.forEach(r => { const k = _payKey(r.name); if (k) c[k] = (c[k] || 0) + 1; });
+  document.querySelectorAll("#rateList .rate-item").forEach(item => {
+    const r = payRates[+item.dataset.i];
+    if (!r) return;
+    const main = item.querySelector(".rate-row");
+    main.classList.toggle("dup", c[_payKey(r.name)] > 1);
+    main.classList.toggle("hr", r.unit === "hr");
+    item.querySelectorAll(".rate-sub").forEach(sub => sub.classList.toggle("hr", !!(r[sub.dataset.t] && r[sub.dataset.t].unit === "hr")));
+  });
+}
+function renderRates() {
+  const box = document.getElementById("rateList");
+  if (!box) return;
+  const money = (v, t, label) => `<span class="rr-money"><span>$</span><input class="rr-rate"${t ? ` data-t="${t}"` : ""} type="number" inputmode="decimal" min="0" step="0.25" value="${v > 0 ? escapeAttr(v) : ""}" placeholder="0" aria-label="${label}"></span>`;
+  const unit = (v, t, label) => `<select class="rr-unit"${t ? ` data-t="${t}"` : ""} aria-label="${label}">
+      <option value="session"${v === "session" ? " selected" : ""}>/ session</option><option value="hr"${v === "hr" ? " selected" : ""}>/ hour</option>${t ? "" : `<option value="split"${v === "split" ? " selected" : ""}>split</option>`}</select>`;
+  box.innerHTML = payRates.map((r, i) => {
+    const split = r.unit === "split", nm = escapeAttr(r.name || "intern");
+    let h = `<div class="rate-item" data-i="${i}"><div class="rate-row${split ? " split" : ""}">
+      <input class="rr-name" list="rateNames" value="${escapeAttr(r.name)}" placeholder="Intern name" aria-label="Intern name" spellcheck="false" autocomplete="off">
+      ${split ? `<span class="rr-by">by type</span>` : money(r.rate, "", `Rate for ${nm}`)}
+      ${unit(r.unit, "", `How ${nm} is paid`)}
+      <button class="rr-del" type="button" aria-label="Remove ${nm}" title="Remove">✕</button>
+    </div>`;
+    if (split) ["excel", "other"].forEach(t => {
+      const sub = r[t] || { rate: 0, unit: "session" };
+      h += `<div class="rate-row rate-sub" data-t="${t}"><span class="rr-type ${t}">${t === "excel" ? "Excel" : "Other"}</span>
+        ${money(sub.rate, t, `${t === "excel" ? "Excel" : "Other"} rate for ${nm}`)}${unit(sub.unit, t, `${t === "excel" ? "Excel" : "Other"} unit for ${nm}`)}<span></span></div>`;
+    });
+    return h + `</div>`;
+  }).join("") || `<div class="pay-empty">No paid interns. Add one below.</div>`;
+  const onCard = new Set(payRates.map(r => _payKey(r.name)));
+  document.getElementById("rateNames").innerHTML = _knownInternNames().filter(n => !onCard.has(_payKey(n)))
+    .map(n => `<option value="${escapeAttr(n)}"></option>`).join("");
+  _markRateDupes();
+}
+let _payRefreshT = null;
+function _payRatesChanged() {
+  payLocal.dirty = true;
+  savePayRates();
+  _markRateDupes();
+  renderRateSync();
+  clearTimeout(_payRefreshT);
+  _payRefreshT = setTimeout(() => { renderWeeklyPay(); renderInvoicePreview(); }, 250);
+}
+
+// ---- Wire up ----
+(function wirePay() {
+  const list = document.getElementById("rateList");
+  const rateAt = el => { const item = el.closest(".rate-item"); return item ? payRates[+item.dataset.i] : null; };
+  list.addEventListener("input", e => {
+    const r = rateAt(e.target); if (!r) return;
+    const t = e.target.dataset.t;
+    if (e.target.classList.contains("rr-name")) r.name = e.target.value;
+    else if (e.target.classList.contains("rr-rate")) { const v = parseFloat(e.target.value) || 0; if (t) r[t].rate = v; else r.rate = v; }
+    else return;
+    _payRatesChanged();
+  });
+  list.addEventListener("change", e => {
+    if (!e.target.classList.contains("rr-unit")) return;
+    const r = rateAt(e.target); if (!r) return;
+    const t = e.target.dataset.t, v = e.target.value;
+    if (t) { r[t].unit = v === "hr" ? "hr" : "session"; _payRatesChanged(); return; }
+    const was = r.unit;
+    if (v === "split") {
+      // Start both types from the current single rate; then change whichever type differs.
+      ["excel", "other"].forEach(k => { if (!r[k]) r[k] = { rate: r.rate, unit: was === "hr" ? "hr" : "session" }; });
+      r.unit = "split";
+    } else {
+      if (was === "split") { const keep = r.excel && r.excel.rate > 0 ? r.excel : r.other; if (keep && keep.rate > 0) r.rate = keep.rate; }
+      r.unit = v === "hr" ? "hr" : "session";
+    }
+    if ((was === "split") !== (r.unit === "split")) {
+      const i = payRates.indexOf(r);
+      renderRates();
+      const focus = list.querySelector(`.rate-item[data-i="${i}"] .rr-rate`);
+      if (focus) focus.focus();
+    }
+    _payRatesChanged();
+  });
+  list.addEventListener("click", e => {
+    const del = e.target.closest(".rr-del"); if (!del) return;
+    const i = +del.closest(".rate-item").dataset.i, r = payRates[i];
+    const desc = !r ? "" : r.unit === "split" ? "split rates" : `${fmtMoney(r.rate)} / ${r.unit === "hr" ? "hr" : "session"}`;
+    if (r && r.name.trim() && !confirm(`Remove ${r.name.trim()} (${desc}) from paid interns?`)) return;
+    payRates.splice(i, 1);
+    renderRates(); _payRatesChanged();
+  });
+  document.getElementById("rateAddBtn").addEventListener("click", () => {
+    payRates.push({ name: "", rate: 15, unit: "session" });
+    renderRates(); _payRatesChanged();
+    const inputs = list.querySelectorAll(".rr-name");
+    if (inputs.length) inputs[inputs.length - 1].focus();
+  });
+  const sync = document.getElementById("rateSync");
+  const syncAct = act => {
+    const inp = document.getElementById("rsPass"), val = inp ? inp.value.trim() : "";
+    if (act === "retry") refreshRateSync();
+    else if (act === "setup") { paySync.form = "set"; paySync.err = ""; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus(); }
+    else if (act === "cancel") { paySync.form = false; paySync.err = ""; renderRateSync(); }
+    else if (act === "create") {
+      if (val.length < 4) { paySync.err = "Use at least 4 characters."; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus(); return; }
+      saveRatesToGitHub(val);
+    }
+    else if (act === "unlock") unlockRates(val);
+    else if (act === "save") saveRatesToGitHub();
+    else if (act === "load") {
+      if (confirm("Replace this device's unsaved rate changes with the rates saved on GitHub?")) {
+        payLocal.dirty = false; payLocal.syncedAt = null; savePayRates(); refreshRateSync();
+      }
+    }
+    else if (act === "reset") {
+      if (confirm("Replace the rates on GitHub with this device's rates, under a new passphrase? The old passphrase will stop working.")) {
+        paySync.form = "set"; paySync.err = ""; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus();
+      }
+    }
+  };
+  sync.addEventListener("click", e => { const b = e.target.closest("[data-rs]"); if (b && !b.disabled) syncAct(b.dataset.rs); });
+  sync.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.target.id !== "rsPass") return;
+    e.preventDefault();
+    const b = sync.querySelector('[data-rs="create"], [data-rs="unlock"]');
+    if (b && !b.disabled) syncAct(b.dataset.rs);
+  });
+  document.getElementById("payWeekSel").addEventListener("change", e => { payWeekKey = e.target.value; renderWeeklyPay(); });
+  document.getElementById("payTypeSeg").addEventListener("click", e => {
+    const b = e.target.closest(".seg-btn"); if (!b || b.dataset.type === payType) return;
+    payType = b.dataset.type === "all" ? "all" : "other";
+    try { localStorage.setItem(LS_PAY_TYPE, payType); } catch (err) {}
+    renderWeeklyPay();
+  });
+  document.getElementById("payDownloadBtn").addEventListener("click", e => exportWeeklyPay("download", e.currentTarget));
+  document.getElementById("payShareBtn").addEventListener("click", e => exportWeeklyPay("share", e.currentTarget));
+  document.getElementById("invMonthSel").addEventListener("change", e => { invMonth = e.target.value; setInvStatus(""); renderInvoicePreview(); });
+  document.getElementById("invDownloadBtn").addEventListener("click", e => downloadInvoice(e.currentTarget));
+  const prev = document.getElementById("invPreview");
+  const toggleThumb = t => { t.classList.toggle("wide"); scaleInvoiceThumbs(); if (t.classList.contains("wide")) t.scrollIntoView({ block: "nearest", behavior: "smooth" }); };
+  prev.addEventListener("click", e => { const t = e.target.closest(".iv-thumb"); if (t) toggleThumb(t); });
+  prev.addEventListener("keydown", e => {
+    const t = e.target.closest(".iv-thumb");
+    if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggleThumb(t); }
+  });
+  window.addEventListener("resize", () => {
+    if (currentMode !== "pay") return;
+    clearTimeout(window.__payResizeT);
+    window.__payResizeT = setTimeout(scaleInvoiceThumbs, 120);
+  });
+  // Fonts that land after the first paint change text widths — re-fit the invoice pages once they do.
+  try { document.fonts.ready.then(() => { if (currentMode === "pay") renderInvoicePreview(); }); } catch (e) {}
 })();
 
 init();
