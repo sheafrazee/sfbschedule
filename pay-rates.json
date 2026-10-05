@@ -1,0 +1,10 @@
+{
+ "app": "sfb-pay-rates",
+ "v": 1,
+ "updatedAt": "2026-10-05T14:03:47.645Z",
+ "kdf": "PBKDF2-SHA256",
+ "iter": 200000,
+ "salt": "I4K9CK3qqXRt+PGkC1Falw==",
+ "iv": "namJlKPU7bnEob0x",
+ "ct": "p8NawoAT3oVg9DxJ7jFThb1nM9xE2pd7lJLyLL9cyC6iRCJ+I5nyG1sg0pUAasug89knaBJRA0Mx1I8uWw5B+lm1BhEyX2z4GPz8FokUM/4ZTGHzRg/OHzqE74qBgSx/LXhyattICresJ6a0twxn7Uueh/9BKpynpJrmxQ1yv5shCiLoVNvUlQiZD8CzxtyiZ1nMK8Kk0Mwe57u48NZkGXh9//a7ACaDLCeJkpOTCfB9iXfuiH1k/UJR+AeipnFgErOwKQXqwpAdgtT0ufUld6DztmQivb1UT/kJhA1dkFSDg9IMdHyGtbG0lQaJUZytfYLiyskrdrJrZhoPVRLRXXqi/gl2hZunXwykg+CQGIxcj98WMiny4BeUNxnbCWegHqD39Lk8OzcQ+YQMeJLfpjw2yGCwUIrBpHMSahPQ9+Ajd9yOJP9QnnV1g8UPlS0h4zWeotimGQhICtwVN91ANsrZhevNa94GVmTlmNDvvltvFHFV09WXb69b1W6hUt601jKkP1++I+TgcDsVs/hVYiTMUZzYjMvMbFu/2zJ2uw+cUfe8DXCUWW/NHI5K+g0lqhJ9MM22wS9nOo4jMskZYaWUP4k+RF5N7TATfOYFrRlRB9yQs1m3Z5+QLjpceabuNWfpZZRCHxZjfpfZeMDnnoUh4fVQtadwmxIX66qKrBFNGqU0I8ZYhpUo2nZfsK7n7H7V5us8Tg2C3Uj1ETIJ6SbynxH4Y2b4qhKuGMQEDdoZRqkiauhaISFukc4QvWsykTJy2fdEHkVsHzzY7pg9k2D0TKqcP0I4ANEtveGCFM2MOlc7+uh1l0tPRBx0L1VbNyg1ulM="
+}
