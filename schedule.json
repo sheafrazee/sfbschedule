@@ -8,7 +8,9 @@
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #6 @ MAP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Jung"
+          ],
           "players": [],
           "note": ""
         }
@@ -22,7 +24,7 @@
           "title": "Audrina 1/5 @ OGP",
           "type": "other",
           "people": [
-            "Jung"
+            "Dylan O"
           ],
           "players": [],
           "note": ""
@@ -32,7 +34,7 @@
           "title": "Group @ OGP:",
           "type": "other",
           "people": [
-            "Jung"
+            "Dylan O"
           ],
           "players": [],
           "note": ""
@@ -47,17 +49,17 @@
           "title": "GW @ OGP",
           "type": "other",
           "people": [
-            "Jung"
+            "Ali"
           ],
           "players": [],
           "note": ""
         },
         {
-          "time": "11:30 AM – 12:30 PM",
+          "time": "10:30 AM – 11:30 AM",
           "title": "Jordan 3/5 @ OGP",
           "type": "other",
           "people": [
-            "Jung"
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -91,7 +93,19 @@
           "time": "10:00 AM – 11:00 AM",
           "title": "Jordan 4/5 @ OGP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "2:45 PM – 4:00 PM",
+          "title": "James @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
           "players": [],
           "note": ""
         },
@@ -100,7 +114,7 @@
           "title": "Audrina 2/5 @ OGP",
           "type": "other",
           "people": [
-            "Jung"
+            "Dylan O"
           ],
           "players": [],
           "note": ""
@@ -110,7 +124,7 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Greg R"
+            "Dylan O"
           ],
           "players": [],
           "note": ""
