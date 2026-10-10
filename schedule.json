@@ -136,6 +136,159 @@
   ],
   "archive": [
     {
+      "key": "2026-10-05",
+      "range": "Oct 5 – Oct 11, 2026",
+      "title": "Week of Oct 5 – 11",
+      "path": "archive/2026-10-05.png",
+      "pathExcel": "archive/2026-10-05-excel.png",
+      "players": [
+        "1/5 Jude 3/5 @ CDM",
+        "ABA/DELTA #6 @ MAP",
+        "ABA/DELTA #7 @ MAP",
+        "Audrina 1/5 @ OGP",
+        "Audrina 2/5 @ OGP",
+        "Colby Jones",
+        "Group @ OGP:",
+        "Jordan 3/5 @ OGP",
+        "Maxwell"
+      ],
+      "days": [
+        {
+          "day": "Mon 10/5",
+          "events": [
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #6 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Tue 10/6",
+          "events": [
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 1/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Wed 10/7",
+          "events": [
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #7 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Thu 10/8",
+          "events": [
+            {
+              "time": "6:15 AM – 7:30 AM",
+              "title": "Maxwell, 1/5 Jude 3/5 @ CDM",
+              "type": "other",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "8:15 AM – 9:15 AM",
+              "title": "Colby Jones ",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "10:00 AM – 11:00 AM",
+              "title": "Jordan 3/5 @ OGP",
+              "type": "other",
+              "people": [],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 2/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": ""
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP: ",
+              "type": "other",
+              "people": [
+                "Dylan O",
+                "Malachi"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Fri 10/9",
+          "events": [
+            {
+              "time": "1:00 PM – 2:00 PM",
+              "title": "Colby Jones ",
+              "type": "excel",
+              "people": [
+                "Colby R"
+              ],
+              "players": [],
+              "note": ""
+            }
+          ]
+        },
+        {
+          "day": "Sat 10/10",
+          "events": []
+        },
+        {
+          "day": "Sun 10/11",
+          "events": []
+        }
+      ],
+      "ts": 1791654813509
+    },
+    {
       "key": "2026-09-28",
       "range": "Sep 28 – Oct 4, 2026",
       "title": "Week of Sep 28 – Oct 4",
