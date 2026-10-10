@@ -70,6 +70,16 @@
           "note": ""
         },
         {
+          "time": "8:15 AM – 9:15 AM",
+          "title": "Colby Jones ",
+          "type": "excel",
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
           "time": "10:00 AM – 11:00 AM",
           "title": "Jordan 3/5 @ OGP",
           "type": "other",
@@ -102,7 +112,18 @@
     },
     {
       "day": "Fri 10/9",
-      "events": []
+      "events": [
+        {
+          "time": "1:00 PM – 2:00 PM",
+          "title": "Colby Jones ",
+          "type": "excel",
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
     },
     {
       "day": "Sat 10/10",
