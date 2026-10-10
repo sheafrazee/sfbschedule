@@ -45,26 +45,6 @@
       "day": "Wed 10/7",
       "events": [
         {
-          "time": "6:00 AM – 7:30 AM",
-          "title": "GW @ OGP",
-          "type": "other",
-          "people": [
-            "Ali"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "10:30 AM – 11:30 AM",
-          "title": "Jordan 3/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #7 @ MAP",
           "type": "other",
@@ -91,21 +71,9 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 4/5 @ OGP",
+          "title": "Jordan 3/5 @ OGP",
           "type": "other",
-          "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "2:45 PM – 4:00 PM",
-          "title": "James @ OGP",
-          "type": "other",
-          "people": [
-            "Dylan O"
-          ],
+          "people": [],
           "players": [],
           "note": ""
         },
@@ -124,7 +92,8 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Dylan O"
+            "Dylan O",
+            "Malachi"
           ],
           "players": [],
           "note": ""
