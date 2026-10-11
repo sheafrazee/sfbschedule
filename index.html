@@ -582,7 +582,28 @@ body.modifier-held .cal-popover { pointer-events: none; }
 .event-time { grid-row: 1 / span 3; flex-direction: column !important; align-items: flex-start !important;
   justify-content: flex-start !important; gap: 4px !important; margin-bottom: 0; }
 .event-title { grid-column: 2; margin-bottom: 3px; }
-.event-people, .event-note { grid-column: 2; }
+.event-people, .event-note, .event-loc { grid-column: 2; }
+/* ---- Locations ---- */
+.event-loc { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 7px; margin-top: 5px; }
+.loc-link { font-style: normal; display: inline-flex; align-items: center; gap: 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; line-height: 1.4; color: var(--ink); text-decoration: none; background: #fff; border: 1px solid var(--light-stone); border-radius: 20px; padding: 2px 9px 2px 7px; white-space: nowrap; }
+a.loc-link:hover { border-color: var(--ink); }
+a.loc-link .go { color: var(--clay); font-size: 10.5px; }
+.loc-link .pin { width: 11px; height: 11px; flex-shrink: 0; color: var(--clay); }
+.loc-note { font-family: 'Source Sans 3', sans-serif; font-size: 11.5px; font-style: italic; color: var(--dark-stone); }
+.loc-panel { margin-top: 18px; background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; padding: 12px 16px 6px; }
+.loc-panel-h { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+.loc-panel-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 0; border-top: 1px solid var(--warm-white); }
+.loc-panel-h + .loc-panel-row { border-top: none; }
+.loc-mgr-list { display: flex; flex-direction: column; gap: 10px; max-height: 52vh; overflow-y: auto; margin-bottom: 10px; }
+.loc-mgr-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; border: 1.5px solid var(--light-stone); border-radius: 8px; padding: 10px; background: var(--warm-white); }
+.loc-mgr-item input { width: 100%; min-width: 0; padding: 7px 9px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
+.loc-mgr-item input:focus { border-color: var(--stone); }
+.loc-mgr-item .lm-name { font-weight: 600; }
+.loc-mgr-item .full { grid-column: 1 / -1; }
+.loc-mgr-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11.5px; color: var(--stone); }
+.loc-mgr-meta a { color: var(--clay); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; text-decoration: none; }
+.loc-mgr-meta a:hover { text-decoration: underline; }
+@media (max-width: 700px) { .loc-mgr-item input { font-size: 16px; } }
 @media (max-width: 380px) { .event-card { grid-template-columns: 70px 1fr; column-gap: 10px; } }
 
 /* (v2) Clear-all inside the match summary */
@@ -1101,6 +1122,7 @@ body.editing-next .ab-next { display: flex; }
     </div>
     <div class="day-grid" id="grid"></div>
     <div class="cal-wrap hidden" id="viewTimeline"></div>
+    <div class="loc-panel hidden" id="locPanel"></div>
   </div>
 
   <div id="editView" class="hidden">
@@ -1149,6 +1171,7 @@ body.editing-next .ab-next { display: flex; }
             <button class="btn ab-more-btn" id="moreBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions" title="More actions">⋯</button>
             <div class="ab-menu hidden" id="moreMenu" role="menu">
               <button type="button" role="menuitem" id="addDayBtn" title="Add a day column to this week">+ Add day</button>
+              <button type="button" role="menuitem" id="locationsBtn" title="Add or edit gym addresses, map links and directions">📍 Locations</button>
               <button type="button" role="menuitem" id="settingsBtn">Settings</button>
               <div class="ab-menu-sep" role="separator"></div>
               <button type="button" role="menuitem" class="danger" id="revertLiveBtn" title="Reload the published schedule and drop any unpublished edits">↺ Discard edits</button>
@@ -1268,6 +1291,17 @@ body.editing-next .ab-next { display: flex; }
       <button class="btn" id="cfgClear">Clear Token</button>
       <button class="btn primary" id="cfgSave">Save</button>
     </div>
+  </div>
+</div>
+
+<!-- Locations Modal -->
+<div class="modal-bg hidden" id="locModal">
+  <div class="modal">
+    <h2>Locations</h2>
+    <p>Paste a Google Maps share link, or type a street address and the map link is built for you. Directions show under the location on every session that uses it. Publish to share changes.</p>
+    <div class="loc-mgr-list" id="locMgrList"></div>
+    <button class="btn" id="locAddBtn" type="button">+ Add location</button>
+    <div class="modal-actions"><button class="btn primary" id="locClose" type="button">Done</button></div>
   </div>
 </div>
 
@@ -1403,8 +1437,84 @@ function _migrateEvent(ev) {
   ev.people = merged;
   ev.players = []; // retired
 }
+// ============ LOCATIONS ============
+// Shared by both weeks (data.locations); a session points at one by id (ev.loc).
+const DEFAULT_LOCATIONS = [
+  { id: "ogp", name: "OGP", url: "https://maps.app.goo.gl/W8V7QS9jAg76gXME8", note: "" },
+  { id: "map", name: "MAP", url: "https://maps.app.goo.gl/9JcNCAcx7R7WfPRS9", note: "" },
+  { id: "san-clemente", name: "San Clemente", url: "https://maps.app.goo.gl/rmEuedaPtGR86tSB8", note: "" },
+];
+function ensureLocations(d) {
+  if (d && typeof d === "object" && !Array.isArray(d.locations)) d.locations = DEFAULT_LOCATIONS.map(l => ({ ...l }));
+}
+// A link is used as-is; anything else is treated as an address and becomes a Google Maps search.
+function mapsUrl(raw) {
+  const s = String(raw || "").trim();
+  if (!s) return "";
+  if (/^https?:\/\//i.test(s)) return s;
+  if (/^(maps\.app\.goo\.gl|goo\.gl\/maps|(www\.)?google\.[a-z.]+\/maps)/i.test(s)) return "https://" + s;
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s);
+}
+function locById(id) { return id ? ((data && data.locations) || []).find(l => l.id === id) || null : null; }
+function locOf(ev) { return ev ? locById(ev.loc) : null; }
+const PIN_SVG = '<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+function locChipHtml(loc) {
+  const href = mapsUrl(loc.url);
+  const label = `${PIN_SVG}<span>${escapeHtml(loc.name || "Location")}</span>`;
+  return href
+    ? `<a class="loc-link" href="${escapeAttr(href)}" target="_blank" rel="noopener" title="Open in Google Maps">${label}<span class="go">↗</span></a>`
+    : `<span class="loc-link">${label}</span>`;
+}
+function evLocHtml(ev) {
+  const loc = locOf(ev);
+  if (!loc) return "";
+  return `<div class="event-loc">${locChipHtml(loc)}${loc.note ? `<span class="loc-note">${escapeHtml(loc.note)}</span>` : ""}</div>`;
+}
+function renderLocPanel() {
+  const el = document.getElementById("locPanel");
+  if (!el) return;
+  const locs = ((data && data.locations) || []).filter(l => String(l.name || "").trim());
+  el.classList.toggle("hidden", !locs.length);
+  el.innerHTML = locs.length ? `<div class="loc-panel-h">Locations</div>` + locs.map(l =>
+    `<div class="loc-panel-row">${locChipHtml(l)}${l.note ? `<span class="loc-note">${escapeHtml(l.note)}</span>` : ""}</div>`).join("") : "";
+}
+function locOptionsHtml(sel) {
+  return `<option value="">No location</option>` + ((data && data.locations) || []).map(l =>
+    `<option value="${escapeAttr(l.id)}"${l.id === sel ? " selected" : ""}>${escapeHtml(l.name || "Untitled")}</option>`).join("")
+    + `<option value="__new">+ New location…</option>`;
+}
+function newLocId() { return "loc-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+function _locUses(id) {
+  let n = 0;
+  [data, data && data.nextWeek].forEach(wk => ((wk && wk.days) || []).forEach(d =>
+    (d.events || []).forEach(ev => { if (ev.loc === id) n++; })));
+  return n;
+}
+function renderLocMgr() {
+  const list = document.getElementById("locMgrList");
+  const locs = data.locations || [];
+  list.innerHTML = locs.map((l, i) => {
+    const href = mapsUrl(l.url), n = _locUses(l.id);
+    return `<div class="loc-mgr-item" data-i="${i}">
+      <input class="lm-name" value="${escapeAttr(l.name)}" placeholder="Name (e.g. OGP)" aria-label="Location name" autocomplete="off" spellcheck="false">
+      <button class="rr-del lm-del" type="button" aria-label="Remove ${escapeAttr(l.name || "location")}" title="Remove">✕</button>
+      <input class="lm-url full" value="${escapeAttr(l.url)}" placeholder="Google Maps link or street address" aria-label="Map link or address" autocomplete="off" spellcheck="false">
+      <input class="lm-note full" value="${escapeAttr(l.note)}" placeholder="Directions (e.g. Park in the back)" aria-label="Directions" autocomplete="off">
+      <div class="loc-mgr-meta"><a class="lm-test" href="${escapeAttr(href)}" target="_blank" rel="noopener"${href ? "" : " hidden"}>Open in Maps ↗</a><span>${n} session${n === 1 ? "" : "s"} this week + next</span></div>
+    </div>`;
+  }).join("") || `<div class="archive-empty">No locations yet.</div>`;
+}
+function openLocMgr(focusNew) {
+  ensureLocations(data);
+  if (focusNew) { data.locations.push({ id: newLocId(), name: "", url: "", note: "" }); saveDraft(); }
+  renderLocMgr();
+  document.getElementById("locModal").classList.remove("hidden");
+  if (focusNew) { const ins = document.querySelectorAll("#locMgrList .lm-name"); if (ins.length) ins[ins.length - 1].focus(); }
+}
+
 function normalizeData(d) {
   if (!d || !Array.isArray(d.days)) return d;
+  ensureLocations(d);
   d.days.forEach(day => (day.events || []).forEach(_migrateEvent));
   if (d.nextWeek && Array.isArray(d.nextWeek.days)) {
     d.nextWeek.days.forEach(day => (day.events || []).forEach(_migrateEvent));
@@ -1839,7 +1949,7 @@ function buildCaptureNode(filtered, opts = {}) {
         html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:4px solid ${s.rail};">
           <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
-          ${internHtml}${noteHtml}
+          ${internHtml}${noteHtml}${evLocHtml(e)}
         </div>`;
       });
     }
@@ -1933,7 +2043,7 @@ function buildDayCaptureNode(day) {
       html += `<div style="padding:10px 12px 10px 13px;margin:8px;border-radius:0 8px 8px 0;background:${s.bg};border-left:4px solid ${s.rail};">
         <div style="font-size:11px;font-weight:600;color:${s.textSecondary};margin-bottom:2px;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;">${countBadge ? `<span style="opacity:.7;font-weight:600;">${countBadge}</span>` : ""}${tagHtml}</span></div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:4px;color:${s.textPrimary};">${titleHtml}</div>
-        ${internHtml}${noteHtml}
+        ${internHtml}${noteHtml}${evLocHtml(e)}
       </div>`;
     });
   }
@@ -1951,6 +2061,8 @@ function _eventTextLine(e) {
   let l = `• ${e.time ? e.time + " — " : ""}${e.title || "Untitled"}${e.type === "excel" ? "  [Excel]" : ""}`;
   if (interns.length) l += `\n   Interns: ${interns.join(", ")}`;
   if (e.note) l += `\n   Note: ${e.note}`;
+  const loc = locOf(e);
+  if (loc) l += `\n   Location: ${loc.name}${loc.note ? " (" + loc.note + ")" : ""}${mapsUrl(loc.url) ? " " + mapsUrl(loc.url) : ""}`;
   return l;
 }
 function buildDayText(day) {
@@ -2184,7 +2296,8 @@ function buildDayICS(day, typeOnly) {
   (day.events || []).filter(e => !typeOnly || e.type === typeOnly).forEach((e, i) => {
     const t = parseEventTimes(e.time);
     const interns = internsOf(e).join(", ");
-    const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
+    const _loc = locOf(e), _locUrl = _loc ? mapsUrl(_loc.url) : "";
+    const desc = [interns ? "Interns: " + interns : "", e.note || "", _loc && _loc.note ? "Directions: " + _loc.note : "", _locUrl ? "Map: " + _locUrl : ""].filter(Boolean).join("\n");
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
     lines.push("DTSTAMP:" + stamp);
@@ -2197,6 +2310,8 @@ function buildDayICS(day, typeOnly) {
       lines.push("DTEND;VALUE=DATE:" + _fmtDate(next));
     }
     lines.push("SUMMARY:" + _icsEsc(e.title));
+    if (_loc) lines.push("LOCATION:" + _icsEsc(_loc.name || ""));
+    if (_locUrl) lines.push("URL:" + _locUrl);
     if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
     lines.push("END:VEVENT");
   });
@@ -2343,7 +2458,8 @@ function buildICSFromDays(days, dateFn, pred) {
     (day.events || []).filter(pred).forEach((e, i) => {
       const t = parseEventTimes(e.time);
       const interns = internsOf(e).join(", ");
-      const desc = [interns ? "Interns: " + interns : "", e.note || ""].filter(Boolean).join("\n");
+      const _loc = locOf(e), _locUrl = _loc ? mapsUrl(_loc.url) : "";
+    const desc = [interns ? "Interns: " + interns : "", e.note || "", _loc && _loc.note ? "Directions: " + _loc.note : "", _locUrl ? "Map: " + _locUrl : ""].filter(Boolean).join("\n");
       lines.push("BEGIN:VEVENT");
       lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
       lines.push("DTSTAMP:" + stamp);
@@ -2356,7 +2472,9 @@ function buildICSFromDays(days, dateFn, pred) {
         lines.push("DTEND;VALUE=DATE:" + _fmtDate(next));
       }
       lines.push("SUMMARY:" + _icsEsc(e.title));
-      if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
+      if (_loc) lines.push("LOCATION:" + _icsEsc(_loc.name || ""));
+    if (_locUrl) lines.push("URL:" + _locUrl);
+    if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
       lines.push("END:VEVENT");
     });
   });
@@ -2974,7 +3092,7 @@ function renderDisplay() {
         col.innerHTML += `<div class="event-card" style="background:${s.bg};border-left-color:${s.rail};">
           <div class="event-time" style="color:${s.textSecondary};display:flex;justify-content:space-between;align-items:center;gap:8px;"><span>${escapeHtml(e.time)}</span><span style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">${tagHtml}${countBadge ? `<span style="opacity:.65;font-weight:600;font-size:11px;white-space:nowrap;">${countBadge}</span>` : ""}</span></div>
           <div class="event-title" style="color:${s.textPrimary}">${titleHtml}</div>
-          ${internHtml}${noteHtml}
+          ${internHtml}${noteHtml}${evLocHtml(e)}
         </div>`;
       });
     }
@@ -3433,7 +3551,7 @@ function _isBlankNew(ev) {
   if (!ev) return false;
   const t = String(ev.title || '').trim().toLowerCase();
   return (t === '' || t === 'new session' || t === 'new event')
-    && !(ev.people || []).length && !(ev.players || []).length && !String(ev.note || '').trim();
+    && !(ev.people || []).length && !(ev.players || []).length && !String(ev.note || '').trim() && !ev.loc;
 }
 // Pull one event object out of whichever week/day holds it.
 function _removeEventObj(evObj) {
@@ -3889,6 +4007,7 @@ function importJson(file) {
       if (!obj.days || !Array.isArray(obj.days)) throw new Error("Invalid format — needs { weekTitle, days: [...] }");
       if (Array.isArray(obj.payRates)) { payRates = _cleanRates(obj.payRates); payLocal.dirty = true; savePayRates(); }
       delete obj.payRates;   // rates stay on this device; schedule.json is public
+      normalizeData(obj);
       data = obj;
       _dayEventSort(data.days);                       // older or hand-edited files may be unsorted
       if (data.nextWeek) _dayEventSort(data.nextWeek.days);
@@ -4010,7 +4129,8 @@ function fitCalTitle(el) {
 // Hover text for a block: time, title, and the full intern list
 function calEvTip(ev) {
   const interns = internsOf(ev);
-  return `${ev.time || ""} \u2013 ${ev.title || ""}` + (interns.length ? `\nInterns: ${interns.join(", ")}` : "");
+  const loc = locOf(ev);
+  return `${ev.time || ""} \u2013 ${ev.title || ""}` + (interns.length ? `\nInterns: ${interns.join(", ")}` : "") + (loc ? `\nLocation: ${loc.name}` : "");
 }
 function fitCalTitles(container) {
   container.querySelectorAll(".cal-ev").forEach(fitCalTitle);
@@ -4834,6 +4954,9 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
       <button type="button" class="cal-pop-type-btn${ev.type === 'excel' ? ' active' : ''}" data-type="excel">Excel Client</button>
       <button type="button" class="cal-pop-type-btn${ev.type !== 'excel' ? ' active' : ''}" data-type="other">Other</button>
     </div>
+    <span class="cal-pop-label">Location</span>
+    <select id="calPopLoc" aria-label="Location">${locOptionsHtml(ev.loc)}</select>
+    <div class="loc-note" id="calPopLocNote" style="margin-top:4px;"></div>
     <span class="cal-pop-label">Note</span>
     <input id="calPopNote" type="text" value="${escapeAttr(ev.note || '')}" placeholder="Optional note" autocomplete="off">
     ${isNew ? '' : `<div class="cal-pop-foot">
@@ -4923,6 +5046,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (active !== noteEl && noteEl.value !== (ev2.note || '')) noteEl.value = ev2.note || '';
     pop.querySelectorAll('.cal-pop-type-btn').forEach(b =>
       b.classList.toggle('active', b.dataset.type === (ev2.type === 'excel' ? 'excel' : 'other')));
+    if (locSel && active !== locSel) { locSel.innerHTML = locOptionsHtml(ev2.loc); syncLocNote(); }
     if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     renderInternChips();
   };
@@ -5038,6 +5162,36 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     calSel = [];
     _commitAndReopen(slot, moved);
   });
+
+  // ---- Location ----
+  const locSel = pop.querySelector('#calPopLoc');
+  function syncLocNote() {
+    const n = pop.querySelector('#calPopLocNote'), ev2 = getEv(), l = ev2 && locOf(ev2);
+    if (!n) return;
+    n.innerHTML = l ? locChipHtml(l) + (l.note ? ` ${escapeHtml(l.note)}` : '') : '';
+  }
+  syncLocNote();
+  locSel.addEventListener('change', () => {
+    const ev2 = getEv(); if (!ev2) return;
+    let v = locSel.value;
+    if (v === '__new') {
+      const name = (prompt('Location name (e.g. OGP):') || '').trim();
+      const url = name ? (prompt('Google Maps link or street address for ' + name + ':') || '').trim() : '';
+      if (!name) { locSel.value = ev2.loc || ''; return; }
+      const note = (prompt('Directions (optional, e.g. Park in the back):') || '').trim();
+      ensureLocations(data);
+      const loc = { id: newLocId(), name, url, note };
+      data.locations.push(loc);
+      v = loc.id;
+      locSel.innerHTML = locOptionsHtml(v);
+    }
+    if (v) ev2.loc = v; else delete ev2.loc;
+    locSel.value = v;
+    saveDraft();
+    syncLocNote();
+    if (ctx.evEl) ctx.evEl.title = calEvTip(ev2);
+  });
+  locSel.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); closeEditor(); } e.stopPropagation(); });
 
   // ---- Note ----
   noteEl.addEventListener('input', () => {
@@ -5554,6 +5708,43 @@ document.getElementById("slotCurrentBtn").addEventListener("click", () => switch
 document.getElementById("slotNextBtn").addEventListener("click", () => switchSlot("next"));
 
 document.getElementById("addDayBtn").addEventListener("click", () => addDayToSlot(editSlot));
+document.getElementById("locationsBtn").addEventListener("click", () => openLocMgr(false));
+document.getElementById("locAddBtn").addEventListener("click", () => openLocMgr(true));
+document.getElementById("locClose").addEventListener("click", () => {
+  document.getElementById("locModal").classList.add("hidden");
+  // Blank rows (no name, link or directions) are dropped on close
+  const before = (data.locations || []).length;
+  data.locations = (data.locations || []).filter(l => l.name.trim() || l.url.trim() || l.note.trim() || _locUses(l.id));
+  if (data.locations.length !== before) saveDraft();
+  if (currentMode === "edit") renderEdit(); else renderDisplay();
+});
+(function wireLocMgr() {
+  const list = document.getElementById("locMgrList");
+  const itemOf = el => { const it = el.closest(".loc-mgr-item"); return it ? { it, loc: data.locations[+it.dataset.i] } : null; };
+  list.addEventListener("input", e => {
+    const h = itemOf(e.target); if (!h || !h.loc) return;
+    if (e.target.classList.contains("lm-name")) h.loc.name = e.target.value;
+    else if (e.target.classList.contains("lm-url")) {
+      h.loc.url = e.target.value;
+      const a = h.it.querySelector(".lm-test"), href = mapsUrl(h.loc.url);
+      a.href = href || "#"; a.hidden = !href;
+    }
+    else if (e.target.classList.contains("lm-note")) h.loc.note = e.target.value;
+    else return;
+    saveDraft();
+  });
+  list.addEventListener("click", e => {
+    if (!e.target.closest(".lm-del")) return;
+    const h = itemOf(e.target); if (!h || !h.loc) return;
+    const n = _locUses(h.loc.id);
+    if ((h.loc.name.trim() || n) && !confirm(`Remove ${h.loc.name.trim() || "this location"}?` + (n ? `\n\n${n} session${n === 1 ? "" : "s"} will lose ${n === 1 ? "its" : "their"} location.` : ""))) return;
+    [data, data.nextWeek].forEach(wk => ((wk && wk.days) || []).forEach(d =>
+      (d.events || []).forEach(ev => { if (ev.loc === h.loc.id) delete ev.loc; })));
+    data.locations.splice(+h.it.dataset.i, 1);
+    saveDraft();
+    renderLocMgr();
+  });
+})();
 
 document.getElementById("seedNextBtn").addEventListener("click", () => {
   // Only ask before overwriting when Next Week already has sessions in it
@@ -5919,6 +6110,7 @@ setInterval(() => { if (currentMode === "display") try { decorateLiveChips(); } 
       const ca = document.getElementById("clearAllFilters");
       if (ca) ca.addEventListener("click", clearAllFilters);
       decorateLiveChips();
+      renderLocPanel();
       applyDisplayViewMode();
     } catch (e) { console.warn(e); }
   };
