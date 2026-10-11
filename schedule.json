@@ -1,15 +1,15 @@
 {
-  "weekTitle": "Week of Oct 5 – 11",
+  "weekTitle": "Week of Oct 12 – 18",
   "days": [
     {
-      "day": "Mon 10/5",
+      "day": "Mon 10/12",
       "events": [
         {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA #6 @ MAP",
-          "type": "other",
+          "time": "8:00 AM – 9:00 AM",
+          "title": "Colby Jones @ San Clemente",
+          "type": "excel",
           "people": [
-            "Jung"
+            "Ali"
           ],
           "players": [],
           "note": ""
@@ -17,8 +17,18 @@
       ]
     },
     {
-      "day": "Tue 10/6",
+      "day": "Tue 10/13",
       "events": [
+        {
+          "time": "10:30 AM – 11:30 AM",
+          "title": "Colby Jones @ San Clemente",
+          "type": "excel",
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 1/5 @ OGP",
@@ -42,8 +52,16 @@
       ]
     },
     {
-      "day": "Wed 10/7",
+      "day": "Wed 10/14",
       "events": [
+        {
+          "time": "6:00 AM – 7:30 AM",
+          "title": "GW @ OGP",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
+        },
         {
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #7 @ MAP",
@@ -57,7 +75,7 @@
       ]
     },
     {
-      "day": "Thu 10/8",
+      "day": "Thu 10/15",
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
@@ -71,7 +89,7 @@
         },
         {
           "time": "8:15 AM – 9:15 AM",
-          "title": "Colby Jones ",
+          "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
             "Ali"
@@ -111,11 +129,11 @@
       ]
     },
     {
-      "day": "Fri 10/9",
+      "day": "Fri 10/16",
       "events": [
         {
-          "time": "1:00 PM – 2:00 PM",
-          "title": "Colby Jones ",
+          "time": "8:00 AM – 9:00 AM",
+          "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
             "Colby R"
@@ -126,11 +144,11 @@
       ]
     },
     {
-      "day": "Sat 10/10",
+      "day": "Sat 10/17",
       "events": []
     },
     {
-      "day": "Sun 10/11",
+      "day": "Sun 10/18",
       "events": []
     }
   ],
