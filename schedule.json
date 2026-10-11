@@ -31,7 +31,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 1/5 @ OGP",
+          "title": "Audrina 3/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O"
@@ -41,7 +41,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:",
+          "title": "Group @ OGP: Russ, Cesar",
           "type": "other",
           "people": [
             "Dylan O"
@@ -99,7 +99,7 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 3/5 @ OGP",
+          "title": "Jordan 4/5 @ OGP",
           "type": "other",
           "people": [],
           "players": [],
@@ -107,7 +107,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 2/5 @ OGP",
+          "title": "Audrina 4/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O"
@@ -117,7 +117,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP:  Russ",
           "type": "other",
           "people": [
             "Dylan O",
@@ -140,6 +140,14 @@
           ],
           "players": [],
           "note": ""
+        },
+        {
+          "time": "10:30 AM – 11:30 AM",
+          "title": "Jordan 5/5 @ OGP",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": ""
         }
       ]
     },
@@ -149,7 +157,18 @@
     },
     {
       "day": "Sun 10/18",
-      "events": []
+      "events": [
+        {
+          "time": "10:00 AM – 11:00 AM",
+          "title": "Kids Pickup @ Venado Park ",
+          "type": "other",
+          "people": [
+            "Ian H"
+          ],
+          "players": [],
+          "note": ""
+        }
+      ]
     }
   ],
   "archive": [
