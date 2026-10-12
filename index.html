@@ -508,6 +508,49 @@ body.modifier-held .cal-popover { pointer-events: none; }
 .cal-sel-bar .cs-sep { width: 1px; height: 16px; background: rgba(244,241,236,.22); }
 .cal-sel-bar .k { background: rgba(244,241,236,.16); border-radius: 5px; padding: 2px 6px; font-size: 11px; margin-left: 4px; }
 @media (max-width: 600px) { .cal-sel-bar { bottom: calc(112px + env(safe-area-inset-bottom)); font-size: 11px; } }
+/* ---- Multi-select: Select mode (touch-friendly) + location changer in the selection bar ---- */
+.cal-sel-bar { max-width: calc(100vw - 24px); }
+.cal-sel-bar .cs-count { white-space: nowrap; flex-shrink: 0; }
+.cal-sel-bar .cs-locs { display: flex; align-items: center; gap: 5px; flex: 0 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.cal-sel-bar .cs-locs::-webkit-scrollbar { display: none; }
+.cal-sel-bar .cs-lbl { flex-shrink: 0; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; opacity: .6; margin-right: 2px; }
+.cs-loc { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 4px 10px 4px 8px; border: 1.5px solid rgba(244,241,236,.25); border-radius: 100px; background: transparent; color: var(--warm-white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; line-height: 1.2; white-space: nowrap; cursor: pointer; transition: background .12s, border-color .12s, color .12s; }
+.cs-loc .pin { width: 11px; height: 11px; flex-shrink: 0; color: #E08B63; }
+.cs-loc:hover:not(:disabled) { border-color: rgba(244,241,236,.65); }
+.cs-loc.active { background: var(--warm-white); border-color: var(--warm-white); color: var(--ink); }
+.cs-loc.active .pin { color: var(--clay); }
+.cs-loc.none { border-style: dashed; padding-left: 10px; }
+.cs-loc:disabled { opacity: .35; cursor: default; }
+.cal-sel-bar .cs-keys { flex-shrink: 0; white-space: nowrap; }
+.cal-sel-bar .cs-acts { display: flex; gap: 6px; flex-shrink: 0; margin-left: 4px; }
+.cs-btn { border: none; border-radius: 7px; background: rgba(244,241,236,.14); color: var(--warm-white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; padding: 6px 11px; cursor: pointer; white-space: nowrap; }
+.cs-btn:hover:not(:disabled) { background: rgba(244,241,236,.24); }
+.cs-btn.danger { color: #F2B79C; }
+.cs-btn.done { background: var(--warm-white); color: var(--ink); }
+.cs-btn:disabled { opacity: .35; cursor: default; }
+body.selbar-on .undo-bar { bottom: calc(var(--selbar-h, 40px) + 30px); }
+#selectModeBtn.active { background: var(--ink); border-color: var(--ink); color: var(--warm-white); }
+body.select-mode .cal-ev-drag, body.select-mode .cal-notime-pill[data-notime] { cursor: pointer; }
+body.select-mode .cal-ev-resize { pointer-events: none !important; }
+body.select-mode .cal-ev-resize::after { display: none; }
+body.select-mode .cal-day-body[data-di] { cursor: default; }
+body.select-mode .cal-ev-selected::after { content: "\2713"; position: absolute; top: 2px; right: 3px; z-index: 5; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); color: var(--warm-white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8.5px; font-weight: 800; line-height: 14px; text-align: center; box-shadow: 0 0 0 1.5px var(--warm-white); }
+.cal-notime-pill[data-notime] { position: relative; }
+body.select-mode .cal-day-head-edit .dh-caret { display: none; }
+body.select-mode .cal-day-head-edit::before { content: ""; flex-shrink: 0; width: 9px; height: 9px; border: 1.5px solid var(--stone); border-radius: 3px; }
+body.select-mode .cal-day-head-edit.all-sel::before { content: "\2713"; width: 12px; height: 12px; border: none; background: var(--ink); color: var(--warm-white); font-size: 8.5px; line-height: 12px; text-align: center; }
+body.select-mode .cal-sel-bar .cs-keys { display: none; }
+@media (max-width: 700px) {
+  body.select-mode .cal-sel-bar { left: 0; right: 0; bottom: 0; transform: none; max-width: none; flex-wrap: wrap; row-gap: 10px; border-radius: 16px 16px 0 0; padding: 12px 14px calc(14px + env(safe-area-inset-bottom)); font-size: 13px; }
+  body.select-mode .cal-sel-bar .cs-count { flex: 1 1 auto; }
+  body.select-mode .cal-sel-bar .cs-sep { display: none; }
+  body.select-mode .cal-sel-bar .cs-locs { order: 5; flex: 1 1 100%; flex-wrap: wrap; overflow: visible; }
+  body.select-mode .cal-sel-bar .cs-lbl { display: none; }
+  body.select-mode .cs-loc { padding: 8px 13px 8px 11px; font-size: 13px; }
+  body.select-mode .cs-btn { padding: 8px 12px; font-size: 13px; }
+  body.select-mode .intern-tally, body.select-mode .cal-fab { display: none !important; }
+  body.select-mode .wrap { padding-bottom: 150px; }
+}
 @media (max-width: 780px) { .preview-weeks { grid-template-columns: 1fr; } }
 
 /* ---- Search fields (display mode) ---- */
@@ -894,7 +937,7 @@ body.editing-next .ab-next { display: flex; }
 @media (hover: none) and (pointer: coarse) {
   .cal-ev-drag .cal-ev-resize { pointer-events: none; }
   .cal-ev-drag.cal-ev-selected .cal-ev-resize { pointer-events: auto; }
-  .cal-sel-bar { display: none !important; }
+  body:not(.select-mode) .cal-sel-bar { display: none !important; }   /* touch: the bar is for Select mode */
 }
 
 /* ---- Phone action bar: week + status / title / tools / Publish + ⋯ ---- */
@@ -1273,6 +1316,7 @@ body.editing-next .ab-next { display: flex; }
           <button type="button" class="seg-btn active" data-type="all">All</button>
           <button type="button" class="seg-btn" data-type="excel">Excel</button>
         </div>
+        <button class="week-preview-toggle" id="selectModeBtn" type="button" aria-pressed="false" title="Select several sessions to set their location or delete them">Select</button>
         <button class="week-preview-toggle" id="weekPreviewToggle" title="Collapse the calendar to see the week's stats on their own">Collapse</button>
       </div>
       <div id="weekPreviewBody">
@@ -1732,6 +1776,7 @@ let previewTypeFilter = "all";   // edit-calendar screenshot toggle: "all" or "e
 let currentMode = "display";
 let editSlot = "current";   // "current" or "next" — which week the edit UI targets
 let calSel = [];            // [{slot,di,ei}] selected calendar tiles (multi-select)
+let calSelectMode = false;  // Select mode: a tap toggles a session in/out of the selection (works on touch)
 let calAnchor = null;       // {slot,di,ei} anchor for shift-range selection
 let calHover = null;        // {slot,di} last-hovered day column (paste target)
 let _lastCalTap = null;     // {slot,di,ei,t} last tile tap — used to detect double-click
@@ -3414,6 +3459,7 @@ function eventHasIntern(ev, name) {
 }
 function setAssignName(name) {
   assignName = (name || "").trim();
+  if (assignName && calSelectMode) setSelectMode(false);
   document.body.classList.toggle("assign-mode", !!assignName);
   updateAssignBar();
   try { applyEditFind(); } catch (e) {}
@@ -4206,7 +4252,7 @@ function setMode(mode) {
   if (mode === "display") renderDisplay();
   else if (mode === "edit") renderEdit();
   else renderPay();
-  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); if (assignName) setAssignName(""); }
+  if (mode !== "edit") { document.getElementById("internTally").classList.add("hidden"); document.body.classList.remove("editing-next"); clearCalSel(); if (assignName) setAssignName(""); if (calSelectMode) setSelectMode(false); }
   _updateEditFloat();
 }
 
@@ -4497,6 +4543,7 @@ function wireCalDrag(container, slot, hPx) {
     el.addEventListener("contextmenu", e => {
       e.preventDefault();
       e.stopPropagation();
+      if (calSelectMode) return;
       if (e.pointerType === 'touch' || Date.now() - _lastTouchDown < 1500) return;   // touch long-press = drag
       _calCtxAt = Date.now();
       _lastCalTap = null; _lastAssignToggle = null;
@@ -4514,6 +4561,7 @@ function wireCalDrag(container, slot, hPx) {
     body.addEventListener("pointerdown", ev => {
       if (ev.button !== 0) return;
       if (ev.target.closest('.cal-ev-drag')) return; // let existing-event drag handle it
+      if (calSelectMode) return;                     // Select mode: empty grid does nothing
       onCalCreateStart(ev, slot, hPx);
     });
   });
@@ -4521,6 +4569,7 @@ function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll('.cal-day-head-edit').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
+      if (calSelectMode) { toggleDaySel(slot, +btn.dataset.dayhead); return; }   // select the whole day
       openDayMenu(slot, +btn.dataset.dayhead, btn);
     });
   });
@@ -4528,22 +4577,24 @@ function wireCalDrag(container, slot, hPx) {
   container.querySelectorAll('.cal-notime-pill[data-notime]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
+      if (calSelectMode) { toggleCalSel(slot, +btn.dataset.di, +btn.dataset.ei); return; }
       clearCalSel();
       showCalPopover(slot, +btn.dataset.di, +btn.dataset.ei, btn, 'calPopStart');
     });
   });
-  // Re-apply multi-select highlight after re-render (prune tiles that no longer exist)
+  // Re-apply the selection after a redraw. Sessions on days that aren't drawn (phone day view)
+  // stay selected; sessions that no longer exist are dropped.
   calSel = calSel.filter(s => {
     if (s.slot !== slot) return true; // a different week's container handles its own
-    const el = container.querySelector(`.cal-ev-drag[data-di="${s.di}"][data-ei="${s.ei}"]`);
-    if (el) { el.classList.add('cal-ev-selected'); return true; }
-    return false;
+    const d = _calDays(slot);
+    return !!(d && d[s.di] && d[s.di].events && d[s.di].events[s.ei]);
   });
-  updateCalSelBar();
+  _applyCalSelHighlight();
 }
 function onCalDragStart(e) {
   const el = e.currentTarget;
   if (e.button != null && e.button !== 0) return;
+  if (calSelectMode) { _selectModeTap(e, el); return; }
   const hourPx = +el.dataset.hourpx;
   const startMin0 = +el.dataset.startmin;
   const dur = +el.dataset.dur;
@@ -4755,9 +4806,14 @@ function calIsSelected(slot, di, ei) {
 function _calDays(slot) { return slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days; }
 function _applyCalSelHighlight() {
   document.querySelectorAll('.cal-ev-selected').forEach(el => el.classList.remove('cal-ev-selected'));
-  calSel.forEach(s => {
-    const el = document.querySelector(`.cal-ev-drag[data-slot="${s.slot}"][data-di="${s.di}"][data-ei="${s.ei}"]`);
+  calSel.forEach(s => {   // timed tiles and untimed pills
+    const el = document.querySelector(`#previewWeeks [data-slot="${s.slot}"][data-di="${s.di}"][data-ei="${s.ei}"]`);
     if (el) el.classList.add('cal-ev-selected');
+  });
+  document.querySelectorAll('#previewWeeks .cal-day-head-edit').forEach(h => {   // day fully selected?
+    const slot = h.dataset.slot, di = +h.dataset.dayhead;
+    const idx = _selectableIdx(slot).filter(x => x.di === di);
+    h.classList.toggle('all-sel', idx.length > 0 && idx.every(x => calIsSelected(slot, di, x.ei)));
   });
   updateCalSelBar();
 }
@@ -4767,16 +4823,67 @@ function clearCalSel() {
   hideCalPopover();
   updateCalSelBar();
 }
+function _selEvents() {
+  return calSel.map(s => { const d = _calDays(s.slot); return d && d[s.di] && d[s.di].events ? d[s.di].events[s.ei] : null; }).filter(Boolean);
+}
+// Sessions the user can see under the All / Excel filter: [{di, ei}]
+function _selectableIdx(slot) {
+  const out = [];
+  (_calDays(slot) || []).forEach((d, di) => (d.events || []).forEach((ev, ei) => {
+    if (previewTypeFilter !== 'excel' || ev.type === 'excel') out.push({ di, ei });
+  }));
+  return out;
+}
+// Selection bar: count · location buttons for every selected session · copy/paste/delete keys
+// (desktop) or All / Delete / Done (Select mode).
 function updateCalSelBar() {
   const bar = document.getElementById('calSelBar');
   if (!bar) return;
-  if (!calSel.length || currentMode !== 'edit') { bar.classList.add('hidden'); return; }
-  const n = calSel.length;
-  bar.innerHTML = `<span>${n} tile${n !== 1 ? 's' : ''} selected</span>`
-    + `<span class="cs-sep"></span>`
-    + `<span class="k">⌘C</span> Copy <span class="k">⌘V</span> Paste <span class="k">⌫</span> Delete`;
+  if (currentMode !== 'edit' || (!calSel.length && !calSelectMode)) {
+    bar.classList.add('hidden');
+    document.body.classList.remove('selbar-on');
+    return;
+  }
+  const n = calSel.length, evs = _selEvents();
+  const locSet = new Set(evs.map(ev => (ev.loc && locById(ev.loc)) ? ev.loc : ''));
+  const common = n && locSet.size === 1 ? [...locSet][0] : null;   // null = mixed
+  const named = _namedLocs(), dis = n ? '' : ' disabled';
+  const tap = window.matchMedia && window.matchMedia('(pointer: coarse)').matches ? 'Tap' : 'Click';
+  let h = `<span class="cs-count">${n ? `${n} selected` : `${tap} sessions or a day`}</span>`;
+  if (named.length) {
+    h += `<span class="cs-sep"></span><span class="cs-locs" role="group" aria-label="Location for the selected sessions"><span class="cs-lbl">Location</span>`
+      + named.map(l => `<button type="button" class="cs-loc${common === l.id ? ' active' : ''}" data-cs="loc" data-loc="${escapeAttr(l.id)}"${dis}>${PIN_SVG}<span>${escapeHtml(l.name)}</span></button>`).join('')
+      + `<button type="button" class="cs-loc none${common === '' ? ' active' : ''}" data-cs="loc" data-loc=""${dis} title="Remove the location">None</button></span>`;
+  }
+  if (calSelectMode) {
+    const allSel = n > 0 && _selectableIdx(editSlot).every(x => calIsSelected(editSlot, x.di, x.ei));
+    h += `<span class="cs-acts"><button type="button" class="cs-btn" data-cs="${allSel ? 'clear' : 'all'}">${allSel ? 'Clear' : 'All'}</button>`
+      + `<button type="button" class="cs-btn danger" data-cs="del"${dis}>Delete</button>`
+      + `<button type="button" class="cs-btn done" data-cs="done">Done</button></span>`;
+  } else {
+    h += `<span class="cs-sep"></span><span class="cs-keys"><span class="k">⌘C</span> Copy <span class="k">⌘V</span> Paste <span class="k">⌫</span> Delete</span>`;
+  }
+  bar.innerHTML = h;
   bar.classList.remove('hidden');
+  const bh = bar.offsetHeight;   // 0 when CSS hides it (touch outside Select mode)
+  if (bh) document.documentElement.style.setProperty('--selbar-h', bh + 'px');
+  document.body.classList.toggle('selbar-on', bh > 0);
+  _placeSelBar();
 }
+// Desktop: slide the bar left when it would run into the intern panel at the bottom right.
+function _placeSelBar() {
+  const bar = document.getElementById('calSelBar');
+  if (!bar || bar.classList.contains('hidden')) return;
+  bar.style.left = ''; bar.style.transform = '';
+  if (_calPhone()) return;
+  const t = document.getElementById('internTally');
+  if (!t || t.classList.contains('hidden')) return;
+  const tr = t.getBoundingClientRect(), br = bar.getBoundingClientRect();
+  if (!tr.width || !br.width || br.right <= tr.left - 10) return;
+  bar.style.left = Math.max(12, tr.left - 10 - br.width) + 'px';
+  bar.style.transform = 'none';
+}
+window.addEventListener('resize', () => { clearTimeout(_placeSelBar._t); _placeSelBar._t = setTimeout(_placeSelBar, 100); });
 
 // Click selection with modifier keys:
 //  • plain click  → single-select (click again to deselect)
@@ -4828,13 +4935,82 @@ function selectAllCal() {
   const slot = editSlot;
   const days = _calDays(slot);
   if (!days) return false;
-  calSel = [];
-  days.forEach((day, di) => (day.events || []).forEach((ev, ei) => calSel.push({ slot, di, ei })));
+  calSel = _selectableIdx(slot).map(x => ({ slot, di: x.di, ei: x.ei }));   // respects the All / Excel filter
   if (!calSel.length) return false;
   calAnchor = calSel[calSel.length - 1];
   hideCalPopover();
   _applyCalSelHighlight();
   return true;
+}
+
+// ---- Select mode ----
+function setSelectMode(on) {
+  on = !!on;
+  if (on === calSelectMode) return;
+  calSelectMode = on;
+  document.body.classList.toggle('select-mode', on);
+  const b = document.getElementById('selectModeBtn');
+  if (b) { b.classList.toggle('active', on); b.textContent = on ? 'Done' : 'Select'; b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+  if (on) {
+    if (assignName) { setAssignName(''); setEditFind('', false); }
+    if (document.getElementById('calPopover')) closeEditor();
+    hideDayMenu();
+    _clearNewMarker();
+    _applyCalSelHighlight();   // a desktop ⌘-click selection carries over
+  } else {
+    clearCalSel();
+  }
+}
+function toggleCalSel(slot, di, ei) {
+  if (calSel.length && calSel[0].slot !== slot) calSel = [];   // one week at a time
+  if (calIsSelected(slot, di, ei)) calSel = calSel.filter(s => !(s.slot === slot && s.di === di && s.ei === ei));
+  else calSel.push({ slot, di, ei });
+  calAnchor = { slot, di, ei };
+  _applyCalSelHighlight();
+}
+function toggleDaySel(slot, di) {
+  const d = (_calDays(slot) || [])[di];
+  if (!d) return;
+  const idx = _selectableIdx(slot).filter(x => x.di === di);
+  if (!idx.length) { showToast(`No sessions on ${_shortDay(d.day)}`); return; }
+  if (calSel.length && calSel[0].slot !== slot) calSel = [];
+  const all = idx.every(x => calIsSelected(slot, di, x.ei));
+  calSel = calSel.filter(s => !(s.slot === slot && s.di === di));
+  if (!all) idx.forEach(x => calSel.push({ slot, di, ei: x.ei }));
+  calAnchor = calSel.length ? calSel[calSel.length - 1] : null;
+  _applyCalSelHighlight();
+}
+// Select mode: a quick, still tap toggles the session. No dragging, no editor.
+function _selectModeTap(e, el) {
+  const x0 = e.clientX, y0 = e.clientY, t0 = Date.now();
+  const slot = el.dataset.slot, di = +el.dataset.di, ei = +el.dataset.ei;
+  let far = false;
+  const move = ev => { if (Math.hypot(ev.clientX - x0, ev.clientY - y0) > 10) far = true; };
+  const done = () => {
+    el.removeEventListener('pointermove', move);
+    el.removeEventListener('pointerup', up);
+    el.removeEventListener('pointercancel', done);
+  };
+  const up = () => { done(); if (!far && Date.now() - t0 < 800) toggleCalSel(slot, di, ei); };
+  el.addEventListener('pointermove', move);
+  el.addEventListener('pointerup', up);
+  el.addEventListener('pointercancel', done);
+}
+// Set (or clear) the location on every selected session. The selection stays, so it can be changed again.
+function setSelLocation(id) {
+  const evs = _selEvents();
+  if (!evs.length) return;
+  const prev = evs.map(ev => [ev, ev.loc]);
+  evs.forEach(ev => { if (id) ev.loc = id; else delete ev.loc; });
+  saveDraft();
+  renderEdit();
+  const n = evs.length, l = id ? locById(id) : null, ss = n === 1 ? '' : 's';
+  _offerUndo(id ? `${n} session${ss} \u2192 ${l ? l.name : 'location'}` : `Location removed from ${n} session${ss}`, () => {
+    prev.forEach(([ev, loc]) => { if (loc) ev.loc = loc; else delete ev.loc; });
+    saveDraft();
+    renderEdit();
+    showToast('Restored');
+  });
 }
 
 // ---- Batch operations driven by keyboard ----
@@ -5825,7 +6001,7 @@ function renderDayPager(slot, days, page) {
   }
   el.querySelectorAll('[data-page]').forEach(b => b.addEventListener('click', () => {
     calDayPage[slot] = b.dataset.page === 'all' ? null : +b.dataset.page;
-    clearCalSel();
+    if (!calSelectMode) clearCalSel();   // Select mode: pick across days
     renderCalendarPreview();
   }));
   const addS = el.querySelector('[data-addsession]');
@@ -5897,6 +6073,7 @@ document.addEventListener('keydown', e => {
   const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (ae && ae.isContentEditable);
   if (e.key === 'Escape') {
     if (!typing && assignName) { setAssignName(""); setEditFind("", false); return; }
+    if (!typing && calSelectMode) { setSelectMode(false); return; }
     if (!typing) { if (document.getElementById('calPopover')) closeEditor(); clearCalSel(); }
     return;
   }
@@ -5964,7 +6141,19 @@ document.getElementById("previewTypeSeg").addEventListener("click", e => {
   if (!btn || btn.dataset.type === previewTypeFilter) return;
   previewTypeFilter = btn.dataset.type;
   document.querySelectorAll("#previewTypeSeg .seg-btn").forEach(b => b.classList.toggle("active", b.dataset.type === previewTypeFilter));
+  clearCalSel();
   renderCalendarPreview();
+});
+document.getElementById("selectModeBtn").addEventListener("click", () => setSelectMode(!calSelectMode));
+document.getElementById("calSelBar").addEventListener("click", e => {
+  const b = e.target.closest("[data-cs]");
+  if (!b || b.disabled) return;
+  const act = b.dataset.cs;
+  if (act === "loc") setSelLocation(b.dataset.loc);
+  else if (act === "all") selectAllCal();
+  else if (act === "clear") clearCalSel();
+  else if (act === "del") deleteCalSelection();
+  else if (act === "done") setSelectMode(false);
 });
 document.getElementById("weekTitleInput").addEventListener("change", function(){ ed().weekTitle = this.value; saveDraft(); if (editSlot === "current") document.getElementById("weekTitleDisplay").textContent = this.value; });
 document.getElementById("publishBtn").addEventListener("click", publish);
