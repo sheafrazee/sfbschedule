@@ -12,7 +12,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "san-clemente"
         }
       ]
     },
@@ -27,7 +28,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "san-clemente"
         },
         {
           "time": "4:00 PM – 5:00 PM",
@@ -62,7 +64,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "ogp"
         },
         {
           "time": "10:30 AM – 11:30 AM",
@@ -72,7 +75,8 @@
             "Colby R"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "ogp"
         },
         {
           "time": "1:00 PM – 2:30 PM",
@@ -82,7 +86,8 @@
             "Colby R"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "map"
         }
       ]
     },
@@ -97,7 +102,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "loc-mv4ixegz8xk"
         },
         {
           "time": "8:15 AM – 9:15 AM",
@@ -107,7 +113,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "san-clemente"
         },
         {
           "time": "10:00 AM – 11:00 AM",
@@ -117,7 +124,8 @@
             "Colby R"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "ogp"
         },
         {
           "time": "4:00 PM – 5:00 PM",
@@ -153,7 +161,8 @@
             "Ali"
           ],
           "players": [],
-          "note": ""
+          "note": "",
+          "loc": "san-clemente"
         }
       ]
     },
@@ -4792,7 +4801,13 @@
       "id": "san-clemente",
       "name": "San Clemente",
       "url": "https://maps.app.goo.gl/rmEuedaPtGR86tSB8",
-      "note": ""
+      "note": "Park in back"
+    },
+    {
+      "id": "loc-mv4ixegz8xk",
+      "name": "CDM",
+      "url": "https://maps.app.goo.gl/HUh1ShLwguke42Vj6",
+      "note": "Park in big lot with shade structures"
     }
   ]
 }
