@@ -964,7 +964,7 @@ body.editing-next .ab-next { display: flex; }
 }
 /* ════════ Pay tab: Weekly Pay · Excel Monthly Interns Invoice · rates ════════ */
 .pay-top { margin-bottom: 12px; }
-.pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
+.pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 16px; align-items: start; }
 .pay-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .pay-card { background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; padding: 14px 16px 16px; min-width: 0; }
 .pay-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 12px; }
@@ -987,7 +987,7 @@ body.editing-next .ab-next { display: flex; }
 /* Rates */
 .rates-card { position: sticky; top: 12px; }
 .rates-hint { font-size: 12px; line-height: 1.5; color: var(--stone); margin: -6px 0 12px; }
-.rate-row { display: grid; grid-template-columns: minmax(0, 1fr) 62px 78px 22px; gap: 5px; align-items: center; margin-bottom: 6px; }
+.rate-row { display: grid; grid-template-columns: minmax(0, 1fr) 58px 76px 22px 22px; gap: 5px; align-items: center; margin-bottom: 6px; }
 .rate-row input, .rate-row select { width: 100%; min-width: 0; padding: 6px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
 .rate-row input:focus, .rate-row select:focus { border-color: var(--stone); }
 .rate-row .rr-name { font-weight: 600; }
@@ -1006,6 +1006,24 @@ body.editing-next .ab-next { display: flex; }
 .rr-type.excel { color: #8A4530; }
 .rr-del { border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 5px 4px; border-radius: 4px; }
 .rr-del:hover { color: #fff; background: var(--clay); }
+/* Location rates: a pin button per intern adds a row that overrides the regular rate at one location */
+.rr-addloc { position: relative; border: none; background: transparent; color: var(--stone); cursor: pointer; padding: 5px 4px; border-radius: 4px; line-height: 0; }
+.rr-addloc .pin { width: 13px; height: 13px; }
+.rr-addloc::after { content: "+"; position: absolute; right: 0; top: 1px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10px; line-height: 1; }
+.rr-addloc.has { color: var(--clay); }
+.rr-addloc:hover:not(:disabled) { color: var(--clay); background: var(--warm-white); }
+.rr-addloc:disabled { opacity: .3; cursor: default; }
+.rate-item .rate-loc { margin-top: 4px; }
+.rate-row .rl-loc { appearance: none; -webkit-appearance: none; cursor: pointer; padding: 6px 17px 6px 20px; border-color: #E8CFC4; background-color: #FFF8F4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B8694A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z'/%3E%3Ccircle cx='12' cy='9.5' r='2.5'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235C5652' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat: no-repeat, no-repeat; background-position: 6px center, right 6px center; background-size: 11px 11px, 9px 5px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 11.5px; color: var(--ink); }
+.rate-row .rl-rate { padding-left: 17px; font-variant-numeric: tabular-nums; }
+.rate-row .rl-unit { appearance: none; -webkit-appearance: none; padding-right: 6px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 11.5px; }
+.rate-loc.hr .rl-unit { border-color: #7B5EA7; color: #7B5EA7; }
+.rl-del { border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 5px 4px; border-radius: 4px; }
+.rl-del:hover { color: #fff; background: var(--clay); }
+.rates-hint .hint-pin { white-space: nowrap; font-weight: 700; color: var(--clay); }
+.rates-hint .pin { width: 11px; height: 11px; vertical-align: -1px; }
 .rate-add { width: 100%; margin-top: 4px; }
 .rate-sync { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--light-stone); }
 .rate-sync:empty { display: none; }
@@ -1067,6 +1085,8 @@ body.editing-next .ab-next { display: flex; }
 .wp-row.multi .wp-part + .wp-part { padding-top: 5px; border-top: 1px dashed #ECE8E3; }
 .wp-calc b { font-weight: 600; color: #B8694A; }
 .wp-part.hr .wp-calc b { color: #7B5EA7; }
+.wp-loc { white-space: nowrap; color: #5C5652; font-weight: 600; }
+.wp-loc .pin { width: 11px; height: 11px; vertical-align: -1px; margin-right: 2px; color: #B8694A; }
 .wp-days { font-size: 12px; line-height: 1.45; color: #9B9590; margin-top: 3px; }
 .wp-empty { padding: 18px 16px; color: #9B9590; font-size: 13px; text-align: center; }
 .wp-chips { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -1126,6 +1146,7 @@ body.editing-next .ab-next { display: flex; }
 .iv-rl.hr { border-color: #7B5EA7; }
 .iv-rl.hr i { color: #7B5EA7; }
 .iv-rl.off { opacity: .45; }
+.iv-rl .lc { color: #5C5652; font-weight: 600; }
 .iv-foot { margin-top: 20px; font-size: 8.5px; color: #9B9590; line-height: 1.6; }
 </style>
 </head>
@@ -1302,7 +1323,7 @@ body.editing-next .ab-next { display: flex; }
       </div>
       <section class="pay-card rates-card" aria-labelledby="ratesH">
         <div class="pay-head"><h2 id="ratesH">Paid intern rates</h2></div>
-        <p class="rates-hint">Names must match the schedule (any capitalization). Choose “split” to pay Excel and Other sessions differently — e.g. hourly for Excel, per session for Other.</p>
+        <p class="rates-hint">Names must match the schedule (any capitalization). “split” pays Excel and Other sessions differently. The <span class="hint-pin"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>+</span> button adds a location rate — it replaces the regular rate for every session at that location.</p>
         <div id="rateList"></div>
         <datalist id="rateNames"></datalist>
         <button class="btn rate-add" id="rateAddBtn" type="button">+ Add paid intern</button>
@@ -1541,6 +1562,14 @@ function locChipHtml(loc) {
   return href
     ? `<a class="loc-link" href="${escapeAttr(href)}" target="_blank" rel="noopener" title="Open in Google Maps">${label}<span class="go">↗</span></a>`
     : `<span class="loc-link">${label}</span>`;
+}
+// html2canvas paints inline SVG without the page's CSS, so pin colors set by CSS are written onto the SVG first.
+function _freezeSvgColors(root) {
+  if (!root) return;
+  root.querySelectorAll("svg.pin").forEach(svg => {
+    const c = getComputedStyle(svg).color;
+    if (c) svg.setAttribute("stroke", c);
+  });
 }
 function evLocHtml(ev) {
   const loc = locOf(ev);
@@ -2506,6 +2535,7 @@ async function shareDay(day, btn) {
   document.body.appendChild(cap);
   try {
     await new Promise(r => setTimeout(r, 120));   // let fonts/layout settle
+    _freezeSvgColors(cap);
     const cv = await html2canvas(cap, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true });
     const blob = await new Promise(res => cv.toBlob(res, "image/png"));
     if (!blob) throw new Error("Could not render image.");
@@ -2570,6 +2600,7 @@ async function shareWeek(btn) {
   document.body.appendChild(cap);
   try {
     await new Promise(r => setTimeout(r, 150));   // let fonts/layout settle
+    _freezeSvgColors(cap);
     const cv = await html2canvas(cap, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true });
     const blob = await new Promise(res => cv.toBlob(res, "image/png"));
     if (!blob) throw new Error("Could not render image.");
@@ -2713,6 +2744,7 @@ async function captureWeekPNGForType(type) {
   document.body.appendChild(cap);
   await new Promise(r => setTimeout(r, 150));
   try {
+    _freezeSvgColors(cap);
     const cv = await html2canvas(cap, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true });
     return cv.toDataURL("image/png").split(",")[1];
   } finally {
@@ -6629,6 +6661,10 @@ function _cleanRates(list) {
     const unit = r.unit === "hr" || r.unit === "split" ? r.unit : "session";
     const out = { name: String(r.name || ""), rate: Number(r.rate) || 0, unit };
     if (unit === "split") { out.excel = sub(r.excel, r); out.other = sub(r.other, r); }
+    // Location rates: [{ loc: locationId, rate, unit }] — each replaces the regular rate at that location
+    const locs = (Array.isArray(r.locs) ? r.locs : []).filter(o => o && typeof o === "object" && o.loc)
+      .map(o => ({ loc: String(o.loc), rate: Number(o.rate) || 0, unit: o.unit === "hr" ? "hr" : "session" }));
+    if (locs.length) out.locs = locs;
     return out;
   });
 }
@@ -6667,11 +6703,15 @@ function payRateIndex() {
     const split = r.unit === "split";
     const excel = split ? one(r.excel && r.excel.rate, r.excel && r.excel.unit) : one(r.rate, r.unit);
     const other = split ? one(r.other && r.other.rate, r.other && r.other.unit) : one(r.rate, r.unit);
-    if (excel || other) m.set(k, { name: String(r.name).trim().replace(/\s+/g, " "), split, excel, other });
+    const locs = new Map();   // location id → {rate, unit}, or null = not paid at that location
+    (r.locs || []).forEach(o => { if (o && o.loc && !locs.has(o.loc)) locs.set(o.loc, one(o.rate, o.unit)); });
+    const anyLoc = [...locs.values()].some(Boolean);
+    if (excel || other || anyLoc) m.set(k, { name: String(r.name).trim().replace(/\s+/g, " "), split, excel, other, locs, anyLoc });
   });
   return m;
 }
 function _evKind(ev) { return ev && ev.type === "excel" ? "excel" : "other"; }
+function _payLocName(id) { const l = locById(id); return l ? (l.name || "Location") : "Deleted location"; }
 
 // ---- small formatters ----
 function _addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
@@ -6733,11 +6773,13 @@ function sessionPay(ev, rix) {
     const raw = String(p || "").trim(), k = _payKey(raw);
     if (!k || seen.has(k)) return;
     seen.add(k);
-    const entry = rix.get(k), kind = _evKind(ev), r = entry && entry[kind];
+    const entry = rix.get(k), kind = _evKind(ev);
+    let r = entry ? entry[kind] : null, at = "";
+    if (entry && ev.loc && entry.locs.has(ev.loc)) { r = entry.locs.get(ev.loc); at = ev.loc; }   // location rate wins
     if (!r) { lines.push({ name: entry ? entry.name : raw, paid: false }); return; }
     const amt = r.unit === "hr" ? r.rate * mins / 60 : r.rate;
     cost += amt;
-    lines.push({ name: entry.name, paid: true, rate: r, amt, kind, split: entry.split });
+    lines.push({ name: entry.name, paid: true, rate: r, amt, kind, split: entry.split, at });
   });
   return { mins, cost, lines };
 }
@@ -6758,9 +6800,10 @@ function buildWeeklyPay(src, type) {
         if (l.paid) {
           const r = paid.get(k) || { name: l.name, split: l.split, n: 0, mins: 0, amt: 0, parts: new Map() };
           r.n++; r.mins += sp.mins; r.amt += l.amt;
-          // One part per distinct rate: a split intern's Excel hours and Other sessions stay separate
-          const pk = `${l.rate.unit}|${l.rate.rate}`;
-          const part = r.parts.get(pk) || { rate: l.rate, n: 0, mins: 0, amt: 0, kinds: new Set(), days: new Map() };
+          // One part per distinct rate (and per location rate): Excel hours, Other sessions and
+          // location rates each stay on their own line
+          const pk = `${l.rate.unit}|${l.rate.rate}|${l.at || ""}`;
+          const part = r.parts.get(pk) || { rate: l.rate, at: l.at || "", n: 0, mins: 0, amt: 0, kinds: new Set(), days: new Map() };
           part.n++; part.mins += sp.mins; part.amt += l.amt; part.kinds.add(l.kind);
           const d = part.days.get(+date) || { date, n: 0, mins: 0 };
           d.n++; d.mins += sp.mins; part.days.set(+date, d);
@@ -6779,7 +6822,7 @@ function buildWeeklyPay(src, type) {
     r.partList.forEach(pt => { pt.dayList = [...pt.days.values()].sort((a, b) => a.date - b.date); });
   });
   const otherRows = [...other.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
-  const idle = [...rix.values()].filter(e => (type === "all" ? (e.excel || e.other) : e.other) && !paid.has(_payKey(e.name))).map(e => e.name);
+  const idle = [...rix.values()].filter(e => (type === "all" ? (e.excel || e.other || e.anyLoc) : (e.other || e.anyLoc)) && !paid.has(_payKey(e.name))).map(e => e.name);
   return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle, sessions,
            total: paidRows.reduce((s, r) => s + r.amt, 0) };
 }
@@ -6795,9 +6838,10 @@ function weeklyPayHtml(m, fixed) {
     const parts = r.partList.map(pt => {
       const hr = pt.rate.unit === "hr";
       const kind = m.type === "all" && r.split && pt.kinds.size === 1 ? ` · ${_KIND_LABEL[[...pt.kinds][0]]}` : "";
+      const where = pt.at ? ` · <span class="wp-loc">${PIN_SVG}${escapeHtml(_payLocName(pt.at))}</span>` : "";
       const calc = hr
-        ? `<b>${fmtHrs(pt.mins)} × ${fmtMoney(pt.rate.rate)}/hr</b>${kind}${multi ? "" : ` · ${plural(pt.n, "session")}`}`
-        : `<b>${plural(pt.n, "session")} × ${fmtMoney(pt.rate.rate)}</b>${kind}${multi ? "" : ` · ${fmtHrs(pt.mins)}`}`;
+        ? `<b>${fmtHrs(pt.mins)} × ${fmtMoney(pt.rate.rate)}/hr</b>${kind}${where}${multi ? "" : ` · ${plural(pt.n, "session")}`}`
+        : `<b>${plural(pt.n, "session")} × ${fmtMoney(pt.rate.rate)}</b>${kind}${where}${multi ? "" : ` · ${fmtHrs(pt.mins)}`}`;
       const days = pt.dayList.map(d => _dayTag(d.date) + (hr ? " " + fmtHrs(d.mins) : d.n > 1 ? " ×" + d.n : "")).join(" · ");
       return `<div class="wp-part${hr ? " hr" : ""}">
         <div class="wp-calc"><span>${calc}</span>${multi ? `<span class="pa">${fmtMoney(pt.amt)}</span>` : ""}</div>
@@ -6843,7 +6887,9 @@ function buildInvoice(ym) {
   const monthName = MONTH_FULL[m0];
   const inMonth = d => d.getFullYear() === Y && d.getMonth() === m0;
   const rix = payRateIndex();
-  const hourly = [...rix.values()].filter(e => e.excel && e.excel.unit === "hr").map(e => ({ name: e.name, rate: e.excel.rate, unit: "hr" }));
+  // Interns with any hourly Excel rate (regular or at a location) get an hours column
+  const hourly = [...rix.values()].filter(e => (e.excel && e.excel.unit === "hr") || [...e.locs.values()].some(r => r && r.unit === "hr"))
+    .map(e => ({ name: e.name }));
   const srcs = new Map(payWeekSources().map(s => [s.key, s]));
   const imageOnly = new Set((data.archive || []).filter(e => !hasSnapshot(e)).map(e => e.key));
   const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -6885,8 +6931,11 @@ function buildInvoice(ym) {
   const per = new Map();
   weeks.forEach(w => w.days.forEach(d => d.sessions.forEach(s => s.lines.forEach(l => {
     if (!l.paid) return;
-    const k = _payKey(l.name), r = per.get(k) || { n: 0, mins: 0, amt: 0 };
-    r.n++; r.mins += s.mins; r.amt += l.amt; per.set(k, r);
+    const k = _payKey(l.name), r = per.get(k) || { n: 0, mins: 0, amt: 0, parts: new Map() };
+    r.n++; r.mins += s.mins; r.amt += l.amt;
+    const at = l.at || "", pt = r.parts.get(at) || { rate: l.rate, n: 0, mins: 0, amt: 0 };   // "" = regular rate
+    pt.n++; pt.mins += s.mins; pt.amt += l.amt; r.parts.set(at, pt);
+    per.set(k, r);
   }))));
   const hrsTot = {};
   hourly.forEach(h => { const k = _payKey(h.name); hrsTot[k] = weeks.reduce((s, w) => s + (w.hrs[k] || 0), 0); });
@@ -6932,23 +6981,37 @@ function invCoverHtml(inv) {
     hcols.map(h => `<td class="hrs">${fmtHrs(inv.hrsTot[_payKey(h.name)] || 0)}</td>`).join("")
   }<td class="amt">${fmtMoney(inv.total)}</td><td>${inv.paid ? fmtMoney(inv.total / inv.paid) : "—"}</td></tr>`;
 
-  const rates = [...inv.rix.values()].filter(e => e.excel).map(e => ({ name: e.name, rate: e.excel.rate, unit: e.excel.unit }))
-    .sort((a, b) => (a.unit === "hr" ? 0 : 1) - (b.unit === "hr" ? 0 : 1));
-  const chips = rates.map(r => {
-    const u = inv.per.get(_payKey(r.name)), hr = r.unit === "hr";
-    const x = u ? `<span class="x"> · ${hr ? fmtHrs(u.mins) : u.n} = ${fmtMoney(u.amt)}</span>` : "";
-    return `<span class="iv-rl${hr ? " hr" : ""}${u ? "" : " off"}"><b>${escapeHtml(r.name)}</b> <i>${fmtMoney(r.rate)}</i><span class="u"> / ${hr ? "hr" : "session"}</span>${x}</span>`;
+  // One chip per rate: the regular Excel rate, then each location rate ("Colby @ San Clemente $25")
+  const isHr = e => !!(e.excel && e.excel.unit === "hr");
+  const chipList = [];
+  [...inv.rix.values()].filter(e => e.excel || e.anyLoc).sort((a, b) => (isHr(a) ? 0 : 1) - (isHr(b) ? 0 : 1)).forEach(e => {
+    const u = inv.per.get(_payKey(e.name));
+    if (e.excel) chipList.push({ e, at: "", r: e.excel, use: u && u.parts.get("") });
+    e.locs.forEach((r, at) => { if (r) chipList.push({ e, at, r, use: u && u.parts.get(at) }); });
+  });
+  const chips = chipList.map(({ e, at, r, use }) => {
+    const hr = r.unit === "hr";
+    const x = use ? `<span class="x"> · ${hr ? fmtHrs(use.mins) : use.n} = ${fmtMoney(use.amt)}</span>` : "";
+    return `<span class="iv-rl${hr ? " hr" : ""}${use ? "" : " off"}"><b>${escapeHtml(e.name)}</b>${at ? ` <span class="lc">@ ${escapeHtml(_payLocName(at))}</span>` : ""} <i>${fmtMoney(r.rate)}</i><span class="u"> / ${hr ? "hr" : "session"}</span>${x}</span>`;
   }).join("");
 
   const foot = [];
-  const usedHr = inv.hourly.filter(h => inv.per.has(_payKey(h.name)));
-  const anyFlat = [...inv.per.keys()].some(k => inv.rix.get(k).excel && inv.rix.get(k).excel.unit !== "hr");
-  if (usedHr.length) {
-    foot.push(usedHr.map(h => { const u = inv.per.get(_payKey(h.name));
-      return `${escapeHtml(h.name)} is billed hourly — ${fmtHrs(u.mins)} of scheduled session time in ${mn} at ${fmtMoney(h.rate)}/hr = ${fmtMoney(u.amt)}.`; }).join(" ")
-      + (anyFlat ? " Every other intern is billed per session." : ""));
-  }
-  if (rates.some(r => !inv.per.has(_payKey(r.name)))) foot.push(`Faded rates had no Excel Client sessions in ${mn}.`);
+  const hrNotes = [];
+  let anyFlat = false;
+  inv.per.forEach((u, k) => {
+    const e = inv.rix.get(k); if (!e) return;
+    const parts = [...u.parts.entries()], hp = parts.filter(([, pt]) => pt.rate.unit === "hr");
+    if (!hp.length) { anyFlat = true; return; }
+    if (hp.length === 1 && !hp[0][0]) {
+      const pt = hp[0][1];
+      hrNotes.push(`${escapeHtml(e.name)} is billed hourly — ${fmtHrs(pt.mins)} of scheduled session time in ${mn} at ${fmtMoney(pt.rate.rate)}/hr = ${fmtMoney(pt.amt)}.`);
+    } else {
+      const sum = hp.reduce((sm, [, pt]) => sm + pt.amt, 0);
+      hrNotes.push(`${escapeHtml(e.name)} is billed hourly — ${hp.map(([at, pt]) => `${fmtHrs(pt.mins)}${at ? " at " + escapeHtml(_payLocName(at)) : ""} × ${fmtMoney(pt.rate.rate)}/hr`).join(" + ")} = ${fmtMoney(sum)}.`);
+    }
+  });
+  if (hrNotes.length) foot.push(hrNotes.join(" ") + (anyFlat ? " Every other intern is billed per session." : ""));
+  if (chipList.some(c => !c.use)) foot.push(`Faded rates had no Excel Client sessions in ${mn}.`);
   if (inv.front.length || inv.back.length) {
     const bits = [];
     if (inv.front.length) bits.push(`${_rangeLabel(inv.front[0], inv.front[inv.front.length - 1])} clipped off the front`);
@@ -6981,7 +7044,11 @@ function invWeekHtml(inv, w) {
         : l.rate.unit === "hr" ? `<u>${escapeHtml(l.name)} ${fmtMoney(l.rate.rate)}/hr</u>`
         : `<b>${escapeHtml(l.name)} ${fmtMoney(l.rate.rate)}</b>`).join(", ");
       return `<div class="iv-card"><div class="iv-crow"><span class="iv-time">${escapeHtml(_shortTime(s.ev.time))}</span>${badge}</div>`
-        + (s.mins ? `<div class="iv-dur">${fmtHrs(s.mins)}</div>` : "")
+        + (() => {   // duration · location
+            const ln = (locOf(s.ev) || {}).name || "";
+            const bits = [s.mins ? fmtHrs(s.mins) : "", ln ? escapeHtml(ln) : ""].filter(Boolean).join(" · ");
+            return bits ? `<div class="iv-dur">${bits}</div>` : "";
+          })()
         + `<div class="iv-ttl">${escapeHtml(s.ev.title || "Untitled")}</div>`
         + (ppl ? `<div class="iv-ppl">${ppl}</div>` : "") + `</div>`;
     }).join("") || `<div class="iv-empty">No sessions</div>`;
@@ -7071,6 +7138,7 @@ async function exportWeeklyPay(mode, btn) {
   try {
     await _payFontsReady();
     await new Promise(r => setTimeout(r, 80));
+    _freezeSvgColors(host);
     const cv = await html2canvas(host.firstElementChild, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true, logging: false });
     const blob = await new Promise(res => cv.toBlob(res, "image/png"));
     if (!blob) throw new Error("Could not render image.");
@@ -7121,6 +7189,7 @@ async function downloadInvoice(btn) {
       const page = host.firstElementChild;
       fitInvoicePage(page);
       await new Promise(r => setTimeout(r, 30));
+      _freezeSvgColors(page);
       const cv = await html2canvas(page, { backgroundColor: "#F4F1EC", scale: 2.5, useCORS: true, logging: false, width: 1056, height: 816 });
       if (i) pdf.addPage("letter", "landscape");
       pdf.addImage(cv.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, 11, 8.5, undefined, "FAST");
@@ -7345,7 +7414,44 @@ function _markRateDupes() {
     main.classList.toggle("dup", c[_payKey(r.name)] > 1);
     main.classList.toggle("hr", r.unit === "hr");
     item.querySelectorAll(".rate-sub").forEach(sub => sub.classList.toggle("hr", !!(r[sub.dataset.t] && r[sub.dataset.t].unit === "hr")));
+    item.querySelectorAll(".rate-loc").forEach(row => {
+      const o = r.locs && r.locs[+row.dataset.li];
+      row.classList.toggle("hr", !!(o && o.unit === "hr"));
+    });
   });
+}
+// A location rate row: [📍 location ▾] [$ rate] [unit] · ✕
+function _locRateRowHtml(r, o, li, nm) {
+  const named = _namedLocs();
+  const taken = new Set((r.locs || []).filter((x, j) => j !== li).map(x => x.loc));
+  const known = named.some(l => l.id === o.loc);
+  const opts = (known ? "" : `<option value="${escapeAttr(o.loc)}" selected>${escapeHtml(_payLocName(o.loc))}</option>`)
+    + named.filter(l => !taken.has(l.id)).map(l => `<option value="${escapeAttr(l.id)}"${l.id === o.loc ? " selected" : ""}>${escapeHtml(l.name)}</option>`).join("");
+  const where = escapeAttr(_payLocName(o.loc));
+  return `<div class="rate-row rate-loc" data-li="${li}">
+    <select class="rl-loc" aria-label="Location for ${nm}'s rate" title="${where}">${opts}</select>
+    <span class="rr-money"><span>$</span><input class="rl-rate" type="number" inputmode="decimal" min="0" step="0.25" value="${o.rate > 0 ? escapeAttr(o.rate) : ""}" placeholder="0" aria-label="${nm}'s rate at ${where}"></span>
+    <select class="rl-unit" aria-label="${nm}'s unit at ${where}"><option value="session"${o.unit !== "hr" ? " selected" : ""}>/ session</option><option value="hr"${o.unit === "hr" ? " selected" : ""}>/ hour</option></select>
+    <span></span>
+    <button class="rl-del" type="button" aria-label="Remove ${nm}'s rate at ${where}" title="Remove location rate">✕</button>
+  </div>`;
+}
+function _locRateAt(r, el) {
+  const row = el.closest(".rate-loc");
+  return row && r && r.locs ? r.locs[+row.dataset.li] : null;
+}
+function addLocRate(i) {
+  const r = payRates[i]; if (!r) return;
+  const used = new Set((r.locs || []).map(o => o.loc));
+  const free = _namedLocs().find(l => !used.has(l.id));
+  if (!free) return;
+  // Start from the regular rate so only the number that differs needs typing
+  const base = r.unit === "split" ? ((r.other && r.other.rate > 0) ? r.other : (r.excel || r.other)) : r;
+  (r.locs = r.locs || []).push({ loc: free.id, rate: Number(base && base.rate) || 0, unit: base && base.unit === "hr" ? "hr" : "session" });
+  renderRates(); _payRatesChanged();
+  const ins = document.querySelectorAll(`#rateList .rate-item[data-i="${i}"] .rl-rate`);
+  const inp = ins[ins.length - 1];
+  if (inp) { inp.focus(); inp.select(); }
 }
 function renderRates() {
   const box = document.getElementById("rateList");
@@ -7353,12 +7459,20 @@ function renderRates() {
   const money = (v, t, label) => `<span class="rr-money"><span>$</span><input class="rr-rate"${t ? ` data-t="${t}"` : ""} type="number" inputmode="decimal" min="0" step="0.25" value="${v > 0 ? escapeAttr(v) : ""}" placeholder="0" aria-label="${label}"></span>`;
   const unit = (v, t, label) => `<select class="rr-unit"${t ? ` data-t="${t}"` : ""} aria-label="${label}">
       <option value="session"${v === "session" ? " selected" : ""}>/ session</option><option value="hr"${v === "hr" ? " selected" : ""}>/ hour</option>${t ? "" : `<option value="split"${v === "split" ? " selected" : ""}>split</option>`}</select>`;
+  const locCount = _namedLocs().length;
+  const addLocBtn = (r, nm) => {
+    const used = new Set((r.locs || []).map(o => o.loc));
+    const free = _namedLocs().some(l => !used.has(l.id));
+    const tip = !locCount ? "Add locations first (Edit → ⋯ → Locations)" : free ? "Pay a different rate at one location" : "Every location already has a rate";
+    return `<button class="rr-addloc${(r.locs || []).length ? " has" : ""}" type="button" aria-label="Add a location rate for ${nm}" title="${tip}"${free ? "" : " disabled"}>${PIN_SVG}</button>`;
+  };
   box.innerHTML = payRates.map((r, i) => {
     const split = r.unit === "split", nm = escapeAttr(r.name || "intern");
     let h = `<div class="rate-item" data-i="${i}"><div class="rate-row${split ? " split" : ""}">
       <input class="rr-name" list="rateNames" value="${escapeAttr(r.name)}" placeholder="Intern name" aria-label="Intern name" spellcheck="false" autocomplete="off">
       ${split ? `<span class="rr-by">by type</span>` : money(r.rate, "", `Rate for ${nm}`)}
       ${unit(r.unit, "", `How ${nm} is paid`)}
+      ${addLocBtn(r, nm)}
       <button class="rr-del" type="button" aria-label="Remove ${nm}" title="Remove">✕</button>
     </div>`;
     if (split) ["excel", "other"].forEach(t => {
@@ -7366,6 +7480,7 @@ function renderRates() {
       h += `<div class="rate-row rate-sub" data-t="${t}"><span class="rr-type ${t}">${t === "excel" ? "Excel" : "Other"}</span>
         ${money(sub.rate, t, `${t === "excel" ? "Excel" : "Other"} rate for ${nm}`)}${unit(sub.unit, t, `${t === "excel" ? "Excel" : "Other"} unit for ${nm}`)}<span></span></div>`;
     });
+    (r.locs || []).forEach((o, li) => { h += _locRateRowHtml(r, o, li, nm); });
     return h + `</div>`;
   }).join("") || `<div class="pay-empty">No paid interns. Add one below.</div>`;
   const onCard = new Set(payRates.map(r => _payKey(r.name)));
@@ -7389,6 +7504,11 @@ function _payRatesChanged() {
   const rateAt = el => { const item = el.closest(".rate-item"); return item ? payRates[+item.dataset.i] : null; };
   list.addEventListener("input", e => {
     const r = rateAt(e.target); if (!r) return;
+    if (e.target.classList.contains("rl-rate")) {
+      const o = _locRateAt(r, e.target);
+      if (o) { o.rate = parseFloat(e.target.value) || 0; _payRatesChanged(); }
+      return;
+    }
     const t = e.target.dataset.t;
     if (e.target.classList.contains("rr-name")) r.name = e.target.value;
     else if (e.target.classList.contains("rr-rate")) { const v = parseFloat(e.target.value) || 0; if (t) r[t].rate = v; else r.rate = v; }
@@ -7396,6 +7516,14 @@ function _payRatesChanged() {
     _payRatesChanged();
   });
   list.addEventListener("change", e => {
+    if (e.target.classList.contains("rl-unit") || e.target.classList.contains("rl-loc")) {
+      const r = rateAt(e.target), o = _locRateAt(r, e.target);
+      if (!o) return;
+      if (e.target.classList.contains("rl-unit")) o.unit = e.target.value === "hr" ? "hr" : "session";
+      else { o.loc = e.target.value; renderRates(); }   // the other rows' location lists change
+      _payRatesChanged();
+      return;
+    }
     if (!e.target.classList.contains("rr-unit")) return;
     const r = rateAt(e.target); if (!r) return;
     const t = e.target.dataset.t, v = e.target.value;
@@ -7418,6 +7546,18 @@ function _payRatesChanged() {
     _payRatesChanged();
   });
   list.addEventListener("click", e => {
+    const add = e.target.closest(".rr-addloc");
+    if (add) { if (!add.disabled) addLocRate(+add.closest(".rate-item").dataset.i); return; }
+    const ldel = e.target.closest(".rl-del");
+    if (ldel) {
+      const r = rateAt(ldel), row = ldel.closest(".rate-loc");
+      if (r && r.locs && row) {
+        r.locs.splice(+row.dataset.li, 1);
+        if (!r.locs.length) delete r.locs;
+        renderRates(); _payRatesChanged();
+      }
+      return;
+    }
     const del = e.target.closest(".rr-del"); if (!del) return;
     const i = +del.closest(".rate-item").dataset.i, r = payRates[i];
     const desc = !r ? "" : r.unit === "split" ? "split rates" : `${fmtMoney(r.rate)} / ${r.unit === "hr" ? "hr" : "session"}`;
