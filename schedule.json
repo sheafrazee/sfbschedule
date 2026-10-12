@@ -41,7 +41,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: Russ, Cesar",
+          "title": "Group @ OGP: ",
           "type": "other",
           "people": [
             "Dylan O"
@@ -58,7 +58,19 @@
           "time": "6:00 AM – 7:30 AM",
           "title": "GW @ OGP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": ""
+        },
+        {
+          "time": "10:30 AM – 11:30 AM",
+          "title": "Jordan 4/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Colby R"
+          ],
           "players": [],
           "note": ""
         },
@@ -67,7 +79,7 @@
           "title": "ABA/DELTA #7 @ MAP",
           "type": "other",
           "people": [
-            "Jung"
+            "Colby R"
           ],
           "players": [],
           "note": ""
@@ -99,9 +111,11 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 4/5 @ OGP",
+          "title": "Jordan 5/5 @ OGP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Colby R"
+          ],
           "players": [],
           "note": ""
         },
@@ -117,11 +131,11 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:  Russ",
+          "title": "Group @ OGP: ",
           "type": "other",
           "people": [
             "Dylan O",
-            "Malachi"
+            "Malachi S"
           ],
           "players": [],
           "note": ""
@@ -136,16 +150,8 @@
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Colby R"
+            "Ali"
           ],
-          "players": [],
-          "note": ""
-        },
-        {
-          "time": "10:30 AM – 11:30 AM",
-          "title": "Jordan 5/5 @ OGP",
-          "type": "other",
-          "people": [],
           "players": [],
           "note": ""
         }
@@ -4768,5 +4774,25 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": null
+  "nextWeek": null,
+  "locations": [
+    {
+      "id": "ogp",
+      "name": "OGP",
+      "url": "https://maps.app.goo.gl/W8V7QS9jAg76gXME8",
+      "note": ""
+    },
+    {
+      "id": "map",
+      "name": "MAP",
+      "url": "https://maps.app.goo.gl/9JcNCAcx7R7WfPRS9",
+      "note": ""
+    },
+    {
+      "id": "san-clemente",
+      "name": "San Clemente",
+      "url": "https://maps.app.goo.gl/rmEuedaPtGR86tSB8",
+      "note": ""
+    }
+  ]
 }
