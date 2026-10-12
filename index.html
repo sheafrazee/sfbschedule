@@ -590,10 +590,6 @@ a.loc-link:hover { border-color: var(--ink); }
 a.loc-link .go { color: var(--clay); font-size: 10.5px; }
 .loc-link .pin { width: 11px; height: 11px; flex-shrink: 0; color: var(--clay); }
 .loc-note { font-family: 'Source Sans 3', sans-serif; font-size: 11.5px; font-style: italic; color: var(--dark-stone); }
-.loc-panel { margin-top: 18px; background: #fff; border: 1px solid var(--light-stone); border-radius: 12px; padding: 12px 16px 6px; }
-.loc-panel-h { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
-.loc-panel-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 0; border-top: 1px solid var(--warm-white); }
-.loc-panel-h + .loc-panel-row { border-top: none; }
 .loc-mgr-list { display: flex; flex-direction: column; gap: 10px; max-height: 52vh; overflow-y: auto; margin-bottom: 10px; }
 .loc-mgr-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; border: 1.5px solid var(--light-stone); border-radius: 8px; padding: 10px; background: var(--warm-white); }
 .loc-mgr-item input { width: 100%; min-width: 0; padding: 7px 9px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
@@ -603,6 +599,66 @@ a.loc-link .go { color: var(--clay); font-size: 10.5px; }
 .loc-mgr-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11.5px; color: var(--stone); }
 .loc-mgr-meta a { color: var(--clay); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; text-decoration: none; }
 .loc-mgr-meta a:hover { text-decoration: underline; }
+.loc-mgr-meta .kind { color: var(--dark-stone); }
+.loc-mgr-item .lm-name:placeholder-shown { border-color: #B8694A88; }
+#locModal { z-index: 420; }   /* opens over the session editor */
+.cap-root .loc-link .go { display: none; }   /* share images: no link arrow */
+
+/* ---- View: locations dropdown in the masthead ---- */
+.mast-inner { position: relative; }
+.loc-menu-wrap { position: relative; flex-shrink: 0; }
+.loc-menu-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px 7px 10px; border: 1.5px solid rgba(244,241,236,.28); border-radius: 100px; background: rgba(244,241,236,.06); color: var(--warm-white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 1; cursor: pointer; white-space: nowrap; transition: border-color .15s, background .15s; }
+.loc-menu-btn:hover, .loc-menu-btn[aria-expanded="true"] { border-color: rgba(244,241,236,.6); background: rgba(244,241,236,.12); }
+.loc-menu-btn .pin { width: 13px; height: 13px; flex-shrink: 0; color: #E08B63; }
+.loc-menu-btn .caret { font-size: 8px; opacity: .65; transition: transform .15s; }
+.loc-menu-btn[aria-expanded="true"] .caret { transform: rotate(180deg); }
+.loc-menu { position: absolute; top: calc(100% + 8px); right: 0; z-index: 120; width: 330px; max-width: calc(100vw - 24px); max-height: min(70vh, 480px); overflow-y: auto; padding: 6px; background: #fff; border: 1.5px solid var(--ink); border-radius: 12px; box-shadow: 0 14px 34px rgba(17,17,17,.24); animation: sfbFade .14s ease-out; }
+.lm-row { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 10px 10px 11px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+.lm-row + .lm-row { margin-top: 2px; }
+.lm-row + .lm-row::before { content: ""; position: absolute; left: 10px; right: 10px; top: -2px; height: 1px; background: #ECE8E3; }
+a.lm-row:hover, a.lm-row:focus-visible { background: var(--warm-white); }
+.lm-row .pin { width: 15px; height: 15px; flex-shrink: 0; margin-top: 1px; color: var(--clay); }
+.lm-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lm-name { display: flex; align-items: center; gap: 7px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 14px; line-height: 1.25; }
+.lm-addr, .lm-dir { font-size: 12.5px; line-height: 1.35; color: var(--dark-stone); }
+.lm-dir { font-style: italic; }
+.lm-go { flex-shrink: 0; margin-top: 2px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--clay); white-space: nowrap; }
+.lm-today { font-weight: 800; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; background: var(--clay); color: #fff; line-height: 1.4; }
+@media (max-width: 600px) {
+  .loc-menu-wrap { position: static; }
+  .loc-menu { left: 12px; right: 12px; width: auto; max-width: none; top: calc(100% - 2px); }
+  .loc-menu-btn { padding: 7px 10px 7px 9px; font-size: 11.5px; }
+}
+@media (max-width: 380px) { .loc-menu-btn .lbl { display: none; } }
+
+/* ---- Edit: location chips (session editor + day menu) ---- */
+.cal-loc-chips, .dm-locs { display: flex; flex-wrap: wrap; gap: 5px; }
+.cal-loc-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; padding: 4px 10px 4px 8px; border: 1.5px solid var(--light-stone); border-radius: 100px; background: #fff; color: var(--dark-stone); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; line-height: 1.2; cursor: pointer; transition: background .12s, border-color .12s, color .12s; }
+.cal-loc-chip .pin { width: 11px; height: 11px; flex-shrink: 0; color: var(--clay); }
+.cal-loc-chip:hover { border-color: var(--ink); color: var(--ink); }
+.cal-loc-chip.active { background: var(--ink); border-color: var(--ink); color: var(--warm-white); }
+.cal-loc-chip.active .pin { color: #E08B63; }
+.cal-loc-chip .x { font-size: 9px; opacity: .65; margin-left: 1px; }
+.cal-loc-chip.add { border-style: dashed; border-color: #B8694A88; color: var(--clay); }
+.cal-loc-chip.add:hover { border-color: var(--clay); background: #FFF6F1; }
+.cal-loc-info { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-top: 6px; }
+.cal-loc-info:empty { display: none; }
+.cal-loc-info a { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11.5px; color: var(--clay); text-decoration: none; }
+.cal-loc-info a:hover { text-decoration: underline; }
+.cal-loc-info .warn { font-size: 11.5px; color: var(--amber); }
+.cal-loc-new { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; padding: 8px; border: 1.5px dashed var(--light-stone); border-radius: 8px; background: var(--warm-white); }
+.cal-popover .cal-loc-new input.err { border-color: var(--clay); background: #FFF6F1; }
+.cal-loc-new-btns { display: flex; gap: 6px; }
+.cal-loc-new-btns .cp-foot-btn { padding: 7px 10px; }
+.cp-foot-btn.primary { background: var(--ink); border-color: var(--ink); color: var(--warm-white); }
+.cp-foot-btn.primary:hover { background: var(--dark-stone); border-color: var(--dark-stone); color: var(--warm-white); }
+.dm-lbl.gap { margin-top: 11px; }
+.dm-lbl em { font-style: normal; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--stone); }
+.cal-ev-loc { font-weight: 700; }
+@media (max-width: 700px) {
+  .cal-loc-chip { min-height: 36px; padding: 7px 13px 7px 11px; font-size: 13px; }
+  .cal-loc-new-btns .cp-foot-btn { padding: 11px 10px; }
+}
 @media (max-width: 700px) { .loc-mgr-item input { font-size: 16px; } }
 @media (max-width: 380px) { .event-card { grid-template-columns: 70px 1fr; column-gap: 10px; } }
 
@@ -661,7 +717,7 @@ button.stat { cursor: pointer; font: inherit; }
 /* (v1) Print stylesheet — clean handout */
 @media print {
   body { background: #fff; }
-  .filter-bar, .day-nav, .mode-toggle, .view-edit-toggle, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
+  .filter-bar, .day-nav, .loc-menu-wrap, .mode-toggle, .view-edit-toggle, .view-toggle, .day-share-btn, .intern-tally, .toast, .match-summary { display: none !important; }
   .masthead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .day-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
   .day-col { break-inside: avoid; }
@@ -1085,6 +1141,12 @@ body.editing-next .ab-next { display: flex; }
       <p class="mast-eyebrow">Shea Frazee Basketball · Training Schedule</p>
       <h1 id="weekTitleDisplay">Loading…</h1>
     </div>
+    <div class="loc-menu-wrap hidden" id="locMenuWrap">
+      <button class="loc-menu-btn" id="locMenuBtn" type="button" aria-expanded="false" aria-controls="locMenu" aria-label="Locations and directions">
+        <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span class="lbl">Locations</span><span class="caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="loc-menu hidden" id="locMenu"></div>
+    </div>
   </div>
 </header>
 <div class="wrap">
@@ -1122,7 +1184,6 @@ body.editing-next .ab-next { display: flex; }
     </div>
     <div class="day-grid" id="grid"></div>
     <div class="cal-wrap hidden" id="viewTimeline"></div>
-    <div class="loc-panel hidden" id="locPanel"></div>
   </div>
 
   <div id="editView" class="hidden">
@@ -1298,7 +1359,7 @@ body.editing-next .ab-next { display: flex; }
 <div class="modal-bg hidden" id="locModal">
   <div class="modal">
     <h2>Locations</h2>
-    <p>Paste a Google Maps share link, or type a street address and the map link is built for you. Directions show under the location on every session that uses it. Publish to share changes.</p>
+    <p>Paste a Google Maps link or type a street address. Directions show with the location everywhere it appears. Publish to share changes.</p>
     <div class="loc-mgr-list" id="locMgrList"></div>
     <button class="btn" id="locAddBtn" type="button">+ Add location</button>
     <div class="modal-actions"><button class="btn primary" id="locClose" type="button">Done</button></div>
@@ -1445,7 +1506,23 @@ const DEFAULT_LOCATIONS = [
   { id: "san-clemente", name: "San Clemente", url: "https://maps.app.goo.gl/rmEuedaPtGR86tSB8", note: "" },
 ];
 function ensureLocations(d) {
-  if (d && typeof d === "object" && !Array.isArray(d.locations)) d.locations = DEFAULT_LOCATIONS.map(l => ({ ...l }));
+  if (!d || typeof d !== "object") return;
+  if (!Array.isArray(d.locations)) { d.locations = DEFAULT_LOCATIONS.map(l => ({ ...l })); return; }
+  const seen = new Set();   // tolerate hand-edited JSON: string fields, unique ids
+  d.locations = d.locations.filter(l => l && typeof l === "object").map(l => {
+    let id = String(l.id || "").trim();
+    if (!id || seen.has(id)) id = newLocId();
+    seen.add(id);
+    return { id, name: String(l.name || ""), url: String(l.url || ""), note: String(l.note || "") };
+  });
+}
+function isMapLink(s) {
+  return /^https?:\/\//i.test(s) || /^(maps\.app\.goo\.gl|goo\.gl\/maps|(www\.)?google\.[a-z.]+\/maps)/i.test(s);
+}
+// The typed street address, when the location has one instead of a map link.
+function locAddress(loc) {
+  const s = String((loc && loc.url) || "").trim();
+  return s && !isMapLink(s) ? s : "";
 }
 // A link is used as-is; anything else is treated as an address and becomes a Google Maps search.
 function mapsUrl(raw) {
@@ -1470,18 +1547,86 @@ function evLocHtml(ev) {
   if (!loc) return "";
   return `<div class="event-loc">${locChipHtml(loc)}${loc.note ? `<span class="loc-note">${escapeHtml(loc.note)}</span>` : ""}</div>`;
 }
-function renderLocPanel() {
-  const el = document.getElementById("locPanel");
-  if (!el) return;
-  const locs = ((data && data.locations) || []).filter(l => String(l.name || "").trim());
-  el.classList.toggle("hidden", !locs.length);
-  el.innerHTML = locs.length ? `<div class="loc-panel-h">Locations</div>` + locs.map(l =>
-    `<div class="loc-panel-row">${locChipHtml(l)}${l.note ? `<span class="loc-note">${escapeHtml(l.note)}</span>` : ""}</div>`).join("") : "";
+function _namedLocs() { return ((data && data.locations) || []).filter(l => String(l.name || "").trim()); }
+// Calendar tile time line: "4:00 PM – 5:00 PM · OGP"
+function calTimeHtml(ev) {
+  const l = locOf(ev);
+  return escapeHtml((ev && ev.time) || "") + (l && l.name ? `<span class="cal-ev-loc"> · ${escapeHtml(l.name)}</span>` : "");
 }
-function locOptionsHtml(sel) {
-  return `<option value="">No location</option>` + ((data && data.locations) || []).map(l =>
-    `<option value="${escapeAttr(l.id)}"${l.id === sel ? " selected" : ""}>${escapeHtml(l.name || "Untitled")}</option>`).join("")
-    + `<option value="__new">+ New location…</option>`;
+// One-tap location chips (session editor + day menu). Tapping the active chip clears it.
+function locPickHtml(sel) {
+  return _namedLocs().map(l => {
+    const on = l.id === sel;
+    return `<button type="button" class="cal-loc-chip${on ? " active" : ""}" data-loc="${escapeAttr(l.id)}" aria-pressed="${on}" title="${on ? "Tap again to clear" : "Use " + escapeAttr(l.name)}">${PIN_SVG}<span>${escapeHtml(l.name)}</span>${on ? '<span class="x" aria-hidden="true">✕</span>' : ""}</button>`;
+  }).join("");
+}
+// A new session starts at the location most of that day's sessions already use.
+function _dayDefaultLoc(day) {
+  const c = {};
+  ((day && day.events) || []).forEach(ev => { if (ev.loc && locById(ev.loc)) c[ev.loc] = (c[ev.loc] || 0) + 1; });
+  let best = null, n = 0;
+  Object.keys(c).forEach(k => { if (c[k] > n) { best = k; n = c[k]; } });
+  return best;
+}
+// .ics: use the street address when there is one, so calendar apps can map it.
+function icsLocLines(ev) {
+  const l = locOf(ev);
+  if (!l) return [];
+  const addr = locAddress(l), url = mapsUrl(l.url), out = ["LOCATION:" + _icsEsc(addr ? `${l.name}, ${addr}` : l.name)];
+  if (url) out.push("URL:" + url);
+  return out;
+}
+function icsLocDesc(ev) {
+  const l = locOf(ev);
+  return l ? [l.note ? "Directions: " + l.note : "", mapsUrl(l.url) ? "Map: " + mapsUrl(l.url) : ""] : [];
+}
+
+// ---- View: locations dropdown in the masthead ----
+function renderLocMenu() {
+  const wrap = document.getElementById("locMenuWrap");
+  if (!wrap) return;
+  const has = _namedLocs().length > 0;
+  wrap.classList.toggle("hidden", !has);
+  if (!has) closeLocMenu();
+}
+function _todayLocIds() {
+  const ids = new Set();
+  ((data && data.days) || []).forEach(d => {
+    if (isTodayLabel(d.day)) (d.events || []).forEach(ev => { if (ev.loc) ids.add(ev.loc); });
+  });
+  return ids;
+}
+function buildLocMenu() {
+  const today = _todayLocIds();
+  return _namedLocs().map(l => {
+    const href = mapsUrl(l.url), addr = locAddress(l);
+    const inner = `${PIN_SVG}<span class="lm-main"><span class="lm-name">${escapeHtml(l.name)}${today.has(l.id) ? '<span class="lm-today">Today</span>' : ""}</span>`
+      + (addr ? `<span class="lm-addr">${escapeHtml(addr)}</span>` : "")
+      + (l.note ? `<span class="lm-dir">${escapeHtml(l.note)}</span>` : "")
+      + `</span>` + (href ? `<span class="lm-go">Directions ↗</span>` : "");
+    return href
+      ? `<a class="lm-row" href="${escapeAttr(href)}" target="_blank" rel="noopener">${inner}</a>`
+      : `<div class="lm-row">${inner}</div>`;
+  }).join("");
+}
+function openLocMenu() {
+  const menu = document.getElementById("locMenu"), btn = document.getElementById("locMenuBtn");
+  if (!menu || !btn) return;
+  menu.innerHTML = buildLocMenu();
+  menu.classList.remove("hidden");
+  btn.setAttribute("aria-expanded", "true");
+  setTimeout(() => document.addEventListener("pointerdown", _locMenuOutside, true), 0);
+}
+function closeLocMenu() {
+  const menu = document.getElementById("locMenu"), btn = document.getElementById("locMenuBtn");
+  document.removeEventListener("pointerdown", _locMenuOutside, true);
+  if (!menu || menu.classList.contains("hidden")) return;
+  menu.classList.add("hidden");
+  btn.setAttribute("aria-expanded", "false");
+}
+function _locMenuOutside(e) {
+  const wrap = document.getElementById("locMenuWrap");
+  if (wrap && !wrap.contains(e.target)) closeLocMenu();
 }
 function newLocId() { return "loc-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
 function _locUses(id) {
@@ -1500,16 +1645,35 @@ function renderLocMgr() {
       <button class="rr-del lm-del" type="button" aria-label="Remove ${escapeAttr(l.name || "location")}" title="Remove">✕</button>
       <input class="lm-url full" value="${escapeAttr(l.url)}" placeholder="Google Maps link or street address" aria-label="Map link or address" autocomplete="off" spellcheck="false">
       <input class="lm-note full" value="${escapeAttr(l.note)}" placeholder="Directions (e.g. Park in the back)" aria-label="Directions" autocomplete="off">
-      <div class="loc-mgr-meta"><a class="lm-test" href="${escapeAttr(href)}" target="_blank" rel="noopener"${href ? "" : " hidden"}>Open in Maps ↗</a><span>${n} session${n === 1 ? "" : "s"} this week + next</span></div>
+      <div class="loc-mgr-meta"><span class="kind">${_locKind(l.url)}</span><a class="lm-test" href="${escapeAttr(href)}" target="_blank" rel="noopener"${href ? "" : " hidden"}>Open in Maps ↗</a><span>${n} session${n === 1 ? "" : "s"} this week + next</span></div>
     </div>`;
   }).join("") || `<div class="archive-empty">No locations yet.</div>`;
 }
+function _locKind(url) {
+  const s = String(url || "").trim();
+  return !s ? "No map link" : isMapLink(s) ? "Maps link" : "Address → map search";
+}
 function openLocMgr(focusNew) {
   ensureLocations(data);
-  if (focusNew) { data.locations.push({ id: newLocId(), name: "", url: "", note: "" }); saveDraft(); }
+  if (focusNew) data.locations.push({ id: newLocId(), name: "", url: "", note: "" });   // saved once something is typed
   renderLocMgr();
   document.getElementById("locModal").classList.remove("hidden");
   if (focusNew) { const ins = document.querySelectorAll("#locMgrList .lm-name"); if (ins.length) ins[ins.length - 1].focus(); }
+}
+// Done / Esc / backdrop. Blank rows are dropped; an open session editor stays open and catches up.
+function closeLocMgr() {
+  const modal = document.getElementById("locModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  _blurInside(modal);
+  modal.classList.add("hidden");
+  const before = (data.locations || []).length;
+  data.locations = (data.locations || []).filter(l => l.name.trim() || l.url.trim() || l.note.trim() || _locUses(l.id));
+  if (data.locations.length !== before) saveDraft();
+  renderLocMenu();
+  if (currentMode !== "edit") { if (currentMode === "display") renderDisplay(); return; }
+  const pop = document.getElementById("calPopover");
+  const ev = pop && pop._getEv && pop._getEv();
+  if (ev) _commitAndReopen(pop._slot, ev); else renderEdit();
 }
 
 function normalizeData(d) {
@@ -1910,6 +2074,7 @@ function buildCaptureNode(filtered, opts = {}) {
   const it = filtered ? internTerms() : [];
   const pt = filtered ? playerTerms() : [];
   const cap = document.createElement("div");
+  cap.className = "cap-root";
   cap.style.cssText = "position:absolute;left:-10000px;top:0;width:1200px;background:#F4F1EC;padding:24px;font-family:'Source Sans 3',sans-serif;color:#111;";
   const bits = [];
   if (filtered) {
@@ -2015,6 +2180,7 @@ function buildCaptureNode(filtered, opts = {}) {
 function buildDayCaptureNode(day) {
   const it = internTerms(), pt = playerTerms();
   const cap = document.createElement("div");
+  cap.className = "cap-root";
   cap.style.cssText = "position:absolute;left:-10000px;top:0;width:440px;background:#F4F1EC;padding:20px;font-family:'Source Sans 3',sans-serif;color:#111;";
   const events = (day.events || []).filter(e => eventMatches(e));
   let html = `<div style="background:#111111;border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;">
@@ -2296,8 +2462,7 @@ function buildDayICS(day, typeOnly) {
   (day.events || []).filter(e => !typeOnly || e.type === typeOnly).forEach((e, i) => {
     const t = parseEventTimes(e.time);
     const interns = internsOf(e).join(", ");
-    const _loc = locOf(e), _locUrl = _loc ? mapsUrl(_loc.url) : "";
-    const desc = [interns ? "Interns: " + interns : "", e.note || "", _loc && _loc.note ? "Directions: " + _loc.note : "", _locUrl ? "Map: " + _locUrl : ""].filter(Boolean).join("\n");
+    const desc = [interns ? "Interns: " + interns : "", e.note || "", ...icsLocDesc(e)].filter(Boolean).join("\n");
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
     lines.push("DTSTAMP:" + stamp);
@@ -2310,8 +2475,7 @@ function buildDayICS(day, typeOnly) {
       lines.push("DTEND;VALUE=DATE:" + _fmtDate(next));
     }
     lines.push("SUMMARY:" + _icsEsc(e.title));
-    if (_loc) lines.push("LOCATION:" + _icsEsc(_loc.name || ""));
-    if (_locUrl) lines.push("URL:" + _locUrl);
+    lines.push(...icsLocLines(e));
     if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
     lines.push("END:VEVENT");
   });
@@ -2458,8 +2622,7 @@ function buildICSFromDays(days, dateFn, pred) {
     (day.events || []).filter(pred).forEach((e, i) => {
       const t = parseEventTimes(e.time);
       const interns = internsOf(e).join(", ");
-      const _loc = locOf(e), _locUrl = _loc ? mapsUrl(_loc.url) : "";
-    const desc = [interns ? "Interns: " + interns : "", e.note || "", _loc && _loc.note ? "Directions: " + _loc.note : "", _locUrl ? "Map: " + _locUrl : ""].filter(Boolean).join("\n");
+      const desc = [interns ? "Interns: " + interns : "", e.note || "", ...icsLocDesc(e)].filter(Boolean).join("\n");
       lines.push("BEGIN:VEVENT");
       lines.push(`UID:${_fmtDate(date)}-${i}-${Math.random().toString(36).slice(2,8)}@sfb-schedule`);
       lines.push("DTSTAMP:" + stamp);
@@ -2472,9 +2635,8 @@ function buildICSFromDays(days, dateFn, pred) {
         lines.push("DTEND;VALUE=DATE:" + _fmtDate(next));
       }
       lines.push("SUMMARY:" + _icsEsc(e.title));
-      if (_loc) lines.push("LOCATION:" + _icsEsc(_loc.name || ""));
-    if (_locUrl) lines.push("URL:" + _locUrl);
-    if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
+      lines.push(...icsLocLines(e));
+      if (desc) lines.push("DESCRIPTION:" + _icsEsc(desc));
       lines.push("END:VEVENT");
     });
   });
@@ -3551,7 +3713,7 @@ function _isBlankNew(ev) {
   if (!ev) return false;
   const t = String(ev.title || '').trim().toLowerCase();
   return (t === '' || t === 'new session' || t === 'new event')
-    && !(ev.people || []).length && !(ev.players || []).length && !String(ev.note || '').trim() && !ev.loc;
+    && !(ev.people || []).length && !(ev.players || []).length && !String(ev.note || '').trim();
 }
 // Pull one event object out of whichever week/day holds it.
 function _removeEventObj(evObj) {
@@ -3627,6 +3789,8 @@ function _createSessionAt(slot, di, startMin, dur) {
   const days = _calDays(slot);
   if (!days || !days[di]) return;
   const nev = { time: _fmt12(startMin) + ' \u2013 ' + _fmt12(startMin + dur), title: 'New Session', type: 'other', people: [], players: [], note: '' };
+  const dayLoc = _dayDefaultLoc(days[di]);
+  if (dayLoc) nev.loc = dayLoc;
   (days[di].events = days[di].events || []).push(nev);
   autoSortSlot(slot);
   saveDraft();
@@ -3859,12 +4023,19 @@ function openDayMenu(slot, di, anchorEl) {
   const days = _calDays(slot);
   if (!days || !days[di]) return;
   const day = days[di];
+  const dayEvs = day.events || [];
+  const dayLocSet = new Set(dayEvs.map(ev => ev.loc || ''));
+  const dayLoc = dayLocSet.size === 1 ? [...dayLocSet][0] : null;   // '' = none set, null = mixed
+  const dayLocHtml = dayEvs.length && _namedLocs().length
+    ? `<span class="dm-lbl gap">Location \u00b7 all ${dayEvs.length} session${dayEvs.length === 1 ? '' : 's'}${dayLoc === null ? ' <em>(mixed)</em>' : ''}</span><div class="dm-locs">${locPickHtml(dayLoc || '')}</div>`
+    : '';
   const m = document.createElement('div');
   m.className = 'day-menu';
   m.id = 'dayMenu';
   m.innerHTML = `
     <span class="dm-lbl">Day name</span>
     <input id="dmName" type="text" value="${escapeAttr(day.day || '')}" placeholder="Monday, May 19" autocomplete="off" spellcheck="false">
+    ${dayLocHtml}
     <div class="dm-row">
       <button class="dm-btn" id="dmLeft" title="Move this day earlier"${di === 0 ? ' disabled' : ''}>\u2190 Move</button>
       <button class="dm-btn" id="dmRight" title="Move this day later"${di === days.length - 1 ? ' disabled' : ''}>Move \u2192</button>
@@ -3920,6 +4091,24 @@ function openDayMenu(slot, di, anchorEl) {
     hideDayMenu();
     renderEdit();
   };
+  const dmLocs = m.querySelector('.dm-locs');
+  if (dmLocs) dmLocs.addEventListener('click', e => {
+    const b = e.target.closest('[data-loc]'); if (!b) return;
+    commitName();
+    const id = b.dataset.loc, clear = dayLoc === id;
+    const prev = dayEvs.map(ev => [ev, ev.loc]);
+    dayEvs.forEach(ev => { if (clear) delete ev.loc; else ev.loc = id; });
+    saveDraft();
+    hideDayMenu();
+    renderEdit();
+    const l = locById(id), dn = _shortDay(day.day);
+    _offerUndo(clear ? `${dn}: location cleared` : `${dn}: ${dayEvs.length} session${dayEvs.length === 1 ? '' : 's'} \u2192 ${l ? l.name : 'location'}`, () => {
+      prev.forEach(([ev, loc]) => { if (loc) ev.loc = loc; else delete ev.loc; });
+      saveDraft();
+      renderEdit();
+      showToast('Restored');
+    });
+  });
   m.querySelector('#dmLeft').addEventListener('click', () => move(-1));
   m.querySelector('#dmRight').addEventListener('click', () => move(1));
   m.querySelector('#dmSession').addEventListener('click', () => { commitName(); hideDayMenu(); addSessionToDay(slot, di); });
@@ -4202,7 +4391,7 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
         : '';
       evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(calEvTip(ev))}">
         <div class="cal-ev-title" data-names="${escapeAttr(calNameList(ev.title).join("\u0001"))}">${calTitleNames(ev.title, CAL_TITLE_MAX_NAMES)}</div>
-        <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${escapeHtml(ev.time)}</div>
+        <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${calTimeHtml(ev)}</div>
         <div class="cal-ev-interns" data-names="${escapeAttr(internsOf(ev).join("\u0001"))}" style="display:none"></div>
         ${editable ? '<div class="cal-ev-resize cal-ev-resize-t" data-edge="top"></div><div class="cal-ev-resize cal-ev-resize-b" data-edge="bottom"></div>' : ''}
       </div>`;
@@ -4737,7 +4926,11 @@ function onCalResizeStart(e, slot, hPx, edge) {
     handle.removeEventListener('pointercancel', up);
     try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
     el.classList.remove('cal-ev-resizing');
-    if (startMin === startMin0 && endMins === fixedEnd) return; // pure click, no change
+    if (startMin === startMin0 && endMins === fixedEnd) {   // no net change
+      const d0 = _calDays(slot), ev0 = d0 && d0[di] && d0[di].events[ei];
+      if (timeEl && ev0) { timeEl.innerHTML = calTimeHtml(ev0); fitCalTitle(el); }
+      return;
+    }
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
     if (days && days[di] && days[di].events[ei]) {
       days[di].events[ei].time = _fmtTimeRange(startMin, endMins - startMin, true);
@@ -4863,6 +5056,8 @@ function onCalCreateStart(e, slot, hPx) {
     if (!days || !days[di]) return;
 
     const newEv = { time: _fmt12(startMins) + ' \u2013 ' + _fmt12(endMins), title: 'New Session', type: 'other', people: [], players: [], note: '' };
+    const dayLoc = _dayDefaultLoc(days[di]);
+    if (dayLoc) newEv.loc = dayLoc;
     const events = days[di].events;
     let insertIdx = events.length;
     for (let i = 0; i < events.length; i++) {
@@ -4954,9 +5149,20 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
       <button type="button" class="cal-pop-type-btn${ev.type === 'excel' ? ' active' : ''}" data-type="excel">Excel Client</button>
       <button type="button" class="cal-pop-type-btn${ev.type !== 'excel' ? ' active' : ''}" data-type="other">Other</button>
     </div>
-    <span class="cal-pop-label">Location</span>
-    <select id="calPopLoc" aria-label="Location">${locOptionsHtml(ev.loc)}</select>
-    <div class="loc-note" id="calPopLocNote" style="margin-top:4px;"></div>
+    <span class="cal-pop-label row">Location
+      <span class="cal-pop-tools"><button type="button" class="cal-pop-mini" id="calPopLocManage" title="Edit addresses, map links and directions">Manage</button></span>
+    </span>
+    <div class="cal-loc-chips" id="calPopLocChips" role="group" aria-label="Location"></div>
+    <div class="cal-loc-info" id="calPopLocInfo"></div>
+    <div class="cal-loc-new hidden" id="calPopLocNew">
+      <input id="calPopLocName" type="text" placeholder="Name \u2014 e.g. OGP" aria-label="New location name" autocomplete="off" spellcheck="false">
+      <input id="calPopLocUrl" type="text" placeholder="Google Maps link or street address" aria-label="Map link or address" autocomplete="off" spellcheck="false">
+      <input id="calPopLocDir" type="text" placeholder="Directions \u2014 e.g. Park in the back" aria-label="Directions" autocomplete="off">
+      <div class="cal-loc-new-btns">
+        <button type="button" class="cp-foot-btn" id="calPopLocCancel">Cancel</button>
+        <button type="button" class="cp-foot-btn primary" id="calPopLocAdd">Add &amp; use</button>
+      </div>
+    </div>
     <span class="cal-pop-label">Note</span>
     <input id="calPopNote" type="text" value="${escapeAttr(ev.note || '')}" placeholder="Optional note" autocomplete="off">
     ${isNew ? '' : `<div class="cal-pop-foot">
@@ -4965,6 +5171,8 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     </div>`}
   `;
   document.body.appendChild(pop);
+  pop._slot = slot;
+  pop._getEv = () => getEv();   // lets the locations manager refresh this editor when it closes
 
   if (phone) {
     document.body.classList.add('sheet-open');
@@ -5046,7 +5254,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (active !== noteEl && noteEl.value !== (ev2.note || '')) noteEl.value = ev2.note || '';
     pop.querySelectorAll('.cal-pop-type-btn').forEach(b =>
       b.classList.toggle('active', b.dataset.type === (ev2.type === 'excel' ? 'excel' : 'other')));
-    if (locSel && active !== locSel) { locSel.innerHTML = locOptionsHtml(ev2.loc); syncLocNote(); }
+    renderLocChips();
     if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     renderInternChips();
   };
@@ -5163,35 +5371,75 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     _commitAndReopen(slot, moved);
   });
 
-  // ---- Location ----
-  const locSel = pop.querySelector('#calPopLoc');
-  function syncLocNote() {
-    const n = pop.querySelector('#calPopLocNote'), ev2 = getEv(), l = ev2 && locOf(ev2);
-    if (!n) return;
-    n.innerHTML = l ? locChipHtml(l) + (l.note ? ` ${escapeHtml(l.note)}` : '') : '';
+  // ---- Location: one-tap chips, inline "+ New", the full list behind Manage ----
+  const locChipsEl = pop.querySelector('#calPopLocChips');
+  const locInfoEl = pop.querySelector('#calPopLocInfo');
+  const locNewEl = pop.querySelector('#calPopLocNew');
+  const locNameIn = pop.querySelector('#calPopLocName');
+  const locUrlIn = pop.querySelector('#calPopLocUrl');
+  const locDirIn = pop.querySelector('#calPopLocDir');
+  function renderLocChips() {
+    const ev2 = getEv(); if (!ev2 || !locChipsEl) return;
+    locChipsEl.innerHTML = locPickHtml(ev2.loc)
+      + `<button type="button" class="cal-loc-chip add" data-loc-new aria-expanded="${!locNewEl.classList.contains('hidden')}">+ New</button>`;
+    const l = locOf(ev2), href = l ? mapsUrl(l.url) : '';
+    locInfoEl.innerHTML = !l ? ''
+      : (l.note ? `<span class="loc-note">${escapeHtml(l.note)}</span>` : '')
+        + (href ? `<a href="${escapeAttr(href)}" target="_blank" rel="noopener">Open in Maps \u2197</a>`
+                : `<span class="warn">No map link yet \u2014 add one under Manage</span>`);
   }
-  syncLocNote();
-  locSel.addEventListener('change', () => {
+  function syncTileLoc() {
+    const ev2 = getEv(), b = ctx.evEl;
+    if (!ev2 || !b) return;
+    b.title = calEvTip(ev2);
+    const tEl = b.querySelector && b.querySelector('.cal-ev-time');
+    if (tEl) tEl.innerHTML = calTimeHtml(ev2);
+  }
+  function setLoc(id) {
     const ev2 = getEv(); if (!ev2) return;
-    let v = locSel.value;
-    if (v === '__new') {
-      const name = (prompt('Location name (e.g. OGP):') || '').trim();
-      const url = name ? (prompt('Google Maps link or street address for ' + name + ':') || '').trim() : '';
-      if (!name) { locSel.value = ev2.loc || ''; return; }
-      const note = (prompt('Directions (optional, e.g. Park in the back):') || '').trim();
-      ensureLocations(data);
-      const loc = { id: newLocId(), name, url, note };
-      data.locations.push(loc);
-      v = loc.id;
-      locSel.innerHTML = locOptionsHtml(v);
-    }
-    if (v) ev2.loc = v; else delete ev2.loc;
-    locSel.value = v;
+    if (id) ev2.loc = id; else delete ev2.loc;
     saveDraft();
-    syncLocNote();
-    if (ctx.evEl) ctx.evEl.title = calEvTip(ev2);
+    renderLocChips();
+    syncTileLoc();
+  }
+  function toggleLocForm(on) {
+    locNewEl.classList.toggle('hidden', !on);
+    if (on) {
+      locNameIn.value = ''; locUrlIn.value = ''; locDirIn.value = '';
+      locNameIn.classList.remove('err');
+      locNameIn.focus();
+    }
+    renderLocChips();
+    if (!phone) positionCalPop(pop, ctx.evEl);
+  }
+  function addLocFromForm() {
+    const name = locNameIn.value.trim();
+    if (!name) { locNameIn.classList.add('err'); locNameIn.focus(); return; }
+    ensureLocations(data);
+    const loc = { id: newLocId(), name, url: locUrlIn.value.trim(), note: locDirIn.value.trim() };
+    data.locations.push(loc);
+    locNewEl.classList.add('hidden');
+    setLoc(loc.id);
+    renderLocMenu();
+    if (!phone) positionCalPop(pop, ctx.evEl);
+    showToast(`Added ${name}`);
+  }
+  renderLocChips();
+  locChipsEl.addEventListener('click', e => {
+    if (e.target.closest('[data-loc-new]')) { toggleLocForm(locNewEl.classList.contains('hidden')); return; }
+    const b = e.target.closest('[data-loc]'); if (!b) return;
+    const ev2 = getEv(); if (!ev2) return;
+    setLoc(ev2.loc === b.dataset.loc ? '' : b.dataset.loc);
   });
-  locSel.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); closeEditor(); } e.stopPropagation(); });
+  pop.querySelector('#calPopLocManage').addEventListener('click', () => openLocMgr(false));
+  pop.querySelector('#calPopLocCancel').addEventListener('click', () => toggleLocForm(false));
+  pop.querySelector('#calPopLocAdd').addEventListener('click', addLocFromForm);
+  [locNameIn, locUrlIn, locDirIn].forEach(inp => inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); addLocFromForm(); }
+    else if (e.key === 'Escape') { e.preventDefault(); toggleLocForm(false); }
+    e.stopPropagation();
+  }));
+  locNameIn.addEventListener('input', () => locNameIn.classList.remove('err'));
 
   // ---- Note ----
   noteEl.addEventListener('input', () => {
@@ -5386,7 +5634,7 @@ function _calPopOutside(e) {
   const pop = document.getElementById('calPopover');
   if (!pop) { document.removeEventListener('pointerdown', _calPopOutside, true); return; }
   if (pop.contains(e.target)) return;
-  if (e.target && e.target.closest && e.target.closest('#sheetScrim')) return;   // the backdrop closes on its own tap
+  if (e.target && e.target.closest && e.target.closest('#sheetScrim, #locModal')) return;   // the backdrop closes on its own tap
   closeEditor();
 }
 
@@ -5710,14 +5958,22 @@ document.getElementById("slotNextBtn").addEventListener("click", () => switchSlo
 document.getElementById("addDayBtn").addEventListener("click", () => addDayToSlot(editSlot));
 document.getElementById("locationsBtn").addEventListener("click", () => openLocMgr(false));
 document.getElementById("locAddBtn").addEventListener("click", () => openLocMgr(true));
-document.getElementById("locClose").addEventListener("click", () => {
-  document.getElementById("locModal").classList.add("hidden");
-  // Blank rows (no name, link or directions) are dropped on close
-  const before = (data.locations || []).length;
-  data.locations = (data.locations || []).filter(l => l.name.trim() || l.url.trim() || l.note.trim() || _locUses(l.id));
-  if (data.locations.length !== before) saveDraft();
-  if (currentMode === "edit") renderEdit(); else renderDisplay();
+document.getElementById("locClose").addEventListener("click", closeLocMgr);
+document.getElementById("locModal").addEventListener("click", e => { if (e.target.id === "locModal") closeLocMgr(); });
+// While the manager is open: Esc closes it (only it), and editor shortcuts can't act on the calendar behind it.
+window.addEventListener("keydown", e => {
+  const modal = document.getElementById("locModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  if (e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); closeLocMgr(); return; }
+  const tag = (document.activeElement && document.activeElement.tagName) || "";
+  if (tag !== "INPUT" && tag !== "TEXTAREA") e.stopImmediatePropagation();
+}, true);
+// View: locations dropdown
+document.getElementById("locMenuBtn").addEventListener("click", () => {
+  if (document.getElementById("locMenu").classList.contains("hidden")) openLocMenu(); else closeLocMenu();
 });
+document.getElementById("locMenu").addEventListener("click", e => { if (e.target.closest("a.lm-row")) setTimeout(closeLocMenu, 0); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLocMenu(); });
 (function wireLocMgr() {
   const list = document.getElementById("locMgrList");
   const itemOf = el => { const it = el.closest(".loc-mgr-item"); return it ? { it, loc: data.locations[+it.dataset.i] } : null; };
@@ -5728,6 +5984,7 @@ document.getElementById("locClose").addEventListener("click", () => {
       h.loc.url = e.target.value;
       const a = h.it.querySelector(".lm-test"), href = mapsUrl(h.loc.url);
       a.href = href || "#"; a.hidden = !href;
+      h.it.querySelector(".kind").textContent = _locKind(h.loc.url);
     }
     else if (e.target.classList.contains("lm-note")) h.loc.note = e.target.value;
     else return;
@@ -6110,7 +6367,7 @@ setInterval(() => { if (currentMode === "display") try { decorateLiveChips(); } 
       const ca = document.getElementById("clearAllFilters");
       if (ca) ca.addEventListener("click", clearAllFilters);
       decorateLiveChips();
-      renderLocPanel();
+      renderLocMenu();
       applyDisplayViewMode();
     } catch (e) { console.warn(e); }
   };
