@@ -44,10 +44,11 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP:  Jude 4/5, Russ, Aiden",
           "type": "other",
           "people": [
-            "Yash"
+            "Yash",
+            "Dylan O"
           ],
           "players": [],
           "note": "",
@@ -87,7 +88,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
-          "title": "Maxwell, 1/5 Jude 3/5 @ CDM",
+          "title": "Maxwell 2/5, Ryan 2/5 @ CDM",
           "type": "other",
           "people": [
             "Ali"
@@ -108,17 +109,6 @@
           "loc": "san-clemente"
         },
         {
-          "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 5/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 4/5 @ OGP",
           "type": "other",
@@ -131,7 +121,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP:  Russ, Jude 5/5",
           "type": "other",
           "people": [
             "Yash"
@@ -145,28 +135,6 @@
     {
       "day": "Fri 10/16",
       "events": [
-        {
-          "time": "6:00 AM – 7:30 AM",
-          "title": "GW @ OGP",
-          "type": "other",
-          "people": [
-            "Ali"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "7:30 AM – 8:30 AM",
-          "title": "Jordan @ OGP ",
-          "type": "other",
-          "people": [
-            "Ali"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
         {
           "time": "1:00 PM – 2:00 PM",
           "title": "Colby Jones @ San Clemente",
