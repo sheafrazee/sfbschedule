@@ -14,6 +14,17 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA #7 @ MAP",
+          "type": "other",
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "map"
         }
       ]
     },
@@ -21,7 +32,7 @@
       "day": "Tue 10/20",
       "events": [
         {
-          "time": "10:30 AM – 11:30 AM",
+          "time": "10:15 AM – 11:15 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -32,11 +43,23 @@
           "loc": "san-clemente"
         },
         {
+          "time": "12:00 PM – 1:00 PM",
+          "title": "Jordan 4/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 4/5 @ OGP",
           "type": "other",
           "people": [
-            "Yash"
+            "Yash",
+            "Dylan O"
           ],
           "players": [],
           "note": "",
@@ -44,7 +67,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:  Jude 4/5, Russ, Aiden",
+          "title": "Group @ OGP:  ",
           "type": "other",
           "people": [
             "Yash",
@@ -60,15 +83,26 @@
       "day": "Wed 10/21",
       "events": [
         {
-          "time": "10:30 AM – 11:30 AM",
-          "title": "Jordan 4/5 @ OGP",
+          "time": "6:00 AM – 7:30 AM",
+          "title": "GW @ OGP",
           "type": "other",
           "people": [
-            "Colby R"
+            "Ali"
           ],
           "players": [],
           "note": "",
           "loc": "ogp"
+        },
+        {
+          "time": "9:00 AM – 10:00 AM",
+          "title": "Colby Jones @ San Clemente",
+          "type": "excel",
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
         },
         {
           "time": "1:00 PM – 2:30 PM",
@@ -88,7 +122,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
-          "title": "Maxwell 2/5, Ryan 2/5 @ CDM",
+          "title": "Maxwell 3/5, Ryan 3/5 @ CDM",
           "type": "other",
           "people": [
             "Ali"
@@ -109,11 +143,23 @@
           "loc": "san-clemente"
         },
         {
+          "time": "10:00 AM – 11:00 AM",
+          "title": "Jordan 4/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 4/5 @ OGP",
           "type": "other",
           "people": [
-            "Yash"
+            "Yash",
+            "Dylan O"
           ],
           "players": [],
           "note": "",
@@ -121,10 +167,11 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:  Russ, Jude 5/5",
+          "title": "Group @ OGP:  ",
           "type": "other",
           "people": [
-            "Yash"
+            "Yash",
+            "Dylan O"
           ],
           "players": [],
           "note": "",
@@ -136,15 +183,35 @@
       "day": "Fri 10/23",
       "events": [
         {
-          "time": "1:00 PM – 2:00 PM",
+          "time": "8:00 AM – 9:00 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Colby"
+            "Ali"
           ],
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "12:00 PM – 1:00 PM",
+          "title": "ABA Film",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": "",
+          "loc": "map"
+        },
+        {
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA #7 @ MAP",
+          "type": "other",
+          "people": [
+            "Colby R"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "map"
         }
       ]
     },
