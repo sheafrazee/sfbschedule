@@ -43,11 +43,11 @@
           "loc": "san-clemente"
         },
         {
-          "time": "12:00 PM – 1:00 PM",
-          "title": "Jordan 4/5 @ OGP",
-          "type": "other",
+          "time": "12:00 PM – 1:30 PM",
+          "title": "Dalton Knecht @ OGP",
+          "type": "excel",
           "people": [
-            "Colby R"
+            "Ali"
           ],
           "players": [],
           "note": "",
@@ -94,15 +94,15 @@
           "loc": "ogp"
         },
         {
-          "time": "9:00 AM – 10:00 AM",
-          "title": "Colby Jones @ San Clemente",
-          "type": "excel",
+          "time": "9:45 AM – 10:45 AM",
+          "title": "Jordan 4/5 @ OGP",
+          "type": "other",
           "people": [
-            "Ali"
+            "Colby R"
           ],
           "players": [],
           "note": "",
-          "loc": "san-clemente"
+          "loc": "ogp"
         },
         {
           "time": "1:00 PM – 2:30 PM",
