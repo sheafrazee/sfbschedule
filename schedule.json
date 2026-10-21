@@ -47,7 +47,8 @@
           "title": "Dalton Knecht @ OGP",
           "type": "excel",
           "people": [
-            "Colby R"
+            "Colby R",
+            "Dylan O"
           ],
           "players": [],
           "note": "",
@@ -83,19 +84,8 @@
       "day": "Wed 10/21",
       "events": [
         {
-          "time": "6:00 AM – 7:30 AM",
-          "title": "GW @ OGP",
-          "type": "other",
-          "people": [
-            "Ali"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "9:45 AM – 10:45 AM",
-          "title": "Jordan 4/5 @ OGP",
+          "time": "11:45 AM – 12:45 PM",
+          "title": "Jordan 5/5 @ OGP",
           "type": "other",
           "people": [
             "Colby R"
@@ -108,9 +98,7 @@
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #7 @ MAP",
           "type": "other",
-          "people": [
-            "Colby R"
-          ],
+          "people": [],
           "players": [],
           "note": "",
           "loc": "map"
@@ -144,11 +132,20 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 4/5 @ OGP",
+          "title": "Jordan 1/5 @ OGP",
           "type": "other",
           "people": [
             "Colby R"
           ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "11:00 AM – 12:30 PM",
+          "title": "Dalton Knecht OGP",
+          "type": "excel",
+          "people": [],
           "players": [],
           "note": "",
           "loc": "ogp"
