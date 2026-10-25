@@ -84,17 +84,6 @@
       "day": "Wed 10/21",
       "events": [
         {
-          "time": "11:45 AM – 12:45 PM",
-          "title": "Jordan 5/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #7 @ MAP",
           "type": "other",
@@ -142,17 +131,8 @@
           "loc": "ogp"
         },
         {
-          "time": "11:00 AM – 12:30 PM",
-          "title": "Dalton Knecht OGP",
-          "type": "excel",
-          "people": [],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 4/5 @ OGP",
+          "title": "Audrina 5/5 @ OGP",
           "type": "other",
           "people": [
             "Yash",
@@ -189,32 +169,24 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "12:00 PM – 1:00 PM",
-          "title": "ABA Film",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": "",
-          "loc": "map"
-        },
-        {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA #7 @ MAP",
-          "type": "other",
-          "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "map"
         }
       ]
     },
     {
       "day": "Sat 10/24",
-      "events": []
+      "events": [
+        {
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Colby Jones @ San Clemente",
+          "type": "excel",
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
+        }
+      ]
     },
     {
       "day": "Sun 10/25",
