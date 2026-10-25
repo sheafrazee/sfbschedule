@@ -25,6 +25,40 @@
           "players": [],
           "note": "",
           "loc": "map"
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Dao @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Audrina 1/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP: ",
+          "type": "other",
+          "people": [
+            "Yash",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
@@ -41,48 +75,23 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "12:00 PM – 1:30 PM",
-          "title": "Dalton Knecht @ OGP",
-          "type": "excel",
-          "people": [
-            "Colby R",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 4/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:  Russ, Aiden",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         }
       ]
     },
     {
       "day": "Wed 10/28",
       "events": [
+        {
+          "time": "6:45 AM – 7:45 AM",
+          "title": "Colby Jones @ San Clemente",
+          "type": "excel",
+          "people": [
+            "Ali"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
+        },
         {
           "time": "1:00 PM – 2:30 PM",
           "title": "ABA/DELTA #7 @ MAP",
@@ -91,6 +100,18 @@
           "players": [],
           "note": "",
           "loc": "map"
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP: ",
+          "type": "other",
+          "people": [
+            "Yash",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
@@ -129,30 +150,6 @@
           "players": [],
           "note": "",
           "loc": "ogp"
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Audrina 5/5 @ OGP",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP:  Russ, Zayden",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         }
       ]
     },
@@ -160,7 +157,7 @@
       "day": "Fri 10/30",
       "events": [
         {
-          "time": "8:00 AM – 9:00 AM",
+          "time": "6:45 AM – 7:45 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -169,6 +166,47 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "12:00 PM – 1:00 PM",
+          "title": "ABA FIlm",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "1:00 PM – 2:30 PM",
+          "title": "ABA/DELTA #7 @ MAP",
+          "type": "other",
+          "people": [],
+          "players": [],
+          "note": "",
+          "loc": "map"
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Audrina 2/5 @ OGP",
+          "type": "other",
+          "people": [
+            "Yash",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Lucas @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
