@@ -1191,6 +1191,52 @@ body.editing-next .ab-next { display: flex; }
 .iv-rl.off { opacity: .45; }
 .iv-rl .lc { color: #5C5652; font-weight: 600; }
 .iv-foot { margin-top: 20px; font-size: 8.5px; color: #9B9590; line-height: 1.6; }
+
+/* ════════ Blocked times (edit link only): green, can't be scheduled over ════════ */
+.cal-blk { position: absolute; left: 0; right: 0; z-index: 1; box-sizing: border-box; overflow: hidden;
+  display: flex; flex-direction: column; gap: 1px; padding: 2px 5px 2px 6px;
+  background: repeating-linear-gradient(135deg, rgba(46,125,50,.20) 0 5px, rgba(46,125,50,.33) 5px 10px);
+  border-left: 3px solid #2e7d32; color: #1B5E20; font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.15; }
+.cal-blk .cb-l { font-weight: 800; font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-blk .cb-t { font-weight: 600; font-size: 8.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-blk-edit { cursor: pointer; }
+.cal-blk-edit:hover { background: repeating-linear-gradient(135deg, rgba(46,125,50,.28) 0 5px, rgba(46,125,50,.42) 5px 10px); }
+.cal-ev.blk-conflict { box-shadow: inset 0 0 0 2px #C62828; }
+.cal-ev.blk-conflict::before { content: "!"; position: absolute; top: 2px; right: 3px; z-index: 5; width: 13px; height: 13px; border-radius: 50%;
+  background: #C62828; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 800; line-height: 13px; text-align: center; }
+body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
+.cal-ev-fly.cal-ev-fly-bad { box-shadow: 0 0 0 2px #C62828, 0 10px 26px rgba(0,0,0,.34); }
+.cal-ev-fly.cal-ev-fly-bad .cal-ev-time { display: inline-block !important; background: #C62828; color: #fff; border-radius: 3px; padding: 0 3px; opacity: 1; }
+.cal-popover input.bad { border-color: #C62828 !important; background: #FDECEC; }
+/* Cards view */
+.blk-row { display: grid; grid-template-columns: 82px 1fr; column-gap: 12px; align-items: center; padding: 9px 14px;
+  border-left: 4px solid #2e7d32; border-bottom: 1px solid rgba(17,17,17,.10);
+  background: repeating-linear-gradient(135deg, rgba(46,125,50,.09) 0 6px, rgba(46,125,50,.16) 6px 12px); }
+.blk-row .bt { font-size: 11px; font-weight: 600; color: #1B5E20; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.blk-row .bl { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1B5E20; }
+.day-col > .blk-row:last-child { border-bottom: none; border-radius: 0 0 11px 11px; }
+@media (max-width: 380px) { .blk-row { grid-template-columns: 70px 1fr; column-gap: 10px; } }
+/* Manager */
+#blkModal { z-index: 420; }
+.blk-list { display: flex; flex-direction: column; gap: 10px; max-height: 52vh; overflow-y: auto; margin-bottom: 10px; }
+.blk-item { display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 1.5px solid var(--light-stone); border-left: 4px solid #2e7d32; border-radius: 8px; background: var(--warm-white); }
+.blk-item.bad { border-left-color: #C62828; }
+.blk-item.flash { animation: sfbFlash 1.5s ease; }
+.blk-days { display: flex; gap: 4px; }
+.blk-day { flex: 1 1 0; min-width: 0; height: 32px; padding: 0; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; color: var(--dark-stone);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; }
+.blk-day:hover { border-color: var(--stone); }
+.blk-day.on { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.blk-days .blk-del { flex: 0 0 auto; margin-left: 2px; padding: 5px 6px; }
+.blk-times { display: flex; align-items: center; gap: 8px; }
+.blk-times input { flex: 1 1 0; min-width: 0; padding: 7px 9px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff;
+  font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: var(--ink); outline: none; }
+.blk-times input:focus { border-color: var(--stone); }
+.blk-times .dash { font-size: 12px; color: var(--stone); }
+.blk-warn { font-size: 12px; color: #C62828; }
+.blk-warn:empty { display: none; }
+@media (max-width: 700px) { .blk-times input { font-size: 16px; padding: 9px 10px; } .blk-day { height: 40px; font-size: 13px; } }
+@media print { .blk-row, .cal-blk { display: none !important; } }
 </style>
 </head>
 <body>
@@ -1297,6 +1343,7 @@ body.editing-next .ab-next { display: flex; }
             <div class="ab-menu hidden" id="moreMenu" role="menu">
               <button type="button" role="menuitem" id="addDayBtn" title="Add a day column to this week">+ Add day</button>
               <button type="button" role="menuitem" id="locationsBtn" title="Add or edit gym addresses, map links and directions">📍 Locations</button>
+              <button type="button" role="menuitem" id="blocksBtn" title="Weekly times you're unavailable. They show in green and sessions can't be scheduled over them">🟩 Blocked times</button>
               <button type="button" role="menuitem" id="settingsBtn">Settings</button>
               <div class="ab-menu-sep" role="separator"></div>
               <button type="button" role="menuitem" class="danger" id="revertLiveBtn" title="Reload the published schedule and drop any unpublished edits">↺ Discard edits</button>
@@ -1428,6 +1475,17 @@ body.editing-next .ab-next { display: flex; }
     <div class="loc-mgr-list" id="locMgrList"></div>
     <button class="btn" id="locAddBtn" type="button">+ Add location</button>
     <div class="modal-actions"><button class="btn primary" id="locClose" type="button">Done</button></div>
+  </div>
+</div>
+
+<!-- Blocked Times Modal -->
+<div class="modal-bg hidden" id="blkModal">
+  <div class="modal">
+    <h2>Blocked times</h2>
+    <p>Times you're unavailable every week. They show in green on your edit link only, and sessions can't be scheduled over them. Publish to sync them to your other devices.</p>
+    <div class="blk-list" id="blkList"></div>
+    <button class="btn" id="blkAddBtn" type="button">+ Add blocked time</button>
+    <div class="modal-actions"><button class="btn primary" id="blkClose" type="button">Done</button></div>
   </div>
 </div>
 
@@ -1749,9 +1807,155 @@ function closeLocMgr() {
   if (ev) _commitAndReopen(pop._slot, ev); else renderEdit();
 }
 
+// ============ BLOCKED TIMES ============
+// Recurring weekday blocks (e.g. school drop-off and pickup). Green on the edit link only;
+// sessions can't be dragged, resized, created, typed, moved or pasted into them.
+// Stored as data.blocks: [{ id, days: [0-6, Sun = 0], start, end }], start/end in minutes of the day.
+const BLK_DAYS = [[1, "Mo", "Monday"], [2, "Tu", "Tuesday"], [3, "We", "Wednesday"], [4, "Th", "Thursday"], [5, "Fr", "Friday"], [6, "Sa", "Saturday"], [0, "Su", "Sunday"]];
+function newBlkId() { return "blk-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+function ensureBlocks(d) {
+  if (!d || typeof d !== "object" || d.blocks == null) return;
+  if (!Array.isArray(d.blocks)) { delete d.blocks; return; }
+  const clamp = v => Math.max(0, Math.min(1440, Math.round(Number(v) || 0)));
+  const seen = new Set();
+  d.blocks = d.blocks.filter(b => b && typeof b === "object").map((b, i) => {
+    let id = String(b.id || "").trim() || "blk-" + i;   // deterministic, so live and draft copies compare equal
+    while (seen.has(id)) id += "x";
+    seen.add(id);
+    const days = [...new Set((Array.isArray(b.days) ? b.days : []).map(Number)
+      .filter(n => Number.isInteger(n) && n >= 0 && n <= 6))].sort((x, y) => x - y);
+    return { id, days, start: clamp(b.start), end: clamp(b.end) };
+  });
+}
+function _validBlocks() { return ((data && data.blocks) || []).filter(b => b.days.length && b.end > b.start); }
+function _blocksVisible() { return editUnlocked && _validBlocks().length > 0; }
+// Weekday of a day column, from its label ("Mon 10/26", "Tuesday"); dated labels fall back to the date.
+function _labelWeekday(label, mon) {
+  const lower = String(label || "").toLowerCase();
+  for (const k in _WEEKDAYS) if (lower.includes(k) || lower.includes(k.slice(0, 3))) return _WEEKDAYS[k];
+  if (mon && /\d{1,2}\s*\/\s*\d{1,2}/.test(lower)) return dateForDayFrom(label, mon).getDay();
+  return null;
+}
+function _slotMon(slot) {
+  const wk = slot === "next" ? (data && data.nextWeek) : data;
+  return wk && (wk.days || []).length ? liveWeekDates(wk).mon : null;
+}
+function _blocksForLabel(label, mon) {
+  const bl = _validBlocks();
+  if (!bl.length) return [];
+  const wd = _labelWeekday(label, mon);
+  if (wd == null) return [];
+  return bl.filter(b => b.days.includes(wd)).map(b => ({ id: b.id, start: b.start, end: b.end }))
+    .sort((a, b) => a.start - b.start);
+}
+function _dayBlocks(slot, di) {
+  const days = slot === "viewer" ? (data && data.days) : _calDays(slot);
+  const day = days && days[di];
+  return day ? _blocksForLabel(day.day, _slotMon(slot === "next" ? "next" : "current")) : [];
+}
+function _blkHit(blks, s, e) { return (blks || []).find(b => s < b.end && e > b.start) || null; }
+function _evRange(ev) {
+  const t = parseEventTimes(ev && ev.time);
+  if (!t) return null;
+  const s = t.start.h * 60 + t.start.min;
+  return { s, e: s + (sessionMinutes(ev) || 60) };
+}
+function _blkLabel(b) { return `${_fmt12(b.start)} – ${_fmt12(b.end)}`; }
+function _blkToast(b) { showToast(`Blocked ${_shortTime(_blkLabel(b))} — pick another time`); }
+// First open stretch at or after `from` (up to `want` minutes, at least 30) that clears every block.
+function _findFreeSlot(blks, from, want) {
+  const endDay = CAL_END_H * 60;
+  let s = Math.max(CAL_START_H * 60, from);
+  for (let guard = 0; guard < 60 && s < endDay; guard++) {
+    const inB = blks.find(b => s >= b.start && s < b.end);
+    if (inB) { s = Math.ceil(inB.end / 15) * 15; continue; }
+    const next = blks.filter(b => b.start > s).reduce((m, b) => Math.min(m, b.start), endDay);
+    const room = next - s;
+    if (room >= Math.min(want, 30)) return { start: s, dur: Math.min(want, room) };
+    s = next;   // too tight: try after the next block
+  }
+  return null;
+}
+function _blockConflicts(slot) {
+  let n = 0;
+  (_calDays(slot) || []).forEach((d, di) => {
+    const bl = _dayBlocks(slot, di);
+    if (bl.length) (d.events || []).forEach(ev => { const r = _evRange(ev); if (r && _blkHit(bl, r.s, r.e)) n++; });
+  });
+  return n;
+}
+
+// ---- Manager (⋯ menu → Blocked times, or click a green block) ----
+function _minToHHMM(m) { m = Math.max(0, Math.min(1439, m)); return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); }
+function _hhmmToMin(s) { const m = String(s || "").match(/^(\d{1,2}):(\d{2})/); return m ? +m[1] * 60 + +m[2] : null; }
+function _blkProblem(b) { return !(b.end > b.start) ? "End time must be after the start." : !b.days.length ? "Pick at least one day." : ""; }
+function renderBlkMgr(flashId) {
+  const list = document.getElementById("blkList");
+  const bl = data.blocks || [];
+  list.innerHTML = bl.map((b, i) => {
+    const bad = _blkProblem(b);
+    return `<div class="blk-item${bad ? " bad" : ""}${b.id === flashId ? " flash" : ""}" data-i="${i}">
+      <div class="blk-days" role="group" aria-label="Days">${BLK_DAYS.map(([n, s, full]) => {
+        const on = b.days.includes(n);
+        return `<button type="button" class="blk-day${on ? " on" : ""}" data-d="${n}" aria-pressed="${on}" aria-label="${full}" title="${full}">${s}</button>`;
+      }).join("")}<button class="rr-del blk-del" type="button" aria-label="Remove this blocked time" title="Remove">✕</button></div>
+      <div class="blk-times">
+        <input type="time" class="blk-start" step="300" value="${_minToHHMM(b.start)}" aria-label="Start time">
+        <span class="dash">to</span>
+        <input type="time" class="blk-end" step="300" value="${_minToHHMM(b.end)}" aria-label="End time">
+      </div>
+      <div class="blk-warn">${bad}</div>
+    </div>`;
+  }).join("") || `<div class="archive-empty">No blocked times yet.</div>`;
+}
+function openBlkMgr(flashId) {
+  if (!Array.isArray(data.blocks)) data.blocks = [];
+  hideCalPopover();
+  hideDayMenu();
+  renderBlkMgr(flashId);
+  document.getElementById("blkModal").classList.remove("hidden");
+  const f = document.querySelector("#blkList .blk-item.flash");
+  if (f) f.scrollIntoView({ block: "nearest" });
+}
+function addBlk() {
+  const bl = data.blocks || (data.blocks = []);
+  const last = bl[bl.length - 1];
+  const b = { id: newBlkId(), days: last ? last.days.slice() : [1, 2, 3, 4, 5],
+              start: last ? 15 * 60 : 7 * 60 + 30, end: last ? 15 * 60 + 30 : 8 * 60 };
+  if (!b.days.length) b.days = [1, 2, 3, 4, 5];
+  bl.push(b);
+  saveDraft();
+  renderBlkMgr(b.id);
+  const rows = document.querySelectorAll("#blkList .blk-item");
+  const row = rows[rows.length - 1];
+  if (row) { row.scrollIntoView({ block: "nearest" }); const inp = row.querySelector(".blk-start"); if (inp && !_calPhone()) inp.focus(); }
+}
+// Done / Esc / backdrop. Unfinished rows are dropped; sessions already sitting in blocked time get flagged.
+function closeBlkMgr() {
+  const modal = document.getElementById("blkModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  _blurInside(modal);
+  modal.classList.add("hidden");
+  const before = JSON.stringify(data.blocks);
+  const bl = data.blocks || [];
+  const keep = bl.filter(b => !_blkProblem(b));
+  const dropped = bl.length - keep.length;
+  if (keep.length) data.blocks = keep;
+  else if (publishedData && Array.isArray(publishedData.blocks)) data.blocks = [];
+  else delete data.blocks;
+  if (JSON.stringify(data.blocks) !== before) saveDraft();
+  if (currentMode === "edit") renderEdit(); else if (currentMode === "display") renderDisplay();
+  const n = _blockConflicts("current") + _blockConflicts("next");
+  const msgs = [];
+  if (dropped) msgs.push(`Removed ${dropped} unfinished blocked time${dropped === 1 ? "" : "s"}`);
+  if (n) msgs.push(`${n} session${n === 1 ? " overlaps" : "s overlap"} blocked time — outlined in red`);
+  if (msgs.length) showToast(msgs.join(" · "));
+}
+
 function normalizeData(d) {
   if (!d || !Array.isArray(d.days)) return d;
   ensureLocations(d);
+  ensureBlocks(d);
   d.days.forEach(day => (day.events || []).forEach(_migrateEvent));
   if (d.nextWeek && Array.isArray(d.nextWeek.days)) {
     d.nextWeek.days.forEach(day => (day.events || []).forEach(_migrateEvent));
@@ -3863,6 +4067,12 @@ function cancelNewSession() {
   if (!blank) _offerUndo('New session discarded', () => _restoreEvents([{ slot: where.slot, di: where.di, ev }]));
 }
 function _createSessionAt(slot, di, startMin, dur) {
+  const fBl = _dayBlocks(slot, di);
+  if (fBl.length) {   // never start a session inside blocked time
+    const f = _findFreeSlot(fBl, startMin, dur) || _findFreeSlot(fBl, CAL_START_H * 60, dur);
+    if (!f) { showToast('No open time left on that day'); return; }
+    startMin = f.start; dur = f.dur;
+  }
   _discardStaleNew(false);
   const days = _calDays(slot);
   if (!days || !days[di]) return;
@@ -3892,18 +4102,24 @@ function _showNewMarker(slot, body, di, hPx, y) {
   _clearNewMarker();
   let m = Math.floor(((Math.max(0, y) / hPx) + CAL_START_H) * 2) * 30;   // the half hour you tapped
   m = Math.max(CAL_START_H * 60, Math.min(m, CAL_END_H * 60 - 60));
+  // Stay out of blocked time: start after a block the half hour lands in, stop where the next one begins
+  const mBl = _dayBlocks(slot, di);
+  for (let inB = _blkHit(mBl, m, m + 1), g = 0; inB && g < 20; inB = _blkHit(mBl, m, m + 1), g++) m = Math.ceil(inB.end / 15) * 15;
+  const nextB = mBl.filter(b => b.start > m).reduce((a, b) => Math.min(a, b.start), CAL_END_H * 60);
+  const len = Math.min(60, nextB - m);
+  if (len < 15) { showToast('No open time there'); return; }
   const mk = document.createElement('button');
   mk.type = 'button';
   mk.className = 'cal-new-marker';
   mk.style.top = Math.round((m / 60 - CAL_START_H) * hPx) + 'px';
-  mk.style.height = Math.max(30, Math.round(hPx) - 2) + 'px';
+  mk.style.height = Math.max(24, Math.round(len / 60 * hPx) - 2) + 'px';
   mk.setAttribute('aria-label', 'Create a session at ' + _fmt12(m));
-  mk.innerHTML = `<span class="nm-l">+ New session</span><span class="nm-t">${_fmt12(m)} \u2013 ${_fmt12(m + 60)}</span>`;
+  mk.innerHTML = `<span class="nm-l">+ New session</span><span class="nm-t">${_fmt12(m)} \u2013 ${_fmt12(m + len)}</span>`;
   mk.addEventListener('pointerdown', ev => ev.stopPropagation());   // not a fresh tap on the grid
   mk.addEventListener('click', ev => {
     ev.preventDefault(); ev.stopPropagation();
     _clearNewMarker();
-    _createSessionAt(slot, di, m, 60);
+    _createSessionAt(slot, di, m, len);
   });
   body.appendChild(mk);
   _newMarker = mk;
@@ -4410,6 +4626,9 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
     return;
   }
   const single = onlyDi != null && !!days[onlyDi];
+  // Blocked times: owner link only, and not in the Excel-only editor view (the one shared as screenshots)
+  const showBlocks = _blocksVisible() && !(editable && typeOnly);
+  const blkMon = showBlocks ? _slotMon(slot === "next" ? "next" : "current") : null;
   const totalHours = CAL_END_H - CAL_START_H;
   const hourPx = hourPxOverride || (compact ? Math.round(CAL_HOUR_PX * 0.65) : CAL_HOUR_PX);
   const totalPx = totalHours * hourPx;
@@ -4441,6 +4660,17 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
       hourLines += `<div style="position:absolute;top:${h*hourPx + Math.round(hourPx/2)}px;left:0;right:0;border-bottom:1px dashed #F0EDE8;height:0;"></div>`;
     }
 
+    const blks = showBlocks ? _blocksForLabel(day.day, blkMon) : [];
+    let blkHtml = '';
+    blks.forEach(b => {
+      const s = Math.max(b.start, CAL_START_H * 60), e = Math.min(b.end, CAL_END_H * 60);
+      if (e <= s) return;
+      const top = Math.round((s / 60 - CAL_START_H) * hourPx);
+      const h = Math.max(6, Math.round((e / 60 - CAL_START_H) * hourPx) - top);
+      const tip = `Blocked ${_blkLabel(b)}${editable ? ' — click to edit blocked times' : ''}`;
+      blkHtml += `<div class="cal-blk${editable ? ' cal-blk-edit' : ''}" data-blk="${escapeAttr(b.id)}" style="top:${top}px;height:${h}px;" title="${escapeAttr(tip)}"><span class="cb-l">Blocked</span>${h >= 22 ? `<span class="cb-t">${escapeHtml(_shortTime(_blkLabel(b)))}</span>` : ''}</div>`;
+    });
+
     let evHtml = '';
     // Lay overlapping events out into side-by-side columns (iCal-style).
     const laid = timed.map(o => {
@@ -4467,7 +4697,10 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
       const editAttrs = editable
         ? ` data-di="${di}" data-ei="${ei}" data-slot="${slot}" data-startmin="${startMin}" data-dur="${durMin}" data-range="${isRange ? 1 : 0}" data-hourpx="${hourPx}"`
         : '';
-      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(calEvTip(ev))}">
+      const rr = blks.length ? _evRange(ev) : null;
+      const clash = rr ? _blkHit(blks, rr.s, rr.e) : null;   // already sitting in blocked time
+      const tipTxt = calEvTip(ev) + (clash ? `\n\u26a0 Overlaps blocked time ${_blkLabel(clash)}` : '');
+      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}${clash ? ' blk-conflict' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(tipTxt)}">
         <div class="cal-ev-title" data-names="${escapeAttr(calNameList(ev.title).join("\u0001"))}">${calTitleNames(ev.title, CAL_TITLE_MAX_NAMES)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${calTimeHtml(ev)}</div>
         <div class="cal-ev-interns" data-names="${escapeAttr(internsOf(ev).join("\u0001"))}" style="display:none"></div>
@@ -4495,6 +4728,7 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
       ${noTimeHtml}
       <div class="cal-day-body" style="height:${totalPx}px;position:relative;overflow:hidden;"${editable ? ` data-di="${di}"` : ''}>
         ${hourLines}
+        ${blkHtml}
         ${evHtml}
       </div>
     </div>`;
@@ -4561,10 +4795,17 @@ function wireCalDrag(container, slot, hPx) {
     body.addEventListener("pointerdown", ev => {
       if (ev.button !== 0) return;
       if (ev.target.closest('.cal-ev-drag')) return; // let existing-event drag handle it
+      if (ev.target.closest('.cal-blk')) return;     // blocked time: its own click opens the manager
       if (calSelectMode) return;                     // Select mode: empty grid does nothing
       onCalCreateStart(ev, slot, hPx);
     });
   });
+  // Green blocked time → blocked-times manager
+  container.querySelectorAll('.cal-blk-edit').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    if (calSelectMode) return;
+    openBlkMgr(b.dataset.blk);
+  }));
   // Day header → day menu (rename / move / duplicate / delete)
   container.querySelectorAll('.cal-day-head-edit').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -4607,6 +4848,8 @@ function onCalDragStart(e) {
   const isTouch = e.pointerType === 'touch';
   let finalStartMin = startMin0;
   let finalDi = di;
+  let blockedHit = null;      // blocked time under the dragged tile, if any
+  const _blkCache = {};
   let dragging = false;
   let needsCapture = false; // setPointerCapture must be called inside a pointer event
   let maxMoved = 0;         // track peak movement to distinguish tap from scroll
@@ -4641,7 +4884,7 @@ function onCalDragStart(e) {
     ghost = el.cloneNode(true);
     ghost.querySelectorAll('.cal-ev-resize').forEach(n => n.remove());
     ghost.classList.add('cal-ev-fly');
-    ghost.classList.remove('cal-ev-dragging');
+    ghost.classList.remove('cal-ev-dragging', 'blk-conflict');
     ghost.style.left = r.left + 'px';
     ghost.style.top = r.top + 'px';
     ghost.style.width = r.width + 'px';
@@ -4701,9 +4944,12 @@ function onCalDragStart(e) {
     let mins = Math.round(((topInBody / hourPx) + CAL_START_H) * 60 / 15) * 15;
     mins = Math.max(CAL_START_H * 60, Math.min(mins, CAL_END_H * 60 - dur));
     finalStartMin = mins;
+    const tBl = _blkCache[finalDi] || (_blkCache[finalDi] = _dayBlocks(slot, finalDi));
+    blockedHit = _blkHit(tBl, mins, mins + dur);
     if (ghost) {
+      ghost.classList.toggle('cal-ev-fly-bad', !!blockedHit);
       const gt = ghost.querySelector('.cal-ev-time');
-      if (gt) gt.textContent = _fmtTimeRange(mins, dur, isRange);
+      if (gt) gt.textContent = blockedHit ? 'Blocked ' + _shortTime(_blkLabel(blockedHit)) : _fmtTimeRange(mins, dur, isRange);
     }
   }
 
@@ -4732,6 +4978,7 @@ function onCalDragStart(e) {
     if (wasDragging) {
       const days = slot === "next" ? (data.nextWeek && data.nextWeek.days) : data.days;
       const moved = (tgtDi !== di) || (newMin !== startMin0);
+      if (moved && blockedHit) { renderEdit(); _blkToast(blockedHit); return; }   // dropped on blocked time: snap back
       if (moved && days && days[di] && days[di].events && days[di].events[ei]) {
         const evObj = days[di].events[ei];
         const prevTime = evObj.time;
@@ -5063,9 +5310,12 @@ function pasteCalSelection() {
   tgt = Math.max(0, Math.min(tgt, days.length - 1));
 
   const MARK = '__paste_' + Date.now();
+  let blockedSkips = 0;
   calClip.items.forEach(it => {
     const dIdx = Math.max(0, Math.min(tgt + (it.di - calClip.minDi), days.length - 1));
     const clone = JSON.parse(JSON.stringify(it.ev));
+    const cr = _evRange(clone);
+    if (cr && _blkHit(_dayBlocks(slot, dIdx), cr.s, cr.e)) { blockedSkips++; return; }   // never paste into blocked time
     clone[MARK] = true;
     const events = days[dIdx].events || (days[dIdx].events = []);
     const t = parseEventTimes(clone.time);
@@ -5086,7 +5336,8 @@ function pasteCalSelection() {
   calSel = newSel; calAnchor = newSel[newSel.length - 1] || null;
   saveDraft();
   renderEdit();
-  showToast(`Pasted ${newSel.length} session${newSel.length !== 1 ? 's' : ''}`);
+  const skipNote = blockedSkips ? ` \u00b7 ${blockedSkips} skipped (blocked time)` : '';
+  showToast(newSel.length ? `Pasted ${newSel.length} session${newSel.length !== 1 ? 's' : ''}${skipNote}` : 'Nothing pasted \u2014 that time is blocked');
   return true;
 }
 
@@ -5104,6 +5355,10 @@ function onCalResizeStart(e, slot, hPx, edge) {
   const fixedEnd = startMin0 + dur0;   // anchor when dragging the TOP edge
   const fixedStart = startMin0;        // anchor when dragging the BOTTOM edge
   let startMin = startMin0, endMins = fixedEnd;
+  // Edges stop at the nearest blocked time above / below the session
+  const rBl = _dayBlocks(slot, di);
+  const minStart = rBl.filter(b => b.end <= startMin0).reduce((m, b) => Math.max(m, b.end), CAL_START_H * 60);
+  const maxEnd = rBl.filter(b => b.start >= fixedEnd).reduce((m, b) => Math.min(m, b.start), CAL_END_H * 60);
 
   function yToMins(y) {
     return Math.round(((Math.max(0, y) / hPx) + CAL_START_H) * 60 / 15) * 15;
@@ -5116,11 +5371,11 @@ function onCalResizeStart(e, slot, hPx, edge) {
   function move(ev) {
     const m = yToMins(ev.clientY - rect.top);
     if (edge === 'top') {
-      startMin = Math.max(CAL_START_H * 60, Math.min(m, fixedEnd - 15));
+      startMin = Math.max(minStart, Math.min(m, fixedEnd - 15));
       endMins = fixedEnd;
     } else {
       startMin = fixedStart;
-      endMins = Math.max(fixedStart + 15, Math.min(m, CAL_END_H * 60));
+      endMins = Math.max(fixedStart + 15, Math.min(m, maxEnd));
     }
     el.style.top = ((startMin / 60 - CAL_START_H) * hPx) + 'px';
     el.style.height = Math.max(14, (endMins - startMin) / 60 * hPx) + 'px';
@@ -5177,6 +5432,10 @@ function onCalCreateStart(e, slot, hPx) {
   }
 
   const anchorMins = yToSnappedMins(startY);
+  const cBl = _dayBlocks(slot, di);
+  const anchorHit = _blkHit(cBl, anchorMins, anchorMins + 1);
+  const cFloor = cBl.filter(b => b.end <= anchorMins).reduce((m, b) => Math.max(m, b.end), CAL_START_H * 60);
+  const cCeil = cBl.filter(b => b.start > anchorMins).reduce((m, b) => Math.min(m, b.start), CAL_END_H * 60);
   let startMins = anchorMins, endMins = anchorMins + 60;
   let armed = false;       // true once drag threshold / long press met
   let needsCapture = false; // claim pointer capture on next pointermove (touch)
@@ -5213,6 +5472,7 @@ function onCalCreateStart(e, slot, hPx) {
     return;
   } else {
     // Mouse path: capture immediately, arm on movement threshold
+    if (anchorHit) { _blkToast(anchorHit); return; }
     e.preventDefault();
     try { body.setPointerCapture(e.pointerId); } catch (_) {}
   }
@@ -5251,6 +5511,8 @@ function onCalCreateStart(e, slot, hPx) {
       endMins   = anchorMins + 60;
     }
     endMins = Math.min(endMins, CAL_END_H * 60);
+    startMins = Math.max(startMins, cFloor);   // the new session can't reach into blocked time
+    endMins = Math.min(endMins, cCeil);
     updateGhost();
   }
 
@@ -5258,6 +5520,7 @@ function onCalCreateStart(e, slot, hPx) {
     const wasArmed = armed;
     cleanup();
     if (!wasArmed) return;
+    if (endMins - startMins < 15) { showToast('No open time there'); return; }
     _discardStaleNew(false);
 
     const days = slot === 'next' ? (data.nextWeek && data.nextWeek.days) : data.days;
@@ -5541,6 +5804,15 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
       }
     }
     if (ev2.time === before) return;
+    const tr = _evRange(ev2), tHit = tr && _blkHit(_dayBlocks(slot, ctx.di), tr.s, tr.e);
+    if (tHit) {   // typed into blocked time: put the old time back
+      ev2.time = before;
+      const tb = readTimes(ev2);
+      startEl.value = tb.start; endEl.value = tb.end;
+      [startEl, endEl].forEach(el => { el.classList.add('bad'); setTimeout(() => el.classList.remove('bad'), 1600); });
+      _blkToast(tHit);
+      return;
+    }
     _commitAndReopen(slot, ev2, nextFocus);
   }
   startEl.addEventListener('change', () => commitTime('calPopStart'));
@@ -5562,6 +5834,8 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (sm == null) { startEl.focus(); return; }
     const next = _fmtTimeRange(sm, +b.dataset.dur, true);
     if (next === ev2.time) return;
+    const dHit = _blkHit(_dayBlocks(slot, ctx.di), sm, sm + +b.dataset.dur);
+    if (dHit) { _blkToast(dHit); return; }
     ev2.time = next;
     _commitAndReopen(slot, ev2);
   });
@@ -5572,6 +5846,8 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (_calPopFlush) { try { _calPopFlush(); } catch (err) {} }
     const d = _calDays(slot);
     if (!d || !d[from] || !d[to]) return;
+    const mr = _evRange(d[from].events[tEi]), mHit = mr && _blkHit(_dayBlocks(slot, to), mr.s, mr.e);
+    if (mHit) { e.target.value = String(from); _blkToast(mHit); return; }
     const moved = d[from].events.splice(tEi, 1)[0];
     if (!moved) return;
     (d[to].events = d[to].events || []).push(moved);
@@ -6177,6 +6453,46 @@ document.getElementById("slotCurrentBtn").addEventListener("click", () => switch
 document.getElementById("slotNextBtn").addEventListener("click", () => switchSlot("next"));
 
 document.getElementById("addDayBtn").addEventListener("click", () => addDayToSlot(editSlot));
+document.getElementById("blocksBtn").addEventListener("click", () => openBlkMgr());
+document.getElementById("blkAddBtn").addEventListener("click", addBlk);
+document.getElementById("blkClose").addEventListener("click", closeBlkMgr);
+document.getElementById("blkModal").addEventListener("click", e => { if (e.target.id === "blkModal") closeBlkMgr(); });
+window.addEventListener("keydown", e => {   // while open: Esc closes it, editor shortcuts can't reach the calendar
+  const modal = document.getElementById("blkModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  if (e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); closeBlkMgr(); return; }
+  const tag = (document.activeElement && document.activeElement.tagName) || "";
+  if (tag !== "INPUT" && tag !== "TEXTAREA") e.stopImmediatePropagation();
+}, true);
+(function wireBlkMgr() {
+  const list = document.getElementById("blkList");
+  const at = el => { const it = el.closest(".blk-item"); return it ? { it, b: (data.blocks || [])[+it.dataset.i] } : null; };
+  const flag = (it, b) => { const bad = _blkProblem(b); it.classList.toggle("bad", !!bad); it.querySelector(".blk-warn").textContent = bad; };
+  list.addEventListener("click", e => {
+    const dBtn = e.target.closest(".blk-day");
+    if (dBtn) {
+      const h = at(dBtn); if (!h || !h.b) return;
+      const n = +dBtn.dataset.d, on = h.b.days.includes(n);
+      h.b.days = on ? h.b.days.filter(x => x !== n) : [...h.b.days, n].sort((x, y) => x - y);
+      dBtn.classList.toggle("on", !on); dBtn.setAttribute("aria-pressed", String(!on));
+      flag(h.it, h.b); saveDraft();
+      return;
+    }
+    const del = e.target.closest(".blk-del");
+    if (del) { const h = at(del); if (!h) return; data.blocks.splice(+h.it.dataset.i, 1); saveDraft(); renderBlkMgr(); }
+  });
+  const onTime = e => {
+    const isStart = e.target.classList.contains("blk-start");
+    if (!isStart && !e.target.classList.contains("blk-end")) return;
+    const h = at(e.target); if (!h || !h.b) return;
+    const m = _hhmmToMin(e.target.value);
+    if (m == null) return;   // half-typed
+    if (isStart) h.b.start = m; else h.b.end = m;
+    flag(h.it, h.b); saveDraft();
+  };
+  list.addEventListener("input", onTime);
+  list.addEventListener("change", onTime);
+})();
 document.getElementById("locationsBtn").addEventListener("click", () => openLocMgr(false));
 document.getElementById("locAddBtn").addEventListener("click", () => openLocMgr(true));
 document.getElementById("locClose").addEventListener("click", closeLocMgr);
@@ -6594,6 +6910,30 @@ setInterval(() => { if (currentMode === "display") try { decorateLiveChips(); } 
   };
 })();
 
+// ---------- Blocked times in the Cards view (edit link only) ----------
+function decorateBlockRows() {
+  const grid = document.getElementById("grid");
+  if (!grid) return;
+  grid.querySelectorAll(".blk-row").forEach(x => x.remove());
+  if (!_blocksVisible() || internTerms().length || playerTerms().length) return;
+  const mon = _slotMon("current");
+  (data.days || []).forEach((day, i) => {
+    const col = grid.children[i];
+    const bl = _blocksForLabel(day.day, mon);
+    if (!col || !bl.length) return;
+    const evs = (day.events || []).filter(e => eventMatches(e));
+    const cards = col.querySelectorAll(".event-card");
+    bl.forEach(b => {
+      const row = document.createElement("div");
+      row.className = "blk-row";
+      row.innerHTML = `<span class="bt">${escapeHtml(_blkLabel(b))}</span><span class="bl">Blocked</span>`;
+      const j = evs.findIndex(ev => { const r = _evRange(ev); return !r || r.s >= b.start; });
+      if (j >= 0 && cards[j]) col.insertBefore(row, cards[j]); else col.appendChild(row);
+    });
+  });
+}
+(function () { const _rd = renderDisplay; renderDisplay = function () { _rd(); try { decorateBlockRows(); } catch (e) { console.warn(e); } }; })();
+
 // ---------- (v1) Viewers auto-refresh from the published schedule.json ----------
 async function pollLiveSchedule() {
   if (currentMode !== "display" || document.hidden) return;
@@ -6773,7 +7113,7 @@ function renderStats() {
 (function () { const _re = renderEdit; renderEdit = function () { _re(); try { renderStats(); } catch (e) { console.warn(e); } }; })();
 // Redraws are never navigation: keep the page, the calendars and the pager put.
 (function () { const _re = renderEdit; renderEdit = function () { _withFrame(_re); }; })();
-(function () { const _sm = setMode; setMode = function (m) { _sm(m); try { renderStats(); } catch (e) {} }; })();
+(function () { const _sm = setMode; setMode = function (m) { if (_lastSnap === null && data) _lastSnap = JSON.stringify(data); _sm(m); try { renderStats(); } catch (e) {} }; })();
 
 // ---------- (v3) Keyboard shortcuts ----------
 document.addEventListener("keydown", e => {
