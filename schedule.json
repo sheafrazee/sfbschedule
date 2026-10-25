@@ -204,6 +204,230 @@
   ],
   "archive": [
     {
+      "key": "2026-10-19",
+      "range": "Oct 19 – Oct 25, 2026",
+      "title": "Week of Oct 19 – 25",
+      "path": "archive/2026-10-19.png",
+      "pathExcel": "archive/2026-10-19-excel.png",
+      "players": [
+        "ABA/DELTA #7 @ MAP",
+        "Aiden",
+        "Audrina 4/5 @ OGP",
+        "Audrina 5/5 @ OGP",
+        "Colby Jones @ San Clemente",
+        "Dalton Knecht @ OGP",
+        "Group @ OGP:  Russ",
+        "Jordan 1/5 @ OGP",
+        "Kids Pickup @ Venado Park",
+        "Maxwell 3/5",
+        "Ryan 3/5 @ CDM",
+        "Zayden"
+      ],
+      "days": [
+        {
+          "day": "Mon 10/19",
+          "events": [
+            {
+              "time": "8:00 AM – 9:00 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #7 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "map"
+            }
+          ]
+        },
+        {
+          "day": "Tue 10/20",
+          "events": [
+            {
+              "time": "10:15 AM – 11:15 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "12:00 PM – 1:30 PM",
+              "title": "Dalton Knecht @ OGP",
+              "type": "excel",
+              "people": [
+                "Colby R",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 4/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:  Russ, Aiden",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            }
+          ]
+        },
+        {
+          "day": "Wed 10/21",
+          "events": [
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #7 @ MAP",
+              "type": "other",
+              "people": [],
+              "players": [],
+              "note": "",
+              "loc": "map"
+            }
+          ]
+        },
+        {
+          "day": "Thu 10/22",
+          "events": [
+            {
+              "time": "6:15 AM – 7:30 AM",
+              "title": "Maxwell 3/5, Ryan 3/5 @ CDM",
+              "type": "other",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "loc-mv4ixegz8xk"
+            },
+            {
+              "time": "8:15 AM – 9:15 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "10:00 AM – 11:00 AM",
+              "title": "Jordan 1/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Colby R"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 5/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:  Russ, Zayden",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            }
+          ]
+        },
+        {
+          "day": "Fri 10/23",
+          "events": [
+            {
+              "time": "8:00 AM – 9:00 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            }
+          ]
+        },
+        {
+          "day": "Sat 10/24",
+          "events": [
+            {
+              "time": "11:00 AM – 12:00 PM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Yash"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            }
+          ]
+        },
+        {
+          "day": "Sun 10/25",
+          "events": [
+            {
+              "time": "10:00 AM – 11:00 AM",
+              "title": "Kids Pickup @ Venado Park ",
+              "type": "other",
+              "people": [],
+              "players": [],
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "ts": 1792965098864
+    },
+    {
       "key": "2026-10-12",
       "range": "Oct 12 – Oct 18, 2026",
       "title": "Week of Oct 12 – 18",
@@ -5035,8 +5259,20 @@
             "loc": "san-clemente"
           },
           {
+            "time": "12:00 PM – 1:30 PM",
+            "title": "Dalton Knecht @ OGP",
+            "type": "excel",
+            "people": [
+              "Colby R",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          },
+          {
             "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 1/5 @ OGP",
+            "title": "Audrina 4/5 @ OGP",
             "type": "other",
             "people": [
               "Yash",
@@ -5048,7 +5284,7 @@
           },
           {
             "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP:  ",
+            "title": "Group @ OGP:  Russ, Aiden",
             "type": "other",
             "people": [
               "Yash",
@@ -5112,7 +5348,7 @@
           },
           {
             "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 2/5 @ OGP",
+            "title": "Audrina 5/5 @ OGP",
             "type": "other",
             "people": [
               "Yash",
@@ -5124,7 +5360,7 @@
           },
           {
             "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP:  ",
+            "title": "Group @ OGP:  Russ, Zayden",
             "type": "other",
             "people": [
               "Yash",
@@ -5175,9 +5411,7 @@
             "time": "10:00 AM – 11:00 AM",
             "title": "Kids Pickup @ Venado Park ",
             "type": "other",
-            "people": [
-              "Ian H"
-            ],
+            "people": [],
             "players": [],
             "note": ""
           }
