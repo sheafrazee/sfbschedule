@@ -1,8 +1,8 @@
 {
-  "weekTitle": "Week of Oct 19 – 25",
+  "weekTitle": "Week of Oct 26 – Nov 1",
   "days": [
     {
-      "day": "Mon 10/19",
+      "day": "Mon 10/26",
       "events": [
         {
           "time": "8:00 AM – 9:00 AM",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "day": "Tue 10/20",
+      "day": "Tue 10/27",
       "events": [
         {
           "time": "10:15 AM – 11:15 AM",
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "day": "Wed 10/21",
+      "day": "Wed 10/28",
       "events": [
         {
           "time": "1:00 PM – 2:30 PM",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "day": "Thu 10/22",
+      "day": "Thu 10/29",
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "day": "Fri 10/23",
+      "day": "Fri 10/30",
       "events": [
         {
           "time": "8:00 AM – 9:00 AM",
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "day": "Sat 10/24",
+      "day": "Sat 10/31",
       "events": [
         {
           "time": "11:00 AM – 12:00 PM",
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "day": "Sun 10/25",
+      "day": "Sun 11/1",
       "events": [
         {
           "time": "10:00 AM – 11:00 AM",
@@ -5214,211 +5214,7 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": {
-    "weekTitle": "Week of Oct 26 – Nov 1",
-    "days": [
-      {
-        "day": "Mon 10/26",
-        "events": [
-          {
-            "time": "8:00 AM – 9:00 AM",
-            "title": "Colby Jones @ San Clemente",
-            "type": "excel",
-            "people": [
-              "Ali"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "san-clemente"
-          },
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA #7 @ MAP",
-            "type": "other",
-            "people": [
-              "Jung"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "map"
-          }
-        ]
-      },
-      {
-        "day": "Tue 10/27",
-        "events": [
-          {
-            "time": "10:15 AM – 11:15 AM",
-            "title": "Colby Jones @ San Clemente",
-            "type": "excel",
-            "people": [
-              "Ali"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "san-clemente"
-          },
-          {
-            "time": "12:00 PM – 1:30 PM",
-            "title": "Dalton Knecht @ OGP",
-            "type": "excel",
-            "people": [
-              "Colby R",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 4/5 @ OGP",
-            "type": "other",
-            "people": [
-              "Yash",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP:  Russ, Aiden",
-            "type": "other",
-            "people": [
-              "Yash",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          }
-        ]
-      },
-      {
-        "day": "Wed 10/28",
-        "events": [
-          {
-            "time": "1:00 PM – 2:30 PM",
-            "title": "ABA/DELTA #7 @ MAP",
-            "type": "other",
-            "people": [],
-            "players": [],
-            "note": "",
-            "loc": "map"
-          }
-        ]
-      },
-      {
-        "day": "Thu 10/29",
-        "events": [
-          {
-            "time": "6:15 AM – 7:30 AM",
-            "title": "Maxwell 3/5, Ryan 3/5 @ CDM",
-            "type": "other",
-            "people": [
-              "Ali"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "loc-mv4ixegz8xk"
-          },
-          {
-            "time": "8:15 AM – 9:15 AM",
-            "title": "Colby Jones @ San Clemente",
-            "type": "excel",
-            "people": [
-              "Ali"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "san-clemente"
-          },
-          {
-            "time": "10:00 AM – 11:00 AM",
-            "title": "Jordan 1/5 @ OGP",
-            "type": "other",
-            "people": [
-              "Colby R"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          },
-          {
-            "time": "4:00 PM – 5:00 PM",
-            "title": "Audrina 5/5 @ OGP",
-            "type": "other",
-            "people": [
-              "Yash",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          },
-          {
-            "time": "5:00 PM – 6:00 PM",
-            "title": "Group @ OGP:  Russ, Zayden",
-            "type": "other",
-            "people": [
-              "Yash",
-              "Dylan O"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "ogp"
-          }
-        ]
-      },
-      {
-        "day": "Fri 10/30",
-        "events": [
-          {
-            "time": "8:00 AM – 9:00 AM",
-            "title": "Colby Jones @ San Clemente",
-            "type": "excel",
-            "people": [
-              "Ali"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "san-clemente"
-          }
-        ]
-      },
-      {
-        "day": "Sat 10/31",
-        "events": [
-          {
-            "time": "11:00 AM – 12:00 PM",
-            "title": "Colby Jones @ San Clemente",
-            "type": "excel",
-            "people": [
-              "Yash"
-            ],
-            "players": [],
-            "note": "",
-            "loc": "san-clemente"
-          }
-        ]
-      },
-      {
-        "day": "Sun 11/1",
-        "events": [
-          {
-            "time": "10:00 AM – 11:00 AM",
-            "title": "Kids Pickup @ Venado Park ",
-            "type": "other",
-            "people": [],
-            "players": [],
-            "note": ""
-          }
-        ]
-      }
-    ]
-  },
+  "nextWeek": null,
   "locations": [
     {
       "id": "ogp",
