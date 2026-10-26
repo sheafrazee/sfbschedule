@@ -100,18 +100,6 @@
           "players": [],
           "note": "",
           "loc": "map"
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         }
       ]
     },
@@ -120,7 +108,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
-          "title": "Maxwell 3/5, Ryan 3/5 @ CDM",
+          "title": "Maxwell 4/5, Ryan 4/5 @ CDM",
           "type": "other",
           "people": [
             "Ali"
@@ -150,6 +138,18 @@
           "players": [],
           "note": "",
           "loc": "ogp"
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP: ",
+          "type": "other",
+          "people": [
+            "Yash",
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
@@ -166,24 +166,6 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "12:00 PM – 1:00 PM",
-          "title": "ABA FIlm",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA #7 @ MAP",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": "",
-          "loc": "map"
         },
         {
           "time": "3:00 PM – 4:00 PM",
@@ -5297,6 +5279,14 @@
       ],
       "start": 755,
       "end": 780
+    },
+    {
+      "id": "blk-mvol6oe49hd",
+      "days": [
+        5
+      ],
+      "start": 555,
+      "end": 660
     }
   ]
 }
