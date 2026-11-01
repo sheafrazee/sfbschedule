@@ -214,6 +214,238 @@
   ],
   "archive": [
     {
+      "key": "2026-10-26",
+      "range": "Oct 26 – Nov 1, 2026",
+      "title": "Week of Oct 26 – Nov 1",
+      "path": "archive/2026-10-26.png",
+      "pathExcel": "archive/2026-10-26-excel.png",
+      "players": [
+        "ABA/DELTA #7 @ MAP",
+        "Audrina 1/5 @ OGP",
+        "Audrina 2/5 @ OGP",
+        "Colby Jones @ San Clemente",
+        "Dao @ OGP",
+        "Group @ OGP:  Russ",
+        "Jordan @ OGP",
+        "Lucas 1/5 @ OGP",
+        "Maxwell 4/5",
+        "Ryan 4/5 @ CDM"
+      ],
+      "days": [
+        {
+          "day": "Mon 10/26",
+          "events": [
+            {
+              "time": "8:00 AM – 9:00 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #7 @ MAP",
+              "type": "other",
+              "people": [
+                "Jung"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "map"
+            },
+            {
+              "time": "3:00 PM – 4:00 PM",
+              "title": "Dao @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Audrina 1/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:  Russ",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            }
+          ]
+        },
+        {
+          "day": "Tue 10/27",
+          "events": [
+            {
+              "time": "10:15 AM – 11:15 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            }
+          ]
+        },
+        {
+          "day": "Wed 10/28",
+          "events": [
+            {
+              "time": "6:45 AM – 7:45 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "1:00 PM – 2:30 PM",
+              "title": "ABA/DELTA #7 @ MAP",
+              "type": "other",
+              "people": [],
+              "players": [],
+              "note": "",
+              "loc": "map"
+            }
+          ]
+        },
+        {
+          "day": "Thu 10/29",
+          "events": [
+            {
+              "time": "6:15 AM – 7:30 AM",
+              "title": "Maxwell 4/5, Ryan 4/5 @ CDM",
+              "type": "other",
+              "people": [],
+              "players": [],
+              "note": "",
+              "loc": "loc-mv4ixegz8xk"
+            },
+            {
+              "time": "8:15 AM – 9:15 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "10:00 AM – 11:00 AM",
+              "title": "Jordan @ OGP",
+              "type": "other",
+              "people": [
+                "Dame"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            }
+          ]
+        },
+        {
+          "day": "Fri 10/30",
+          "events": [
+            {
+              "time": "6:45 AM – 7:45 AM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Ali"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            },
+            {
+              "time": "3:00 PM – 4:00 PM",
+              "title": "Audrina 2/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "4:00 PM – 5:00 PM",
+              "title": "Lucas 1/5 @ OGP",
+              "type": "other",
+              "people": [
+                "Dylan O",
+                "Yash"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            },
+            {
+              "time": "5:00 PM – 6:00 PM",
+              "title": "Group @ OGP:  Russ",
+              "type": "other",
+              "people": [
+                "Yash",
+                "Dylan O"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "ogp"
+            }
+          ]
+        },
+        {
+          "day": "Sat 10/31",
+          "events": [
+            {
+              "time": "11:15 AM – 12:00 PM",
+              "title": "Colby Jones @ San Clemente",
+              "type": "excel",
+              "people": [
+                "Dame"
+              ],
+              "players": [],
+              "note": "",
+              "loc": "san-clemente"
+            }
+          ]
+        },
+        {
+          "day": "Sun 11/1",
+          "events": []
+        }
+      ],
+      "ts": 1793557132968
+    },
+    {
       "key": "2026-10-19",
       "range": "Oct 19 – Oct 25, 2026",
       "title": "Week of Oct 19 – 25",
