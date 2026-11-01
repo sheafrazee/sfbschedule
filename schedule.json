@@ -50,7 +50,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP:  Russ",
           "type": "other",
           "people": [
             "Yash",
@@ -110,9 +110,7 @@
           "time": "6:15 AM – 7:30 AM",
           "title": "Maxwell 4/5, Ryan 4/5 @ CDM",
           "type": "other",
-          "people": [
-            "Ali"
-          ],
+          "people": [],
           "players": [],
           "note": "",
           "loc": "loc-mv4ixegz8xk"
@@ -130,22 +128,10 @@
         },
         {
           "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan 1/5 @ OGP",
+          "title": "Jordan @ OGP",
           "type": "other",
           "people": [
-            "Colby R"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
-          "type": "other",
-          "people": [
-            "Yash",
-            "Dylan O"
+            "Dame"
           ],
           "players": [],
           "note": "",
@@ -181,9 +167,22 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Lucas @ OGP",
+          "title": "Lucas 1/5 @ OGP",
           "type": "other",
           "people": [
+            "Dylan O",
+            "Yash"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
+        },
+        {
+          "time": "5:00 PM – 6:00 PM",
+          "title": "Group @ OGP:  Russ",
+          "type": "other",
+          "people": [
+            "Yash",
             "Dylan O"
           ],
           "players": [],
@@ -196,11 +195,11 @@
       "day": "Sat 10/31",
       "events": [
         {
-          "time": "11:00 AM – 12:00 PM",
+          "time": "11:15 AM – 12:00 PM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Yash"
+            "Dame"
           ],
           "players": [],
           "note": "",
@@ -210,16 +209,7 @@
     },
     {
       "day": "Sun 11/1",
-      "events": [
-        {
-          "time": "10:00 AM – 11:00 AM",
-          "title": "Kids Pickup @ Venado Park ",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": ""
-        }
-      ]
+      "events": []
     }
   ],
   "archive": [
@@ -5266,7 +5256,8 @@
       "id": "blk-mvncnaxpqpn",
       "days": [
         2,
-        3
+        3,
+        5
       ],
       "start": 500,
       "end": 555
@@ -5279,14 +5270,6 @@
       ],
       "start": 755,
       "end": 780
-    },
-    {
-      "id": "blk-mvol6oe49hd",
-      "days": [
-        5
-      ],
-      "start": 555,
-      "end": 660
     }
   ]
 }
