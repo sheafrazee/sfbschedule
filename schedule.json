@@ -248,9 +248,7 @@
               "time": "1:00 PM – 2:30 PM",
               "title": "ABA/DELTA #7 @ MAP",
               "type": "other",
-              "people": [
-                "Jung"
-              ],
+              "people": [],
               "players": [],
               "note": "",
               "loc": "map"
@@ -441,7 +439,7 @@
           "events": []
         }
       ],
-      "ts": 1793557132968
+      "ts": 1793557277873
     },
     {
       "key": "2026-10-19",
