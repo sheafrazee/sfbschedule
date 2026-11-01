@@ -25,17 +25,6 @@
           "loc": "map"
         },
         {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Dao @ OGP",
-          "type": "other",
-          "people": [
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
           "time": "4:00 PM – 5:00 PM",
           "title": "Audrina 2/5 @ OGP",
           "type": "other",
@@ -110,6 +99,17 @@
           "players": [],
           "note": "",
           "loc": "map"
+        },
+        {
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Dao @ OGP",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         },
         {
           "time": "4:00 PM – 5:00 PM",
@@ -5496,8 +5496,8 @@
         2,
         4
       ],
-      "start": 755,
-      "end": 780
+      "start": 705,
+      "end": 735
     }
   ]
 }
