@@ -9,7 +9,7 @@
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Ali"
+            "Dame"
           ],
           "players": [],
           "note": "",
@@ -29,7 +29,7 @@
           "title": "Audrina 2/5 @ OGP",
           "type": "other",
           "people": [
-            "Dylan O"
+            "Guiressi"
           ],
           "players": [],
           "note": "",
@@ -40,8 +40,7 @@
           "title": "Group @ OGP: ",
           "type": "other",
           "people": [
-            "Yash",
-            "Dylan O"
+            "Guiressi"
           ],
           "players": [],
           "note": "",
@@ -90,6 +89,17 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "10:00 AM – 11:00 AM",
+          "title": "Jordan @ OGP",
+          "type": "other",
+          "people": [
+            "Dame"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         },
         {
           "time": "1:00 PM – 2:30 PM",
@@ -142,7 +152,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:30 AM",
-          "title": "Maxwell 4/5, Ryan 4/5 @ CDM",
+          "title": "Maxwell 5/5, Ryan 5/5 @ CDM",
           "type": "other",
           "people": [],
           "players": [],
@@ -159,17 +169,6 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan @ OGP",
-          "type": "other",
-          "people": [
-            "Dame"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         }
       ]
     },
