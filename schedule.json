@@ -37,7 +37,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ OGP: ",
+          "title": "Group @ OGP:  Russ",
           "type": "other",
           "people": [
             "Guiressi"
@@ -56,6 +56,7 @@
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
+            "Dame",
             "Ali"
           ],
           "players": [],
@@ -64,7 +65,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Lucas 1/5 @ OGP",
+          "title": "Lucas 2/5 @ OGP",
           "type": "other",
           "people": [
             "Dylan O",
@@ -89,17 +90,6 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "10:00 AM – 11:00 AM",
-          "title": "Jordan @ OGP",
-          "type": "other",
-          "people": [
-            "Dame"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         },
         {
           "time": "1:00 PM – 2:30 PM",
@@ -154,7 +144,9 @@
           "time": "6:15 AM – 7:30 AM",
           "title": "Maxwell 5/5, Ryan 5/5 @ CDM",
           "type": "other",
-          "people": [],
+          "people": [
+            "Ali"
+          ],
           "players": [],
           "note": "",
           "loc": "loc-mv4ixegz8xk"
@@ -169,6 +161,17 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "10:00 AM – 11:00 AM",
+          "title": "Jordan @ OGP 1/5",
+          "type": "other",
+          "people": [
+            "Guiressi"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
@@ -180,8 +183,18 @@
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Ali"
+            "Ali",
+            "Dame"
           ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
+        },
+        {
+          "time": "11:15 AM – 12:15 PM",
+          "title": "Crew F @ San Clemente",
+          "type": "other",
+          "people": [],
           "players": [],
           "note": "",
           "loc": "san-clemente"
@@ -192,12 +205,10 @@
       "day": "Sat 11/7",
       "events": [
         {
-          "time": "11:15 AM – 12:00 PM",
+          "time": "7:15 AM – 8:00 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
-          "people": [
-            "Dame"
-          ],
+          "people": [],
           "players": [],
           "note": "",
           "loc": "san-clemente"
@@ -5451,7 +5462,275 @@
       "ts": 1779653765260
     }
   ],
-  "nextWeek": null,
+  "nextWeek": {
+    "weekTitle": "Week of Nov 9 – 15",
+    "days": [
+      {
+        "day": "Mon 11/9",
+        "events": [
+          {
+            "time": "9:45 AM – 11:00 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "11:00 AM – 12:15 PM",
+            "title": "Pat C @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "ABA/DELTA #7 @ MAP",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": "",
+            "loc": "map"
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina 2/5 @ OGP",
+            "type": "other",
+            "people": [
+              "Guiressi"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group @ OGP:  Russ",
+            "type": "other",
+            "people": [
+              "Guiressi"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          }
+        ]
+      },
+      {
+        "day": "Tue 11/10",
+        "events": [
+          {
+            "time": "8:30 AM – 9:45 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame",
+              "Ali"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "9:45 AM – 11:00 AM",
+            "title": "Pat C @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Lucas 2/5 @ OGP",
+            "type": "other",
+            "people": [
+              "Dylan O",
+              "Yash"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          }
+        ]
+      },
+      {
+        "day": "Wed 11/11",
+        "events": [
+          {
+            "time": "9:45 AM – 11:00 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "11:00 AM – 12:15 PM",
+            "title": "Pat C @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "1:00 PM – 2:30 PM",
+            "title": "ABA/DELTA #7 @ MAP",
+            "type": "other",
+            "people": [],
+            "players": [],
+            "note": "",
+            "loc": "map"
+          },
+          {
+            "time": "3:00 PM – 4:00 PM",
+            "title": "Dao @ OGP",
+            "type": "other",
+            "people": [
+              "Dylan O"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          },
+          {
+            "time": "4:00 PM – 5:00 PM",
+            "title": "Audrina 3/5 @ OGP",
+            "type": "other",
+            "people": [
+              "Yash",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          },
+          {
+            "time": "5:00 PM – 6:00 PM",
+            "title": "Group @ OGP:  Russ",
+            "type": "other",
+            "people": [
+              "Yash",
+              "Dylan O"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          }
+        ]
+      },
+      {
+        "day": "Thu 11/12",
+        "events": [
+          {
+            "time": "6:15 AM – 7:30 AM",
+            "title": "Maxwell 5/5, Ryan 5/5 @ CDM",
+            "type": "other",
+            "people": [
+              "Ali"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "loc-mv4ixegz8xk"
+          },
+          {
+            "time": "8:15 AM – 9:30 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Colby R"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "9:30 AM – 10:45 AM",
+            "title": "Pat C @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "11:30 AM – 12:30 PM",
+            "title": "Jordan @ OGP 1/5",
+            "type": "other",
+            "people": [
+              "Guiressi"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          }
+        ]
+      },
+      {
+        "day": "Fri 11/13",
+        "events": [
+          {
+            "time": "9:45 AM – 11:00 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [
+              "Ali",
+              "Dame"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          },
+          {
+            "time": "11:45 AM – 12:45 PM",
+            "title": "Jordan @ OGP 1/5",
+            "type": "other",
+            "people": [
+              "Guiressi"
+            ],
+            "players": [],
+            "note": "",
+            "loc": "ogp"
+          }
+        ]
+      },
+      {
+        "day": "Sat 11/14",
+        "events": [
+          {
+            "time": "7:15 AM – 8:00 AM",
+            "title": "Colby Jones @ San Clemente",
+            "type": "excel",
+            "people": [],
+            "players": [],
+            "note": "",
+            "loc": "san-clemente"
+          }
+        ]
+      },
+      {
+        "day": "Sun 11/15",
+        "events": []
+      }
+    ]
+  },
   "locations": [
     {
       "id": "ogp",
@@ -5482,7 +5761,6 @@
     {
       "id": "blk-mvncnaxpqpn",
       "days": [
-        2,
         3,
         5
       ],
@@ -5492,11 +5770,18 @@
     {
       "id": "blk-mvncpukwsmx",
       "days": [
-        2,
-        4
+        2
       ],
-      "start": 705,
-      "end": 735
+      "start": 760,
+      "end": 780
+    },
+    {
+      "id": "blk-mw5mmi50yri",
+      "days": [
+        5
+      ],
+      "start": 890,
+      "end": 910
     }
   ]
 }
