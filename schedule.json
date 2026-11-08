@@ -185,7 +185,7 @@
         },
         {
           "time": "11:45 AM – 12:45 PM",
-          "title": "Jordan @ OGP 1/5",
+          "title": "Jordan @ OGP 2/5",
           "type": "other",
           "people": [
             "Guiressi"
@@ -221,17 +221,6 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "11:45 AM – 12:45 PM",
-          "title": "Jordan @ OGP 1/5",
-          "type": "other",
-          "people": [
-            "Guiressi"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
         }
       ]
     },
