@@ -38,7 +38,8 @@
           "title": "Audrina 9/5 @ OGP",
           "type": "other",
           "people": [
-            "Guiressi"
+            "Dylan O",
+            "Yash"
           ],
           "players": [],
           "note": "",
@@ -49,7 +50,8 @@
           "title": "Group @ OGP:  Russ",
           "type": "other",
           "people": [
-            "Guiressi"
+            "Dylan O",
+            "Yash"
           ],
           "players": [],
           "note": "",
@@ -61,8 +63,8 @@
       "day": "Tue 11/10",
       "events": [
         {
-          "time": "8:45 AM – 10:00 AM",
-          "title": "Pat C @ San Clemente",
+          "time": "9:45 AM – 11:00 AM",
+          "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
             "Ali"
@@ -72,8 +74,8 @@
           "loc": "san-clemente"
         },
         {
-          "time": "10:00 AM – 11:15 AM",
-          "title": "Colby Jones @ San Clemente",
+          "time": "11:00 AM – 12:15 PM",
+          "title": "Pat C @ San Clemente",
           "type": "excel",
           "people": [
             "Ali"
@@ -118,7 +120,9 @@
           "time": "3:00 PM – 4:00 PM",
           "title": "Dao @ OGP",
           "type": "other",
-          "people": [],
+          "people": [
+            "Dylan O"
+          ],
           "players": [],
           "note": "",
           "loc": "san-clemente"
@@ -164,7 +168,7 @@
           "loc": "loc-mv4ixegz8xk"
         },
         {
-          "time": "8:15 AM – 9:30 AM",
+          "time": "9:30 AM – 10:45 AM",
           "title": "Pat C @ San Clemente",
           "type": "excel",
           "people": [
@@ -175,21 +179,10 @@
           "loc": "san-clemente"
         },
         {
-          "time": "10:30 AM – 11:45 AM",
+          "time": "11:30 AM – 12:45 PM",
           "title": "Colby Jones @ OGP",
           "type": "excel",
           "people": [],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        },
-        {
-          "time": "11:45 AM – 12:45 PM",
-          "title": "Jordan @ OGP 2/5",
-          "type": "other",
-          "people": [
-            "Guiressi"
-          ],
           "players": [],
           "note": "",
           "loc": "ogp"
