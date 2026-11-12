@@ -11,8 +11,8 @@
 <title>SFB Training Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 :root {
   --ink: #111111;
@@ -1237,6 +1237,79 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
 .blk-warn:empty { display: none; }
 @media (max-width: 700px) { .blk-times input { font-size: 16px; padding: 9px 10px; } .blk-day { height: 40px; font-size: 13px; } }
 @media print { .blk-row, .cal-blk { display: none !important; } }
+
+/* ════════ Rate history (under an intern on the rate card) ════════ */
+.rate-hist { display: flex; flex-direction: column; gap: 1px; margin: 5px 0 2px 2px; padding: 3px 0 3px 8px; border-left: 2px solid var(--light-stone); }
+.rh-line { display: grid; grid-template-columns: 158px minmax(0, 1fr) auto 22px; align-items: center; gap: 6px; min-height: 27px; font-size: 12px; color: var(--dark-stone); }
+.rh-when { display: flex; align-items: center; gap: 5px; white-space: nowrap; min-width: 0; }
+.rh-l { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.rh-date { width: 118px; min-width: 0; padding: 3px 5px; border: 1.5px solid var(--light-stone); border-radius: 5px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--ink); outline: none; }
+.rh-date:focus { border-color: var(--stone); }
+.rh-date.bad { border-color: #C62828; background: #FDECEC; }
+.rh-what { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.rh-line.now .rh-what { color: var(--ink); font-weight: 600; }
+.rh-line.off .rh-what { color: var(--stone); font-style: italic; font-weight: 400; }
+.rh-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+.rh-del { border: none; background: transparent; color: var(--stone); font-size: 12px; line-height: 1; cursor: pointer; padding: 4px; border-radius: 4px; }
+.rh-del:hover { color: #fff; background: var(--clay); }
+.rate-item.ended > .rate-row:first-child .rr-name { color: var(--stone); text-decoration: line-through; }
+.rates-hint b { color: var(--dark-stone); font-weight: 600; }
+@media (max-width: 600px) {
+  .rh-line { grid-template-columns: 182px minmax(0, 1fr) auto 26px; min-height: 34px; }
+  .rh-date { width: 140px; font-size: 16px; padding: 4px 6px; }
+  .rh-del { font-size: 14px; padding: 6px; }
+}
+
+/* ════════ One-off payments (Weekly Pay) ════════ */
+.px-box { max-width: 760px; margin: 0 0 12px; padding: 10px 12px; border: 1.5px solid var(--light-stone); border-radius: 10px; background: var(--warm-white); }
+.px-box:empty { display: none; }
+.px-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; }
+.px-t { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; color: var(--ink); }
+.px-sub { font-size: 12px; color: var(--stone); margin-right: auto; font-variant-numeric: tabular-nums; }
+.px-head .btn { padding: 5px 12px; font-size: 12px; }
+#pxSave:empty { display: none; }
+.px-row { display: grid; grid-template-columns: minmax(0, 1.1fr) 82px 96px 74px minmax(0, 1.6fr) 24px; gap: 5px; align-items: center; margin-top: 8px; }
+.px-row + .px-row { margin-top: 5px; }
+.px-row input, .px-row select { width: 100%; min-width: 0; padding: 6px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); outline: none; }
+.px-row input:focus, .px-row select:focus { border-color: var(--stone); }
+.px-row .px-name { font-weight: 600; }
+.px-row select { appearance: none; -webkit-appearance: none; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 11.5px; padding-right: 22px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235C5652' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 8px center; }
+.px-money { position: relative; display: block; min-width: 0; }
+.px-money > span { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--stone); pointer-events: none; }
+.px-row .px-amt { padding-left: 17px; font-variant-numeric: tabular-nums; }
+.px-del { border: none; background: transparent; color: var(--stone); font-size: 13px; line-height: 1; cursor: pointer; padding: 5px 4px; border-radius: 4px; }
+.px-del:hover { color: #fff; background: var(--clay); }
+@media (max-width: 600px) {
+  .px-row { display: flex; flex-wrap: wrap; }
+  .px-row .px-name { order: 1; flex: 1 1 calc(100% - 128px); }
+  .px-row .px-money { order: 2; flex: 0 0 88px; }
+  .px-row .px-del { order: 3; flex: 0 0 30px; font-size: 15px; }
+  .px-row .px-kind { order: 4; flex: 1 1 calc(50% - 3px); }
+  .px-row .px-day { order: 5; flex: 1 1 calc(50% - 3px); }
+  .px-row .px-note { order: 6; flex: 1 1 100%; }
+  .px-row input, .px-row select { font-size: 16px; padding: 8px 9px; }
+  .px-row select { font-size: 14px; }
+  .px-money > span { font-size: 16px; }
+  .px-row .px-amt { padding-left: 20px; }
+  .px-row + .px-row { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--light-stone); }
+}
+/* On the Weekly Pay sheet (also captured into the PNG — literal colors) */
+.wp-extra .wp-calc { margin-top: 3px; color: #111111; }
+.wp-xk { display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.35;
+  color: #fff; background: #5C5652; border-radius: 4px; padding: 1px 6px; margin-right: 7px; vertical-align: 1px; }
+.wp-xk.tip { background: #2e7d32; }
+.wp-xk.bonus { background: #c87a00; }
+.wp-xk.other { background: #9B9590; }
+.wp-row.x-only { border-left-color: #2e7d32; }
+.iv-rl .dt { color: #9B9590; font-weight: 600; }
+/* The phone rule that moves the action bar's Publish button first and full width must not reach these */
+.rs-form .btn.publish, #pxSave .btn.publish { order: 0; width: auto; }
+@media (max-width: 600px) {
+  .rs-form { flex-direction: column; }
+  .rs-form input { font-size: 16px; padding: 10px 12px; }
+  .rs-form .btn, .rs-form .btn.publish { width: 100%; text-align: center; padding: 10px 13px; }
+}
 </style>
 </head>
 <body>
@@ -1395,6 +1468,8 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
               <button class="btn primary" id="payDownloadBtn" type="button">↓ Download PNG</button>
             </div>
           </div>
+          <div class="px-box" id="payExtras"></div>
+          <datalist id="pxNames"></datalist>
           <div class="pay-msg" id="payWeekMsg"></div>
           <div class="pay-sheet-wrap" id="payWeekPreview"></div>
         </section>
@@ -1414,7 +1489,7 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
       </div>
       <section class="pay-card rates-card" aria-labelledby="ratesH">
         <div class="pay-head"><h2 id="ratesH">Paid intern rates</h2></div>
-        <p class="rates-hint">Names must match the schedule (any capitalization). “split” pays Excel and Other sessions differently. The <span class="hint-pin"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>+</span> button adds a location rate — it replaces the regular rate for every session at that location.</p>
+        <p class="rates-hint">Names must match the schedule (any capitalization). “split” pays Excel and Other sessions differently. The <span class="hint-pin"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>+</span> button adds a location rate — it replaces the regular rate for every session at that location. <b>A rate change starts today</b>; earlier weeks keep the old rate. Change the date under the intern to start it earlier or later.</p>
         <div id="rateList"></div>
         <datalist id="rateNames"></datalist>
         <button class="btn rate-add" id="rateAddBtn" type="button">+ Add paid intern</button>
@@ -1584,6 +1659,10 @@ const LS_DRAFT = "sfb_schedule_draft_v2";
 const LS_CFG = "sfb_schedule_cfg_v2";
 const LS_PUBLISHED = "sfb_schedule_published_v2";
 const LS_ROSTER = "sfb_intern_roster_v1";   // every intern name ever seen → last-seen ts
+const LS_DRAFT_BASE = "sfb_schedule_draft_base_v1";   // GitHub sha of the published copy the draft started from
+// The edit link (?edit=1) owns the draft. The public link always shows the published schedule — even on
+// a device that has unpublished edits — and never writes a draft or publishes.
+const EDIT_LINK = new URLSearchParams(location.search).get("edit") === "1";
 
 const STYLES = {
   // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
@@ -2008,8 +2087,15 @@ function saveCfg(c) { localStorage.setItem(LS_CFG, JSON.stringify(c)); }
 function loadDraft() {
   try { return JSON.parse(localStorage.getItem(LS_DRAFT)); } catch { return null; }
 }
-function saveDraft() { localStorage.setItem(LS_DRAFT, JSON.stringify(data)); updateStatus(); }
-function clearDraft() { localStorage.removeItem(LS_DRAFT); }
+function saveDraft() {
+  if (!EDIT_LINK) return;
+  try {
+    if (!localStorage.getItem(LS_DRAFT) && publishedSha) localStorage.setItem(LS_DRAFT_BASE, publishedSha);
+    localStorage.setItem(LS_DRAFT, JSON.stringify(data));
+  } catch (e) { console.warn("Couldn't save the draft:", e); }
+  updateStatus();
+}
+function clearDraft() { localStorage.removeItem(LS_DRAFT); localStorage.removeItem(LS_DRAFT_BASE); }
 
 function isDirty() {
   if (!publishedData) return true;
@@ -2055,7 +2141,7 @@ async function init() {
   }
 
   // 3. Use a draft if one exists, otherwise the published, otherwise empty
-  const draft = loadDraft();
+  const draft = EDIT_LINK ? loadDraft() : null;   // the public link ignores (and keeps) this device's draft
   // BUGFIX: only prefer the local draft if it isn't older than what's live.
   // A draft left over from before a promote used to silently win here.
   if (draft && publishedData) {
@@ -2092,6 +2178,21 @@ async function init() {
   // 4. Get current sha from GitHub if we have credentials
   await refreshSha();
 
+  // 5. Unpublished edits here, but the schedule was published from another device since they began:
+  //    publishing these would silently wipe that device's changes, so ask first.
+  try {
+    const base = localStorage.getItem(LS_DRAFT_BASE);
+    if (EDIT_LINK && draft && data === draft && base && publishedSha && base !== publishedSha && isDirty()) {
+      const takeLive = confirm(
+        "The schedule was published from another device after you started editing on this one.\n\n" +
+        "OK = load the published version (this device's unpublished edits are discarded)\n" +
+        "Cancel = keep this device's edits (publishing them replaces the other device's changes)"
+      );
+      if (takeLive) { clearDraft(); data = JSON.parse(JSON.stringify(publishedData)); normalizeData(data); data.archive = data.archive || []; }
+      else localStorage.setItem(LS_DRAFT_BASE, publishedSha);   // asked once; publishing now is a deliberate overwrite
+    }
+  } catch (e) { console.warn("draft check failed:", e); }
+
   setMode("display");
   updateStatus();
 
@@ -2101,7 +2202,8 @@ async function init() {
     const now = new Date();
     const w = liveWeekDates(data);   // BUGFIX: match archiveCurrentWeek's key
     const sundayNight = now.getDay() === 0 && now.getHours() >= 20;
-    if (cfg.token && cfg.owner && cfg.repo && sundayNight && !data.archive.some(a => a.key === w.key)) {
+    // Skipped while there are unpublished edits: archiving publishes, and nobody reviewed them yet
+    if (EDIT_LINK && cfg.token && cfg.owner && cfg.repo && sundayNight && !isDirty() && !data.archive.some(a => a.key === w.key)) {
       archiveCurrentWeek(true);
     }
   } catch (e) { console.warn("auto-archive check failed:", e); }
@@ -2138,7 +2240,7 @@ async function publish() {
   const cfg = loadCfg();
   if (!cfg.token || !cfg.owner || !cfg.repo) {
     alert("Set up GitHub Settings first.");
-    openSettings(); return;
+    openSettings(); return false;
   }
   // BUGFIX: refuse to silently overwrite a NEWER live week with an older one.
   // publish() re-sends a freshly fetched sha, so GitHub's own conflict check
@@ -2155,7 +2257,7 @@ async function publish() {
           `About to publish: ${data.weekTitle || outKey}\n\n` +
           "This is almost always a stale draft. Publish anyway?"
         );
-        if (!goOn) { updateStatus(); return; }
+        if (!goOn) { updateStatus(); return false; }
       }
     }
   } catch (e) { console.warn("publish regression check failed:", e); }
@@ -2183,7 +2285,11 @@ async function publish() {
     });
     if (!res.ok) {
       const err = await res.text();
-      throw new Error(`${res.status}: ${err}`);
+      throw new Error(
+        res.status === 401 ? "GitHub didn't accept your token — it has probably expired. Make a new one and paste it in Settings."
+        : res.status === 409 ? "The schedule was published from another device since this page loaded. Reload the page — your edits here stay saved and you'll be asked which version to keep."
+        : res.status === 403 || res.status === 404 ? `GitHub refused the save (${res.status}). Check the repo name and that the token has Contents: Read & Write on it.`
+        : `${res.status}: ${err.slice(0, 200)}`);
     }
     const j = await res.json();
     publishedSha = j.content.sha;
@@ -2194,11 +2300,13 @@ async function publish() {
     pill.textContent = "✓ Published — Netlify rebuilding";
     pill.className = "status-pill clean";
     setTimeout(updateStatus, 3000);
+    return true;
   } catch (e) {
     console.error(e);
     pill.textContent = "✗ Publish failed";
     pill.className = "status-pill error";
     alert("Publish failed: " + e.message);
+    return false;
   }
 }
 
@@ -2618,13 +2726,8 @@ function liveWeekDates(src) {
   return weekDates(mon);
 }
 function dateForDay(dayName) {
-  const mon = scheduleWeekMonday();          // the schedule's Monday (not necessarily this real week's)
-  const lower = (dayName || "").toLowerCase();
-  let wd = null;
-  for (const k in _WEEKDAYS) { if (lower.includes(k) || lower.includes(k.slice(0,3))) { wd = _WEEKDAYS[k]; break; } }
-  const base = new Date(mon);
-  if (wd !== null) base.setDate(mon.getDate() + ((wd + 6) % 7));   // offset from Monday
-  return base;
+  // A dated label ("Mon 11/9") is used as written; an undated one ("Monday") counts from the live week's Monday
+  return dateForDayFrom(dayName, liveWeekDates(data).mon);
 }
 // Same idea, but anchored to a Monday passed in (used by archived weeks, whose
 // Monday comes from the archive key rather than the live week title). Prefers an
@@ -2713,12 +2816,28 @@ function _eventSortKey(ev) {
   const t = parseEventTimes(ev && ev.time);
   return t ? t.start.h * 60 + t.start.min : Infinity;
 }
+// Session times are the gym's wall-clock time (Pacific), whatever time zone the phone exporting them is set to.
+const GYM_TZ = "America/Los_Angeles";
+function _tzOffsetMin(utcMs, tz) {   // minutes the zone is ahead of UTC at that instant (Pacific: -480 or -420)
+  const p = {};
+  new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit" }).formatToParts(new Date(utcMs)).forEach(x => { p[x.type] = x.value; });
+  return (Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second) - utcMs) / 60000;
+}
+function _gymUtcMs(date, h, min) {
+  const wall = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), h, min);
+  try {
+    let t = wall - _tzOffsetMin(wall, GYM_TZ) * 60000;
+    const off2 = _tzOffsetMin(t, GYM_TZ);                     // daylight-saving switch between guess and answer
+    if (wall - off2 * 60000 !== t) t = wall - off2 * 60000;
+    return t;
+  } catch (e) { const d = new Date(date); d.setHours(h, min, 0, 0); return +d; }   // no time-zone data: this device's zone
+}
 function _fmtLocal(date, h, min) {
-  // Write the wall-clock time (in this device's time zone — the gym's local time)
-  // as an absolute UTC instant ending in "Z". Floating times with no zone make
-  // Apple Calendar guess a zone on import (which shifted everything to Eastern);
-  // UTC is unambiguous, so each calendar app converts it back to the right local time.
-  const d = new Date(date); d.setHours(h, min, 0, 0);
+  // Written as an absolute UTC instant ending in "Z": floating times make Apple Calendar guess a zone on
+  // import (which once shifted everything to Eastern); UTC is unambiguous, and each calendar app shows it
+  // back in its own local time.
+  const d = new Date(_gymUtcMs(date, h, min));
   const p = n => String(n).padStart(2, "0");
   return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}T${p(d.getUTCHours())}${p(d.getUTCMinutes())}00Z`;
 }
@@ -3021,6 +3140,10 @@ async function archiveCurrentWeek(auto) {
   const w = liveWeekDates(data);   // BUGFIX: was weekDates(new Date())
   data.archive = data.archive || [];
   if (auto && data.archive.some(a => a.key === w.key)) return true;   // already archived this week
+  if (!auto && isDirty() && !confirm("Archiving also publishes your unpublished edits, so viewers will see them. Archive and publish now?")) {
+    setArchiveStatus("");
+    return false;
+  }
   try {
     setArchiveStatus("Capturing all types…");
     const b64All = await captureWeekPNGForType("all");
@@ -3039,7 +3162,10 @@ async function archiveCurrentWeek(auto) {
     // re-exported as .ics later (the images alone aren't machine-readable).
     data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, players: weekRosterPlayers(data.days), days: JSON.parse(JSON.stringify(data.days || [])), ts: Date.now() });
     data.archive.sort((a, b) => b.key.localeCompare(a.key));
-    await publish();   // commit updated schedule.json (now includes the archive index)
+    if (!(await publish())) {   // commit updated schedule.json (now includes the archive index)
+      setArchiveStatus("✗ Images saved, but the schedule didn't publish — press Publish to finish archiving " + w.range);
+      return false;
+    }
     setArchiveStatus("✓ Archived " + w.range);
     if (!document.getElementById("archiveModal").classList.contains("hidden")) renderArchiveList("");
     return true;
@@ -3225,8 +3351,8 @@ async function deleteArchivedWeek(key, range, btn) {
     if (entry.path)      await ghDeleteFile(entry.path,      "Delete archived week " + range + " (all types)");
     if (entry.pathExcel) await ghDeleteFile(entry.pathExcel, "Delete archived week " + range + " (Excel Client)");
     data.archive = (data.archive || []).filter(a => a.key !== key);
-    await publish();   // commit updated schedule.json without this entry
-    setArchiveStatus("✓ Deleted " + range);
+    const ok = await publish();   // commit updated schedule.json without this entry
+    setArchiveStatus(ok ? "✓ Deleted " + range : "✗ Images deleted, but the schedule didn't publish — press Publish to finish");
     renderArchiveList(document.getElementById("archiveSearch").value || "");
   } catch (e) {
     console.error(e);
@@ -3496,7 +3622,9 @@ function isTodayLabel(dayName) {
   let wd = null;
   for (const k in _WEEKDAYS) { if (lower.includes(k) || lower.includes(k.slice(0, 3))) { wd = _WEEKDAYS[k]; break; } }
   if (wd === null || wd !== now.getDay()) return false;
-  const nums = String(dayName).match(/\d{1,2}/g);
+  const md = String(dayName).match(/(\d{1,2})\s*\/\s*(\d{1,2})/);   // "Mon 5/18": month and day must both match
+  if (md) return parseInt(md[1], 10) === now.getMonth() + 1 && parseInt(md[2], 10) === now.getDate();
+  const nums = String(dayName).match(/\d{1,2}/g);                       // "Mon 13": day of month
   if (nums && nums.length) return nums.some(x => parseInt(x, 10) === now.getDate());
   return true;
 }
@@ -4474,7 +4602,7 @@ function setMode(mode) {
 
 // ============ JSON IO ============
 function exportJson() {
-  const blob = new Blob([JSON.stringify({ ...data, payRates }, null, 2)], {type: "application/json"});
+  const blob = new Blob([JSON.stringify({ ...data, payRates, payExtras }, null, 2)], {type: "application/json"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -4489,7 +4617,8 @@ function importJson(file) {
       const obj = JSON.parse(e.target.result);
       if (!obj.days || !Array.isArray(obj.days)) throw new Error("Invalid format — needs { weekTitle, days: [...] }");
       if (Array.isArray(obj.payRates)) { payRates = _cleanRates(obj.payRates); payLocal.dirty = true; savePayRates(); }
-      delete obj.payRates;   // rates stay on this device; schedule.json is public
+      if (Array.isArray(obj.payExtras)) { payExtras = _cleanExtras(obj.payExtras); payLocal.dirty = true; savePayRates(); }
+      delete obj.payRates; delete obj.payExtras;   // pay stays on this device; schedule.json is public
       normalizeData(obj);
       data = obj;
       _dayEventSort(data.days);                       // older or hand-edited files may be unsorted
@@ -6680,9 +6809,10 @@ async function promoteNext() {
     document.getElementById("weekTitleDisplay").textContent = data.weekTitle || "";
     saveDraft();
     renderEdit();
-    await publish();
+    const ok = await publish();
     document.getElementById("promoteModal").classList.add("hidden");
-    alert("Promoted. Next Week is now live.");
+    alert(ok ? "Promoted. Next Week is now live."
+             : "Next Week is promoted on this device, but publishing failed — viewers still see the old week. Fix the problem above, then press Publish.");
   } catch (e) {
     console.error(e);
     setPromoteStatus("✗ Promote failed");
@@ -6944,7 +7074,7 @@ async function pollLiveSchedule() {
     const s = JSON.stringify(fresh);
     if (s === JSON.stringify(publishedData)) return;
     publishedData = fresh; localStorage.setItem(LS_PUBLISHED, s);
-    if (!loadDraft()) { data = JSON.parse(s); data.archive = data.archive || []; renderDisplay(); showToast("Schedule updated"); }
+    if (!EDIT_LINK || !loadDraft()) { data = JSON.parse(s); data.archive = data.archive || []; renderDisplay(); showToast("Schedule updated"); }
     else { showToast("A newer schedule was published"); }
   } catch (e) {}
 }
@@ -7168,76 +7298,151 @@ const LS_PAY_TYPE = "sfb_pay_type_v1";
 const JSPDF_SRC = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
 const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 // Starting rate card: the September 2026 Intern Cost sheet + Dylan O and Greg R (Oct 2026).
-const DEFAULT_PAY_RATES = [
-  { name: "Jung", rate: 17, unit: "hr" },
-  { name: "Dame", rate: 17, unit: "session" },
-  { name: "Anthony", rate: 17, unit: "session" },
-  { name: "Guiressi", rate: 20, unit: "session" },
-  { name: "Colby", rate: 20, unit: "session" },
-  { name: "Dylan W", rate: 17, unit: "session" },
-  { name: "Kirby", rate: 17, unit: "session" },
-  { name: "David", rate: 15, unit: "session" },
-  { name: "Mark L", rate: 25, unit: "session" },
-  { name: "Ali", rate: 15, unit: "session" },
-  { name: "Dylan O", rate: 17, unit: "session" },
-  { name: "Greg R", rate: 17, unit: "session" },
-];
+// Empty on purpose: this page is public, so real rates never ship in it. A new device gets the card from
+// the encrypted pay-rates.json (pay passphrase) or starts blank.
+const DEFAULT_PAY_RATES = [];
 // A rate is { name, rate, unit: "session" | "hr" } for both session types, or unit "split" with its own
 // { rate, unit } for Excel Client and for Other sessions (a 0 rate = not paid for that type).
+// RATE HISTORY: a change applies from a start date on, so past weeks keep the rate they were paid at.
+// The fields above hold the newest version; `since` ("YYYY-MM-DD") is the day it starts (none = always).
+// `hist` holds the earlier versions, oldest first, each { since?, rate, unit, excel?, other?, locs? }.
+// Before the oldest version's `since`, the intern isn't paid.
+const _DK_RE = /^\d{4}-\d{2}-\d{2}$/;
+function _dk(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
+function _todayDk() { return _dk(new Date()); }
+function _dkDate(dk) { const [y, m, d] = dk.split("-").map(Number); return new Date(y, m - 1, d); }
+function _fmtDk(dk) { const d = _dkDate(dk); return _md(d) + (d.getFullYear() !== new Date().getFullYear() ? `, ${d.getFullYear()}` : ""); }
+function _cleanVer(v) {
+  const sub = o => ({ rate: Number(o ? o.rate : v.rate) || 0, unit: (o ? o.unit : v.unit) === "hr" ? "hr" : "session" });
+  const unit = v.unit === "hr" || v.unit === "split" ? v.unit : "session";
+  const out = { rate: Number(v.rate) || 0, unit };
+  if (unit === "split") { out.excel = sub(v.excel); out.other = sub(v.other); }
+  // Location rates: [{ loc: locationId, rate, unit }] — each replaces the regular rate at that location
+  const locs = (Array.isArray(v.locs) ? v.locs : []).filter(o => o && typeof o === "object" && o.loc)
+    .map(o => ({ loc: String(o.loc), rate: Number(o.rate) || 0, unit: o.unit === "hr" ? "hr" : "session" }));
+  if (locs.length) out.locs = locs;
+  if (_DK_RE.test(v.since || "")) out.since = v.since;
+  return out;
+}
 function _cleanRates(list) {
-  const sub = (o, r) => ({ rate: Number(o ? o.rate : r.rate) || 0, unit: (o ? o.unit : r.unit) === "hr" ? "hr" : "session" });
   return (Array.isArray(list) ? list : []).filter(r => r && typeof r === "object").map(r => {
-    const unit = r.unit === "hr" || r.unit === "split" ? r.unit : "session";
-    const out = { name: String(r.name || ""), rate: Number(r.rate) || 0, unit };
-    if (unit === "split") { out.excel = sub(r.excel, r); out.other = sub(r.other, r); }
-    // Location rates: [{ loc: locationId, rate, unit }] — each replaces the regular rate at that location
-    const locs = (Array.isArray(r.locs) ? r.locs : []).filter(o => o && typeof o === "object" && o.loc)
-      .map(o => ({ loc: String(o.loc), rate: Number(o.rate) || 0, unit: o.unit === "hr" ? "hr" : "session" }));
-    if (locs.length) out.locs = locs;
-    return out;
+    const out = { name: String(r.name || "") };
+    const hist = (Array.isArray(r.hist) ? r.hist : []).filter(v => v && typeof v === "object").map(_cleanVer);
+    return _setVersions(out, [...hist, _cleanVer(r)]);
   });
 }
-// payLocal = this device's copy: { rates, dirty (edited since the last save/load), syncedAt (updatedAt of the
-// GitHub copy it matches) }.
+// Every version of an intern's rate, oldest first (the last one is the live entry's own fields)
+function _versions(r) { return [...(r.hist || []).map(v => JSON.parse(JSON.stringify(v))), _cleanVer(r)]; }
+function _verPaid(v) {
+  const on = o => !!o && Number(o.rate) > 0;
+  return (v.unit === "split" ? on(v.excel) || on(v.other) : Number(v.rate) > 0) || (v.locs || []).some(on);
+}
+function _verSig(v) {   // what a version pays, ignoring its start date
+  if (!_verPaid(v)) return "unpaid";
+  const sub = o => [Number(o && o.rate) || 0, o && o.unit === "hr" ? "hr" : "session"];
+  const base = v.unit === "split" ? ["split", sub(v.excel), sub(v.other)] : [v.unit === "hr" ? "hr" : "session", Number(v.rate) || 0];
+  const locs = (v.locs || []).map(o => JSON.stringify([o.loc].concat(sub(o)))).sort();
+  return JSON.stringify([base, locs]);
+}
+// Sort by start date (a later entry wins a shared date), merge back-to-back identical rates, and drop a
+// leading "not paid" stretch (before the first version nobody is paid anyway).
+function _normVersions(list) {
+  const sorted = list.map((v, i) => ({ v, i }))
+    .sort((a, b) => (a.v.since || "").localeCompare(b.v.since || "") || a.i - b.i).map(x => x.v);
+  const byDate = [];
+  sorted.forEach(v => {
+    const p = byDate[byDate.length - 1];
+    if (p && (p.since || "") === (v.since || "")) byDate[byDate.length - 1] = v; else byDate.push(v);
+  });
+  const out = [];
+  byDate.forEach(v => { const p = out[out.length - 1]; if (!(p && _verSig(p) === _verSig(v))) out.push(v); });
+  while (out.length > 1 && !_verPaid(out[0])) out.shift();
+  return out;
+}
+function _setVersions(r, list) {
+  const vs = _normVersions(list);
+  const cur = vs[vs.length - 1] || { rate: 0, unit: "session" };
+  ["rate", "unit", "excel", "other", "locs", "since", "hist"].forEach(f => delete r[f]);
+  Object.assign(r, JSON.parse(JSON.stringify(cur)));
+  if (vs.length > 1) r.hist = JSON.parse(JSON.stringify(vs.slice(0, -1)));
+  return r;
+}
+// The version in force on day `dk`, or null (not on the card yet)
+function _rateOn(r, dk) {
+  let hit = null;
+  _versions(r).forEach(v => { if (!v.since || v.since <= dk) hit = v; });
+  return hit;
+}
+
+// ONE-OFF PAYMENTS (gas money, tips, bonuses): { id, name, date: "YYYY-MM-DD", amt, kind, note }.
+// Private like the rates: kept on this device and in the encrypted pay-rates.json, never in schedule.json.
+const PAY_EXTRA_KINDS = { gas: "Gas", tip: "Tip", bonus: "Bonus", other: "Other" };
+function _newExtraId() { return "px-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function _cleanExtras(list) {
+  const seen = new Set();
+  return (Array.isArray(list) ? list : []).filter(x => x && typeof x === "object" && _DK_RE.test(x.date || "")).map((x, i) => {
+    let id = String(x.id || "").trim() || "px-" + i;
+    while (seen.has(id)) id += "x";
+    seen.add(id);
+    return { id, name: String(x.name || ""), date: x.date, amt: Math.max(0, Math.round((Number(x.amt) || 0) * 100) / 100),
+             kind: PAY_EXTRA_KINDS[x.kind] ? x.kind : "other", note: String(x.note || "").slice(0, 120) };
+  });
+}
+// payLocal = this device's copy: { rates, extras, dirty (edited since the last save/load), syncedAt (updatedAt
+// of the GitHub copy it matches) }.
 function loadPayLocal() {
   let raw = null;
   try { raw = JSON.parse(localStorage.getItem(LS_PAY_RATES)); } catch (e) {}
   if (Array.isArray(raw)) {   // first release kept a bare array — keep those edits, add any newer defaults
     const rates = _cleanRates(raw), have = new Set(rates.map(r => _payKey(r.name)));
     DEFAULT_PAY_RATES.forEach(d => { if (!have.has(_payKey(d.name))) rates.push({ ...d }); });
-    return { rates, dirty: true, syncedAt: null };
+    return { rates, extras: [], dirty: true, syncedAt: null, base: null };
   }
-  if (raw && Array.isArray(raw.rates)) return { rates: _cleanRates(raw.rates), dirty: !!raw.dirty, syncedAt: raw.syncedAt || null };
-  return { rates: DEFAULT_PAY_RATES.map(r => ({ ...r })), dirty: false, syncedAt: null };
+  if (raw && Array.isArray(raw.rates)) {
+    const base = raw.base && Array.isArray(raw.base.rates) ? { rates: _cleanRates(raw.base.rates), extras: _cleanExtras(raw.base.extras) } : null;
+    return { rates: _cleanRates(raw.rates), extras: _cleanExtras(raw.extras), dirty: !!raw.dirty, syncedAt: raw.syncedAt || null, base };
+  }
+  return { rates: DEFAULT_PAY_RATES.map(r => ({ ...r })), extras: [], dirty: false, syncedAt: null, base: null };
 }
+// base = the GitHub copy this device last loaded or saved; a save compares against it to merge.
 function savePayRates() {
-  payLocal.rates = payRates;
-  try { localStorage.setItem(LS_PAY_RATES, JSON.stringify({ v: 2, rates: payRates, dirty: payLocal.dirty, syncedAt: payLocal.syncedAt })); } catch (e) {}
+  payLocal.rates = payRates; payLocal.extras = payExtras;
+  try { localStorage.setItem(LS_PAY_RATES, JSON.stringify({ v: 3, rates: payRates, extras: payExtras, dirty: payLocal.dirty, syncedAt: payLocal.syncedAt, base: payLocal.base || null })); } catch (e) {}
 }
 let payLocal = loadPayLocal();
 let payRates = payLocal.rates;
+let payExtras = payLocal.extras;
 let payType = (() => { try { return localStorage.getItem(LS_PAY_TYPE) === "all" ? "all" : "other"; } catch (e) { return "other"; } })();
 let payWeekKey = null;   // Monday key of the week shown in Weekly Pay
 let invMonth = null;     // "YYYY-MM" shown in the invoice
 
 // Names match on case, spacing and dots only — "Mark L." = "mark l", but "Dylan O" ≠ "Dylan W".
 function _payKey(n) { return String(n || "").toLowerCase().replace(/\./g, "").replace(/\s+/g, " ").trim(); }
-// name key → { name, split, excel: {rate, unit} | null, other: {rate, unit} | null }
-function payRateIndex() {
+// name key → { name, split, excel: {rate, unit} | null, other: {rate, unit} | null, locs, anyLoc }, using the
+// rate each intern had on day `dk` ("YYYY-MM-DD", default today) — a raise never reaches back into past weeks.
+function payRateIndex(dk) {
+  dk = dk || _todayDk();
   const m = new Map();
   const one = (rate, unit) => (Number(rate) > 0 ? { rate: Number(rate), unit: unit === "hr" ? "hr" : "session" } : null);
   payRates.forEach(r => {
     const k = _payKey(r.name);
     if (!k || m.has(k)) return;
-    const split = r.unit === "split";
-    const excel = split ? one(r.excel && r.excel.rate, r.excel && r.excel.unit) : one(r.rate, r.unit);
-    const other = split ? one(r.other && r.other.rate, r.other && r.other.unit) : one(r.rate, r.unit);
+    const v = _rateOn(r, dk);
+    if (!v) return;
+    const split = v.unit === "split";
+    const excel = split ? one(v.excel && v.excel.rate, v.excel && v.excel.unit) : one(v.rate, v.unit);
+    const other = split ? one(v.other && v.other.rate, v.other && v.other.unit) : one(v.rate, v.unit);
     const locs = new Map();   // location id → {rate, unit}, or null = not paid at that location
-    (r.locs || []).forEach(o => { if (o && o.loc && !locs.has(o.loc)) locs.set(o.loc, one(o.rate, o.unit)); });
+    (v.locs || []).forEach(o => { if (o && o.loc && !locs.has(o.loc)) locs.set(o.loc, one(o.rate, o.unit)); });
     const anyLoc = [...locs.values()].some(Boolean);
     if (excel || other || anyLoc) m.set(k, { name: String(r.name).trim().replace(/\s+/g, " "), split, excel, other, locs, anyLoc });
   });
   return m;
+}
+// One rate index per day, built on first use (a week or a month asks for the same day many times)
+function _rixMemo() {
+  const memo = new Map();
+  return d => { const k = typeof d === "string" ? d : _dk(d); if (!memo.has(k)) memo.set(k, payRateIndex(k)); return memo.get(k); };
 }
 function _evKind(ev) { return ev && ev.type === "excel" ? "excel" : "other"; }
 function _payLocName(id) { const l = locById(id); return l ? (l.name || "Location") : "Deleted location"; }
@@ -7314,12 +7519,17 @@ function sessionPay(ev, rix) {
 }
 
 // ============ WEEKLY PAY ============
+function _weekExtras(mon) {
+  const a = _dk(mon), b = _dk(_addDays(mon, 6));
+  return payExtras.filter(x => x.date >= a && x.date <= b);
+}
 function buildWeeklyPay(src, type) {
-  const rix = payRateIndex();
+  const rixOn = _rixMemo();
   const paid = new Map(), other = new Map();
   let sessions = 0;
   (src.days || []).forEach(day => {
     const date = dateForDayFrom(day.day, src.mon);
+    const rix = rixOn(date);   // the rates in force that day
     (day.events || []).forEach(ev => {
       if (type !== "all" && ev.type === "excel") return;
       sessions++;
@@ -7329,8 +7539,8 @@ function buildWeeklyPay(src, type) {
         if (l.paid) {
           const r = paid.get(k) || { name: l.name, split: l.split, n: 0, mins: 0, amt: 0, parts: new Map() };
           r.n++; r.mins += sp.mins; r.amt += l.amt;
-          // One part per distinct rate (and per location rate): Excel hours, Other sessions and
-          // location rates each stay on their own line
+          // One part per distinct rate (and per location rate): Excel hours, Other sessions, location
+          // rates and a rate that changed mid-week each stay on their own line
           const pk = `${l.rate.unit}|${l.rate.rate}|${l.at || ""}`;
           const part = r.parts.get(pk) || { rate: l.rate, at: l.at || "", n: 0, mins: 0, amt: 0, kinds: new Set(), days: new Map() };
           part.n++; part.mins += sp.mins; part.amt += l.amt; part.kinds.add(l.kind);
@@ -7345,14 +7555,32 @@ function buildWeeklyPay(src, type) {
       });
     });
   });
+  // On the rate card that week, but no sessions of the counted type
+  const idle = new Map();
+  for (let i = 0; i < 7; i++) rixOn(_addDays(src.mon, i)).forEach((e, k) => {
+    if ((type === "all" ? (e.excel || e.other || e.anyLoc) : (e.other || e.anyLoc)) && !paid.has(k) && !idle.has(k)) idle.set(k, e.name);
+  });
+  // One-off payments (gas, tips, bonuses) count in both views
+  const knownName = k => {
+    for (let i = 6; i >= 0; i--) { const e = rixOn(_addDays(src.mon, i)).get(k); if (e) return e.name; }
+    return other.has(k) ? other.get(k).name : null;
+  };
+  let extraTotal = 0;
+  _weekExtras(src.mon).filter(x => x.amt > 0 && _payKey(x.name)).sort((a, b) => a.date.localeCompare(b.date)).forEach(x => {
+    const k = _payKey(x.name);
+    const r = paid.get(k) || { name: knownName(k) || String(x.name).trim().replace(/\s+/g, " "), split: false, n: 0, mins: 0, amt: 0, parts: new Map() };
+    (r.extras = r.extras || []).push({ ...x, day: _dkDate(x.date) });
+    r.amt += x.amt; extraTotal += x.amt;
+    paid.set(k, r);
+  });
   const paidRows = [...paid.values()].sort((a, b) => b.amt - a.amt || a.name.localeCompare(b.name));
   paidRows.forEach(r => {
+    r.extras = r.extras || [];
     r.partList = [...r.parts.values()].sort((a, b) => b.amt - a.amt);
     r.partList.forEach(pt => { pt.dayList = [...pt.days.values()].sort((a, b) => a.date - b.date); });
   });
   const otherRows = [...other.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
-  const idle = [...rix.values()].filter(e => (type === "all" ? (e.excel || e.other || e.anyLoc) : (e.other || e.anyLoc)) && !paid.has(_payKey(e.name))).map(e => e.name);
-  return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle, sessions,
+  return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle: [...idle.values()], sessions, extraTotal,
            total: paidRows.reduce((s, r) => s + r.amt, 0) };
 }
 
@@ -7363,7 +7591,7 @@ function weeklyPayHtml(m, fixed) {
   const range = `${_rangeLabel(m.src.mon, m.sun)}, ${m.sun.getFullYear()}`;
   const plural = (n, w) => `${n} ${w}${n !== 1 ? "s" : ""}`;
   const rows = m.paidRows.map(r => {
-    const multi = r.partList.length > 1;
+    const multi = r.partList.length + r.extras.length > 1;
     const parts = r.partList.map(pt => {
       const hr = pt.rate.unit === "hr";
       const kind = m.type === "all" && r.split && pt.kinds.size === 1 ? ` · ${_KIND_LABEL[[...pt.kinds][0]]}` : "";
@@ -7377,10 +7605,14 @@ function weeklyPayHtml(m, fixed) {
         <div class="wp-days">${escapeHtml(days)}</div>
       </div>`;
     }).join("");
-    const allHr = r.partList.every(pt => pt.rate.unit === "hr");
-    return `<div class="wp-row${allHr ? " hr" : ""}${multi ? " multi" : ""}">
+    const extras = r.extras.map(x => `<div class="wp-part wp-extra">
+        <div class="wp-calc"><span><span class="wp-xk ${x.kind}">${PAY_EXTRA_KINDS[x.kind]}</span>${escapeHtml(x.note || "")}</span>${multi ? `<span class="pa">${fmtMoney(x.amt)}</span>` : ""}</div>
+        <div class="wp-days">${escapeHtml(_dayTag(x.day))}</div>
+      </div>`).join("");
+    const allHr = r.partList.length > 0 && r.partList.every(pt => pt.rate.unit === "hr");
+    return `<div class="wp-row${allHr ? " hr" : ""}${multi ? " multi" : ""}${r.partList.length ? "" : " x-only"}">
       <div class="wp-row-top"><span class="nm">${escapeHtml(r.name)}</span><span class="amt">${fmtMoney(r.amt)}</span></div>
-      ${parts}
+      ${parts}${extras}
     </div>`;
   }).join("");
   const chips = m.otherRows.map(r => `<div class="wp-chip"><span class="nm">${escapeHtml(r.name)}</span><span class="ct">${r.n}</span></div>`).join("");
@@ -7392,7 +7624,7 @@ function weeklyPayHtml(m, fixed) {
         <div class="wp-title">Weekly Pay</div>
         <div class="wp-sub">Week of ${escapeHtml(range)} · ${typeLabel}</div>
       </div>
-      <div class="wp-total"><div class="v">${fmtMoney(m.total)}</div><div class="l">Total · ${plural(m.paidRows.length, "paid intern")}</div></div>
+      <div class="wp-total"><div class="v">${fmtMoney(m.total)}</div><div class="l">Total · ${plural(m.paidRows.length, "paid intern")}${m.extraTotal > 0 ? ` · incl. ${fmtMoney(m.extraTotal)} one-off` : ""}</div></div>
     </div>
     <div class="wp-sec">Paid interns</div>
     <div class="wp-list">${rows || `<div class="wp-empty">No paid interns on ${m.type === "all" ? "any" : "Other"} sessions this week.</div>`}</div>
@@ -7415,10 +7647,15 @@ function buildInvoice(ym) {
   const first = new Date(Y, m0, 1), last = new Date(Y, m0 + 1, 0);
   const monthName = MONTH_FULL[m0];
   const inMonth = d => d.getFullYear() === Y && d.getMonth() === m0;
-  const rix = payRateIndex();
-  // Interns with any hourly Excel rate (regular or at a location) get an hours column
-  const hourly = [...rix.values()].filter(e => (e.excel && e.excel.unit === "hr") || [...e.locs.values()].some(r => r && r.unit === "hr"))
-    .map(e => ({ name: e.name }));
+  const rixOn = _rixMemo();
+  const monthDays = [];
+  for (let d = new Date(first); d <= last; d = _addDays(d, 1)) monthDays.push(d);
+  // Interns with an hourly Excel rate at any point in the month (regular or at a location) get an hours column
+  const hourlyM = new Map();
+  monthDays.forEach(d => rixOn(d).forEach((e, k) => {
+    if (!hourlyM.has(k) && ((e.excel && e.excel.unit === "hr") || [...e.locs.values()].some(r => r && r.unit === "hr"))) hourlyM.set(k, { name: e.name });
+  }));
+  const hourly = [...hourlyM.values()];
   const srcs = new Map(payWeekSources().map(s => [s.key, s]));
   const imageOnly = new Set((data.archive || []).filter(e => !hasSnapshot(e)).map(e => e.key));
   const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -7437,7 +7674,7 @@ function buildInvoice(ym) {
       if (!inMonth(date)) { outside.push(date); return; }
       const sessions = (day.events || []).filter(e => e.type === "excel")
         .slice().sort((a, b) => _eventSortKey(a) - _eventSortKey(b))
-        .map(ev => ({ ev, ...sessionPay(ev, rix) }));
+        .map(ev => ({ ev, ...sessionPay(ev, rixOn(date)) }));
       days.push({ date, sessions, total: sessions.reduce((s, x) => s + x.cost, 0) });
     });
     days.sort((a, b) => a.date - b.date);
@@ -7460,16 +7697,28 @@ function buildInvoice(ym) {
   const per = new Map();
   weeks.forEach(w => w.days.forEach(d => d.sessions.forEach(s => s.lines.forEach(l => {
     if (!l.paid) return;
-    const k = _payKey(l.name), r = per.get(k) || { n: 0, mins: 0, amt: 0, parts: new Map() };
+    const k = _payKey(l.name), r = per.get(k) || { name: l.name, n: 0, mins: 0, amt: 0, parts: new Map() };
     r.n++; r.mins += s.mins; r.amt += l.amt;
-    const at = l.at || "", pt = r.parts.get(at) || { rate: l.rate, n: 0, mins: 0, amt: 0 };   // "" = regular rate
-    pt.n++; pt.mins += s.mins; pt.amt += l.amt; r.parts.set(at, pt);
+    const pk = `${l.at || ""}|${l.rate.unit}|${l.rate.rate}`;   // one part per rate actually paid ("" = regular rate)
+    const pt = r.parts.get(pk) || { rate: l.rate, at: l.at || "", n: 0, mins: 0, amt: 0 };
+    pt.n++; pt.mins += s.mins; pt.amt += l.amt; r.parts.set(pk, pt);
     per.set(k, r);
   }))));
+  // Every Excel rate in force during the month: one chip per intern × location × rate, with the days it applied
+  const chipMap = new Map();
+  monthDays.forEach(d => rixOn(d).forEach((e, k) => {
+    const add = (at, r) => {
+      if (!r) return;
+      const ck = `${k}|${at}|${r.unit}|${r.rate}`, c = chipMap.get(ck);
+      if (c) c.to = d; else chipMap.set(ck, { k, name: e.name, at, r, from: d, to: d });
+    };
+    if (e.excel) add("", e.excel);
+    e.locs.forEach((r, at) => add(at, r));
+  }));
   const hrsTot = {};
   hourly.forEach(h => { const k = _payKey(h.name); hrsTot[k] = weeks.reduce((s, w) => s + (w.hrs[k] || 0), 0); });
   return {
-    ym, Y, m0, monthName, first, last, weeks, gaps: merged, rix, hourly, per, hrsTot,
+    ym, Y, m0, monthName, first, last, weeks, gaps: merged, hourly, per, hrsTot, rateChips: [...chipMap.values()],
     total: weeks.reduce((s, w) => s + w.total, 0),
     count: weeks.reduce((s, w) => s + w.count, 0),
     paid: weeks.reduce((s, w) => s + w.paid, 0),
@@ -7502,45 +7751,50 @@ function invCoverHtml(inv) {
   inv.gaps.forEach(g => sub.push(`${_rangeLabel(g.from, g.to)} ${_GAP_SHORT[g.why]}`));
 
   const hcols = inv.hourly;
-  const head = `<tr><th>Week</th><th>Sessions</th><th>Paid</th>${hcols.map(h => `<th>${escapeHtml(h.name)} Hrs</th>`).join("")}<th>Total</th><th>$ / Paid</th></tr>`;
-  const rows = inv.weeks.map(w => `<tr><td class="wk">${_rangeLabel(w.from, w.to)}</td><td>${w.count}</td><td>${w.paid}</td>${
+  // "Paid" (sessions with at least one paid intern) only when it differs from Sessions somewhere
+  const showPaid = inv.weeks.some(w => w.paid !== w.count);
+  const head = `<tr><th>Week</th><th>Sessions</th>${showPaid ? "<th>Paid</th>" : ""}${hcols.map(h => `<th>${escapeHtml(h.name)} Hrs</th>`).join("")}<th>Total</th></tr>`;
+  const rows = inv.weeks.map(w => `<tr><td class="wk">${_rangeLabel(w.from, w.to)}</td><td>${w.count}</td>${showPaid ? `<td>${w.paid}</td>` : ""}${
     hcols.map(h => `<td class="hrs">${fmtHrs(w.hrs[_payKey(h.name)] || 0)}</td>`).join("")
-  }<td class="amt">${fmtMoney(w.total)}</td><td>${w.paid ? fmtMoney(w.total / w.paid) : "—"}</td></tr>`).join("");
-  const grand = `<tr class="grand"><td>${mn} Total</td><td>${inv.count}</td><td>${inv.paid}</td>${
+  }<td class="amt">${fmtMoney(w.total)}</td></tr>`).join("");
+  const grand = `<tr class="grand"><td>${mn} Total</td><td>${inv.count}</td>${showPaid ? `<td>${inv.paid}</td>` : ""}${
     hcols.map(h => `<td class="hrs">${fmtHrs(inv.hrsTot[_payKey(h.name)] || 0)}</td>`).join("")
-  }<td class="amt">${fmtMoney(inv.total)}</td><td>${inv.paid ? fmtMoney(inv.total / inv.paid) : "—"}</td></tr>`;
+  }<td class="amt">${fmtMoney(inv.total)}</td></tr>`;
 
-  // One chip per rate: the regular Excel rate, then each location rate ("Colby @ San Clemente $25")
-  const isHr = e => !!(e.excel && e.excel.unit === "hr");
-  const chipList = [];
-  [...inv.rix.values()].filter(e => e.excel || e.anyLoc).sort((a, b) => (isHr(a) ? 0 : 1) - (isHr(b) ? 0 : 1)).forEach(e => {
-    const u = inv.per.get(_payKey(e.name));
-    if (e.excel) chipList.push({ e, at: "", r: e.excel, use: u && u.parts.get("") });
-    e.locs.forEach((r, at) => { if (r) chipList.push({ e, at, r, use: u && u.parts.get(at) }); });
-  });
-  const chips = chipList.map(({ e, at, r, use }) => {
-    const hr = r.unit === "hr";
+  // One chip per rate in force during the month: the regular Excel rate, then each location rate
+  // ("Colby @ San Clemente $25"). A rate that changed mid-month shows each rate with its dates.
+  const hrIntern = new Set(inv.rateChips.filter(c => !c.at && c.r.unit === "hr").map(c => c.k));
+  const order = new Map();
+  inv.rateChips.forEach(c => { if (!order.has(c.k)) order.set(c.k, order.size); });
+  const spans = {};
+  inv.rateChips.forEach(c => { const sk = c.k + "|" + c.at; spans[sk] = (spans[sk] || 0) + 1; });
+  const chipList = inv.rateChips.map(c => ({ ...c, use: (inv.per.get(c.k) || { parts: new Map() }).parts.get(`${c.at}|${c.r.unit}|${c.r.rate}`) }))
+    .sort((a, b) => (hrIntern.has(a.k) ? 0 : 1) - (hrIntern.has(b.k) ? 0 : 1) || order.get(a.k) - order.get(b.k)
+      || (a.at ? 1 : 0) - (b.at ? 1 : 0) || a.at.localeCompare(b.at) || a.from - b.from);
+  const chips = chipList.map(c => {
+    const hr = c.r.unit === "hr", use = c.use;
     const x = use ? `<span class="x"> · ${hr ? fmtHrs(use.mins) : use.n} = ${fmtMoney(use.amt)}</span>` : "";
-    return `<span class="iv-rl${hr ? " hr" : ""}${use ? "" : " off"}"><b>${escapeHtml(e.name)}</b>${at ? ` <span class="lc">@ ${escapeHtml(_payLocName(at))}</span>` : ""} <i>${fmtMoney(r.rate)}</i><span class="u"> / ${hr ? "hr" : "session"}</span>${x}</span>`;
+    const when = spans[c.k + "|" + c.at] > 1 ? ` <span class="dt">${_rangeLabel(c.from, c.to)}</span>` : "";
+    return `<span class="iv-rl${hr ? " hr" : ""}${use ? "" : " off"}"><b>${escapeHtml(c.name)}</b>${c.at ? ` <span class="lc">@ ${escapeHtml(_payLocName(c.at))}</span>` : ""}${when} <i>${fmtMoney(c.r.rate)}</i><span class="u"> / ${hr ? "hr" : "session"}</span>${x}</span>`;
   }).join("");
 
   const foot = [];
   const hrNotes = [];
   let anyFlat = false;
-  inv.per.forEach((u, k) => {
-    const e = inv.rix.get(k); if (!e) return;
-    const parts = [...u.parts.entries()], hp = parts.filter(([, pt]) => pt.rate.unit === "hr");
+  inv.per.forEach(u => {
+    const hp = [...u.parts.values()].filter(pt => pt.rate.unit === "hr");
     if (!hp.length) { anyFlat = true; return; }
-    if (hp.length === 1 && !hp[0][0]) {
-      const pt = hp[0][1];
-      hrNotes.push(`${escapeHtml(e.name)} is billed hourly — ${fmtHrs(pt.mins)} of scheduled session time in ${mn} at ${fmtMoney(pt.rate.rate)}/hr = ${fmtMoney(pt.amt)}.`);
+    if (hp.length === 1 && !hp[0].at) {
+      const pt = hp[0];
+      hrNotes.push(`${escapeHtml(u.name)} is billed hourly — ${fmtHrs(pt.mins)} of scheduled session time in ${mn} at ${fmtMoney(pt.rate.rate)}/hr = ${fmtMoney(pt.amt)}.`);
     } else {
-      const sum = hp.reduce((sm, [, pt]) => sm + pt.amt, 0);
-      hrNotes.push(`${escapeHtml(e.name)} is billed hourly — ${hp.map(([at, pt]) => `${fmtHrs(pt.mins)}${at ? " at " + escapeHtml(_payLocName(at)) : ""} × ${fmtMoney(pt.rate.rate)}/hr`).join(" + ")} = ${fmtMoney(sum)}.`);
+      const sum = hp.reduce((sm, pt) => sm + pt.amt, 0);
+      hrNotes.push(`${escapeHtml(u.name)} is billed hourly — ${hp.map(pt => `${fmtHrs(pt.mins)}${pt.at ? " at " + escapeHtml(_payLocName(pt.at)) : ""} × ${fmtMoney(pt.rate.rate)}/hr`).join(" + ")} = ${fmtMoney(sum)}.`);
     }
   });
   if (hrNotes.length) foot.push(hrNotes.join(" ") + (anyFlat ? " Every other intern is billed per session." : ""));
   if (chipList.some(c => !c.use)) foot.push(`Faded rates had no Excel Client sessions in ${mn}.`);
+  if (chipList.some(c => spans[c.k + "|" + c.at] > 1)) foot.push(`Dated rates changed during ${mn} — each session is billed at the rate in force that day.`);
   if (inv.front.length || inv.back.length) {
     const bits = [];
     if (inv.front.length) bits.push(`${_rangeLabel(inv.front[0], inv.front[inv.front.length - 1])} clipped off the front`);
@@ -7551,7 +7805,7 @@ function invCoverHtml(inv) {
 
   return `<div class="iv-page">
     ${_invHdr("cover", "Shea Frazee Basketball · Intern Cost", `${mn} ${inv.Y} — Cost Summary`, escapeHtml(sub.join(" · ")),
-      fmtMoney(inv.total), `${mn} total · ${inv.count} session${inv.count !== 1 ? "s" : ""} · ${inv.paid} paid${_hrsBits(inv, inv.hrsTot)}`, "")}
+      fmtMoney(inv.total), `${mn} total · ${inv.count} session${inv.count !== 1 ? "s" : ""}${inv.paid !== inv.count ? ` · ${inv.paid} paid` : ""}${_hrsBits(inv, inv.hrsTot)}`, "")}
     <div class="iv-fit">
       <table class="iv-ctable">${head}${rows}${grand}</table>
       <div class="iv-rates">
@@ -7589,7 +7843,7 @@ function invWeekHtml(inv, w) {
     const o = w.outside;
     note = `${mn} only — ${o.length === 1 ? `${_DAY_SHORT[o[0].getDay()]} ${_md(o[0])}` : _rangeLabel(o[0], o[o.length - 1])} removed.`;
   }
-  const sub = `${w.count} session${w.count !== 1 ? "s" : ""} total · ${w.paid ? fmtMoney(w.total / w.paid) : "—"} / paid session${_hrsBits(inv, w.hrs)}`;
+  const sub = `${w.count} session${w.count !== 1 ? "s" : ""} total${w.paid !== w.count ? ` · ${w.paid} paid` : ""}${_hrsBits(inv, w.hrs)}`;
   return `<div class="iv-page">
     ${_invHdr("", "Shea Frazee Basketball · Intern Cost", `Week of ${_rangeLabel(w.from, w.to)}`,
       w.roster.length ? escapeHtml(w.roster.join(" · ")) : "No Excel Client sessions this week",
@@ -7754,17 +8008,18 @@ async function _payCryptoKey(pass, salt, iter) {
   return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iter, hash: "SHA-256" }, base,
     { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
 }
-async function sealRates(rates, pass) {
+async function sealRates(pay, pass) {   // pay = { rates, extras }
   const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12)), iter = 200000;
   const key = await _payCryptoKey(pass, salt, iter);
-  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify({ rates }))));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(pay))));
   return { app: "sfb-pay-rates", v: 1, updatedAt: new Date().toISOString(), kdf: "PBKDF2-SHA256", iter,
            salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
 }
 async function openRates(env, pass) {   // throws if the passphrase is wrong
   const key = await _payCryptoKey(pass, _unb64(env.salt), env.iter || 200000);
   const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(env.iv) }, key, _unb64(env.ct));
-  return _cleanRates(JSON.parse(new TextDecoder().decode(pt)).rates);
+  const o = JSON.parse(new TextDecoder().decode(pt));
+  return { rates: _cleanRates(o.rates), extras: _cleanExtras(o.extras) };
 }
 async function ghGetJson(path) {   // authenticated read: no raw-CDN caching, null when the file doesn't exist
   const cfg = loadCfg();
@@ -7775,8 +8030,9 @@ async function ghGetJson(path) {   // authenticated read: no raw-CDN caching, nu
   const j = await res.json();
   return JSON.parse(new TextDecoder().decode(_unb64(String(j.content || "").replace(/\s/g, ""))));
 }
-function _adoptRates(rates, updatedAt) {
-  payRates = rates; payLocal.dirty = false; payLocal.syncedAt = updatedAt; savePayRates();
+function _adoptRates(pay, updatedAt) {
+  payLocal.base = JSON.parse(JSON.stringify({ rates: pay.rates, extras: pay.extras }));
+  payRates = pay.rates; payExtras = pay.extras; payLocal.dirty = false; payLocal.syncedAt = updatedAt; savePayRates();
   renderRates(); renderWeeklyPay(); renderInvoicePreview();
 }
 // Pull the GitHub copy. Unsaved edits on this device are never overwritten without asking.
@@ -7795,17 +8051,89 @@ async function refreshRateSync() {
   } catch (e) { paySync.state = "error"; paySync.err = e.message; }
   renderRateSync();
 }
+// 3-way merge of pay data: base = the copy this device last synced (null if unknown), mine = this device,
+// theirs = what another device saved since. Each intern (by name) and each one-off (by id) is merged on its
+// own: changed on one side → that side's version; changed on both → this device's; added on either side →
+// kept; deleted on one side and untouched on the other → stays deleted.
+function _mergePay(base, mine, theirs) {
+  const same = (x, y) => JSON.stringify(x) === JSON.stringify(y);
+  const rateKeys = list => { const n = {}; return list.map(r => { const k = _payKey(r.name) || "~"; n[k] = (n[k] || 0) + 1; return n[k] > 1 ? `${k}#${n[k]}` : k; }); };
+  const merge = (b, m, t, keysOf) => {
+    const map = list => { const ks = keysOf(list), out = new Map(); list.forEach((x, i) => out.set(ks[i], x)); return out; };
+    const B = b ? map(b) : null, M = map(m), T = map(t), out = [];
+    M.forEach((x, k) => {
+      if (T.has(k)) out.push(!B || !B.has(k) || !same(B.get(k), x) ? x : T.get(k));
+      else if (!(B && B.has(k) && same(B.get(k), x))) out.push(x);     // deleted there and untouched here → drop
+    });
+    T.forEach((x, k) => {
+      if (M.has(k)) return;
+      if (B && B.has(k) && same(B.get(k), x)) return;                   // deleted here and untouched there
+      out.push(x);                                                      // added (or edited) on the other device
+    });
+    return out;
+  };
+  return { rates: merge(base && base.rates, mine.rates, theirs.rates, rateKeys),
+           extras: merge(base && base.extras, mine.extras, theirs.extras, list => list.map(x => x.id)) };
+}
+async function ghGetFileJson(path) {   // { json, sha } or null when the file doesn't exist
+  const cfg = loadCfg();
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch || "main"}&_=${Date.now()}`;
+  const res = await fetch(url, { headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json" }, cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error("GitHub " + res.status);
+  const j = await res.json();
+  return { sha: j.sha, json: JSON.parse(new TextDecoder().decode(_unb64(String(j.content || "").replace(/\s/g, "")))) };
+}
+// Write a JSON file only if it still has `sha` (null = it must not exist yet). "conflict" = someone wrote it first.
+async function ghPutJsonIf(path, obj, sha, message) {
+  const cfg = loadCfg();
+  const body = { message, branch: cfg.branch || "main", content: btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 1)))) };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`, {
+    method: "PUT", body: JSON.stringify(body),
+    headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" } });
+  if (res.status === 409 || res.status === 422) return "conflict";
+  if (!res.ok) throw new Error("GitHub " + res.status + (res.status === 401 ? " — the token has probably expired; make a new one in Settings" : ""));
+  return "ok";
+}
+let _payEditSeq = 0;   // bumped by every rate / one-off edit, so a save can tell if you kept typing meanwhile
+// newPass: set or change the passphrase. When the GitHub copy can't be opened with the current passphrase
+// (forgotten / changed elsewhere), a newPass save replaces it — that's the explicit "Forgot it?" path.
 async function saveRatesToGitHub(newPass) {
-  const pass = newPass || _payPass();
+  const oldPass = _payPass(), pass = newPass || oldPass;
   if (!pass || paySync.busy) return;
   paySync.busy = true; paySync.err = ""; renderRateSync();
+  const seq0 = _payEditSeq;
+  const mine0 = { rates: _cleanRates(payRates), extras: _cleanExtras(payExtras) };
   try {
-    const env = await sealRates(_cleanRates(payRates).filter(r => r.name.trim()), pass);
-    await ghPutFile(payRatesPath(), btoa(unescape(encodeURIComponent(JSON.stringify(env, null, 1)))), "Update pay rates (encrypted)");
+    let merged = false, done = null;
+    for (let attempt = 0; attempt < 3 && !done; attempt++) {
+      const got = await ghGetFileJson(payRatesPath());
+      const env = got && got.json && got.json.ct ? got.json : null;
+      let next = mine0;
+      if (env && env.updatedAt !== payLocal.syncedAt) {          // saved from another device since this one synced
+        let theirs = null;
+        if (oldPass) { try { theirs = await openRates(env, oldPass); } catch (e) {} }
+        if (theirs) { next = _mergePay(payLocal.base, mine0, theirs); merged = true; }
+        else if (!newPass) { paySync.remote = env; paySync.locked = true; throw new Error("the pay passphrase was changed on another device — enter it above first"); }
+      }
+      const up = { rates: next.rates.filter(r => r.name.trim()), extras: next.extras.filter(x => x.name.trim() && x.amt > 0) };
+      const sealed = await sealRates(up, pass);
+      if ((await ghPutJsonIf(payRatesPath(), sealed, got ? got.sha : null, "Update pay rates (encrypted)")) === "ok") done = { next, up, sealed };
+    }
+    if (!done) throw new Error("another device kept saving at the same moment — try again");
     if (newPass) _setPayPass(newPass);
-    paySync.remote = env; paySync.locked = false; paySync.unlockErr = false; paySync.form = false;
-    payLocal.dirty = false; payLocal.syncedAt = env.updatedAt; savePayRates();
-    showToast("Rates saved to GitHub");
+    const edited = _payEditSeq !== seq0;   // typed more while saving: keep that on top of the saved copy
+    if (merged) {
+      const now = { rates: _cleanRates(payRates), extras: _cleanExtras(payExtras) };
+      const res = edited ? _mergePay(mine0, now, done.next) : done.next;
+      payRates = res.rates; payExtras = res.extras;
+    }
+    paySync.remote = done.sealed; paySync.locked = false; paySync.unlockErr = false; paySync.form = false;
+    payLocal.base = JSON.parse(JSON.stringify(done.up));
+    payLocal.dirty = edited; payLocal.syncedAt = done.sealed.updatedAt; savePayRates();
+    if (merged) { renderRates(); renderWeeklyPay(); renderInvoicePreview(); }
+    showToast(merged ? "Pay saved — combined with changes from another device" : "Pay saved to GitHub");
   } catch (e) {
     console.error(e);
     paySync.err = "Save failed — " + e.message;
@@ -7816,9 +8144,9 @@ async function unlockRates(pass) {
   if (!pass || !paySync.remote || paySync.busy) return;
   paySync.busy = true; renderRateSync();
   try {
-    const rates = await openRates(paySync.remote, pass);
+    const pay = await openRates(paySync.remote, pass);
     _setPayPass(pass); paySync.locked = false; paySync.unlockErr = false;
-    if (!payLocal.dirty) _adoptRates(rates, paySync.remote.updatedAt);
+    if (!payLocal.dirty) _adoptRates(pay, paySync.remote.updatedAt);
   } catch (e) { paySync.unlockErr = true; }
   paySync.busy = false; renderRateSync();
 }
@@ -7841,8 +8169,9 @@ function renderRateSync() {
   } else if (st.state === "error") {
     h = `<div class="rs-msg err">Couldn't reach GitHub (${escapeHtml(st.err)}). Rates are still saved on this device.</div><button class="btn" type="button" data-rs="retry">Retry</button>`;
   } else if (st.form === "set") {
-    h = form(st.remote ? "Choose a new pay passphrase. This device's rates replace the GitHub copy, and the old passphrase stops working."
-                       : "Choose a pay passphrase. Enter it once on each of your devices — it keeps the rates unreadable in your public repo.",
+    h = form(st.remote && (st.locked || !pass) ? "Choose a new pay passphrase (12+ characters). This device's rates replace the GitHub copy, and the old passphrase stops working."
+             : st.remote ? "Choose a new pay passphrase — at least 12 characters; three unrelated words work well. Each of your other devices asks for it once."
+             : "Choose a pay passphrase — at least 12 characters; three unrelated words work well. Enter it once on each of your devices — it keeps pay unreadable in your public repo.",
              "Pay passphrase", "new-password", "create", "↑ Save rates", "publish")
       + (st.err ? `<div class="rs-msg err">${escapeHtml(st.err)}</div>` : "")
       + `<button class="ab-link" type="button" data-rs="cancel">Cancel</button>`;
@@ -7855,14 +8184,15 @@ function renderRateSync() {
   } else if (!st.remote && !pass) {
     h = `<div class="rs-msg">Saved on this device only.</div><button class="btn" type="button" data-rs="setup">Sync across devices</button>`;
   } else if (payLocal.dirty || !st.remote) {
-    h = `<div class="rs-msg dirty">${st.remote ? "● Unsaved rate changes" : "● Not saved to GitHub yet"}</div><button class="btn publish" type="button" data-rs="save"${dis}>${st.busy ? "Saving…" : "↑ Save rates"}</button>`;
+    h = `<div class="rs-msg dirty">${st.remote ? "● Unsaved pay changes" : "● Not saved to GitHub yet"}</div><button class="btn publish" type="button" data-rs="save"${dis}>${st.busy ? "Saving…" : "↑ Save rates"}</button>`;
     if (st.remote && st.remote.updatedAt !== payLocal.syncedAt)
-      h += `<div class="rs-msg">Another device saved rates ${escapeHtml(_rsWhen(st.remote.updatedAt))}. <button class="ab-link" type="button" data-rs="load">Load those instead</button></div>`;
+      h += `<div class="rs-msg">Another device saved pay changes ${escapeHtml(_rsWhen(st.remote.updatedAt))} — saving here combines them with yours. <button class="ab-link" type="button" data-rs="load">Use theirs and discard this device's changes</button></div>`;
   } else {
-    h = `<div class="rs-msg ok">✓ Synced to GitHub · ${escapeHtml(_rsWhen(st.remote.updatedAt))}</div>`;
+    h = `<div class="rs-msg ok">✓ Synced to GitHub · ${escapeHtml(_rsWhen(st.remote.updatedAt))}</div><button class="ab-link" type="button" data-rs="setup">Change pay passphrase</button>`;
   }
   if (st.err && st.form !== "set" && st.state === "ready") h += `<div class="rs-msg err">${escapeHtml(st.err)}</div>`;
   box.innerHTML = h;
+  _renderPxSave();
 }
 
 // ============ PAY TAB RENDER ============
@@ -7887,10 +8217,64 @@ function renderWeeklyPay() {
   const src = _paySrc();
   ["payDownloadBtn", "payShareBtn"].forEach(id => { document.getElementById(id).disabled = !src; });
   sel.disabled = !src;
+  renderPayExtras();
   if (!src) { msg.innerHTML = ""; box.innerHTML = `<div class="pay-empty">No weeks with saved sessions yet.</div>`; return; }
+  _renderWeeklySheet();
+}
+function _renderWeeklySheet() {
+  const src = _paySrc();
+  if (!src) return;
   const m = buildWeeklyPay(src, payType);
-  msg.innerHTML = m.idle.length ? `On the rate card, no ${payType === "all" ? "" : "Other "}sessions this week: ${escapeHtml(m.idle.join(", "))}` : "";
-  box.innerHTML = weeklyPayHtml(m, false);
+  document.getElementById("payWeekMsg").innerHTML = m.idle.length ? `On the rate card, no ${payType === "all" ? "" : "Other "}sessions this week: ${escapeHtml(m.idle.join(", "))}` : "";
+  document.getElementById("payWeekPreview").innerHTML = weeklyPayHtml(m, false);
+}
+
+// ---- One-off payments (gas, tips, bonuses) for the week shown ----
+function _pxSubText(src) {
+  const list = _weekExtras(src.mon);
+  const tot = list.reduce((s, x) => s + (x.amt > 0 && _payKey(x.name) ? x.amt : 0), 0);
+  return list.length ? `${fmtMoney(tot)} this week` : "Gas money, tips, bonuses";
+}
+function renderPayExtras() {
+  const box = document.getElementById("payExtras");
+  if (!box) return;
+  const src = _paySrc();
+  if (!src) { box.innerHTML = ""; return; }
+  const list = _weekExtras(src.mon).slice().sort((a, b) => a.date.localeCompare(b.date));
+  const days = [0, 1, 2, 3, 4, 5, 6].map(i => _addDays(src.mon, i));
+  const kindOpts = k => Object.entries(PAY_EXTRA_KINDS).map(([v, l]) => `<option value="${v}"${v === k ? " selected" : ""}>${l}</option>`).join("");
+  const dayOpts = dk => days.map(d => { const v = _dk(d); return `<option value="${v}"${v === dk ? " selected" : ""}>${_dayTag(d)}</option>`; }).join("");
+  const rows = list.map(x => `<div class="px-row" data-id="${escapeAttr(x.id)}">
+      <input class="px-name" list="pxNames" value="${escapeAttr(x.name)}" placeholder="Intern" aria-label="Who it's for" spellcheck="false" autocomplete="off">
+      <select class="px-kind" aria-label="What it's for">${kindOpts(x.kind)}</select>
+      <select class="px-day" aria-label="Day">${dayOpts(x.date)}</select>
+      <span class="px-money"><span>$</span><input class="px-amt" type="number" inputmode="decimal" min="0" step="1" value="${x.amt > 0 ? escapeAttr(x.amt) : ""}" placeholder="0" aria-label="Amount"></span>
+      <input class="px-note" value="${escapeAttr(x.note)}" placeholder="Note (optional)" maxlength="120" aria-label="Note">
+      <button class="px-del" type="button" aria-label="Remove this payment" title="Remove">✕</button>
+    </div>`).join("");
+  box.innerHTML = `<div class="px-head"><span class="px-t">One-off payments</span><span class="px-sub">${escapeHtml(_pxSubText(src))}</span><span id="pxSave"></span><button class="btn px-add" type="button">+ Add</button></div>${rows}`;
+  const dl = document.getElementById("pxNames");
+  if (dl) dl.innerHTML = _knownInternNames().map(n => `<option value="${escapeAttr(n)}"></option>`).join("");
+  _renderPxSave();
+}
+// A Save button beside the one-offs, when this device syncs pay to GitHub and has unsaved changes
+function _renderPxSave() {
+  const el = document.getElementById("pxSave");
+  if (!el) return;
+  const st = paySync;
+  const show = payLocal.dirty && _paySyncOn() && !!_payPass() && !st.locked && st.state === "ready";
+  el.innerHTML = show ? `<button class="btn publish" type="button" data-rs="save"${st.busy ? " disabled" : ""}>${st.busy ? "Saving…" : "↑ Save"}</button>` : "";
+}
+let _pxRefreshT = null;
+function _payExtrasChanged() {
+  _payEditSeq++;
+  payLocal.dirty = true;
+  savePayRates();
+  renderRateSync();
+  const src = _paySrc(), sub = document.querySelector("#payExtras .px-sub");
+  if (src && sub) sub.textContent = _pxSubText(src);
+  clearTimeout(_pxRefreshT);
+  _pxRefreshT = setTimeout(_renderWeeklySheet, 250);
 }
 
 function renderInvoicePreview() {
@@ -7909,7 +8293,7 @@ function renderInvoicePreview() {
   const inv = buildInvoice(invMonth);
   if (!inv.weeks.length) { msg.innerHTML = ""; warn.innerHTML = ""; box.innerHTML = `<div class="pay-empty">No saved schedule covers this month.</div>`; return; }
   const pages = invoicePagesHtml(inv);
-  msg.innerHTML = `<b>${fmtMoney(inv.total)}</b> · ${inv.count} Excel session${inv.count !== 1 ? "s" : ""} · ${inv.paid} paid · ${pages.length} page${pages.length !== 1 ? "s" : ""}. Tap a page to enlarge.`;
+  msg.innerHTML = `<b>${fmtMoney(inv.total)}</b> · ${inv.count} Excel session${inv.count !== 1 ? "s" : ""}${inv.paid !== inv.count ? ` · ${inv.paid} paid` : ""} · ${pages.length} page${pages.length !== 1 ? "s" : ""}. Tap a page to enlarge.`;
   const live = inv.weeks.find(w => w.live);
   const notes = inv.gaps.map(g => `${_rangeLabel(g.from, g.to)} isn't included — ${_GAP_LONG[g.why]}.`);
   if (live) notes.push(`${_rangeLabel(live.from, live.to)} comes from the live week (not archived yet).`);
@@ -7976,12 +8360,78 @@ function addLocRate(i) {
   if (!free) return;
   // Start from the regular rate so only the number that differs needs typing
   const base = r.unit === "split" ? ((r.other && r.other.rate > 0) ? r.other : (r.excel || r.other)) : r;
+  _beginRateEdit(r);
   (r.locs = r.locs || []).push({ loc: free.id, rate: Number(base && base.rate) || 0, unit: base && base.unit === "hr" ? "hr" : "session" });
+  _setVersions(r, _versions(r));
   renderRates(); _payRatesChanged();
   const ins = document.querySelectorAll(`#rateList .rate-item[data-i="${i}"] .rl-rate`);
   const inp = ins[ins.length - 1];
   if (inp) { inp.focus(); inp.select(); }
 }
+// ---- Rate history: a change starts today; every earlier day keeps the rate it had ----
+function _beginRateEdit(r) {
+  const today = _todayDk();
+  if (r.since && r.since >= today) return;   // today's change (or a scheduled one): edit it in place
+  r.hist = _versions(r);                      // the rate so far becomes history…
+  r.since = today;                            // …and this edit starts today
+}
+function _rateEdited(r) {
+  _setVersions(r, _versions(r));              // typing the old number back undoes the change
+  _renderRateHist(r);
+  _payRatesChanged();
+}
+function _isEnded(r) { return !!(r.hist && r.hist.length) && !_verPaid(_cleanVer(r)); }
+function _verSummary(v) {
+  if (!_verPaid(v)) return "Not paid";
+  const amt = (o, unitWord) => Number(o.rate) > 0 ? `${fmtMoney(o.rate)}${o.unit === "hr" ? (unitWord ? " / hr" : "/hr") : unitWord ? " / session" : ""}` : "—";
+  let s = v.unit === "split" ? `Excel ${amt(v.excel)} · Other ${amt(v.other)}` : Number(v.rate) > 0 ? amt(v, true) : "Locations only";
+  (v.locs || []).forEach(o => { s += ` · @ ${_payLocName(o.loc)} ${amt(o)}`; });
+  return s;
+}
+function _rateHistHtml(r, i) {
+  const vs = _versions(r);
+  if (vs.length < 2 && !vs[0].since) return "";
+  const today = _todayDk(), nm = escapeAttr(r.name.trim() || "intern");
+  let nowIdx = -1;
+  vs.forEach((v, j) => { if (!v.since || v.since <= today) nowIdx = j; });
+  const tag = on => on ? `<span class="rh-tag">now</span>` : `<span></span>`;
+  const lines = [];
+  for (let j = vs.length - 1; j >= 0; j--) {
+    const v = vs[j], sum = _verSummary(v);
+    const when = v.since
+      ? `<span class="rh-l">${v.since > today ? "Starts" : "From"}</span><input type="date" class="rh-date" data-v="${j}" value="${v.since}" aria-label="Start date of ${nm}'s ${escapeAttr(sum)} rate">`
+      : `<span class="rh-l">Before ${escapeHtml(_fmtDk(vs[j + 1].since))}</span>`;
+    const del = vs.length > 1 ? `<button class="rh-del" type="button" data-v="${j}" aria-label="Remove ${nm}'s ${escapeAttr(sum)} rate" title="Remove this rate">✕</button>` : `<span></span>`;
+    lines.push(`<div class="rh-line${j === nowIdx ? " now" : ""}${_verPaid(v) ? "" : " off"}"><span class="rh-when">${when}</span><span class="rh-what" title="${escapeAttr(sum)}">${escapeHtml(sum)}</span>${tag(j === nowIdx)}${del}</div>`);
+  }
+  if (vs[0].since) lines.push(`<div class="rh-line off${nowIdx < 0 ? " now" : ""}"><span class="rh-when"><span class="rh-l">Before ${escapeHtml(_fmtDk(vs[0].since))}</span></span><span class="rh-what">Not paid</span>${tag(nowIdx < 0)}<button class="rh-del" type="button" data-v="-1" aria-label="Pay ${nm}'s ${escapeAttr(_verSummary(vs[0]))} rate before ${escapeAttr(_fmtDk(vs[0].since))} too" title="Pay this rate for earlier dates too">✕</button></div>`);
+  return `<div class="rate-hist">${lines.join("")}</div>`;
+}
+function _renderRateHist(r) {
+  const i = payRates.indexOf(r);
+  const item = document.querySelector(`#rateList .rate-item[data-i="${i}"]`);
+  if (!item) return;
+  const html = _rateHistHtml(r, i), old = item.querySelector(".rate-hist");
+  if (old) { if (html) old.outerHTML = html; else old.remove(); }
+  else if (html) item.insertAdjacentHTML("beforeend", html);
+  item.classList.toggle("ended", _isEnded(r));
+}
+// Paid for any session before `today`? (Removing them would then erase pay from past weeks.)
+function _hasPastPay(r, today) {
+  const k = _payKey(r.name);
+  return payWeekSources().some(src => (src.days || []).some(day => {
+    const dk = _dk(dateForDayFrom(day.day, src.mon));
+    if (dk >= today) return false;
+    const v = _rateOn(r, dk);
+    return !!v && _verPaid(v) && (day.events || []).some(ev => (ev.people || []).some(p => _payKey(p) === k));
+  }));
+}
+function _periodLabel(vs, j) {
+  const v = vs[j], next = vs[j + 1];
+  if (!v.since) return `before ${_fmtDk(next.since)}`;
+  return next ? `${_fmtDk(v.since)} until ${_fmtDk(next.since)}` : `from ${_fmtDk(v.since)} on`;
+}
+
 function renderRates() {
   const box = document.getElementById("rateList");
   if (!box) return;
@@ -7997,12 +8447,12 @@ function renderRates() {
   };
   box.innerHTML = payRates.map((r, i) => {
     const split = r.unit === "split", nm = escapeAttr(r.name || "intern");
-    let h = `<div class="rate-item" data-i="${i}"><div class="rate-row${split ? " split" : ""}">
+    let h = `<div class="rate-item${_isEnded(r) ? " ended" : ""}" data-i="${i}"><div class="rate-row${split ? " split" : ""}">
       <input class="rr-name" list="rateNames" value="${escapeAttr(r.name)}" placeholder="Intern name" aria-label="Intern name" spellcheck="false" autocomplete="off">
       ${split ? `<span class="rr-by">by type</span>` : money(r.rate, "", `Rate for ${nm}`)}
       ${unit(r.unit, "", `How ${nm} is paid`)}
       ${addLocBtn(r, nm)}
-      <button class="rr-del" type="button" aria-label="Remove ${nm}" title="Remove">✕</button>
+      <button class="rr-del" type="button" aria-label="${_isEnded(r) ? "Remove " + nm + " from the rate card" : "Stop paying or remove " + nm}" title="${_isEnded(r) ? "Remove from the rate card" : "Stop paying / remove"}">✕</button>
     </div>`;
     if (split) ["excel", "other"].forEach(t => {
       const sub = r[t] || { rate: 0, unit: "session" };
@@ -8010,7 +8460,7 @@ function renderRates() {
         ${money(sub.rate, t, `${t === "excel" ? "Excel" : "Other"} rate for ${nm}`)}${unit(sub.unit, t, `${t === "excel" ? "Excel" : "Other"} unit for ${nm}`)}<span></span></div>`;
     });
     (r.locs || []).forEach((o, li) => { h += _locRateRowHtml(r, o, li, nm); });
-    return h + `</div>`;
+    return h + _rateHistHtml(r, i) + `</div>`;
   }).join("") || `<div class="pay-empty">No paid interns. Add one below.</div>`;
   const onCard = new Set(payRates.map(r => _payKey(r.name)));
   document.getElementById("rateNames").innerHTML = _knownInternNames().filter(n => !onCard.has(_payKey(n)))
@@ -8019,12 +8469,13 @@ function renderRates() {
 }
 let _payRefreshT = null;
 function _payRatesChanged() {
+  _payEditSeq++;
   payLocal.dirty = true;
   savePayRates();
   _markRateDupes();
   renderRateSync();
   clearTimeout(_payRefreshT);
-  _payRefreshT = setTimeout(() => { renderWeeklyPay(); renderInvoicePreview(); }, 250);
+  _payRefreshT = setTimeout(() => { _renderWeeklySheet(); renderInvoicePreview(); }, 250);
 }
 
 // ---- Wire up ----
@@ -8034,29 +8485,63 @@ function _payRatesChanged() {
   list.addEventListener("input", e => {
     const r = rateAt(e.target); if (!r) return;
     if (e.target.classList.contains("rl-rate")) {
-      const o = _locRateAt(r, e.target);
-      if (o) { o.rate = parseFloat(e.target.value) || 0; _payRatesChanged(); }
+      if (!_locRateAt(r, e.target)) return;
+      _beginRateEdit(r);
+      _locRateAt(r, e.target).rate = parseFloat(e.target.value) || 0;
+      _rateEdited(r);
       return;
     }
     const t = e.target.dataset.t;
-    if (e.target.classList.contains("rr-name")) r.name = e.target.value;
-    else if (e.target.classList.contains("rr-rate")) { const v = parseFloat(e.target.value) || 0; if (t) r[t].rate = v; else r.rate = v; }
-    else return;
-    _payRatesChanged();
+    if (e.target.classList.contains("rr-name")) { r.name = e.target.value; _payRatesChanged(); return; }
+    if (!e.target.classList.contains("rr-rate")) return;
+    _beginRateEdit(r);
+    const v = parseFloat(e.target.value) || 0;
+    if (t) r[t].rate = v; else r.rate = v;
+    _rateEdited(r);
+  });
+  // A history line's start date: applied as soon as it's a valid date between its neighbours; the line
+  // list redraws when the field loses focus (redrawing mid-typing would drop the cursor).
+  const rhBounds = (vs, j) => [j > 0 ? vs[j - 1].since || null : null, j < vs.length - 1 ? vs[j + 1].since : null];
+  list.addEventListener("focusout", e => {
+    const el = e.target;
+    if (!el.classList || !el.classList.contains("rh-date") || !el.dataset.pending) return;
+    const r = rateAt(el); if (!r) return;
+    if (el.classList.contains("bad")) {
+      const [lo, hi] = rhBounds(_versions(r), +el.dataset.v);
+      showToast(lo && hi ? `Pick a date after ${_fmtDk(lo)} and before ${_fmtDk(hi)}` : lo ? `Pick a date after ${_fmtDk(lo)}` : hi ? `Pick a date before ${_fmtDk(hi)}` : "Pick a date");
+    }
+    setTimeout(() => _renderRateHist(r), 0);
   });
   list.addEventListener("change", e => {
-    if (e.target.classList.contains("rl-unit") || e.target.classList.contains("rl-loc")) {
-      const r = rateAt(e.target), o = _locRateAt(r, e.target);
-      if (!o) return;
-      if (e.target.classList.contains("rl-unit")) o.unit = e.target.value === "hr" ? "hr" : "session";
-      else { o.loc = e.target.value; renderRates(); }   // the other rows' location lists change
+    if (e.target.classList.contains("rh-date")) {
+      const el = e.target, r = rateAt(el); if (!r) return;
+      const j = +el.dataset.v, vs = _versions(r), val = el.value;
+      el.dataset.pending = "1";
+      el.classList.remove("bad");
+      if (!_DK_RE.test(val) || !vs[j]) return;              // half-typed: focusout puts the saved date back
+      const [lo, hi] = rhBounds(vs, j);
+      if ((lo && val <= lo) || (hi && val >= hi)) { el.classList.add("bad"); return; }
+      vs[j].since = val;
+      _setVersions(r, vs);
       _payRatesChanged();
+      return;
+    }
+    if (e.target.classList.contains("rl-unit") || e.target.classList.contains("rl-loc")) {
+      const r = rateAt(e.target);
+      if (!_locRateAt(r, e.target)) return;
+      _beginRateEdit(r);
+      const o = _locRateAt(r, e.target);
+      if (e.target.classList.contains("rl-unit")) o.unit = e.target.value === "hr" ? "hr" : "session";
+      else o.loc = e.target.value;
+      _rateEdited(r);
+      if (e.target.classList.contains("rl-loc")) renderRates();   // the other rows' location lists change
       return;
     }
     if (!e.target.classList.contains("rr-unit")) return;
     const r = rateAt(e.target); if (!r) return;
     const t = e.target.dataset.t, v = e.target.value;
-    if (t) { r[t].unit = v === "hr" ? "hr" : "session"; _payRatesChanged(); return; }
+    _beginRateEdit(r);
+    if (t) { r[t].unit = v === "hr" ? "hr" : "session"; _rateEdited(r); return; }
     const was = r.unit;
     if (v === "split") {
       // Start both types from the current single rate; then change whichever type differs.
@@ -8066,13 +8551,13 @@ function _payRatesChanged() {
       if (was === "split") { const keep = r.excel && r.excel.rate > 0 ? r.excel : r.other; if (keep && keep.rate > 0) r.rate = keep.rate; }
       r.unit = v === "hr" ? "hr" : "session";
     }
+    _rateEdited(r);
     if ((was === "split") !== (r.unit === "split")) {
       const i = payRates.indexOf(r);
       renderRates();
       const focus = list.querySelector(`.rate-item[data-i="${i}"] .rr-rate`);
       if (focus) focus.focus();
     }
-    _payRatesChanged();
   });
   list.addEventListener("click", e => {
     const add = e.target.closest(".rr-addloc");
@@ -8081,21 +8566,59 @@ function _payRatesChanged() {
     if (ldel) {
       const r = rateAt(ldel), row = ldel.closest(".rate-loc");
       if (r && r.locs && row) {
-        r.locs.splice(+row.dataset.li, 1);
+        const li = +row.dataset.li;
+        _beginRateEdit(r);
+        r.locs.splice(li, 1);
         if (!r.locs.length) delete r.locs;
+        _setVersions(r, _versions(r));
         renderRates(); _payRatesChanged();
       }
       return;
     }
+    // ✕ on a history line: that rate goes; the rate before it runs on (or, for the oldest, the next one reaches back)
+    const hd = e.target.closest(".rh-del");
+    if (hd) {
+      const r = rateAt(hd); if (!r) return;
+      const j = +hd.dataset.v, vs = _versions(r), nm = r.name.trim() || "this intern", today = _todayDk();
+      if (j === -1) {
+        if (!confirm(`Pay ${nm} ${_verSummary(vs[0])} before ${_fmtDk(vs[0].since)} too? Earlier weeks and invoices will include it.`)) return;
+        delete vs[0].since;
+      } else {
+        const v = vs[j];
+        if (!vs[j]) return;
+        const fill = j > 0 ? vs[j - 1] : vs[1];
+        const reachesPast = !v.since || v.since < today;
+        if (reachesPast && !confirm(`Remove ${nm}'s ${_verSummary(v)} rate (${_periodLabel(vs, j)})? Those dates will use ${_verPaid(fill) ? _verSummary(fill) : "no pay"} instead.`)) return;
+        vs.splice(j, 1);
+        if (j === 0) { if (v.since) vs[0].since = v.since; else delete vs[0].since; }
+      }
+      _setVersions(r, vs);
+      renderRates(); _payRatesChanged();
+      return;
+    }
     const del = e.target.closest(".rr-del"); if (!del) return;
     const i = +del.closest(".rate-item").dataset.i, r = payRates[i];
-    const desc = !r ? "" : r.unit === "split" ? "split rates" : `${fmtMoney(r.rate)} / ${r.unit === "hr" ? "hr" : "session"}`;
-    if (r && r.name.trim() && !confirm(`Remove ${r.name.trim()} (${desc}) from paid interns?`)) return;
+    if (!r) return;
+    const nm = r.name.trim(), today = _todayDk();
+    // Paid in past weeks: stop paying from today instead, so those weeks keep their pay
+    if (nm && !_isEnded(r) && _hasPastPay(r, today)) {
+      if (!confirm(`Stop paying ${nm} from ${_fmtDk(today)} on? Past weeks keep their pay.`)) return;
+      _beginRateEdit(r);
+      r.rate = 0; r.unit = "session";
+      ["excel", "other", "locs"].forEach(f => delete r[f]);
+      _setVersions(r, _versions(r));
+      renderRates(); _payRatesChanged();
+      return;
+    }
+    const desc = r.unit === "split" ? "split rates" : `${fmtMoney(r.rate)} / ${r.unit === "hr" ? "hr" : "session"}`;
+    const msg = _isEnded(r) ? `Remove ${nm} from the rate card completely? Their pay will also disappear from past weeks and invoices.`
+                            : `Remove ${nm} (${desc}) from paid interns?`;
+    if (nm && !confirm(msg)) return;
     payRates.splice(i, 1);
     renderRates(); _payRatesChanged();
   });
   document.getElementById("rateAddBtn").addEventListener("click", () => {
-    payRates.push({ name: "", rate: 15, unit: "session" });
+    payRates.push({ name: "", rate: 15, unit: "session", since: _todayDk() });   // paid from today; change the date to backdate
     renderRates(); _payRatesChanged();
     const inputs = list.querySelectorAll(".rr-name");
     if (inputs.length) inputs[inputs.length - 1].focus();
@@ -8107,13 +8630,13 @@ function _payRatesChanged() {
     else if (act === "setup") { paySync.form = "set"; paySync.err = ""; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus(); }
     else if (act === "cancel") { paySync.form = false; paySync.err = ""; renderRateSync(); }
     else if (act === "create") {
-      if (val.length < 4) { paySync.err = "Use at least 4 characters."; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus(); return; }
+      if (val.length < 12) { paySync.err = "Use at least 12 characters — three unrelated words work well."; renderRateSync(); const i = document.getElementById("rsPass"); if (i) i.focus(); return; }
       saveRatesToGitHub(val);
     }
     else if (act === "unlock") unlockRates(val);
     else if (act === "save") saveRatesToGitHub();
     else if (act === "load") {
-      if (confirm("Replace this device's unsaved rate changes with the rates saved on GitHub?")) {
+      if (confirm("Replace this device's unsaved pay changes with the rates and one-offs saved on GitHub?")) {
         payLocal.dirty = false; payLocal.syncedAt = null; savePayRates(); refreshRateSync();
       }
     }
@@ -8129,6 +8652,43 @@ function _payRatesChanged() {
     e.preventDefault();
     const b = sync.querySelector('[data-rs="create"], [data-rs="unlock"]');
     if (b && !b.disabled) syncAct(b.dataset.rs);
+  });
+  const px = document.getElementById("payExtras");
+  const pxAt = el => { const row = el.closest(".px-row"); return row ? payExtras.find(x => x.id === row.dataset.id) || null : null; };
+  px.addEventListener("click", e => {
+    if (e.target.closest('[data-rs="save"]')) { saveRatesToGitHub(); return; }
+    if (e.target.closest(".px-add")) {
+      const src = _paySrc(); if (!src) return;
+      const today = _todayDk(), a = _dk(src.mon), b = _dk(_addDays(src.mon, 6));
+      const x = { id: _newExtraId(), name: "", date: today >= a && today <= b ? today : a, amt: 0, kind: "gas", note: "" };
+      payExtras.push(x);
+      renderPayExtras(); _payExtrasChanged();
+      const inp = px.querySelector(`.px-row[data-id="${x.id}"] .px-name`);
+      if (inp) inp.focus();
+      return;
+    }
+    const del = e.target.closest(".px-del");
+    if (del) {
+      const x = pxAt(del); if (!x) return;
+      if (x.amt > 0 && x.name.trim() && !confirm(`Remove ${x.name.trim()}'s ${fmtMoney(x.amt)} ${PAY_EXTRA_KINDS[x.kind].toLowerCase()} payment?`)) return;
+      payExtras.splice(payExtras.indexOf(x), 1);
+      renderPayExtras(); _payExtrasChanged();
+    }
+  });
+  px.addEventListener("input", e => {
+    const x = pxAt(e.target); if (!x) return;
+    if (e.target.classList.contains("px-name")) x.name = e.target.value;
+    else if (e.target.classList.contains("px-amt")) x.amt = Math.max(0, parseFloat(e.target.value) || 0);
+    else if (e.target.classList.contains("px-note")) x.note = e.target.value.slice(0, 120);
+    else return;
+    _payExtrasChanged();
+  });
+  px.addEventListener("change", e => {
+    const x = pxAt(e.target); if (!x) return;
+    if (e.target.classList.contains("px-kind")) x.kind = PAY_EXTRA_KINDS[e.target.value] ? e.target.value : "other";
+    else if (e.target.classList.contains("px-day")) x.date = e.target.value;
+    else return;
+    _payExtrasChanged();
   });
   document.getElementById("payWeekSel").addEventListener("change", e => { payWeekKey = e.target.value; renderWeeklyPay(); });
   document.getElementById("payTypeSeg").addEventListener("click", e => {
