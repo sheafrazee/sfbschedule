@@ -11,8 +11,10 @@
 <title>SFB Training Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- Pinned: the browser refuses these files if their contents ever differ from the hashes below.
+     This page holds the GitHub token, so a tampered library must not be able to run. -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 :root {
   --ink: #111111;
@@ -311,6 +313,13 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .promote-ack { display: flex; align-items: flex-start; gap: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); line-height: 1.45; margin: 4px 0 2px; cursor: pointer; }
 .promote-ack input { margin-top: 2px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--ink); }
 .promote-ack input:disabled + span { color: var(--stone); }
+/* Passphrase prompt for the sealed schedule data: opens over every other dialog (Promote, Archive…) */
+#privModal { z-index: 460; }
+#privModal .modal { max-width: 440px; }
+.pm-err { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 1.4; color: var(--clay); min-height: 17px; margin-top: -4px; }
+#privModal .modal-actions { align-items: center; }
+#privModal .ab-link { margin-right: auto; }
+@media (max-width: 700px) { #privModal input { font-size: 16px; padding: 10px 12px; } }
 .archive-empty { color: var(--stone); text-align: center; padding: 30px 16px; font-size: 13.5px; line-height: 1.5; }
 .archive-status { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: var(--dark-stone); min-height: 16px; flex: 1; }
 .img-modal { max-width: 92vw; padding: 14px; }
@@ -1625,6 +1634,23 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
   </div>
 </div>
 
+<!-- Passphrase prompt (sealed schedule data: next week, archive, blocked times) -->
+<div class="modal-bg hidden" id="privModal" role="dialog" aria-modal="true" aria-labelledby="privTitle">
+  <div class="modal">
+    <h2 id="privTitle"></h2>
+    <p id="privMsg"></p>
+    <div class="modal-field">
+      <input id="privPass" type="password" placeholder="Passphrase" aria-label="Passphrase" spellcheck="false">
+    </div>
+    <div class="pm-err" id="privErr" aria-live="polite"></div>
+    <div class="modal-actions">
+      <button class="ab-link hidden" id="privAlt" type="button"></button>
+      <button class="btn" id="privCancel" type="button">Cancel</button>
+      <button class="btn primary" id="privOk" type="button">Unlock</button>
+    </div>
+  </div>
+</div>
+
 <!-- Image Viewer Modal -->
 <div class="modal-bg hidden" id="imgModal">
   <div class="modal img-modal">
@@ -1663,6 +1689,10 @@ const LS_DRAFT_BASE = "sfb_schedule_draft_base_v1";   // GitHub sha of the publi
 // The edit link (?edit=1) owns the draft. The public link always shows the published schedule — even on
 // a device that has unpublished edits — and never writes a draft or publishes.
 const EDIT_LINK = new URLSearchParams(location.search).get("edit") === "1";
+// schedule.json is public, so only the live week and the locations go in it. These keys are saved
+// encrypted in schedule-private.json instead (see PRIVATE DATA below) and load on the edit link only.
+const PRIVATE_KEYS = ["nextWeek", "archive", "blocks"];
+const LS_PRIV_META = "sfb_schedule_private_v1";   // { sha }: the sealed file version this device's cached copy matches
 
 const STYLES = {
   // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
@@ -2090,7 +2120,10 @@ function loadDraft() {
 function saveDraft() {
   if (!EDIT_LINK) return;
   try {
-    if (!localStorage.getItem(LS_DRAFT) && publishedSha) localStorage.setItem(LS_DRAFT_BASE, publishedSha);
+    if (!localStorage.getItem(LS_DRAFT)) {
+      if (publishedSha) localStorage.setItem(LS_DRAFT_BASE, _baseKey());
+      else if (_pubRaw) localStorage.setItem(LS_DRAFT_BASE, _offlineBase());
+    }
     localStorage.setItem(LS_DRAFT, JSON.stringify(data));
   } catch (e) { console.warn("Couldn't save the draft:", e); }
   updateStatus();
@@ -2099,7 +2132,398 @@ function clearDraft() { localStorage.removeItem(LS_DRAFT); localStorage.removeIt
 
 function isDirty() {
   if (!publishedData) return true;
-  return JSON.stringify(data) !== JSON.stringify(publishedData);
+  return _canon(data) !== _canon(publishedData);   // same content, whatever order the top-level keys are in
+}
+
+// ============ PRIVATE DATA: next week · archive · blocked times ============
+// schedule.json is public (anyone with the site address or the repo can read it), so it carries only
+// what viewers need: the live week and the locations. Next week, the archive and the blocked times are
+// saved beside it in schedule-private.json, sealed with AES-GCM under the same passphrase as the pay
+// rates, and are loaded on the edit link only. In memory nothing changes: `data` and `publishedData`
+// still hold everything. They are split when publishing and joined again when loading.
+//
+// Two rules keep that file safe:
+//  1. It is only ever written on top of the exact version this device loaded (privState.sha). Anything
+//     else is a conflict and stops the publish.
+//  2. Archived weeks are never dropped by accident: a publish keeps every week GitHub has unless it was
+//     removed with Delete in the Archive (_keepRemoteArchive).
+let _pubRaw = null;        // the public file as last fetched; publishedData = this + the private part
+let _publishedAt = 0;      // when this device last published (the site takes a minute to catch up)
+const privState = {
+  exists: false,   // a sealed file is known to exist on GitHub
+  sha: null,       // the version of it that `data` below matches (null = none loaded)
+  data: null,      // its opened contents: { nextWeek, archive, blocks }
+  locked: false,   // it exists, but this device doesn't have the passphrase that opens it
+  remote: null,    // { sha, env } as last read (the unlock prompt tries passphrases against it)
+  replace: false,  // "Forgot it?": the next publish overwrites it with this device's copy, under a new passphrase
+  reseal: false,   // the passphrase changed: the next publish re-saves it even if nothing else changed
+  err: "",         // why it couldn't be read (GitHub unreachable…)
+};
+function _clone(o) { return o == null ? o : JSON.parse(JSON.stringify(o)); }
+function publicPart(d) { const o = {}; Object.keys(d || {}).forEach(k => { if (!PRIVATE_KEYS.includes(k)) o[k] = d[k]; }); return o; }
+function privatePart(d) { const o = {}; PRIVATE_KEYS.forEach(k => { if (d && d[k] != null) o[k] = d[k]; }); return o; }
+function _privEmpty(p) {
+  const nw = p && p.nextWeek;
+  return !(p && p.archive && p.archive.length) && !(p && p.blocks && p.blocks.length)
+    && !(nw && ((nw.days || []).length || String(nw.weekTitle || "").trim()));
+}
+function _canon(d) { const o = {}; Object.keys(d || {}).sort().forEach(k => { if (d[k] != null) o[k] = d[k]; }); return JSON.stringify(o); }
+function _ghReady() { const c = loadCfg(); return !!(c.token && c.owner && c.repo); }
+function _draftInUse() { return EDIT_LINK && !!localStorage.getItem(LS_DRAFT); }
+// What a draft was started from: the public file's version plus the sealed file's.
+function _baseKey() { return (publishedSha || "") + (privState.sha ? "+" + privState.sha : ""); }
+// The same for a draft begun while GitHub couldn't be reached: there is no version of the public file to
+// name, so its content is fingerprinted instead and compared once GitHub answers again.
+function _offlineBase() {
+  const str = _canon(publicPart(_pubRaw || {}));
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+  return "c:" + str.length + ":" + (h >>> 0).toString(36) + (privState.sha ? "+" + privState.sha : "");
+}
+function privatePath() {
+  const p = loadCfg().path || "schedule.json", i = p.lastIndexOf("/");
+  return (i >= 0 ? p.slice(0, i + 1) : "") + "schedule-private.json";
+}
+// The public file still carries private data (it was saved by the older all-in-one version): publishing moves it out.
+function _publicNeedsTrim() {
+  return EDIT_LINK && !!_pubRaw && !privState.locked && _ghReady() && !_privEmpty(privatePart(_pubRaw));
+}
+
+// Every copy of the published schedule goes through here. `raw` is the public file as fetched; the
+// private part this device has loaded is laid on top of it.
+function _setPublished(raw) {
+  normalizeData(raw);
+  _pubRaw = raw;
+  _rebuildPublished();
+}
+function _rebuildPublished() {
+  if (!_pubRaw) return;
+  const out = _clone(_pubRaw);
+  if (privState.exists) {                 // once a sealed file exists it is the only source of the private keys
+    PRIVATE_KEYS.forEach(k => { delete out[k]; });
+    if (privState.data) Object.assign(out, _clone(privState.data));
+  }
+  normalizeData(out);
+  out.archive = out.archive || [];
+  publishedData = out;
+  _cachePublished();
+}
+function _cachePublished() {
+  try {
+    let out = publishedData;
+    const holdsPrivate = EDIT_LINK && (!privState.exists || !!privState.data);
+    if (!holdsPrivate && localStorage.getItem(LS_PRIV_META)) {
+      // This session has no private data (public link, or locked). On a device that also edits, keep the
+      // private part an earlier session cached, so the edit link still has it when GitHub can't be reached.
+      let old = null;
+      try { old = JSON.parse(localStorage.getItem(LS_PUBLISHED)); } catch (e) {}
+      if (old) out = Object.assign(publicPart(publishedData), privatePart(old));
+    }
+    localStorage.setItem(LS_PUBLISHED, JSON.stringify(out));
+  } catch (e) { console.warn("Couldn't cache the published schedule:", e); }
+}
+// Edit link, before GitHub has answered: start from the private part this device last synced.
+function _privInitFromCache() {
+  if (!EDIT_LINK) return;
+  try {
+    const meta = JSON.parse(localStorage.getItem(LS_PRIV_META));
+    const cached = JSON.parse(localStorage.getItem(LS_PUBLISHED));
+    if (meta && meta.sha && cached) { privState.exists = true; privState.sha = meta.sha; privState.data = privatePart(cached); }
+  } catch (e) {}
+}
+function _savePrivMeta() {
+  try {
+    if (privState.exists && privState.sha && privState.data) localStorage.setItem(LS_PRIV_META, JSON.stringify({ sha: privState.sha }));
+    else if (!privState.exists) localStorage.removeItem(LS_PRIV_META);
+  } catch (e) {}
+}
+
+// ---- Sealing: gzip (where the browser has it) → AES-GCM, key from the passphrase via PBKDF2 ----
+async function _packBytes(str) {
+  const raw = new TextEncoder().encode(str);
+  if (typeof CompressionStream === "function") {
+    try {
+      const gz = await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer();
+      return { z: "gzip", bytes: new Uint8Array(gz) };
+    } catch (e) {}
+  }
+  return { z: "", bytes: raw };
+}
+async function _unpackBytes(bytes, z) {
+  if (!z) return new TextDecoder().decode(bytes);
+  if (z !== "gzip" || typeof DecompressionStream !== "function") throw new Error("this browser is too old to open the saved data — update it and try again");
+  return new TextDecoder().decode(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer());
+}
+async function sealPrivate(obj, pass) {
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12)), iter = 200000;
+  const key = await _payCryptoKey(pass, salt, iter);
+  const packed = await _packBytes(JSON.stringify(obj));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, packed.bytes));
+  return { app: "sfb-schedule-private", v: 1, updatedAt: new Date().toISOString(), kdf: "PBKDF2-SHA256", iter, z: packed.z,
+           salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
+}
+async function openPrivate(env, pass) {   // throws (err.badPass) if the passphrase is wrong
+  if (!env || !env.ct || !env.salt || !env.iv) throw new Error("the saved file is damaged");
+  const key = await _payCryptoKey(pass, _unb64(env.salt), env.iter || 200000);
+  let pt;
+  try { pt = new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(env.iv) }, key, _unb64(env.ct))); }
+  catch (e) { const err = new Error("that passphrase doesn't match"); err.badPass = true; throw err; }
+  return privatePart(JSON.parse(await _unpackBytes(pt, env.z || "")));
+}
+
+// ---- GitHub I/O for the sealed file ----
+function _ghHeaders() { return { "Authorization": `Bearer ${loadCfg().token}`, "Accept": "application/vnd.github+json" }; }
+function _ghErr(status) { return new Error("GitHub " + status + (status === 401 ? " — the token has probably expired; make a new one in Settings" : "")); }
+// { sha, env }, or null when the file doesn't exist. Past 1 MB the contents API leaves the content out,
+// so it is read through the blob API instead.
+async function ghGetSealed(path) {
+  const cfg = loadCfg(), base = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}`;
+  const res = await fetch(`${base}/contents/${path}?ref=${cfg.branch || "main"}&_=${Date.now()}`, { headers: _ghHeaders(), cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw _ghErr(res.status);
+  const j = await res.json();
+  let b64 = String(j.content || "").replace(/\s/g, "");
+  if (!b64 && j.sha) {
+    const br = await fetch(`${base}/git/blobs/${j.sha}`, { headers: _ghHeaders(), cache: "no-store" });
+    if (!br.ok) throw _ghErr(br.status);
+    b64 = String((await br.json()).content || "").replace(/\s/g, "");
+  }
+  let env = null;
+  try { env = JSON.parse(new TextDecoder().decode(_unb64(b64))); } catch (e) {}
+  return { sha: j.sha, env };
+}
+// Writes the sealed file only if it still has `sha` (null = it must not exist yet); returns its new sha.
+async function ghPutSealed(path, env, sha) {
+  const cfg = loadCfg();
+  const body = { message: "Update private schedule data (encrypted)", branch: cfg.branch || "main", content: btoa(JSON.stringify(env)) };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`, {
+    method: "PUT", body: JSON.stringify(body), headers: { ..._ghHeaders(), "Content-Type": "application/json" } });
+  if (res.status === 409 || res.status === 422) { const e = new Error("conflict"); e.conflict = true; throw e; }
+  if (!res.ok) throw _ghErr(res.status);
+  return (await res.json()).content.sha;
+}
+
+// Read the sealed file and open it with the passphrase stored on this device. Leaves privState saying
+// one of: no sealed file yet · loaded · locked (wrong or no passphrase) · unreachable (err; cached copy kept).
+async function refreshPrivate() {
+  if (!EDIT_LINK || !_ghReady() || !(window.crypto && crypto.subtle)) return;
+  let got;
+  try { got = await ghGetSealed(privatePath()); }
+  catch (e) { privState.err = e.message || "GitHub couldn't be reached"; return; }
+  privState.err = "";
+  if (!got) {
+    privState.exists = false; privState.sha = null; privState.data = null; privState.locked = false; privState.remote = null;
+  } else {
+    privState.exists = true; privState.remote = got;
+    const pass = _payPass();
+    let obj = null;
+    if (pass) { try { obj = await openPrivate(got.env, pass); } catch (e) { if (!e.badPass) privState.err = e.message; } }
+    if (obj) { privState.sha = got.sha; privState.data = obj; privState.locked = false; }
+    else { privState.sha = null; privState.data = null; privState.locked = true; }
+  }
+  _savePrivMeta();
+  _rebuildPublished();
+}
+// Seal `obj` and save it, but only on top of the version this device loaded (rule 1 above).
+async function writePrivate(obj) {
+  const path = privatePath();
+  const got = await ghGetSealed(path);
+  const there = got ? got.sha : null;
+  if (!privState.replace && there !== (privState.sha || null)) { const e = new Error("conflict"); e.conflict = true; throw e; }
+  const env = await sealPrivate(obj, _payPass());
+  const sha = await ghPutSealed(path, env, there);
+  privState.exists = true; privState.sha = sha; privState.data = _clone(obj); privState.locked = false;
+  privState.remote = { sha, env }; privState.replace = false; privState.reseal = false; privState.err = "";
+  _savePrivMeta();
+}
+
+// ---- Rule 2, and drafts ----
+const _archiveDeleted = new Set();   // weeks removed with Delete in the Archive during this session
+// Put back any archived week GitHub has that the working copy lost (an old draft, an undo, an import).
+function _keepRemoteArchive() {
+  const have = new Set((data.archive || []).map(a => a && a.key));
+  const back = ((publishedData && publishedData.archive) || [])
+    .filter(a => a && a.key && !have.has(a.key) && !_archiveDeleted.has(a.key));
+  if (!back.length) return 0;
+  data.archive = (data.archive || []).concat(_clone(back)).sort((a, b) => String(b.key).localeCompare(String(a.key)));
+  return back.length;
+}
+// A draft only holds what this device knew when it was saved: give it the private keys it never had.
+function _reconcileDraft() {
+  if (!publishedData || !data) return;
+  PRIVATE_KEYS.forEach(k => { if (!(k in data) && publishedData[k] != null) data[k] = _clone(publishedData[k]); });
+  data.archive = data.archive || [];
+  _keepRemoteArchive();
+}
+// Unpublished edits here, but the schedule was published from another device since they began:
+// publishing these would silently wipe that device's changes, so ask first.
+function _draftBaseCheck() {
+  try {
+    const base = localStorage.getItem(LS_DRAFT_BASE);
+    if (!_draftInUse() || privState.locked || !base || !publishedSha || base === _baseKey() || !isDirty()) return;
+    if (base === _offlineBase()) { localStorage.setItem(LS_DRAFT_BASE, _baseKey()); return; }   // begun offline, and nothing has changed since
+    const takeLive = confirm(
+      "The schedule was published from another device after you started editing on this one.\n\n" +
+      "OK = load the published version (this device's unpublished edits are discarded)\n" +
+      "Cancel = keep this device's edits (publishing them replaces the other device's changes)"
+    );
+    if (takeLive) { clearDraft(); data = _clone(publishedData); normalizeData(data); data.archive = data.archive || []; }
+    else localStorage.setItem(LS_DRAFT_BASE, _baseKey());   // asked once; publishing now is a deliberate overwrite
+  } catch (e) { console.warn("draft check failed:", e); }
+}
+// The private part has just arrived (unlock, new settings): bring the working copy up to date and redraw.
+function _afterPrivateLoaded() {
+  if (_draftInUse()) { _reconcileDraft(); _draftBaseCheck(); }
+  else if (publishedData) { data = _clone(publishedData); data.archive = data.archive || []; }
+  try { _resetUndo(); } catch (e) {}
+  try {
+    document.getElementById("weekTitleDisplay").textContent = data.weekTitle || "";
+    if (currentMode === "edit") renderEdit(); else if (currentMode === "pay") renderPay(); else renderDisplay();
+  } catch (e) { console.warn(e); }
+  updateStatus();
+}
+
+// ---- Passphrase prompts ----
+// Resolves with a passphrase that passed `check`, { alt: true } if the secondary link was pressed, or null.
+function askPassphrase({ title, msg, ok, minLen, check, alt }) {
+  return new Promise(resolve => {
+    const $ = id => document.getElementById(id);
+    const modal = $("privModal"), inp = $("privPass"), err = $("privErr"), okBtn = $("privOk"), altBtn = $("privAlt"), cancelBtn = $("privCancel");
+    $("privTitle").textContent = title; $("privMsg").textContent = msg;
+    okBtn.textContent = ok; okBtn.disabled = false;
+    inp.value = ""; err.textContent = "";
+    inp.setAttribute("autocomplete", minLen ? "new-password" : "current-password");
+    altBtn.classList.toggle("hidden", !alt);
+    altBtn.textContent = alt ? alt.label : "";
+    let busy = false;
+    const done = v => {
+      modal.classList.add("hidden");
+      okBtn.onclick = cancelBtn.onclick = altBtn.onclick = inp.onkeydown = null;
+      inp.value = "";
+      resolve(v);
+    };
+    const submit = async () => {
+      if (busy) return;
+      const v = inp.value.trim();
+      if (!v) { inp.focus(); return; }
+      if (minLen && v.length < minLen) { err.textContent = `Use at least ${minLen} characters — three unrelated words work well.`; inp.focus(); return; }
+      busy = true; okBtn.disabled = true; okBtn.textContent = "…"; err.textContent = "";
+      let problem = "";
+      try { problem = check ? ((await check(v)) || "") : ""; } catch (e) { problem = (e && e.message) || "Something went wrong."; }
+      busy = false; okBtn.disabled = false; okBtn.textContent = ok;
+      if (problem) { err.textContent = problem.charAt(0).toUpperCase() + problem.slice(1) + (/[.!?]$/.test(problem) ? "" : "."); inp.focus(); inp.select(); return; }
+      done(v);
+    };
+    okBtn.onclick = submit;
+    cancelBtn.onclick = () => { if (!busy) done(null); };
+    altBtn.onclick = () => { if (!busy) done({ alt: true }); };
+    inp.onkeydown = e => {
+      if (e.key === "Enter") { e.preventDefault(); submit(); }
+      else if (e.key === "Escape") { e.preventDefault(); if (!busy) done(null); }
+      e.stopPropagation();   // editor shortcuts must not act on the calendar behind the prompt
+    };
+    modal.classList.remove("hidden");
+    setTimeout(() => inp.focus(), 30);
+  });
+}
+// The sealed file exists but this device can't open it yet: ask for the passphrase. True once it's loaded.
+async function unlockPrivate() {
+  if (!privState.locked) return true;
+  if (!privState.remote) { await refreshPrivate(); if (!privState.locked) { _afterPrivateLoaded(); return true; } }
+  if (!privState.remote) { alert("Couldn't reach GitHub to load next week, the archive and blocked times. Check the connection and try again."); return false; }
+  let opened = null;
+  const res = await askPassphrase({
+    title: "Enter your passphrase",
+    msg: "Next week, the archive and your blocked times are saved encrypted. Enter your passphrase (the one you use for pay) to load them on this device.",
+    ok: "Unlock",
+    check: async v => { opened = await openPrivate(privState.remote.env, v); return ""; },
+    alt: { label: "Forgot it?" },
+  });
+  if (res === null) return false;
+  if (res && res.alt) return _privReset();
+  _setPayPass(res);
+  privState.sha = privState.remote.sha; privState.data = opened; privState.locked = false; privState.err = "";
+  _savePrivMeta();
+  _rebuildPublished();
+  _afterPrivateLoaded();
+  return true;
+}
+// "Forgot it?": give up on the copy saved on GitHub and carry on with whatever this device still has.
+async function _privReset() {
+  let local = {};
+  if (_draftInUse()) local = privatePart(data);
+  else { try { local = privatePart(JSON.parse(localStorage.getItem(LS_PUBLISHED)) || {}); } catch (e) {} }
+  const n = (local.archive || []).length, b = (local.blocks || []).length;
+  const hasNext = !!(local.nextWeek && (local.nextWeek.days || []).length);
+  if (!confirm(
+    "Without the passphrase, the copy saved on GitHub can't be opened.\n\n" +
+    `This device still has: ${n} archived week${n === 1 ? "" : "s"}, ${hasNext ? "a next week" : "no next week"}, ${b} blocked time${b === 1 ? "" : "s"}.\n\n` +
+    "Replace the GitHub copy with this device's copy the next time you publish? You'll choose a new passphrase then.")) return false;
+  privState.locked = false; privState.replace = true; privState.sha = null; privState.data = {}; privState.err = "";
+  _rebuildPublished();
+  PRIVATE_KEYS.forEach(k => { if (local[k] != null) data[k] = _clone(local[k]); else delete data[k]; });
+  data.archive = data.archive || [];
+  normalizeData(data);
+  saveDraft();
+  _afterPrivateLoaded();
+  return true;
+}
+// Before the sealed file is written: make sure this device has the passphrase to seal it with.
+// One passphrase covers pay and the schedule, so a new one is only chosen when neither is set up yet.
+async function _ensurePrivPass() {
+  if (!(window.crypto && crypto.subtle)) { alert("Saving next week, the archive and blocked times needs a secure (https) page."); return false; }
+  const stored = _payPass();
+  if (privState.exists && !privState.replace) {
+    if (stored) return true;                                    // it opened the file this device loaded
+    let got = privState.remote;
+    if (!got) { try { got = await ghGetSealed(privatePath()); } catch (e) {} }
+    if (!got) return false;
+    const res = await askPassphrase({
+      title: "Enter your passphrase",
+      msg: "Next week, the archive and your blocked times are saved encrypted. Enter your passphrase (the one you use for pay) to publish from this device.",
+      ok: "Continue", check: async v => { await openPrivate(got.env, v); return ""; },
+    });
+    if (!res || res.alt) return false;
+    _setPayPass(res);
+    return true;
+  }
+  // First sealed save from this device, or a reset.
+  let payEnv = null;
+  try { const e = await ghGetJson(payRatesPath()); payEnv = e && e.ct ? e : null; } catch (e) {}
+  if (stored && !privState.replace) {
+    if (!payEnv) return true;
+    try { await openRates(payEnv, stored); return true; } catch (e) {}   // stale: pay was re-saved under another passphrase
+  }
+  let mode = payEnv && !privState.replace ? "pay" : "new";
+  for (;;) {
+    const res = await askPassphrase(mode === "pay" ? {
+      title: "Enter your pay passphrase",
+      msg: "Next week, the archive and your blocked times are now saved encrypted, under the same passphrase as pay, so they can't be read from the public site. Enter it to publish from this device.",
+      ok: "Publish", check: async v => { try { await openRates(payEnv, v); return ""; } catch (e) { return "That passphrase doesn't match."; } },
+      alt: { label: "Forgot it?" },
+    } : {
+      title: "Choose a passphrase",
+      msg: "Next week, the archive and your blocked times are now saved encrypted, so they can't be read from the public site. Choose a passphrase of 12 or more characters; three unrelated words work well. You'll enter it once on each device you edit from, and it protects pay too."
+        + (payEnv ? " Pay will then ask to replace its saved copy under the new passphrase." : ""),
+      ok: "Publish", minLen: 12,
+    });
+    if (res === null) return false;
+    if (res && res.alt) { mode = "new"; continue; }
+    _setPayPass(res);
+    return true;
+  }
+}
+// The pay passphrase was changed on this device: move the sealed schedule data to the new one too.
+async function _privAfterPassChange() {
+  if (!EDIT_LINK || !privState.exists || privState.locked || !privState.data) return;
+  try { await writePrivate(privState.data); }
+  catch (e) {
+    console.warn(e);
+    privState.reseal = true;
+    updateStatus();
+    showToast("Press Publish to re-save next week and the archive under the new passphrase");
+  }
 }
 
 function updateStatus() {
@@ -2111,8 +2535,13 @@ function updateStatus() {
     btn.disabled = true;
     return;
   }
-  if (isDirty()) {
+  if (isDirty() || privState.reseal) {
     pill.textContent = "● Unpublished changes";
+    pill.className = "status-pill dirty";
+    btn.disabled = false;
+  } else if (_publicNeedsTrim()) {
+    // Saved by the older version: next week, the archive and blocked times are still in the public file
+    pill.textContent = "● Publish to seal private data";
     pill.className = "status-pill dirty";
     btn.disabled = false;
   } else {
@@ -2124,20 +2553,23 @@ function updateStatus() {
 
 // ============ INITIAL LOAD ============
 async function init() {
+  _privInitFromCache();   // edit link: begin with the private part this device last synced (step 4 replaces it)
   // 1. Try to fetch published schedule.json from the live site
   try {
     const cfg = loadCfg();
     const path = cfg.path || "schedule.json";
     const res = await fetch(`./${path}?t=${Date.now()}`, { cache: "no-store" });
-    if (res.ok) {
-      publishedData = await res.json();
-      localStorage.setItem(LS_PUBLISHED, JSON.stringify(publishedData));
-    }
+    if (res.ok) _setPublished(await res.json());
   } catch (e) { console.warn("Couldn't fetch schedule.json from site:", e); }
 
   // 2. Fallback to last known published from localStorage
   if (!publishedData) {
-    try { publishedData = JSON.parse(localStorage.getItem(LS_PUBLISHED)); } catch {}
+    // This device's cache holds both halves. Once a sealed file exists, only the public half stands in
+    // for the public file (the edit link already took the private half in _privInitFromCache).
+    try {
+      const cached = JSON.parse(localStorage.getItem(LS_PUBLISHED));
+      if (cached) _setPublished(localStorage.getItem(LS_PRIV_META) ? publicPart(cached) : cached);
+    } catch {}
   }
 
   // 3. Use a draft if one exists, otherwise the published, otherwise empty
@@ -2175,23 +2607,17 @@ async function init() {
   if (publishedData) publishedData.archive = publishedData.archive || [];
   data.archive = data.archive || [];
 
-  // 4. Get current sha from GitHub if we have credentials
+  // 4. Get the authoritative copy from GitHub if we have credentials: the public file's sha and
+  //    contents, then the sealed private part (next week, archive, blocked times). Without a draft,
+  //    the working copy is exactly that.
   await refreshSha();
+  await refreshPrivate();
+  if (draft && data === draft) _reconcileDraft();
+  else if (publishedData) { data = _clone(publishedData); data.archive = data.archive || []; }
 
   // 5. Unpublished edits here, but the schedule was published from another device since they began:
   //    publishing these would silently wipe that device's changes, so ask first.
-  try {
-    const base = localStorage.getItem(LS_DRAFT_BASE);
-    if (EDIT_LINK && draft && data === draft && base && publishedSha && base !== publishedSha && isDirty()) {
-      const takeLive = confirm(
-        "The schedule was published from another device after you started editing on this one.\n\n" +
-        "OK = load the published version (this device's unpublished edits are discarded)\n" +
-        "Cancel = keep this device's edits (publishing them replaces the other device's changes)"
-      );
-      if (takeLive) { clearDraft(); data = JSON.parse(JSON.stringify(publishedData)); normalizeData(data); data.archive = data.archive || []; }
-      else localStorage.setItem(LS_DRAFT_BASE, publishedSha);   // asked once; publishing now is a deliberate overwrite
-    }
-  } catch (e) { console.warn("draft check failed:", e); }
+  _draftBaseCheck();
 
   setMode("display");
   updateStatus();
@@ -2203,7 +2629,9 @@ async function init() {
     const w = liveWeekDates(data);   // BUGFIX: match archiveCurrentWeek's key
     const sundayNight = now.getDay() === 0 && now.getHours() >= 20;
     // Skipped while there are unpublished edits: archiving publishes, and nobody reviewed them yet
-    if (EDIT_LINK && cfg.token && cfg.owner && cfg.repo && sundayNight && !isDirty() && !data.archive.some(a => a.key === w.key)) {
+    // …and until the sealed file is set up and open on this device: archiving must never stop to ask for a passphrase
+    const sealedReady = privState.exists && !privState.locked && !privState.err && !!_payPass();
+    if (EDIT_LINK && cfg.token && cfg.owner && cfg.repo && sundayNight && sealedReady && !isDirty() && !data.archive.some(a => a.key === w.key)) {
       archiveCurrentWeek(true);
     }
   } catch (e) { console.warn("auto-archive check failed:", e); }
@@ -2223,9 +2651,7 @@ async function refreshSha() {
       // Also refresh publishedData from authoritative source
       try {
         const decoded = atob(j.content.replace(/\s/g, ""));
-        publishedData = JSON.parse(new TextDecoder().decode(Uint8Array.from(decoded, c => c.charCodeAt(0))));
-        normalizeData(publishedData);
-        localStorage.setItem(LS_PUBLISHED, JSON.stringify(publishedData));
+        _setPublished(JSON.parse(new TextDecoder().decode(Uint8Array.from(decoded, c => c.charCodeAt(0)))));
       } catch (e) { /* ignore */ }
     } else if (res.status === 404) {
       publishedSha = null; // file doesn't exist yet, will create
@@ -2242,6 +2668,30 @@ async function publish() {
     alert("Set up GitHub Settings first.");
     openSettings(); return false;
   }
+  if (publish._busy) return false;   // a passphrase prompt may be open: one publish at a time
+  publish._busy = true;
+  try { return await _publish(cfg); }
+  finally { publish._busy = false; }
+}
+// This page opened without reaching GitHub (offline, then back online), so it holds no version of the
+// public file to save on top of. GitHub's is taken, but only while the file there is still the one this
+// device last saw. False = it was changed from somewhere else in the meantime.
+async function _ensurePublicSha(cfg) {
+  if (publishedSha) return true;
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path || "schedule.json"}?ref=${cfg.branch || "main"}&_=${Date.now()}`;
+  const res = await fetch(url, { headers: _ghHeaders(), cache: "no-store" });
+  if (res.status === 404) return true;   // not there yet: this publish creates it
+  if (!res.ok) throw _ghErr(res.status);
+  const j = await res.json();
+  let remote = null;
+  try { remote = normalizeData(JSON.parse(new TextDecoder().decode(_unb64(String(j.content || "").replace(/\s/g, ""))))); } catch (e) {}
+  if (_pubRaw && remote && _canon(publicPart(remote)) !== _canon(publicPart(_pubRaw))) return false;
+  publishedSha = j.sha;
+  return true;
+}
+// Two files: the sealed private part first (next week, archive, blocked times), then the public
+// schedule.json with only the live week and locations. If the first fails, nothing public has changed.
+async function _publish(cfg) {
   // BUGFIX: refuse to silently overwrite a NEWER live week with an older one.
   // publish() re-sends a freshly fetched sha, so GitHub's own conflict check
   // never fires -- this is the only thing standing between a stale draft and
@@ -2262,39 +2712,57 @@ async function publish() {
     }
   } catch (e) { console.warn("publish regression check failed:", e); }
 
+  // The private part is never written blind: it has to be open on this device first.
+  if (privState.locked && !(await unlockPrivate())) { updateStatus(); return false; }
+  if (_keepRemoteArchive()) saveDraft();   // rule 2: no archived week is dropped by accident
+
+  const pubNow = publicPart(data), privNow = privatePart(data);
+  const sealedSoFar = privState.exists || privState.replace;
+  const needPriv = sealedSoFar
+    ? privState.replace || privState.reseal || JSON.stringify(privNow) !== JSON.stringify(privatePart(publishedData || {}))
+    : !_privEmpty(privNow);                // nothing private yet and no sealed file: no passphrase needed
+  if (needPriv && !(await _ensurePrivPass())) { updateStatus(); return false; }
+
   const path = cfg.path || "schedule.json";
   const branch = cfg.branch || "main";
   const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
-  const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-  const body = {
-    message: `Update schedule: ${data.weekTitle || "(no title)"}`,
-    content: contentB64,
-    branch: branch,
-  };
-  if (publishedSha) body.sha = publishedSha;
 
   const pill = document.getElementById("statusPill");
   pill.textContent = "Publishing…";
   pill.className = "status-pill dirty";
 
   try {
-    const res = await fetch(url, {
-      method: "PUT",
-      headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(
-        res.status === 401 ? "GitHub didn't accept your token — it has probably expired. Make a new one and paste it in Settings."
-        : res.status === 409 ? "The schedule was published from another device since this page loaded. Reload the page — your edits here stay saved and you'll be asked which version to keep."
-        : res.status === 403 || res.status === 404 ? `GitHub refused the save (${res.status}). Check the repo name and that the token has Contents: Read & Write on it.`
-        : `${res.status}: ${err.slice(0, 200)}`);
+    if (!(await _ensurePublicSha(cfg))) { const e = new Error("conflict"); e.conflict = true; throw e; }
+    // The public file is skipped only when it would be identical (an edit to next week, say): one commit, not two.
+    const putPublic = !(needPriv && publishedSha && !_publicNeedsTrim() && _canon(pubNow) === _canon(publicPart(_pubRaw || {})));
+    if (needPriv) await writePrivate(privNow);
+    if (putPublic) {
+      const body = {
+        message: `Update schedule: ${data.weekTitle || "(no title)"}`,
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(pubNow, null, 2)))),
+        branch: branch,
+      };
+      if (publishedSha) body.sha = publishedSha;
+      const res = await fetch(url, {
+        method: "PUT",
+        headers: { "Authorization": `Bearer ${cfg.token}`, "Accept": "application/vnd.github+json", "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(
+          res.status === 401 ? "GitHub didn't accept your token — it has probably expired. Make a new one and paste it in Settings."
+          : res.status === 409 ? "The schedule was published from another device since this page loaded. Reload the page — your edits here stay saved and you'll be asked which version to keep."
+          : res.status === 403 || res.status === 404 ? `GitHub refused the save (${res.status}). Check the repo name and that the token has Contents: Read & Write on it.`
+          : `${res.status}: ${err.slice(0, 200)}`);
+      }
+      const j = await res.json();
+      publishedSha = j.content.sha;
     }
-    const j = await res.json();
-    publishedSha = j.content.sha;
+    _pubRaw = _clone(pubNow);
+    _publishedAt = Date.now();
     publishedData = JSON.parse(JSON.stringify(data));
-    localStorage.setItem(LS_PUBLISHED, JSON.stringify(publishedData));
+    _cachePublished();
     clearDraft();
     updateStatus();
     pill.textContent = "✓ Published — Netlify rebuilding";
@@ -2303,9 +2771,12 @@ async function publish() {
     return true;
   } catch (e) {
     console.error(e);
+    try { _rebuildPublished(); } catch (e2) {}   // the private part may have saved even though the public file didn't
     pill.textContent = "✗ Publish failed";
     pill.className = "status-pill error";
-    alert("Publish failed: " + e.message);
+    alert("Publish failed: " + (e.conflict
+      ? "The schedule was saved from another device since this page loaded. Reload the page — your edits here stay saved and you'll be asked which version to keep."
+      : e.message));
     return false;
   }
 }
@@ -2371,9 +2842,26 @@ function relabelToNextWeek(days, nw) {
   });
 }
 
-function rawUrl(path) {
+// Where a file stored in the repo (an older archive PNG) can be read from. The site itself comes first:
+// it is deployed from the repo, so the path works for every viewer, with or without Settings filled in.
+// GitHub directly is the fallback for the minute after a save, before the site has redeployed.
+function archiveUrls(path) {
+  const urls = ["./" + path];
   const c = loadCfg();
-  return `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch || "main"}/${path}`;
+  if (c.owner && c.repo) urls.push(`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch || "main"}/${path}`);
+  return urls;
+}
+async function fetchArchiveFile(path) {
+  let last = "not found";
+  for (const u of archiveUrls(path)) {
+    try {
+      const res = await fetch(u + "?t=" + Date.now(), { cache: "no-store" });
+      // a site that answers every unknown path with its home page is not the image
+      if (res.ok && !/^text\/html/i.test(res.headers.get("content-type") || "")) return res;
+      last = "HTTP " + res.status;
+    } catch (e) { last = e.message || "network error"; }
+  }
+  throw new Error(last);
 }
 
 function setArchiveStatus(msg) {
@@ -2802,8 +3290,8 @@ function parseEventTimes(timeStr) {
   const noMer = !a.mer && !(b && b.mer);
   let start = _to24(a, b && b.mer ? b.mer : null);
   let end = b ? _to24(b, a.mer) : { h: (start.h + 1) % 24, min: start.min };
-  // Heuristic: with no AM/PM given, a time before the working-day start (7am)
-  // is almost certainly afternoon in this 7am–8pm schedule, so bump it to PM.
+  // Heuristic for stored text with no AM/PM at all (hand-edited or imported files; the editor always
+  // writes AM/PM): a time before the calendar's first hour can only be afternoon, so bump it to PM.
   if (noMer) {
     if (start.h >= 1 && start.h < CAL_START_H) start = { h: start.h + 12, min: start.min };
     if (b && end.h >= 1 && end.h < CAL_START_H) end = { h: end.h + 12, min: end.min };
@@ -3102,21 +3590,76 @@ function openArchiveICSMenu(entry, btn) {
 
 
 
-async function captureWeekPNGForType(type) {
-  if (!window.html2canvas) throw new Error("capture library not loaded");
-  // Temporarily override globals so buildCaptureNode renders with correct type and no name filters
-  const savedType = typeFilter, savedIntern = internFilter, savedPlayer = playerFilter;
-  typeFilter = type; internFilter = ""; playerFilter = "";
-  const cap = buildCaptureNode(true, { showInternTally: true, showPlayerTally: true });
-  typeFilter = savedType; internFilter = savedIntern; playerFilter = savedPlayer;
+// Draw one week as the archive image: the live week, or an archived snapshot passed as `src`
+// ({ title, range, days, locations }). buildCaptureNode reads the globals, so for the moment it runs
+// (it is synchronous) they point at the week being drawn, with the given type and no name filters.
+async function renderWeekCanvas(type, src) {
+  if (!window.html2canvas) throw new Error("the image library hasn't loaded — check the connection and try again");
+  const saved = { typeFilter, internFilter, playerFilter, data };
+  let cap;
+  try {
+    typeFilter = type; internFilter = ""; playerFilter = "";
+    if (src) data = {
+      weekTitle: src.title || src.range || "",
+      days: src.days || [],
+      locations: (src.locations && src.locations.length ? src.locations : (saved.data && saved.data.locations)) || [],
+    };
+    cap = buildCaptureNode(true, { showInternTally: true, showPlayerTally: true });
+  } finally {
+    typeFilter = saved.typeFilter; internFilter = saved.internFilter; playerFilter = saved.playerFilter; data = saved.data;
+  }
   document.body.appendChild(cap);
   await new Promise(r => setTimeout(r, 150));
   try {
     _freezeSvgColors(cap);
-    const cv = await html2canvas(cap, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true });
-    return cv.toDataURL("image/png").split(",")[1];
+    return await html2canvas(cap, { backgroundColor: "#F4F1EC", scale: 2, useCORS: true });
   } finally {
     document.body.removeChild(cap);
+  }
+}
+// The image for an archived week. It is drawn on this device from the week's saved sessions, so no
+// picture of the schedule sits in the repo. Weeks archived before sessions were saved only have the
+// PNG stored at the time.
+async function archiveImageBlob(entry, type) {
+  if (hasSnapshot(entry)) {
+    const cv = await renderWeekCanvas(type === "excel" ? "excel" : "all", entry);
+    return await new Promise(res => cv.toBlob(res, "image/png"));
+  }
+  const p = type === "excel" ? entry.pathExcel : entry.path;
+  if (!p) return null;
+  return await (await fetchArchiveFile(p)).blob();
+}
+function _archiveHasImage(entry, type) {
+  if (type !== "excel") return hasSnapshot(entry) || !!entry.path;
+  return hasSnapshot(entry) ? entry.days.some(d => (d.events || []).some(e => e.type === "excel")) : !!entry.pathExcel;
+}
+// The locations a week's sessions point at, copied into its archive entry so the image still reads
+// the same after a location is renamed or removed.
+function _usedLocations(days) {
+  const used = new Set();
+  (days || []).forEach(d => (d.events || []).forEach(ev => { if (ev && ev.loc) used.add(ev.loc); }));
+  return ((data && data.locations) || []).filter(l => used.has(l.id)).map(l => ({ ...l }));
+}
+// Open an archived week's image in the viewer.
+let _imgShown = null;   // { blob, range, label }: what Share and Download act on
+async function openArchiveImage(entry, type, btn) {
+  const label = type === "excel" ? "Excel Client" : "All Types";
+  const prev = btn ? btn.textContent : "";
+  if (btn) { btn.textContent = "…"; btn.disabled = true; }
+  try {
+    const blob = await archiveImageBlob(entry, type);
+    if (!blob) throw new Error("no image was saved for this week");
+    const iv = document.getElementById("imgView");
+    if (iv.dataset.url) URL.revokeObjectURL(iv.dataset.url);
+    iv.dataset.url = iv.src = URL.createObjectURL(blob);
+    _imgShown = { blob, range: entry.range, label };
+    document.getElementById("imgTitle").textContent = entry.range + "  ·  " + label;
+    document.getElementById("imgModal").classList.remove("hidden");
+  } catch (e) {
+    console.error(e);
+    alert("Couldn't open the image: " + e.message);
+  } finally {
+    if (btn) { btn.textContent = prev; btn.disabled = false; }
   }
 }
 
@@ -3131,10 +3674,16 @@ function weekRosterPlayers(days) {
 }
 
 // Returns true only if the week is archived when this resolves (callers gate on it).
+// An archived week is its sessions, kept in the sealed file. Its images are drawn from those sessions
+// when someone opens them, so archiving uploads no picture of the schedule.
 async function archiveCurrentWeek(auto) {
   const cfg = loadCfg();
   if (!cfg.token || !cfg.owner || !cfg.repo) {
     if (!auto) { setArchiveStatus(""); alert("Connect GitHub in Settings to archive."); openSettings(); }
+    return false;
+  }
+  if (privState.locked && (auto || !(await unlockPrivate()))) {   // the archive can't be added to until it is open
+    if (!auto) setArchiveStatus("");
     return false;
   }
   const w = liveWeekDates(data);   // BUGFIX: was weekDates(new Date())
@@ -3145,26 +3694,19 @@ async function archiveCurrentWeek(auto) {
     return false;
   }
   try {
-    setArchiveStatus("Capturing all types…");
-    const b64All = await captureWeekPNGForType("all");
-    const pathAll = `archive/${w.key}.png`;
-
-    setArchiveStatus("Capturing Excel Client only…");
-    const b64Excel = await captureWeekPNGForType("excel");
-    const pathExcel = `archive/${w.key}-excel.png`;
-
-    setArchiveStatus("↑ Uploading to GitHub…");
-    await ghPutFile(pathAll,   b64All,   "Archive week " + w.range + " (all types)");
-    await ghPutFile(pathExcel, b64Excel, "Archive week " + w.range + " (Excel Client)");
-
+    setArchiveStatus("Saving the week…");
+    const old = data.archive.find(a => a.key === w.key);
     data.archive = data.archive.filter(a => a.key !== w.key);
-    // Snapshot the week's events alongside the PNGs so archived weeks can be
-    // re-exported as .ics later (the images alone aren't machine-readable).
-    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", path: pathAll, pathExcel, players: weekRosterPlayers(data.days), days: JSON.parse(JSON.stringify(data.days || [])), ts: Date.now() });
+    data.archive.push({ key: w.key, range: w.range, title: data.weekTitle || "", players: weekRosterPlayers(data.days), days: JSON.parse(JSON.stringify(data.days || [])), locations: _usedLocations(data.days), ts: Date.now() });
     data.archive.sort((a, b) => b.key.localeCompare(a.key));
-    if (!(await publish())) {   // commit updated schedule.json (now includes the archive index)
-      setArchiveStatus("✗ Images saved, but the schedule didn't publish — press Publish to finish archiving " + w.range);
+    _archiveDeleted.delete(w.key);
+    if (!(await publish())) {   // seals the archive and commits it
+      setArchiveStatus("✗ The week didn't save — press Publish to finish archiving " + w.range);
       return false;
+    }
+    // An earlier archive of this same week left pictures in the repo. The new entry replaces them.
+    if (old) for (const p of [old.path, old.pathExcel]) {
+      if (p) try { await ghDeleteFile(p, "Remove old archive image for " + w.range); } catch (e) { console.warn(e); }
     }
     setArchiveStatus("✓ Archived " + w.range);
     if (!document.getElementById("archiveModal").classList.contains("hidden")) renderArchiveList("");
@@ -3249,20 +3791,15 @@ function renderArchiveList(filter) {
       ${rosterPreview(a.players, f)}
     </div>
     <div class="ai-btns">
-      <button class="ai-view-btn" data-path="${escapeAttr(a.path)}" data-range="${escapeAttr(a.range)}" data-label="All Types">All Types →</button>
-      ${a.pathExcel ? `<button class="ai-view-btn excel" data-path="${escapeAttr(a.pathExcel)}" data-range="${escapeAttr(a.range)}" data-label="Excel Client">Excel →</button>` : ""}
+      ${_archiveHasImage(a, "all") ? `<button class="ai-view-btn" data-key="${escapeAttr(a.key)}" data-type="all">All Types →</button>` : ""}
+      ${_archiveHasImage(a, "excel") ? `<button class="ai-view-btn excel" data-key="${escapeAttr(a.key)}" data-type="excel">Excel →</button>` : ""}
       <button class="ai-cal-btn" data-cal-key="${escapeAttr(a.key)}" ${(a.days && a.days.length) ? `title="Download this week as a calendar file (.ics)"` : `disabled title="Archived before calendar export existed — image only"`}>↓ .ics</button>
       ${editUnlocked ? `<button class="ai-del-btn" data-key="${escapeAttr(a.key)}" data-range="${escapeAttr(a.range)}" title="Delete this archived snapshot">Delete</button>` : ""}
     </div>
   </div>`).join("") || `<div class="archive-empty">No match.</div>`;
   list.querySelectorAll(".ai-view-btn").forEach(b => b.addEventListener("click", () => {
-    document.getElementById("imgTitle").textContent = b.dataset.range + (b.dataset.label ? "  ·  " + b.dataset.label : "");
-    const iv = document.getElementById("imgView");
-    iv.src = rawUrl(b.dataset.path) + "?t=" + Date.now();
-    iv.dataset.path = b.dataset.path;
-    iv.dataset.range = b.dataset.range;
-    iv.dataset.label = b.dataset.label || "";
-    document.getElementById("imgModal").classList.remove("hidden");
+    const entry = (data.archive || []).find(a => a.key === b.dataset.key);
+    if (entry) openArchiveImage(entry, b.dataset.type, b);
   }));
   list.querySelectorAll(".ai-cal-btn").forEach(b => b.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -3279,18 +3816,20 @@ function renderArchiveList(filter) {
   updateArchiveBulk();
 }
 
-// Pull an already-archived week PNG from GitHub and hand it to the native share
+function _archiveImageName(range, label) {
+  const safe = (range || "week").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "week";
+  return `schedule-${safe}${label === "Excel Client" ? "-excel" : ""}.png`;
+}
+
+// Hand the archived week image that is open in the viewer to the native share
 // sheet (Messages, Mail, AirDrop…). Falls back to download on desktop.
-async function shareArchivedWeek(path, range, label, btn) {
+async function shareArchivedWeek(btn) {
+  if (!_imgShown) return;
+  const { blob, range, label } = _imgShown;
   const prev = btn ? btn.textContent : "";
   if (btn) { btn.textContent = "…"; btn.disabled = true; }
   try {
-    const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const blob = await res.blob();
-    const safe = (range || "week").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "week";
-    const tag = label === "Excel Client" ? "-excel" : "";
-    const fname = `schedule-${safe}${tag}.png`;
+    const fname = _archiveImageName(range, label);
     const file = new File([blob], fname, { type: blob.type || "image/png" });
     const shareText = range + (label ? "  ·  " + label : "");
 
@@ -3316,43 +3855,40 @@ async function shareArchivedWeek(path, range, label, btn) {
   }
 }
 
-// Download the archived week PNG straight to the device (no share sheet).
-async function downloadArchivedWeek(path, range, label, btn) {
-  const prev = btn ? btn.textContent : "";
-  if (btn) { btn.textContent = "…"; btn.disabled = true; }
-  try {
-    const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const blob = await res.blob();
-    const safe = (range || "week").replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase() || "week";
-    const tag = label === "Excel Client" ? "-excel" : "";
-    const fname = `schedule-${safe}${tag}.png`;
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = fname; a.click();
-    URL.revokeObjectURL(url);
-  } catch (e) {
-    console.error(e);
-    alert("Download failed: " + e.message);
-  } finally {
-    if (btn) { btn.textContent = prev; btn.disabled = false; }
-  }
+// Download the archived week image that is open in the viewer (no share sheet).
+function downloadArchivedWeek() {
+  if (!_imgShown) return;
+  const url = URL.createObjectURL(_imgShown.blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = _archiveImageName(_imgShown.range, _imgShown.label); a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-// Delete an archived week: removes both PNGs from GitHub, drops the index entry, and publishes.
+// Delete an archived week: drops the entry, publishes, and removes any image stored for it in the repo.
 async function deleteArchivedWeek(key, range, btn) {
   const entry = (data.archive || []).find(a => a.key === key);
   if (!entry) return;
-  if (!confirm(`Delete the archived snapshot for ${range}?\n\nThis removes the saved image(s) from GitHub and the entry from the list. It does not affect the live schedule.`)) return;
+  if (!confirm(`Delete the archived week ${range}?\n\nThis removes its saved sessions and image(s) for good. It does not affect the live schedule.`)) return;
   const prev = btn ? btn.textContent : "";
   if (btn) { btn.textContent = "…"; btn.disabled = true; }
   setArchiveStatus("Deleting " + range + "…");
+  const kept = data.archive;
   try {
-    if (entry.path)      await ghDeleteFile(entry.path,      "Delete archived week " + range + " (all types)");
-    if (entry.pathExcel) await ghDeleteFile(entry.pathExcel, "Delete archived week " + range + " (Excel Client)");
     data.archive = (data.archive || []).filter(a => a.key !== key);
-    const ok = await publish();   // commit updated schedule.json without this entry
-    setArchiveStatus(ok ? "✓ Deleted " + range : "✗ Images deleted, but the schedule didn't publish — press Publish to finish");
+    _archiveDeleted.add(key);   // a deliberate removal: publish must not bring it back from GitHub
+    if (!(await publish())) {
+      data.archive = kept; _archiveDeleted.delete(key);   // nothing was removed anywhere, so the list stays true
+      updateStatus();
+      setArchiveStatus("✗ Not deleted — the change didn't publish. Try Delete again.");
+      renderArchiveList(document.getElementById("archiveSearch").value || "");
+      return;
+    }
+    // The entry is gone. Clear out the pictures an older archive stored in the repo for it.
+    let left = false;
+    for (const [p, what] of [[entry.path, "all types"], [entry.pathExcel, "Excel Client"]]) {
+      if (p) try { await ghDeleteFile(p, "Delete archived week " + range + " (" + what + ")"); } catch (e) { console.warn(e); left = true; }
+    }
+    setArchiveStatus(left ? "✓ Deleted " + range + " — an old image file couldn't be removed from GitHub (archive/ folder)" : "✓ Deleted " + range);
     renderArchiveList(document.getElementById("archiveSearch").value || "");
   } catch (e) {
     console.error(e);
@@ -3365,12 +3901,9 @@ async function deleteArchivedWeek(key, range, btn) {
 // ============ BULK DOWNLOAD (.zip) ============
 // Firing several <a download> clicks in a row gets throttled or silently blocked
 // by every browser, so the selected files are bundled into one .zip instead.
-async function fetchArchiveBlob(path) {
-  try {
-    const res = await fetch(rawUrl(path) + "?t=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.blob();
-  } catch (e) { return null; }
+async function archiveImageOrNull(entry, type) {
+  try { return await archiveImageBlob(entry, type); }
+  catch (e) { console.warn(e); return null; }
 }
 
 // Menu off the ↓ Download button — same pattern as the archive .ics menu.
@@ -3412,18 +3945,18 @@ async function zipSelectedWeeks(mode, btn) {
     for (let i = 0; i < sel.length; i++) {
       const e = sel[i];
       const slug = _icsSlug(e.range, "week");
-      setArchiveStatus(`Fetching ${i + 1} of ${sel.length} — ${e.range}…`);
-      if (wantAll && e.path) {
-        const b = await fetchArchiveBlob(e.path);
+      setArchiveStatus(`Preparing ${i + 1} of ${sel.length} — ${e.range}…`);
+      if (wantAll && _archiveHasImage(e, "all")) {
+        const b = await archiveImageOrNull(e, "all");
         if (b) { zip.file(`${e.key}_${slug}_all-types.png`, b); files++; }
         else missing.push(`${e.range} — all types image`);
       }
-      if (wantExcel && e.pathExcel) {
-        const b = await fetchArchiveBlob(e.pathExcel);
+      if (wantExcel && _archiveHasImage(e, "excel")) {
+        const b = await archiveImageOrNull(e, "excel");
         if (b) { zip.file(`${e.key}_${slug}_excel.png`, b); files++; }
         else missing.push(`${e.range} — Excel image`);
       } else if (wantExcel) {
-        missing.push(`${e.range} — no Excel image archived for this week`);
+        missing.push(`${e.range} — no Excel image for this week`);
       }
       if (wantIcs) {
         if (!hasSnapshot(e)) { missing.push(`${e.range} — calendars (archived before .ics existed)`); }
@@ -4619,8 +5152,12 @@ function importJson(file) {
       if (Array.isArray(obj.payRates)) { payRates = _cleanRates(obj.payRates); payLocal.dirty = true; savePayRates(); }
       if (Array.isArray(obj.payExtras)) { payExtras = _cleanExtras(obj.payExtras); payLocal.dirty = true; savePayRates(); }
       delete obj.payRates; delete obj.payExtras;   // pay stays on this device; schedule.json is public
+      // A file with no archive in it is the public schedule.json (live week only). Next week, the archive
+      // and the blocked times were never in that file, so importing it leaves them as they are.
+      if (!("archive" in obj)) PRIVATE_KEYS.forEach(k => { if (data && data[k] != null) obj[k] = _clone(data[k]); });
       normalizeData(obj);
       data = obj;
+      data.archive = data.archive || [];
       _dayEventSort(data.days);                       // older or hand-edited files may be unsorted
       if (data.nextWeek) _dayEventSort(data.nextWeek.days);
       saveDraft(); setMode(currentMode); closeSettings();
@@ -4874,7 +5411,13 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
 
 // Read a typed clock string ("8", "830", "8:30", "8:30p") into minutes-of-day.
 // refMin (the start time) resolves a bare end time to the next reading after it.
-function _parseTimeToMin(str, refMin) {
+// A bare start time ("5", "630") can mean morning or evening:
+//  • if only one reading falls inside the calendar's hours, that's the one ("3" = 3 PM, "10" = 10 AM);
+//  • if both do (5 – 8 on a 5 AM – 9 PM calendar), it stays on the same half of the day as the time it
+//    replaces (prevMin): a 4 PM session retyped as "530" becomes 5:30 PM, a 6 AM session retyped as
+//    "530" stays 5:30 AM. With nothing to go on, before 7 means evening.
+// Typing "a" or "p" always wins.
+function _parseTimeToMin(str, refMin, prevMin) {
   const c = _parseClock(str);
   if (!c) return null;
   let h = c.h;
@@ -4883,9 +5426,19 @@ function _parseTimeToMin(str, refMin) {
   let m = h * 60 + c.min;
   if (!c.mer) {
     if (refMin != null) { if (m < refMin) m += 720; if (m < refMin) m += 720; }
-    else if (h >= 1 && h < CAL_START_H) m += 720;   // 1–4 means afternoon in this gym's day
+    else if (h >= 1 && h <= 11) {
+      const inDay = x => x >= CAL_START_H * 60 && x < CAL_END_H * 60;
+      const am = m, pm = m + 720;
+      if (inDay(am) && inDay(pm)) m = (prevMin != null ? prevMin >= 720 : h < 7) ? pm : am;
+      else if (inDay(pm)) m = pm;
+    }
   }
   return m;
+}
+// Start time (minutes of the day) a session has right now, or null: the context for a retyped bare time.
+function _startMinOf(timeStr) {
+  const t = parseEventTimes(timeStr);
+  return t ? t.start.h * 60 + t.start.min : null;
 }
 // 12-hour clock formatting for drag-edited times
 function _fmt12(totalMin) {
@@ -5922,7 +6475,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     if (!raw) {
       ev2.time = '';
     } else {
-      const sm = _parseTimeToMin(raw, null);
+      const sm = _parseTimeToMin(raw, null, _startMinOf(before));
       if (sm == null) {
         ev2.time = raw;                                  // unparseable: keep it as typed
       } else {
@@ -5959,7 +6512,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
   pop.querySelector('#calPopDur').addEventListener('click', e => {
     const b = e.target.closest('[data-dur]'); if (!b) return;
     const ev2 = getEv(); if (!ev2) return;
-    const sm = _parseTimeToMin(startEl.value.trim(), null);
+    const sm = _parseTimeToMin(startEl.value.trim(), null, _startMinOf(ev2.time));
     if (sm == null) { startEl.focus(); return; }
     const next = _fmtTimeRange(sm, +b.dataset.dur, true);
     if (next === ev2.time) return;
@@ -6429,9 +6982,13 @@ const editUnlocked = urlParams.get("edit") === "1";
 if (editUnlocked) document.querySelectorAll(".view-edit-toggle").forEach(t => t.classList.remove("hidden"));
 if (editUnlocked) document.getElementById("archiveNowBtn").classList.remove("hidden");
 
-document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", async () => {
+  const wantsEdit = b.dataset.mode === "edit" || b.dataset.mode === "pay";
   // Block edit mode unless unlocked
-  if ((b.dataset.mode === "edit" || b.dataset.mode === "pay") && !editUnlocked) return;
+  if (wantsEdit && !editUnlocked) return;
+  // Editing without next week, the archive and the blocked times loaded would mean working blind
+  // (and double-booking over a blocked time), so they are opened first.
+  if (wantsEdit && privState.locked && !(await unlockPrivate())) return;
   setMode(b.dataset.mode);
 }));
 
@@ -6711,10 +7268,10 @@ function renderPromoteCheck() {
     const ex = entry.days.reduce((n, d) => n + (d.events || []).filter(e => e.type === "excel").length, 0);
     cls = "ok";
     title = "✓ Archived — " + escapeHtml(w.range);
-    meta = `<b>${all}</b> session${all === 1 ? "" : "s"} saved (<b>${ex}</b> Excel · <b>${all - ex}</b> other)<br>Snapshot taken ${escapeHtml(_fmtWhen(entry.ts))}<br>Images + calendar data stored — this week stays exportable as .ics.`;
+    meta = `<b>${all}</b> session${all === 1 ? "" : "s"} saved (<b>${ex}</b> Excel · <b>${all - ex}</b> other)<br>Snapshot taken ${escapeHtml(_fmtWhen(entry.ts))}<br>Sessions saved — the week's image and .ics can be made from them at any time.`;
     btns = `<div class="pc-btns">
-      <button class="ai-view-btn" data-pc-img="${escapeAttr(entry.path || "")}" data-pc-label="All Types">View image →</button>
-      ${entry.pathExcel ? `<button class="ai-view-btn excel" data-pc-img="${escapeAttr(entry.pathExcel)}" data-pc-label="Excel Client">View Excel →</button>` : ""}
+      <button class="ai-view-btn" data-pc-type="all">View image →</button>
+      ${_archiveHasImage(entry, "excel") ? `<button class="ai-view-btn excel" data-pc-type="excel">View Excel →</button>` : ""}
     </div>`;
   } else if (entry) {
     cls = "warn";
@@ -6728,15 +7285,7 @@ function renderPromoteCheck() {
   box.innerHTML = `<div class="pc-card ${cls}"><div class="pc-title">${title}</div><div class="pc-meta">${meta}</div>${btns}</div>` +
     (data.nextWeek ? `<div class="pc-card"><div class="pc-title">Incoming: ${escapeHtml(data.nextWeek.weekTitle || "Next Week")}</div><div class="pc-meta"><b>${(data.nextWeek.days || []).reduce((n, d) => n + (d.events || []).length, 0)}</b> sessions will go live to viewers.</div></div>` : "");
 
-  box.querySelectorAll("[data-pc-img]").forEach(b => b.addEventListener("click", () => {
-    document.getElementById("imgTitle").textContent = w.range + "  ·  " + b.dataset.pcLabel;
-    const iv = document.getElementById("imgView");
-    iv.src = rawUrl(b.dataset.pcImg) + "?t=" + Date.now();
-    iv.dataset.path = b.dataset.pcImg;
-    iv.dataset.range = w.range;
-    iv.dataset.label = b.dataset.pcLabel;
-    document.getElementById("imgModal").classList.remove("hidden");
-  }));
+  box.querySelectorAll("[data-pc-type]").forEach(b => b.addEventListener("click", () => openArchiveImage(entry, b.dataset.pcType, b)));
 
   archBtn.textContent = hasDays ? "Re-archive" : "Archive now";
   ack.disabled = !hasDays;
@@ -6846,9 +7395,8 @@ document.getElementById("revertLiveBtn").addEventListener("click", async () => {
     const res = await fetch(`./${path}?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const fresh = await res.json();
-    normalizeData(fresh);
-    publishedData = fresh;
-    localStorage.setItem(LS_PUBLISHED, JSON.stringify(publishedData));
+    await refreshPrivate();   // next week, the archive and blocked times, as published
+    _setPublished(fresh);
     data = JSON.parse(JSON.stringify(publishedData));
     clearDraft();
     renderEdit();
@@ -6890,12 +7438,19 @@ document.getElementById("cfgSave").addEventListener("click", async () => {
   saveCfg(cfg);
   closeSettings();
   await refreshSha();
+  await refreshPrivate();
+  if (privState.locked) await unlockPrivate(); else _afterPrivateLoaded();
   updateStatus();
 });
 
 // Archive modal wiring
 document.getElementById("shareWeekBtn").addEventListener("click", (e) => { e.stopPropagation(); openWeekShareMenu(e.currentTarget); });
-document.getElementById("archiveBtn").addEventListener("click", openArchive);
+// The archive lives in the sealed file, so it is only there on the edit link.
+document.getElementById("archiveBtn").classList.toggle("hidden", !editUnlocked);
+document.getElementById("archiveBtn").addEventListener("click", async () => {
+  if (privState.locked && !(await unlockPrivate())) return;
+  openArchive();
+});
 document.getElementById("archiveClose").addEventListener("click", () => document.getElementById("archiveModal").classList.add("hidden"));
 document.getElementById("archiveSearch").addEventListener("input", e => renderArchiveList(e.target.value));
 document.getElementById("archiveNowBtn").addEventListener("click", () => archiveCurrentWeek(false));
@@ -6924,17 +7479,14 @@ document.getElementById("rollupTypes").addEventListener("click", (e) => {
   document.querySelectorAll("#rollupTypes .ru-type").forEach(x => x.classList.toggle("active", x === b));
   renderRollup();
 });
-document.getElementById("imgClose").addEventListener("click", () => document.getElementById("imgModal").classList.add("hidden"));
-document.getElementById("imgShare").addEventListener("click", (e) => {
+document.getElementById("imgClose").addEventListener("click", () => {
+  document.getElementById("imgModal").classList.add("hidden");
   const iv = document.getElementById("imgView");
-  if (!iv.dataset.path) return;
-  shareArchivedWeek(iv.dataset.path, iv.dataset.range, iv.dataset.label, e.currentTarget);
+  if (iv.dataset.url) { URL.revokeObjectURL(iv.dataset.url); delete iv.dataset.url; iv.removeAttribute("src"); }
+  _imgShown = null;
 });
-document.getElementById("imgDownload").addEventListener("click", (e) => {
-  const iv = document.getElementById("imgView");
-  if (!iv.dataset.path) return;
-  downloadArchivedWeek(iv.dataset.path, iv.dataset.range, iv.dataset.label, e.currentTarget);
-});
+document.getElementById("imgShare").addEventListener("click", (e) => shareArchivedWeek(e.currentTarget));
+document.getElementById("imgDownload").addEventListener("click", () => downloadArchivedWeek());
 
 document.getElementById("internTallyHead").addEventListener("click", () => {
   document.getElementById("internTally").classList.toggle("collapsed");
@@ -7071,10 +7623,13 @@ async function pollLiveSchedule() {
     const cfg = loadCfg(); const path = cfg.path || "schedule.json";
     const r = await fetch(`./${path}?t=${Date.now()}`, { cache: "no-store" }); if (!r.ok) return;
     const fresh = await r.json(); normalizeData(fresh);
-    const s = JSON.stringify(fresh);
-    if (s === JSON.stringify(publishedData)) return;
-    publishedData = fresh; localStorage.setItem(LS_PUBLISHED, s);
-    if (!EDIT_LINK || !loadDraft()) { data = JSON.parse(s); data.archive = data.archive || []; renderDisplay(); showToast("Schedule updated"); }
+    // The site lags GitHub by a deploy. Just after this device published, or while the site still
+    // serves the older all-in-one file, its copy is the stale one: leave what's loaded alone.
+    if (Date.now() - _publishedAt < 180000) return;
+    if (EDIT_LINK && privState.exists && !_privEmpty(privatePart(fresh))) return;
+    if (_canon(fresh) === _canon(_pubRaw)) return;
+    _setPublished(fresh);
+    if (!EDIT_LINK || !loadDraft()) { data = _clone(publishedData); data.archive = data.archive || []; renderDisplay(); showToast("Schedule updated"); }
     else { showToast("A newer schedule was published"); }
   } catch (e) {}
 }
@@ -7083,6 +7638,13 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) poll
 
 // ---------- (v3) Undo / Redo — 60-step snapshot stack around saveDraft ----------
 let _undoStack = [], _redoStack = [], _lastSnap = null, _pendingSnap = null, _snapTimer = null, _silentRestore = false;
+// The working copy was replaced from outside the editor (private data loaded): history before that
+// point describes a different document, so it is dropped.
+function _resetUndo() {
+  _undoStack.length = 0; _redoStack.length = 0;
+  _lastSnap = JSON.stringify(data); _pendingSnap = null;
+  _syncUndoBtns();
+}
 function _syncUndoBtns() {
   const u = document.getElementById("undoBtn"), r = document.getElementById("redoBtn");
   if (u) u.disabled = !_undoStack.length && _pendingSnap === null;
@@ -7296,6 +7858,7 @@ const LS_PAY_RATES = "sfb_pay_rates_v1";
 const LS_PAY_PASS = "sfb_pay_pass_v1";
 const LS_PAY_TYPE = "sfb_pay_type_v1";
 const JSPDF_SRC = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+const JSPDF_SRI = "sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==";   // pinned, like the two libraries in <head>
 const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 // Starting rate card: the September 2026 Intern Cost sheet + Dylan O and Greg R (Oct 2026).
 // Empty on purpose: this page is public, so real rates never ship in it. A new device gets the card from
@@ -7526,6 +8089,7 @@ function _weekExtras(mon) {
 function buildWeeklyPay(src, type) {
   const rixOn = _rixMemo();
   const paid = new Map(), other = new Map();
+  const untimed = [];   // sessions whose time can't be read: an hourly intern on one earns $0, so say so
   let sessions = 0;
   (src.days || []).forEach(day => {
     const date = dateForDayFrom(day.day, src.mon);
@@ -7534,6 +8098,8 @@ function buildWeeklyPay(src, type) {
       if (type !== "all" && ev.type === "excel") return;
       sessions++;
       const sp = sessionPay(ev, rix);
+      const zeroHr = _zeroHourly(sp);
+      if (zeroHr.length) untimed.push({ date, ev, names: zeroHr });
       sp.lines.forEach(l => {
         const k = _payKey(l.name);
         if (l.paid) {
@@ -7580,8 +8146,24 @@ function buildWeeklyPay(src, type) {
     r.partList.forEach(pt => { pt.dayList = [...pt.days.values()].sort((a, b) => a.date - b.date); });
   });
   const otherRows = [...other.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
-  return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle: [...idle.values()], sessions, extraTotal,
+  return { src, type, sun: _addDays(src.mon, 6), paidRows, otherRows, idle: [...idle.values()], sessions, extraTotal, untimed,
            total: paidRows.reduce((s, r) => s + r.amt, 0) };
+}
+// Hourly interns on a session with no readable length (no time, "TBD"…): hours × rate comes to $0.
+function _zeroHourly(sp) {
+  return sp.mins > 0 ? [] : sp.lines.filter(l => l.paid && l.rate.unit === "hr").map(l => l.name);
+}
+function _untimedLine(u) {
+  const t = String((u.ev && u.ev.time) || "").trim();
+  return `${_dayTag(u.date)} · ${(u.ev && u.ev.title) || "Untitled"} (${t ? "time: " + t : "no time"}) — ${u.names.join(", ")}`;
+}
+function _untimedWarnHtml(list, live) {
+  if (!list.length) return "";
+  const n = list.length;
+  const fix = live ? `Give ${n === 1 ? "it" : "them"} a start and end time in Edit.`
+                   : `This week is archived, so add what's owed as a one-off payment above.`;
+  return `<div class="pay-warn"><div><b>Hourly pay is $0 for ${n} session${n === 1 ? "" : "s"}</b> — the time can't be read, so there are no hours to pay. ${fix}</div>`
+    + list.map(u => `<div>${escapeHtml(_untimedLine(u))}</div>`).join("") + `</div>`;
 }
 
 const _KIND_LABEL = { excel: "Excel", other: "Other" };
@@ -7878,11 +8460,12 @@ function fitInvoicePage(page) {
 }
 
 // ============ CAPTURE / DOWNLOAD ============
-function _loadScript(src) {
+function _loadScript(src, integrity) {
   _loadScript.p = _loadScript.p || {};
   if (_loadScript.p[src]) return _loadScript.p[src];
   return (_loadScript.p[src] = new Promise((res, rej) => {
     const s = document.createElement("script");
+    if (integrity) { s.integrity = integrity; s.crossOrigin = "anonymous"; s.referrerPolicy = "no-referrer"; }
     s.src = src; s.async = true;
     s.onload = () => res();
     s.onerror = () => { delete _loadScript.p[src]; s.remove(); rej(new Error("couldn't load the PDF library — check the connection and try again")); };
@@ -7960,7 +8543,7 @@ async function downloadInvoice(btn) {
   document.body.appendChild(host);
   try {
     setInvStatus("Loading PDF library…");
-    await _loadScript(JSPDF_SRC);
+    await _loadScript(JSPDF_SRC, JSPDF_SRI);
     const JsPDF = window.jspdf && window.jspdf.jsPDF;
     if (!JsPDF) throw new Error("PDF library didn't load.");
     await _payFontsReady();
@@ -8123,6 +8706,7 @@ async function saveRatesToGitHub(newPass) {
     }
     if (!done) throw new Error("another device kept saving at the same moment — try again");
     if (newPass) _setPayPass(newPass);
+    if (newPass && newPass !== oldPass) { try { await _privAfterPassChange(); } catch (e) { console.warn(e); } }   // one passphrase: the schedule's sealed file moves with it
     const edited = _payEditSeq !== seq0;   // typed more while saving: keep that on top of the saved copy
     if (merged) {
       const now = { rates: _cleanRates(payRates), extras: _cleanExtras(payExtras) };
@@ -8147,6 +8731,8 @@ async function unlockRates(pass) {
     const pay = await openRates(paySync.remote, pass);
     _setPayPass(pass); paySync.locked = false; paySync.unlockErr = false;
     if (!payLocal.dirty) _adoptRates(pay, paySync.remote.updatedAt);
+    // The same passphrase opens next week, the archive and the blocked times
+    if (privState.locked) refreshPrivate().then(() => { if (!privState.locked) _afterPrivateLoaded(); }).catch(e => console.warn(e));
   } catch (e) { paySync.unlockErr = true; }
   paySync.busy = false; renderRateSync();
 }
@@ -8226,7 +8812,8 @@ function _renderWeeklySheet() {
   if (!src) return;
   const m = buildWeeklyPay(src, payType);
   document.getElementById("payWeekMsg").innerHTML = m.idle.length ? `On the rate card, no ${payType === "all" ? "" : "Other "}sessions this week: ${escapeHtml(m.idle.join(", "))}` : "";
-  document.getElementById("payWeekPreview").innerHTML = weeklyPayHtml(m, false);
+  // The warning sits above the sheet on screen only; the shared PNG is built separately from weeklyPayHtml.
+  document.getElementById("payWeekPreview").innerHTML = _untimedWarnHtml(m.untimed, !!src.live) + weeklyPayHtml(m, false);
 }
 
 // ---- One-off payments (gas, tips, bonuses) for the week shown ----
@@ -8297,6 +8884,10 @@ function renderInvoicePreview() {
   const live = inv.weeks.find(w => w.live);
   const notes = inv.gaps.map(g => `${_rangeLabel(g.from, g.to)} isn't included — ${_GAP_LONG[g.why]}.`);
   if (live) notes.push(`${_rangeLabel(live.from, live.to)} comes from the live week (not archived yet).`);
+  inv.weeks.forEach(w => w.days.forEach(d => d.sessions.forEach(s => {
+    const zeroHr = _zeroHourly(s);
+    if (zeroHr.length) notes.push(`Hourly pay is $0 — the session time can't be read: ${_untimedLine({ date: d.date, ev: s.ev, names: zeroHr })}`);
+  })));
   warn.innerHTML = notes.length ? `<div class="pay-warn">${notes.map(n => `<div>${escapeHtml(n)}</div>`).join("")}</div>` : "";
   box.innerHTML = pages.map((p, i) => `<div class="iv-thumb" role="button" tabindex="0" data-i="${i}" aria-label="Page ${i + 1} — tap to enlarge"><div class="iv-doc">${p}</div></div>`).join("");
   box.querySelectorAll(".iv-page").forEach(fitInvoicePage);
