@@ -50,7 +50,7 @@
         },
         {
           "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ Clava: ",
+          "title": "Group @ Clava: Russ",
           "type": "other",
           "people": [
             "Dylan O"
@@ -89,7 +89,8 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Smitty"
+            "Smitty",
+            "Nick C"
           ],
           "players": [],
           "note": "",
@@ -106,7 +107,7 @@
         },
         {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Audrina 10/5 @ Clava",
+          "title": "Audrina 11/5 @ Clava",
           "type": "other",
           "people": [
             "Anthony"
@@ -117,7 +118,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Group @ Clava: Russ, Matt S",
+          "title": "Group @ Clava: Russ, Matt S, Kate-Joe",
           "type": "other",
           "people": [
             "Anthony"
@@ -133,7 +134,7 @@
       "events": [
         {
           "time": "6:15 AM – 7:15 AM",
-          "title": "Maxwell 1/5, Ryan 5/5, Jude 2/5 @ CDM",
+          "title": "Maxwell 2/5 @ CDM",
           "type": "other",
           "people": [
             "Smitty"
@@ -148,7 +149,6 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Dame",
             "Smitty"
           ],
           "players": [],
@@ -177,7 +177,6 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Dame",
             "Nick C",
             "Yash",
             "Smitty"
@@ -185,6 +184,17 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "3:30 PM – 4:30 PM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
         }
       ]
     },
@@ -192,7 +202,7 @@
       "day": "Sat 11/21",
       "events": [
         {
-          "time": "10:00 AM – 10:45 AM",
+          "time": "1:00 PM – 2:00 PM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
