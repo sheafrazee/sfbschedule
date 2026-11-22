@@ -1,11 +1,35 @@
 {
-  "weekTitle": "Week of Nov 16 – 22",
+  "weekTitle": "Week of Nov 23 – 29",
   "days": [
     {
-      "day": "Mon 11/16",
+      "day": "Mon 11/23",
       "events": [
         {
-          "time": "9:45 AM – 11:00 AM",
+          "time": "7:00 AM – 8:30 AM",
+          "title": "Stanley Johnson",
+          "type": "other",
+          "people": [
+            "Kadafi",
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "map"
+        },
+        {
+          "time": "8:30 AM – 9:30 AM",
+          "title": "Illan",
+          "type": "other",
+          "people": [
+            "Kadafi",
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "map"
+        },
+        {
+          "time": "10:30 AM – 11:45 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -18,27 +42,7 @@
           "loc": "san-clemente"
         },
         {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA #7 @ MAP",
-          "type": "other",
-          "people": [],
-          "players": [],
-          "note": "",
-          "loc": "map"
-        },
-        {
-          "time": "3:00 PM – 4:00 PM",
-          "title": "Audrina 10/5 @ Clava",
-          "type": "other",
-          "people": [
-            "Dylan O"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
+          "time": "2:00 PM – 3:00 PM",
           "title": "Dao @ Clava",
           "type": "other",
           "people": [
@@ -49,8 +53,19 @@
           "loc": "loc-mwbdxphi42l"
         },
         {
-          "time": "5:00 PM – 6:00 PM",
-          "title": "Group @ Clava: Russ",
+          "time": "3:00 PM – 4:00 PM",
+          "title": "Audrina 12/5 @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "4:00 PM – 5:00 PM",
+          "title": "Group @ Clava",
           "type": "other",
           "people": [
             "Dylan O"
@@ -62,10 +77,24 @@
       ]
     },
     {
-      "day": "Tue 11/17",
+      "day": "Tue 11/24",
       "events": [
         {
-          "time": "9:45 AM – 11:00 AM",
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Kenny Lawson",
+          "type": "excel",
+          "people": [
+            "Anthony",
+            "Dame",
+            "Nick C",
+            "Smitty"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
+        },
+        {
+          "time": "9:00 AM – 10:15 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -77,14 +106,39 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Lucas 4/5 @ Clava",
+          "type": "other",
+          "people": [
+            "Yash"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "ogp"
         }
       ]
     },
     {
-      "day": "Wed 11/18",
+      "day": "Wed 11/25",
       "events": [
         {
-          "time": "9:45 AM – 11:00 AM",
+          "time": "7:00 AM – 8:15 AM",
+          "title": "Kenny Lawson",
+          "type": "excel",
+          "people": [
+            "Anthony",
+            "Dame",
+            "Nick C",
+            "Smitty"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "san-clemente"
+        },
+        {
+          "time": "8:15 AM – 9:30 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -97,13 +151,27 @@
           "loc": "san-clemente"
         },
         {
-          "time": "1:00 PM – 2:30 PM",
-          "title": "ABA/DELTA #7 @ MAP",
+          "time": "1:00 PM – 2:00 PM",
+          "title": "Illan",
           "type": "other",
-          "people": [],
+          "people": [
+            "Kadafi",
+            "Anthony"
+          ],
           "players": [],
           "note": "",
-          "loc": "map"
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "2:00 PM – 3:00 PM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Dylan O"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
         },
         {
           "time": "3:00 PM – 4:00 PM",
@@ -118,7 +186,7 @@
         },
         {
           "time": "4:00 PM – 5:00 PM",
-          "title": "Group @ Clava: Russ, Matt S, Kate-Joe",
+          "title": "Group @ Clava: ",
           "type": "other",
           "people": [
             "Anthony"
@@ -130,47 +198,24 @@
       ]
     },
     {
-      "day": "Thu 11/19",
-      "events": [
-        {
-          "time": "6:15 AM – 7:15 AM",
-          "title": "Maxwell 2/5 @ CDM",
-          "type": "other",
-          "people": [
-            "Smitty"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mv4ixegz8xk"
-        },
-        {
-          "time": "8:15 AM – 9:30 AM",
-          "title": "Colby Jones @ ",
-          "type": "excel",
-          "people": [
-            "Anthony",
-            "Smitty"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "san-clemente"
-        },
-        {
-          "time": "4:00 PM – 5:00 PM",
-          "title": "Lucas 4/5 @ Clava",
-          "type": "other",
-          "people": [
-            "Yash"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "ogp"
-        }
-      ]
+      "day": "Thu 11/26",
+      "events": []
     },
     {
-      "day": "Fri 11/20",
+      "day": "Fri 11/27",
       "events": [
+        {
+          "time": "8:30 AM – 9:30 AM",
+          "title": "Illan",
+          "type": "other",
+          "people": [
+            "Kadafi",
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
         {
           "time": "10:30 AM – 11:45 AM",
           "title": "Colby Jones @ San Clemente",
@@ -184,22 +229,11 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "3:30 PM – 4:30 PM",
-          "title": "Dao @ Clava",
-          "type": "other",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
         }
       ]
     },
     {
-      "day": "Sat 11/21",
+      "day": "Sat 11/28",
       "events": [
         {
           "time": "1:00 PM – 2:00 PM",
@@ -215,7 +249,7 @@
       ]
     },
     {
-      "day": "Sun 11/22",
+      "day": "Sun 11/29",
       "events": []
     }
   ],
