@@ -10,8 +10,7 @@
           "type": "other",
           "people": [
             "Kadafi",
-            "Anthony",
-            "Ali"
+            "Anthony"
           ],
           "players": [],
           "note": "",
@@ -22,8 +21,7 @@
           "title": "Illan",
           "type": "other",
           "people": [
-            "Anthony",
-            "Ali"
+            "Anthony"
           ],
           "players": [],
           "note": "",
@@ -35,7 +33,7 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Smitty"
+            "Nick C"
           ],
           "players": [],
           "note": "",
@@ -212,7 +210,18 @@
           "loc": "loc-mwbdxphi42l"
         },
         {
-          "time": "10:30 AM – 11:45 AM",
+          "time": "9:30 AM – 10:30 AM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "11:30 AM – 12:45 PM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -223,17 +232,6 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
-        },
-        {
-          "time": "1:30 PM – 2:30 PM",
-          "title": "Dao @ Clava",
-          "type": "other",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
         },
         {
           "time": "2:30 PM – 3:30 PM",
