@@ -17,18 +17,7 @@
           "loc": "map"
         },
         {
-          "time": "8:30 AM – 9:30 AM",
-          "title": "Illan",
-          "type": "other",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "map"
-        },
-        {
-          "time": "10:30 AM – 11:45 AM",
+          "time": "9:30 AM – 10:45 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -199,29 +188,7 @@
       "day": "Fri 11/27",
       "events": [
         {
-          "time": "8:30 AM – 9:30 AM",
-          "title": "Illan",
-          "type": "other",
-          "people": [
-            "Ofek"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
-        },
-        {
-          "time": "9:30 AM – 10:30 AM",
-          "title": "Dao @ Clava",
-          "type": "other",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
-        },
-        {
-          "time": "11:30 AM – 12:45 PM",
+          "time": "8:00 AM – 9:15 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
@@ -234,7 +201,18 @@
           "loc": "san-clemente"
         },
         {
-          "time": "2:30 PM – 3:30 PM",
+          "time": "11:00 AM – 12:00 PM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "12:00 PM – 1:00 PM",
           "title": "Audrina 11/5 @ Clava",
           "type": "other",
           "people": [
