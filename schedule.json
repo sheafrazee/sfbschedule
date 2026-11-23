@@ -35,8 +35,7 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Smitty",
-            "Nick C"
+            "Smitty"
           ],
           "players": [],
           "note": "",
@@ -85,9 +84,9 @@
           "title": "Kenny Lawson",
           "type": "excel",
           "people": [
-            "Nick C",
             "Smitty",
-            "Anthony"
+            "Anthony",
+            "Nick C"
           ],
           "players": [],
           "note": "",
@@ -99,19 +98,30 @@
           "type": "excel",
           "people": [
             "Anthony",
-            "Nick C",
-            "Smitty"
+            "Smitty",
+            "Nick C"
           ],
           "players": [],
           "note": "",
           "loc": "san-clemente"
         },
         {
-          "time": "2:00 PM – 3:00 PM",
+          "time": "12:00 PM – 1:00 PM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Ofek"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "1:00 PM – 2:00 PM",
           "title": "Lucas 4/5 @ Clava",
           "type": "other",
           "people": [
-            "Anthony"
+            "Ofek"
           ],
           "players": [],
           "note": "",
@@ -147,19 +157,8 @@
           "loc": "san-clemente"
         },
         {
-          "time": "1:00 PM – 2:00 PM",
+          "time": "1:30 PM – 2:30 PM",
           "title": "Illan",
-          "type": "other",
-          "people": [
-            "Anthony"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "loc-mwbdxphi42l"
-        },
-        {
-          "time": "2:00 PM – 3:00 PM",
-          "title": "Dao @ Clava",
           "type": "other",
           "people": [
             "Anthony"
@@ -173,7 +172,8 @@
           "title": "Audrina 11/5 @ Clava",
           "type": "other",
           "people": [
-            "Anthony"
+            "Anthony",
+            "Ofek"
           ],
           "players": [],
           "note": "",
@@ -184,7 +184,7 @@
           "title": "Group @ Clava: ",
           "type": "other",
           "people": [
-            "Anthony"
+            "Ofek"
           ],
           "players": [],
           "note": "",
@@ -201,7 +201,7 @@
       "events": [
         {
           "time": "8:30 AM – 9:30 AM",
-          "title": "Illan",
+          "title": "Ofek",
           "type": "other",
           "people": [
             "Kadafi",
@@ -223,6 +223,28 @@
           "players": [],
           "note": "",
           "loc": "san-clemente"
+        },
+        {
+          "time": "1:30 PM – 2:30 PM",
+          "title": "Dao @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
+        },
+        {
+          "time": "2:30 PM – 3:30 PM",
+          "title": "Audrina 11/5 @ Clava",
+          "type": "other",
+          "people": [
+            "Anthony"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "loc-mwbdxphi42l"
         }
       ]
     },
