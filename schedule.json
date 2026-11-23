@@ -120,18 +120,6 @@
       "day": "Wed 11/25",
       "events": [
         {
-          "time": "7:00 AM – 8:15 AM",
-          "title": "Kenny Lawson",
-          "type": "excel",
-          "people": [
-            "Anthony",
-            "Smitty"
-          ],
-          "players": [],
-          "note": "",
-          "loc": "san-clemente"
-        },
-        {
           "time": "8:15 AM – 9:30 AM",
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
