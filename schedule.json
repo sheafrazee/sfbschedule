@@ -21,8 +21,7 @@
           "title": "Colby Jones @ San Clemente",
           "type": "excel",
           "people": [
-            "Anthony",
-            "Nick C"
+            "Anthony"
           ],
           "players": [],
           "note": "",
@@ -41,7 +40,7 @@
         },
         {
           "time": "3:00 PM – 4:00 PM",
-          "title": "Audrina 12/5 @ Clava",
+          "title": "Audrina 9/5 @ Clava",
           "type": "other",
           "people": [
             "Anthony"
@@ -97,7 +96,7 @@
           "title": "Dao @ Clava",
           "type": "other",
           "people": [
-            "Ofek"
+            "Anthony"
           ],
           "players": [],
           "note": "",
@@ -108,11 +107,23 @@
           "title": "Lucas 4/5 @ Clava",
           "type": "other",
           "people": [
-            "Ofek"
+            "Anthony"
           ],
           "players": [],
           "note": "",
           "loc": "ogp"
+        },
+        {
+          "time": "3:00 PM – 4:30 PM",
+          "title": "Stanley Johnson ",
+          "type": "other",
+          "people": [
+            "Anthony",
+            "Kadafi"
+          ],
+          "players": [],
+          "note": "",
+          "loc": "map"
         }
       ]
     },
@@ -147,8 +158,7 @@
           "title": "Audrina 11/5 @ Clava",
           "type": "other",
           "people": [
-            "Anthony",
-            "Ofek"
+            "Anthony"
           ],
           "players": [],
           "note": "",
@@ -159,7 +169,6 @@
           "title": "Group @ Clava: ",
           "type": "other",
           "people": [
-            "Ofek",
             "Anthony"
           ],
           "players": [],
@@ -201,7 +210,7 @@
         },
         {
           "time": "12:00 PM – 1:00 PM",
-          "title": "Audrina 11/5 @ Clava",
+          "title": "Audrina 10/5 @ Clava",
           "type": "other",
           "people": [
             "Anthony"
