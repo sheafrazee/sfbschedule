@@ -284,6 +284,50 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .btn.excel:hover:not(:disabled) { background: var(--clay); color: #fff; }
 /* Archive roll-up */
 .rollup-modal { max-width: 760px; }
+/* Attendance: every date one intern or player was scheduled */
+#attModal { z-index: 120; }   /* above the archive and roll-up it can be opened from */
+.att-modal { max-width: 720px; }
+.att-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.att-controls .ru-types { margin-bottom: 0; }
+.att-controls .ru-type { white-space: nowrap; }
+.att-range { padding: 5px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; }
+.att-custom { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--stone); }
+.att-custom input { padding: 4px 6px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); }
+#attBack { display: block; margin-bottom: 10px; }
+.att-body { max-height: 56vh; overflow-y: auto; }
+.att-count { font-size: 12.5px; color: var(--stone); margin-bottom: 8px; }
+.att-names { display: flex; flex-direction: column; gap: 6px; }
+.att-name { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: #fff; border: 1.5px solid var(--light-stone); border-radius: 8px; padding: 9px 12px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: border-color .15s; }
+.att-name:hover { border-color: var(--ink); }
+.att-name .nm { font-weight: 700; font-size: 13.5px; color: var(--ink); }
+.att-sub { margin-left: auto; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; color: var(--dark-stone); text-align: right; }
+.att-role { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; border-radius: 10px; padding: 2px 7px; white-space: nowrap; }
+.att-role.intern { background: var(--ink); color: var(--warm-white); }
+.att-role.player { background: var(--warm-white); color: var(--dark-stone); border: 1px solid var(--light-stone); }
+.att-head { padding-bottom: 4px; }
+.att-who { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -.01em; color: var(--ink); }
+.att-stats { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 13px; color: var(--dark-stone); }
+.att-stats b { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--ink); }
+.att-month { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--dark-stone); margin: 16px 0 4px; }
+.att-month span { color: var(--stone); font-weight: 600; }
+.att-row { display: grid; grid-template-columns: 58px 1fr auto; gap: 10px; align-items: start; padding: 8px 0; border-top: 1px solid var(--light-stone); }
+.att-row.up { opacity: .55; }
+.att-date { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink); line-height: 1.25; }
+.att-date span { display: block; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--stone); }
+.att-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink); line-height: 1.3; }
+.att-meta { font-size: 12.5px; color: var(--dark-stone); margin-top: 2px; line-height: 1.4; }
+.att-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; border-radius: 10px; padding: 2px 7px; white-space: nowrap; }
+.att-tag.ex { color: var(--clay); border: 1px solid var(--clay); }
+.att-tag.up { color: var(--stone); border: 1px solid var(--light-stone); }
+.ru-chip[data-att] { cursor: pointer; }
+.ru-chip[data-att]:hover { border-color: var(--ink); }
+@media (max-width: 600px) {
+  .att-name { flex-wrap: wrap; }
+  .att-sub { flex-basis: 100%; margin-left: 0; text-align: left; }
+  .att-row { grid-template-columns: 50px 1fr; }
+  .att-row .att-tag { grid-column: 2; justify-self: start; }
+  .att-custom input { font-size: 16px; }
+}
 .ru-types { display: flex; gap: 6px; margin-bottom: 14px; }
 .ru-type { border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; padding: 5px 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); cursor: pointer; transition: all .15s; }
 .ru-type:hover { border-color: var(--stone); }
@@ -315,6 +359,9 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .promote-ack input:disabled + span { color: var(--stone); }
 /* Passphrase prompt for the sealed schedule data: opens over every other dialog (Promote, Archive…) */
 #privModal { z-index: 460; }
+.cfg-connect { background: var(--warm-white); border-left: 3px solid var(--clay); padding: 8px 10px; border-radius: 4px; color: var(--ink); }
+.cfg-vault { color: var(--dark-stone); }
+.cfg-vault:empty { display: none; }
 #privModal .modal { max-width: 440px; }
 .pm-err { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 1.4; color: var(--clay); min-height: 17px; margin-top: -4px; }
 #privModal .modal-actions { align-items: center; }
@@ -1369,6 +1416,7 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
           <div class="view-toggle" id="viewToggle"><button class="vt-btn active" data-view="cards">Cards</button><button class="vt-btn" data-view="timeline">Timeline</button></div>
           <button class="btn" id="shareWeekBtn">↗ Share</button>
           <button class="btn" id="archiveBtn">Archive</button>
+          <button class="btn" id="attendanceBtn">Attendance</button>
         </div>
       </div>
       <div class="fb-row"><div class="match-summary hidden" id="matchSummary"></div></div>
@@ -1512,6 +1560,7 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
 <div class="modal-bg hidden" id="settingsModal">
   <div class="modal">
     <h2>GitHub Settings</h2>
+    <p class="cfg-connect hidden" id="cfgConnectNote">This device isn't connected yet. Editing needs your GitHub token; without it, the edit link only shows the schedule.</p>
     <p>Connect this app to your GitHub repo. Get a fine-grained PAT at <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">github.com/settings/personal-access-tokens</a> with <b>Contents: Read &amp; Write</b> on this one repo. Stored only in this browser.</p>
     <div class="modal-field">
       <label>GitHub Owner (username/org)</label>
@@ -1534,6 +1583,7 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
       <label>Personal Access Token</label>
       <input id="cfgToken" type="password" placeholder="github_pat_...">
       <div class="hint">Stored only in your browser's localStorage</div>
+      <div class="hint cfg-vault" id="cfgVault"></div>
     </div>
     <div class="modal-field" style="border-top:1px solid var(--light-stone);padding-top:14px;">
       <label>Backup &amp; Restore</label>
@@ -1596,6 +1646,44 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
       <button class="btn hidden" id="archiveNowBtn">Archive current week now</button>
       <button class="btn primary" id="archiveClose">Close</button>
     </div>
+  </div>
+</div>
+
+<!-- Attendance Modal -->
+<div class="modal-bg hidden" id="attModal">
+  <div class="modal att-modal">
+    <div class="img-modal-head">
+      <h2>Attendance</h2>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="btn" id="attCopy" title="Copy the dates as text">⧉ Copy</button>
+        <button class="btn" id="attCsv" title="Download a spreadsheet of these sessions">↓ CSV</button>
+        <button class="btn primary" id="attClose">✕ Close</button>
+      </div>
+    </div>
+    <input class="archive-search" id="attSearch" placeholder="Search an intern or player… e.g. Jung, Bogi M" autocomplete="off" spellcheck="false">
+    <div class="att-controls">
+      <div class="ru-types" id="attWho">
+        <button class="ru-type active" data-who="all">Everyone</button>
+        <button class="ru-type" data-who="intern">Interns</button>
+        <button class="ru-type" data-who="player">Players</button>
+      </div>
+      <div class="ru-types" id="attTypes">
+        <button class="ru-type active" data-type="all">All Types</button>
+        <button class="ru-type" data-type="excel">Excel Client</button>
+        <button class="ru-type" data-type="other">Other</button>
+      </div>
+      <select class="att-range" id="attRange" aria-label="Dates">
+        <option value="all">All time</option>
+        <option value="month">This month</option>
+        <option value="last">Last month</option>
+        <option value="90">Last 90 days</option>
+        <option value="year">This year</option>
+        <option value="custom">Custom dates…</option>
+      </select>
+      <span class="att-custom hidden" id="attCustom"><input type="date" id="attFrom" aria-label="From"> to <input type="date" id="attTo" aria-label="To"></span>
+    </div>
+    <button class="ab-link hidden" id="attBack" type="button">← All names</button>
+    <div class="att-body" id="attBody"></div>
   </div>
 </div>
 
@@ -1692,7 +1780,9 @@ const EDIT_LINK = new URLSearchParams(location.search).get("edit") === "1";
 // schedule.json is public, so only the live week and the locations go in it. These keys are saved
 // encrypted in schedule-private.json instead (see PRIVATE DATA below) and load on the edit link only.
 const PRIVATE_KEYS = ["nextWeek", "archive", "blocks"];
-const LS_PRIV_META = "sfb_schedule_private_v1";   // { sha }: the sealed file version this device's cached copy matches
+const LS_PRIV_META = "sfb_schedule_private_v1";
+const LS_VAULT = "sfb_storage_mode_v1";              // { plain }: how private files were kept when GitHub last answered
+const SITE_RULE_MARK = "sfb-schedule: private files"; // marks the netlify.toml this app wrote   // { sha }: the sealed file version this device's cached copy matches
 
 const STYLES = {
   // Cards: clay is an accent (rail + tag + tint), per the brand pack — never the dominant fill.
@@ -2136,11 +2226,12 @@ function isDirty() {
 }
 
 // ============ PRIVATE DATA: next week · archive · blocked times ============
-// schedule.json is public (anyone with the site address or the repo can read it), so it carries only
-// what viewers need: the live week and the locations. Next week, the archive and the blocked times are
-// saved beside it in schedule-private.json, sealed with AES-GCM under the same passphrase as the pay
-// rates, and are loaded on the edit link only. In memory nothing changes: `data` and `publishedData`
-// still hold everything. They are split when publishing and joined again when loading.
+// schedule.json is public (anyone with the site address can read it), so it carries only what viewers
+// need: the live week and the locations. Next week, the archive and the blocked times are saved beside
+// it in schedule-private.json and loaded on the edit link only. In a public repo that file is sealed
+// with AES-GCM under the same passphrase as the pay rates; in a private repo it is plain JSON that the
+// site never serves (see "vault" below). In memory nothing changes: `data` and `publishedData` still
+// hold everything. They are split when publishing and joined again when loading.
 //
 // Two rules keep that file safe:
 //  1. It is only ever written on top of the exact version this device loaded (privState.sha). Anything
@@ -2156,7 +2247,8 @@ const privState = {
   locked: false,   // it exists, but this device doesn't have the passphrase that opens it
   remote: null,    // { sha, env } as last read (the unlock prompt tries passphrases against it)
   replace: false,  // "Forgot it?": the next publish overwrites it with this device's copy, under a new passphrase
-  reseal: false,   // the passphrase changed: the next publish re-saves it even if nothing else changed
+  reseal: false,   // the next publish re-saves it even if nothing else changed (new passphrase, or exposed)
+  sealedRemote: false, // the copy on GitHub is encrypted (false = plain JSON)
   err: "",         // why it couldn't be read (GitHub unreachable…)
 };
 function _clone(o) { return o == null ? o : JSON.parse(JSON.stringify(o)); }
@@ -2263,6 +2355,7 @@ async function sealPrivate(obj, pass) {
            salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
 }
 async function openPrivate(env, pass) {   // throws (err.badPass) if the passphrase is wrong
+  if (_isPlainEnv(env)) return privatePart(env.data || {});
   if (!env || !env.ct || !env.salt || !env.iv) throw new Error("the saved file is damaged");
   const key = await _payCryptoKey(pass, _unb64(env.salt), env.iter || 200000);
   let pt;
@@ -2295,7 +2388,9 @@ async function ghGetSealed(path) {
 // Writes the sealed file only if it still has `sha` (null = it must not exist yet); returns its new sha.
 async function ghPutSealed(path, env, sha) {
   const cfg = loadCfg();
-  const body = { message: "Update private schedule data (encrypted)", branch: cfg.branch || "main", content: btoa(JSON.stringify(env)) };
+  const text = env.plain ? JSON.stringify(env, null, 1) : JSON.stringify(env);
+  const body = { message: env.plain ? "Update private schedule data" : "Update private schedule data (encrypted)", branch: cfg.branch || "main",
+                 content: _b64(new TextEncoder().encode(text)) };
   if (sha) body.sha = sha;
   const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`, {
     method: "PUT", body: JSON.stringify(body), headers: { ..._ghHeaders(), "Content-Type": "application/json" } });
@@ -2304,7 +2399,117 @@ async function ghPutSealed(path, env, sha) {
   return (await res.json()).content.sha;
 }
 
-// Read the sealed file and open it with the passphrase stored on this device. Leaves privState saying
+// ---- Where the private files are kept: sealed in a public repo, plain in a private one ----
+// Netlify serves every file in the repo, and a public repo also shows every file and its history on
+// GitHub, so there the private files are sealed under the passphrase. Once the repo is private, GitHub
+// is closed to anyone without the token, and netlify.toml (written here before any plain file goes up)
+// deletes those files from every deploy, so the site never serves them. Then they are plain JSON and no
+// passphrase is needed. A file still sealed from before is opened once and re-saved plain.
+const vault = {
+  checked: false,     // GitHub answered this session
+  repoPrivate: null,
+  rule: "",           // netlify.toml: "none" · "ours" (deletes the private files) · "theirs" (another file: left alone)
+  plain: false,       // private files are kept as plain JSON
+  exposed: false,     // the site was caught serving one: back to sealed until that's fixed
+};
+function _vaultPlain() { return vault.plain && !vault.exposed; }
+function _isPlainEnv(env) { return !!(env && env.plain === true); }
+function _siteRuleText() {
+  const q = p => "'" + String(p).replace(/'/g, "") + "'";
+  return [
+    `# ${SITE_RULE_MARK}`,
+    "# Written by the schedule app when this repo was made private. Every deploy deletes the files below",
+    "# before publishing, so the site never serves them; the app reads them from GitHub with your token.",
+    "# Keep this file while the repo holds them.",
+    "[build]",
+    `  command = "rm -f ${q(privatePath())} ${q(payRatesPath())} && rm -rf ${q("archive")}"`,
+    "",
+  ].join("\n");
+}
+async function _ghGetText(path) {   // { sha, text }, or null when the file doesn't exist
+  const cfg = loadCfg();
+  const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch || "main"}&_=${Date.now()}`, { headers: _ghHeaders(), cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw _ghErr(res.status);
+  const j = await res.json();
+  return { sha: j.sha, text: new TextDecoder().decode(_unb64(String(j.content || "").replace(/\s/g, ""))) };
+}
+// Is the repo private, and is netlify.toml ours or absent? That decides how private files are written.
+async function refreshVault() {
+  if (!EDIT_LINK || !_ghReady()) return;
+  const cfg = loadCfg();
+  try {
+    const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}?_=${Date.now()}`, { headers: _ghHeaders(), cache: "no-store" });
+    if (!res.ok) throw _ghErr(res.status);
+    vault.repoPrivate = (await res.json()).private === true;
+    vault.rule = "";
+    if (vault.repoPrivate) {
+      const t = await _ghGetText("netlify.toml");
+      vault.rule = !t ? "none" : t.text.includes(SITE_RULE_MARK) ? "ours" : "theirs";
+    }
+    vault.plain = vault.repoPrivate && vault.rule !== "theirs";
+    vault.checked = true;
+    try { localStorage.setItem(LS_VAULT, JSON.stringify({ plain: vault.plain })); } catch (e) {}
+  } catch (e) {
+    console.warn("Couldn't check the repo's visibility:", e);
+    try { vault.plain = !!(JSON.parse(localStorage.getItem(LS_VAULT)) || {}).plain; } catch (e2) {}
+  }
+}
+async function _vaultReady() { if (!vault.checked) await refreshVault(); }
+// Before any plain file goes up, the delete rule must already be in the repo, so every deploy that
+// contains a plain file also deletes it.
+async function _ensureSiteRule(again) {
+  if (vault.rule === "ours") return;
+  const t = await _ghGetText("netlify.toml");
+  if (t && t.text.includes(SITE_RULE_MARK)) { vault.rule = "ours"; return; }
+  if (t || again) {
+    vault.rule = "theirs"; vault.plain = false;
+    throw new Error("netlify.toml in your repo isn't the one this app writes, so private files stay encrypted. Publish again to save them with a passphrase");
+  }
+  const cfg = loadCfg();
+  const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/netlify.toml`, {
+    method: "PUT", headers: { ..._ghHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify({ message: "Keep private files off the public site", branch: cfg.branch || "main",
+                           content: _b64(new TextEncoder().encode(_siteRuleText())) }) });
+  if (res.status === 409 || res.status === 422) return _ensureSiteRule(true);   // written from another device a moment ago
+  if (!res.ok) throw _ghErr(res.status);
+  vault.rule = "ours";
+}
+// The site must never serve a plain private file. If it does, Netlify isn't using netlify.toml:
+// go back to sealing, and re-save what's exposed at the next publish.
+async function _checkExposure() {
+  if (!EDIT_LINK || !_vaultPlain()) return;
+  for (const p of [privatePath(), payRatesPath()]) {
+    try {
+      const r = await fetch(`./${p}?t=${Date.now()}`, { cache: "no-store" });
+      if (!r.ok || /^text\/html/i.test(r.headers.get("content-type") || "")) continue;
+      if (_isPlainEnv(await r.json())) { vault.exposed = true; break; }
+    } catch (e) {}
+  }
+  if (!vault.exposed) return;
+  if (privState.exists && !privState.sealedRemote) privState.reseal = true;
+  alert("Your site is serving files that should be private (next week, the archive or pay) to anyone with the address.\n\n" +
+        "Netlify isn't applying netlify.toml from your repo. In Netlify, open Site configuration → Build & deploy → Build settings and make sure Base directory is empty.\n\n" +
+        "Until that's fixed, this app encrypts those files again: press Publish and choose a passphrase.");
+}
+// Same contents, saved again in the current form (plain or sealed). A draft keeps its starting point.
+async function _reencodePrivate() {
+  const before = _baseKey(), base = localStorage.getItem(LS_DRAFT_BASE);
+  await writePrivate(privState.data);
+  if (base && base === before) localStorage.setItem(LS_DRAFT_BASE, _baseKey());
+}
+// The repo is private: re-save whatever is still sealed as plain JSON. Nothing else changes.
+async function _finishPlainMove() {
+  if (!EDIT_LINK || !_vaultPlain() || !vault.checked) return;
+  let moved = 0;
+  if (privState.exists && privState.sealedRemote && !privState.locked && privState.data && !privState.err) {
+    try { await _reencodePrivate(); moved++; } catch (e) { console.warn("Couldn't re-save the private file:", e); }
+  }
+  try { if (await _migratePayPlain()) moved++; } catch (e) { console.warn("Couldn't re-save pay rates:", e); }
+  if (moved) { showToast("Repo is private — no passphrase needed from now on"); updateStatus(); }
+}
+
+// Read the private file (opening it with the passphrase stored here if it's sealed). Leaves privState saying
 // one of: no sealed file yet · loaded · locked (wrong or no passphrase) · unreachable (err; cached copy kept).
 async function refreshPrivate() {
   if (!EDIT_LINK || !_ghReady() || !(window.crypto && crypto.subtle)) return;
@@ -2316,25 +2521,34 @@ async function refreshPrivate() {
     privState.exists = false; privState.sha = null; privState.data = null; privState.locked = false; privState.remote = null;
   } else {
     privState.exists = true; privState.remote = got;
+    privState.sealedRemote = !_isPlainEnv(got.env);
     const pass = _payPass();
     let obj = null;
-    if (pass) { try { obj = await openPrivate(got.env, pass); } catch (e) { if (!e.badPass) privState.err = e.message; } }
+    if (!privState.sealedRemote) obj = privatePart(got.env.data || {});
+    else if (pass) { try { obj = await openPrivate(got.env, pass); } catch (e) { if (!e.badPass) privState.err = e.message; } }
+    // Saved plain while the repo was private, and it's public again: seal it at the next publish
+    if (!privState.sealedRemote && vault.checked && !_vaultPlain()) privState.reseal = true;
     if (obj) { privState.sha = got.sha; privState.data = obj; privState.locked = false; }
     else { privState.sha = null; privState.data = null; privState.locked = true; }
   }
   _savePrivMeta();
   _rebuildPublished();
 }
-// Seal `obj` and save it, but only on top of the version this device loaded (rule 1 above).
+// Save `obj` (plain in a private repo, sealed otherwise), but only on top of the version this device
+// loaded (rule 1 above).
 async function writePrivate(obj) {
   const path = privatePath();
   const got = await ghGetSealed(path);
   const there = got ? got.sha : null;
   if (!privState.replace && there !== (privState.sha || null)) { const e = new Error("conflict"); e.conflict = true; throw e; }
-  const env = await sealPrivate(obj, _payPass());
+  const plain = _vaultPlain();
+  if (plain) await _ensureSiteRule();
+  const env = plain ? { app: "sfb-schedule-private", v: 2, plain: true, updatedAt: new Date().toISOString(), data: obj }
+                    : await sealPrivate(obj, _payPass());
   const sha = await ghPutSealed(path, env, there);
   privState.exists = true; privState.sha = sha; privState.data = _clone(obj); privState.locked = false;
   privState.remote = { sha, env }; privState.replace = false; privState.reseal = false; privState.err = "";
+  privState.sealedRemote = !plain;
   _savePrivMeta();
 }
 
@@ -2433,7 +2647,13 @@ async function unlockPrivate() {
   if (!privState.remote) { await refreshPrivate(); if (!privState.locked) { _afterPrivateLoaded(); return true; } }
   if (!privState.remote) { alert("Couldn't reach GitHub to load next week, the archive and blocked times. Check the connection and try again."); return false; }
   let opened = null;
-  const res = await askPassphrase({
+  const res = await askPassphrase(_vaultPlain() ? {
+    title: "Enter your passphrase one last time",
+    msg: "Your repo is private now, so the passphrase is going away. Enter it once more to move next week, the archive and your blocked times over; after that, no device needs it.",
+    ok: "Unlock",
+    check: async v => { opened = await openPrivate(privState.remote.env, v); return ""; },
+    alt: { label: "Forgot it?" },
+  } : {
     title: "Enter your passphrase",
     msg: "Next week, the archive and your blocked times are saved encrypted. Enter your passphrase (the one you use for pay) to load them on this device.",
     ok: "Unlock",
@@ -2447,6 +2667,7 @@ async function unlockPrivate() {
   _savePrivMeta();
   _rebuildPublished();
   _afterPrivateLoaded();
+  await _finishPlainMove();
   return true;
 }
 // "Forgot it?": give up on the copy saved on GitHub and carry on with whatever this device still has.
@@ -2459,7 +2680,7 @@ async function _privReset() {
   if (!confirm(
     "Without the passphrase, the copy saved on GitHub can't be opened.\n\n" +
     `This device still has: ${n} archived week${n === 1 ? "" : "s"}, ${hasNext ? "a next week" : "no next week"}, ${b} blocked time${b === 1 ? "" : "s"}.\n\n` +
-    "Replace the GitHub copy with this device's copy the next time you publish? You'll choose a new passphrase then.")) return false;
+    "Replace the GitHub copy with this device's copy the next time you publish?" + (_vaultPlain() ? "" : " You'll choose a new passphrase then."))) return false;
   privState.locked = false; privState.replace = true; privState.sha = null; privState.data = {}; privState.err = "";
   _rebuildPublished();
   PRIVATE_KEYS.forEach(k => { if (local[k] != null) data[k] = _clone(local[k]); else delete data[k]; });
@@ -2472,6 +2693,7 @@ async function _privReset() {
 // Before the sealed file is written: make sure this device has the passphrase to seal it with.
 // One passphrase covers pay and the schedule, so a new one is only chosen when neither is set up yet.
 async function _ensurePrivPass() {
+  if (_vaultPlain()) return true;   // private repo: nothing to seal
   if (!(window.crypto && crypto.subtle)) { alert("Saving next week, the archive and blocked times needs a secure (https) page."); return false; }
   const stored = _payPass();
   if (privState.exists && !privState.replace) {
@@ -2504,7 +2726,7 @@ async function _ensurePrivPass() {
       alt: { label: "Forgot it?" },
     } : {
       title: "Choose a passphrase",
-      msg: "Next week, the archive and your blocked times are now saved encrypted, so they can't be read from the public site. Choose a passphrase of 12 or more characters; three unrelated words work well. You'll enter it once on each device you edit from, and it protects pay too."
+      msg: "Next week, the archive and your blocked times are now saved encrypted, so they can't be read from the public site. Choose a passphrase of 12 or more characters; three unrelated words work well. You'll enter it once on each device you edit from, and it protects pay too. (Making your GitHub repo private removes the need for one.)"
         + (payEnv ? " Pay will then ask to replace its saved copy under the new passphrase." : ""),
       ok: "Publish", minLen: 12,
     });
@@ -2516,8 +2738,8 @@ async function _ensurePrivPass() {
 }
 // The pay passphrase was changed on this device: move the sealed schedule data to the new one too.
 async function _privAfterPassChange() {
-  if (!EDIT_LINK || !privState.exists || privState.locked || !privState.data) return;
-  try { await writePrivate(privState.data); }
+  if (!EDIT_LINK || _vaultPlain() || !privState.exists || privState.locked || !privState.data) return;
+  try { await _reencodePrivate(); }
   catch (e) {
     console.warn(e);
     privState.reseal = true;
@@ -2539,9 +2761,10 @@ function updateStatus() {
     pill.textContent = "● Unpublished changes";
     pill.className = "status-pill dirty";
     btn.disabled = false;
-  } else if (_publicNeedsTrim()) {
-    // Saved by the older version: next week, the archive and blocked times are still in the public file
-    pill.textContent = "● Publish to seal private data";
+  } else if (_publicNeedsTrim() || (_vaultPlain() && privState.exists && privState.sealedRemote)) {
+    // Next week, the archive and blocked times are still in the public file (saved by an older version),
+    // or still sealed although the repo is private now
+    pill.textContent = _vaultPlain() ? "● Publish to finish setup" : "● Publish to seal private data";
     pill.className = "status-pill dirty";
     btn.disabled = false;
   } else {
@@ -2611,6 +2834,7 @@ async function init() {
   //    contents, then the sealed private part (next week, archive, blocked times). Without a draft,
   //    the working copy is exactly that.
   await refreshSha();
+  await refreshVault();
   await refreshPrivate();
   if (draft && data === draft) _reconcileDraft();
   else if (publishedData) { data = _clone(publishedData); data.archive = data.archive || []; }
@@ -2618,6 +2842,10 @@ async function init() {
   // 5. Unpublished edits here, but the schedule was published from another device since they began:
   //    publishing these would silently wipe that device's changes, so ask first.
   _draftBaseCheck();
+
+  // 6. Private repo: make sure the site isn't serving the private files, then re-save anything still sealed.
+  await _checkExposure();
+  await _finishPlainMove();
 
   setMode("display");
   updateStatus();
@@ -2630,7 +2858,9 @@ async function init() {
     const sundayNight = now.getDay() === 0 && now.getHours() >= 20;
     // Skipped while there are unpublished edits: archiving publishes, and nobody reviewed them yet
     // …and until the sealed file is set up and open on this device: archiving must never stop to ask for a passphrase
-    const sealedReady = privState.exists && !privState.locked && !privState.err && !!_payPass();
+    const sealedReady = _vaultPlain()
+      ? vault.checked && !privState.locked && !privState.err
+      : privState.exists && !privState.locked && !privState.err && !!_payPass();
     if (EDIT_LINK && cfg.token && cfg.owner && cfg.repo && sundayNight && sealedReady && !isDirty() && !data.archive.some(a => a.key === w.key)) {
       archiveCurrentWeek(true);
     }
@@ -2712,6 +2942,7 @@ async function _publish(cfg) {
     }
   } catch (e) { console.warn("publish regression check failed:", e); }
 
+  await _vaultReady();                     // private repo or public: decides how the private part is saved
   // The private part is never written blind: it has to be open on this device first.
   if (privState.locked && !(await unlockPrivate())) { updateStatus(); return false; }
   if (_keepRemoteArchive()) saveDraft();   // rule 2: no archived week is dropped by accident
@@ -2719,8 +2950,9 @@ async function _publish(cfg) {
   const pubNow = publicPart(data), privNow = privatePart(data);
   const sealedSoFar = privState.exists || privState.replace;
   const needPriv = sealedSoFar
-    ? privState.replace || privState.reseal || JSON.stringify(privNow) !== JSON.stringify(privatePart(publishedData || {}))
-    : !_privEmpty(privNow);                // nothing private yet and no sealed file: no passphrase needed
+    ? privState.replace || privState.reseal || (_vaultPlain() && privState.sealedRemote)
+      || JSON.stringify(privNow) !== JSON.stringify(privatePart(publishedData || {}))
+    : !_privEmpty(privNow);                // nothing private yet and no private file: nothing to write
   if (needPriv && !(await _ensurePrivPass())) { updateStatus(); return false; }
 
   const path = cfg.path || "schedule.json";
@@ -2842,24 +3074,22 @@ function relabelToNextWeek(days, nw) {
   });
 }
 
-// Where a file stored in the repo (an older archive PNG) can be read from. The site itself comes first:
-// it is deployed from the repo, so the path works for every viewer, with or without Settings filled in.
-// GitHub directly is the fallback for the minute after a save, before the site has redeployed.
-function archiveUrls(path) {
-  const urls = ["./" + path];
-  const c = loadCfg();
-  if (c.owner && c.repo) urls.push(`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch || "main"}/${path}`);
-  return urls;
-}
+// An image an older version stored in the repo (archive/…png), as a Blob. The site serves it while the
+// repo is public; in a private repo it's kept off the site, so it is read from GitHub with the token.
 async function fetchArchiveFile(path) {
   let last = "not found";
-  for (const u of archiveUrls(path)) {
-    try {
-      const res = await fetch(u + "?t=" + Date.now(), { cache: "no-store" });
-      // a site that answers every unknown path with its home page is not the image
-      if (res.ok && !/^text\/html/i.test(res.headers.get("content-type") || "")) return res;
-      last = "HTTP " + res.status;
-    } catch (e) { last = e.message || "network error"; }
+  try {
+    const res = await fetch(`./${path}?t=${Date.now()}`, { cache: "no-store" });
+    // a site that answers every unknown path with its home page is not the image
+    if (res.ok && !/^text\/html/i.test(res.headers.get("content-type") || "")) return await res.blob();
+    last = "HTTP " + res.status;
+  } catch (e) { last = e.message || "network error"; }
+  if (_ghReady()) {
+    const cfg = loadCfg();
+    const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch || "main"}&_=${Date.now()}`,
+      { headers: { ..._ghHeaders(), "Accept": "application/vnd.github.raw+json" }, cache: "no-store" });
+    if (res.ok) return new Blob([await res.arrayBuffer()], { type: "image/png" });
+    last = "GitHub " + res.status;
   }
   throw new Error(last);
 }
@@ -3627,7 +3857,7 @@ async function archiveImageBlob(entry, type) {
   }
   const p = type === "excel" ? entry.pathExcel : entry.path;
   if (!p) return null;
-  return await (await fetchArchiveFile(p)).blob();
+  return await fetchArchiveFile(p);
 }
 function _archiveHasImage(entry, type) {
   if (type !== "excel") return hasSnapshot(entry) || !!entry.path;
@@ -4033,7 +4263,7 @@ function renderRollup() {
   document.getElementById("rollupTitle").textContent =
     `Players & interns · ${sel.length} week${sel.length !== 1 ? "s" : ""}`;
 
-  const chip = (r, cls) => `<div class="ru-chip">
+  const chip = (r, cls) => `<div class="ru-chip" data-att="${escapeAttr(cls === "i" ? r.name : (_rosterNames(r.name)[0] || r.name))}" data-role="${cls === "i" ? "intern" : "player"}" title="See every date">
       <span class="nm">${escapeHtml(r.name)}</span>
       <span class="ct ${cls}">${r.n}</span>
       ${multi ? `<span class="wk">in ${r.weeks} of ${withDays.length}</span>` : ""}
@@ -4070,6 +4300,208 @@ function rollupCSV() {
   push("Group", t.group);
   push("Intern", t.interns);
   return lines.join("\n");
+}
+
+// ============ ATTENDANCE ============
+// Every session one intern or player was on, with its date, across the archived weeks and the live week.
+// Interns come from a session's people row; players from its title (the same names as the roster line),
+// so "Bogi M" and "Bogi" are two names. Weeks archived as images only have no sessions to read.
+// These are the sessions they were scheduled on: the app doesn't record no-shows.
+const att = { q: "", who: "all", type: "all", range: "all", from: "", to: "", sel: null };   // sel: { id, name, role }
+
+function _attRange() {
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth();
+  const first = (yy, mm) => _dk(new Date(yy, mm, 1)), last = (yy, mm) => _dk(new Date(yy, mm + 1, 0));
+  switch (att.range) {
+    case "month":  return [first(y, m), last(y, m)];
+    case "last":   return [first(y, m - 1), last(y, m - 1)];
+    case "90":     return [_dk(_addDays(now, -90)), "9999-12-31"];
+    case "year":   return [`${y}-01-01`, `${y}-12-31`];
+    case "custom": {
+      const a = att.from || "0000-01-01", b = att.to || "9999-12-31";
+      return a <= b ? [a, b] : [b, a];
+    }
+    default:       return ["0000-01-01", "9999-12-31"];
+  }
+}
+function _attScope() {
+  const r = att.range, now = new Date();
+  const label = r === "month" ? `${MON[now.getMonth()]} ${now.getFullYear()}`
+    : r === "last" ? (d => `${MON[d.getMonth()]} ${d.getFullYear()}`)(new Date(now.getFullYear(), now.getMonth() - 1, 1))
+    : r === "90" ? "last 90 days" : r === "year" ? String(now.getFullYear())
+    : r === "custom" ? (() => { const [a, b] = _attRange(); return `${a[0] === "0" ? "start" : _fmtDk(a)} – ${b[0] === "9" ? "now" : _fmtDk(b)}`; })()
+    : "all time";
+  return `${_ruTypeLabel(att.type)} · ${label}`;
+}
+function _attLocNames() {
+  const m = new Map();
+  ((data && data.archive) || []).forEach(e => (e.locations || []).forEach(l => { if (l && l.id) m.set(l.id, l.name || "Location"); }));
+  ((data && data.locations) || []).forEach(l => { if (l && l.id) m.set(l.id, l.name || "Location"); });
+  return m;
+}
+// Everyone on a session in the chosen dates and type, each with their sessions (newest first).
+function _attData() {
+  const [a, b] = _attRange();
+  const today = _todayDk(), locs = _attLocNames();
+  const people = new Map();
+  let sessions = 0;
+  payWeekSources().forEach(src => (src.days || []).forEach(day => {
+    const date = dateForDayFrom(day.day, src.mon), dk = _dk(date);
+    if (dk < a || dk > b) return;
+    (day.events || []).forEach(ev => {
+      if (att.type !== "all" && _evKind(ev) !== att.type) return;
+      sessions++;
+      const interns = internsOf(ev).map(n => String(n || "").trim()).filter(Boolean);
+      const players = _rosterNames(ev.title);
+      const st = _startMinOf(ev.time);
+      const base = { date, dk, ev, up: dk > today, start: st == null ? 9999 : st, loc: ev.loc ? (locs.get(ev.loc) || "") : "" };
+      const seen = new Set();
+      const add = (role, name, others) => {
+        const key = _payKey(name);
+        if (!key || seen.has(role + "|" + key)) return;
+        seen.add(role + "|" + key);
+        const id = role + "|" + key;
+        const p = people.get(id) || { id, role, key, spell: new Map(), list: [] };
+        p.spell.set(name, (p.spell.get(name) || 0) + 1);
+        p.list.push({ ...base, with: others.filter(o => _payKey(o) !== key) });
+        people.set(id, p);
+      };
+      interns.forEach(n => add("intern", n, players));
+      players.forEach(n => add("player", n, interns));
+    });
+  }));
+  const list = [...people.values()].map(p => {
+    p.name = [...p.spell.entries()].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]))[0][0];
+    p.list.sort((x, y) => y.dk.localeCompare(x.dk) || x.start - y.start);
+    const done = p.list.filter(s => !s.up);
+    p.n = done.length; p.upcoming = p.list.length - done.length;
+    p.days = new Set(done.map(s => s.dk)).size;
+    p.mins = done.reduce((t, s) => t + sessionMinutes(s.ev), 0);
+    p.last = done.length ? done[0].dk : ""; p.first = done.length ? done[done.length - 1].dk : "";
+    return p;
+  });
+  // Weeks in range that were archived before sessions were saved: nothing to read
+  const imageOnly = ((data && data.archive) || []).filter(e => e && e.key && !hasSnapshot(e)
+    && _dk(_addDays(archiveMonday(e), 6)) >= a && e.key <= b);
+  return { people: list, sessions, imageOnly };
+}
+function _attMatches(p) {
+  if (att.who !== "all" && p.role !== att.who) return false;
+  const q = _payKey(att.q);
+  return !q || p.key.includes(q) || [...p.spell.keys()].some(n => _payKey(n).includes(q));
+}
+function _attShown(d) {
+  return d.people.filter(_attMatches)
+    .sort((x, y) => (y.n + y.upcoming) - (x.n + x.upcoming) || x.name.localeCompare(y.name));
+}
+const _attPl = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+function _attRoleTag(role) { return `<span class="att-role ${role}">${role === "intern" ? "Intern" : "Player"}</span>`; }
+function _attWith(names) { return names.length > 4 ? names.slice(0, 4).join(", ") + ` +${names.length - 4}` : names.join(", "); }
+
+function renderAttendance() {
+  const d = _attData();
+  const sel = att.sel ? d.people.find(p => p.id === att.sel.id) || null : null;
+  document.getElementById("attBack").classList.toggle("hidden", !att.sel);
+  document.getElementById("attCustom").classList.toggle("hidden", att.range !== "custom");
+  document.querySelectorAll("#attWho .ru-type").forEach(b => b.classList.toggle("active", b.dataset.who === att.who));
+  document.querySelectorAll("#attTypes .ru-type").forEach(b => b.classList.toggle("active", b.dataset.type === att.type));
+  document.getElementById("attRange").value = att.range;
+  let h = "";
+  if (d.imageOnly.length) {
+    h += `<div class="ru-note"><b>${d.imageOnly.length}</b> week${d.imageOnly.length === 1 ? " was" : "s were"} archived as ${d.imageOnly.length === 1 ? "an image" : "images"} only, before sessions were saved, so ${d.imageOnly.length === 1 ? "it isn't" : "they aren't"} counted: ${d.imageOnly.map(e => escapeHtml(e.range)).join("; ")}.</div>`;
+  }
+  if (att.sel) {
+    const name = sel ? sel.name : att.sel.name;
+    h += `<div class="att-head"><div class="att-who">${escapeHtml(name)} ${_attRoleTag(att.sel.role)}</div>`;
+    if (!sel) {
+      h += `</div><div class="archive-empty">No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions for ${escapeHtml(name)} in ${escapeHtml(_attScope().split(" · ")[1])}.</div>`;
+    } else {
+      const span = !sel.first ? "" : sel.first === sel.last ? _fmtDk(sel.first) : `${_fmtDk(sel.first)} – ${_fmtDk(sel.last)}`;
+      h += `<div class="att-stats"><span><b>${sel.n}</b> session${sel.n === 1 ? "" : "s"}</span><span><b>${sel.days}</b> day${sel.days === 1 ? "" : "s"}</span><span><b>${fmtHrs(sel.mins)}</b> scheduled</span>`
+        + (span ? `<span>${escapeHtml(span)}</span>` : "") + (sel.upcoming ? `<span>+ ${sel.upcoming} upcoming</span>` : "") + `</div>`
+        + `<div class="att-count" style="margin:4px 0 0">${escapeHtml(_attScope())}</div></div>`;
+      let month = "";
+      sel.list.forEach(s => {
+        const ym = s.dk.slice(0, 7);
+        if (ym !== month) {
+          month = ym;
+          const n = sel.list.filter(x => x.dk.slice(0, 7) === ym).length;
+          h += `<div class="att-month">${s.date.toLocaleString("en-US", { month: "long", year: "numeric" })} <span>· ${_attPl(n, "session")}</span></div>`;
+        }
+        const meta = [s.ev.time ? _shortTime(s.ev.time) : "No time", s.loc, s.with.length ? "with " + _attWith(s.with) : ""].filter(Boolean).join(" · ");
+        const tag = s.up ? `<span class="att-tag up">Upcoming</span>` : s.ev.type === "excel" ? `<span class="att-tag ex">Excel</span>` : "";
+        h += `<div class="att-row${s.up ? " up" : ""}"><div class="att-date"><span>${_DAY_SHORT[s.date.getDay()]}</span>${s.date.getMonth() + 1}/${s.date.getDate()}</div>`
+          + `<div><div class="att-title">${escapeHtml(s.ev.title || "Untitled")}</div><div class="att-meta">${escapeHtml(meta)}</div></div>${tag}</div>`;
+      });
+    }
+  } else {
+    const rows = _attShown(d);
+    if (!rows.length) {
+      h += `<div class="archive-empty">${!d.sessions ? `No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions in ${escapeHtml(_attScope().split(" · ")[1])}.`
+        : att.q.trim() ? `No ${att.who === "all" ? "intern or player" : att.who} matches “${escapeHtml(att.q.trim())}” in ${escapeHtml(_attScope().split(" · ")[1])}.`
+        : `No ${att.who}s in ${escapeHtml(_attScope().split(" · ")[1])}.`}</div>`;
+    } else {
+      h += `<div class="att-count">${_attPl(rows.length, "name")} · ${escapeHtml(_attScope())} · tap a name for every date</div><div class="att-names">`
+        + rows.map(p => `<button class="att-name" type="button" data-id="${escapeAttr(p.id)}"><span class="nm">${escapeHtml(p.name)}</span>${_attRoleTag(p.role)}`
+          + `<span class="att-sub">${_attPl(p.n, "session")}${p.last ? " · last " + escapeHtml(_fmtDk(p.last)) : ""}${p.upcoming ? ` · ${p.upcoming} upcoming` : ""}</span></button>`).join("")
+        + `</div>`;
+    }
+  }
+  document.getElementById("attBody").innerHTML = h;
+}
+
+// Text to paste into a message: one line per session for a person, or one line per name.
+function attCopyText() {
+  const d = _attData();
+  if (att.sel) {
+    const p = d.people.find(x => x.id === att.sel.id);
+    const head = `${p ? p.name : att.sel.name} (${att.sel.role}) · ${_attScope()}`;
+    if (!p) return head + "\nNo sessions.";
+    const lines = [`${head} · ${_attPl(p.n, "session")} on ${_attPl(p.days, "day")}${p.upcoming ? `, ${p.upcoming} upcoming` : ""}`];
+    p.list.slice().reverse().forEach(s => lines.push(
+      [`${_DAY_SHORT[s.date.getDay()]} ${_fmtDk(s.dk)}`, s.ev.time ? _shortTime(s.ev.time) : "No time", s.ev.title || "Untitled", s.loc].filter(Boolean).join(" · ")
+      + (s.up ? " (upcoming)" : "")));
+    return lines.join("\n");
+  }
+  const rows = _attShown(d);
+  return [`Attendance · ${_attScope()}`].concat(rows.map(p =>
+    `${p.name} (${p.role}): ${_attPl(p.n, "session")}${p.last ? `, last ${_fmtDk(p.last)}` : ""}${p.upcoming ? `, ${p.upcoming} upcoming` : ""}`)).join("\n");
+}
+// One row per person per session, oldest first: the open person, or every name in the list.
+function attCSV() {
+  const d = _attData();
+  const list = att.sel ? d.people.filter(p => p.id === att.sel.id) : _attShown(d).slice().sort((x, y) => x.name.localeCompare(y.name));
+  const q = v => { let t = String(v == null ? "" : v); if (/^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
+  const lines = ["Name,Role,Date,Weekday,Time,Hours,Session,Type,Location,With,Status"];
+  list.forEach(p => p.list.slice().reverse().forEach(s => lines.push([
+    p.name, p.role === "intern" ? "Intern" : "Player", s.dk, _DAY_SHORT[s.date.getDay()], s.ev.time || "",
+    Math.round(sessionMinutes(s.ev) / 60 * 100) / 100, s.ev.title || "", s.ev.type === "excel" ? "Excel Client" : "Other",
+    s.loc, s.with.join(", "), s.up ? "Upcoming" : "Scheduled",
+  ].map(q).join(","))));
+  return { text: lines.join("\n"), rows: lines.length - 1, who: att.sel ? (list[0] ? list[0].name : att.sel.name) : "" };
+}
+function attDownloadCSV() {
+  const c = attCSV();
+  if (!c.rows) { alert("Nothing to download for these filters."); return; }
+  const slug = c.who ? c.who.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "person" : "all";
+  _saveBlob(new Blob(["﻿" + c.text], { type: "text/csv;charset=utf-8" }), `attendance-${slug}-${_todayDk()}.csv`);
+}
+// prefill: { q, role } — opens straight on that person when the name matches exactly one.
+async function openAttendance(prefill) {
+  if (!_ghReady()) { _askToConnect("attendance"); return; }
+  if (privState.locked && !(await unlockPrivate())) return;
+  att.q = (prefill && prefill.q) || "";
+  att.who = (prefill && prefill.role) || "all";
+  att.sel = null;
+  if (att.q) {
+    const k = _payKey(att.q);
+    const exact = _attData().people.filter(p => (att.who === "all" || p.role === att.who) && p.key === k);
+    if (exact.length === 1) att.sel = { id: exact[0].id, name: exact[0].name, role: exact[0].role };
+  }
+  document.getElementById("attSearch").value = att.q;
+  renderAttendance();
+  document.getElementById("attBody").scrollTop = 0;
+  document.getElementById("attModal").classList.remove("hidden");
 }
 
 function openArchive() {
@@ -5112,6 +5544,13 @@ function openSettings() {
   document.getElementById("cfgBranch").value = cfg.branch || "main";
   document.getElementById("cfgPath").value = cfg.path || "schedule.json";
   document.getElementById("cfgToken").value = cfg.token || "";
+  document.getElementById("cfgConnectNote").classList.add("hidden");
+  _connectThen = null;
+  document.getElementById("cfgVault").textContent = !vault.checked ? ""
+    : vault.exposed ? "Your site is serving private files: they're being encrypted again until Netlify applies netlify.toml."
+    : vault.plain ? "Repo is private: next week, the archive and pay are kept off the site. No passphrase needed."
+    : vault.repoPrivate ? "Repo is private, but netlify.toml is your own, so next week, the archive and pay stay encrypted with your passphrase."
+    : "Repo is public: next week, the archive and pay are encrypted with your passphrase. Make the repo private to stop needing one.";
   document.getElementById("settingsModal").classList.remove("hidden");
 }
 function closeSettings() { document.getElementById("settingsModal").classList.add("hidden"); }
@@ -6982,10 +7421,19 @@ const editUnlocked = urlParams.get("edit") === "1";
 if (editUnlocked) document.querySelectorAll(".view-edit-toggle").forEach(t => t.classList.remove("hidden"));
 if (editUnlocked) document.getElementById("archiveNowBtn").classList.remove("hidden");
 
+// Edit and Pay need this device connected to GitHub. Without a token the edit link is only a way in to
+// Settings: nobody without your token sees the editor.
+let _connectThen = null;   // the tab to open once Settings has a working token
+function _askToConnect(then) {
+  openSettings();
+  _connectThen = then;
+  document.getElementById("cfgConnectNote").classList.remove("hidden");
+}
 document.querySelectorAll(".mode-btn").forEach(b => b.addEventListener("click", async () => {
   const wantsEdit = b.dataset.mode === "edit" || b.dataset.mode === "pay";
   // Block edit mode unless unlocked
   if (wantsEdit && !editUnlocked) return;
+  if (wantsEdit && !_ghReady()) { _askToConnect(b.dataset.mode); return; }
   // Editing without next week, the archive and the blocked times loaded would mean working blind
   // (and double-booking over a blocked time), so they are opened first.
   if (wantsEdit && privState.locked && !(await unlockPrivate())) return;
@@ -7419,7 +7867,7 @@ document.getElementById("revertLiveBtn").addEventListener("click", async () => {
   }
 });
 
-document.getElementById("cfgCancel").addEventListener("click", closeSettings);
+document.getElementById("cfgCancel").addEventListener("click", () => { _connectThen = null; closeSettings(); });
 document.getElementById("cfgClear").addEventListener("click", () => {
   if (confirm("Remove GitHub token from this browser?")) {
     const c = loadCfg(); delete c.token; saveCfg(c);
@@ -7437,10 +7885,22 @@ document.getElementById("cfgSave").addEventListener("click", async () => {
   };
   saveCfg(cfg);
   closeSettings();
+  const then = _connectThen; _connectThen = null;
+  vault.checked = false; vault.rule = ""; vault.exposed = false;   // the repo may be a different one now
   await refreshSha();
+  await refreshVault();
+  if (then && cfg.token && !vault.checked) {
+    alert("GitHub didn't accept that. Check the owner, repo name and token, then try again.");
+    _askToConnect(then);
+    return;
+  }
   await refreshPrivate();
   if (privState.locked) await unlockPrivate(); else _afterPrivateLoaded();
+  await _finishPlainMove();
   updateStatus();
+  if (then === "archive") openArchive();
+  else if (then === "attendance") openAttendance();
+  else if (then && _ghReady() && !privState.locked) setMode(then);
 });
 
 // Archive modal wiring
@@ -7448,6 +7908,7 @@ document.getElementById("shareWeekBtn").addEventListener("click", (e) => { e.sto
 // The archive lives in the sealed file, so it is only there on the edit link.
 document.getElementById("archiveBtn").classList.toggle("hidden", !editUnlocked);
 document.getElementById("archiveBtn").addEventListener("click", async () => {
+  if (!_ghReady()) { _askToConnect("archive"); return; }
   if (privState.locked && !(await unlockPrivate())) return;
   openArchive();
 });
@@ -7471,6 +7932,52 @@ document.getElementById("abRollup").addEventListener("click", openArchiveRollup)
 
 // Roll-up modal
 document.getElementById("rollupClose").addEventListener("click", () => document.getElementById("rollupModal").classList.add("hidden"));
+document.getElementById("rollupBody").addEventListener("click", (e) => {
+  const c = e.target.closest("[data-att]");
+  if (c) openAttendance({ q: c.dataset.att, role: c.dataset.role });
+});
+// Attendance
+document.getElementById("attendanceBtn").classList.toggle("hidden", !editUnlocked);
+document.getElementById("attendanceBtn").addEventListener("click", () => openAttendance());
+document.getElementById("attClose").addEventListener("click", () => document.getElementById("attModal").classList.add("hidden"));
+document.getElementById("attCopy").addEventListener("click", () => copyText(attCopyText(), att.sel ? "Dates copied" : "Names copied"));
+document.getElementById("attCsv").addEventListener("click", attDownloadCSV);
+document.getElementById("attSearch").addEventListener("input", function () { att.q = this.value; att.sel = null; renderAttendance(); });
+document.getElementById("attSearch").addEventListener("keydown", function (e) {
+  if (e.key !== "Enter") return;
+  e.preventDefault();
+  const first = document.querySelector("#attBody .att-name");
+  if (first) first.click();
+});
+document.getElementById("attBack").addEventListener("click", () => { att.sel = null; renderAttendance(); document.getElementById("attSearch").focus(); });
+document.getElementById("attBody").addEventListener("click", (e) => {
+  const b = e.target.closest(".att-name");
+  if (!b) return;
+  const p = _attData().people.find(x => x.id === b.dataset.id);
+  if (!p) return;
+  att.sel = { id: p.id, name: p.name, role: p.role };
+  renderAttendance();
+  document.getElementById("attBody").scrollTop = 0;
+});
+document.getElementById("attWho").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-who]"); if (!b) return;
+  att.who = b.dataset.who; att.sel = null; renderAttendance();
+});
+document.getElementById("attTypes").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-type]"); if (!b) return;
+  att.type = b.dataset.type; renderAttendance();
+});
+document.getElementById("attRange").addEventListener("change", function () {
+  att.range = this.value;
+  if (att.range === "custom" && !att.from && !att.to) {
+    const now = new Date();
+    att.from = _dk(new Date(now.getFullYear(), now.getMonth(), 1)); att.to = _todayDk();
+    document.getElementById("attFrom").value = att.from; document.getElementById("attTo").value = att.to;
+  }
+  renderAttendance();
+});
+document.getElementById("attFrom").addEventListener("change", function () { att.from = this.value; renderAttendance(); });
+document.getElementById("attTo").addEventListener("change", function () { att.to = this.value; renderAttendance(); });
 document.getElementById("rollupCopy").addEventListener("click", () => copyText(rollupCSV(), "Totals copied as CSV"));
 document.getElementById("rollupTypes").addEventListener("click", (e) => {
   const b = e.target.closest(".ru-type");
@@ -7581,8 +8088,15 @@ setInterval(() => { if (currentMode === "display") try { decorateLiveChips(); } 
     _rd();
     try {
       const ms = document.getElementById("matchSummary");
-      if (ms && !ms.classList.contains("hidden"))
+      if (ms && !ms.classList.contains("hidden")) {
+        // One name searched on the edit link: offer every date that name was on, beyond this week
+        const one = [...internFilter.split(",").map(t => ["intern", t.trim()]), ...playerFilter.split(",").map(t => ["player", t.trim()])].filter(x => x[1]);
+        if (editUnlocked && one.length === 1)
+          ms.innerHTML += `<button class="clear-all" id="attFromSearch" type="button" data-q="${escapeAttr(one[0][1])}" data-role="${one[0][0]}">All dates →</button>`;
         ms.innerHTML += `<button class="clear-all" id="clearAllFilters" type="button">Clear all</button>`;
+      }
+      const af = document.getElementById("attFromSearch");
+      if (af) af.addEventListener("click", () => openAttendance({ q: af.dataset.q, role: af.dataset.role }));
       const ca = document.getElementById("clearAllFilters");
       if (ca) ca.addEventListener("click", clearAllFilters);
       decorateLiveChips();
@@ -8575,7 +9089,7 @@ async function downloadInvoice(btn) {
   }
 }
 
-// ============ RATE SYNC (encrypted pay-rates.json in the repo) ============
+// ============ RATE SYNC (pay-rates.json in the repo: sealed in a public repo, plain in a private one) ============
 let paySync = { state: "idle", remote: null, err: "", locked: false, unlockErr: false, form: false, busy: false };
 function _payPass() { try { return localStorage.getItem(LS_PAY_PASS) || ""; } catch (e) { return ""; } }
 function _setPayPass(v) { try { localStorage.setItem(LS_PAY_PASS, v); } catch (e) {} }
@@ -8598,7 +9112,13 @@ async function sealRates(pay, pass) {   // pay = { rates, extras }
   return { app: "sfb-pay-rates", v: 1, updatedAt: new Date().toISOString(), kdf: "PBKDF2-SHA256", iter,
            salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
 }
+function _isPayEnv(x) { return !!(x && (x.ct || _isPlainEnv(x))); }
+// updatedAt is kept when re-saving the same rates in another form, so no device sees it as a new save.
+function _payPlainEnv(pay, updatedAt) {
+  return { app: "sfb-pay-rates", v: 2, plain: true, updatedAt: updatedAt || new Date().toISOString(), rates: pay.rates, extras: pay.extras };
+}
 async function openRates(env, pass) {   // throws if the passphrase is wrong
+  if (_isPlainEnv(env)) return { rates: _cleanRates(env.rates), extras: _cleanExtras(env.extras) };
   const key = await _payCryptoKey(pass, _unb64(env.salt), env.iter || 200000);
   const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(env.iv) }, key, _unb64(env.ct));
   const o = JSON.parse(new TextDecoder().decode(pt));
@@ -8624,15 +9144,34 @@ async function refreshRateSync() {
   paySync.state = "loading"; renderRateSync();
   try {
     const env = await ghGetJson(payRatesPath());
-    paySync.remote = env && env.ct ? env : null;
+    paySync.remote = _isPayEnv(env) ? env : null;
     paySync.state = "ready"; paySync.err = "";
-    const pass = _payPass();
-    if (paySync.remote && pass && !payLocal.dirty && payLocal.syncedAt !== paySync.remote.updatedAt) {
+    const pass = _payPass(), plain = _isPlainEnv(paySync.remote);
+    if (plain) paySync.locked = false;
+    if (paySync.remote && (plain || pass) && !payLocal.dirty && payLocal.syncedAt !== paySync.remote.updatedAt) {
       try { _adoptRates(await openRates(paySync.remote, pass), paySync.remote.updatedAt); paySync.locked = false; }
       catch (e) { paySync.locked = true; }      // the passphrase was changed on another device
     }
+    // Private repo, but pay is still sealed and this device can open it: re-save it plain
+    if (_vaultPlain() && paySync.remote && !plain && pass && !paySync.locked) await _migratePayPlain();
   } catch (e) { paySync.state = "error"; paySync.err = e.message; }
   renderRateSync();
+}
+// Private repo: re-save sealed pay rates as plain JSON (same rates, same updatedAt). True when done.
+async function _migratePayPlain() {
+  if (!_vaultPlain() || !_paySyncOn()) return false;
+  const got = await ghGetFileJson(payRatesPath());
+  if (!got || !got.json || !got.json.ct) return false;     // nothing sealed there
+  const pass = _payPass();
+  if (!pass) return false;                                  // Pay asks for it one last time
+  let pay;
+  try { pay = await openRates(got.json, pass); } catch (e) { return false; }
+  await _ensureSiteRule();
+  const env = _payPlainEnv(pay, got.json.updatedAt);
+  if ((await ghPutJsonIf(payRatesPath(), env, got.sha, "Pay rates: no longer encrypted (repo is private)")) !== "ok") return false;
+  if (!paySync.remote || paySync.remote.updatedAt === env.updatedAt) paySync.remote = env;
+  paySync.locked = false;
+  return true;
 }
 // 3-way merge of pay data: base = the copy this device last synced (null if unknown), mine = this device,
 // theirs = what another device saved since. Each intern (by name) and each one-off (by id) is merged on its
@@ -8682,9 +9221,12 @@ async function ghPutJsonIf(path, obj, sha, message) {
 let _payEditSeq = 0;   // bumped by every rate / one-off edit, so a save can tell if you kept typing meanwhile
 // newPass: set or change the passphrase. When the GitHub copy can't be opened with the current passphrase
 // (forgotten / changed elsewhere), a newPass save replaces it — that's the explicit "Forgot it?" path.
-async function saveRatesToGitHub(newPass) {
+// replace: overwrite a copy this device can't open (private repo, passphrase forgotten).
+async function saveRatesToGitHub(newPass, replace) {
+  await _vaultReady();
+  const plainMode = _vaultPlain() && !newPass;
   const oldPass = _payPass(), pass = newPass || oldPass;
-  if (!pass || paySync.busy) return;
+  if ((!pass && !plainMode) || paySync.busy) return;
   paySync.busy = true; paySync.err = ""; renderRateSync();
   const seq0 = _payEditSeq;
   const mine0 = { rates: _cleanRates(payRates), extras: _cleanExtras(payExtras) };
@@ -8692,17 +9234,18 @@ async function saveRatesToGitHub(newPass) {
     let merged = false, done = null;
     for (let attempt = 0; attempt < 3 && !done; attempt++) {
       const got = await ghGetFileJson(payRatesPath());
-      const env = got && got.json && got.json.ct ? got.json : null;
+      const env = got && _isPayEnv(got.json) ? got.json : null;
       let next = mine0;
       if (env && env.updatedAt !== payLocal.syncedAt) {          // saved from another device since this one synced
         let theirs = null;
-        if (oldPass) { try { theirs = await openRates(env, oldPass); } catch (e) {} }
+        if (_isPlainEnv(env) || oldPass) { try { theirs = await openRates(env, oldPass); } catch (e) {} }
         if (theirs) { next = _mergePay(payLocal.base, mine0, theirs); merged = true; }
-        else if (!newPass) { paySync.remote = env; paySync.locked = true; throw new Error("the pay passphrase was changed on another device — enter it above first"); }
+        else if (!newPass && !replace) { paySync.remote = env; paySync.locked = true; throw new Error(plainMode ? "pay was saved with a passphrase — enter it above one last time" : "the pay passphrase was changed on another device — enter it above first"); }
       }
       const up = { rates: next.rates.filter(r => r.name.trim()), extras: next.extras.filter(x => x.name.trim() && x.amt > 0) };
-      const sealed = await sealRates(up, pass);
-      if ((await ghPutJsonIf(payRatesPath(), sealed, got ? got.sha : null, "Update pay rates (encrypted)")) === "ok") done = { next, up, sealed };
+      if (plainMode) await _ensureSiteRule();
+      const sealed = plainMode ? _payPlainEnv(up) : await sealRates(up, pass);
+      if ((await ghPutJsonIf(payRatesPath(), sealed, got ? got.sha : null, plainMode ? "Update pay rates" : "Update pay rates (encrypted)")) === "ok") done = { next, up, sealed };
     }
     if (!done) throw new Error("another device kept saving at the same moment — try again");
     if (newPass) _setPayPass(newPass);
@@ -8731,8 +9274,9 @@ async function unlockRates(pass) {
     const pay = await openRates(paySync.remote, pass);
     _setPayPass(pass); paySync.locked = false; paySync.unlockErr = false;
     if (!payLocal.dirty) _adoptRates(pay, paySync.remote.updatedAt);
+    try { await _migratePayPlain(); } catch (e) { console.warn(e); }   // private repo: that was the last time it's needed
     // The same passphrase opens next week, the archive and the blocked times
-    if (privState.locked) refreshPrivate().then(() => { if (!privState.locked) _afterPrivateLoaded(); }).catch(e => console.warn(e));
+    if (privState.locked) refreshPrivate().then(async () => { if (!privState.locked) { _afterPrivateLoaded(); await _finishPlainMove(); } }).catch(e => console.warn(e));
   } catch (e) { paySync.unlockErr = true; }
   paySync.busy = false; renderRateSync();
 }
@@ -8748,12 +9292,17 @@ function renderRateSync() {
   const form = (hint, ph, ac, act, label, cls) => `<div class="rs-msg">${hint}</div>
     <div class="rs-form"><input type="password" id="rsPass" placeholder="${ph}" autocomplete="${ac}" spellcheck="false"><button class="btn ${cls}" type="button" data-rs="${act}"${dis}>${st.busy ? "…" : label}</button></div>`;
   let h = "";
+  const plain = _vaultPlain(), remotePlain = _isPlainEnv(st.remote);
   if (!_paySyncOn()) {
     h = `<div class="rs-msg">Saved on this device only. Add your GitHub token in Settings to sync rates to your other devices.</div>`;
   } else if (st.state === "loading" || st.state === "idle") {
     h = `<div class="rs-msg">Checking GitHub for saved rates…</div>`;
   } else if (st.state === "error") {
     h = `<div class="rs-msg err">Couldn't reach GitHub (${escapeHtml(st.err)}). Rates are still saved on this device.</div><button class="btn" type="button" data-rs="retry">Retry</button>`;
+  } else if (!plain && remotePlain && st.form !== "set") {
+    // Saved plain while the repo was private; it isn't now (or the site serves it): encrypt it again
+    h = `<div class="rs-msg dirty">● Pay is saved unencrypted, and your repo is public or your site serves it</div>`
+      + `<button class="btn publish" type="button" data-rs="${pass ? "save" : "setup"}"${dis}>${st.busy ? "Saving…" : "Encrypt it"}</button>`;
   } else if (st.form === "set") {
     h = form(st.remote && (st.locked || !pass) ? "Choose a new pay passphrase (12+ characters). This device's rates replace the GitHub copy, and the old passphrase stops working."
              : st.remote ? "Choose a new pay passphrase — at least 12 characters; three unrelated words work well. Each of your other devices asks for it once."
@@ -8761,20 +9310,22 @@ function renderRateSync() {
              "Pay passphrase", "new-password", "create", "↑ Save rates", "publish")
       + (st.err ? `<div class="rs-msg err">${escapeHtml(st.err)}</div>` : "")
       + `<button class="ab-link" type="button" data-rs="cancel">Cancel</button>`;
-  } else if (st.remote && (st.locked || !pass)) {
-    h = form(st.locked ? "The pay passphrase was changed on another device. Enter the new one to load the latest rates."
+  } else if (st.remote && !remotePlain && (st.locked || !pass)) {
+    h = form(plain ? "Your repo is private now, so pay no longer needs a passphrase. Enter it one last time to move your saved rates over."
+             : st.locked ? "The pay passphrase was changed on another device. Enter the new one to load the latest rates."
                        : "Rates were saved to GitHub from another device. Enter the pay passphrase to load them.",
              "Pay passphrase", "current-password", "unlock", "Unlock", "primary")
       + (st.unlockErr ? `<div class="rs-msg err">That passphrase doesn't match.</div>` : "")
       + `<button class="ab-link" type="button" data-rs="reset">Forgot it? Replace the GitHub copy with this device's rates</button>`;
-  } else if (!st.remote && !pass) {
+  } else if (!st.remote && !pass && !plain) {
     h = `<div class="rs-msg">Saved on this device only.</div><button class="btn" type="button" data-rs="setup">Sync across devices</button>`;
   } else if (payLocal.dirty || !st.remote) {
     h = `<div class="rs-msg dirty">${st.remote ? "● Unsaved pay changes" : "● Not saved to GitHub yet"}</div><button class="btn publish" type="button" data-rs="save"${dis}>${st.busy ? "Saving…" : "↑ Save rates"}</button>`;
     if (st.remote && st.remote.updatedAt !== payLocal.syncedAt)
       h += `<div class="rs-msg">Another device saved pay changes ${escapeHtml(_rsWhen(st.remote.updatedAt))} — saving here combines them with yours. <button class="ab-link" type="button" data-rs="load">Use theirs and discard this device's changes</button></div>`;
   } else {
-    h = `<div class="rs-msg ok">✓ Synced to GitHub · ${escapeHtml(_rsWhen(st.remote.updatedAt))}</div><button class="ab-link" type="button" data-rs="setup">Change pay passphrase</button>`;
+    h = `<div class="rs-msg ok">✓ Synced to GitHub · ${escapeHtml(_rsWhen(st.remote.updatedAt))}</div>`
+      + (plain ? "" : `<button class="ab-link" type="button" data-rs="setup">Change pay passphrase</button>`);
   }
   if (st.err && st.form !== "set" && st.state === "ready") h += `<div class="rs-msg err">${escapeHtml(st.err)}</div>`;
   box.innerHTML = h;
@@ -8849,7 +9400,7 @@ function _renderPxSave() {
   const el = document.getElementById("pxSave");
   if (!el) return;
   const st = paySync;
-  const show = payLocal.dirty && _paySyncOn() && !!_payPass() && !st.locked && st.state === "ready";
+  const show = payLocal.dirty && _paySyncOn() && (_vaultPlain() || !!_payPass()) && !st.locked && st.state === "ready";
   el.innerHTML = show ? `<button class="btn publish" type="button" data-rs="save"${st.busy ? " disabled" : ""}>${st.busy ? "Saving…" : "↑ Save"}</button>` : "";
 }
 let _pxRefreshT = null;
@@ -9230,6 +9781,9 @@ function _payRatesChanged() {
       if (confirm("Replace this device's unsaved pay changes with the rates and one-offs saved on GitHub?")) {
         payLocal.dirty = false; payLocal.syncedAt = null; savePayRates(); refreshRateSync();
       }
+    }
+    else if (act === "reset" && _vaultPlain()) {
+      if (confirm("Replace the rates on GitHub with this device's rates?")) saveRatesToGitHub(null, true);
     }
     else if (act === "reset") {
       if (confirm("Replace the rates on GitHub with this device's rates, under a new passphrase? The old passphrase will stop working.")) {
