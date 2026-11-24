@@ -320,12 +320,34 @@ button:focus-visible, a:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .att-tag.ex { color: var(--clay); border: 1px solid var(--clay); }
 .att-tag.up { color: var(--stone); border: 1px solid var(--light-stone); }
 .ru-chip[data-att] { cursor: pointer; }
+.att-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.att-tag.fm { color: var(--dark-stone); border: 1px solid var(--light-stone); }
+.att-num { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 12px; color: var(--warm-white); background: var(--ink); border-radius: 10px; padding: 1px 8px; white-space: nowrap; }
+.att-sub b { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--ink); }
+.att-ctrs { margin: 12px 0 4px; padding: 10px 12px; border: 1.5px solid var(--light-stone); border-left: 4px solid var(--ink); border-radius: 8px; background: var(--warm-white); }
+.att-ctrs-h { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--dark-stone); margin-bottom: 6px; }
+.att-ctr { padding: 6px 0; border-bottom: 1px solid var(--light-stone); }
+.att-ctr-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12.5px; color: var(--dark-stone); }
+.att-ctr-row select, .att-ctr-row input { padding: 4px 6px; border: 1.5px solid var(--light-stone); border-radius: 6px; background: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--ink); }
+.att-ctr-row input[type=number] { width: 58px; }
+.att-ctr-x { margin-left: auto; border: none; background: none; color: var(--stone); font-size: 13px; cursor: pointer; padding: 2px 4px; }
+.att-ctr-x:hover { color: var(--ink); }
+.att-ctr-status { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; color: var(--ink); margin-top: 6px; }
+.att-ctrs > .ab-link { margin-top: 8px; }
+.att-ctr-note { font-size: 11.5px; color: var(--stone); margin-top: 4px; }
+.cal-ev-count { position: absolute; top: 1px; right: 2px; font-size: 8.5px; line-height: 11px; font-weight: 800; padding: 0 3px; border: 1px solid currentColor; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 1; }
+.cal-ev.has-count .cal-ev-title { padding-right: 26px; }
+.cp-counts { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; font-size: 12px; color: var(--dark-stone); }
+.cp-counts b { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--ink); }
+.cp-counts .lb { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--warm-white); background: var(--ink); border-radius: 8px; padding: 0 6px; }
+.cp-counts em { font-style: normal; color: var(--stone); }
+.cp-fmt-hint { font-size: 11px; color: var(--stone); margin-top: 4px; }
 .ru-chip[data-att]:hover { border-color: var(--ink); }
 @media (max-width: 600px) {
   .att-name { flex-wrap: wrap; }
   .att-sub { flex-basis: 100%; margin-left: 0; text-align: left; }
   .att-row { grid-template-columns: 50px 1fr; }
-  .att-row .att-tag { grid-column: 2; justify-self: start; }
+  .att-row .att-right { grid-column: 2; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
   .att-custom input { font-size: 16px; }
 }
 .ru-types { display: flex; gap: 6px; margin-bottom: 14px; }
@@ -521,8 +543,8 @@ body.assign-mode .cal-ev.find-miss { opacity: .55; }
 .cal-pop-label:first-child { margin-top: 0; }
 .cal-popover input { width: 100%; border: 1.5px solid var(--light-stone); border-radius: 5px; padding: 6px 8px; font-size: 13px; font-family: 'Source Sans 3', sans-serif; outline: none; box-sizing: border-box; }
 .cal-popover input:focus { border-color: var(--stone); }
-.cal-pop-type-btn { flex: 1; padding: 5px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; cursor: pointer; background: #fff; color: var(--dark-stone); transition: all .12s; }
-.cal-pop-type-btn.active { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
+.cal-pop-type-btn, .cal-pop-fmt-btn { flex: 1; padding: 5px 8px; border: 1.5px solid var(--light-stone); border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; cursor: pointer; background: #fff; color: var(--dark-stone); transition: all .12s; }
+.cal-pop-type-btn.active, .cal-pop-fmt-btn.active { background: var(--ink); color: var(--warm-white); border-color: var(--ink); }
 .cal-notime-pill { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 700; border-radius: 3px; padding: 2px 4px; margin: 1px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Two-week preview layout */
 .week-preview { margin-bottom: 16px; }
@@ -906,7 +928,7 @@ body.editing-next .cal-daypager .dp-btn.active { background: var(--clay); border
     background: var(--light-stone); margin: 3px auto 9px; }
   .cal-popover input, .cal-popover select { font-size: 16px; padding: 9px 10px; }
   .cal-popover .cal-chip-box input { font-size: 16px; }
-  .cal-pop-type-btn { padding: 11px 8px; font-size: 12.5px; }
+  .cal-pop-type-btn, .cal-pop-fmt-btn { padding: 11px 8px; font-size: 12.5px; }
   .cal-pop-dur button { padding: 9px 2px; font-size: 12px; }
   .cal-chip-list { max-height: 132px; grid-template-columns: 1fr 1fr; }
   .cal-chip { height: 30px; }
@@ -1672,6 +1694,11 @@ body.select-mode .cal-ev-selected.blk-conflict::before { display: none; }
         <button class="ru-type" data-type="excel">Excel Client</button>
         <button class="ru-type" data-type="other">Other</button>
       </div>
+      <div class="ru-types" id="attFmt">
+        <button class="ru-type active" data-fmt="all">Indiv. + Group</button>
+        <button class="ru-type" data-fmt="individual">Individual</button>
+        <button class="ru-type" data-fmt="group">Group</button>
+      </div>
       <select class="att-range" id="attRange" aria-label="Dates">
         <option value="all">All time</option>
         <option value="month">This month</option>
@@ -1779,7 +1806,7 @@ const LS_DRAFT_BASE = "sfb_schedule_draft_base_v1";   // GitHub sha of the publi
 const EDIT_LINK = new URLSearchParams(location.search).get("edit") === "1";
 // schedule.json is public, so only the live week and the locations go in it. These keys are saved
 // encrypted in schedule-private.json instead (see PRIVATE DATA below) and load on the edit link only.
-const PRIVATE_KEYS = ["nextWeek", "archive", "blocks"];
+const PRIVATE_KEYS = ["nextWeek", "archive", "blocks", "counters"];   // counters: per-player session counting
 const LS_PRIV_META = "sfb_schedule_private_v1";
 const LS_VAULT = "sfb_storage_mode_v1";              // { plain }: how private files were kept when GitHub last answered
 const SITE_RULE_MARK = "sfb-schedule: private files"; // marks the netlify.toml this app wrote   // { sha }: the sealed file version this device's cached copy matches
@@ -2257,6 +2284,7 @@ function privatePart(d) { const o = {}; PRIVATE_KEYS.forEach(k => { if (d && d[k
 function _privEmpty(p) {
   const nw = p && p.nextWeek;
   return !(p && p.archive && p.archive.length) && !(p && p.blocks && p.blocks.length)
+    && !(p && p.counters && Object.keys(p.counters).length)
     && !(nw && ((nw.days || []).length || String(nw.weekTitle || "").trim()));
 }
 function _canon(d) { const o = {}; Object.keys(d || {}).sort().forEach(k => { if (d[k] != null) o[k] = d[k]; }); return JSON.stringify(o); }
@@ -3155,8 +3183,8 @@ function tallyDays(weeks, type) {
       if (!typeOk(ev)) return;
       totalSessions++;
       const names = titlePlayerNames(ev.title);
-      if (names.length === 1) { indivSessions++; bump(indiv, names[0], wi); }
-      else if (names.length > 1) { groupSessions++; names.forEach(p => bump(group, p, wi)); }
+      if (names.length && sessionFormat(ev) === "group") { groupSessions++; names.forEach(p => bump(group, p, wi)); }
+      else if (names.length) { indivSessions++; names.forEach(p => bump(indiv, p, wi)); }
       const people = (ev.people || []).map(p => String(p || "").trim()).filter(Boolean);
       if (people.length) internSessions++;
       people.forEach(p => bump(interns, p, wi));
@@ -4307,7 +4335,7 @@ function rollupCSV() {
 // Interns come from a session's people row; players from its title (the same names as the roster line),
 // so "Bogi M" and "Bogi" are two names. Weeks archived as images only have no sessions to read.
 // These are the sessions they were scheduled on: the app doesn't record no-shows.
-const att = { q: "", who: "all", type: "all", range: "all", from: "", to: "", sel: null };   // sel: { id, name, role }
+const att = { q: "", who: "all", type: "all", fmt: "all", range: "all", from: "", to: "", sel: null, ctrChanged: false };   // sel: { id, name, role }
 
 function _attRange() {
   const now = new Date(), y = now.getFullYear(), m = now.getMonth();
@@ -4325,13 +4353,15 @@ function _attRange() {
   }
 }
 function _attScope() {
+  return [_ruTypeLabel(att.type), att.fmt !== "all" ? FMT_LABEL[att.fmt] + " sessions" : "", _attRangeLabel()].filter(Boolean).join(" · ");
+}
+function _attRangeLabel() {
   const r = att.range, now = new Date();
-  const label = r === "month" ? `${MON[now.getMonth()]} ${now.getFullYear()}`
+  return r === "month" ? `${MON[now.getMonth()]} ${now.getFullYear()}`
     : r === "last" ? (d => `${MON[d.getMonth()]} ${d.getFullYear()}`)(new Date(now.getFullYear(), now.getMonth() - 1, 1))
     : r === "90" ? "last 90 days" : r === "year" ? String(now.getFullYear())
     : r === "custom" ? (() => { const [a, b] = _attRange(); return `${a[0] === "0" ? "start" : _fmtDk(a)} – ${b[0] === "9" ? "now" : _fmtDk(b)}`; })()
     : "all time";
-  return `${_ruTypeLabel(att.type)} · ${label}`;
 }
 function _attLocNames() {
   const m = new Map();
@@ -4350,11 +4380,13 @@ function _attData() {
     if (dk < a || dk > b) return;
     (day.events || []).forEach(ev => {
       if (att.type !== "all" && _evKind(ev) !== att.type) return;
+      const fmt = sessionFormat(ev);
+      if (att.fmt !== "all" && fmt !== att.fmt) return;
       sessions++;
       const interns = internsOf(ev).map(n => String(n || "").trim()).filter(Boolean);
       const players = _rosterNames(ev.title);
       const st = _startMinOf(ev.time);
-      const base = { date, dk, ev, up: dk > today, start: st == null ? 9999 : st, loc: ev.loc ? (locs.get(ev.loc) || "") : "" };
+      const base = { date, dk, ev, fmt, up: dk > today, start: st == null ? 9999 : st, loc: ev.loc ? (locs.get(ev.loc) || "") : "" };
       const seen = new Set();
       const add = (role, name, others) => {
         const key = _payKey(name);
@@ -4405,6 +4437,8 @@ function renderAttendance() {
   document.getElementById("attCustom").classList.toggle("hidden", att.range !== "custom");
   document.querySelectorAll("#attWho .ru-type").forEach(b => b.classList.toggle("active", b.dataset.who === att.who));
   document.querySelectorAll("#attTypes .ru-type").forEach(b => b.classList.toggle("active", b.dataset.type === att.type));
+  document.querySelectorAll("#attFmt .ru-type").forEach(b => b.classList.toggle("active", b.dataset.fmt === att.fmt));
+  const pc = playerCounts();
   document.getElementById("attRange").value = att.range;
   let h = "";
   if (d.imageOnly.length) {
@@ -4414,12 +4448,14 @@ function renderAttendance() {
     const name = sel ? sel.name : att.sel.name;
     h += `<div class="att-head"><div class="att-who">${escapeHtml(name)} ${_attRoleTag(att.sel.role)}</div>`;
     if (!sel) {
-      h += `</div><div class="archive-empty">No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions for ${escapeHtml(name)} in ${escapeHtml(_attScope().split(" · ")[1])}.</div>`;
+      if (att.sel.role === "player") h += `</div>` + _attCounterHtml(att.sel.id.split("|")[1], name, pc) + `<div>`;
+      h += `</div><div class="archive-empty">No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions for ${escapeHtml(name)} in ${escapeHtml(_attRangeLabel())}.</div>`;
     } else {
       const span = !sel.first ? "" : sel.first === sel.last ? _fmtDk(sel.first) : `${_fmtDk(sel.first)} – ${_fmtDk(sel.last)}`;
       h += `<div class="att-stats"><span><b>${sel.n}</b> session${sel.n === 1 ? "" : "s"}</span><span><b>${sel.days}</b> day${sel.days === 1 ? "" : "s"}</span><span><b>${fmtHrs(sel.mins)}</b> scheduled</span>`
         + (span ? `<span>${escapeHtml(span)}</span>` : "") + (sel.upcoming ? `<span>+ ${sel.upcoming} upcoming</span>` : "") + `</div>`
         + `<div class="att-count" style="margin:4px 0 0">${escapeHtml(_attScope())}</div></div>`;
+      if (att.sel.role === "player") h += _attCounterHtml(sel.key, sel.name, pc);
       let month = "";
       sel.list.forEach(s => {
         const ym = s.dk.slice(0, 7);
@@ -4430,20 +4466,23 @@ function renderAttendance() {
         }
         const meta = [s.ev.time ? _shortTime(s.ev.time) : "No time", s.loc, s.with.length ? "with " + _attWith(s.with) : ""].filter(Boolean).join(" · ");
         const tag = s.up ? `<span class="att-tag up">Upcoming</span>` : s.ev.type === "excel" ? `<span class="att-tag ex">Excel</span>` : "";
+        const nums = att.sel.role === "player" ? _ctrFor(pc, s.ev, sel.key).map(e => `<span class="att-num" title="${escapeAttr(e.tip)}">${escapeHtml(e.label)}</span>`).join("") : "";
         h += `<div class="att-row${s.up ? " up" : ""}"><div class="att-date"><span>${_DAY_SHORT[s.date.getDay()]}</span>${s.date.getMonth() + 1}/${s.date.getDate()}</div>`
-          + `<div><div class="att-title">${escapeHtml(s.ev.title || "Untitled")}</div><div class="att-meta">${escapeHtml(meta)}</div></div>${tag}</div>`;
+          + `<div><div class="att-title">${escapeHtml(s.ev.title || "Untitled")}</div><div class="att-meta">${escapeHtml(meta)}</div></div>`
+          + `<div class="att-right">${nums}<span class="att-tag fm">${s.fmt === "group" ? "Group" : "Indiv."}</span>${tag}</div></div>`;
       });
     }
   } else {
     const rows = _attShown(d);
     if (!rows.length) {
-      h += `<div class="archive-empty">${!d.sessions ? `No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions in ${escapeHtml(_attScope().split(" · ")[1])}.`
-        : att.q.trim() ? `No ${att.who === "all" ? "intern or player" : att.who} matches “${escapeHtml(att.q.trim())}” in ${escapeHtml(_attScope().split(" · ")[1])}.`
-        : `No ${att.who}s in ${escapeHtml(_attScope().split(" · ")[1])}.`}</div>`;
+      h += `<div class="archive-empty">${!d.sessions ? `No ${att.type === "all" ? "" : _ruTypeLabel(att.type) + " "}sessions in ${escapeHtml(_attRangeLabel())}.`
+        : att.q.trim() ? `No ${att.who === "all" ? "intern or player" : att.who} matches “${escapeHtml(att.q.trim())}” in ${escapeHtml(_attRangeLabel())}.`
+        : `No ${att.who}s in ${escapeHtml(_attRangeLabel())}.`}</div>`;
     } else {
       h += `<div class="att-count">${_attPl(rows.length, "name")} · ${escapeHtml(_attScope())} · tap a name for every date</div><div class="att-names">`
         + rows.map(p => `<button class="att-name" type="button" data-id="${escapeAttr(p.id)}"><span class="nm">${escapeHtml(p.name)}</span>${_attRoleTag(p.role)}`
-          + `<span class="att-sub">${_attPl(p.n, "session")}${p.last ? " · last " + escapeHtml(_fmtDk(p.last)) : ""}${p.upcoming ? ` · ${p.upcoming} upcoming` : ""}</span></button>`).join("")
+          + `<span class="att-sub">${_attPl(p.n, "session")}${p.last ? " · last " + escapeHtml(_fmtDk(p.last)) : ""}${p.upcoming ? ` · ${p.upcoming} upcoming` : ""}`
+          + (p.role === "player" ? _ctrShorts(p.key, pc).map(t => ` · <b>${escapeHtml(t)}</b>`).join("") : "") + `</span></button>`).join("")
         + `</div>`;
     }
   }
@@ -4458,8 +4497,10 @@ function attCopyText() {
     const head = `${p ? p.name : att.sel.name} (${att.sel.role}) · ${_attScope()}`;
     if (!p) return head + "\nNo sessions.";
     const lines = [`${head} · ${_attPl(p.n, "session")} on ${_attPl(p.days, "day")}${p.upcoming ? `, ${p.upcoming} upcoming` : ""}`];
+    const pc = att.sel.role === "player" ? playerCounts() : null;
     p.list.slice().reverse().forEach(s => lines.push(
-      [`${_DAY_SHORT[s.date.getDay()]} ${_fmtDk(s.dk)}`, s.ev.time ? _shortTime(s.ev.time) : "No time", s.ev.title || "Untitled", s.loc].filter(Boolean).join(" · ")
+      [`${_DAY_SHORT[s.date.getDay()]} ${_fmtDk(s.dk)}`, s.ev.time ? _shortTime(s.ev.time) : "No time", s.ev.title || "Untitled", s.loc, FMT_LABEL[s.fmt],
+       pc ? _ctrFor(pc, s.ev, p.key).map(e => e.label).join(", ") : ""].filter(Boolean).join(" · ")
       + (s.up ? " (upcoming)" : "")));
     return lines.join("\n");
   }
@@ -4472,11 +4513,13 @@ function attCSV() {
   const d = _attData();
   const list = att.sel ? d.people.filter(p => p.id === att.sel.id) : _attShown(d).slice().sort((x, y) => x.name.localeCompare(y.name));
   const q = v => { let t = String(v == null ? "" : v); if (/^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
-  const lines = ["Name,Role,Date,Weekday,Time,Hours,Session,Type,Location,With,Status"];
+  const pc = playerCounts();
+  const lines = ["Name,Role,Date,Weekday,Time,Hours,Session,Type,Location,With,Status,Format,Count"];
   list.forEach(p => p.list.slice().reverse().forEach(s => lines.push([
     p.name, p.role === "intern" ? "Intern" : "Player", s.dk, _DAY_SHORT[s.date.getDay()], s.ev.time || "",
     Math.round(sessionMinutes(s.ev) / 60 * 100) / 100, s.ev.title || "", s.ev.type === "excel" ? "Excel Client" : "Other",
-    s.loc, s.with.join(", "), s.up ? "Upcoming" : "Scheduled",
+    s.loc, s.with.join(", "), s.up ? "Upcoming" : "Scheduled", FMT_LABEL[s.fmt],
+    p.role === "player" ? _ctrFor(pc, s.ev, p.key).map(e => e.label).join(", ") : "",
   ].map(q).join(","))));
   return { text: lines.join("\n"), rows: lines.length - 1, who: att.sel ? (list[0] ? list[0].name : att.sel.name) : "" };
 }
@@ -4502,6 +4545,166 @@ async function openAttendance(prefill) {
   renderAttendance();
   document.getElementById("attBody").scrollTop = 0;
   document.getElementById("attModal").classList.remove("hidden");
+}
+
+// ============ PLAYER SESSION COUNTERS ============
+// A player can have one or more counters, set in Attendance and kept with the private data
+// (data.counters, by player key; saved with the next Publish, never shown to viewers):
+//   { name, list: [{ only: "all" | "individual" | "group", mode, size, from, to }] }
+// Modes:  total  every session                              #23
+//         year   restarts every January 1                    '26 #8
+//         range  only between two dates                      #7
+//         set    in sets of N, from an optional start date   3/5
+// `only` counts just the kind of session the player bought: individual or group (see sessionFormat).
+// Sessions count in date order, then start time, across the archive, the live week and next week; one
+// that hasn't happened yet shows the number it will be.
+const CTR_MODES = { total: "Overall", year: "Per year", range: "Between dates", set: "In sets of" };
+function _ctrCfg() { return (data && data.counters) || {}; }
+function _ctrList(key) { const c = _ctrCfg()[key]; return c && Array.isArray(c.list) ? c.list : []; }
+function _ctrSize(c) { const n = parseInt(c && c.size, 10); return n >= 1 && n <= 100 ? n : 5; }
+function _ctrRangeText(c) {
+  const a = c.from ? _fmtDk(c.from) : "", b = c.to ? _fmtDk(c.to) : "";
+  return a && b ? `${a} – ${b}` : a ? `since ${a}` : b ? `until ${b}` : "(pick the dates)";
+}
+function _ctrWeeks() {
+  const out = payWeekSources().slice();
+  const nw = data && data.nextWeek;
+  if (nw && (nw.days || []).length) {
+    const w = liveWeekDates(nw);
+    if (!out.some(x => x.key === w.key)) out.push({ key: w.key, mon: w.mon, days: nw.days, next: true });
+  }
+  return out;
+}
+// idx: session → its counts [{ key, ci, name, label, tip, up, … }]; hist: "key#ci" → counts, oldest first.
+function playerCounts() {
+  const cfg = _ctrCfg(), idx = new Map(), hist = {};
+  if (!Object.keys(cfg).length) return { idx, hist };
+  const today = _todayDk(), rows = [];
+  _ctrWeeks().forEach(src => (src.days || []).forEach(day => {
+    const dk = _dk(dateForDayFrom(day.day, src.mon));
+    (day.events || []).forEach(ev => { const st = _startMinOf(ev.time); rows.push({ dk, start: st == null ? 9999 : st, ev }); });
+  }));
+  rows.sort((a, b) => a.dk.localeCompare(b.dk) || a.start - b.start);
+  const run = {};
+  rows.forEach(r => {
+    const fmt = sessionFormat(r.ev), y = r.dk.slice(0, 4), seen = new Set();
+    _rosterNames(r.ev.title).forEach(nm => {
+      const key = _payKey(nm), pcfg = cfg[key];
+      if (!pcfg || !Array.isArray(pcfg.list) || seen.has(key)) return;
+      seen.add(key);
+      pcfg.list.forEach((c, ci) => {
+        if (!c || !CTR_MODES[c.mode]) return;
+        if (c.only && c.only !== "all" && c.only !== fmt) return;
+        if ((c.mode === "range" || c.mode === "set") && c.from && r.dk < c.from) return;
+        if (c.mode === "range" && c.to && r.dk > c.to) return;
+        const hk = key + "#" + ci, st = run[hk] || (run[hk] = { n: 0, year: "" });
+        if (c.mode === "year" && st.year !== y) { st.year = y; st.n = 0; }
+        st.n++;
+        const kind = c.only && c.only !== "all" ? FMT_LABEL[c.only].toLowerCase() + " " : "";
+        const e = { key, ci, name: pcfg.name || nm, dk: r.dk, n: st.n, year: y, up: r.dk > today, only: c.only || "all" };
+        if (c.mode === "set") {
+          const size = _ctrSize(c);
+          e.size = size; e.i = (st.n - 1) % size + 1; e.set = Math.floor((st.n - 1) / size) + 1;
+          e.label = `${e.i}/${size}`; e.tip = `${kind}session ${e.i} of ${size}, set ${e.set}`;
+        } else if (c.mode === "year") { e.label = `'${y.slice(2)} #${st.n}`; e.tip = `${kind}session ${st.n} of ${y}`; }
+        else if (c.mode === "range") { e.label = `#${st.n}`; e.tip = `${kind}session ${st.n} ${_ctrRangeText(c)}`; }
+        else { e.label = `#${st.n}`; e.tip = `${kind}session ${st.n} overall`; }
+        (hist[hk] || (hist[hk] = [])).push(e);
+        const list = idx.get(r.ev) || []; list.push(e); idx.set(r.ev, list);
+      });
+    });
+  });
+  return { idx, hist };
+}
+function _ctrFor(pc, ev, key) { return ((pc && pc.idx.get(ev)) || []).filter(e => e.key === key); }
+// Where one counter stands today: { text, short }
+function counterStatus(key, ci, pc) {
+  const c = _ctrList(key)[ci];
+  if (!c || !CTR_MODES[c.mode]) return null;
+  const h = (pc.hist[key + "#" + ci] || []);
+  const held = h.filter(e => !e.up), last = held[held.length - 1] || null, next = h.find(e => e.up) || null;
+  const kind = c.only && c.only !== "all" ? FMT_LABEL[c.only].toLowerCase() + " " : "";
+  const pre = c.only && c.only !== "all" ? (c.only === "group" ? "Group " : "Indiv. ") : "";
+  const nextTxt = next ? ` · next: ${_DAY_SHORT[_dkDate(next.dk).getDay()]} ${_fmtDk(next.dk)} is ${next.label}` : "";
+  const y = _todayDk().slice(0, 4), today = _todayDk();
+  if (c.mode === "set") {
+    const size = _ctrSize(c);
+    if (!last) return { text: `Sets of ${size} ${kind}sessions${c.from ? " from " + _fmtDk(c.from) : ""}: none held yet${nextTxt}`, short: `${pre}0/${size}` };
+    const left = size - last.i;
+    return { text: left
+        ? `Set ${last.set}: ${last.i} of ${size} ${kind}sessions used · ${left} left${nextTxt}`
+        : `Set ${last.set} complete (${size} of ${size}) · the next ${kind}session starts set ${last.set + 1}${nextTxt}`,
+      short: `${pre}${last.i}/${size}${left ? "" : " ✓"}` };
+  }
+  if (c.mode === "year") {
+    const n = last && last.year === y ? last.n : 0;
+    return { text: `${n} ${kind}session${n === 1 ? "" : "s"} in ${y}${nextTxt}`, short: `${pre}${n} in ${y}` };
+  }
+  if (c.mode === "range") {
+    const n = last ? last.n : 0;
+    const state = c.from && c.from > today ? " · hasn't started" : c.to && c.to < today ? " · ended" : "";
+    return { text: `${n} ${kind}session${n === 1 ? "" : "s"} ${_ctrRangeText(c)}${state}${nextTxt}`, short: `${pre}${n} ${_ctrRangeText(c)}` };
+  }
+  const n = last ? last.n : 0;
+  return { text: `${n} ${kind}session${n === 1 ? "" : "s"} overall${nextTxt}`, short: `${pre}${n} overall` };
+}
+function _ctrShorts(key, pc) { return _ctrList(key).map((c, ci) => counterStatus(key, ci, pc)).filter(Boolean).map(x => x.short); }
+function setPlayerCounters(name, list) {
+  const key = _payKey(name);
+  if (!key || !data) return;
+  if (!data.counters) data.counters = {};
+  if (list && list.length) data.counters[key] = { name, list };
+  else delete data.counters[key];
+  att.ctrChanged = true;
+  saveDraft(); updateStatus();
+}
+function _attCounterHtml(key, name, pc) {
+  const list = _ctrList(key);
+  const opt = (v, cur, label) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
+  let h = `<div class="att-ctrs"><div class="att-ctrs-h">Session counter${list.length > 1 ? "s" : ""}</div>`;
+  list.forEach((c, ci) => {
+    const st = counterStatus(key, ci, pc);
+    h += `<div class="att-ctr" data-ci="${ci}"><div class="att-ctr-row">`
+      + `<select data-f="only" aria-label="Which sessions">${opt("all", c.only || "all", "All sessions")}${opt("individual", c.only, "Individual sessions")}${opt("group", c.only, "Group sessions")}</select>`
+      + `<select data-f="mode" aria-label="How to count">${Object.entries(CTR_MODES).map(([v, l]) => opt(v, c.mode, l)).join("")}</select>`
+      + (c.mode === "set" ? `<input type="number" data-f="size" min="1" max="100" value="${_ctrSize(c)}" aria-label="Sessions per set">` : "")
+      + (c.mode === "set" || c.mode === "range" ? `<label>${c.mode === "set" ? "counting from" : "from"} <input type="date" data-f="from" value="${escapeAttr(c.from || "")}"></label>` : "")
+      + (c.mode === "range" ? `<label>to <input type="date" data-f="to" value="${escapeAttr(c.to || "")}"></label>` : "")
+      + `<button type="button" class="att-ctr-x" data-act="ctr-del" title="Remove this counter">✕</button></div>`
+      + (st ? `<div class="att-ctr-status">${escapeHtml(st.text)}</div>` : "") + `</div>`;
+  });
+  h += `<button type="button" class="ab-link" data-act="ctr-add">${list.length ? "+ Add another counter" : `+ Count ${escapeHtml(name)}'s sessions`}</button>`;
+  if (list.length) h += `<div class="att-ctr-note">The count shows on each of ${escapeHtml(name)}'s sessions in Edit. Saved with your next Publish.</div>`;
+  return h + `</div>`;
+}
+function _attCtrChange(el) {
+  const box = el.closest(".att-ctr");
+  if (!box || !att.sel) return;
+  const key = att.sel.id.split("|")[1], ci = +box.dataset.ci;
+  const list = _ctrList(key).map(c => ({ ...c }));
+  if (!list[ci]) return;
+  const f = el.dataset.f;
+  if (f === "size") list[ci].size = _ctrSize({ size: el.value });
+  else if (f === "from" || f === "to") { if (el.value) list[ci][f] = el.value; else delete list[ci][f]; }
+  else list[ci][f] = el.value;
+  if (f === "mode" && el.value === "set" && !list[ci].size) list[ci].size = 5;
+  setPlayerCounters(att.sel.name, list);
+  renderAttendance();
+}
+function _attCtrAct(act, el) {
+  if (!att.sel) return;
+  const key = att.sel.id.split("|")[1];
+  const list = _ctrList(key).map(c => ({ ...c }));
+  if (act === "ctr-add") {
+    const used = list.map(c => c.only || "all");
+    const only = !list.length ? "all" : used.includes("individual") && !used.includes("group") ? "group" : "individual";
+    list.push(list.length ? { only, mode: "total" } : { only: "all", mode: "set", size: 5 });
+  } else if (act === "ctr-del") {
+    const ci = +el.closest(".att-ctr").dataset.ci;
+    list.splice(ci, 1);
+  }
+  setPlayerCounters(att.sel.name, list);
+  renderAttendance();
 }
 
 function openArchive() {
@@ -4533,11 +4736,28 @@ function titlePlayerNames(title) {
   if (!t) return [];
   t = t.split(/\s[\u2013\u2014-]\s/)[0];   // drop everything after an en/em dash or hyphen
   t = t.replace(/\([^)]*\)/g, "");          // drop parenthetical notes
-  return t.split(",").map(s => s.trim()).filter(Boolean);
+  return t.split(",").map(_stripSessionCount).filter(Boolean);
+}
+// A session count written next to a player's name isn't part of the name: "Audrina 2/5", "Audrina 3 of 5",
+// "Audrina #3", "Audrina 5" and "Audrina2/5" are all Audrina. The title itself keeps the count, so the
+// schedule still shows it. Numbers inside a word ("ABA/Delta 7up", "U12") are part of the name and stay.
+function _stripSessionCount(name) {
+  return String(name || "")
+    .replace(/(^|\s)[#\[]?\d+(?:\s*(?:\/|of|-|\u2013)\s*\d+)?\]?(?=\s|:|$)/gi, " ")
+    .replace(/([A-Za-z])\d+\s*\/\s*\d+(?=\s|:|$)/g, "$1")
+    .replace(/\s+/g, " ").trim();
 }
 function countTitlePlayers(title) {
   return titlePlayerNames(title).length;
 }
+// Individual or group. Set on the session in Edit (ev.format), or worked out from the title: two or more
+// players, or a word like "group" or "class", makes it a group session.
+function sessionFormat(ev) {
+  if (ev && (ev.format === "group" || ev.format === "individual")) return ev.format;
+  const t = String((ev && ev.title) || "");
+  return titlePlayerNames(t).length > 1 || /\b(group|class|clinic|camp)\b/i.test(t) ? "group" : "individual";
+}
+const FMT_LABEL = { individual: "Individual", group: "Group" };
 // For calendar blocks: show up to `max` player names parsed from the title.
 // Falls back to the raw title for non-name labels (e.g. "Open Gym").
 function calNameList(title) {
@@ -5726,6 +5946,7 @@ function fitCalTitles(container) {
 }
 
 function renderCalendar(days, container, compact, editable, slot, typeOnly, onlyDi, hourPxOverride) {
+  const _pcx = editable && Object.keys(_ctrCfg()).length ? playerCounts() : null;   // players' session counts (Edit only)
   if (!days || !days.length) {
     container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--stone);font-size:13px;">No days yet \u2014 use <b>+ Add Day</b> to start this week.</div>`;
     return;
@@ -5804,8 +6025,10 @@ function renderCalendar(days, container, compact, editable, slot, typeOnly, only
         : '';
       const rr = blks.length ? _evRange(ev) : null;
       const clash = rr ? _blkHit(blks, rr.s, rr.e) : null;   // already sitting in blocked time
-      const tipTxt = calEvTip(ev) + (clash ? `\n\u26a0 Overlaps blocked time ${_blkLabel(clash)}` : '');
-      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}${clash ? ' blk-conflict' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(tipTxt)}">
+      const cnt = _pcx ? (_pcx.idx.get(ev) || []) : [];
+      const tipTxt = calEvTip(ev) + (clash ? `\n\u26a0 Overlaps blocked time ${_blkLabel(clash)}` : '') + cnt.map(c => `\n${c.name}: ${c.tip}`).join('');
+      evHtml += `<div class="cal-ev${editable ? ' cal-ev-drag' : ''}${clash ? ' blk-conflict' : ''}${cnt.length ? ' has-count' : ''}" style="top:${top}px;height:${height}px;${horiz}background:${s.calBg};color:${s.calText};"${editAttrs} title="${escapeAttr(tipTxt)}">
+        ${cnt.length ? `<span class="cal-ev-count">${escapeHtml(cnt[0].label)}${cnt.length > 1 ? '+' : ''}</span>` : ''}
         <div class="cal-ev-title" data-names="${escapeAttr(calNameList(ev.title).join("\u0001"))}">${calTitleNames(ev.title, CAL_TITLE_MAX_NAMES)}</div>
         <div class="cal-ev-time"${height > 24 ? '' : ' style="display:none"'}>${calTimeHtml(ev)}</div>
         <div class="cal-ev-interns" data-names="${escapeAttr(internsOf(ev).join("\u0001"))}" style="display:none"></div>
@@ -6714,6 +6937,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     </div>
     <span class="cal-pop-label">Players / Session Title <span class="player-count-badge" id="calPopPlayerBadge">${initPlayerCount}</span></span>
     <input id="calPopTitle" type="text" value="${escapeAttr(ev.title || '')}" placeholder="Dariq, KJ, Colby" autocomplete="off" spellcheck="false">
+    <div class="cp-counts hidden" id="calPopCounts"></div>
     <span class="cal-pop-label">Day &amp; Time</span>
     <div class="cal-pop-grid three">
       <select id="calPopDay" title="Move this session to another day">${days0.map((d, i) => `<option value="${i}"${i === di0 ? ' selected' : ''}>${escapeHtml(d.day || ('Day ' + (i + 1)))}</option>`).join('')}</select>
@@ -6741,6 +6965,12 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
       <button type="button" class="cal-pop-type-btn${ev.type === 'excel' ? ' active' : ''}" data-type="excel">Excel Client</button>
       <button type="button" class="cal-pop-type-btn${ev.type !== 'excel' ? ' active' : ''}" data-type="other">Other</button>
     </div>
+    <span class="cal-pop-label">Session</span>
+    <div style="display:flex;gap:6px;" id="calPopFmt">
+      <button type="button" class="cal-pop-fmt-btn" data-fmt="individual">Individual</button>
+      <button type="button" class="cal-pop-fmt-btn" data-fmt="group">Group</button>
+    </div>
+    <div class="cp-fmt-hint" id="calPopFmtHint"></div>
     <span class="cal-pop-label row">Location
       <span class="cal-pop-tools"><button type="button" class="cal-pop-mini" id="calPopLocManage" title="Edit addresses, map links and directions">Manage</button></span>
     </span>
@@ -6849,6 +7079,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     renderLocChips();
     if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     renderInternChips();
+    renderFmt(); renderPopCounts();
   };
 
   // Delete + Duplicate sit at the bottom, away from Done. A delete can be undone.
@@ -6896,6 +7127,7 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
     saveDraft();
     if (playerBadge) playerBadge.textContent = countTitlePlayers(titleInput.value);
     updateCov();
+    renderFmt(); renderPopCounts();
     // Live-update the tiny calendar label without a full re-render
     const lbl = ctx.evEl && ctx.evEl.querySelector && ctx.evEl.querySelector('.cal-ev-title');
     if (lbl) {
@@ -7195,6 +7427,32 @@ function showCalPopover(slot, di0, ei0, evEl0, focusId, quiet) {
       try { renderInternTally(); } catch (err) {}
     });
   });
+
+  // Individual / group: worked out from the title until set here. Picking what the title already
+  // implies goes back to automatic, so adding a second player later still makes it a group.
+  function renderFmt() {
+    const ev2 = getEv(); if (!ev2) return;
+    const f = sessionFormat(ev2), manual = ev2.format === 'group' || ev2.format === 'individual';
+    pop.querySelectorAll('.cal-pop-fmt-btn').forEach(b => b.classList.toggle('active', b.dataset.fmt === f));
+    const hint = pop.querySelector('#calPopFmtHint');
+    if (hint) hint.textContent = manual ? 'Set by you' : 'Worked out from the title';
+  }
+  function renderPopCounts() {
+    const el = pop.querySelector('#calPopCounts'), ev2 = getEv();
+    if (!el || !ev2) return;
+    const list = Object.keys(_ctrCfg()).length ? (playerCounts().idx.get(ev2) || []) : [];
+    el.classList.toggle('hidden', !list.length);
+    el.innerHTML = list.map(c => `<span><b>${escapeHtml(c.name)}</b> <span class="lb">${escapeHtml(c.label)}</span> <em>${escapeHtml(c.tip)}</em></span>`).join('');
+  }
+  pop.querySelectorAll('.cal-pop-fmt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ev2 = getEv(); if (!ev2) return;
+      if (btn.dataset.fmt === sessionFormat({ title: ev2.title })) delete ev2.format; else ev2.format = btn.dataset.fmt;
+      saveDraft();
+      renderFmt(); renderPopCounts();
+    });
+  });
+  renderFmt(); renderPopCounts();
 
   // Tab advances field; Enter / Escape close
   titleInput.addEventListener('keydown', e => {
@@ -7939,7 +8197,19 @@ document.getElementById("rollupBody").addEventListener("click", (e) => {
 // Attendance
 document.getElementById("attendanceBtn").classList.toggle("hidden", !editUnlocked);
 document.getElementById("attendanceBtn").addEventListener("click", () => openAttendance());
-document.getElementById("attClose").addEventListener("click", () => document.getElementById("attModal").classList.add("hidden"));
+document.getElementById("attClose").addEventListener("click", () => {
+  document.getElementById("attModal").classList.add("hidden");
+  if (att.ctrChanged) { att.ctrChanged = false; if (currentMode === "edit") renderEdit(); }   // redraw the counts on the sessions
+});
+document.getElementById("attFmt").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-fmt]"); if (!b) return;
+  att.fmt = b.dataset.fmt; renderAttendance();
+});
+document.getElementById("attBody").addEventListener("change", (e) => { if (e.target.closest(".att-ctr") && e.target.dataset.f) _attCtrChange(e.target); });
+document.getElementById("attBody").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-act^='ctr-']");
+  if (b) _attCtrAct(b.dataset.act, b);
+});
 document.getElementById("attCopy").addEventListener("click", () => copyText(attCopyText(), att.sel ? "Dates copied" : "Names copied"));
 document.getElementById("attCsv").addEventListener("click", attDownloadCSV);
 document.getElementById("attSearch").addEventListener("input", function () { att.q = this.value; att.sel = null; renderAttendance(); });
